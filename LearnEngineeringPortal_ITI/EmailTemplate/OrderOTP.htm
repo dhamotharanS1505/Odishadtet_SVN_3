@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<style>
+/* CSS Document */
+body{
+font-family:Arial, Helvetica, sans-serif;
+font-size:12px;
+}
+.mailer_midas{
+width:98%;
+height:auto;
+margin:0 auto;
+padding:0px;
+}
+.mailder_header{
+width:100%;
+height:28px;
+/*background:url(../Content/Images/mailer_header_midas.jpg) left top repeat-x;*/
+/* IE10 Consumer Preview */ 
+background: #1a82f7;
+}
+.mailder_header img{
+padding-left:26px;
+}
+.mailder_header span
+{
+    color:#ffffff;
+    font-size:18px;
+}
+.mailer_midas_grid{
+width:95.9%;
+height:auto;
+float:left;
+border:1px solid #bcbec0;
+padding:10px 2%;
+}
+.mailer_title_2{
+color:#397fc0;
+font-weight:bold;
+line-height:30px;
+}
+.mailder_header_midas_bg{
+/*background:url(../Content/Images/mailer_midas_header_bg.jpg) left top repeat-x;*/
+background:#1e5799;
+height:25px;
+color:#fff;
+font-weight:bold;
+}
+.mailer_grid_midas{
+border:1px solid #458ba6;
+border-right:0px;
+margin-bottom:20px;
+}
+.mailer_grid_td_odd{
+background-color:#d6edf5;
+height:25px;
+color:#1d5487;
+}
+.mailer_grid_td_even{
+background-color:#fff;
+height:25px;
+color:#1d5487;
+}
+.mailer_grid_midas tr td{
+border-right:1px solid #458ba6;
+}
+.mailer_footer{
+color:#367cbf;
+font-size:12px;
+font-style:italic;
+}
+</style>
+</head>
+<body>
+<div class="mailer_midas">
+<!--<div class="mailder_header">
+    <span><center>Learnengg.com</center></span>
+</div>-->
+<div class="mailer_midas_grid">
+    <center>
+        <div class="imgpop"><img src="http://learnengg.com/LE/img/Learn1.png" /></div>
+
+        <table width="50%" border="0"><tr ><td align="Left" style="border-top: 1px solid #cdd0d4;"><span class="mailer_title_2">{MailTitle}</span></td></tr></table>
+        
+        <table width="50%" border="0" cellspacing="0" cellpadding="0" class="mailer_grid_midas">
+            <tr class="mailder_header_midas_bg">
+
+                <td align="Left" valign="middle" width="30%">Mobile Number</td>
+                <td align="Left" valign="middle">{mobile}</td>
+
+
+            </tr>
+            <tr class="mailer_grid_td_odd">
+
+                <td align="Left" valign="middle" width="30%">OTP (One Time Password)</td>
+                <td align="Left" valign="middle">{otp}</td>
+
+
+            </tr>
+
+        </table>
+        <div class="mailer_footer">
+            (This is a system generated advice does not require signature)
+        </div>
+    </center>
+    </div>
+</div>
+</body>
+</html>

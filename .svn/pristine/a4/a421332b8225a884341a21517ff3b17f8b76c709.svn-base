@@ -1,0 +1,306 @@
+
+@media screen and (max-width:768px){
+	
+	/****new***/
+.iti-subcont .video-popup{
+	position:static;
+}
+.iti-subcont{
+	display: inline-block;
+}
+.bg-section{
+	padding: 15px;
+}
+.top-title{
+	font-size: 20px;
+	margin:10px 0;
+}
+.del-img{
+	margin-bottom:15px;
+}
+.iti-digcont{
+	margin-bottom:15px;
+}
+.digcont-img1{
+	margin-bottom:15px;
+}
+.digcont-img2{
+	margin-bottom:15px;
+}
+.iti-table{
+	margin-bottom:15px;
+}
+#ititrade_page .bg-green {
+    width: 260px;
+    margin: 10px 10px;
+    padding: 10px 0px;
+}
+.footer-social {
+    margin: 0;
+    text-align: center;
+}
+.payment div{
+	float:none !important;
+	text-align:center;
+	margin-top: 10px;
+}
+.payment span:last-child {
+    display: block;
+    position: relative;
+    right: -7px;
+    top: -15px;
+}
+	
+#myCarousel .carousel-caption .sub-capt{
+	font-size:10px;
+}
+	.browse-btn{right:0;}
+.green-blocks div:first-child{padding:0;}
+.count-text br{display:none;}
+.logo-img{width:35%;}
+
+/****/
+#myCarousel .carousel-caption{padding:0;margin-top:45px;left:39%; bottom: 0px; width:52%;}
+
+.carousel-caption h1{font-size:16px;}
+.carousel-caption .btn{margin:5px;font-size:10px;}
+/*#myCarousel .buy-btn{padding:2px 18px;margin-left:0;}*/
+.video-banner iframe{margin:0;width:200px;height:122px;position:relative;left:55px;}
+#myCarousel .carousel-control{top:45px;font-size:40px;}
+
+.home i{
+	font-size:12px;
+}
+.unique-block {
+    border-bottom: 1px solid #7feab0;
+}
+.methods-but{
+	background:none;
+	border:none;
+}
+.methods-but a{
+	font-size:13px;
+}
+
+}
+
+@media screen and (max-width:480px){
+	
+	/****new***/
+#ititrade_page .bg-green {
+	width: 100%;
+	margin: 10px 0;
+}
+#myCarousel .carousel-caption .sub-capt{
+	font-size:7px;
+}
+	
+.my-account {
+    font-size: 14px;
+    float: left;
+	margin: 5px 0 4px;
+}
+.my-account li:first-child{
+	display: inline-block;
+	width: 50%;
+}
+.my-account .dropdown-menu li:first-child{
+	width:100%;
+}
+.icon-top a{
+	position: relative;
+	top: -4px;
+}
+.btn-title{
+	width: 100%;
+	display: inline-block;
+	text-align: left;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+
+
+	.logo-img {
+		margin-top: 0;
+	}
+
+	.shop-by-course-xs a {
+        font-size: 10px;
+		font-weight: 700;
+		padding: 4px 4px;
+    }
+	.my-account {
+		font-size: 12px !important;
+	}
+	#price-content{
+		background-color:#fff;
+	}
+	.cd-btn{
+		padding:4px 4px !important;top:212px;
+	}
+.gallery-modal > .modal-dialog{width:auto;}
+.price-details{margin:0 !important;}
+.price-video iframe{height:auto !important;margin-bottom:10px;}
+.img-container{width:100%;}
+.img-container iframe{width:100%;}
+.cd-demo{padding:6px !important;right:1px;top:208px;font-size:11px;}
+.block-title{font-size:13px;}
+.carousel .item{height:235px;}
+#myCarousel .carousel-caption{padding-bottom:0;margin-top:0;left:32%;width:68%;}
+.video-banner{text-align:left;}
+.carousel-caption h1{font-size:12px;}
+.carousel-caption .btn{margin:5px 5px 5px 30px;font-size:10px;padding:2px 2px;}
+#myCarousel .buy-btn{padding:2px 18px;margin-left:0;}
+.video-banner iframe{margin:0;width:150px;height:100px;position:relative;left:55px;top:10px;}
+#myCarousel .carousel-control{top:45px;font-size:40px;}
+}
+
+
+@media screen and (max-width:360px){#myCarousel .carousel-caption{padding-bottom:0;margin-top:0;left:32%;width:68%;}
+.video-banner{text-align:left;}
+.carousel-caption h1{font-size:12px;}
+.carousel-caption .btn{margin:5px 5px 5px 30px;font-size:10px;padding:2px 2px;}
+#myCarousel .buy-btn{padding:2px 18px;margin-left:0;}
+.video-banner iframe{margin:0;width:150px;height:100px;position:relative;left:55px;top:10px;}
+#myCarousel .carousel-control{top:45px;font-size:40px;}
+.carousel .item{height:200px;}
+}
+@media screen and (max-width:989px){}
+@media screen and (max-width:850px){.form-control{border-radius:0;font-size:12px;height:26px;padding:1px 10px;}
+.search-mobile button{border-radius:0;font-size:12px;padding:3px 5px;}
+.menu-bar i{font-size:20px;}
+}
+@media screen and (max-width:760px){}
+@media only screen and (min-width:769px){
+
+/****new ***/
+.iti-subcont{
+	display: flex;
+}
+.bg-section{
+	padding: 40px;
+}
+.top-title{
+	font-size: 25px;
+	margin:25px 0 35px;
+}
+.del-img{
+	padding-left:0;
+}
+.iti-digcont{
+	padding-right:0
+}
+.digcont-img1{
+	padding-left:0;
+}
+.digcont-img1 img{
+	height: 219px;
+}
+.digcont-img2{
+	padding-right:0
+}
+.digcont-img2 img{
+	height: 219px;
+}
+#ititrade_page .bg-green{
+	width: 200px;
+	margin:0 10px;
+	padding: 10px 0px;
+}
+.payment div{
+	display:inline;
+	margin: 0 35px 0 0;
+}
+
+.cont-addrs {
+    padding-left: 12px;
+    position: relative;
+    top: -8px;
+    display: block;
+}
+
+.iti-drpdown .nav-list li {
+    width: 22%;
+	padding: 10px 5px;
+}
+	
+/*****/
+	
+.header-dropdown .dropdown-menu{position:fixed;width:745px;top:100px;left:10px;}
+.scroll-height{height:400px;overflow:auto;}
+.logo-img{width:50%;}
+.fa.fa-home.home{font-size:20px;}
+.carousel-product .text > ul{font-size:10px;line-height:18px;}
+}
+@media only screen and (min-width:992px){
+/****new ***/
+.iti-drpdown .nav-list li{
+	width:12%;
+	padding:15px 0 !important;
+}
+	
+.header-dropdown .dropdown-menu{
+	position:fixed;
+	width:920px;
+	top:73px;
+	left:auto;
+}
+#myCarousel .carousel-caption{width:52%;bottom:0;}
+#myCarousel .carousel-caption h1{font-size:20px;}
+.scroll-height{height:450px;overflow:auto;}
+.logo-img{width:75%;margin-top:2px;}
+.fa.fa-home.home{font-size:25px;margin-top:4px;}
+.price-video{margin-top:-180px;background:#eff0f1;}
+.carousel-product .text > ul{font-size:14px;line-height:25px;}
+}
+@media only screen and (min-width:1200px){
+
+/****new***/
+#myCarousel .carousel-caption .sub-capt{
+	font-size:20px;
+	margin:8px 0 2px;
+}
+
+.header-dropdown .dropdown-menu{
+	position:fixed;
+}
+.engg-dropmenu{
+	width: 1010px !important; 
+	left: 200px !important;
+}
+.engg-dropmenu img{
+	width: 50px;
+	margin-right:10px;
+}
+.engg-dropmenu .univ-name{
+	width:100%;
+}
+.engg-dropmenu >li >a{
+	display:flex;
+}
+.engg-dropmenu >li >a span:first-child{
+	width:100%;
+}
+.poly-dropmenu {
+    max-width: 550px;
+}
+.iti-dropmenu{
+	left:53px !important;
+	width:1235px !important;
+}
+.skill-dropmenu {
+    max-width: 550px;
+}
+.scroll-height{
+	/*height:auto;*/
+}
+#myCarousel .carousel-caption h1{font-size:28px;}
+.slide .item{height:auto;}
+.price-video{margin-top:-180px;}
+.carousel-product .text > ul{font-size:15px;line-height:28px;}
+}
+@media only screen and (min-width:1900px){.slide .item{height:auto;}
+.header-dropdown .dropdown-menu{left:490px;}
+}

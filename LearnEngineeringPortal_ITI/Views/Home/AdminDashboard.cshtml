@@ -1,0 +1,935 @@
+﻿
+@{
+    ViewBag.Title = "AdminDashboard";
+    Layout = "~/Views/Shared/_LearnEnggAdminLayout.cshtml";
+}
+
+<script src="~/Scripts/Admin/GoogleChart/jsapi.js"></script>
+<style>
+    .row {
+        margin-left: -15px;
+        margin-right: -15px;
+    }
+
+    /*#status {
+        margin-top: 50px;
+    }*/
+
+    #printbtn {
+        float: right;
+        margin-right: 0px;
+    }
+
+    .refno {
+        color: #0066c0 !important;
+        text-decoration: none;
+    }
+
+
+    thead tr th {
+        line-height: 15px !important;
+    }
+    
+    .ui-state-default.ui-jqgrid-pager.ui-corner-bottom {
+        width: 1083px !important;
+    }
+   
+    #txtcment {
+        width: 70%;
+    }
+
+    .ui-dialog .ui-dialog-buttonpane button {
+        cursor: pointer;
+        margin: 0.5em 0.4em 0.5em 0;
+        padding: 4px;
+    }
+
+    .ui-dialog .ui-dialog-title {
+        float: left;
+        font-weight: bold;
+        margin: 0.1em 0;
+        overflow: hidden;
+        padding: 0 12px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 91%;
+    }
+
+    .col-sm-6 > select {
+        border: 1px solid #000;
+        border-radius: 1px !important;
+        margin: 1px !important;
+        width: 70%;
+        padding: 4px;
+        background: rgba(0, 0, 0, 0) url("../Content/img/v1.png") no-repeat scroll right center;
+        -moz-appearance: none;
+    }
+
+    .ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix.ui-draggable-handle > button {
+        background: #fff none repeat scroll 0 0;
+        margin-left: 7%;
+        padding: 0;
+        top: 0 !important;
+    }
+
+    #thead {
+        background: #34addb none repeat scroll 0 0;
+        color: #fff;
+    }
+
+    .ui-dialog-content.ui-widget-content {
+         height: 400px;
+        max-height: none;
+        min-height: 0;
+        width: 1083px !important;
+    }
+
+    fieldset.scheduler-border {
+        border: 1px groove #ddd !important;
+        border-radius: 4px;
+        box-shadow: 0 0 0 0 #000;
+        margin: 15px 0;
+        padding: 15px;
+        clear: both;
+    }
+
+    legend.scheduler-border {
+        font-size: 1.2em !important;
+        font-weight: bold !important;
+        text-align: left !important;
+        width: auto;
+        padding: 0 10px;
+        border-bottom: none;
+    }
+
+    .scheduler-border legend {
+        margin-bottom: 0px !important;
+    }
+
+    #ordersdetails ul {
+        list-style: outside none none;
+        margin: 0;
+        padding: 0;
+    }
+
+        #ordersdetails ul li {
+            font-size: 13px;
+            line-height: 1.5;
+            margin: 0;
+            padding: 0;
+        }
+
+    #ordersdetails table {
+        font-size: 13px;
+        width: 100%;
+    }
+
+    #ordersdetails tfoot {
+        font-weight: bold;
+    }
+
+    #ordersdetails span strong {
+        font-size: 13px;
+        font-weight: normal;
+    }
+
+    #ordersdetails table td:nth-child(2) {
+        text-align: right;
+    }
+
+
+
+    .topics tr {
+        line-height: 14px !important;
+    }
+
+    .mandatory {
+        color: red;
+    }
+
+    .textbox {
+        border: 1px solid #848484;
+        -webkit-border-radius: 30px;
+        -moz-border-radius: 30px;
+        border-radius: 30px;
+        outline: 0;
+        height: 25px;
+        width: 275px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.ui-draggable
+    {
+  top: 110px !important;
+   left:140px !important;
+  /*word-wrap: break-word;*/
+    }
+     .ui-jqgrid tr.jqgrow td {
+        word-wrap: break-word; /* IE 5.5+ and CSS3 */
+        white-space: pre-wrap; /* CSS3 */
+        white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+        white-space: -pre-wrap; /* Opera 4-6 */
+        white-space: -o-pre-wrap; /* Opera 7 */
+        overflow: hidden;
+        height: auto;
+        vertical-align: middle;
+        padding-top: 3px;
+        padding-bottom: 3px;
+        white-space: normal !important;
+
+    }
+      
+       .ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.ui-draggable
+    {
+        width:1110px;
+    }
+</style>
+
+<article class="cnt_wrp-main">
+
+    <div class="row">
+
+        <div class="col-sm-6">
+            <div class="tle_txt-dah">
+                <h1>Dashboard</h1>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="clg_search">
+                <select class="form-control" id="ddlUniversity">
+                    <option value="0">--Select University--</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="ord_wrp">
+                <h1>Total Subject </h1>
+                <span id="opentotalsub" class="colr_span-tolsub_rd">**</span>
+                <strong id="openorder" class="timer_1">**</strong>
+                <div class="ord_wrp_btm-bg cor_opn-or">Total Orders</div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="ord_wrp">
+                <h1> Total Subject</h1>
+                <span id="closedtotalsub" class="colr_span-tolsub_blu">**</span>
+                <strong id="closedorders" class="timer_2">**</strong>
+                <div class="ord_wrp_btm-bg cor_cn-or">cancel Orders</div>
+            </div>
+        </div>
+        <div class="loader">
+            <center>
+                <img src="../Content/img/pre_loader.gif" />
+            </center>
+        </div>
+        <div class="col-sm-4">
+            <div class="ord_wrp">
+                <h1> Total Subject </h1>
+                <span id="delitotalsub" class="colr_span-tolsub_grn">**</span>
+                <strong id="deliverd" class="timer_3">**</strong>
+                <div class="ord_wrp_btm-bg cor_dlvy-or">Download Online Orders</div>
+            </div>
+        </div>
+    </div>
+</article>
+
+<article class="opnord_wrp-main">
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="grp_wrp-main">
+                <div class="tle_opn-ord">
+                    <h1>Visitors Count</h1>
+                    <h2>Showing Login for New and Old Users</h2>
+                </div>
+                <div id="divchart" style="height:240px;">
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="opnord_wrp-inr">
+                <div id="overallordersFix" class="tle_opn-ord">
+                    <h1> OnDoor Orders  ( DVD ,USB ,TABLET )</h1>
+                </div>
+                <table class="opnord_table-wrp">
+                    <tbody>
+                        <tr>
+                            <td>
+                                In queue
+                            </td>
+                            <td><span id="inque"></span></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                In preparation
+                            </td>
+                            <td><span id="inprepartion"></span></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                In Quality check
+                            </td>
+                            <td><span id="inqualtiycheck"></span></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                In delivery process
+                            </td>
+                            <td><span id="indelivery"></span></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Order Delivered
+                            </td>
+                            <td><span id="orderdelivred"></span></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td>
+                                Total Orders  ( DVD ,USB ,TABLET ) <br>
+                            </td>
+                            <td><span id="totalorders"></span></td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+<article class="inv_data_tbwrp-main">
+    <div class="tle_opn-ord">
+        <h1>Orders</h1>
+        <h2>Showing Orders for Last 7 orders Date. </h2>
+    </div>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>Date</td>
+                    <td>Total Orders</td>
+                    <td>Total Items</td>
+                    <td>Product price</td>
+                    <td>Shipping + Media</td>
+                    <td>discount</td>
+                    <td>Total Amount</td>
+                    <td>Details</td>
+
+                </tr>
+            </thead>
+            <tbody id="lastordersFix"></tbody>
+        </table>
+    </div>
+</article>
+
+ 
+ 
+ 
+    <article class="col-sm-12">
+        <section class="sub_wrp row">
+            <div id="jqgrid" class="grid_panel">
+                <table id="Purchased_Ordersgrid_popup" class="openp"></table>
+                <div id="pager"></div>
+            </div>
+        </section>
+        <div style="margin-bottom: 70px;"></div>
+    </article>
+ 
+
+
+<script type="text/javascript">
+    var univ_Id = 0;
+    var chartData;
+
+    google.load("visualization", "1", { packages: ["corechart"] });
+
+    $(document).ready(function () {
+        LoadVisitorsChart();
+        LoadDashboard();
+        OverallOrders();
+        LoadUniversity();
+        Lastsevenorders();
+        var selecteddate = '';
+        var Pdate = '';
+        
+
+        initDateSearch = function (elem) {
+            setTimeout(function () {
+                $(elem).datepicker({
+                    dateFormat: "dd-mm-yy",
+                    autoSize: true,
+                    changeYear: true,
+                    changeMonth: true,
+                    showWeek: true,
+                    showButtonPanel: true,
+                    onSelect: function (dateText, inst) {
+                        setTimeout(function () {
+                            $('#Purchased_Ordersgrid_popup')[0].triggerToolbar();
+                        }, 100);
+                    }
+                });
+            }, 100);
+        };
+
+    });
+
+
+    $(document).on('click', '.btndetails', function () {
+        
+        var selectdata = $(this).attr('class');
+        selecteddate = $(this).closest('tr').children('td').eq(0).text();
+        fnOpendialogsubjectdetails_datewise();
+        $("#Purchased_Ordersgrid_popup").jqGrid('setGridParam', { url: '/AdminActivity/AllOrdersStatusBuy_Online_grid?Pdate=' + selecteddate, page: 1 }).trigger('reloadGrid');
+
+
+    });
+
+
+    function fnOpendialogsubjectdetails_datewise() {
+     
+        $('#Purchased_Ordersgrid_popup').dialog({
+               
+            resizable: false,
+            modal: true,
+            title: "User Purchased Details",
+            height: '447px',
+            width: '1095px',
+             
+             
+                open: function () {
+                   
+                    openOrderDetails();
+                    $(this).closest(".ui-dialog")
+                    .find(".ui-dialog-titlebar-close")
+                    .removeClass("ui-dialog-titlebar-close")
+                    .html("<span class='ui-button-icon-primary ui-icon ui-icon-closethick'></span>");
+                     
+                }
+
+            });
+        
+         return true;
+    }
+
+    function LoadDashboard() {
+        $.ajax({
+            beforeSend: function () {
+                $('.loader').show();
+            },
+            type: 'GET',
+            url: "/APIService/APIAdminActivity/AdminDashBoard?mapuniv=" + $("#sessionMappedUniv").val(),
+            dataType: 'json',
+            contentType: "application/json; chartset=utf-8",
+            success: function (data) {
+                var toalorder = 0;
+                var cancelorder = 0;
+                var deliverdorder = 0;
+                var overallsubjsum = 0;
+                var overallordersum = 0;
+                var deliverdsub = 0;
+
+                $.each(data, function (index, value) {
+                    if (value.OpenOrders == 1) {
+                        overallsubjsum += value.SubjectCount;
+                        toalorder = value.OrderCount;
+                    }
+
+                    else if (value.OpenOrders == 3) {
+                        overallsubjsum += value.SubjectCount;
+                        deliverdsub += value.SubjectCount;
+                        deliverdorder += value.OrderCount;
+                    }
+                    else if (value.OpenOrders == 2) {
+                        overallsubjsum += value.SubjectCount;
+                        $('#closedtotalsub').html(value.SubjectCount);
+                        cancelorder += value.OrderCount;
+                    }
+                    else if (value.OpenOrders == 5) {
+                        overallsubjsum += value.SubjectCount;
+                        deliverdsub += value.SubjectCount;
+                        deliverdorder += value.OrderCount;
+                    }
+                });
+                $('#opentotalsub').html(overallsubjsum);
+                $('#delitotalsub').html(deliverdsub);
+                toalorder = toalorder + cancelorder + deliverdorder;
+                jQuery(function ($) {
+
+                    $('.timer_1').countTo({
+                        from: 1,
+                        to: toalorder,
+                        speed: 1000,
+                        refreshInterval: 50,
+                    });
+                    $('.timer_2').countTo({
+                        from: 0,
+                        to: cancelorder,
+                        speed: 1000,
+                        refreshInterval: 50,
+                    });
+                    $('.timer_3').countTo({
+                        from: 0,
+                        to: deliverdorder,
+                        speed: 5000,
+                        refreshInterval: 50,
+                    });
+                });
+            },
+            complete: function () {
+                $('.loader').hide();
+            }
+        });
+    }
+
+    function OverallOrders() {
+        var ordercount = 0;
+        $.getJSON("/APIService/APIAdminActivity/OpenOrdersAdminDashBoard",
+            {
+                mapuniv: $("#sessionMappedUniv").val()
+            },
+            function (data) {
+                $.each(data, function (index, value) {
+                    $('#inque').html(value.OrdersInQue);
+                    $('#inprepartion').html(value.OrderInPreparation);
+                    $('#inqualtiycheck').html(value.OrdersInQalityCheck);
+                    $('#indelivery').html(value.OrdersInDelivery);
+                    $('#totalorders').html(value.TotalOrders);
+                    $('#orderdelivred').html(value.DeliveredOrderds);
+                });
+            });
+    }
+
+    function LoadUniversity() {
+        $.getJSON("/APIService/APIAdminActivity/GetUniversityDetailsAdmin",
+            {
+                mapuniv: $("#sessionMappedUniv").val()
+            },
+            function (data) {
+                $.each(data, function (index, value) {
+                    $("#UniversityList").tmpl(value).appendTo("#ddlUniversity");
+                });
+                $('.univ-' + univ_Id).addClass('active');
+            });
+    }
+
+    function Lastsevenorders() {
+        $.getJSON("/APIService/APIAdminActivity/LastweekOrdersAdminDashBoard",
+            {
+                mapuniv: $("#sessionMappedUniv").val()
+            },
+            function (data) {
+                $.each(data, function (index, value) {
+                    $("#lastorders").tmpl(value).appendTo("#lastordersFix");
+                });
+            });
+    }
+
+    function LoadVisitorsChart() {
+        $.ajax({
+            type: 'POST',
+            url: "/APIService/APIAdminActivity/VisitedUsersData?mapuniv=" + $("#sessionMappedUniv").val(),
+            dataType: 'json',
+            contentType: "application/json; chartset=utf-8",
+            success: function (data) {
+                chartData = data;
+            },
+            error: function () {
+                ShowAlert("ERROR !", "Error loading data! Please try again.", "warning");
+            }
+        }).done(function () {
+            google.setOnLoadCallback(drawChart);
+            drawChart();
+
+        });
+    }
+
+    function drawChart() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'VisitedDate');
+        data.addColumn('number', 'NewUser');
+        data.addColumn('number', 'OldUser');
+        for (var i = 0; i < chartData.length; i++) {
+            data.addRow([chartData[i].VisitedDate, chartData[i].NewUserCount, chartData[i].OldUserCount]);
+        }
+        var options = {
+            //title: "VISITED USERS",
+            pointSize: 12,
+            series: {
+                0: { pointShape: 'square' },
+                1: { pointShape: 'diamond' },
+            },
+            legend: {
+                position: 'right',
+                textStyle: {
+                    fontSize: 12
+                }
+            },
+            animation: {
+                'startup': true,
+                duration: 1000,
+                easing: 'inAndOut',
+            },
+            vAxis: {
+                gridlines: {
+                    count: 6
+                },
+                title: 'New & Old User Count',
+                textStyle: {
+                    fontSize: 12,
+                    bold: true,
+                    italic: false
+                },
+                titleTextStyle: {
+                    bold: true
+                }
+            },
+            hAxis: {
+
+                title: 'Visited Date'
+            }
+        };
+
+        var lineChart = new google.visualization.LineChart(document.getElementById('divchart'));
+        lineChart.draw(data, options);
+    }
+
+    $(document).on('click', '.refno', function () {
+        orderId = $(this).closest("tr").find("td").eq(4).text();
+        fnOpenOrdersdialog();
+    });
+
+    function openOrderDetails() {
+
+        $('#Purchased_Ordersgrid_popup').jqGrid({
+            url: '/AdminActivity/AllOrdersStatusBuy_Online_grid?Pdate=' + selecteddate,
+            datatype: 'json',
+            type:'GET',
+       
+            colNames: ['', '', '','Order Id', 'Placed On', 'Total Items', 'Delivery Mode', 'University Name', 'Name', 'Mobile', 'Payment Status'],
+            colModel: [
+                {
+                    name: 'Identyvalue', index: 'Identyvalue', key: true, sortable: false, search: false, resizable: false, frozen: false, hidden: true,
+                    "formatter": function (v) {
+                        return '<input type="hidden"  id="sub" name="hidActive" value=' + v + '>';
+                    }
+                },
+                {
+                    name: 'paymentrefundstatus', index: 'paymentrefundstatus', key: true, sortable: false, search: false, resizable: false, frozen: false, hidden: true,
+                    "formatter": function (v) {
+                        paymentrefundstatus = v;
+                        return '<input type="hidden"  id="subs" name="hidActive" value=' + paymentrefundstatus + '>';
+                    }
+                },
+                {
+                    name: 'PaymentGatewayId', index: 'PaymentGatewayId', key: true, sortable: false, search: false, resizable: false, frozen: false, hidden: true,
+                    "formatter": function (v) {
+                        return '<input type="hidden"  id="paymgtwayId" name="hidActive" value=' + v + '>';
+                    }
+                },
+                {
+                    name: "OrderRefNo",
+                    index: 'OrderRefNo', key: true, sortable: true, sorttype: 'text', width: 4, search: true, resizable: true, editable: true, searchoptions: { sopt: ['cn', 'bw', 'ew', 'eq'] },
+                    "formatter": function (v) {
+                        return '<a  id="refNo" class="refno" href="#" rel="' + v + '">' + v + '  <i  id="ordersdetails"></i></a>';
+                    }
+                },
+               {
+                   name: "OrderPlacedOndatetime",
+                   index: 'OrderPlacedOnInt~date', key: true, sortable: true, sorttype: 'text', width: 4, search: true, resizable: true, editable: true, searchoptions: { sopt: ["eq", "ne", "lt", "le", "gt", "ge"], dataInit: initDateSearch },
+                   formatter: '#date', formatoptions: { srcformat: 'd/m/Y', newformat: 'M/d/Y' }
+                   //formatter: 'date', formatoptions: { "srcformat": "m/d/Y hh:mm:ss tt", "newformat": "n/j/Y g:i:s A" }
+               },
+                 {
+                     name: "TotalItems",
+                     index: 'TotalItems', key: true, sortable: false, sorttype: 'text', width: 3, search: false, resizable: true, editable: true, align: "center",
+                     searchoptions: { sopt: ['cn', 'bw', 'ew', 'eq'] }
+                 },
+                 {
+                     name: "DeliveryMode",
+                     index: 'DeliveryMode', key: true, sortable: true, sorttype: 'text', width: 5, search: true, resizable: true, editable: true, align: "center",
+                     searchoptions: { sopt: ['cn', 'bw', 'ew', 'eq'] }
+                 },
+            {
+                name: "universityname",
+                index: 'universityname', key: true, sortable: true, sorttype: 'text', width:10 , search: true, resizable: true, editable: true,
+                searchoptions: { sopt: ['cn', 'bw', 'ew', 'eq'] }
+            },
+                {
+                    name: "UserName",
+                    index: 'UserName', key: true, sortable: true, sorttype: 'text', width: 3, search: true, resizable: true, editable: true,
+                    searchoptions: { sopt: ['cn', 'bw', 'ew', 'eq'] }
+                },
+                {
+                    name: "Mobile",
+                    index: 'Mobile', key: true, sortable: true, sorttype: 'text', width: 3, search: true, resizable: true, editable: true,
+                    searchoptions: { sopt: ['cn', 'bw', 'ew', 'eq'] }
+                },
+                 {
+                     name: "OnlinePaymentStatus",
+                     index: 'OnlinePaymentStatus', key: true, sortable: true, sorttype: 'text', width:5, search: true, resizable: true, editable: true,
+                     searchoptions: { sopt: ['cn', 'bw', 'ew', 'eq'] }
+                 },
+                 
+            ],
+            rownumbers: true,
+            rowNum: 10,
+            rowList: [10, 20, 30, 50, 100, 200, 500, 1000],
+            pager: '#pager',
+            sortname: 'OrderPlacedOn',
+            //+'OrderRefNo'sortable: true,
+            sortorder: 'desc',
+            multiSort: 'true',
+            sortable: true,
+            altclass: 'myAltRowClass',
+            altRows: true,
+            height: '300px',
+            left: '170px',
+            width: '1095px',
+        //    top: '150px',
+            autowidth: true,
+            margin:'100px',
+            shrinkToFit: true,
+            viewsortcols: [true, 'vertical', true],
+            forceFit: true, // have to set for column scroll enable while expand the grid
+            toppager: true,
+            emptyrecords: "Empty records",
+            viewrecords: true,
+            loadComplete: function () {
+                highlightFilteredData.call(this);
+            },
+            gridComplete: function () {
+               
+            }
+        });
+        InitiateProperty("Purchased_Ordersgrid_popup", "pager");
+
+    }
+ 
+    function getordersdetails() {
+        $("#purchased").empty();
+        $("#purchased_details").empty();
+
+        $.getJSON("/APIService/APIAdminActivity/OrderDetailsDialog",
+            {
+                orderRefNo: orderId
+            },
+            function (data) {
+                $.each(data, function (index, value) {
+                    if (index == 0) {
+
+                        $("#orders_shippment").tmpl(value).appendTo("#purchased");
+                    }
+                    $("#purchasedorder_details").tmpl(value).appendTo("#purchased_details");
+
+                });
+            }
+        );
+    }
+
+    function fnOpenOrdersdialog() {
+        getordersdetails();
+        $('#openorders_popup').dialog({
+            resizable: false,
+            modal: true,
+            title: "Order Details",
+            height: 570,
+            top: 150,
+            width:'1083px',
+            scrollOffset: 0,
+            open: function () {
+                $(this).closest(".ui-dialog")
+                .find(".ui-dialog-titlebar-close")
+                .removeClass("ui-dialog-titlebar-close")
+                .html("<span  id='closeicon' class='ui-button-icon-primary ui-icon ui-icon-closethick'></span>");
+            }
+        });
+        return false;
+    }
+
+   
+
+    $(document).on('click', '#printbtn', function () {
+        $('#printbtn').hide();
+        var divContents = $("#openorders_popup").html();
+        var printWindow = window.open('', '', '', true);
+        printWindow.document.write(divContents);
+        printWindow.document.close();
+        printWindow.print();
+        $('#printbtn').show();
+    });
+
+</script>
+
+ 
+
+<script id="UniversityList" type="text/html">
+    <option value="${Universityid}" class="univ-${Universityid}">${UniversityName}</option>
+</script>
+
+<script id="lastorders" type="text/html">
+    <tr>
+        <td>
+            ${Createdon}
+        </td>
+        <td>
+            ${TotalOrders}
+        </td>
+        <td>
+            ${TotalItmes}
+        </td>
+        <td>
+            ${ProductPrice}
+        </td>
+        <td>
+            ${ShippingAndMedia}
+        </td>
+        <td>
+            ${DiscountAmount}
+        </td>
+        <td>
+            ${TotalAmount}
+        </td>
+        
+        <td>
+            @*  <a data-toggle="modal" title="Update Quick Overview" href="#modelpopup"  class="btndetails"  rel="${Createdon}" style="color:#0066c0 !important;text-decoration:none;">Details</a>*@
+
+            <a href="#" class="btndetails" rel="${Createdon}" style="color:#0066c0 !important;text-decoration:none;">Details</a>
+            @*<a href="#" style="color:#0000FF" rel="${ClientRefNo}-${OrderStatus}" id="btnshowdetails" class="btnOrderDetails${paymentStatus}"> ${paymentStatus}</a>*@
+            
+        </td>
+
+    </tr>
+</script>
+
+<script id="orders_shippment" type="text/html">
+    <div class="a-column a-span9 a-spacing-top-mini">
+        <div>
+            Ordered on:<strong><span id="orderedon">${OrderDate}</span></strong> | OrderRefNo: <strong><span id="referno">${OrderRefNo}</span></strong> | Delivery Mode: <strong><span id="deliverymode">${DeliveryMode}</span></strong> | Payment Mode: <strong><span id="paymentmode">${TraxnType}</span></strong><br />
+            MAC-Windows: <strong><span id="macwindows">${PrimaryMacWindows}</span></strong> | MAC-Android: <strong><span id="macandroid">${PrimaryMacAndroid}</span></strong>
+            <button id="printbtn" class="page-numbers btn btn-primary btn-style">Print Order</button>
+        </div>
+    </div>
+
+    <fieldset class="scheduler-border">
+        <div class="row">
+            <div id="ordersdetails" class="col-sm-12">
+                <div class="row">
+                    <div class="col-sm-3  col-md-3 col-lg-3 ">
+                        <h5 class="a-spacing-micro"><strong>Shipping Address</strong></h5>
+                        <ul>
+                            <li>
+                                <span class="id-addr-ux-search-text">${DeliveryUser}</span>
+                            </li>
+                            <li>
+                                <span class="id-addr-ux-search-text">${DeliveryAddress}</span>
+                            </li>
+                            <li>
+                                <span class="id-addr-ux-search-text">${DeliveryContact}</span>
+                            </li>
+                            <li>
+                                <span class="id-addr-ux-search-text">Address Type: ${AddressType}</span>
+                            </li>
+                            <li>
+                                <span class="id-addr-ux-search-text">Landmark: ${Landmark}</span>
+                            </li>
+                            <li>
+                                <span class="id-addr-ux-search-text">${City}, ${State} - ${Pincode}</span>
+                            </li>
+                            <li>
+                                <span class="id-addr-ux-search-text">${Country}</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3  col-md-3 col-lg-3  col-sm-offset-1">
+                        <h5 class="a-spacing-micro"><strong>Ordered by</strong> </h5>
+                        <ul>
+                            <li>
+                                <span class="id-addr-ux-search-text">${UserName}</span>
+                            </li>
+                            <li>
+                                <span class="id-addr-ux-search-text">${UserRole}</span>
+                            </li>
+                            <li>
+                                <span class="id-addr-ux-search-text">${Mobile}</span>
+                            </li>
+                            <li>
+                                <span class="id-addr-ux-search-text">${Email}</span>
+                            </li>
+                            <li>
+                                <span class="id-addr-ux-search-text">${University}</span>
+                            </li>
+                            <li>
+                                <span class="id-addr-ux-search-text">${CollegeName}</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-5  col-md-5 col-lg-5">
+                        <h5 class="a-spacing-micro"><strong>Order Summary</strong>  </h5>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>Item(s) Subtotal: </td>
+                                    <td><i class="fa fa-inr"></i> ${AmountSubtotal}.00</td>
+                                </tr>
+                                <tr>
+                                    <td>Delivery Mode - (${DeliveryMode}) + Shipping:  </td>
+                                    <td><i class="fa fa-inr"></i> ${ShippingAmount}.00</td>
+                                </tr>
+                                <tr>
+                                    <td>Discount:  </td>
+                                    <td><i class="fa fa-inr"></i> ${DiscountAmount}.00</td>
+                                </tr>
+                                <tr>
+                                    <td>Total: </td>
+                                    <td><i class="fa fa-inr"></i> ${TotalAmount}.00</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td>Grand Total: </td>
+                                    <td><i class="fa fa-inr"></i> ${TotalAmount}.00</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+</script>
+
+<script id="purchasedorder_details" type="text/html">
+    <ul>
+        <li>
+            ${SubjectName} -- ${OSType} -- &nbsp; <i class="fa fa-inr"></i> ${SellingAmount}
+            <ul>
+                ---  ${DepartmentName}&nbsp;|&nbsp;  year - ${Year}  &nbsp;|&nbsp;  semester - ${Semester}
+            </ul>
+        </li>
+    </ul>
+</script>
+
+<div id="openorders_popup" style="display: none">
+    <div id="purchased">
+
+    </div>
+
+    <fieldset class="scheduler-border">
+        <div class="row">
+            <div id="purch_orders" class="col-sm-12">
+                <h5 class="a-spacing-micro"><strong> Orders Details</strong> </h5>
+            </div>
+        </div>
+        <div id="purchased_details" class="col-sm-12">
+
+        </div>
+    </fieldset>
+    <br />
+</div>

@@ -1,0 +1,739 @@
+﻿@{
+    ViewBag.Title = "SubjectActivationExtension";
+    Layout = "~/Views/Shared/_LearnEnggAdminLayout.cshtml";
+}
+
+<script src="~/Scripts/moment/moments.js"></script>
+<script src="~/Scripts/DataSorting/sortable.js"></script>
+<style>
+    .textbox {
+        border: 1px solid #848484;
+        border-radius: 0px;
+        outline: 0;
+        height: 30px;
+        width: 220px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .panel-default > .panel-heading {
+        background-image: linear-gradient(to bottom, #00acc2 0%, #00acc2 100%);
+        background-repeat: repeat-x;
+        color: #fff;
+        text-transform: uppercase;
+        font-size: 12px;
+        font-weight: normal;
+    }
+
+    .txt_cntr_wrp {
+        margin-top: 12px;
+    }
+
+    .pd_btm_wrp {
+        padding: 10px;
+    }
+
+    .lbl_txt {
+        text-transform: uppercase;
+        font-weight: bold !important;
+        font-size: 12px;
+    }
+
+    .mrgn_none {
+        margin: -1px !important;
+    }
+
+    .form-control {
+        -moz-appearance: none;
+        background: rgba(0, 0, 0, 0) url("../css/images/v1.png") no-repeat scroll right center;
+        border: 1px solid #ccc;
+        border-radius: 0 !important;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+        color: #555;
+        display: block;
+        font-size: 14px;
+        height: 34px;
+        line-height: 1.42857;
+        padding: 6px 12px;
+        transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+        width: 100%;
+    }
+</style>
+<input type="hidden" id="ExtendedUserId" />
+<input type="hidden" id="ExtendedSem" />
+<input type="hidden" id="ExtendedUnivid" />
+<input type="hidden" id="ExtdepartId" />
+
+
+<div class="col-sm-12" id="Userdetails">
+    <div class="panel panel-default height">
+        <div class="panel-heading"><strong>Subject Activation & Extension</strong> </div>
+        <center class="txt_cntr_wrp">
+            <table>
+                <tr>
+                    <td>
+                        <label>Mobile Number</label><font color="red">*</font>
+                        <input type="text" class="textbox" id="Mobile" placeholder="Enter Mobile Number" />&nbsp;&nbsp;&nbsp;
+                    </td>
+                    <td>
+                        <span>
+                            <input type="button" value="Submit" id="btnsubmit" class="fil_in_btn" />
+                        </span>
+                    </td>
+                </tr>
+                <tr></tr>
+                <tr></tr>
+            </table>
+        </center>
+        <div class="panel-body">
+            <table style="width:100%;" class="table table-bordered">
+                <tbody id="FixSubjectExtendedDays"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<div class="col-md-12" id="Subjects">
+    <div class="panel panel-default height">
+        <div class="panel-heading">
+            <strong>Subjects Details</strong>
+            @*  <span><font color="red">*Note:Search By(Year-Semester)</font></span>*@
+            @*<input type="text" id="txtSearch" class="" placeholder="Search Here..." />*@
+            @*<button class="button1" id="btnSearch" value="Go">
+                    <span class="fa fa-search">Search </span>
+                </button>*@
+            @*onClick="javascript:goTo()"*@
+        </div>
+        <div class="panel-body">
+            <div class="col-sm-12">
+                <fieldset class="scheduler-border">
+                    <div class="row mrg_row_wrp">
+                        <div class="col-sm-4">
+                            <select class="form-control" id="FixDepartment">
+                                <option value="0">Select Department</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-2">
+                            <select class="form-control full-width" id="Fixyear">
+                                <option value="0">Select year</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-2">
+                            <select class="form-control full-width" id="FixSemester">
+                                <option value="0">Select semester</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-2">
+                            <select class="form-control full-width" id="FixProductType">
+                                <option value="0">-Product Type-</option>
+                                <option value="1">Content Product</option>
+                                <option value="2">Q & A (Windows)</option>
+                                <option value="4">Q & A (Android)</option>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <input type="button" value="GO" id="btnGo" class="fil_in_btn" />
+                            <input type="button" value="Clear" id="btnrefresh" class="fil_in_btn" />
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table style="width:100%" class="table table-bordered table-striped topics tr  sortable" id="sort">
+                    <thead class="scroll">
+                        <tr>
+                            <td class="unsortable">
+                                <input id="selectall" type="checkbox" class="chk" name="checkAll" />
+                                Select All
+                            </td>
+                            <td>Year</td>
+                            <td>Semester</td>
+                            <td>Department</td>
+                            <td>Subject Code</td>
+                            <td>Subject Name</td>
+                            <td>Regulation</td>
+                            <td style="padding:6px;">Expiry Date</td>
+                        </tr>
+                    </thead>
+                    <tbody id="FixSubjectDetails" class="scroll"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12" id="Activation">
+    <div class="panel panel-default height">
+        <div class="panel-heading"><strong>Activation Extended Days Details</strong></div>
+        <div class="panel-body">
+            <center>
+                <div class="col-sm-12 pd_btm_wrp">
+                    <label class="some-class">
+                        <strong>Days To Extend</strong>
+                    </label>
+                    <input type="text" class="textbox" id="Days" placeholder="Enter Days To Extend" />
+                    <input type="button" value="OK" id="btnOk" class="fil_in_btn" />
+                    <label class="some-class" id="lblextenddays">
+                        <strong>Extended Date</strong>
+                    </label>
+                    <textbox class="textbox" id="Fixextenddays" style="border-style: solid;"></textbox>
+                </div>
+                <div class="col-sm-12 pd_btm_wrp">
+                    <strong>Notification To User Through&nbsp;&nbsp;<input type="checkbox" id="Checksms" class="chkboxsms mrgn_none" checked="checked">&nbsp;&nbsp;SMS</strong>
+                    <input type="checkbox" id="Checkmail" class="chkboxemail mrgn_none" checked="checked"><strong>&nbsp;&nbsp;EMAIL</strong>
+                </div>
+                <div class="col-sm-12 pd_btm_wrp">
+                    <span>
+                        <input type="button" value="Update" id="btnUpdate" class="fil_in_btn" />
+                    </span>
+                    <span>
+                        <input type="button" value="Cancel" id="btnCancel" class="fil_in_btn" />
+                    </span>
+                </div>
+            </center>
+            <span><font color="red">*Note:Extended Days will Calculate From Today Onwards</font></span>
+        </div>
+    </div>
+</div>
+
+<div class="loader">
+    <center>
+        <img src="../Content/img/pre_loader.gif" />
+    </center>
+</div>
+
+<script id="BindSubjectDetails" type="text/html">
+
+    <tr class="semyear-${Years}-${Semester} hidealltmpl">
+        <td style="width:10%"><input id="selectCheck" type="checkbox" class="chk" name="checkAll" value="${PackageId}~${SubjectCode}~${SubjectName}~${Subjectversion}~${DepartmentId}~${ExpiredDate}" /></td>
+        <td style="width:6%">
+            <span>${Years}</span>
+        </td>
+        <td style="width:10%">
+            <span>${Semester}</span>
+        </td>
+        <td style="width:25%">
+            <span>${DepartmentName}</span>
+        </td>
+        <td style="width:15%">
+            <span>${SubjectCode}</span>
+        </td>
+
+        <td style="width:24%">
+            <span>${SubjectName}</span>
+        </td>
+
+        <td style="width:15%">
+            <span>${Regulation}</span>
+        </td>
+
+        <td style="width:10%">
+            <span>${ExpiredDate}</span>
+        </td>
+
+    </tr>
+
+</script>
+
+<script id="BindSubjectExtendedDays" type="text/html">
+    <tr>
+        <td>
+            <label class="lbl_txt">
+                Name :
+            </label> <span>${UserName}</span>
+        </td>
+        <td>
+            <label class="lbl_txt">
+                Mobile :
+            </label> <span>${Mobile}</span>
+        </td>
+        <td>
+            <label class="lbl_txt">
+                Email :
+            </label> <span>${Email}</span>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label class="lbl_txt">
+                University :
+            </label>  <span>${University}</span>
+        </td>
+        <td>
+            <label class="lbl_txt">
+                College :
+            </label>  <span>${College}</span>
+        </td>
+        <td>
+            <label class="lbl_txt">
+                Department :
+            </label> <span>${DepartmentName}</span>
+        </td>
+    </tr>
+</script>
+
+<script id="BindExtendeddaysUpdate">
+</script>
+
+<script id="BindDepartmentlist" type="text/html">
+    <option id="ddlDepart" value="${DepartmentId}">${DepartmentName}</option>
+</script>
+
+<script id="Bindsemesterlist" type="text/html">
+    <option id="ddlsem" value="${semester}">${semester} </option>
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#Mobile').ForceNumericOnly();
+        $('#Subjects').hide();
+        $('#Activation').hide();
+        $('#Fixextenddays').hide();
+        $('#lblextenddays').hide();
+
+    });
+
+    var depart = 0;
+    var departId = 0;
+    var semvalue = 0;
+    var semId = 0;
+    var yearvalue = 0;
+    var yearId = 0;
+    var univ_Id = 0;
+    var mobile = 0;
+    var $this = '';
+    var ActivationBy = $("#sessionUserId").val();
+    var subjUnitType = 0;
+    function LoadDepartments() {
+        univ_Id = $('#ExtendedUnivid').val();
+
+        $.getJSON("/APIService/APIAdminActivity/GetDepartmentListActivitionextenddays",
+            {
+                univId: univ_Id
+
+            }, function (data) {
+                $.each(data, function (index, value) {
+                    $("#BindDepartmentlist").tmpl(value).appendTo("#FixDepartment");
+
+                });
+            });
+        //$("#FixDepartment").empty().append($("#FixDepartment").html('<option value="0">--Select Department--</option>'));
+    }
+
+    function LoadSemester() {
+
+        univ_Id = $('#ExtendedUnivid').val();
+        $.getJSON("/APIService/APIAdminActivity/GetsemesterSubjectActivation",
+            {
+                univId: univ_Id
+
+            }, function (data) {
+                $.each(data, function (index, value) {
+
+                    $("#Bindsemesterlist").tmpl(value).appendTo("#FixSemester");
+
+                });
+            });
+        //$("#FixSemester").empty().append($("#FixSemester").html('<option value="0">--Select semester--</option>'));
+    }
+
+
+    function SaveUserSubjectActivationDetails() {
+        depart = $('#FixDepartment').find("option:selected").val();
+        departId = depart.split('~')[0];
+        var ExtendedDays = $('#Days').val();
+        var startdate = moment();
+        startdate = startdate.add(ExtendedDays, "days");
+        startdate = startdate.format("DD-MM-YYYY");
+        var subjectId = $(".chk:checked").map(function () {
+            return this.value.split('~')[0];
+        }).get();
+        var subjectCode = $(".chk:checked").map(function () {
+            return this.value.split('~')[1];
+        }).get();
+
+        var subjectName = $(".chk:checked").map(function () {
+            return this.value.split('~')[2];
+        }).get();
+
+        var subjectVersion = $(".chk:checked").map(function () {
+
+            return this.value.split('~')[3];
+        }).get();
+
+        var DepartmentId = $(".chk:checked").map(function () {
+
+            return this.value.split('~')[4];
+        }).get();
+
+        var subjectexpirydate = $(".chk:checked").map(function () {
+
+            return this.value.split('~')[5];
+        }).get();
+
+
+        var userID = $('#ExtendedUserId').val();
+        var subjectexpiryextensiondate = startdate;
+        var subjectextensiondays = ExtendedDays;
+
+
+        $.post("/APIService/APIAdminActivity/SaveSubjectActivatedUserDetails",
+           {
+               userid: userID,
+               subjectid: subjectId,
+               subjectcode: subjectCode,
+               subjectname: subjectName.toString(),
+               Subjectversion: subjectVersion,
+               departmentid: DepartmentId,
+               subjectexpirydate: subjectexpirydate,
+               subjectexpiryextensiondate: subjectexpiryextensiondate,
+               subjectextensiondays: subjectextensiondays,
+               activatedby: ActivationBy
+
+           }, function (data) {
+
+           });
+    }
+
+    //--------------------search-----------------------------------------
+    function goTo() {
+
+        var txtValue = $("#txtSearch").val();
+
+        if (txtValue != 0) {
+            $('.hidealltmpl').hide();
+            $('.semyear-' + txtValue).show();
+        }
+    }
+    //----------------------btnupdate------------------------------------
+    $(document).on('click', '#btnUpdate', function (e) {
+        e.preventDefault();
+        $this = $(this);
+        var subjectids = $(".chk:checked").map(function () {
+            return this.value.split('~')[0];
+        }).get();
+
+        var userID = $('#ExtendedUserId').val();
+        var ExtendedDays = $('#Days').val();
+        var checksms = 1;
+        var checkemail = 1;
+        checksms = $(".chkboxsms").is(":checked") ? "1" : "0";
+        checkemail = $(".chkboxemail").is(":checked") ? "1" : "0";
+
+        depart = $('#FixDepartment').find("option:selected").val();
+        departId = depart.split('~')[0];
+
+        var ExtendedDays = $('#Days').val();
+        var startdate = moment();
+        startdate = startdate.add(ExtendedDays, "days");
+        startdate = startdate.format("DD-MM-YYYY");
+
+        subjUnitType = $('#FixProductType option:selected').val();
+
+        if (subjectids != "") {
+            if (ExtendedDays > 0) {
+                $.ajax({
+                    beforeSend: function () {
+                        if ($this.attr('id') == "btnUpdate") {
+                            $('.loader').show();
+                        }
+                    },
+                    url: '/APIService/APIAdminActivity/InsertOrUpdateLicenseExtensionByAdmin?pUserID=' + userID + '&pPackageIds=' + subjectids.toString() + '&pSubjectUnitType=' + subjUnitType + '&trialDays=' + ExtendedDays + '&sms=' + checksms + '&email=' + checkemail + '&activatedby=' + ActivationBy,
+                    type: 'GET',
+                    dataType: "json",
+                    success: function (rdata) {
+                        if (rdata == 7) {
+                            ShowAlert("Subject Extension", "Days Extended sucessfully", "success");
+                            $('#Fixextenddays').hide();
+                            //SaveUserSubjectActivationDetails();
+                            GetAllUserSubjectDetails();
+
+                        }
+                        else {
+                            ShowAlert("Subject Extension", "Days Not Extended", "warning");
+
+                        }
+                    },
+                    complete: function () {
+                        $('.loader').hide();
+                        subjectActivationUserdetails(mobile);
+                    }
+
+                });
+
+            }
+            else {
+                if (ExtendedDays == '') {
+                    ShowAlert("Subject Extension", "Extend Days Should be Enter", "warning");
+                    $('#lblextenddays').hide();
+                    $('#Fixextenddays').hide();
+
+                }
+                else {
+                    ShowAlert("Subject Extension", "Extend Days Should be  greater than 0", "warning");
+                    $('#lblextenddays').hide();
+                    $('#Fixextenddays').hide();
+                }
+            }
+        }
+        else {
+            ShowAlert("Subject Extension", "select subject", "warning");
+
+        }
+    });
+
+    //---------------------btnok to add days to extend--------------------------------------------------------------
+    $(document).on('click', '#btnOk', function () {
+        $('#Fixextenddays').empty();
+        $('#Fixextenddays').show();
+        $('#lblextenddays').show();
+        var subjectids = $(".chk:checked").map(function () {
+            return this.value
+        }).get();
+
+        var ExtendedDays = $('#Days').val();
+        var startdate = moment();
+        startdate = startdate.add(ExtendedDays, "days");
+        startdate = startdate.format("DD-MM-YYYY");
+
+        if (ExtendedDays != 0) {
+            $('#Fixextenddays').text(startdate);
+        }
+        else {
+            if (ExtendedDays == '') {
+                ShowAlert("Activation Extension", "Extend Days Should be Enter", "warning");
+                $('#lblextenddays').hide();
+                $('#Fixextenddays').hide();
+            }
+            else {
+                ShowAlert("Activation Extension", "Extend Days Should be  greater than 0", "warning");
+                $('#lblextenddays').hide();
+                $('#Fixextenddays').hide();
+            }
+        }
+
+    });
+
+    //------------btnsubmit TO show subjects and user details------------------------------------------
+    $(document).on('click', '#btnsubmit', function (e) {
+        e.preventDefault();
+
+        $this = $(this);
+        $('#Days').ForceNumericOnly();
+        $("#selectall").change(function () {
+            $(".chk").prop('checked', $(this).prop("checked"));
+            AllSubjects = $(".chk:checked").map(function () {
+                return this.value;
+            }).get();
+        });
+        $('#Days').val('');
+        $('#Fixextenddays').hide();
+        $('#selectall').attr('checked', false);
+        $('#lblextenddays').hide();
+        $('#FixSubjectExtendedDays').empty();
+        $('#FixSubjectDetails').empty();
+
+
+        mobile = $('#Mobile').val();
+        if (mobile.length != 10) {
+            ShowAlert("Alert!", "Phone number must be 10 digits", "warning");
+        }
+        else {
+            //GetAllUserSubjectDetails();
+            subjectActivationUserdetails(mobile);
+            setTimeout(function () {
+                $("#FixDepartment").empty().append($("#FixDepartment").html('<option value="0">Select Department</option>'), LoadDepartments());
+                $("#FixSemester").empty().append($("#FixSemester").html('<option value="0">Select semester</option>'), LoadSemester());
+            }, 100);
+        }
+
+    });
+
+    function subjectActivationUserdetails(mobile) {
+        $.getJSON("/APIService/APIAdminActivity/GetUserDetailsForSubjectActivation",
+                 {
+                     MobileNo: mobile
+
+                 }, function (data) {
+                     if (data != "") {
+                         $('#Activation').show();
+                         $('#Subjects').show();
+                         $.each(data, function (index, value) {
+                             if (index == 0) {
+                                 $('#ExtendedUserId').val(value.UserId);
+                                 $('#Extendedsem').val(value.Semester);
+                                 $('#ExtendedUnivid').val(value.UniversityId);
+                                 $('#ExtdepartId').val(value.DepartmentId);
+
+                                 $("#BindSubjectExtendedDays").tmpl(value).appendTo("#FixSubjectExtendedDays");
+                             }
+                         });
+                     }
+                     else {
+                         $('#Activation').hide();
+                         $('#Subjects').hide();
+                         ShowAlert("Alert!", "InValid Mobile Number", "warning");
+                     }
+                 });
+    }
+
+    $(document).on('click', '#btnrefresh', function () {
+
+        $("#FixDepartment").empty().append($("#FixDepartment").html('<option value="0">Select Department</option>'), LoadDepartments());
+        $("#Fixyear").empty().append($("#Fixyear").html('<option value="0">Select year</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>'));
+        $("#FixSemester").empty().append($("#FixSemester").html('<option value="0">Select semester</option>'), LoadSemester());
+        $('#FixProductType').empty().append($('#FixProductType').html('<option value="0">Product Type</option><option value="1">Content Product</option><option value="2">Q & A App</option>'));
+        $('#Fixextenddays').hide();
+        $("#FixSubjectDetails").empty();
+        //GO();
+
+    });
+
+    function GetAllUserSubjectDetails() {
+        $("#selectall").change(function () {
+            $(".chk").prop('checked', $(this).prop("checked"));
+            AllSubjects = $(".chk:checked").map(function () {
+                return this.value;
+            }).get();
+        });
+        $('#Days').val('');
+        $('#Fixextenddays').empty();
+        $('#selectall').attr('checked', false);
+        $('#lblextenddays').hide();
+        $('#FixSubjectExtendedDays').empty();
+        $('#FixSubjectDetails').empty();
+        var mobile = $('#Mobile').val();
+
+        if (mobile.length != 10) {
+            ShowAlert("Alert!", "Phone number must be 10 digits", "warning");
+        }
+        else {
+            $.ajax({
+                beforeSend: function () {
+                    if ($this.attr('id') == "btnsubmit") {
+                        $('.loader').show();
+                    }
+                },
+                url: '/APIService/APIAdminActivity/GetOverallSubjectDetails?MobileNo=' + mobile + '&univId=' + univ_Id + '&departmentId=' + departId + '&year=' + yearvalue + '&semester=' + semvalue + '&subjunitType=' + subjUnitType,
+                type: 'GET',
+                dataType: "json",
+                success: function (rdata) {
+                    if (rdata != "") {
+                        $('#Activation').show();
+                        $('#Subjects').show();
+                        $.each(rdata, function (index, value) {
+                            if (index == 0) {
+                                $('#Subjects').show();
+                                $('#ExtendedUserId').val(value.UserId);
+
+                            }
+                            $("#BindSubjectDetails").tmpl(value).appendTo("#FixSubjectDetails");
+
+                        });
+                    }
+                    else {
+                        $('#Activation').hide();
+                        $('#FixSubjectDetails').html('<div><strong><h3 style="text-align:center;">Subjects Not Avaliable</h3></strong></div>');
+                    }
+                },
+                complete: function () {
+                    $('.loader').hide();
+                }
+
+            });
+        }
+    }
+
+
+    function GO() {
+
+        depart = $('#FixDepartment option:selected').val();
+        departId = depart.split('~')[0];
+        yearvalue = $('#Fixyear option:selected').val();
+        semvalue = $('#FixSemester option:selected').val();
+        univ_Id = $('#ExtendedUnivid').val();
+        subjUnitType = $('#FixProductType option:selected').val();
+
+        $("#selectall").change(function () {
+            $(".chk").prop('checked', $(this).prop("checked"));
+            AllSbjets = $(".chk:checked").map(function () {
+                return this.value;
+            }).get();
+        });
+        $('#Days').val('');
+        $('#Fixextenddays').empty();
+        $('#selectall').attr('checked', false);
+        $('#lblextenddays').hide();
+        $('#FixSubjectExtendedDays').empty();
+        $('#FixSubjectDetails').empty();
+
+        mobile = $('#Mobile').val();
+
+        subjectActivationUserdetails(mobile);
+
+        if (mobile.length != 10) {
+            ShowAlert("Alert!", "Phone number must be 10 digits", "warning");
+        }
+        else {
+            if (departId == "0" || subjUnitType == "0") {
+                ShowAlert("Alert!", "Select department and product type", "warning");
+            }
+            else {
+                $.ajax({
+                    beforeSend: function () {
+                        if ($this.attr('id') == "btnGo") {
+                            $('.loader').show();
+                        }
+                    },
+                    url: '/APIService/APIAdminActivity/GetOverallSubjectDetails?MobileNo=' + mobile + '&univId=' + univ_Id + '&departmentId=' + departId + '&year=' + yearvalue + '&semester=' + semvalue + '&subjunitType=' + subjUnitType,
+                    type: 'GET',
+                    dataType: "json",
+                    success: function (rdata) {
+                        if (rdata != "") {
+                            $('#Activation').show();
+                            $('#Subjects').show();
+                            $.each(rdata, function (index, value) {
+                                if (index == 0) {
+                                    $('#Subjects').show();
+                                    $('#ExtendedUserId').val(value.UserId);
+                                }
+                                $("#BindSubjectDetails").tmpl(value).appendTo("#FixSubjectDetails");
+                            });
+                        }
+                        else {
+                            $('#Activation').hide();
+                            $('#FixSubjectDetails').html('<div><strong><h3 style="text-align:center;">Subjects Not Avaliable</h3></strong></div>');
+                        }
+                    },
+                    complete: function () {
+                        $('.loader').hide();
+                    }
+
+                });
+            }
+
+        }
+    }
+
+
+    $(document).on('click', '#btnGo', function (e) {
+        e.preventDefault();
+        $this = $(this);
+        $('#Fixextenddays').hide();
+        GO();
+
+    });
+
+    $('#btnCancel').click(function () {
+        $('#Days').val('');
+        $('#lblextenddays').hide();
+        $('#Fixextenddays').hide();
+    });
+</script>

@@ -1,0 +1,346 @@
+﻿
+@{
+    ViewBag.Title = "RegistrationDashBoard";
+    Layout = "~/Views/Shared/_LearnEnggGroupAdminLayout.cshtml";
+}
+
+
+<div class="content">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="container">
+                <div class="row" style="box-shadow: 0 1px 2px 2px #e6ecf1; padding:4% 0 4% 4%; background-color: #fff;">
+                    <div class="col-md-3">
+                        <div style="padding-top:0%; padding-left:10%;">
+                            <img src="../files/images/trade-01.png" style="width:60px; ">
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <p style="margin:0; padding-top:2%; color:#000; font-weight:600;">HIGHEST REGISTERED TRADE</p>
+                        <p style="font-size:11px; margin:0; padding-top:2%; color:#1875f0; font-weight:500;">HIGHEST TRADE : <strong id="lblRegTrde"></strong></p>
+                    </div>
+                    <div class="col-md-2">
+                        <div style="padding-top:20%;">
+                            <p style="color:#1875f0; font-weight:600; font-size:18px; margin:0; "><b id="lblTotTrde"></b></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-6">
+            <div class="container">
+                <div class="row" style="box-shadow: 0 1px 2px 2px #e6ecf1; padding:4% 0 4% 4%; background-color: #fff;">
+                    <div class="col-md-3">
+                        <div style="padding-top:0%; padding-left:10%;">
+                            <img src="../files/images/univ-01.png" style="width:60px; ">
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <p style="margin:0; padding-top:2%; color:#000; font-weight:600;">HIGHEST REGISTERED IT</p>
+                        <p style="font-size:11px; margin:0; padding-top:2%; color:#1875f0; font-weight:500;">HIGHEST TRADE : <strong id="lblRegColge"></strong></p>
+                    </div>
+                    <div class="col-md-2">
+                        <div style="padding-top:20%;">
+                            <p style="color:#1875f0; font-weight:600; font-size:18px; margin:0;"><b id="lblTotColge"></b></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="container">
+                <div class="row fist-cnt" style="padding:1% 0 0 2%; margin-top:2%;  background-color: #fff !important;">
+                    <div class="col-md-7">
+                        <h2 style="padding-left:4%; color:#000; font-weight:500; font-size:22px;">Trade Wise Registration</h2>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div style="width:15px; height:15px; background: linear-gradient( #88c509,#4e9806);border-radius:20px; margin-top:5px;"></div>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div style=" font-size:15px; color:#000; font-weight:400;">above 800</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div style="width:15px; height:15px;  background: linear-gradient( #0260ee,#4a84ff); border-radius:20px; margin-top:5px;"></div>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div style=" font-size:15px; color:#000; font-weight:400;">400 to 800</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div style="width:15px; height:15px; background: linear-gradient( #ff5d59,#c91f37); border-radius:20px; margin-top:5px;"></div>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div style=" font-size:15px;  color:#000; font-weight:400;">0 to 50</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   <div class="row">
+        <div class="container">
+
+    <div class="col-md-12" style="background-color: #fff;" id="TradeColumnChartdiv">
+        @*<img src="../files/images/chart 1-01.png" style="width:100%;">*@
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="container">
+            <div class="col-md-12" style="box-shadow: 0 1px 2px 2px #e6ecf1; margin-top:2%; background-color: #fff; width: 1080px; height: 370px;" id="MonthBarChartdiv">
+                @*<img src="../files/images/chart 2-01.png" style="width:100%;">*@
+
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<script type="text/javascript">
+    google.load("visualization", "1.1", { packages: ["corechart"] });
+    google.load("visualization", "1.1", { packages: ["table"] });
+    $(document).ready(function () {
+        BaseITIUsageBarChart();
+    });
+
+     var sessionuserID = '@Session["loginUserID"]';
+     var sessionCollegeID = '@Session["CollegeID"]';
+     var sessionCollegeGrpId = '@Session["logincollegegrpId"]';
+
+    function navigate(target) {
+        //  UnivCode = "01";
+        var _Url = '../GroupAdminProcess/StudentRegistrationHistorys';
+
+        window.open(_Url, '_blank');
+    }
+
+    function BaseITIUsageBarChart() {
+
+        $.ajax({
+            type: 'GET',
+            url: '/APIService/APICollegeGroupAdminDashBoardReports/GetCollegeGroupDashBoardRegistrationData',
+            dataType: 'json',
+            data: { CollegeGrpId: sessionCollegeGrpId, SubType : 1 },
+            async: 'false',
+            crossOrigin: true,
+            success: function (response) {
+
+
+                $('#lblRegTrde').empty();
+                $('#lblRegColge').empty();
+                $('#lblTotTrde').empty();
+                $('#lblTotColge').empty();
+
+                // fill Trade data
+                var TraderData = response.TradeUsage;
+
+                $('#TradeColumnChartdiv').empty();
+
+                if (TraderData.length > 0) {
+                    TradeUsageBarChart(TraderData);
+                }
+                else {
+                    $('#TradeColumnChartdiv').css('text-align', 'center').addClass('center').html('<img src="../css/Images/warning.png" />' + "<br/>" + "<strong>DATA NOT FOUND</strong>");
+                }
+
+                // Higherst Trade and ITI
+                $('#lblRegTrde').text(response.HighestRegisteredTrade);
+                $('#lblRegColge').text(response.HighestRegisteredITIName);
+                $('#lblTotTrde').text(response.RegisteredITICount);
+                $('#lblTotColge').text(response.RegisteredTradeCount);
+
+
+                // fill Monthwise data
+                var MonthrData = response.MonthUsage;
+                $('#MonthBarChartdiv').empty();
+
+                if (MonthrData.length > 0) {
+                    MonthUsageBarChart(MonthrData);
+                }
+                else {
+                    $('#MonthBarChartdiv').css('text-align', 'center').addClass('center').html('<img src="../css/Images/warning.png" />' + "<br/>" + "<strong>DATA NOT FOUND</strong>");
+                }
+            }
+        });
+    }
+
+
+    function TradeUsageBarChart(ChartData) {
+       // alert("ChartData" + ChartData)
+        google.charts.load("current", { packages: ['corechart'] });
+        google.charts.setOnLoadCallback(drawUsageChart);
+
+
+        function drawUsageChart() {
+
+            var dataarray = [['Trade Name', 'TotalRegistration', { "type": "string", "role": "style" }, { "type": "string", "role": "annotation" }]];  // ,  { role: 'annotation' }
+
+            for (var i = 0; i < ChartData.length; i++) {
+                var color = '#88c509';
+                if (ChartData[i].TotalRegistration < 20) {
+                    color = '#ff5d59';
+                }
+                else if (ChartData[i].TotalRegistration > 100) {
+                    color = '#66B102';
+                }
+                else {
+                    color = '#1F6EEF';
+                }
+                dataarray.push([ChartData[i].TradeName, ChartData[i].TotalRegistration, color, ChartData[i].TotalRegistration]);
+            }
+
+            var data = google.visualization.arrayToDataTable(dataarray);
+            var view = new google.visualization.DataView(data);
+            var options = {
+                titlePosition: 'none',
+                height: 380,
+                chartArea: { left: 75, top: 20, width: "90%", height: "55%" },
+
+                annotations: {
+                    alwaysOutside: true,
+                    textStyle: {
+                        fontSize: 10,
+                        auraColor: 'none',
+                        color: '#555'
+                    },
+                    boxStyle: {
+                        stroke: '#ccc',
+                        strokeWidth: 1,
+                        gradient: {
+                            color1: '#f3e5f5',
+                            color2: '#f3e5f5',
+                            x1: '0%', y1: '0%',
+                            x2: '100%', y2: '100%'
+                        }
+                    }
+                },
+                hAxis: {
+                    title: 'Trades',
+                    slantedTextAngle: 50,
+                    slantedText: true,
+                    textStyle: {
+                        fontSize: '11', fontfamily: 'Roboto'
+                    }
+                },
+                vAxis: {
+                    title: 'Registered Users',
+                    textStyle: {
+                        fontSize: 11
+                    }
+                },
+                bar: { groupWidth: "98%", height: "70%", gap: "35%" },
+                legend: { position: "none" },
+                is3D: true
+            };
+            var chart = new google.visualization.ColumnChart(document.getElementById('TradeColumnChartdiv'));
+            chart.draw(view, options);
+        }
+
+    }
+
+
+
+
+
+    function MonthUsageBarChart(ChartData) {
+
+        // google.charts.load("current", { packages: ['corechart'] });
+        google.charts.load("current", { packages: ["imageareachart"] });
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+
+            var dataarray = [['Month Name', 'TotalRegistration']];
+            for (var i = 0; i < ChartData.length; i++) {
+                dataarray.push([ChartData[i].MonthName, ChartData[i].TotalRegistration]);
+            }
+
+            var data = google.visualization.arrayToDataTable(dataarray);
+            var view = new google.visualization.DataView(data);
+
+            view.setColumns([0, 1,
+                {
+                    calc: "stringify",
+                    sourceColumn: 1,
+                    type: "string",
+                    role: "annotation"
+                }
+            ]);
+
+            var options = {
+                curveType: 'function',
+                title: 'Month wise Registration',
+                titleTextStyle: { color: 'black', fontSize: '22', fontfamily: 'Roboto' },
+                titlePosition: 'out',
+                height: 360,
+                width: 1040,
+                chartArea: { left: 75, top: 70, right: 20, bottom: 130, width: "100%", height: "55%" },
+
+                annotations: {
+                    alwaysOutside: true,
+                    textStyle: {
+                        fontSize: 12,
+                        auraColor: 'none',
+                        color: '#555'
+                    },
+                    boxStyle: {
+                        stroke: '#ccc',
+                        strokeWidth: 1,
+                        gradient: {
+                            color1: '#f3e5f5',
+                            color2: '#f3e5f5',
+                            x1: '0%', y1: '0%',
+                            x2: '100%', y2: '100%'
+                        }
+                    }
+                },
+                hAxis: {
+                    title: 'Month-Year',
+                    slantedTextAngle: 50,
+                    slantedText: true,
+                    textStyle: {
+                        fontSize: '11', fontfamily: 'Roboto'
+                    }
+                },
+                vAxis: {
+                    title: 'Registered Trades',
+                    viewWindowMode: 'explicit',
+                    viewWindow: {
+                        min: 0
+                    },
+                    textStyle: {
+                        fontSize: '11', fontfamily: 'Roboto'
+                    }
+                },
+                bar: { groupWidth: "100%", height: "99%", gap: "20%" },
+                legend: { position: "none" },
+                is3D: true
+            }
+            var chart = new google.visualization.AreaChart(document.getElementById('MonthBarChartdiv'));
+            chart.draw(view, options);
+        };
+    }
+
+</script>
+

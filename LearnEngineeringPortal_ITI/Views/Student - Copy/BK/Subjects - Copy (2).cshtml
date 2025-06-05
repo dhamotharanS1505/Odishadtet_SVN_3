@@ -1,0 +1,143 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_StudentLearnEnggSubjectLayout.cshtml";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HTML Display</title>
+    @*<base href="http://localhost:8081/odskills/OD-CO-VLS-24-004/">*@
+</head>
+<body>
+    <div style="margin-top:10px">
+        <!-- Store ViewBag data in a hidden element -->
+        <input type="hidden" id="hiddenMessage" value="@ViewBag.HtmlContent" />
+        @*<div style="margin-top:150px" id="htmlContainer"></div>*@
+
+        @*<div>
+            <input type="button" value="Go to Dashboard" src="~/student/Dashboard"/>
+        </div>*@
+
+        <div>
+            <iframe id="htmlContainer" width="100%" height="600px" style="border: none;"></iframe>
+            @*<iframe id="myIframe" width="100%" height="600px" ></iframe>*@
+
+            @*<iframe id="htmlContainer" width="300" height="200" 
+           srcdoc="<base href='http://localhost:8081/odskills/OD-CO-VLS-24-004/'><body><img src='image.jpg'><div id='htmlContainer'>Hello</div></body>">
+
+            </iframe>*@
+
+        </div>
+        
+    </div>
+    <script>
+
+
+        $(document).ready(function () {
+            //var imageName = $(this).attr('data-name');
+            imageName = "index.html";
+            var message = $("#hiddenMessage").val();
+           alert("ViewBag Message: " + message);
+            //window.location.href = "/Student/PrivatePage?fileName=" + imageName;
+
+           //$('#htmlContainer').attr('src', '/Student/PrivatePage?fileName=' + message);
+
+           var baseurl = "http://localhost:8081/odskills/OD-CO-VLS-24-001/";
+           //document.write("<base href='" + baseurl + "' />");
+          // document.baseurl = baseurl;
+           var mybase = document.createElement("base");
+           mybase.href = baseurl;
+           document.head.appendChild(mybase);
+           //var mydiv = document.createElement("div");
+           // mydiv.attributes.
+           //document.body.appendChild(mydiv);
+           $('#htmlContainer').attr('src', '/Student/PrivatePage?fileName=' + message);
+
+           //var mydiv1 = document.createElement("iframe");
+           //var mydiv1 = document.createElement("iframe");
+           //mydiv1.
+           //document.body.appendChild(mydiv);
+          // var container = $('#htmlContainer');
+          // container.empty();
+           //var response = "<iframe id='myIframe' width='300' height='200' srcdoc='<base href= " + baseurl +"><body><img src='image.jpg'></body>'></iframe>";
+////           var response = `<iframe id='myIframe' width='300' height='200' 
+////    srcdoc="<base href='${baseurl}'><body><img src='image.jpg'><div id='myIframehtml'>Hello</div></body>">
+////</iframe>`;
+
+
+
+
+//           var htmlcontainer = "";
+//            $.ajax({
+//               type: 'GET',
+//               url: '/Student/PrivatePage?fileName=' + message,
+//               //dataType: 'json',
+//               //crossOrigin: true,
+//               success: function (response) {
+//                  // var container = $('#htmlContainer');
+//                   // container.empty();
+                  
+//                   //
+                  
+
+//                   //
+//                   mydiv.innerHTML = response;
+                   
+//                   ////setTimeout(myinitnew, 10000);
+//                  // document.body.appendChild(mydiv);
+//                  // myinitnew();
+//                   // mydiv.append(response);
+////                   var response1 = `<iframe id='myIframe' width='600' height='200' 
+////    src=`+ htmlcontainer +`
+////</iframe>`;
+
+////                   alert(response1);
+////                  container.append(response1);
+
+//               },
+//               error: function (result) {
+//                   alert("Error");
+//               }
+//           });
+
+
+
+         
+
+           //$('#myIframehtml').attr('src', 'Index.html');
+            
+                    
+           
+
+            //$.ajax({
+            //    type: 'GET',
+            //    url: '/Student/PrivatePage?fileName=' + message,
+            //    //dataType: 'json',
+            //    //crossOrigin: true,
+            //    success: function (response) {
+
+            //        alert(response);
+            //        alert($('#htmlContainer').val());
+            //        //var encodedHtml = encodeURIComponent(response);
+            //        //alert(encodedHtml);
+            //        //$('#showimage').hide();
+            //        var container = $('#myIframehtml');
+            //        container.empty();
+            //        container.append(response);
+            //        //$("#myIframehtml").html(response);
+
+            //        //$("#htmlContainer").html(response);
+            //        //window.location.href = "/Student/Subjects?fileName=" + response;
+            //        //window.location.href = "/Student/Subjects??fileName=" + encodedHtml;
+
+            //    },
+            //    error: function (result) {
+            //        alert("Error");
+            //    }
+            //});
+        });
+
+    </script>
+</body>
+</html>

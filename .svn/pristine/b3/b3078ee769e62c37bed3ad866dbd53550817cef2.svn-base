@@ -1,0 +1,497 @@
+﻿
+@{
+    ViewBag.Title = "FeedBack";
+    Layout = "~/Views/Shared/_LearnEnggGroupAdminLayout.cshtml";
+}
+<style type="text/css">
+    table#t01 tr:nth-child(odd) {
+        background-color: #e7f1fd;
+        ;
+    }
+
+    table#t01 th {
+        background-color: #1875f0;
+        color: white;
+    }
+
+    th, td {
+        padding: 7px;
+        text-align: left;
+        text-align: center;
+        color: #000;
+        font-weight: 500;
+    }
+
+    td {
+        padding: 7px;
+        text-align: left;
+        text-align: center;
+        color: #000;
+        font-weight: 500;
+        opacity: 0.87;
+    }
+
+    table {
+        box-shadow: 0 1px 2px 2px #e6ecf1;
+        background-color: #fff;
+    }
+
+    input[type="text"] {
+        background-image: none !important;
+    }
+
+    select:valid {
+        color: #1875f0;
+        font-size: 13px;
+    }
+
+    .scroller {
+        width: 350px;
+        overflow-y: scroll;
+        scrollbar-color: #1875f0 #DADAEB;
+        scrollbar-width: thin;
+        overflow-x: hidden;
+    }
+
+    .srt-ltr-one {
+        background-color: #ccdffc;
+        text-align: center;
+        border-radius: 24px;
+        padding: 4px 10px 3px 10px;
+        width: 35px;
+        font-size: 20px;
+        opacity: 0.87;
+        color: #1875f0;
+        font-weight: 550;
+    }
+
+    .name-one {
+        color: #000;
+        font-weight: 400;
+        font-size: 16px;
+    }
+
+    .nm-stus-one {
+        font-size: 12px;
+        color: #0260ee;
+        font-weight: 400;
+        margin: 0;
+        padding-top: 9%;
+        float: right;
+        padding-right: 10%;
+    }
+
+    .srt-ltr-two {
+        background-color: #f6d3d3;
+        text-align: center;
+        border-radius: 24px;
+        padding: 8px 10px 10px 10px;
+        width: 40px;
+        font-size: 20px;
+        color: #d42323;
+        font-weight: 550;
+    }
+
+    .name-two {
+        color: #000;
+        font-weight: 400;
+    }
+
+    .nm-stus-two {
+        font-size: 12px;
+        color: #d42323;
+        font-weight: 400;
+        padding-top: 9%;
+        float: right;
+        padding-right: 10%;
+    }
+
+    .srt-ltr-three {
+        background-color: #fce9cc;
+        text-align: center;
+        border-radius: 24px;
+        padding: 8px 10px 10px 10px;
+        width: 40px;
+        font-size: 20px;
+        opacity: 0.87;
+        color: #ff9d00;
+        font-weight: 550;
+    }
+
+    .name-three {
+        color: #000;
+        font-weight: 400;
+    }
+
+    .nm-stus-three {
+        font-size: 12px;
+        color: #ff9d00;
+        font-weight: 400;
+        padding-top: 9%;
+        float: right;
+        padding-right: 10%;
+    }
+
+    .srt-ltr-four {
+        background-color: #cceedc;
+        text-align: center;
+        border-radius: 24px;
+        padding: 8px 10px 10px 10px;
+        width: 40px;
+        font-size: 20px;
+        opacity: 0.87;
+        color: #00aa52;
+        font-weight: 550;
+    }
+
+    .name-four {
+        color: #000;
+        font-weight: 400;
+    }
+
+    .nm-stus-four {
+        font-size: 12px;
+        color: #00aa52;
+        font-weight: 400;
+        padding-top: 9%;
+        float: right;
+        padding-right: 10%;
+    }
+
+    .btn-tt {
+        margin-top: 2%;
+        margin-bottom: 10%;
+        margin-right: 4%;
+    }
+
+    .btn-one {
+        padding: 0.4% 3.8%;
+        float: right;
+        border: 1px solid #1875f0;
+        color: #1875f0;
+        font-weight: 400;
+        border-radius: 3px;
+    }
+
+    .btn-two {
+        background-color: #1875f0;
+        padding: 0.4% 4%;
+        float: right;
+        border: 1px solid #1875f0;
+        margin-right: 2%;
+        color: #fff;
+        font-weight: 400;
+        border-radius: 3px;
+    }
+
+    .scroller {
+        width: 347px;
+        overflow-y: scroll;
+        scrollbar-color: #0260ee #DADAEB;
+        scrollbar-width: thin;
+        overflow-x: hidden;
+        height: 550px;
+    }
+
+    .left-box {
+        box-shadow: 0 1px 2px 1px #e6ecf1;
+        background-color: #fff !important;
+        margin-right: -4.5%;
+        padding: 3% 2% 3% 2%;
+    }
+
+    .srt-ltr-one {
+        background-color: ccdffc;
+        text-align: center;
+        border-radius: 24px;
+        padding: 8px 10px 10px 10px;
+        width: 40px;
+        font-size: 20px;
+        color: #0260ee;
+        font-weight: 550;
+    }
+
+    .paraa {
+        font-size: 13.5px;
+        display: flex;
+        text-align: justify;
+        margin-top: -4%;
+        opacity: 0.60;
+        color: #000;
+        padding-right: 4%;
+        line-height: 130%;
+    }
+
+    .navbar {
+        padding: 0rem 1rem;
+    }
+
+    .dropdown-toggle::after {
+        display: none !important;
+    }
+</style>
+<div class="content-area">
+
+   
+
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="left-box">
+                    <div class="scroller">
+                        <select id="RoleCategory">
+                            <option value="AllFeedback">All Feedback</option>
+                            @*<option value="StateAdmin">State Admin</option>*@
+                            <option value="ITIAdmin">ITI Admin</option>
+                            <option value="Instructor">Instructor</option>
+                        </select>
+
+                        <div id="FeedbackListId">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div style="box-shadow: 0 1px 2px 1px #e6ecf1;margin-left: 6%; background-color: #fff !important; padding:2% 4%; color:#000;">
+
+                    <div class="loader row">
+                        <center>
+                            <img src="../Content/img/pre_loader.gif" />
+                        </center>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-9">
+                            <p style="color:#1875f0; font-weight:400; margin-bottom:4%;">Feedback</p>
+                        </div>
+                        <div class="col-md-3">
+
+                        </div>
+
+                        <div class="col-md-12">
+
+                            <textarea cols="72" rows="15" id="feedbackDesc" placeholder="Enter Your Feedback here..." style="padding-top:2%; padding-left:2%; opacity:0.87;"></textarea>
+
+                        </div>
+                        <div class="col-md-12">
+                            <div class="btn-tt" style="">
+                                <a href="#">  <span class="btn-one"  style="margin-right: 14%;">cancel</span></a>
+                                <a href="#"> <span class="btn-two" id="sendFeedback">send</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    $('.loader').hide();
+
+    $(document).ready(function () {
+
+        $('.loader').hide();
+        var RoleDesc = $('#sessionroledescription').val();
+        var SearchRoleDesc = $('#RoleCategory option:selected').text();
+        var GetUrl = "/APIService/APIAdminReport/getRoleFeedback?CollegeGrpId=0&RoleDesc=" + RoleDesc + "&SearchRole=" + SearchRoleDesc;
+        //  alert("GetUrl" + GetUrl);
+
+        var HtmlOutput = "";
+        $.ajax({
+            type: 'GET',
+            dataType: 'json',
+            url: GetUrl,
+            beforeSend: function () {
+                $('.loader').hide();
+            },
+            success: function (response) {
+                var class1 = "srt-ltr-four";
+                var class2 = "name-four";
+                var class3 = "nm-stus-four";
+                var incrementor = 0;
+                var userInitial = "";
+                $.each(response, function (index, value) {
+                    incrementor++;
+                    if (incrementor == 1) {
+                        class1 = "srt-ltr-one";
+                        class2 = "name-one";
+                        class3 = "nm-stus-one";
+                    }
+                    if (incrementor == 2) {
+                        class1 = "srt-ltr-two";
+                        class2 = "name-two";
+                        class3 = "nm-stus-two";
+                    }
+                    if (incrementor == 3) {
+                        class1 = "srt-ltr-three";
+                        class2 = "name-three";
+                        class3 = "nm-stus-three";
+                    }
+                    if (incrementor == 4) {
+                        class1 = "srt-ltr-four";
+                        class2 = "name-four";
+                        class3 = "nm-stus-four";
+                    }
+                    userInitial = value['UserName'].charAt(0);
+
+                    HtmlOutput += '<div class="row"> <div class="col-md-2" style="padding-right: 0;padding-left: 5%;"> <h3 class="' + class1 + '">' + userInitial + '</h3></div>';
+                    HtmlOutput += '<div class="col-md-10" style="padding-right: 5%;"> <div class="row"><div class="col-md-7"><p class="' + class2 + '">' + value['UserName'] + '</p></div>';
+                    HtmlOutput += '<div class="col-md-5"><p class="' + class3 + '">' + value['UserRole'] + '</p></div></div > ';
+                    HtmlOutput += '<p class="paraa">' + value['UserFeedbackDesc'] + '</p> </div > </div > ';
+
+                    if (incrementor == 4) {
+                        incrementor = 0;
+                    }
+                });
+                $('#FeedbackListId').html(HtmlOutput);
+            },
+            complete: function (xhr, status) {
+
+            },
+            error: function () {
+                alert("No Response");
+            }
+        });
+
+        $('#RoleCategory').on('change', function () {
+
+            var RoleDesc = $('#sessionroledescription').val();
+            var SearchRoleDesc = $('#RoleCategory option:selected').text();
+            var GetUrl = "/APIService/APIAdminReport/getRoleFeedback?CollegeGrpId=0&RoleDesc=" + RoleDesc + "&SearchRole=" + SearchRoleDesc;
+            //  alert("GetUrl" + GetUrl);
+
+            var HtmlOutput = "";
+            $.ajax({
+                type: 'GET',
+                dataType: 'json',
+                url: GetUrl,
+                beforeSend: function () {
+                    $('.loader').hide();
+                },
+                success: function (response) {
+                    var class1 = "srt-ltr-four";
+                    var class2 = "name-four";
+                    var class3 = "nm-stus-four";
+                    var incrementor = 0;
+                    var userInitial = "";
+                    $.each(response, function (index, value) {
+                        incrementor++;
+                        if (incrementor == 1) {
+                            class1 = "srt-ltr-one";
+                            class2 = "name-one";
+                            class3 = "nm-stus-one";
+                        }
+                        if (incrementor == 2) {
+                            class1 = "srt-ltr-two";
+                            class2 = "name-two";
+                            class3 = "nm-stus-two";
+                        }
+                        if (incrementor == 3) {
+                            class1 = "srt-ltr-three";
+                            class2 = "name-three";
+                            class3 = "nm-stus-three";
+                        }
+                        if (incrementor == 4) {
+                            class1 = "srt-ltr-four";
+                            class2 = "name-four";
+                            class3 = "nm-stus-four";
+                        }
+                        userInitial = value['UserName'].charAt(0);
+
+                        HtmlOutput += '<div class="row"> <div class="col-md-2" style="padding-right: 0;padding-left: 5%;"> <h3 class="' + class1 + '">' + userInitial + '</h3></div>';
+                        HtmlOutput += '<div class="col-md-10" style="padding-right: 5%;"> <div class="row"><div class="col-md-7"><p class="' + class2 + '">' + value['UserName'] + '</p></div>';
+                        HtmlOutput += '<div class="col-md-5"><p class="' + class3 + '">' + value['UserRole'] + '</p></div></div > ';
+                        HtmlOutput += '<p class="paraa">' + value['UserFeedbackDesc'] + '</p> </div > </div > ';
+
+                        if (incrementor == 4) {
+                            incrementor = 0;
+                        }
+                    });
+                    $('#FeedbackListId').html(HtmlOutput);
+                },
+                complete: function (xhr, status) {
+
+                },
+                error: function () {
+                    alert("No Response");
+                }
+            });
+        });
+
+
+        $('#sendFeedback').on('click', function () {
+
+            var vfeedback = $('#feedbackDesc').val();
+            if (vfeedback.length < 2) {
+                alert("Please enter valid feedback");
+                return false;
+            }
+
+            var vuser_id = $('#sessionUserId').val();
+            var vuser_name = $('#sessionUserName').val();
+            var vrolle_id = $('#sessionroleId').val();
+            var vrolle_desc = $('#sessionroledescription').val();
+            var vmobile = $('#sessionMobileNumber').val();
+            var vemail = $('#sessionEmailID').val();
+            var vcollege_id = $('#sessioncollegeID').val() != null ? $('#sessioncollegeID').val() : 0;
+
+            var UserFeedbackData = { user_id: vuser_id, user_name: vuser_name, rolle_id: vrolle_id, rolle_desc: vrolle_desc, mobile: vmobile, email: vemail, college_id: vcollege_id, feedback: vfeedback };
+
+            $.ajax({
+                type: 'POST',
+                datatype: 'json',
+                url: '/APIService/APIAdminReport/sendRoleFeedback',
+                data: JSON.stringify(UserFeedbackData),
+                contentType: "application/json",
+
+                beforeSend: function () {
+                    $('.loader').show();
+                },
+                success: function (data) {
+                    $('.loader').hide();
+                    if (data >= 0) {
+                        alert("Feedback successfully uploaded ..");
+                    }
+                },
+                complete: function () {
+                    $('.loader').hide();
+                    window.location = "/UserDashBoard/FeedBack";
+                },
+                error: function (jqXHR, exception) {
+                    $('.loader').hide();
+                    var msg = '';
+                    if (jqXHR.status === 0) {
+                        msg = 'Not connect.\n Verify Network.';
+                    } else if (jqXHR.status == 404) {
+                        msg = 'Requested page not found. [404]';
+                    } else if (jqXHR.status == 500) {
+                        msg = 'Internal Server Error [500].';
+                    } else if (exception === 'parsererror') {
+                        msg = 'Requested JSON parse failed.';
+                    } else if (exception === 'timeout') {
+                        msg = 'Time out error.';
+                    } else if (exception === 'abort') {
+                        msg = 'Ajax request aborted.';
+                    } else {
+                        msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                    }
+                    alert("something wrong ... " + msg);
+                }
+            });
+
+        });
+
+    });
+
+
+
+</script>

@@ -1,0 +1,2326 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="subject_delivery_anna_newModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="business_customer">
+    <Key>
+      <PropertyRef Name="bcust_id" />
+    </Key>
+    <Property Name="bcust_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="bcust_first_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="bcust_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="bcust_password" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="role_id" Type="Int32" Nullable="false" />
+    <Property Name="bcust_email_id" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="bcust_mobile" Type="Int64" Nullable="false" />
+    <Property Name="loggedin_status" Type="Int32" />
+    <Property Name="last_loggedin_date" Type="DateTime" Precision="3" />
+    <Property Name="is_first_login" Type="Int32" Nullable="false" />
+    <Property Name="active_status" Type="Int32" Nullable="false" />
+    <Property Name="created_by" Type="Int32" />
+    <Property Name="created_on" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="bcust_profileimage" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="bcust_address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="state_id" Type="Int32" />
+    <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="dob" Type="DateTime" Precision="0" />
+    <Property Name="gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="phonenumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Bulk_mail" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="product_request_master_history" Relationship="Self.FK__product_r__bcust__00AA174D" FromRole="business_customer" ToRole="product_request_master_history" />
+    <NavigationProperty Name="product_request_master" Relationship="Self.FK__product_r__bcust__05A3D694" FromRole="business_customer" ToRole="product_request_master" />
+    <NavigationProperty Name="product_request_master1" Relationship="Self.FK__product_r__bcust__793DFFAF" FromRole="business_customer" ToRole="product_request_master" />
+    <NavigationProperty Name="product_request_master_history1" Relationship="Self.FK__product_r__bcust__id" FromRole="business_customer" ToRole="product_request_master_history" />
+  </EntityType>
+  <EntityType Name="business_customer_teams">
+    <Key>
+      <PropertyRef Name="bcust_teamid" />
+    </Key>
+    <Property Name="bcust_teamid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="bcust_id" Type="Int64" />
+    <Property Name="bteamCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="bteamName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="bteamLeadName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="createdDate" Type="DateTime" Precision="3" />
+    <Property Name="active_status" Type="Int32" />
+  </EntityType>
+  <EntityType Name="clienttool_user_version">
+    <Key>
+      <PropertyRef Name="client_tool_user_versionid" />
+    </Key>
+    <Property Name="client_tool_user_versionid" Type="Int32" Nullable="false" />
+    <Property Name="user_id" Type="Int64" Nullable="false" />
+    <Property Name="tool_version_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="model_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="released_on" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="reason" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="is_current_version" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="clienttool_version">
+    <Key>
+      <PropertyRef Name="tool_version_id" />
+    </Key>
+    <Property Name="tool_version_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tool_version_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="model_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="released_on" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="reason" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="is_current_version" Type="Int32" Nullable="false" />
+    <Property Name="path_to_download" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="college_master">
+    <Key>
+      <PropertyRef Name="college_id" />
+    </Key>
+    <Property Name="college_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="college_code" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="college_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="active_status" Type="Int32" Nullable="false" />
+    <Property Name="university_id" Type="Int32" Nullable="false" />
+    <Property Name="enter_on" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="enter_by" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="product_request_master_history" Relationship="Self.FK__product_r__colle__02925FBF" FromRole="college_master" ToRole="product_request_master_history" />
+    <NavigationProperty Name="product_request_master" Relationship="Self.FK__product_r__colle__078C1F06" FromRole="college_master" ToRole="product_request_master" />
+    <NavigationProperty Name="product_request_master1" Relationship="Self.FK__product_r__colle__7A3223E8" FromRole="college_master" ToRole="product_request_master" />
+    <NavigationProperty Name="product_request_master_history1" Relationship="Self.FK__product_r__colle__id" FromRole="college_master" ToRole="product_request_master_history" />
+    <Property Name="total_license" Type="Int32" />
+    <Property Name="college_mobile" Type="Int64" />
+    <Property Name="college_email" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="college_installation_details" Relationship="subject_delivery_anna_newModel.FK_college_installation_details_college_installation_details" FromRole="college_master" ToRole="college_installation_details" />
+    <Property Name="password" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="college_subject_mapping" Relationship="subject_delivery_anna_newModel.FK_college_subject_mapping_college_subject_mapping1" FromRole="college_master" ToRole="college_subject_mapping" />
+    <NavigationProperty Name="college_group_map" Relationship="subject_delivery_anna_newModel.FK_college_group_map_college_master" FromRole="college_master" ToRole="college_group_map" />
+    <NavigationProperty Name="user_master" Relationship="subject_delivery_anna_newModel.FK_user_master_college_master" FromRole="college_master" ToRole="user_master" />
+  </EntityType>
+  <EntityType Name="country_master">
+    <Key>
+      <PropertyRef Name="country_id" />
+    </Key>
+    <Property Name="country_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="country_code" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="country_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="country_mobile_prefix" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="active_status" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="user_address_details" Relationship="Self.FK_user_address_details_country_master" FromRole="country_master" ToRole="user_address_details" />
+  </EntityType>
+  <EntityType Name="Demo_SubscribedUser">
+    <Key>
+      <PropertyRef Name="SubscriberUserID" />
+    </Key>
+    <Property Name="SubscriberUserID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SubscriberName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="SubscriberCollege" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="EmailID" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="MobileNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="SubscribedDate" Type="DateTime" Precision="3" />
+    <Property Name="Subscriberip" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="SubscriberCountry" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="SubscriberRegion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="SubscriberCity" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="department_master">
+    <Key>
+      <PropertyRef Name="department_id" />
+    </Key>
+    <Property Name="department_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="department_code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="department_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="no_of_year" Type="Int32" Nullable="false" />
+    <Property Name="max_semester_per_year" Type="Int32" Nullable="false" />
+    <Property Name="active_status" Type="Int32" Nullable="false" />
+    <Property Name="created_by" Type="Int32" />
+    <Property Name="created_on" Type="DateTime" Precision="3" />
+    <Property Name="modified_by" Type="Int32" />
+    <Property Name="modified_on" Type="DateTime" Precision="3" />
+    <Property Name="UniversityID" Type="Int32" Nullable="false" />
+    <Property Name="dept_img_path" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="product_request_master_history" Relationship="Self.FK__product_r__depar__047AA831" FromRole="department_master" ToRole="product_request_master_history" />
+    <NavigationProperty Name="product_request_master" Relationship="Self.FK__product_r__depar__09746778" FromRole="department_master" ToRole="product_request_master" />
+    <NavigationProperty Name="product_request_master1" Relationship="Self.FK__product_r__depar__7B264821" FromRole="department_master" ToRole="product_request_master" />
+    <NavigationProperty Name="product_request_master_history1" Relationship="Self.FK__product_r__depar__id" FromRole="department_master" ToRole="product_request_master_history" />
+    <NavigationProperty Name="department_subject_mapping" Relationship="Self.FK_department_subject_mapping_department_master" FromRole="department_master" ToRole="department_subject_mapping" />
+    <NavigationProperty Name="college_installation_expiry" Relationship="subject_delivery_anna_newModel.FK_college_installation_expiry_department_master" FromRole="department_master" ToRole="college_installation_expiry" />
+    <Property Name="coursehours" Type="Int32" />
+    <Property Name="visuals" Type="Int32" />
+    <Property Name="pagecontent" Type="Int32" />
+    <Property Name="solvedproblem" Type="Int32" />
+    <Property Name="multichoice" Type="Int32" />
+    <Property Name="dept_video" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="college_subject_mapping" Relationship="subject_delivery_anna_newModel.FK_college_subject_mapping_department_master" FromRole="department_master" ToRole="college_subject_mapping" />
+    <NavigationProperty Name="user_master" Relationship="subject_delivery_anna_newModel.FK_user_master_department_master" FromRole="department_master" ToRole="user_master" />
+  </EntityType>
+  <EntityType Name="department_subject_mapping">
+    <Key>
+      <PropertyRef Name="department_subject_mapping_id" />
+    </Key>
+    <Property Name="department_subject_mapping_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="department_id" Type="Int32" Nullable="false" />
+    <Property Name="subject_id" Type="Int64" Nullable="false" />
+    <Property Name="rule_id" Type="Int32" Nullable="false" />
+    <Property Name="university_id" Type="Int32" Nullable="false" />
+    <Property Name="map_year" Type="Int32" Nullable="false" />
+    <Property Name="semester" Type="Int32" Nullable="false" />
+    <Property Name="active_status" Type="Int32" Nullable="false" />
+    <Property Name="created_by" Type="Int32" />
+    <Property Name="created_on" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="department_master" Relationship="Self.FK_department_subject_mapping_department_master" FromRole="department_subject_mapping" ToRole="department_master" />
+    <NavigationProperty Name="subject_master" Relationship="Self.FK_department_subject_mapping_subject_master" FromRole="department_subject_mapping" ToRole="subject_master" />
+  </EntityType>
+  <EntityType Name="device_preidentification">
+    <Key>
+      <PropertyRef Name="device_preidentification_id" />
+    </Key>
+    <Property Name="device_preidentification_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="device_id" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="subject_id" Type="Int64" Nullable="false" />
+    <Property Name="expiry_days" Type="Int32" Nullable="false" />
+    <Property Name="enter_by" Type="Int32" Nullable="false" />
+    <Property Name="enter_on" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="subject_master" Relationship="Self.FK_device_preidentification_subject_master" FromRole="device_preidentification" ToRole="subject_master" />
+  </EntityType>
+  <EntityType Name="ExceptionLog">
+    <Key>
+      <PropertyRef Name="ExceptionID" />
+    </Key>
+    <Property Name="ExceptionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ExceptionType" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ExceptionMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ExceptionSource" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ExceptionURL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="TargetSiteModule" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TargetSiteName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="StackTrace" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="HelpLink" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="isFromController" Type="Boolean" />
+    <Property Name="ExceptionDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ErrorColumnNumber" Type="Int32" />
+    <Property Name="errorLine" Type="Int32" />
+  </EntityType>
+  <EntityType Name="feedback">
+    <Key>
+      <PropertyRef Name="fb_id" />
+    </Key>
+    <Property Name="fb_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="college_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="subject_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="mobile_number" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="createdon" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="isread" Type="Boolean" Nullable="false" />
+    <Property Name="readon" Type="DateTime" Precision="3" />
+    <Property Name="status" Type="Boolean" Nullable="false" />
+    <Property Name="read_by" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="feedback_poll_userreply">
+    <Key>
+      <PropertyRef Name="feedback_poll_userreply_id" />
+    </Key>
+    <Property Name="feedback_poll_userreply_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="feedback_poll_qanswer1" Type="Int32" Nullable="false" />
+    <Property Name="feedback_poll_qanswer2" Type="Int32" Nullable="false" />
+    <Property Name="feedback_poll_qanswer3" Type="Int32" Nullable="false" />
+    <Property Name="feedback_poll_qanswer4" Type="Int32" Nullable="false" />
+    <Property Name="feedback_poll_qanswer5" Type="Int32" Nullable="false" />
+    <Property Name="uname" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="mobile" Type="Int64" />
+    <Property Name="email_id" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="polled_on" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="feedback_poll_userreply1" Relationship="Self.FK_feedback_poll_userreply_feedback_poll_userreply" FromRole="feedback_poll_userreply" ToRole="feedback_poll_userreply1" />
+    <NavigationProperty Name="feedback_poll_userreply2" Relationship="Self.FK_feedback_poll_userreply_feedback_poll_userreply" FromRole="feedback_poll_userreply1" ToRole="feedback_poll_userreply" />
+  </EntityType>
+  <EntityType Name="Menu">
+    <Key>
+      <PropertyRef Name="MenuID" />
+    </Key>
+    <Property Name="MenuID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ParentMenuID" Type="Int32" Nullable="false" />
+    <Property Name="MenuText" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TargetURL" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="MenuLevel" Type="Int32" Nullable="false" />
+    <Property Name="MenuOrder" Type="Int32" />
+    <Property Name="IsParent" Type="Boolean" />
+    <Property Name="active_status" Type="Boolean" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModuleID" Type="Int32" />
+    <Property Name="Univ_ID" Type="Int32" />
+    <NavigationProperty Name="MenuPrivileges" Relationship="Self.FK_MenuPrivilege_Menu" FromRole="Menu" ToRole="MenuPrivilege" />
+  </EntityType>
+  <EntityType Name="MenuPrivilege">
+    <Key>
+      <PropertyRef Name="MenuPrivilegeID" />
+    </Key>
+    <Property Name="MenuPrivilegeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleID" Type="Int32" />
+    <Property Name="MenuID" Type="Int32" Nullable="false" />
+    <Property Name="active_status" Type="Boolean" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Menu" Relationship="Self.FK_MenuPrivilege_Menu" FromRole="MenuPrivilege" ToRole="Menu" />
+    <NavigationProperty Name="user_role" Relationship="subject_delivery_anna_newModel.FK_MenuPrivilege_Role" FromRole="MenuPrivilege" ToRole="user_role" />
+  </EntityType>
+  <EntityType Name="product_request_master">
+    <Key>
+      <PropertyRef Name="request_id" />
+    </Key>
+    <Property Name="request_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="bcust_id" Type="Int64" Nullable="false" />
+    <Property Name="college_id" Type="Int32" Nullable="false" />
+    <Property Name="department_id" Type="Int32" />
+    <Property Name="product_count" Type="Int32" />
+    <Property Name="remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="active_status" Type="Int32" Nullable="false" />
+    <Property Name="created_on" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="created_by" Type="Int32" />
+    <Property Name="modified_on" Type="DateTime" Precision="3" />
+    <Property Name="modified_by" Type="Int32" />
+    <Property Name="bcustTeam_id" Type="Int32" />
+    <NavigationProperty Name="business_customer" Relationship="Self.FK__product_r__bcust__05A3D694" FromRole="product_request_master" ToRole="business_customer" />
+    <NavigationProperty Name="business_customer1" Relationship="Self.FK__product_r__bcust__793DFFAF" FromRole="product_request_master" ToRole="business_customer" />
+    <NavigationProperty Name="college_master" Relationship="Self.FK__product_r__colle__078C1F06" FromRole="product_request_master" ToRole="college_master" />
+    <NavigationProperty Name="college_master1" Relationship="Self.FK__product_r__colle__7A3223E8" FromRole="product_request_master" ToRole="college_master" />
+    <NavigationProperty Name="department_master" Relationship="Self.FK__product_r__depar__09746778" FromRole="product_request_master" ToRole="department_master" />
+    <NavigationProperty Name="department_master1" Relationship="Self.FK__product_r__depar__7B264821" FromRole="product_request_master" ToRole="department_master" />
+  </EntityType>
+  <EntityType Name="product_request_master_history">
+    <Key>
+      <PropertyRef Name="request_id" />
+    </Key>
+    <Property Name="request_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="bcust_id" Type="Int64" Nullable="false" />
+    <Property Name="college_id" Type="Int32" Nullable="false" />
+    <Property Name="department_id" Type="Int32" />
+    <Property Name="product_count" Type="Int32" />
+    <Property Name="remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="active_status" Type="Int32" Nullable="false" />
+    <Property Name="created_on" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="created_by" Type="Int32" />
+    <Property Name="modified_on" Type="DateTime" Precision="3" />
+    <Property Name="modified_by" Type="Int32" />
+    <Property Name="closed_on" Type="DateTime" Precision="3" />
+    <Property Name="bcustTeam_id" Type="Int32" />
+    <NavigationProperty Name="business_customer" Relationship="Self.FK__product_r__bcust__00AA174D" FromRole="product_request_master_history" ToRole="business_customer" />
+    <NavigationProperty Name="business_customer1" Relationship="Self.FK__product_r__bcust__id" FromRole="product_request_master_history" ToRole="business_customer" />
+    <NavigationProperty Name="college_master" Relationship="Self.FK__product_r__colle__02925FBF" FromRole="product_request_master_history" ToRole="college_master" />
+    <NavigationProperty Name="college_master1" Relationship="Self.FK__product_r__colle__id" FromRole="product_request_master_history" ToRole="college_master" />
+    <NavigationProperty Name="department_master" Relationship="Self.FK__product_r__depar__047AA831" FromRole="product_request_master_history" ToRole="department_master" />
+    <NavigationProperty Name="department_master1" Relationship="Self.FK__product_r__depar__id" FromRole="product_request_master_history" ToRole="department_master" />
+  </EntityType>
+  <EntityType Name="promo_discount_master">
+    <Key>
+      <PropertyRef Name="discount_id" />
+    </Key>
+    <Property Name="discount_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="discount_code" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="discount_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="discount_desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="discount_expiryon" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="discount_extend_days" Type="Int32" Nullable="false" />
+    <Property Name="discount_price" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="active_status" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="promo_package_mapping">
+    <Key>
+      <PropertyRef Name="promo_package_id" />
+    </Key>
+    <Property Name="promo_package_id" Type="Int64" Nullable="false" />
+    <Property Name="promo_id" Type="Int64" Nullable="false" />
+    <Property Name="package_id" Type="Int64" Nullable="false" />
+    <Property Name="active_status" Type="Int32" Nullable="false" />
+    <Property Name="created_by" Type="Int64" Nullable="false" />
+    <Property Name="created_on" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="promocode_master">
+    <Key>
+      <PropertyRef Name="promo_id" />
+    </Key>
+    <Property Name="promo_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="promo_code" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="promo_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="promo_desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="promo_expiryon" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="promo_extend_days" Type="Int32" Nullable="false" />
+    <Property Name="promo_discount_price" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="active_status" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="purchase_activationmaster">
+    <Key>
+      <PropertyRef Name="activationmasterid" />
+    </Key>
+    <Property Name="activationmasterid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_subscribed_masterid" Type="Int64" />
+    <Property Name="buyer_userid" Type="Int64" />
+    <Property Name="buyer_mobileNo" Type="Int64" />
+    <Property Name="activationcode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="created_date" Type="DateTime" Precision="3" />
+    <Property Name="created_userid" Type="Int64" />
+    <Property Name="activated_userid" Type="Int64" />
+    <Property Name="activated_date" Type="DateTime" Precision="3" />
+    <Property Name="activationstatus" Type="Int32" />
+  </EntityType>
+  <EntityType Name="regulation">
+    <Key>
+      <PropertyRef Name="rule_id" />
+    </Key>
+    <Property Name="rule_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="rule_name" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="rule_desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="active_status" Type="Byte" Nullable="false" />
+    <Property Name="created_by" Type="Int32" />
+    <Property Name="created_on" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="regulation_master">
+    <Key>
+      <PropertyRef Name="rule_id" />
+    </Key>
+    <Property Name="rule_id" Type="Int32" Nullable="false" />
+    <Property Name="rule_name" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="rule_desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="university_id" Type="Int32" Nullable="false" />
+    <Property Name="active_status" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="state_master">
+    <Key>
+      <PropertyRef Name="state_id" />
+    </Key>
+    <Property Name="state_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="state_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="state_short_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="isDelete" Type="Boolean" />
+    <Property Name="active_status" Type="Int32" />
+    <Property Name="created_by" Type="Int32" />
+    <Property Name="created_on" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="university_master" Relationship="subject_delivery_anna_newModel.FK_university_master_state_master" FromRole="state_master" ToRole="university_master" />
+  </EntityType>
+  <EntityType Name="status">
+    <Key>
+      <PropertyRef Name="status_id" />
+    </Key>
+    <Property Name="status_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="subject_enc">
+    <Key>
+      <PropertyRef Name="subject_encid" />
+    </Key>
+    <Property Name="subject_encid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="subject_id" Type="Int32" Nullable="false" />
+    <Property Name="enc_data" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="generated_on" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="subject_master">
+    <Key>
+      <PropertyRef Name="subject_id" />
+    </Key>
+    <Property Name="subject_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="subject_code" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="univ_subject_code" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="subject_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="subject_cover_path" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="subject_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="active_status" Type="Int32" Nullable="false" />
+    <Property Name="rule_id" Type="Int32" />
+    <Property Name="created_on" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="released_on" Type="DateTime" Precision="3" />
+    <Property Name="UniversityID" Type="Int32" Nullable="false" />
+    <Property Name="having_questionpaper" Type="Int32" Nullable="false" />
+    <Property Name="subject_version" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="active_duration_days" Type="Int32" Nullable="false" />
+    <Property Name="active_duration_date" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="department_subject_mapping" Relationship="Self.FK_department_subject_mapping_subject_master" FromRole="subject_master" ToRole="department_subject_mapping" />
+    <NavigationProperty Name="device_preidentification" Relationship="Self.FK_device_preidentification_subject_master" FromRole="subject_master" ToRole="device_preidentification" />
+    <NavigationProperty Name="subject_master_history" Relationship="Self.FK_subject_master_history_subject_master" FromRole="subject_master" ToRole="subject_master_history" />
+    <NavigationProperty Name="package_details" Relationship="subject_delivery_anna_newModel.FK_package_details_subject_master" FromRole="subject_master" ToRole="package_details" />
+    <NavigationProperty Name="university_master" Relationship="subject_delivery_anna_newModel.FK_subject_master_UniversityID" FromRole="subject_master" ToRole="university_master" />
+    <NavigationProperty Name="subject_unit_master" Relationship="subject_delivery_anna_newModel.FK_subject_unit_master_subject_master" FromRole="subject_master" ToRole="subject_unit_master" />
+    <NavigationProperty Name="college_installation_expiry" Relationship="subject_delivery_anna_newModel.FK_college_installation_expiry_subject_master" FromRole="subject_master" ToRole="college_installation_expiry" />
+    <NavigationProperty Name="college_subject_mapping" Relationship="subject_delivery_anna_newModel.FK_college_subject_mapping_college_subject_mapping" FromRole="subject_master" ToRole="college_subject_mapping" />
+  </EntityType>
+  <EntityType Name="subject_master_history">
+    <Key>
+      <PropertyRef Name="subject_historyid" />
+    </Key>
+    <Property Name="subject_historyid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="subject_id" Type="Int64" Nullable="false" />
+    <Property Name="subject_code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="subject_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="subject_cover_path" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="subject_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="active_status" Type="Int32" Nullable="false" />
+    <Property Name="rule_id" Type="Int32" Nullable="false" />
+    <Property Name="created_on" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="released_on" Type="DateTime" Precision="3" />
+    <Property Name="UniversityID" Type="Int32" Nullable="false" />
+    <Property Name="having_questionpaper" Type="Int32" Nullable="false" />
+    <Property Name="subject_version" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="active_duration_days" Type="Int32" Nullable="false" />
+    <Property Name="active_duration_date" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="subject_master" Relationship="Self.FK_subject_master_history_subject_master" FromRole="subject_master_history" ToRole="subject_master" />
+    <NavigationProperty Name="university_master" Relationship="subject_delivery_anna_newModel.FK_subject_master_history_UniversityID" FromRole="subject_master_history" ToRole="university_master" />
+  </EntityType>
+  <EntityType Name="subject_unit_master_history">
+    <Key>
+      <PropertyRef Name="unit_history_id" />
+    </Key>
+    <Property Name="unit_history_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="unit_id" Type="Int64" Nullable="false" />
+    <Property Name="unit_code" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="unit_name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="subject_id" Type="Int64" Nullable="false" />
+    <Property Name="active_status" Type="Int32" Nullable="false" />
+    <Property Name="subject_unit_path" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="is_demo" Type="Int32" />
+    <Property Name="is_unit_or_index" Type="Int32" />
+    <Property Name="subject_unit_version" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="released_on" Type="DateTime" Precision="3" />
+    <Property Name="created_on" Type="DateTime" Precision="3" />
+    <Property Name="filesize_in_mb" Type="Int32" />
+    <Property Name="created_by" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Transaction_Details">
+    <Key>
+      <PropertyRef Name="user_trans_id" />
+    </Key>
+    <Property Name="user_trans_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="trans_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="trans_number" Type="Int64" Nullable="false" />
+  </EntityType>
+  <EntityType Name="univ_semester_master">
+    <Key>
+      <PropertyRef Name="univ_semester_id" />
+    </Key>
+    <Property Name="univ_semester_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="univ_id" Type="Int32" Nullable="false" />
+    <Property Name="sem_display" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="semester_name" Type="Int32" Nullable="false" />
+    <Property Name="sem_year" Type="Int32" Nullable="false" />
+    <Property Name="active_status" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="university_master" Relationship="subject_delivery_anna_newModel.FK_univ_semester_master_university_master" FromRole="univ_semester_master" ToRole="university_master" />
+  </EntityType>
+  <EntityType Name="user_address_details">
+    <Key>
+      <PropertyRef Name="delivery_address_id" />
+    </Key>
+    <Property Name="delivery_address_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_id" Type="Int64" Nullable="false" />
+    <Property Name="address_type" Type="Int32" Nullable="false" />
+    <Property Name="full_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="mobile_number" Type="Int64" Nullable="false" />
+    <Property Name="address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="pincode" Type="Int64" Nullable="false" />
+    <Property Name="city" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="state" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="country" Type="Int32" Nullable="false" />
+    <Property Name="landmark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="isbilling_delivery" Type="Int32" Nullable="false" />
+    <Property Name="created_on" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="country_master" Relationship="Self.FK_user_address_details_country_master" FromRole="user_address_details" ToRole="country_master" />
+  </EntityType>
+  <EntityType Name="user_app_subject_read_history">
+    <Key>
+      <PropertyRef Name="user_app_read_history_id" />
+    </Key>
+    <Property Name="user_app_read_history_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="subject_id" Type="Int32" Nullable="false" />
+    <Property Name="total_hours" Type="Int32" Nullable="false" />
+    <Property Name="usage_date" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="user_cart_details">
+    <Key>
+      <PropertyRef Name="user_cart_details_id" />
+    </Key>
+    <Property Name="user_cart_details_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_id" Type="Int64" Nullable="false" />
+    <Property Name="package_id" Type="Int32" Nullable="false" />
+    <Property Name="delivery_modeid" Type="Int32" />
+    <Property Name="created_on" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="package_display_name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="package_master" Relationship="subject_delivery_anna_newModel.FK_user_cart_details_package_master" FromRole="user_cart_details" ToRole="package_master" />
+    <NavigationProperty Name="user_master" Relationship="subject_delivery_anna_newModel.FK_user_cart_details_user_master" FromRole="user_cart_details" ToRole="user_master" />
+  </EntityType>
+  <EntityType Name="user_feedback">
+    <Key>
+      <PropertyRef Name="user_feedback_id" />
+    </Key>
+    <Property Name="user_feedback_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_id" Type="Int64" Nullable="false" />
+    <Property Name="feedback" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="feedback_on" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="feedback_category" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="user_master" Relationship="subject_delivery_anna_newModel.FK_user_feedback_user_master" FromRole="user_feedback" ToRole="user_master" />
+  </EntityType>
+  <EntityType Name="user_master_history">
+    <Key>
+      <PropertyRef Name="user_historyid" />
+    </Key>
+    <Property Name="user_historyid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_id" Type="Int64" Nullable="false" />
+    <Property Name="user_first_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="user_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="role_id" Type="Int32" Nullable="false" />
+    <Property Name="email_id" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="mobile" Type="Int64" Nullable="false" />
+    <Property Name="loggedin_status" Type="Int32" />
+    <Property Name="last_loggedin_date" Type="DateTime" Precision="3" />
+    <Property Name="is_first_login" Type="Int32" Nullable="false" />
+    <Property Name="active_status" Type="Int32" Nullable="false" />
+    <Property Name="created_by" Type="Int32" />
+    <Property Name="created_on" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="modified_by" Type="Int32" />
+    <Property Name="modified_on" Type="DateTime" Precision="3" />
+    <Property Name="ProfileImage" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="univ_id" Type="Int32" />
+    <Property Name="CollegeName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="DepartmentID" Type="Int32" />
+    <Property Name="address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="state_id" Type="Int32" />
+    <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="dob" Type="DateTime" Precision="0" />
+    <Property Name="gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="phonenumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Bulk_mail" Type="Boolean" Nullable="false" />
+    <Property Name="primary_imei" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="primary_mac" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="user_master" Relationship="subject_delivery_anna_newModel.FK_user_master_history_user_master" FromRole="user_master_history" ToRole="user_master" />
+  </EntityType>
+  <EntityType Name="user_notification_details">
+    <Key>
+      <PropertyRef Name="user_notify_id" />
+    </Key>
+    <Property Name="user_notify_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_id" Type="Int32" Nullable="false" />
+    <Property Name="notification_id" Type="Int32" Nullable="false" />
+    <Property Name="notification_on" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="user_notification_master">
+    <Key>
+      <PropertyRef Name="notification_id" />
+    </Key>
+    <Property Name="notification_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="notification_message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="notification_for" Type="Int32" Nullable="false" />
+    <Property Name="created_by" Type="Int32" Nullable="false" />
+    <Property Name="created_on" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="user_random_pass">
+    <Key>
+      <PropertyRef Name="user_random_id" />
+    </Key>
+    <Property Name="user_random_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_id" Type="Int32" Nullable="false" />
+    <Property Name="verification_code" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="generated_time" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="action_type" Type="Int32" Nullable="false" />
+    <Property Name="user_type" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="user_subject_mapping_history">
+    <Key>
+      <PropertyRef Name="user_subject_history_id" />
+    </Key>
+    <Property Name="user_subject_history_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_subject_id" Type="Int64" Nullable="false" />
+    <Property Name="subject_id" Type="Int32" Nullable="false" />
+    <Property Name="subject_code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="subject_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="subject_version" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="subject_cover_path" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="user_id" Type="Int32" Nullable="false" />
+    <Property Name="department_id" Type="Int32" Nullable="false" />
+    <Property Name="department_code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="department_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="download_status" Type="Int32" />
+    <Property Name="downloaded_on" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="subject_unit_id" Type="Int32" Nullable="false" />
+    <Property Name="subject_unit_code" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="subject_unit_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="subject_unit_version" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="subject_unit_expiryon" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="is_demo" Type="Int32" />
+    <Property Name="is_unit_or_index" Type="Int32" />
+    <Property Name="subject_unit_path" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="user_subject_read_history_androidapp">
+    <Key>
+      <PropertyRef Name="user_read_history_id" />
+    </Key>
+    <Property Name="user_read_history_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_id" Type="Int32" Nullable="false" />
+    <Property Name="subject_id" Type="Int32" Nullable="false" />
+    <Property Name="total_hours" Type="Int32" Nullable="false" />
+    <Property Name="last_read_on" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="is_updated_to_server" Type="Int32" />
+    <Property Name="hours_topic_video" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="entered_on" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="user_subject_unit_read_history">
+    <Key>
+      <PropertyRef Name="user_read_unit_history_id" />
+    </Key>
+    <Property Name="user_read_unit_history_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_id" Type="Int32" Nullable="false" />
+    <Property Name="subject_id" Type="Int32" Nullable="false" />
+    <Property Name="subject_unitid" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="total_seconds" Type="Int32" Nullable="false" />
+    <Property Name="last_read_on" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="is_updated_to_server" Type="Int32" />
+    <Property Name="read_percentage" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="user_subject_unit_read_history_androidapp">
+    <Key>
+      <PropertyRef Name="user_read_unit_history_id" />
+    </Key>
+    <Property Name="user_read_unit_history_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_id" Type="Int32" Nullable="false" />
+    <Property Name="subject_id" Type="Int32" Nullable="false" />
+    <Property Name="subject_unitid" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="total_seconds" Type="Int32" Nullable="false" />
+    <Property Name="last_read_on" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="is_updated_to_server" Type="Int32" />
+    <Property Name="read_percentage" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="user_subject_video_history">
+    <Key>
+      <PropertyRef Name="user_read_video_id" />
+    </Key>
+    <Property Name="user_read_video_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_id" Type="Int32" Nullable="false" />
+    <Property Name="subject_id" Type="Int32" Nullable="false" />
+    <Property Name="subject_unitid" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="subject_videoname" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="total_viewed" Type="Int32" Nullable="false" />
+    <Property Name="last_read_on" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="is_updated_to_server" Type="Int32" />
+    <Property Name="user_rating" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="user_subject_video_history_androidapp">
+    <Key>
+      <PropertyRef Name="user_read_video_id" />
+    </Key>
+    <Property Name="user_read_video_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_id" Type="Int32" Nullable="false" />
+    <Property Name="subject_id" Type="Int32" Nullable="false" />
+    <Property Name="subject_unitid" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="subject_videoname" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="total_viewed" Type="Int32" Nullable="false" />
+    <Property Name="last_read_on" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="is_updated_to_server" Type="Int32" />
+    <Property Name="user_rating" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="user_subscribe_delivery_mode">
+    <Key>
+      <PropertyRef Name="user_subscribe_delivery_mode_id" />
+    </Key>
+    <Property Name="user_subscribe_delivery_mode_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="subscribe_delivery_mode" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="price" Type="Int32" Nullable="false" />
+    <Property Name="active_status" Type="Int32" Nullable="false" />
+    <Property Name="product_price" Type="Int32" />
+    <Property Name="delivery_price" Type="Int32" />
+    <Property Name="delivery_type" Type="Int32" />
+    <Property Name="delivery_desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="user_subscribe_details">
+    <Key>
+      <PropertyRef Name="user_subscribe_details_id" />
+    </Key>
+    <Property Name="user_subscribe_details_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_subscribe_master_id" Type="Int64" Nullable="false" />
+    <Property Name="package_id" Type="Int32" Nullable="false" />
+    <Property Name="actual_price" Type="Int32" Nullable="false" />
+    <Property Name="selling_price" Type="Int32" Nullable="false" />
+    <Property Name="package_validity_days" Type="Int32" Nullable="false" />
+    <Property Name="package_expiryon" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="promocode_id" Type="Int64" />
+    <Property Name="promo_discount_amt" Type="Int32" />
+    <Property Name="deliver_status" Type="Int32" />
+    <NavigationProperty Name="user_subscribe_master" Relationship="Self.FK_user_subscribe_details_user_subscribe_master" FromRole="user_subscribe_details" ToRole="user_subscribe_master" />
+    <NavigationProperty Name="package_master" Relationship="subject_delivery_anna_newModel.FK_user_subscribe_details_package_master" FromRole="user_subscribe_details" ToRole="package_master" />
+  </EntityType>
+  <EntityType Name="user_subscribe_master">
+    <Key>
+      <PropertyRef Name="user_subscribe_master_id" />
+    </Key>
+    <Property Name="user_subscribe_master_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_id" Type="Int64" Nullable="false" />
+    <Property Name="payment_ref_no" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="count" Type="Int32" Nullable="false" />
+    <Property Name="discount_id" Type="Int64" />
+    <Property Name="discount_amt" Type="Int32" />
+    <Property Name="TransactionType" Type="Int32" Nullable="false" />
+    <Property Name="payment_status" Type="Int32" Nullable="false" />
+    <Property Name="order_status" Type="Int32" />
+    <Property Name="user_subscribe_delivery_mode_id" Type="Int32" />
+    <Property Name="payment_on" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="created_on" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="billing_address_id" Type="Int64" />
+    <Property Name="deliver_address_id" Type="Int64" />
+    <NavigationProperty Name="user_subscribe_details" Relationship="Self.FK_user_subscribe_details_user_subscribe_master" FromRole="user_subscribe_master" ToRole="user_subscribe_details" />
+    <NavigationProperty Name="user_subscribe_order_track" Relationship="Self.FK_user_subscribe_order_track_user_subscribe_master" FromRole="user_subscribe_master" ToRole="user_subscribe_order_track" />
+    <Property Name="refund_on" Type="DateTime" Precision="3" />
+    <Property Name="refund_amount" Type="Int32" />
+    <Property Name="refund_by" Type="Int64" />
+    <NavigationProperty Name="payment_refund_master" Relationship="subject_delivery_anna_newModel.FK_payment_refund_master_user_subscribe_master" FromRole="user_subscribe_master" ToRole="payment_refund_master" />
+    <NavigationProperty Name="user_master" Relationship="subject_delivery_anna_newModel.FK_user_subscribe_master_user_id" FromRole="user_subscribe_master" ToRole="user_master" />
+  </EntityType>
+  <EntityType Name="user_subscribe_order_track">
+    <Key>
+      <PropertyRef Name="user_subscribe_order_track_id" />
+    </Key>
+    <Property Name="user_subscribe_order_track_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_subscribe_master_id" Type="Int64" Nullable="false" />
+    <Property Name="package_id" Type="Int32" />
+    <Property Name="orderby" Type="Int64" Nullable="false" />
+    <Property Name="orderstatus" Type="Int32" Nullable="false" />
+    <Property Name="orderon" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="orderrefno" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ordermobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="preparedstatus" Type="Int32" Nullable="false" />
+    <Property Name="preparedon" Type="DateTime" Precision="3" />
+    <Property Name="preparedby" Type="Int64" />
+    <Property Name="preparedcomments" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="qualitycheckstatus" Type="Int32" Nullable="false" />
+    <Property Name="qualitycheckon" Type="DateTime" Precision="3" />
+    <Property Name="qualitycheckby" Type="Int64" />
+    <Property Name="qualitycheckcomments" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="deliverstatus" Type="Int32" Nullable="false" />
+    <Property Name="deliveron" Type="DateTime" Precision="3" />
+    <Property Name="deliverby" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="delivercomments" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="couriername" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="courierrefno" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="couriercontactno" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="expecteddeliverywdays" Type="Int32" />
+    <Property Name="denterby" Type="Int64" />
+    <Property Name="denteron" Type="DateTime" Precision="3" />
+    <Property Name="paystatus" Type="Int32" Nullable="false" />
+    <Property Name="payreceiveon" Type="DateTime" Precision="3" />
+    <Property Name="payreceivedby" Type="Int64" />
+    <Property Name="payreceivedamt" Type="Int64" />
+    <Property Name="payenteron" Type="DateTime" Precision="3" />
+    <Property Name="activationstatus" Type="Int32" Nullable="false" />
+    <Property Name="activationon" Type="DateTime" Precision="3" />
+    <Property Name="activationby" Type="Int64" />
+    <Property Name="activationmobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="user_subscribe_master" Relationship="Self.FK_user_subscribe_order_track_user_subscribe_master" FromRole="user_subscribe_order_track" ToRole="user_subscribe_master" />
+    <Property Name="refundstatus" Type="Int32" />
+    <Property Name="refundon" Type="DateTime" Precision="3" />
+    <Property Name="refundamt" Type="Int32" />
+    <Property Name="refundby" Type="Int64" />
+  </EntityType>
+  <EntityType Name="user_subunit_download_history">
+    <Key>
+      <PropertyRef Name="user_unit_download_history" />
+    </Key>
+    <Property Name="user_unit_download_history" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_id" Type="Int64" Nullable="false" />
+    <Property Name="subject_unit_id" Type="Int64" Nullable="false" />
+    <Property Name="downloaded_on" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="subject_unit_master" Relationship="subject_delivery_anna_newModel.FK_user_subunit_download_history_subject_unit_master" FromRole="user_subunit_download_history" ToRole="subject_unit_master" />
+  </EntityType>
+  <EntityType Name="user_wishlist">
+    <Key>
+      <PropertyRef Name="user_wishlist_id" />
+    </Key>
+    <Property Name="user_wishlist_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="package_id" Type="Int64" Nullable="false" />
+    <Property Name="user_id" Type="Int64" Nullable="false" />
+    <Property Name="created_on" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="user_subject_unit_read_history_restore">
+    <Key>
+      <PropertyRef Name="user_read_unit_history_id" />
+      <PropertyRef Name="user_id" />
+      <PropertyRef Name="subject_id" />
+      <PropertyRef Name="subject_unitid" />
+      <PropertyRef Name="total_seconds" />
+      <PropertyRef Name="last_read_on" />
+      <PropertyRef Name="read_percentage" />
+    </Key>
+    <Property Name="user_read_unit_history_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_id" Type="Int32" Nullable="false" />
+    <Property Name="subject_id" Type="Int32" Nullable="false" />
+    <Property Name="subject_unitid" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="total_seconds" Type="Int32" Nullable="false" />
+    <Property Name="last_read_on" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="is_updated_to_server" Type="Int32" />
+    <Property Name="read_percentage" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__product_r__bcust__00AA174D">
+    <End Role="business_customer" Type="Self.business_customer" Multiplicity="1" />
+    <End Role="product_request_master_history" Type="Self.product_request_master_history" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="business_customer">
+        <PropertyRef Name="bcust_id" />
+      </Principal>
+      <Dependent Role="product_request_master_history">
+        <PropertyRef Name="bcust_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__product_r__bcust__05A3D694">
+    <End Role="business_customer" Type="Self.business_customer" Multiplicity="1" />
+    <End Role="product_request_master" Type="Self.product_request_master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="business_customer">
+        <PropertyRef Name="bcust_id" />
+      </Principal>
+      <Dependent Role="product_request_master">
+        <PropertyRef Name="bcust_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__product_r__bcust__793DFFAF">
+    <End Role="business_customer" Type="Self.business_customer" Multiplicity="1" />
+    <End Role="product_request_master" Type="Self.product_request_master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="business_customer">
+        <PropertyRef Name="bcust_id" />
+      </Principal>
+      <Dependent Role="product_request_master">
+        <PropertyRef Name="bcust_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__product_r__bcust__id">
+    <End Role="business_customer" Type="Self.business_customer" Multiplicity="1" />
+    <End Role="product_request_master_history" Type="Self.product_request_master_history" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="business_customer">
+        <PropertyRef Name="bcust_id" />
+      </Principal>
+      <Dependent Role="product_request_master_history">
+        <PropertyRef Name="bcust_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__product_r__colle__02925FBF">
+    <End Role="college_master" Type="Self.college_master" Multiplicity="1" />
+    <End Role="product_request_master_history" Type="Self.product_request_master_history" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="college_master">
+        <PropertyRef Name="college_id" />
+      </Principal>
+      <Dependent Role="product_request_master_history">
+        <PropertyRef Name="college_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__product_r__colle__078C1F06">
+    <End Role="college_master" Type="Self.college_master" Multiplicity="1" />
+    <End Role="product_request_master" Type="Self.product_request_master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="college_master">
+        <PropertyRef Name="college_id" />
+      </Principal>
+      <Dependent Role="product_request_master">
+        <PropertyRef Name="college_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__product_r__colle__7A3223E8">
+    <End Role="college_master" Type="Self.college_master" Multiplicity="1" />
+    <End Role="product_request_master" Type="Self.product_request_master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="college_master">
+        <PropertyRef Name="college_id" />
+      </Principal>
+      <Dependent Role="product_request_master">
+        <PropertyRef Name="college_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__product_r__colle__id">
+    <End Role="college_master" Type="Self.college_master" Multiplicity="1" />
+    <End Role="product_request_master_history" Type="Self.product_request_master_history" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="college_master">
+        <PropertyRef Name="college_id" />
+      </Principal>
+      <Dependent Role="product_request_master_history">
+        <PropertyRef Name="college_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_address_details_country_master">
+    <End Role="country_master" Type="Self.country_master" Multiplicity="1" />
+    <End Role="user_address_details" Type="Self.user_address_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="country_master">
+        <PropertyRef Name="country_id" />
+      </Principal>
+      <Dependent Role="user_address_details">
+        <PropertyRef Name="country" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__product_r__depar__047AA831">
+    <End Role="department_master" Type="Self.department_master" Multiplicity="0..1" />
+    <End Role="product_request_master_history" Type="Self.product_request_master_history" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="department_master">
+        <PropertyRef Name="department_id" />
+      </Principal>
+      <Dependent Role="product_request_master_history">
+        <PropertyRef Name="department_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__product_r__depar__09746778">
+    <End Role="department_master" Type="Self.department_master" Multiplicity="0..1" />
+    <End Role="product_request_master" Type="Self.product_request_master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="department_master">
+        <PropertyRef Name="department_id" />
+      </Principal>
+      <Dependent Role="product_request_master">
+        <PropertyRef Name="department_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__product_r__depar__7B264821">
+    <End Role="department_master" Type="Self.department_master" Multiplicity="0..1" />
+    <End Role="product_request_master" Type="Self.product_request_master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="department_master">
+        <PropertyRef Name="department_id" />
+      </Principal>
+      <Dependent Role="product_request_master">
+        <PropertyRef Name="department_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__product_r__depar__id">
+    <End Role="department_master" Type="Self.department_master" Multiplicity="0..1" />
+    <End Role="product_request_master_history" Type="Self.product_request_master_history" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="department_master">
+        <PropertyRef Name="department_id" />
+      </Principal>
+      <Dependent Role="product_request_master_history">
+        <PropertyRef Name="department_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_department_subject_mapping_department_master">
+    <End Role="department_master" Type="Self.department_master" Multiplicity="1" />
+    <End Role="department_subject_mapping" Type="Self.department_subject_mapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="department_master">
+        <PropertyRef Name="department_id" />
+      </Principal>
+      <Dependent Role="department_subject_mapping">
+        <PropertyRef Name="department_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_department_subject_mapping_subject_master">
+    <End Role="subject_master" Type="Self.subject_master" Multiplicity="1" />
+    <End Role="department_subject_mapping" Type="Self.department_subject_mapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="subject_master">
+        <PropertyRef Name="subject_id" />
+      </Principal>
+      <Dependent Role="department_subject_mapping">
+        <PropertyRef Name="subject_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_device_preidentification_subject_master">
+    <End Role="subject_master" Type="Self.subject_master" Multiplicity="1" />
+    <End Role="device_preidentification" Type="Self.device_preidentification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="subject_master">
+        <PropertyRef Name="subject_id" />
+      </Principal>
+      <Dependent Role="device_preidentification">
+        <PropertyRef Name="subject_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_feedback_poll_userreply_feedback_poll_userreply">
+    <End Role="feedback_poll_userreply" Type="Self.feedback_poll_userreply" Multiplicity="1" />
+    <End Role="feedback_poll_userreply1" Type="Self.feedback_poll_userreply" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="feedback_poll_userreply">
+        <PropertyRef Name="feedback_poll_userreply_id" />
+      </Principal>
+      <Dependent Role="feedback_poll_userreply1">
+        <PropertyRef Name="feedback_poll_userreply_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MenuPrivilege_Menu">
+    <End Role="Menu" Type="subject_delivery_anna_newModel.Menu" Multiplicity="1" />
+    <End Role="MenuPrivilege" Type="Self.MenuPrivilege" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Menu">
+        <PropertyRef Name="MenuID" />
+      </Principal>
+      <Dependent Role="MenuPrivilege">
+        <PropertyRef Name="MenuID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_subject_master_history_subject_master">
+    <End Role="subject_master" Type="Self.subject_master" Multiplicity="1" />
+    <End Role="subject_master_history" Type="Self.subject_master_history" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="subject_master">
+        <PropertyRef Name="subject_id" />
+      </Principal>
+      <Dependent Role="subject_master_history">
+        <PropertyRef Name="subject_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_subscribe_details_user_subscribe_master">
+    <End Role="user_subscribe_master" Type="Self.user_subscribe_master" Multiplicity="1" />
+    <End Role="user_subscribe_details" Type="Self.user_subscribe_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user_subscribe_master">
+        <PropertyRef Name="user_subscribe_master_id" />
+      </Principal>
+      <Dependent Role="user_subscribe_details">
+        <PropertyRef Name="user_subscribe_master_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_subscribe_order_track_user_subscribe_master">
+    <End Role="user_subscribe_master" Type="Self.user_subscribe_master" Multiplicity="1" />
+    <End Role="user_subscribe_order_track" Type="Self.user_subscribe_order_track" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user_subscribe_master">
+        <PropertyRef Name="user_subscribe_master_id" />
+      </Principal>
+      <Dependent Role="user_subscribe_order_track">
+        <PropertyRef Name="user_subscribe_master_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="learnengg_payment_portal_entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="business_customer" EntityType="Self.business_customer" />
+    <EntitySet Name="business_customer_teams" EntityType="Self.business_customer_teams" />
+    <EntitySet Name="clienttool_user_version" EntityType="Self.clienttool_user_version" />
+    <EntitySet Name="clienttool_version" EntityType="Self.clienttool_version" />
+    <EntitySet Name="college_master" EntityType="Self.college_master" />
+    <EntitySet Name="country_master" EntityType="Self.country_master" />
+    <EntitySet Name="Demo_SubscribedUser" EntityType="Self.Demo_SubscribedUser" />
+    <EntitySet Name="department_master" EntityType="Self.department_master" />
+    <EntitySet Name="department_subject_mapping" EntityType="Self.department_subject_mapping" />
+    <EntitySet Name="device_preidentification" EntityType="Self.device_preidentification" />
+    <EntitySet Name="ExceptionLogs" EntityType="Self.ExceptionLog" />
+    <EntitySet Name="feedbacks" EntityType="Self.feedback" />
+    <EntitySet Name="feedback_poll_userreply" EntityType="Self.feedback_poll_userreply" />
+    <EntitySet Name="Menus" EntityType="subject_delivery_anna_newModel.Menu" />
+    <EntitySet Name="MenuPrivileges" EntityType="Self.MenuPrivilege" />
+    <EntitySet Name="product_request_master" EntityType="Self.product_request_master" />
+    <EntitySet Name="product_request_master_history" EntityType="Self.product_request_master_history" />
+    <EntitySet Name="promo_discount_master" EntityType="Self.promo_discount_master" />
+    <EntitySet Name="promo_package_mapping" EntityType="Self.promo_package_mapping" />
+    <EntitySet Name="promocode_master" EntityType="Self.promocode_master" />
+    <EntitySet Name="purchase_activationmaster" EntityType="Self.purchase_activationmaster" />
+    <EntitySet Name="regulations" EntityType="Self.regulation" />
+    <EntitySet Name="regulation_master" EntityType="Self.regulation_master" />
+    <EntitySet Name="state_master" EntityType="Self.state_master" />
+    <EntitySet Name="status" EntityType="Self.status" />
+    <EntitySet Name="subject_enc" EntityType="Self.subject_enc" />
+    <EntitySet Name="subject_master" EntityType="Self.subject_master" />
+    <EntitySet Name="subject_master_history" EntityType="Self.subject_master_history" />
+    <EntitySet Name="subject_unit_master_history" EntityType="Self.subject_unit_master_history" />
+    <EntitySet Name="Transaction_Details" EntityType="Self.Transaction_Details" />
+    <EntitySet Name="univ_semester_master" EntityType="Self.univ_semester_master" />
+    <EntitySet Name="user_address_details" EntityType="Self.user_address_details" />
+    <EntitySet Name="user_app_subject_read_history" EntityType="Self.user_app_subject_read_history" />
+    <EntitySet Name="user_cart_details" EntityType="Self.user_cart_details" />
+    <EntitySet Name="user_feedback" EntityType="Self.user_feedback" />
+    <EntitySet Name="user_master_history" EntityType="Self.user_master_history" />
+    <EntitySet Name="user_notification_details" EntityType="Self.user_notification_details" />
+    <EntitySet Name="user_notification_master" EntityType="Self.user_notification_master" />
+    <EntitySet Name="user_random_pass" EntityType="Self.user_random_pass" />
+    <EntitySet Name="user_subject_mapping_history" EntityType="Self.user_subject_mapping_history" />
+    <EntitySet Name="user_subject_read_history_androidapp" EntityType="Self.user_subject_read_history_androidapp" />
+    <EntitySet Name="user_subject_unit_read_history" EntityType="Self.user_subject_unit_read_history" />
+    <EntitySet Name="user_subject_unit_read_history_androidapp" EntityType="Self.user_subject_unit_read_history_androidapp" />
+    <EntitySet Name="user_subject_video_history" EntityType="Self.user_subject_video_history" />
+    <EntitySet Name="user_subject_video_history_androidapp" EntityType="Self.user_subject_video_history_androidapp" />
+    <EntitySet Name="user_subscribe_delivery_mode" EntityType="Self.user_subscribe_delivery_mode" />
+    <EntitySet Name="user_subscribe_details" EntityType="Self.user_subscribe_details" />
+    <EntitySet Name="user_subscribe_master" EntityType="Self.user_subscribe_master" />
+    <EntitySet Name="user_subscribe_order_track" EntityType="Self.user_subscribe_order_track" />
+    <EntitySet Name="user_subunit_download_history" EntityType="Self.user_subunit_download_history" />
+    <EntitySet Name="user_wishlist" EntityType="Self.user_wishlist" />
+    <EntitySet Name="user_subject_unit_read_history_restore" EntityType="Self.user_subject_unit_read_history_restore" />
+    <AssociationSet Name="FK__product_r__bcust__00AA174D" Association="Self.FK__product_r__bcust__00AA174D">
+      <End Role="business_customer" EntitySet="business_customer" />
+      <End Role="product_request_master_history" EntitySet="product_request_master_history" />
+    </AssociationSet>
+    <AssociationSet Name="FK__product_r__bcust__05A3D694" Association="Self.FK__product_r__bcust__05A3D694">
+      <End Role="business_customer" EntitySet="business_customer" />
+      <End Role="product_request_master" EntitySet="product_request_master" />
+    </AssociationSet>
+    <AssociationSet Name="FK__product_r__bcust__793DFFAF" Association="Self.FK__product_r__bcust__793DFFAF">
+      <End Role="business_customer" EntitySet="business_customer" />
+      <End Role="product_request_master" EntitySet="product_request_master" />
+    </AssociationSet>
+    <AssociationSet Name="FK__product_r__bcust__id" Association="Self.FK__product_r__bcust__id">
+      <End Role="business_customer" EntitySet="business_customer" />
+      <End Role="product_request_master_history" EntitySet="product_request_master_history" />
+    </AssociationSet>
+    <AssociationSet Name="FK__product_r__colle__02925FBF" Association="Self.FK__product_r__colle__02925FBF">
+      <End Role="college_master" EntitySet="college_master" />
+      <End Role="product_request_master_history" EntitySet="product_request_master_history" />
+    </AssociationSet>
+    <AssociationSet Name="FK__product_r__colle__078C1F06" Association="Self.FK__product_r__colle__078C1F06">
+      <End Role="college_master" EntitySet="college_master" />
+      <End Role="product_request_master" EntitySet="product_request_master" />
+    </AssociationSet>
+    <AssociationSet Name="FK__product_r__colle__7A3223E8" Association="Self.FK__product_r__colle__7A3223E8">
+      <End Role="college_master" EntitySet="college_master" />
+      <End Role="product_request_master" EntitySet="product_request_master" />
+    </AssociationSet>
+    <AssociationSet Name="FK__product_r__colle__id" Association="Self.FK__product_r__colle__id">
+      <End Role="college_master" EntitySet="college_master" />
+      <End Role="product_request_master_history" EntitySet="product_request_master_history" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_address_details_country_master" Association="Self.FK_user_address_details_country_master">
+      <End Role="country_master" EntitySet="country_master" />
+      <End Role="user_address_details" EntitySet="user_address_details" />
+    </AssociationSet>
+    <AssociationSet Name="FK__product_r__depar__047AA831" Association="Self.FK__product_r__depar__047AA831">
+      <End Role="department_master" EntitySet="department_master" />
+      <End Role="product_request_master_history" EntitySet="product_request_master_history" />
+    </AssociationSet>
+    <AssociationSet Name="FK__product_r__depar__09746778" Association="Self.FK__product_r__depar__09746778">
+      <End Role="department_master" EntitySet="department_master" />
+      <End Role="product_request_master" EntitySet="product_request_master" />
+    </AssociationSet>
+    <AssociationSet Name="FK__product_r__depar__7B264821" Association="Self.FK__product_r__depar__7B264821">
+      <End Role="department_master" EntitySet="department_master" />
+      <End Role="product_request_master" EntitySet="product_request_master" />
+    </AssociationSet>
+    <AssociationSet Name="FK__product_r__depar__id" Association="Self.FK__product_r__depar__id">
+      <End Role="department_master" EntitySet="department_master" />
+      <End Role="product_request_master_history" EntitySet="product_request_master_history" />
+    </AssociationSet>
+    <AssociationSet Name="FK_department_subject_mapping_department_master" Association="Self.FK_department_subject_mapping_department_master">
+      <End Role="department_master" EntitySet="department_master" />
+      <End Role="department_subject_mapping" EntitySet="department_subject_mapping" />
+    </AssociationSet>
+    <AssociationSet Name="FK_department_subject_mapping_subject_master" Association="Self.FK_department_subject_mapping_subject_master">
+      <End Role="subject_master" EntitySet="subject_master" />
+      <End Role="department_subject_mapping" EntitySet="department_subject_mapping" />
+    </AssociationSet>
+    <AssociationSet Name="FK_device_preidentification_subject_master" Association="Self.FK_device_preidentification_subject_master">
+      <End Role="subject_master" EntitySet="subject_master" />
+      <End Role="device_preidentification" EntitySet="device_preidentification" />
+    </AssociationSet>
+    <AssociationSet Name="FK_feedback_poll_userreply_feedback_poll_userreply" Association="Self.FK_feedback_poll_userreply_feedback_poll_userreply">
+      <End Role="feedback_poll_userreply" EntitySet="feedback_poll_userreply" />
+      <End Role="feedback_poll_userreply1" EntitySet="feedback_poll_userreply" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MenuPrivilege_Menu" Association="Self.FK_MenuPrivilege_Menu">
+      <End Role="Menu" EntitySet="Menus" />
+      <End Role="MenuPrivilege" EntitySet="MenuPrivileges" />
+    </AssociationSet>
+    <AssociationSet Name="FK_subject_master_history_subject_master" Association="Self.FK_subject_master_history_subject_master">
+      <End Role="subject_master" EntitySet="subject_master" />
+      <End Role="subject_master_history" EntitySet="subject_master_history" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_subscribe_details_user_subscribe_master" Association="Self.FK_user_subscribe_details_user_subscribe_master">
+      <End Role="user_subscribe_master" EntitySet="user_subscribe_master" />
+      <End Role="user_subscribe_details" EntitySet="user_subscribe_details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_subscribe_order_track_user_subscribe_master" Association="Self.FK_user_subscribe_order_track_user_subscribe_master">
+      <End Role="user_subscribe_master" EntitySet="user_subscribe_master" />
+      <End Role="user_subscribe_order_track" EntitySet="user_subscribe_order_track" />
+    </AssociationSet>
+    <EntitySet Name="user_login_track" EntityType="subject_delivery_anna_newModel.user_login_track" />
+    <EntitySet Name="user_session_track" EntityType="subject_delivery_anna_newModel.user_session_track" />
+    <EntitySet Name="package_details" EntityType="subject_delivery_anna_newModel.package_details" />
+    <AssociationSet Name="FK_package_details_subject_master" Association="subject_delivery_anna_newModel.FK_package_details_subject_master">
+      <End Role="subject_master" EntitySet="subject_master" />
+      <End Role="package_details" EntitySet="package_details" />
+    </AssociationSet>
+    <EntitySet Name="user_subject_mapping" EntityType="subject_delivery_anna_newModel.user_subject_mapping" />
+    <EntitySet Name="university_master" EntityType="subject_delivery_anna_newModel.university_master" />
+    <AssociationSet Name="FK_university_master_state_master" Association="subject_delivery_anna_newModel.FK_university_master_state_master">
+      <End Role="state_master" EntitySet="state_master" />
+      <End Role="university_master" EntitySet="university_master" />
+    </AssociationSet>
+    <AssociationSet Name="FK_subject_master_UniversityID" Association="subject_delivery_anna_newModel.FK_subject_master_UniversityID">
+      <End Role="university_master" EntitySet="university_master" />
+      <End Role="subject_master" EntitySet="subject_master" />
+    </AssociationSet>
+    <AssociationSet Name="FK_subject_master_history_UniversityID" Association="subject_delivery_anna_newModel.FK_subject_master_history_UniversityID">
+      <End Role="university_master" EntitySet="university_master" />
+      <End Role="subject_master_history" EntitySet="subject_master_history" />
+    </AssociationSet>
+    <AssociationSet Name="FK_univ_semester_master_university_master" Association="subject_delivery_anna_newModel.FK_univ_semester_master_university_master">
+      <End Role="university_master" EntitySet="university_master" />
+      <End Role="univ_semester_master" EntitySet="univ_semester_master" />
+    </AssociationSet>
+    <EntitySet Name="user_subject_activation_history" EntityType="subject_delivery_anna_newModel.user_subject_activation_history" />
+    <FunctionImport Name="ImportExcel" ReturnType="Collection(String)">
+      <Parameter Name="fileLocation" Mode="In" Type="String" />
+      <Parameter Name="fileextension" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="package_master_track" EntityType="subject_delivery_anna_newModel.package_master_track" />
+    <EntitySet Name="user_university_privilege" EntityType="subject_delivery_anna_newModel.user_university_privilege" />
+    <AssociationSet Name="FK_user_university_privilege_university_master" Association="subject_delivery_anna_newModel.FK_user_university_privilege_university_master">
+      <End Role="university_master" EntitySet="university_master" />
+      <End Role="user_university_privilege" EntitySet="user_university_privilege" />
+    </AssociationSet>
+    <FunctionImport Name="ImportExcel1" ReturnType="Collection(Int32)">
+      <Parameter Name="fileLocation" Mode="In" Type="String" />
+      <Parameter Name="fileextension" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="package_master" EntityType="subject_delivery_anna_newModel.package_master" />
+    <EntitySet Name="subject_unit_master" EntityType="subject_delivery_anna_newModel.subject_unit_master" />
+    <AssociationSet Name="FK_package_details_package_master" Association="subject_delivery_anna_newModel.FK_package_details_package_master">
+      <End Role="package_master" EntitySet="package_master" />
+      <End Role="package_details" EntitySet="package_details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_cart_details_package_master" Association="subject_delivery_anna_newModel.FK_user_cart_details_package_master">
+      <End Role="package_master" EntitySet="package_master" />
+      <End Role="user_cart_details" EntitySet="user_cart_details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_subscribe_details_package_master" Association="subject_delivery_anna_newModel.FK_user_subscribe_details_package_master">
+      <End Role="package_master" EntitySet="package_master" />
+      <End Role="user_subscribe_details" EntitySet="user_subscribe_details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_subject_unit_master_subject_master" Association="subject_delivery_anna_newModel.FK_subject_unit_master_subject_master">
+      <End Role="subject_master" EntitySet="subject_master" />
+      <End Role="subject_unit_master" EntitySet="subject_unit_master" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_subunit_download_history_subject_unit_master" Association="subject_delivery_anna_newModel.FK_user_subunit_download_history_subject_unit_master">
+      <End Role="subject_unit_master" EntitySet="subject_unit_master" />
+      <End Role="user_subunit_download_history" EntitySet="user_subunit_download_history" />
+    </AssociationSet>
+    <EntitySet Name="user_role" EntityType="subject_delivery_anna_newModel.user_role" />
+    <AssociationSet Name="FK_MenuPrivilege_Role" Association="subject_delivery_anna_newModel.FK_MenuPrivilege_Role">
+      <End Role="user_role" EntitySet="user_role" />
+      <End Role="MenuPrivilege" EntitySet="MenuPrivileges" />
+    </AssociationSet>
+    <EntitySet Name="cancel_category_master" EntityType="subject_delivery_anna_newModel.cancel_category_master" />
+    <EntitySet Name="order_cancel_history" EntityType="subject_delivery_anna_newModel.order_cancel_history" />
+    <EntitySet Name="order_cancel_random_pass" EntityType="subject_delivery_anna_newModel.order_cancel_random_pass" />
+    <EntitySet Name="user_trial_subject" EntityType="subject_delivery_anna_newModel.user_trial_subject" />
+    <EntitySet Name="payment_master" EntityType="subject_delivery_anna_newModel.payment_master" />
+    <EntitySet Name="batch_year_master" EntityType="subject_delivery_anna_newModel.batch_year_master" />
+    <EntitySet Name="sms_batch_data" EntityType="subject_delivery_anna_newModel.sms_batch_data" />
+    <EntitySet Name="payment_refund_master" EntityType="subject_delivery_anna_newModel.payment_refund_master" />
+    <AssociationSet Name="FK_payment_refund_master_user_subscribe_master" Association="subject_delivery_anna_newModel.FK_payment_refund_master_user_subscribe_master">
+      <End Role="user_subscribe_master" EntitySet="user_subscribe_master" />
+      <End Role="payment_refund_master" EntitySet="payment_refund_master" />
+    </AssociationSet>
+    <EntitySet Name="college_installation_details" EntityType="subject_delivery_anna_newModel.college_installation_details" />
+    <AssociationSet Name="FK_college_installation_details_college_installation_details" Association="subject_delivery_anna_newModel.FK_college_installation_details_college_installation_details">
+      <End Role="college_master" EntitySet="college_master" />
+      <End Role="college_installation_details" EntitySet="college_installation_details" />
+    </AssociationSet>
+    <EntitySet Name="mastercopy_usage_details" EntityType="subject_delivery_anna_newModel.mastercopy_usage_details" />
+    <EntitySet Name="college_installation_expiry" EntityType="subject_delivery_anna_newModel.college_installation_expiry" />
+    <AssociationSet Name="FK_college_installation_expiry_college_installation_details" Association="subject_delivery_anna_newModel.FK_college_installation_expiry_college_installation_details">
+      <End Role="college_installation_details" EntitySet="college_installation_details" />
+      <End Role="college_installation_expiry" EntitySet="college_installation_expiry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_college_installation_expiry_department_master" Association="subject_delivery_anna_newModel.FK_college_installation_expiry_department_master">
+      <End Role="department_master" EntitySet="department_master" />
+      <End Role="college_installation_expiry" EntitySet="college_installation_expiry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_college_installation_expiry_subject_master" Association="subject_delivery_anna_newModel.FK_college_installation_expiry_subject_master">
+      <End Role="subject_master" EntitySet="subject_master" />
+      <End Role="college_installation_expiry" EntitySet="college_installation_expiry" />
+    </AssociationSet>
+    <EntitySet Name="user_random_pass_college" EntityType="subject_delivery_anna_newModel.user_random_pass_college" />
+    <EntitySet Name="college_subject_mapping" EntityType="subject_delivery_anna_newModel.college_subject_mapping" />
+    <AssociationSet Name="FK_college_subject_mapping_college_subject_mapping1" Association="subject_delivery_anna_newModel.FK_college_subject_mapping_college_subject_mapping1">
+      <End Role="college_master" EntitySet="college_master" />
+      <End Role="college_subject_mapping" EntitySet="college_subject_mapping" />
+    </AssociationSet>
+    <AssociationSet Name="FK_college_subject_mapping_college_subject_mapping" Association="subject_delivery_anna_newModel.FK_college_subject_mapping_college_subject_mapping">
+      <End Role="subject_master" EntitySet="subject_master" />
+      <End Role="college_subject_mapping" EntitySet="college_subject_mapping" />
+    </AssociationSet>
+    <AssociationSet Name="FK_college_subject_mapping_department_master" Association="subject_delivery_anna_newModel.FK_college_subject_mapping_department_master">
+      <End Role="department_master" EntitySet="department_master" />
+      <End Role="college_subject_mapping" EntitySet="college_subject_mapping" />
+    </AssociationSet>
+    <EntitySet Name="college_test_installation_details" EntityType="subject_delivery_anna_newModel.college_test_installation_details" />
+    <EntitySet Name="college_test_installation_expiry" EntityType="subject_delivery_anna_newModel.college_test_installation_expiry" />
+    <EntitySet Name="college_subject_test_mapping" EntityType="subject_delivery_anna_newModel.college_subject_test_mapping" />
+    <EntitySet Name="college_group_map" EntityType="subject_delivery_anna_newModel.college_group_map" />
+    <AssociationSet Name="FK_college_group_map_college_master" Association="subject_delivery_anna_newModel.FK_college_group_map_college_master">
+      <End Role="college_master" EntitySet="college_master" />
+      <End Role="college_group_map" EntitySet="college_group_map" />
+    </AssociationSet>
+    <EntitySet Name="user_feedback_master" EntityType="subject_delivery_anna_newModel.user_feedback_master" />
+    <EntitySet Name="college_group_master" EntityType="subject_delivery_anna_newModel.college_group_master" />
+    <AssociationSet Name="FK_college_group_map_college_group_master" Association="subject_delivery_anna_newModel.FK_college_group_map_college_group_master">
+      <End Role="college_group_master" EntitySet="college_group_master" />
+      <End Role="college_group_map" EntitySet="college_group_map" />
+    </AssociationSet>
+    <EntitySet Name="user_master" EntityType="subject_delivery_anna_newModel.user_master" />
+    <AssociationSet Name="FK_user_master_college_master" Association="subject_delivery_anna_newModel.FK_user_master_college_master">
+      <End Role="college_master" EntitySet="college_master" />
+      <End Role="user_master" EntitySet="user_master" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_master_department_master" Association="subject_delivery_anna_newModel.FK_user_master_department_master">
+      <End Role="department_master" EntitySet="department_master" />
+      <End Role="user_master" EntitySet="user_master" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_master_university_master" Association="subject_delivery_anna_newModel.FK_user_master_university_master">
+      <End Role="university_master" EntitySet="university_master" />
+      <End Role="user_master" EntitySet="user_master" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_cart_details_user_master" Association="subject_delivery_anna_newModel.FK_user_cart_details_user_master">
+      <End Role="user_master" EntitySet="user_master" />
+      <End Role="user_cart_details" EntitySet="user_cart_details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_feedback_user_master" Association="subject_delivery_anna_newModel.FK_user_feedback_user_master">
+      <End Role="user_master" EntitySet="user_master" />
+      <End Role="user_feedback" EntitySet="user_feedback" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_master_history_user_master" Association="subject_delivery_anna_newModel.FK_user_master_history_user_master">
+      <End Role="user_master" EntitySet="user_master" />
+      <End Role="user_master_history" EntitySet="user_master_history" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_master_user_role" Association="subject_delivery_anna_newModel.FK_user_master_user_role">
+      <End Role="user_role" EntitySet="user_role" />
+      <End Role="user_master" EntitySet="user_master" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_subscribe_master_user_id" Association="subject_delivery_anna_newModel.FK_user_subscribe_master_user_id">
+      <End Role="user_master" EntitySet="user_master" />
+      <End Role="user_subscribe_master" EntitySet="user_subscribe_master" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_university_privilege_user_master" Association="subject_delivery_anna_newModel.FK_user_university_privilege_user_master">
+      <End Role="user_master" EntitySet="user_master" />
+      <End Role="user_university_privilege" EntitySet="user_university_privilege" />
+    </AssociationSet>
+    <EntitySet Name="user_subject_read_history" EntityType="subject_delivery_anna_newModel.user_subject_read_history" />
+  </EntityContainer>
+  <EntityType Name="user_login_track">
+    <Key>
+      <PropertyRef Name="user_log_id" />
+    </Key>
+    <Property Name="user_log_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_id" Type="Int32" Nullable="false" />
+    <Property Name="visited_on" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="visited_time" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="is_first_time_login" Type="Int32" Nullable="false" />
+    <Property Name="repeated_login_cnt" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="user_session_track">
+    <Key>
+      <PropertyRef Name="user_session_track_id" />
+    </Key>
+    <Property Name="user_session_track_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="session_id" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="user_id" Type="Int64" Nullable="false" />
+    <Property Name="visit_page_url" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="repeated_visit_count" Type="Int32" Nullable="false" />
+    <Property Name="visited_on" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="visited_time" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="package_details">
+    <Key>
+      <PropertyRef Name="package_detail_id" />
+    </Key>
+    <Property Name="package_detail_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="package_id" Type="Int32" Nullable="false" />
+    <Property Name="subject_id" Type="Int64" Nullable="false" />
+    <Property Name="created_on" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="created_by" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="validity_days" Type="Int32" Nullable="false" />
+    <Property Name="department_id" Type="Int32" />
+    <Property Name="year" Type="Int32" />
+    <Property Name="semester" Type="Int32" />
+    <Property Name="subject_unit_type" Type="Int32" />
+    <NavigationProperty Name="subject_master" Relationship="subject_delivery_anna_newModel.FK_package_details_subject_master" FromRole="package_details" ToRole="subject_master" />
+    <NavigationProperty Name="package_master" Relationship="subject_delivery_anna_newModel.FK_package_details_package_master" FromRole="package_details" ToRole="package_master" />
+  </EntityType>
+  <Association Name="FK_package_details_subject_master">
+    <End Type="subject_delivery_anna_newModel.subject_master" Role="subject_master" Multiplicity="1" />
+    <End Type="subject_delivery_anna_newModel.package_details" Role="package_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="subject_master">
+        <PropertyRef Name="subject_id" />
+      </Principal>
+      <Dependent Role="package_details">
+        <PropertyRef Name="subject_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="user_subject_mapping">
+    <Key>
+      <PropertyRef Name="user_subject_id" />
+    </Key>
+    <Property Name="user_subject_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="subject_id" Type="Int32" Nullable="false" />
+    <Property Name="subject_code" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="subject_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="subject_version" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="subject_cover_path" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="subject_purchasedon" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="user_id" Type="Int32" Nullable="false" />
+    <Property Name="department_id" Type="Int32" Nullable="false" />
+    <Property Name="department_code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="department_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="download_status" Type="Int32" />
+    <Property Name="downloaded_on" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="subject_unit_id" Type="Int32" Nullable="false" />
+    <Property Name="subject_unit_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="subject_unit_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="subject_unit_version" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="subject_unit_user_version" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="subject_unit_expiryon" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="subject_trial_expiryon" Type="DateTime" Precision="3" />
+    <Property Name="is_trial" Type="Int32" />
+    <Property Name="is_demo" Type="Int32" />
+    <Property Name="is_unit_or_index" Type="Int32" Nullable="false" />
+    <Property Name="subject_unit_path" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="is_updated_to_client" Type="Int32" Nullable="false" />
+    <Property Name="last_modified_on" Type="DateTime" Precision="3" />
+    <Property Name="last_client_updated_on" Type="DateTime" Precision="3" />
+    <Property Name="is_updated_subunit_to_client" Type="Int32" />
+    <Property Name="last_subunit_modified_on" Type="DateTime" Precision="3" />
+    <Property Name="last_subunit_client_updated_on" Type="DateTime" Precision="3" />
+    <Property Name="package_expirydate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="is_purchased" Type="Int32" />
+    <Property Name="yearsem" Type="Int32" />
+  </EntityType>
+  <EntityType Name="university_master">
+    <Key>
+      <PropertyRef Name="univ_id" />
+    </Key>
+    <Property Name="univ_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="university_code" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="university_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="university_shortname" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="university_address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="university_city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="state_id" Type="Int32" Nullable="false" />
+    <Property Name="isDelete" Type="Boolean" />
+    <Property Name="university_type" Type="Int32" />
+    <NavigationProperty Name="state_master" Relationship="subject_delivery_anna_newModel.FK_university_master_state_master" FromRole="university_master" ToRole="state_master" />
+    <NavigationProperty Name="subject_master" Relationship="subject_delivery_anna_newModel.FK_subject_master_UniversityID" FromRole="university_master" ToRole="subject_master" />
+    <NavigationProperty Name="subject_master_history" Relationship="subject_delivery_anna_newModel.FK_subject_master_history_UniversityID" FromRole="university_master" ToRole="subject_master_history" />
+    <NavigationProperty Name="univ_semester_master" Relationship="subject_delivery_anna_newModel.FK_univ_semester_master_university_master" FromRole="university_master" ToRole="univ_semester_master" />
+    <NavigationProperty Name="user_university_privilege" Relationship="subject_delivery_anna_newModel.FK_user_university_privilege_university_master" FromRole="university_master" ToRole="user_university_privilege" />
+    <NavigationProperty Name="user_master" Relationship="subject_delivery_anna_newModel.FK_user_master_university_master" FromRole="university_master" ToRole="user_master" />
+  </EntityType>
+  <Association Name="FK_university_master_state_master">
+    <End Type="subject_delivery_anna_newModel.state_master" Role="state_master" Multiplicity="1" />
+    <End Type="subject_delivery_anna_newModel.university_master" Role="university_master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="state_master">
+        <PropertyRef Name="state_id" />
+      </Principal>
+      <Dependent Role="university_master">
+        <PropertyRef Name="state_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_subject_master_UniversityID">
+    <End Type="subject_delivery_anna_newModel.university_master" Role="university_master" Multiplicity="1" />
+    <End Type="subject_delivery_anna_newModel.subject_master" Role="subject_master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="university_master">
+        <PropertyRef Name="univ_id" />
+      </Principal>
+      <Dependent Role="subject_master">
+        <PropertyRef Name="UniversityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_subject_master_history_UniversityID">
+    <End Type="subject_delivery_anna_newModel.university_master" Role="university_master" Multiplicity="1" />
+    <End Type="subject_delivery_anna_newModel.subject_master_history" Role="subject_master_history" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="university_master">
+        <PropertyRef Name="univ_id" />
+      </Principal>
+      <Dependent Role="subject_master_history">
+        <PropertyRef Name="UniversityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_univ_semester_master_university_master">
+    <End Type="subject_delivery_anna_newModel.university_master" Role="university_master" Multiplicity="1" />
+    <End Type="subject_delivery_anna_newModel.univ_semester_master" Role="univ_semester_master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="university_master">
+        <PropertyRef Name="univ_id" />
+      </Principal>
+      <Dependent Role="univ_semester_master">
+        <PropertyRef Name="univ_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="user_subject_activation_history">
+    <Key>
+      <PropertyRef Name="user_subject_activation_id" />
+    </Key>
+    <Property Name="user_subject_activation_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="subject_id" Type="Int32" Nullable="false" />
+    <Property Name="subject_code" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="subject_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="subject_version" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="user_id" Type="Int32" Nullable="false" />
+    <Property Name="department_id" Type="Int32" Nullable="false" />
+    <Property Name="subject_expiry_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="subject_expiry_extension_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="subject_extension_days" Type="Int32" Nullable="false" />
+    <Property Name="activated_on" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="activated_by" Type="Int32" Nullable="false" />
+    <Property Name="activation_type" Type="Int32" Nullable="false" />
+    <Property Name="activation_product_type" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="package_master_track">
+    <Key>
+      <PropertyRef Name="package_master_track_id" />
+    </Key>
+    <Property Name="package_master_track_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_id" Type="Int64" Nullable="false" />
+    <Property Name="previous_words" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="current_words" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="type" Type="Int32" Nullable="false" />
+    <Property Name="package_id" Type="Int32" Nullable="false" />
+    <Property Name="created_on" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="user_university_privilege">
+    <Key>
+      <PropertyRef Name="univ_user_privilege_id" />
+    </Key>
+    <Property Name="univ_user_privilege_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="university_id" Type="Int32" Nullable="false" />
+    <Property Name="user_id" Type="Int64" Nullable="false" />
+    <Property Name="active_status" Type="Int32" Nullable="false" />
+    <Property Name="mapped_on" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="mapped_by" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="university_master" Relationship="subject_delivery_anna_newModel.FK_user_university_privilege_university_master" FromRole="user_university_privilege" ToRole="university_master" />
+    <NavigationProperty Name="user_master" Relationship="subject_delivery_anna_newModel.FK_user_university_privilege_user_master" FromRole="user_university_privilege" ToRole="user_master" />
+  </EntityType>
+  <Association Name="FK_user_university_privilege_university_master">
+    <End Type="subject_delivery_anna_newModel.university_master" Role="university_master" Multiplicity="1" />
+    <End Type="subject_delivery_anna_newModel.user_university_privilege" Role="user_university_privilege" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="university_master">
+        <PropertyRef Name="univ_id" />
+      </Principal>
+      <Dependent Role="user_university_privilege">
+        <PropertyRef Name="university_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="package_master">
+    <Key>
+      <PropertyRef Name="package_id" />
+    </Key>
+    <Property Name="package_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="package_code" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="package_display_name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="package_name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="package_duration_days" Type="Int32" Nullable="false" />
+    <Property Name="long_desc" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="short_desc" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="selling_price" Type="Int32" Nullable="false" />
+    <Property Name="actual_price" Type="Int32" Nullable="false" />
+    <Property Name="department_id" Type="Int32" Nullable="false" />
+    <Property Name="subject_id" Type="Int64" Nullable="false" />
+    <Property Name="rule_id" Type="Int64" Nullable="false" />
+    <Property Name="subject_unit_type" Type="Int32" />
+    <Property Name="created_on" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="created_by" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="current_status" Type="Int32" />
+    <Property Name="activestatus" Type="Int32" Nullable="false" />
+    <Property Name="is_offer_package" Type="Int32" Nullable="false" />
+    <Property Name="cover_path" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="univ_id" Type="Int32" Nullable="false" />
+    <Property Name="year" Type="Int32" Nullable="false" />
+    <Property Name="semester" Type="Int32" Nullable="false" />
+    <Property Name="is_bundle" Type="Int32" Nullable="false" />
+    <Property Name="keywords" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="package_video_url" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="os_type" Type="Int32" />
+    <NavigationProperty Name="package_details" Relationship="subject_delivery_anna_newModel.FK_package_details_package_master" FromRole="package_master" ToRole="package_details" />
+    <NavigationProperty Name="user_cart_details" Relationship="subject_delivery_anna_newModel.FK_user_cart_details_package_master" FromRole="package_master" ToRole="user_cart_details" />
+    <NavigationProperty Name="user_subscribe_details" Relationship="subject_delivery_anna_newModel.FK_user_subscribe_details_package_master" FromRole="package_master" ToRole="user_subscribe_details" />
+  </EntityType>
+  <EntityType Name="subject_unit_master">
+    <Key>
+      <PropertyRef Name="unit_id" />
+    </Key>
+    <Property Name="unit_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="unit_code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="unit_name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="subject_id" Type="Int64" Nullable="false" />
+    <Property Name="active_status" Type="Int32" Nullable="false" />
+    <Property Name="subject_unit_path" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="is_demo" Type="Int32" />
+    <Property Name="is_unit_or_index" Type="Int32" Nullable="false" />
+    <Property Name="subject_unit_type" Type="Int32" />
+    <Property Name="subject_unit_version" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="released_on" Type="DateTime" Precision="3" />
+    <Property Name="created_on" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="filesize_in_mb" Type="Int32" Nullable="false" />
+    <Property Name="created_by" Type="Int32" Nullable="false" />
+    <Property Name="os_type" Type="Int32" />
+    <NavigationProperty Name="subject_master" Relationship="subject_delivery_anna_newModel.FK_subject_unit_master_subject_master" FromRole="subject_unit_master" ToRole="subject_master" />
+    <NavigationProperty Name="user_subunit_download_history" Relationship="subject_delivery_anna_newModel.FK_user_subunit_download_history_subject_unit_master" FromRole="subject_unit_master" ToRole="user_subunit_download_history" />
+  </EntityType>
+  <Association Name="FK_package_details_package_master">
+    <End Type="subject_delivery_anna_newModel.package_master" Role="package_master" Multiplicity="1" />
+    <End Type="subject_delivery_anna_newModel.package_details" Role="package_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="package_master">
+        <PropertyRef Name="package_id" />
+      </Principal>
+      <Dependent Role="package_details">
+        <PropertyRef Name="package_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_cart_details_package_master">
+    <End Type="subject_delivery_anna_newModel.package_master" Role="package_master" Multiplicity="1" />
+    <End Type="subject_delivery_anna_newModel.user_cart_details" Role="user_cart_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="package_master">
+        <PropertyRef Name="package_id" />
+      </Principal>
+      <Dependent Role="user_cart_details">
+        <PropertyRef Name="package_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_subscribe_details_package_master">
+    <End Type="subject_delivery_anna_newModel.package_master" Role="package_master" Multiplicity="1" />
+    <End Type="subject_delivery_anna_newModel.user_subscribe_details" Role="user_subscribe_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="package_master">
+        <PropertyRef Name="package_id" />
+      </Principal>
+      <Dependent Role="user_subscribe_details">
+        <PropertyRef Name="package_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_subject_unit_master_subject_master">
+    <End Type="subject_delivery_anna_newModel.subject_master" Role="subject_master" Multiplicity="1" />
+    <End Type="subject_delivery_anna_newModel.subject_unit_master" Role="subject_unit_master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="subject_master">
+        <PropertyRef Name="subject_id" />
+      </Principal>
+      <Dependent Role="subject_unit_master">
+        <PropertyRef Name="subject_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_subunit_download_history_subject_unit_master">
+    <End Type="subject_delivery_anna_newModel.subject_unit_master" Role="subject_unit_master" Multiplicity="1" />
+    <End Type="subject_delivery_anna_newModel.user_subunit_download_history" Role="user_subunit_download_history" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="subject_unit_master">
+        <PropertyRef Name="unit_id" />
+      </Principal>
+      <Dependent Role="user_subunit_download_history">
+        <PropertyRef Name="subject_unit_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="user_role">
+    <Key>
+      <PropertyRef Name="role_id" />
+    </Key>
+    <Property Name="role_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="role_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="role_desc" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="role_type" Type="Int32" Nullable="false" />
+    <Property Name="active_subject_days" Type="Int32" Nullable="false" />
+    <Property Name="active_status" Type="Int32" Nullable="false" />
+    <Property Name="created_by" Type="Int32" />
+    <Property Name="created_on" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LandingPage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="role_level" Type="Int32" />
+    <NavigationProperty Name="MenuPrivileges" Relationship="subject_delivery_anna_newModel.FK_MenuPrivilege_Role" FromRole="user_role" ToRole="MenuPrivilege" />
+    <NavigationProperty Name="user_master" Relationship="subject_delivery_anna_newModel.FK_user_master_user_role" FromRole="user_role" ToRole="user_master" />
+  </EntityType>
+  <Association Name="FK_MenuPrivilege_Role">
+    <End Type="subject_delivery_anna_newModel.user_role" Role="user_role" Multiplicity="0..1" />
+    <End Type="subject_delivery_anna_newModel.MenuPrivilege" Role="MenuPrivilege" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user_role">
+        <PropertyRef Name="role_id" />
+      </Principal>
+      <Dependent Role="MenuPrivilege">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="cancel_category_master">
+    <Key>
+      <PropertyRef Name="category_id" />
+    </Key>
+    <Property Name="category_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="category_name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="category_desc" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="active_status" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="order_cancel_history">
+    <Key>
+      <PropertyRef Name="order_cancel_id" />
+    </Key>
+    <Property Name="order_cancel_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="order_ref_no" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="cancelled_by" Type="Int32" Nullable="false" />
+    <Property Name="cancelled_on" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="category" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="reason" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="order_cancel_random_pass">
+    <Key>
+      <PropertyRef Name="user_random_id" />
+    </Key>
+    <Property Name="user_random_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="buyer_user_id" Type="Int32" Nullable="false" />
+    <Property Name="order_ref_no" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="buyer_mobile" Type="Int64" Nullable="false" />
+    <Property Name="verification_code" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="action_user_id" Type="Int32" Nullable="false" />
+    <Property Name="generated_time" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="action_type" Type="Int32" Nullable="false" />
+    <Property Name="user_type" Type="Int32" />
+  </EntityType>
+  <EntityType Name="user_trial_subject">
+    <Key>
+      <PropertyRef Name="user_trial_subject_id" />
+    </Key>
+    <Property Name="user_trial_subject_id" Type="Int64" Nullable="false" />
+    <Property Name="user_id" Type="Int64" Nullable="false" />
+    <Property Name="subject_id" Type="Int64" Nullable="false" />
+    <Property Name="trail_expiry_on" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="created_on" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="payment_master">
+    <Key>
+      <PropertyRef Name="payment_master_id" />
+    </Key>
+    <Property Name="payment_master_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_subscribe_master_id" Type="Int64" Nullable="false" />
+    <Property Name="Txn_msg" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Txn_err_msg" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="ClintTxnRefNo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="TPSLTxnBankCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="TPSLTxnID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="TxnAmount" Type="Decimal" Nullable="false" Precision="10" Scale="0" />
+    <Property Name="TxnDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="TxnDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="TxnStatus" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="TxnTime" Type="Time" Precision="7" />
+    <Property Name="TransactionType" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Tpsl_charges" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="rpst_token" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="service_fee" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="base_fee" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="TPSLRefundID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="bal_amt" Type="Decimal" Precision="12" Scale="0" />
+    <Property Name="request_token" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="sms_status" Type="Int32" />
+    <Property Name="payment_gatway_id" Type="Int32" Nullable="false" />
+    <Property Name="refund_amt" Type="Decimal" Precision="12" Scale="0" />
+    <Property Name="refund_date" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="batch_year_master">
+    <Key>
+      <PropertyRef Name="batch_year_id" />
+    </Key>
+    <Property Name="batch_year_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="batch_year" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="batch_desc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="active_status" Type="Int32" Nullable="false" />
+    <Property Name="created_by" Type="Int32" Nullable="false" />
+    <Property Name="created_on" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="sms_batch_data">
+    <Key>
+      <PropertyRef Name="sem_data_id" />
+    </Key>
+    <Property Name="sem_data_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="mobile" Type="Int64" Nullable="false" />
+    <Property Name="batch_year_id" Type="Int32" Nullable="false" />
+    <Property Name="year" Type="Int32" Nullable="false" />
+    <Property Name="university_id" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="payment_refund_master">
+    <Key>
+      <PropertyRef Name="payment_refund_master_id" />
+    </Key>
+    <Property Name="payment_refund_master_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_subscribe_master_id" Type="Int64" Nullable="false" />
+    <Property Name="Txn_msg" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Txn_err_msg" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="ClintTxnRefNo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="TPSLRefundID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="request_token" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="refund_amt" Type="Decimal" Nullable="false" Precision="12" Scale="0" />
+    <Property Name="refund_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="refund_by" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="user_subscribe_master" Relationship="subject_delivery_anna_newModel.FK_payment_refund_master_user_subscribe_master" FromRole="payment_refund_master" ToRole="user_subscribe_master" />
+  </EntityType>
+  <Association Name="FK_payment_refund_master_user_subscribe_master">
+    <End Type="subject_delivery_anna_newModel.user_subscribe_master" Role="user_subscribe_master" Multiplicity="1" />
+    <End Type="subject_delivery_anna_newModel.payment_refund_master" Role="payment_refund_master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user_subscribe_master">
+        <PropertyRef Name="user_subscribe_master_id" />
+      </Principal>
+      <Dependent Role="payment_refund_master">
+        <PropertyRef Name="user_subscribe_master_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="college_installation_details">
+    <Key>
+      <PropertyRef Name="college_install_id" />
+    </Key>
+    <Property Name="college_install_id" Type="Int64" Nullable="false" />
+    <Property Name="college_id" Type="Int32" Nullable="false" />
+    <Property Name="installation_centre_name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="primary_mac" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="enter_on" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="enter_by" Type="Int64" Nullable="false" />
+    <Property Name="active_status" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="college_master" Relationship="subject_delivery_anna_newModel.FK_college_installation_details_college_installation_details" FromRole="college_installation_details" ToRole="college_master" />
+    <NavigationProperty Name="college_installation_expiry" Relationship="subject_delivery_anna_newModel.FK_college_installation_expiry_college_installation_details" FromRole="college_installation_details" ToRole="college_installation_expiry" />
+  </EntityType>
+  <Association Name="FK_college_installation_details_college_installation_details">
+    <End Type="subject_delivery_anna_newModel.college_master" Role="college_master" Multiplicity="1" />
+    <End Type="subject_delivery_anna_newModel.college_installation_details" Role="college_installation_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="college_master">
+        <PropertyRef Name="college_id" />
+      </Principal>
+      <Dependent Role="college_installation_details">
+        <PropertyRef Name="college_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="mastercopy_usage_details">
+    <Key>
+      <PropertyRef Name="mastercopy_usage_id" />
+    </Key>
+    <Property Name="mastercopy_usage_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="email_id" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="mobile" Type="Int64" />
+    <Property Name="department_name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="semester" Type="Int32" Nullable="false" />
+    <Property Name="requested_on" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="otp_code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="is_otp_verified" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="college_installation_expiry">
+    <Key>
+      <PropertyRef Name="college_installation_expiry_id" />
+    </Key>
+    <Property Name="college_installation_expiry_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="college_install_id" Type="Int64" Nullable="false" />
+    <Property Name="department_id" Type="Int32" Nullable="false" />
+    <Property Name="subject_id" Type="Int64" Nullable="false" />
+    <Property Name="install_by" Type="Int32" />
+    <Property Name="installed_on" Type="DateTime" Precision="3" />
+    <Property Name="expiry_on" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="college_installation_details" Relationship="subject_delivery_anna_newModel.FK_college_installation_expiry_college_installation_details" FromRole="college_installation_expiry" ToRole="college_installation_details" />
+    <NavigationProperty Name="department_master" Relationship="subject_delivery_anna_newModel.FK_college_installation_expiry_department_master" FromRole="college_installation_expiry" ToRole="department_master" />
+    <NavigationProperty Name="subject_master" Relationship="subject_delivery_anna_newModel.FK_college_installation_expiry_subject_master" FromRole="college_installation_expiry" ToRole="subject_master" />
+    <Property Name="semester" Type="Int32" />
+  </EntityType>
+  <Association Name="FK_college_installation_expiry_college_installation_details">
+    <End Type="subject_delivery_anna_newModel.college_installation_details" Role="college_installation_details" Multiplicity="1" />
+    <End Type="subject_delivery_anna_newModel.college_installation_expiry" Role="college_installation_expiry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="college_installation_details">
+        <PropertyRef Name="college_install_id" />
+      </Principal>
+      <Dependent Role="college_installation_expiry">
+        <PropertyRef Name="college_install_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_college_installation_expiry_department_master">
+    <End Type="subject_delivery_anna_newModel.department_master" Role="department_master" Multiplicity="1" />
+    <End Type="subject_delivery_anna_newModel.college_installation_expiry" Role="college_installation_expiry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="department_master">
+        <PropertyRef Name="department_id" />
+      </Principal>
+      <Dependent Role="college_installation_expiry">
+        <PropertyRef Name="department_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_college_installation_expiry_subject_master">
+    <End Type="subject_delivery_anna_newModel.subject_master" Role="subject_master" Multiplicity="1" />
+    <End Type="subject_delivery_anna_newModel.college_installation_expiry" Role="college_installation_expiry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="subject_master">
+        <PropertyRef Name="subject_id" />
+      </Principal>
+      <Dependent Role="college_installation_expiry">
+        <PropertyRef Name="subject_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="user_random_pass_college">
+    <Key>
+      <PropertyRef Name="user_college_random_id" />
+    </Key>
+    <Property Name="user_college_random_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="verification_code" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="generated_time" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="college_id" Type="Int32" Nullable="false" />
+    <Property Name="action_type" Type="Int32" Nullable="false" />
+    <Property Name="user_type" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="college_subject_mapping">
+    <Key>
+      <PropertyRef Name="college_subject_mapping_id" />
+    </Key>
+    <Property Name="college_subject_mapping_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="university_id" Type="Int32" />
+    <Property Name="college_id" Type="Int32" />
+    <Property Name="department_id" Type="Int32" />
+    <Property Name="subject_id" Type="Int64" />
+    <Property Name="rule_id" Type="Int32" />
+    <Property Name="map_year" Type="Int32" />
+    <Property Name="semester" Type="Int32" />
+    <Property Name="active_status" Type="Int32" />
+    <Property Name="created_by" Type="Int32" />
+    <Property Name="created_on" Type="DateTime" Precision="3" />
+    <Property Name="active_duration_days" Type="Int32" />
+    <Property Name="active_duration_date" Type="DateTime" Precision="3" />
+    <Property Name="total_license" Type="Int32" />
+    <NavigationProperty Name="college_master" Relationship="subject_delivery_anna_newModel.FK_college_subject_mapping_college_subject_mapping1" FromRole="college_subject_mapping" ToRole="college_master" />
+    <NavigationProperty Name="subject_master" Relationship="subject_delivery_anna_newModel.FK_college_subject_mapping_college_subject_mapping" FromRole="college_subject_mapping" ToRole="subject_master" />
+    <NavigationProperty Name="department_master" Relationship="subject_delivery_anna_newModel.FK_college_subject_mapping_department_master" FromRole="college_subject_mapping" ToRole="department_master" />
+  </EntityType>
+  <Association Name="FK_college_subject_mapping_college_subject_mapping1">
+    <End Type="subject_delivery_anna_newModel.college_master" Role="college_master" Multiplicity="0..1" />
+    <End Type="subject_delivery_anna_newModel.college_subject_mapping" Role="college_subject_mapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="college_master">
+        <PropertyRef Name="college_id" />
+      </Principal>
+      <Dependent Role="college_subject_mapping">
+        <PropertyRef Name="college_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_college_subject_mapping_college_subject_mapping">
+    <End Type="subject_delivery_anna_newModel.subject_master" Role="subject_master" Multiplicity="0..1" />
+    <End Type="subject_delivery_anna_newModel.college_subject_mapping" Role="college_subject_mapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="subject_master">
+        <PropertyRef Name="subject_id" />
+      </Principal>
+      <Dependent Role="college_subject_mapping">
+        <PropertyRef Name="subject_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_college_subject_mapping_department_master">
+    <End Type="subject_delivery_anna_newModel.department_master" Role="department_master" Multiplicity="0..1" />
+    <End Type="subject_delivery_anna_newModel.college_subject_mapping" Role="college_subject_mapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="department_master">
+        <PropertyRef Name="department_id" />
+      </Principal>
+      <Dependent Role="college_subject_mapping">
+        <PropertyRef Name="department_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="college_test_installation_details">
+    <Key>
+      <PropertyRef Name="college_test_install_id" />
+    </Key>
+    <Property Name="college_test_install_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="college_id" Type="Int32" Nullable="false" />
+    <Property Name="installation_centre_name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="primary_mac" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="enter_on" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="enter_by" Type="Int64" Nullable="false" />
+    <Property Name="active_status" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="college_test_installation_expiry">
+    <Key>
+      <PropertyRef Name="college_test_installation_expiry_id" />
+    </Key>
+    <Property Name="college_test_installation_expiry_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="college_test_install_id" Type="Int64" Nullable="false" />
+    <Property Name="department_id" Type="Int32" Nullable="false" />
+    <Property Name="subject_id" Type="Int64" Nullable="false" />
+    <Property Name="install_by" Type="Int32" />
+    <Property Name="installed_on" Type="DateTime" Precision="3" />
+    <Property Name="expiry_on" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="semester" Type="Int32" />
+  </EntityType>
+  <EntityType Name="college_subject_test_mapping">
+    <Key>
+      <PropertyRef Name="college_subject_test_mapping_id" />
+    </Key>
+    <Property Name="college_subject_test_mapping_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="university_id" Type="Int32" />
+    <Property Name="college_id" Type="Int32" />
+    <Property Name="department_id" Type="Int32" />
+    <Property Name="subject_id" Type="Int64" />
+    <Property Name="rule_id" Type="Int32" />
+    <Property Name="map_year" Type="Int32" />
+    <Property Name="semester" Type="Int32" />
+    <Property Name="active_status" Type="Int32" />
+    <Property Name="created_by" Type="Int32" />
+    <Property Name="created_on" Type="DateTime" Precision="3" />
+    <Property Name="active_duration_days" Type="Int32" />
+    <Property Name="active_duration_date" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="college_group_map">
+    <Key>
+      <PropertyRef Name="college_group_map_id" />
+    </Key>
+    <Property Name="college_group_map_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="college_id" Type="Int32" Nullable="false" />
+    <Property Name="college_group_id" Type="Int32" Nullable="false" />
+    <Property Name="enter_on" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="enter_by" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="college_master" Relationship="subject_delivery_anna_newModel.FK_college_group_map_college_master" FromRole="college_group_map" ToRole="college_master" />
+    <NavigationProperty Name="college_group_master" Relationship="subject_delivery_anna_newModel.FK_college_group_map_college_group_master" FromRole="college_group_map" ToRole="college_group_master" />
+  </EntityType>
+  <Association Name="FK_college_group_map_college_master">
+    <End Type="subject_delivery_anna_newModel.college_master" Role="college_master" Multiplicity="1" />
+    <End Type="subject_delivery_anna_newModel.college_group_map" Role="college_group_map" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="college_master">
+        <PropertyRef Name="college_id" />
+      </Principal>
+      <Dependent Role="college_group_map">
+        <PropertyRef Name="college_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="user_feedback_master">
+    <Key>
+      <PropertyRef Name="user_feedback_id" />
+    </Key>
+    <Property Name="user_feedback_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="rolle_desc" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="rolle_id" Type="Int32" Nullable="false" />
+    <Property Name="mobile" Type="Int32" />
+    <Property Name="email" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="user_id" Type="Int64" />
+    <Property Name="college_id" Type="Int32" />
+    <Property Name="feedback" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="enter_on" Type="DateTime" Nullable="false" Precision="7" />
+  </EntityType>
+  <EntityType Name="college_group_master">
+    <Key>
+      <PropertyRef Name="college_group_id" />
+    </Key>
+    <Property Name="college_group_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="college_group_name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="college_group_desc" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="active_status" Type="Int32" Nullable="false" />
+    <Property Name="enter_on" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="enter_by" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="college_group_map" Relationship="subject_delivery_anna_newModel.FK_college_group_map_college_group_master" FromRole="college_group_master" ToRole="college_group_map" />
+  </EntityType>
+  <Association Name="FK_college_group_map_college_group_master">
+    <End Type="subject_delivery_anna_newModel.college_group_master" Role="college_group_master" Multiplicity="1" />
+    <End Type="subject_delivery_anna_newModel.college_group_map" Role="college_group_map" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="college_group_master">
+        <PropertyRef Name="college_group_id" />
+      </Principal>
+      <Dependent Role="college_group_map">
+        <PropertyRef Name="college_group_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="user_master">
+    <Key>
+      <PropertyRef Name="user_id" />
+    </Key>
+    <Property Name="user_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_first_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="user_name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="role_id" Type="Int32" Nullable="false" />
+    <Property Name="email_id" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="mobile" Type="Int64" Nullable="false" />
+    <Property Name="loggedin_status" Type="Int32" />
+    <Property Name="last_loggedin_date" Type="DateTime" Precision="3" />
+    <Property Name="is_first_login" Type="Int32" Nullable="false" />
+    <Property Name="active_status" Type="Int32" Nullable="false" />
+    <Property Name="created_by" Type="Int32" />
+    <Property Name="created_on" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="profileimage" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="univ_id" Type="Int32" />
+    <Property Name="collegeid" Type="Int32" />
+    <Property Name="collegename" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="DepartmentID" Type="Int32" />
+    <Property Name="department_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="currentyear" Type="Int32" />
+    <Property Name="currentsemester" Type="Int32" />
+    <Property Name="address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="state_id" Type="Int32" />
+    <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="dob" Type="DateTime" Precision="0" />
+    <Property Name="gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="phonenumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Bulk_mail" Type="Boolean" />
+    <Property Name="primary_imei" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="primary_mac" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="tool_version_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="registered_from" Type="Int32" />
+    <Property Name="roll_number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ref_mobileno" Type="Int64" />
+    <Property Name="primary_andriod_mac" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="college_group_id" Type="Int32" />
+    <NavigationProperty Name="college_master" Relationship="subject_delivery_anna_newModel.FK_user_master_college_master" FromRole="user_master" ToRole="college_master" />
+    <NavigationProperty Name="department_master" Relationship="subject_delivery_anna_newModel.FK_user_master_department_master" FromRole="user_master" ToRole="department_master" />
+    <NavigationProperty Name="university_master" Relationship="subject_delivery_anna_newModel.FK_user_master_university_master" FromRole="user_master" ToRole="university_master" />
+    <NavigationProperty Name="user_cart_details" Relationship="subject_delivery_anna_newModel.FK_user_cart_details_user_master" FromRole="user_master" ToRole="user_cart_details" />
+    <NavigationProperty Name="user_feedback" Relationship="subject_delivery_anna_newModel.FK_user_feedback_user_master" FromRole="user_master" ToRole="user_feedback" />
+    <NavigationProperty Name="user_master_history" Relationship="subject_delivery_anna_newModel.FK_user_master_history_user_master" FromRole="user_master" ToRole="user_master_history" />
+    <NavigationProperty Name="user_role" Relationship="subject_delivery_anna_newModel.FK_user_master_user_role" FromRole="user_master" ToRole="user_role" />
+    <NavigationProperty Name="user_subscribe_master" Relationship="subject_delivery_anna_newModel.FK_user_subscribe_master_user_id" FromRole="user_master" ToRole="user_subscribe_master" />
+    <NavigationProperty Name="user_university_privilege" Relationship="subject_delivery_anna_newModel.FK_user_university_privilege_user_master" FromRole="user_master" ToRole="user_university_privilege" />
+  </EntityType>
+  <Association Name="FK_user_master_college_master">
+    <End Type="subject_delivery_anna_newModel.college_master" Role="college_master" Multiplicity="0..1" />
+    <End Type="subject_delivery_anna_newModel.user_master" Role="user_master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="college_master">
+        <PropertyRef Name="college_id" />
+      </Principal>
+      <Dependent Role="user_master">
+        <PropertyRef Name="collegeid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_master_department_master">
+    <End Type="subject_delivery_anna_newModel.department_master" Role="department_master" Multiplicity="0..1" />
+    <End Type="subject_delivery_anna_newModel.user_master" Role="user_master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="department_master">
+        <PropertyRef Name="department_id" />
+      </Principal>
+      <Dependent Role="user_master">
+        <PropertyRef Name="DepartmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_master_university_master">
+    <End Type="subject_delivery_anna_newModel.university_master" Role="university_master" Multiplicity="0..1" />
+    <End Type="subject_delivery_anna_newModel.user_master" Role="user_master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="university_master">
+        <PropertyRef Name="univ_id" />
+      </Principal>
+      <Dependent Role="user_master">
+        <PropertyRef Name="univ_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_cart_details_user_master">
+    <End Type="subject_delivery_anna_newModel.user_master" Role="user_master" Multiplicity="1" />
+    <End Type="subject_delivery_anna_newModel.user_cart_details" Role="user_cart_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user_master">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="user_cart_details">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_feedback_user_master">
+    <End Type="subject_delivery_anna_newModel.user_master" Role="user_master" Multiplicity="1" />
+    <End Type="subject_delivery_anna_newModel.user_feedback" Role="user_feedback" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user_master">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="user_feedback">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_master_history_user_master">
+    <End Type="subject_delivery_anna_newModel.user_master" Role="user_master" Multiplicity="1" />
+    <End Type="subject_delivery_anna_newModel.user_master_history" Role="user_master_history" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user_master">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="user_master_history">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_master_user_role">
+    <End Type="subject_delivery_anna_newModel.user_role" Role="user_role" Multiplicity="1" />
+    <End Type="subject_delivery_anna_newModel.user_master" Role="user_master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user_role">
+        <PropertyRef Name="role_id" />
+      </Principal>
+      <Dependent Role="user_master">
+        <PropertyRef Name="role_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_subscribe_master_user_id">
+    <End Type="subject_delivery_anna_newModel.user_master" Role="user_master" Multiplicity="1" />
+    <End Type="subject_delivery_anna_newModel.user_subscribe_master" Role="user_subscribe_master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user_master">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="user_subscribe_master">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_university_privilege_user_master">
+    <End Type="subject_delivery_anna_newModel.user_master" Role="user_master" Multiplicity="1" />
+    <End Type="subject_delivery_anna_newModel.user_university_privilege" Role="user_university_privilege" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user_master">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="user_university_privilege">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="user_subject_read_history">
+    <Key>
+      <PropertyRef Name="user_read_history_id" />
+    </Key>
+    <Property Name="user_read_history_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_id" Type="Int32" Nullable="false" />
+    <Property Name="department_id" Type="Int32" />
+    <Property Name="subject_id" Type="Int32" Nullable="false" />
+    <Property Name="total_hours" Type="Int32" Nullable="false" />
+    <Property Name="last_read_on" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="is_updated_to_server" Type="Int32" />
+    <Property Name="hours_topic_video" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="entered_on" Type="DateTime" Precision="3" />
+  </EntityType>
+</Schema>

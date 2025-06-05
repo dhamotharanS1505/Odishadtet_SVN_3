@@ -1,0 +1,469 @@
+﻿@{
+    ViewBag.Title = "Department";
+    Layout = "~/Views/Shared/_TechTeachLayout.cshtml";
+}
+<style type="text/css">
+    .selected {
+        background-color: #c8c8c8;
+        color: #fff;
+    }
+</style>
+<div id="wrapper">
+    @section departmentlist{
+
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li style="margin-top: 10px;">
+                    <div class="right-inner-addon">
+                        <i class="glyphicon glyphicon-search"></i>
+                        <form class="form-searchh">
+                            <input type="search" placeholder="Keyword Search" style="width: 80%; margin: 0px auto;" class="form-control searchbydepatement">
+                        </form>
+                    </div>
+                </li>
+
+                <li>
+                    <h4 class="" style="">Departments</h4>
+                </li>
+                <li>
+
+
+                    <div class="col-lg-12 menu-left" id="DepartmentFix">
+                    </div>
+                </li>
+                @*<li>
+                        <h4 style="margin-top:5px;">Quick Search</h4>
+                    </li>
+                    <li>
+                        <div class="dd">
+                            <select class="form-control bg-blk clr-wyt dp-dwn">
+                                <option class="">Department Name</option>
+                                <option class="">Electrical</option>
+                                <option class="">Electronics</option>
+                                <option class="">Communication</option>
+                                <option class="">Computer Science</option>
+                                <option class="">Civil</option>
+                                <option class="">Information</option>
+                                <option class="">Automobile</option>
+                            </select>
+                            <select class="form-control clr-wyt bg-blk dp-dwn">
+                                <option class="">Subject Name</option>
+                                <option class="">Basic Electrical and Electronics Engineering</option>
+                                <option class="">Electrical Engineering</option>
+                                <option class="">Electrical Circuits</option>
+                                <option class="">Power Electronics </option>
+                                <option class="">Electrical Installation, Estimation and  Drawing</option>
+                                <option class="">Electric Lighting</option>
+                            </select>
+                        </div>
+                    </li>
+                    <li>
+                        <button style="width:90%; margin-top:10px; margin-left:15px;" class="btn btn-info" type="submit">
+                            Search Topics
+                        </button>
+                    </li>*@
+            </ul>
+        </div>
+    }
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+
+            <a href="" type="" data-click-state="1" style="margin-left: -29px; position:fixed; border:none; z-index: 99999;" id="menu-toggle" class="#menu-toggle">
+                <img width="30px" class="hidden-lg" src="../content/img/toggle.png">
+            </a>
+            <div class="row">
+
+            </div>
+            <section class="mid_warp col-lg-12">
+                <div class="">
+                    <div class="">
+                        <!--
+                        <div class="hd_til_txt">
+                          <strong class="fa fa-university"></strong> <span>ANNA UNIVERSITY</span>
+                          </div>
+                          -->
+                        <div class="row" id="subjectfix">
+                            <article class="book_panel">
+                                <div style="background-color:#fff; padding:0;" id="fine" class="container-fluid">
+                                    <div class="col-md-4">
+                                        <h4 id="Branch" class="">Branch:&nbsp;</h4>
+                                    </div>
+                                    <div class="col-md-6 col-md-offset-2">
+                                        <div class="pull-right">
+                                            <p id="deptName" style="padding-top:8px;" class="fontp">
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                            <div class="col-sm-3">
+                                <article class="book_panel">
+                                    <h4>Subjects</h4>
+                                </article>
+                                <ul id="subList" class="menu-list"></ul>
+                            </div>
+                            <section class="col-sm-9 pad-0">
+                                <div class="book_view">
+                                    <article style="background-color: rgb(255, 255, 255); padding-right: 0px;" id="hide" class="book_panel_li book_panel col-sm-12">
+                                        <div class="col-sm-12 pad-0">
+                                            <h4>Learning Objects Name:</h4>
+                                        </div>
+                                        <!--- --->
+                                        <script>
+                                            $("#myModal2").on("show", function () {    // wire up the OK button to dismiss the modal when shown
+                                                $("#myModal2 a.btn").on("click", function (e) {
+                                                    console.log("button pressed");   // just as an example...
+                                                    $("#myModal2").modal('hide');     // dismiss the dialog
+                                                });
+                                            });
+                                            $("#myModal2").on("hide", function () {    // remove the event listeners when the dialog is dismissed
+                                                $("#myModal2 a.btn").off("click");
+                                            });
+
+                                            $("#myModal2").on("hidden", function () {  // remove the actual elements from the DOM when fully hidden
+                                                $("#myModal2").remove();
+                                            });
+
+                                            $("#myModal2").modal({                    // wire up the actual modal functionality and show the dialog
+                                                "backdrop": "static",
+                                                "keyboard": true,
+                                                "show": true                     // ensure the modal is shown immediately
+                                            });
+                                        </script>
+                                        <div role="dialog" id="myModal2" class="modal fade">
+                                            <div id="modelpopup" class="modal-dialog modal-sm">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button data-dismiss="modal" class="close" type="button">×</button>
+                                                        <h4 class="modal-title">Electricity Fundamentals</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>Added To Cart.</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button data-dismiss="modal" class="btn btn-default close" type="button">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--- -->
+                                        <!---- Page - 1 ---->
+                                        <div id="subjectcontantpanel" class="row_h">
+
+                                        </div>
+                                        <!---- View More ---->
+                                        <div class="col-md-12">
+                                            <div class="">
+                                                <div class="view-more pull-right">
+                                                    @*<a href="department-more.html"><button class="btn-primary" type="button">View More</button></a>*@
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!---- Footer ---->
+            <div style="background: rgb(248, 248, 248) none repeat scroll 0% 0%;" class="col-md-12">
+                <div class="col-md-4">
+                    <p style="padding-top:8px;padding-left: 15px;" class="muted">Powered by Infoplus Technologies Pvt Ltd</p>
+                </div>
+                <div class="Col-md-4 col-md-offset-4">
+                    <p style="padding-top:8px;" class="muted">Copyright &copy; 2016 LearnEngg. All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    var subjectid = 0;
+    var unitid = 0;
+    var deptId = 0;
+    var departmentName = '';
+
+    /*Function To Get Values From Another View.cshtml*/
+    /*start*/
+    var getUrlParameter = function getUrlParameter(sParam) {
+        var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName,
+            i;
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === undefined ? true : sParameterName[1];
+            }
+        }
+    };
+    /*End*/
+
+    $(document).ready(function () {
+        LoadDepartments();
+        var branchName = getUrlParameter('depName');
+        var packageCount = getUrlParameter('pckgcount');
+        $("#Branch").html("<b>" + branchName + "</b>");
+        deptId = getUrlParameter('depid');
+        departmentsubjects(deptId);
+        onclickSubjects(deptId, 0);
+        $("#deptName").empty().append("Total Engineering Learning Object in  " + branchName + "  <button  class='btn btn-primary' type='button'>" + packageCount + "</button>");
+        setTimeout(function () {
+            $("a.selected").removeClass("selected");
+            $(".img-active-" + deptId).addClass("selected");
+        }, 20);
+
+
+    })
+
+    function LoadDepartments() {
+        $.getJSON("/APIService/APIProductHome/GetDepartmentsList", function (data) {
+            $.each(data, function (index, value) {
+                $("#DepartmentList").tmpl(value).appendTo("#DepartmentFix");
+
+            });
+        });
+    }
+
+    function departmentsubjects(deptId) {
+        var existsubjectValue = '';
+
+        $.getJSON("/APIService/APIProductHome/GetSubjectDetails",
+           {
+               departmentID: deptId
+
+           }, function (data) {
+               $.each(data, function (index, value) {
+                   if (existsubjectValue != value.subj_ID) {
+                       existsubjectValue = value.subj_ID;
+                       $("#SubjecList").tmpl(value).appendTo("#subList");
+                       $("#UnitList").tmpl(value).appendTo("#collapseExample_" + value.subj_ID);
+                   }
+                   else {
+                       $("#UnitList").tmpl(value).appendTo("#collapseExample_" + value.subj_ID);
+                   }
+
+               });
+           });
+    }
+
+
+    $(document).on('click', '#subject', function () {
+        subjectid = $(this).attr('rel');
+        $('.hidealltemp').hide();
+        $('.SubjShow-' + subjectid).show();
+
+    });
+
+    $(document).on('click', '#unit', function () {
+        unitid = $(this).attr('rel');
+        $('.hidealltemp').hide();
+        $('.UnitShow-' + unitid).show();
+    });
+
+    $(document).on('click', '#departments', function () {
+        $("a.selected").removeClass("selected");
+        $(this).addClass("selected");
+        $("#subList").empty();
+        var department = $(this).attr('rel');
+        deptId = department.split('~')[0];
+        departmentName = department.split('~')[1];
+        var pckgcount = department.split('~')[2];
+        $("#Branch").empty().append("<b>" + departmentName + "</b>");
+        $("#deptName").empty().append("Total Engineering Learning Object in  " + departmentName + "  <button  class='btn btn-primary' type='button'>" + pckgcount + "</button>");
+        departmentsubjects(deptId);
+        $("#subjectcontantpanel").empty().append(onclickSubjects(deptId, 0));
+        $('.hidealltemp').hide();
+    })
+
+
+    function onclickSubjects(deptId, subjectid) {
+
+        $.getJSON("/APIService/APIProductHome/GetPackageDetails",
+           {
+               departId: deptId,
+               subjectid: subjectid
+
+           }, function (data) {
+               $.each(data, function (index, value) {
+
+                   $("#SubjtUnitContent").tmpl(value).appendTo("#subjectcontantpanel");
+
+               });
+           });
+    }
+
+    $(function () {
+        $('.form-searchh').on('submit', function () { return false; });
+        $('.searchbydepatement').keypress(function (e) {
+            var key = e.which;
+            if (key == 13)  // the enter key code
+            {
+                var query = $.trim($(this).val()).toLowerCase();
+                $('div.keyword-container .SearchKey').each(function () {
+                    var $this = $(this);
+                    if ($this.text().toLowerCase().indexOf(query) === -1)
+                        $this.closest('div.keyword-container').fadeOut();
+                    else $this.closest('div.keyword-container').fadeIn();
+                });
+
+            }
+        });
+
+
+
+
+    });
+
+    function openSolution($this) {
+
+        window.location = '@Url.Action("ProductDetailes", "ProductHomeDetail")' + '?PackageId=' + $this.attr('rel');
+    }
+
+
+    // Add to Cart
+    $(document).on('click', '#AddtoCart', function (e) {
+        e.preventDefault();
+        var userID = $("#sessionUserId").val();
+        
+        //$("#viewCart").attr("data-toggle", "modal");
+        if (userID == null || userID == '' || userID == 0) {
+            var packageId = $(this).attr('rel');
+            var keycookie; // read your cookie here
+            keycookie = getCookie('key');
+        
+            if (keycookie != null) {
+                document.cookie = 'key=' + keycookie + ',' + packageId + ';';
+            }
+            else {
+                document.cookie = 'key=' + 'val=' + packageId;
+            }
+            //            $("#logg").get(0).click();
+        }
+        else {
+            var packageId = $(this).attr('rel');
+
+
+            $.ajax({
+                url: '/APIService/APIUserDashBoard/Getinsertpackageusercarts?userId=' + userID + '&packageId=' + packageId + '',
+                //data: param,
+                type: "GET",
+                success: function (data) {
+                    //var rdata = JSON.parse(data.GetCollegeListResult);
+                    var resMsg = data.split('-')[0];
+                    var count = data.split('-')[1];
+                    usrMastrID = data.split('-')[2];
+                    if (parseInt(count) > 0) {
+                        $("#lblViewCount").text(": " + count);
+                    }
+                    //alert(resMsg);
+                    $('#lblAlert').text(resMsg);
+                    $('#modalAlert').modal('show');
+
+                },
+                error: function () {
+                    alert('failure');
+                }
+                
+            });
+        }
+
+
+
+    });
+    function getCookie(name) {
+
+        var dc = document.cookie;
+        var prefix = name + "=";
+        var begin = dc.indexOf("; " + prefix);
+        if (begin == -1) {
+            begin = dc.indexOf(prefix);
+            if (begin != 0) return null;
+        }
+        else {
+            begin += 2;
+            var end = document.cookie.indexOf(";", begin);
+            if (end == -1) {
+                end = dc.length;
+            }
+        }
+        return unescape(dc.substring(begin + prefix.length, end));
+    }
+
+    function doSomething() {
+        var myCookie = getCookie("MyCookie");
+
+        if (myCookie == null) {
+            // do cookie doesn't exist stuff;
+        }
+        else {
+            // do cookie exists stuff
+        }
+    }
+
+
+</script>
+
+<script id="DepartmentList" type="text/html">
+    <div class="col-lg-6  col-xs-6 col-md-6 col-sm-6 cntr text-center keyword-container  ">
+        <a class="img-active-${DepartmentId}" href="#" id="departments" rel="${DepartmentId}~${DepartmentName}~${packageCount}">
+            <img style="width:40px" class="res" src="${ DeptImagePath}"><p class="visible-xs mrg-top"></p>
+            <span class="res-font">
+                ${DepartmentName}
+            </span>
+            <div class="SearchKey" style="display:none;">${SearchKeywords}</div>
+        </a>
+    </div>
+</script>
+
+<script id="SubjecList" type="text/html">
+
+    <a id="subject" aria-controls="collapseExample2" aria-expanded="false" href="#collapseExample_${subj_ID}" rel="${subj_ID}" class="sel" data-toggle="collapse">
+        <li class="list-group-item list2  bg">
+            <img class="img" width="20" src="../content/img/doc1.png">  ${ subj_Name}
+        </li>
+    </a>
+    <div id="collapseExample_${subj_ID}" class="collapse"></div>
+</script>
+
+<script id="UnitList" type="text/html">
+    <a class="sel bg-sub" href="#" id="unit" rel="${UnitId}">
+        <li style="padding-left:15px;" class="list-group-item list2 list-bg">
+            <img width="20" src="../content/img/doc2.png"> ${ UnitName}
+        </li>
+    </a>
+</script>
+
+<script id="SubjtUnitContent" type="text/html">
+    <div id="subjects" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 pd-btm UnitShow-${subj_Parent_unitId} SubjShow-${subjectID} hidealltemp">
+
+        <ul>
+            <li class="li-hover li-hover-brdr1">
+                <div class="col-lg-12 col-m6 col-xs-12 brdr-btm">
+                    <div class="col-lg-11 col-xs-11 txt">${packageName}</div>
+                </div>
+                <div class="div-hover">
+                    <div>
+
+
+                        <a href="#" onClick="openSolution($(this));" rel="${packageId}"><i class="glyphicon glyphicon-eye-open"></i></a>
+                        @*<a title="View Details" href="cart.html">
+                            @Html.ActionLink(" View ", "ProductDetailes", "ProductHomeDetail" , new { PackageId = 10} , null) </a>*@
+                        <a data-target="#myModal2" data-toggle="modal" class="Addcartdirect" rel="${packageId}" id="AddtoCart" title="Add To Cart" href="#myModal2"><i class="glyphicon glyphicon-shopping-cart"></i></a>
+                        <a title="Wishlist" href=""><i class="glyphicon glyphicon-heart"></i></a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</script>
+
+
+
+
+

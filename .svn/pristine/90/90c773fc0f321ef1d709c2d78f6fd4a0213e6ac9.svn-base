@@ -1,0 +1,1112 @@
+﻿using ClosedXML.Excel;
+using Odishadtet.Models;
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Text;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Script.Serialization;
+using System.Xml;
+using Odishadtet.DAL;
+using System.Reflection;
+using System.Web.UI.WebControls;
+using System.Web.UI;
+using Odishadtet.General;
+
+namespace Odishadtet.Controllers
+{
+    public class AdminProcessController : Controller
+    {
+        // GET: AdminProcess
+        static IAdminService _Adminrepository;
+
+
+
+
+        public AdminProcessController(IAdminService repository)
+        {
+            _Adminrepository = repository;
+        }
+
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+
+        public ActionResult Profile()
+        {
+
+            return View();
+        }
+
+
+
+        public ActionResult Help()
+        {
+
+            return View();
+        }
+
+        public ActionResult Feedback()
+        {
+            return View();
+        }
+
+
+
+        public ActionResult UsersSummaryReadHistory()
+        {
+
+            return View();
+        }
+
+        public ActionResult StudentRegistrationHistorys()
+        {
+
+            return View();
+        }
+
+        public ActionResult StudentRegistrationHistorysTest()
+        {
+
+            return View();
+        }
+
+        public ActionResult AdminDashBoard()
+        {
+            return View();
+
+        }
+
+        public ActionResult RegistrationDashBoard()
+        {
+            return View();
+        }
+
+        public ActionResult UsageDashBoard()
+        {
+            return View();
+        }
+
+          
+        public ActionResult RegistrationIssues()
+        {
+            return View();
+        }
+
+        public ActionResult DemoSubscribedUserReport()
+        {
+            return View();
+        }
+        public JsonResult GetDemoSubscribedUserReport(JqSearchIn si)
+        {
+            var GridData = LoginModels.LoadDemoSubscriberReport(si);
+            return Json(GridData, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult UsersReadHistory()
+        {
+            return View();
+        }
+
+        public ActionResult RegisteredUserUsageDetails()
+        {
+            return View();
+        }
+
+        public ActionResult CollegeRegistrationReport()
+        {
+            return View();
+        }
+        public ActionResult ChennalPartnerReport()
+        {
+
+            return View();
+        }
+        public ActionResult ChannelPartnerMapping()
+        {
+            return View();
+
+        }
+        
+
+        public ActionResult DownloadReports()
+        {
+            return View();
+        }
+
+
+        public ActionResult VisitorsDetailsReport()
+        {
+            return View();
+        }
+
+        #region ArchieveMail To View
+        public ActionResult ArchieveMail()
+        {
+            string responseText = "";
+            try
+            {
+
+                WebClient web = new WebClient();
+                WebRequest request = WebRequest.Create(ConfigurationManager.AppSettings["localhost_server"] + "/AdminService.svc/AdminService/GetArchiveFeedbacks");
+                WebResponse response = request.GetResponse();
+                WebHeaderCollection header = response.Headers;
+                var encoding = ASCIIEncoding.ASCII;
+
+
+                using (var reader = new System.IO.StreamReader(response.GetResponseStream(), encoding))
+                {
+                    responseText = reader.ReadToEnd();
+                    responseText = System.Net.WebUtility.HtmlDecode(responseText);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+                // Common.StoreException(ex, "ArchieveMail", "ArchieveMail");
+            }
+
+            return Json(responseText, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+        #region MailSummary To View
+        public ActionResult MailSummary()
+        {
+            WebClient web = new WebClient();
+            WebRequest request = WebRequest.Create(ConfigurationManager.AppSettings["localhost_server"] + "/AdminService.svc/AdminService/Getallfeedbacks");
+            WebResponse response = request.GetResponse();
+            WebHeaderCollection header = response.Headers;
+            var encoding = ASCIIEncoding.ASCII;
+            string responseText;
+
+            using (var reader = new System.IO.StreamReader(response.GetResponseStream(), encoding))
+            {
+                responseText = reader.ReadToEnd();
+                responseText = System.Net.WebUtility.HtmlDecode(responseText);
+            }
+            return Json(responseText, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+        #region UpdateMailStatus
+        public ActionResult UpdateMailStatus(int fId)
+        {
+
+            proLoginUserDefaultValues ob = new proLoginUserDefaultValues();
+
+            WebClient web = new WebClient();
+            WebRequest request = WebRequest.Create(ConfigurationManager.AppSettings["localhost_server"] + "/AdminService.svc/AdminService/UpdateReadStatus?fId=" + fId + "&readBy=" + ob.loginUserID);
+            WebResponse response = request.GetResponse();
+            WebHeaderCollection header = response.Headers;
+            var encoding = ASCIIEncoding.ASCII;
+            string responseText;
+
+            using (var reader = new System.IO.StreamReader(response.GetResponseStream(), encoding))
+            {
+                responseText = reader.ReadToEnd();
+                responseText = System.Net.WebUtility.HtmlDecode(responseText);
+            }
+            return Json(responseText, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+        /// <summary>
+        /// UserReadHistoryReportwithfilter
+        /// </summary>
+        /// <param name="univId"></param>
+        /// <param name="clog_id"></param>
+        /// <param name="sem"></param>
+        /// <param name="year"></param>
+        /// <param name="rg_st_dte"></param>
+        /// <param name="rg_end_dte"></param>
+        /// <param name="usg_st_dte"></param>
+        /// <param name="usg_end_dte"></param>
+        public void UserReadHistoryReportwithfilter(int univId, string clog_id, string sem, string year, string rg_st_dte, string rg_end_dte, string usg_st_dte, string usg_end_dte)
+        {
+            var data = _Adminrepository.UniversityReadHistoryexportwithfilter(univId, clog_id, sem, year, rg_st_dte, rg_end_dte, usg_st_dte, usg_end_dte);
+
+            DataTable dt = new DataTable("ReadHistoryReport");
+
+            if (data.Count > 0)
+            {
+
+                dt.Columns.Add("SNo");
+                dt.Columns.Add("UserName");
+                dt.Columns.Add("Mobile");
+                dt.Columns.Add("Email");
+                dt.Columns.Add("year-Sem");
+                dt.Columns.Add("UserRole");
+                dt.Columns.Add("TotalHours");
+                dt.Columns.Add("ReadCount");
+                dt.Columns.Add("ReadSubject");
+                dt.Columns.Add("LastReadDate", typeof(DateTime));
+                dt.Columns.Add("CollegeName");
+
+                foreach (var s in data)
+                {
+                    DataRow dr = dt.NewRow();
+
+                    dr["SNo"] = dt.Rows.Count + 1;
+                    dr["UserName"] = s.userName;
+                    dr["Mobile"] = s.Mobile;
+                    dr["Email"] = s.Email;
+                    dr["year-Sem"] = s.YearMonth;
+                    dr["UserRole"] = s.userRole;
+                    dr["TotalHours"] = s.totalhrs;
+                    dr["ReadCount"] = s.userCount;
+                    dr["ReadSubject"] = s.subjectCount;
+                    dr["LastReadDate"] = s.lastReadDate;
+                    dr["CollegeName"] = s.collegeName;
+                    dt.Rows.Add(dr);
+                }
+            }
+            else
+            {
+                dt.Columns.Add("SNo");
+                dt.Columns.Add("UserName");
+                dt.Columns.Add("Mobile");
+                dt.Columns.Add("Email");
+                dt.Columns.Add("year-Sem");
+                dt.Columns.Add("UserRole");
+                dt.Columns.Add("TotalHours");
+                dt.Columns.Add("ReadCount");
+                dt.Columns.Add("ReadSubject");
+                dt.Columns.Add("LastReadDate", typeof(DateTime));
+                dt.Columns.Add("CollegeName");
+                dt.Rows.Add("Data Not Avilable");
+            }
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+
+                wb.Worksheets.Add(dt);
+                wb.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                wb.Style.Font.Bold = true;
+                Response.Clear();
+                Response.Buffer = true;
+                Response.Charset = "";
+                Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                Response.AddHeader("content-disposition", "attachment;filename= ReadHistoryReport.xlsx");
+
+                using (MemoryStream MyMemoryStream = new MemoryStream())
+                {
+                    wb.SaveAs(MyMemoryStream);
+                    MyMemoryStream.WriteTo(Response.OutputStream);
+                    Response.Flush();
+                    Response.End();
+                }
+            }
+
+
+        }
+
+        /// <summary>
+        /// UserReadHistoryReportAndroidApp
+        /// </summary>
+        /// <param name="univId"></param>
+        /// <param name="clog_id"></param>
+        /// <param name="sem"></param>
+        /// <param name="year"></param>
+        /// <param name="rg_st_dte"></param>
+        /// <param name="rg_end_dte"></param>
+        /// <param name="usg_st_dte"></param>
+        /// <param name="usg_end_dte"></param>
+        public void UserReadHistoryReportAndroidApp(int univId, string clog_id, string sem, string year, string rg_st_dte, string rg_end_dte, string usg_st_dte, string usg_end_dte)
+        {
+            var data = _Adminrepository.UniversityReadHistoryExportAndroidApp(univId, clog_id, sem, year, rg_st_dte, rg_end_dte, usg_st_dte, usg_end_dte);
+
+            DataTable dt = new DataTable("ReadHistoryReportAndroid");
+
+            if (data.Count > 0)
+            {
+                dt.Columns.Add("SNo");
+                dt.Columns.Add("UserName");
+                dt.Columns.Add("Mobile");
+                dt.Columns.Add("Email");
+                dt.Columns.Add("year-Sem");
+                dt.Columns.Add("UserRole");
+                dt.Columns.Add("TotalHours");
+                dt.Columns.Add("ReadCount");
+                dt.Columns.Add("ReadSubject");
+                dt.Columns.Add("LastReadDate", typeof(DateTime));
+                dt.Columns.Add("CollegeName");
+
+                foreach (var s in data)
+                {
+                    DataRow dr = dt.NewRow();
+
+                    dr["SNo"] = dt.Rows.Count + 1;
+                    dr["UserName"] = s.userName;
+                    dr["Mobile"] = s.Mobile;
+                    dr["Email"] = s.Email;
+                    dr["year-Sem"] = s.YearMonth;
+                    dr["UserRole"] = s.userRole;
+                    dr["TotalHours"] = s.totalhrs;
+                    dr["ReadCount"] = s.userCount;
+                    dr["ReadSubject"] = s.subjectCount;
+                    dr["LastReadDate"] = s.lastReadDate;
+                    dr["CollegeName"] = s.collegeName;
+                    dt.Rows.Add(dr);
+                }
+            }
+            else
+            {
+                dt.Columns.Add("SNo");
+                dt.Columns.Add("UserName");
+                dt.Columns.Add("Mobile");
+                dt.Columns.Add("Email");
+                dt.Columns.Add("year-Sem");
+                dt.Columns.Add("UserRole");
+                dt.Columns.Add("TotalHours");
+                dt.Columns.Add("ReadCount");
+                dt.Columns.Add("ReadSubject");
+                dt.Columns.Add("LastReadDate", typeof(DateTime));
+                dt.Columns.Add("CollegeName");
+                dt.Rows.Add("Data Not Available");
+            }
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+
+                wb.Worksheets.Add(dt);
+                wb.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                wb.Style.Font.Bold = true;
+                Response.Clear();
+                Response.Buffer = true;
+                Response.Charset = "";
+                Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                Response.AddHeader("content-disposition", "attachment;filename=ReadHistoryReportAndroid.xlsx");
+
+                using (MemoryStream MyMemoryStream = new MemoryStream())
+                {
+                    wb.SaveAs(MyMemoryStream);
+                    MyMemoryStream.WriteTo(Response.OutputStream);
+                    Response.Flush();
+                    Response.End();
+                }
+            }
+        }
+
+        /// <summary>
+        /// ReadHistoryContentAndQA_AndroidApp
+        /// </summary>
+        /// <param name="univId"></param>
+        /// <param name="college_id"></param>
+        /// <param name="semester"></param>
+        /// <param name="year"></param>
+        /// <param name="reg_startdate"></param>
+        /// <param name="reg_end_date"></param>
+        /// <param name="usg_start_date"></param>
+        /// <param name="usg_end_date"></param>
+        /// <param name="contenttype"></param>
+        public void ReadHistoryContentAndQA_AndroidApp(int univId, string college_id, string semester, string year, string reg_startdate, string reg_end_date, string usg_start_date, string usg_end_date, int contenttype)
+        {
+            var data = _Adminrepository.ExportReadHistoryContentAndQA_AndroidApp(univId, college_id, semester, year, reg_startdate, reg_end_date, usg_start_date, usg_end_date, contenttype);
+
+            DataTable dt = new DataTable("ContentAndQA_AndroidApp");
+
+            if (data.Count > 0)
+            {
+                dt.Columns.Add("SNo");
+                dt.Columns.Add("UserName");
+                dt.Columns.Add("Mobile");
+                dt.Columns.Add("Email");
+                dt.Columns.Add("year-Sem");
+                dt.Columns.Add("UserRole");
+                dt.Columns.Add("TotalHours");
+                dt.Columns.Add("ReadCount");
+                dt.Columns.Add("ReadSubject");
+                dt.Columns.Add("LastReadDate", typeof(DateTime));
+                dt.Columns.Add("CollegeName");
+
+                foreach (var s in data)
+                {
+                    DataRow dr = dt.NewRow();
+
+                    dr["SNo"] = dt.Rows.Count + 1;
+                    dr["UserName"] = s.userName;
+                    dr["Mobile"] = s.Mobile;
+                    dr["Email"] = s.Email;
+                    dr["year-Sem"] = s.YearMonth;
+                    dr["UserRole"] = s.userRole;
+                    dr["TotalHours"] = s.totalhrs;
+                    dr["ReadCount"] = s.userCount;
+                    dr["ReadSubject"] = s.subjectCount;
+                    dr["LastReadDate"] = s.lastReadDate;
+                    dr["CollegeName"] = s.collegeName;
+                    dt.Rows.Add(dr);
+                }
+            }
+            else
+            {
+                dt.Columns.Add("SNo");
+                dt.Columns.Add("UserName");
+                dt.Columns.Add("Mobile");
+                dt.Columns.Add("Email");
+                dt.Columns.Add("year-Sem");
+                dt.Columns.Add("UserRole");
+                dt.Columns.Add("TotalHours");
+                dt.Columns.Add("ReadCount");
+                dt.Columns.Add("ReadSubject");
+                dt.Columns.Add("LastReadDate", typeof(DateTime));
+                dt.Columns.Add("CollegeName");
+                dt.Rows.Add("Data Not Available");
+            }
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+
+                wb.Worksheets.Add(dt);
+                wb.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                wb.Style.Font.Bold = true;
+                Response.Clear();
+                Response.Buffer = true;
+                Response.Charset = "";
+                Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                Response.AddHeader("content-disposition", "attachment;filename=ContentAndQA_AndroidApp.xlsx");
+
+                using (MemoryStream MyMemoryStream = new MemoryStream())
+                {
+                    wb.SaveAs(MyMemoryStream);
+                    MyMemoryStream.WriteTo(Response.OutputStream);
+                    Response.Flush();
+                    Response.End();
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// SubjectUnitReadHistorywithFilter
+        /// </summary>
+        /// <param name="univId"></param>
+        /// <param name="college_id"></param>
+        /// <param name="semester"></param>
+        /// <param name="year"></param>
+        /// <param name="reg_startdate"></param>
+        /// <param name="reg_end_date"></param>
+        /// <param name="usg_start_date"></param>
+        /// <param name="usg_end_date"></param>
+        /// <param name="contenttype"></param>
+        public void SubjectUnitReadHistorywithFilter(int univId, string college_id, string semester, string year, string reg_startdate, string reg_end_date, string usg_start_date, string usg_end_date, int contenttype)
+        {
+            var data = _Adminrepository.subjectunitwiseReadHistoryReportwithfilter(univId, college_id, semester, year, reg_startdate, reg_end_date, usg_start_date, usg_end_date, contenttype);
+
+            DataTable dt = new DataTable("SubjectUnitReadHistory");
+
+            if (data.Count > 0)
+            {
+                dt.Columns.Add("SNo");
+                dt.Columns.Add("UserName");
+                dt.Columns.Add("Mobile");
+                dt.Columns.Add("Email");
+                dt.Columns.Add("year-Sem");
+                dt.Columns.Add("UserRole");
+                dt.Columns.Add("TotalHours");
+                dt.Columns.Add("ReadCount");
+                dt.Columns.Add("ReadSubject");
+                dt.Columns.Add("LastReadDate", typeof(DateTime));
+                dt.Columns.Add("CollegeName");
+
+                foreach (var s in data)
+                {
+                    DataRow dr = dt.NewRow();
+
+                    dr["SNo"] = dt.Rows.Count + 1;
+                    dr["UserName"] = s.userName;
+                    dr["Mobile"] = s.Mobile;
+                    dr["Email"] = s.Email;
+                    dr["year-Sem"] = s.YearMonth;
+                    dr["UserRole"] = s.userRole;
+                    dr["TotalHours"] = s.totalhrs;
+                    dr["ReadCount"] = s.userCount;
+                    dr["ReadSubject"] = s.subjectCount;
+                    dr["LastReadDate"] = s.lastReadDate;
+                    dr["CollegeName"] = s.collegeName;
+                    dt.Rows.Add(dr);
+                }
+            }
+            else
+            {
+                dt.Columns.Add("SNo");
+                dt.Columns.Add("UserName");
+                dt.Columns.Add("Mobile");
+                dt.Columns.Add("Email");
+                dt.Columns.Add("year-Sem");
+                dt.Columns.Add("UserRole");
+                dt.Columns.Add("TotalHours");
+                dt.Columns.Add("ReadCount");
+                dt.Columns.Add("ReadSubject");
+                dt.Columns.Add("LastReadDate", typeof(DateTime));
+                dt.Columns.Add("CollegeName");
+                dt.Rows.Add("Data Not Avilable");
+            }
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+
+                wb.Worksheets.Add(dt);
+                wb.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                wb.Style.Font.Bold = true;
+                Response.Clear();
+                Response.Buffer = true;
+                Response.Charset = "";
+                Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                Response.AddHeader("content-disposition", "attachment;filename=SubjectUnitReadHistory.xlsx");
+
+                using (MemoryStream MyMemoryStream = new MemoryStream())
+                {
+                    wb.SaveAs(MyMemoryStream);
+                    MyMemoryStream.WriteTo(Response.OutputStream);
+                    Response.Flush();
+                    Response.End();
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// DataAnalyseReport
+        /// </summary>
+        /// <param name="UnivId"></param>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
+        public void DataAnalyseReport(int UnivId, string startDate, string endDate)
+        {
+
+            WebClient web = new WebClient();
+            //WebRequest request = WebRequest.Create(ConfigurationManager.AppSettings["localhost"] + "/AdminService.svc/Adminservice/UniversityReadHistory?univId=" + UnivId + "&college_id=0&semester=0&year=0&reg_startdate=0&reg_end_date=0&usg_start_date=0&usg_end_date=0&xmlOrJson=1");
+            WebRequest request = WebRequest.Create(ConfigurationManager.AppSettings["localhost_server"] + "/AdminService.svc/Adminservice/UniversityReadHistoryexport?univId=" + UnivId + "&xmlOrJson=1");
+            WebResponse response = request.GetResponse();
+            WebHeaderCollection header = response.Headers;
+            var encoding = ASCIIEncoding.ASCII;
+            string responseText;
+
+            using (var reader = new System.IO.StreamReader(response.GetResponseStream(), encoding))
+            {
+                responseText = reader.ReadToEnd();
+                responseText = System.Net.WebUtility.HtmlDecode(responseText);
+                XmlDocument xmldoc = new XmlDocument();
+                xmldoc.LoadXml(responseText);
+                //string insqry = string.Empty;
+                XmlNodeList xmlnodelstTrack = xmldoc.GetElementsByTagName("readHistory");
+                JavaScriptSerializer serializer = new JavaScriptSerializer();
+
+                DataTable dt = new DataTable("UserHistory");
+                dt.Columns.Add("SNo");
+                dt.Columns.Add("UserName");
+                dt.Columns.Add("Mobile");
+                dt.Columns.Add("Email");
+                dt.Columns.Add("year-Sem");
+                dt.Columns.Add("UserRole");
+                dt.Columns.Add("TotalHours");
+                dt.Columns.Add("ReadCount");
+                dt.Columns.Add("ReadSubject");
+                dt.Columns.Add("LastReadOn");
+                dt.Columns.Add("CollegeName");
+
+                foreach (XmlNode NodeObj in xmlnodelstTrack)
+                {
+                    string s = NodeObj.OuterXml;
+
+                    DataRow dr = dt.NewRow();
+
+                    dr["SNo"] = dt.Rows.Count + 1;
+                    dr["UserName"] = (NodeObj.Attributes["UserName"].Value.ToString());
+                    dr["Mobile"] = (NodeObj.Attributes["Mobile"].Value.ToString());
+                    dr["Email"] = (NodeObj.Attributes["email"].Value.ToString());
+                    dr["year-Sem"] = (NodeObj.Attributes["YearMonth"].Value.ToString());
+                    dr["UserRole"] = (NodeObj.Attributes["UserRole"].Value.ToString());
+                    dr["TotalHours"] = (NodeObj.Attributes["TotalHours"]).Value.ToString();
+                    dr["ReadCount"] = (NodeObj.Attributes["UserCount"].Value.ToString());
+                    dr["ReadSubject"] = (NodeObj.Attributes["SubjectCount"].Value.ToString());
+                    dr["LastReadOn"] = (NodeObj.Attributes["LastReadon"].Value.ToString());
+                    dr["CollegeName"] = (NodeObj.Attributes["CollegeName"].Value.ToString());
+                    dt.Rows.Add(dr);
+                }
+
+                using (XLWorkbook wb = new XLWorkbook())
+                {
+
+                    wb.Worksheets.Add(dt);
+                    wb.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                    wb.Style.Font.Bold = true;
+                    Response.Clear();
+                    Response.Buffer = true;
+                    Response.Charset = "";
+                    Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                    Response.AddHeader("content-disposition", "attachment;filename= UserReadHistory.xlsx");
+
+                    using (MemoryStream MyMemoryStream = new MemoryStream())
+                    {
+                        wb.SaveAs(MyMemoryStream);
+                        MyMemoryStream.WriteTo(Response.OutputStream);
+                        Response.Flush();
+                        Response.End();
+                    }
+                }
+
+            }
+        }
+        public void ReportbyUniversity(int univID, int roleID)
+        {
+            try
+            {
+                WebClient web = new WebClient();
+                string service = ConfigurationManager.AppSettings["localhost_server"];
+                if (univID == 88)
+                {
+                    service = ConfigurationManager.AppSettings["localhostvtu_server"];
+                    univID = 1;
+                }
+                else if (univID == 22)
+                {
+                    service = ConfigurationManager.AppSettings["localhostKtu_server"];
+                    univID = 1;
+                }
+                
+                WebRequest request = WebRequest.Create(service + "/AdminService.svc/adminservice/RegisteredStudentDetails?roleid=" + roleID + "&univId=" + univID + "&xmlOrJson=1");
+                WebResponse response = request.GetResponse();
+                WebHeaderCollection header = response.Headers;
+                var encoding = ASCIIEncoding.ASCII;
+                string responseText;
+
+
+                using (var reader = new System.IO.StreamReader(response.GetResponseStream(), encoding))
+                {
+                    responseText = reader.ReadToEnd();
+                    responseText = System.Net.WebUtility.HtmlDecode(responseText);
+                    XmlDocument xmldoc = new XmlDocument();
+                    xmldoc.LoadXml(responseText);
+                    XmlNodeList xmlnodelstTrack = xmldoc.GetElementsByTagName("List");
+
+                    string univName = "", rolldet = "Staff";
+                    if (roleID == 1)
+                        rolldet = "Students";
+                    DataTable dt = new DataTable("Student");
+
+                    dt.Columns.Add("S.No");
+                    dt.Columns.Add("User Name");
+                    dt.Columns.Add("University");
+                    dt.Columns.Add("Email Id");
+                    dt.Columns.Add("Mobile");
+                    dt.Columns.Add("College Code");
+                    dt.Columns.Add("College Name");
+                    dt.Columns.Add("Department Name");
+                    dt.Columns.Add("Registered On", typeof(DateTime));
+                    dt.Columns.Add("RollNumber/USN");
+                    dt.Columns.Add("Ref Mobilenumber");
+                    dt.Columns.Add("RegistrationType");
+                    dt.Columns.Add("Registred_Year");
+                    dt.Columns.Add("Registred_semester");
+
+                    foreach (XmlNode NodeObj in xmlnodelstTrack)
+                    {
+                        string s = NodeObj.OuterXml;
+
+                        DataRow dr = dt.NewRow();
+                        dr["S.No"] = dt.Rows.Count + 1;
+                        dr["User Name"] = (NodeObj.Attributes["UserName"].Value.ToString());
+                        dr["University"] = (NodeObj.Attributes["University"].Value.ToString());
+                        univName = (NodeObj.Attributes["University"].Value.ToString());
+                        dr["Email Id"] = (NodeObj.Attributes["EmailId"].Value.ToString());
+                        dr["Mobile"] = (NodeObj.Attributes["MobileNo"]).Value.ToString();
+                        dr["College Code"] = (NodeObj.Attributes["CollegeCode"].Value.ToString());
+                        dr["College Name"] = (NodeObj.Attributes["CollegeName"].Value.ToString());
+                        dr["Department Name"] = (NodeObj.Attributes["DepartmentName"].Value.ToString());
+                        dr["Registered On"] = DateTime.Parse((NodeObj.Attributes["RegisteredOn"].Value)).Date;
+                        dr["RollNumber/USN"] = (NodeObj.Attributes["Rollnumber"].Value.ToString());
+                        dr["Ref Mobilenumber"] = (NodeObj.Attributes["Refnumber"].Value.ToString());
+                        dr["RegistrationType"] = (NodeObj.Attributes["RegistrationType"].Value.ToString());
+                        dr["Registred_Year"] = (NodeObj.Attributes["currentyear"].Value.ToString());
+                        dr["Registred_semester"] = (NodeObj.Attributes["currentsemeseter"].Value.ToString());
+
+                        dt.Rows.Add(dr);
+
+                    }
+
+
+                    using (XLWorkbook wb = new XLWorkbook())
+                    {
+                        DateTime dat = new DateTime();
+                        int d = dat.Day;
+                        int m = dat.Month;
+                        univName = univName.Replace(" ", "-");
+                        string filename = "attachment;filename=" + univName + "-" + rolldet + "-Report.xlsx";
+                        wb.Worksheets.Add(dt);
+                        //int colNumber = 0;
+                        //colNumber++;
+                        //foreach (DataColumn col in dt.Columns)
+                        //{
+
+                        //    if (col.DataType == typeof(DateTime))
+                        //    {
+                        //        wb.Worksheet("Student").Column(colNumber).Style.NumberFormat.Format = "dd-mm-yyyy";
+                        ////wb.Style.NumberFormat.Format = "mm/dd/yyyy";
+                        //    }
+                        //    colNumber++;
+                        //}
+                        //wb.Style.NumberFormat.Format = "mm/dd/yyyy";
+                        wb.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                        wb.Style.Font.Bold = true;
+                        Response.Clear();
+                        Response.Buffer = true;
+                        Response.Charset = "";
+                        Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                        Response.AddHeader("content-disposition", filename);
+
+                        using (MemoryStream MyMemoryStream = new MemoryStream())
+                        {
+                            wb.SaveAs(MyMemoryStream);
+                            MyMemoryStream.WriteTo(Response.OutputStream);
+                            Response.Flush();
+                            Response.End();
+                        }
+                    }
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.WriteLogMessage("AdminProcess", "ReportsByUniversity", "ReportsByUniversity", ex.Message, "error");
+            }
+        }
+        public ActionResult BulkUserRegistration()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult BulkUserRegistration(HttpPostedFileBase file)
+        {
+            DataSet ds = new DataSet();
+            if (Request.Files["file"].ContentLength > 0)
+            {
+                string fileExtension = System.IO.Path.GetExtension(Request.Files["file"].FileName);
+
+                if (fileExtension == ".xls" || fileExtension == ".xlsx")
+                {
+                    string fileLocation = Server.MapPath("~/Content/") + Request.Files["file"].FileName;
+                    if (System.IO.File.Exists(fileLocation))
+                    {
+
+                        System.IO.File.Delete(fileLocation);
+                    }
+                    Request.Files["file"].SaveAs(fileLocation);
+
+                    //string result = _Adminrepository.BulkInsertExcel(fileLocation, fileExtension);
+                }
+            }
+            return View();
+        }
+        //[HttpPost]
+        //public void BulkUserRegistrations(string univ_ID, string collegeID, string departmentID, string Year, string Sem)
+        //{
+
+        //    try
+        //    {
+
+
+        //        List<Excel_ECommerce> excel = _Adminrepository.ExportExcel_ECommerce_Report();
+        //        DataSet ds = new DataSet();
+        //        DataTable dt = new DataTable();
+        //        ListtoDataTableConverter converter = new ListtoDataTableConverter();
+        //        dt = converter.ToDataTable(excel);
+
+
+        //        //using (ExcelPackage pck = new ExcelPackage())
+        //        //{
+        //        //    // Excel Sheet name  
+        //        //    ExcelWorksheet ws = pck.Workbook.Worksheets.Add("ExportReport");
+        //        //    // pass the cell from where we start dumping data and load the data from datatable  
+        //        //    ws.Cells["A1"].LoadFromDataTable(dt, true, TableStyles.Medium15);
+
+        //        //    //Read the Excel file in a byte array  
+        //        //    Byte[] fileBytes = pck.GetAsByteArray();
+        //        //    HttpContext.Current.Response.ClearContent();
+        //        //    // Add the content disposition (file name to be customizable) to be exported.  
+        //        //    HttpContext.Current.Response.AddHeader("content- disposition", "attachment;filename=Exported_" + DateTime.Now.ToString("M_dd_yyyy_H_M_s") + ".xlsx");
+
+        //        //    // add the required content type  
+        //        //    HttpContext.Current.Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+        //        //    // write the bytes to the file and end the response  
+        //        //    HttpContext.Current.Response.BinaryWrite(fileBytes);
+        //        //    HttpContext.Current.Response.End();
+
+
+        //        using (XLWorkbook wb = new XLWorkbook())
+        //        {
+        //            DateTime dat = new DateTime();
+        //            int d = dat.Day;
+        //            int m = dat.Month;
+        //            string filename = "attachment;filename=D:\\test\\xls1.xls";
+        //            wb.Worksheets.Add(dt);
+        //            wb.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+        //            wb.Style.Font.Bold = true;
+        //            Response.Clear();
+        //            Response.Buffer = true;
+        //            Response.Charset = "";
+        //            Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+        //            //Response.AddHeader("content-disposition", "attachment;filename= StudentReport.xlsx");
+        //            Response.AddHeader("content-disposition", filename);
+
+        //            using (MemoryStream MyMemoryStream = new MemoryStream())
+        //            {
+        //                wb.SaveAs(MyMemoryStream);
+        //                MyMemoryStream.WriteTo(Response.OutputStream);
+        //                Response.Flush();
+        //                Response.End();
+        //            }
+        //        }
+
+        //        for (int i = 0; i < Request.Files.Count; i++)
+        //        {
+        //            var file = Request.Files[i];
+
+        //            var fileName = Path.GetFileName(file.FileName);
+        //            string fileExtension = System.IO.Path.GetExtension(file.FileName);
+        //            string ImportExcelPath = ConfigurationManager.AppSettings["ImportExcelPath"] + "/";
+        //            string fileRename = "Import_Excel_" + DateTime.Now.ToString("ddMMyyyyHHmmss");
+        //            var fileLocation = Path.Combine(ImportExcelPath, fileRename);
+        //            if (System.IO.File.Exists(fileLocation))
+        //            {
+        //                System.IO.File.Delete(fileLocation);
+        //            }
+        //            file.SaveAs(fileLocation);
+        //            string s = univ_ID.ToString();
+        //            string result = _Adminrepository.BulkInsertExcel(fileLocation, fileRename, fileExtension, univ_ID, collegeID, departmentID, Year, Sem);
+        //            if (result != "")
+        //            {
+        //                //return fileRename;
+        //            }
+        //            else
+        //            {
+        //                //return "";
+        //            }
+
+
+        //        }
+        //        //return "";
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        //return "";
+
+        //    }
+        //    //if (Request.Files["file"].ContentLength > 0)
+        //    //{
+        //    //    string fileExtension =System.IO.Path.GetExtension(Request.Files["file"].FileName);
+
+        //    //    if (fileExtension == ".xls" || fileExtension == ".xlsx")
+        //    //    {
+        //    //        string fileLocation = Server.MapPath("~/Content/") + Request.Files["file"].FileName;
+        //    //        if (System.IO.File.Exists(fileLocation))
+        //    //        {
+
+        //    //            System.IO.File.Delete(fileLocation);
+        //    //        }
+        //    //        Request.Files["file"].SaveAs(fileLocation);
+
+        //    //        string result = _Adminrepository.BulkInsertExcel(fileLocation, fileExtension);
+        //    //    }
+        //    //}
+        //    //return View();
+
+
+
+        //}
+
+        public ActionResult Admin_HelpDeskReport()
+        {
+            try
+            {
+                List<Excel_ECommerce> excel = _Adminrepository.ExportExcel_ECommerce_Report();
+                DataTable dtEcommerceReport = new DataTable();
+                dtEcommerceReport.Columns.Add("OrderDate", typeof(DateTime));
+                dtEcommerceReport.Columns.Add("OrderNo");
+                dtEcommerceReport.Columns.Add("UserName");
+                dtEcommerceReport.Columns.Add("Mobile");
+                dtEcommerceReport.Columns.Add("University");
+                dtEcommerceReport.Columns.Add("UserRole");
+                dtEcommerceReport.Columns.Add("CollegeName");
+                dtEcommerceReport.Columns.Add("Department");
+                dtEcommerceReport.Columns.Add("StudentYearSem", typeof(string));
+                dtEcommerceReport.Columns.Add("PackageNames");
+                dtEcommerceReport.Columns.Add("OrderedThrough");
+                dtEcommerceReport.Columns.Add("OrderPreparationDate");
+                dtEcommerceReport.Columns.Add("OrderPrepareBy");
+                dtEcommerceReport.Columns.Add("DeliveryMode");
+                dtEcommerceReport.Columns.Add("DeliveryDate");
+                dtEcommerceReport.Columns.Add("DeliveryBy");
+                dtEcommerceReport.Columns.Add("DeliveryStatus");
+                dtEcommerceReport.Columns.Add("CourierVIA");
+                dtEcommerceReport.Columns.Add("CourierTrackingID");
+                dtEcommerceReport.Columns.Add("Remarks");
+                dtEcommerceReport.Columns.Add("InstallationDate");
+                dtEcommerceReport.Columns.Add("InstalledBy");
+                dtEcommerceReport.Columns.Add("InstallationStatus");
+                dtEcommerceReport.Columns.Add("PaymentStatus");
+                dtEcommerceReport.Columns.Add("PaymentDate", typeof(DateTime));
+                dtEcommerceReport.Columns.Add("PaymentAccount");
+                dtEcommerceReport.Columns.Add("TxnAmount");
+                dtEcommerceReport.Columns.Add("Quantity");
+                dtEcommerceReport.Columns.Add("LicensePeriod");
+                dtEcommerceReport.Columns.Add("FinalRemarks");
+
+
+                ListtoDataTableConverter converter = new ListtoDataTableConverter();
+                dtEcommerceReport = converter.ToDataTable(excel);
+
+
+                GridView gv = new GridView();
+                gv.DataSource = dtEcommerceReport;
+                gv.DataBind();
+                Response.ClearContent();
+                Response.Buffer = true;
+                Response.AddHeader("content-disposition", "attachment; filename=E_Commerce_Report" + DateTime.Now.ToString("ddMMyy_HHmmss") + ".xls");
+                Response.ContentType = "application/ms-excel";
+                Response.Charset = "";
+                StringWriter sw = new StringWriter();
+                HtmlTextWriter htw = new HtmlTextWriter(sw);
+                gv.RenderControl(htw);
+                Response.Output.Write(sw.ToString());
+                Response.Flush();
+                Response.End();
+                return RedirectToAction("Admin_HelpDeskReport");
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+        
+        public ActionResult DatewiseRegistrationReport()
+        {
+
+            return View();
+        }
+
+
+        //[HttpPost]
+        public void Univ_Sem_Wise_Reg_Report_Excel(string start_date, string End_date)
+        {
+            List<datewisereport> obj = new List<datewisereport>();
+            obj = _Adminrepository.University_SemWise_user_Registration_report_Excel(start_date, End_date);
+            //StringBuilder str = new StringBuilder();
+            //str.Append("<table border=`" + "1px" + "`b>");
+            //str.Append("<tr>");
+            //str.Append("<td><b><font face=Arial Narrow size=3>universityName</font></b></td>");
+            ////  str.Append("<td><b><font face=Arial Narrow size=3>Semester</font></b></td>");
+            //str.Append("<td><b><font face=Arial Narrow size=3>Registration</font></b></td>");
+            //str.Append("<td><b><font face=Arial Narrow size=3>Issues</font></b></td>");
+            //str.Append("<td><b><font face=Arial Narrow size=3>SubjectDownloadUser</font></b></td>");
+            //str.Append("<td><b><font face=Arial Narrow size=3>DownloadSubjects</font></b></td>");
+            //str.Append("</tr>");
+
+            DataTable dt = new DataTable("UserHistory");
+
+            dt.Columns.Add("SNo");
+            dt.Columns.Add("universityName");
+            dt.Columns.Add("Semester");
+            dt.Columns.Add("Registration");
+            dt.Columns.Add("Issues");
+            dt.Columns.Add("SubjectDownloadUser");
+            dt.Columns.Add("DownloadSubjects");
+            foreach (datewisereport val in obj)
+            {
+                //str.Append("<tr>");
+                //str.Append("<td><font face=Arial Narrow size=" + "14px" + ">" + val.universityName.ToString() + "</font></td>");
+                //// str.Append("<td><font face=Arial Narrow size=" + "14px" + ">" + val.Semester.ToString() + "</font></td>");
+                //str.Append("<td><font face=Arial Narrow size=" + "14px" + ">" + val.Registration.ToString() + "</font></td>");
+                //str.Append("<td><font face=Arial Narrow size=" + "14px" + ">" + val.Issues.ToString() + "</font></td>");
+                //str.Append("<td><font face=Arial Narrow size=" + "14px" + ">" + val.SubjectDownloadUser.ToString() + "</font></td>");
+                //str.Append("<td><font face=Arial Narrow size=" + "14px" + ">" + val.DownloadSubjects.ToString() + "</font></td>");
+
+                //str.Append("</tr>");
+                DataRow dr = dt.NewRow();
+
+                dr["SNo"] = dt.Rows.Count + 1;
+                dr["universityName"] = (val.universityName.ToString());
+                dr["Semester"] = (val.Semester.ToString());
+                dr["Registration"] = (val.Registration.ToString());
+                dr["Issues"] = (val.Issues.ToString());
+                dr["SubjectDownloadUser"] = (val.SubjectDownloadUser.ToString());
+                dr["DownloadSubjects"] = (val.DownloadSubjects.ToString());
+                dt.Rows.Add(dr);
+            }
+            // str.Append("</table>");
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+
+                wb.Worksheets.Add(dt);
+                wb.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                wb.Style.Font.Bold = true;
+                Response.Clear();
+                Response.Buffer = true;
+                Response.Charset = "";
+                Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                Response.AddHeader("content-disposition", "attachment;filename= University_Semester_Wise_UserRegistration_Details.xlsx");
+
+                using (MemoryStream MyMemoryStream = new MemoryStream())
+                {
+                    wb.SaveAs(MyMemoryStream);
+                    MyMemoryStream.WriteTo(Response.OutputStream);
+                    Response.Flush();
+                    Response.End();
+                }
+            }
+
+        }
+
+        public void Visitors_Details_Report()
+        {
+            try
+            {
+                DataTable dtVisitorsDetails = new DataTable();
+                dtVisitorsDetails = _Adminrepository.VisitorsReport();
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+    }
+}
+
+public class ListtoDataTableConverter
+{
+    public DataTable ToDataTable<T>(List<T> items)
+    {
+        DataTable dataTable = new DataTable(typeof(T).Name);
+        //Get all the properties  
+        PropertyInfo[] Props = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+        // Loop through all the properties  
+        foreach (PropertyInfo prop in Props)
+        {
+            //Setting column names as Property names  
+            dataTable.Columns.Add(prop.Name);
+        }
+
+        foreach (T item in items)
+        {
+            var values = new object[Props.Length];
+            for (int i = 0; i < Props.Length; i++)
+            {
+                //inserting property values to datatable rows  
+                values[i] = Props[i].GetValue(item, null);
+            }
+            // Finally add value to datatable  
+            dataTable.Rows.Add(values);
+
+        }
+        //put a breakpoint here and check datatable of return values  
+        return dataTable;
+    }
+
+   
+}

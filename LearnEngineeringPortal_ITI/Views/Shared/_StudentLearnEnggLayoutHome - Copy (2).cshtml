@@ -1,0 +1,803 @@
+﻿
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ODISHA-DTET</title>
+
+  
+    @Styles.Render("~/Content/cssMainLayout")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/JSAdminLayout")
+    @RenderSection("scripts", required: false)
+    @*<script src="theme_v2/js_v2/jquery.min.js"></script>*@
+    @*<script src="theme_v2/js_v2/bootstrap.min.js"></script>*@
+
+
+    <!-- SLIDER REVOLUTION 4.x SCRIPTS  -->
+    <script type="text/javascript" src="theme_v2/js_v2/jquery.themepunch.plugins.min.js"></script>
+    <script type="text/javascript" src="theme_v2/js_v2/jquery.themepunch.revolution.min.js"></script>
+    <script type="text/javascript" src="theme_v2/js_v2/imagesloaded.pkgd.min.js"></script>
+    <script type="text/javascript" src="theme_v2/js_v2/progressbar.js"></script>
+    <script type="text/javascript" src="theme_v2/js_v2/jquery.touchSwipe.min.js"></script>
+    <script src="theme_v2/js_v2/owl.carousel.min.js"></script>
+
+    <script src="theme_v2/js_v2/main.js"></script>
+    <script src="theme_v2/js_v2/jquery.magnific-popup.js"></script>
+
+    <link href="~/Scripts/DataTable/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/DataTable/jquery.dataTables.min.js" type="text/javascript"></script>
+
+    @*<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>*@
+    <link rel="icon" href="../favicon.ico" sizes="16x16" type="image/png">
+    <script src="~/Scripts/ProjectScript/StudentCheckInProcess.js"></script>
+    <style>
+        /*.sf-menu ul {
+                    left: -125px !important;
+                }*/
+
+        label.error {
+            color: #fb3a3a;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        ul.sf-menu > li > a {
+            display: block;
+            font-size: 12px;
+            font-weight: bold;
+            line-height: 1;
+            padding: 0 10px;
+            position: relative;
+            text-decoration: none;
+        }
+
+        #loginID, #loginIDnew {
+            background: url("../content/img/user_icon.png") no-repeat scroll 0% 0% #fff;
+            text-indent: 20px;
+            border-radius: 7px;
+        }
+
+        #Password, #Passwordnew, #newPassword, #confirmPassword, #otpCode, #mobileNootpverify, #mobileNootpverifySplOffer {
+            background: url("../Content/img/pass_icon.png") no-repeat scroll 0% 0% #fff;
+            text-indent: 20px;
+            border-radius: 7px;
+        }
+
+        #mobileNo {
+            background: url("../Content/img/mbl_icon.png") no-repeat scroll 0% 0% #fff;
+            text-indent: 20px;
+            border-radius: 7px;
+        }
+
+        .tw-menu-container .sf-menu > li {
+            padding-bottom: 15px !important;
+            padding-top: 15px !important;
+        }
+
+        .bx_sh_st_br img {
+            border: 5px solid #e5e5e5;
+            border-radius: 50%;
+        }
+
+        .bx_sh_st_br .store {
+            border: 0 !important;
+            border-radius: 0 !important;
+        }
+
+        table.scroll tbody,
+        table.scroll thead {
+            display: block;
+        }
+
+        thead tr th {
+            /*height: 100px;*/
+            line-height: 30px;
+            /* text-align: left; */
+        }
+
+        table.scroll tbody {
+            height: 200px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .field_cont2 {
+            padding: .35em .625em .75em;
+            border: 1px solid silver;
+        }
+		#loading-screen {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(0, 0, 0, 0.1);
+    border-top: 5px solid #007bff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+    </style>
+
+</head>
+
+@*oncontextmenu="return false"*@
+<body id="one-page-home" oncontextmenu="return false" class="page  page-template-default custom-background waves-pagebuilder menu-fixed header-logo_left theme-full">
+<div id="loading-screen">
+        <div class="spinner">
+        </div>
+    </div>
+    @{
+
+        int cookieUserIdUserMaster = 0;
+        string cookieUserIdUserEmailId = "";
+        long cookieUserIdUserMobileNo = 0;
+        int cookieUniversityid = 0;
+        string cookieUserName = "";
+        string cookieUserImage = "";
+        string cookieserverdate = "";
+        string roledescription = "";
+        int roleid = 0;
+        int univ_Type = 0;
+        int year = 0;
+        int semester = 0;
+        string collegeID = "";
+        int Department_ID = 0;
+
+        if (HttpContext.Current.Session["LoginUserID"] != null)
+        {
+            cookieUserIdUserMaster = Convert.ToInt32(HttpContext.Current.Session["LoginUserID"]);
+            cookieUserIdUserEmailId = HttpContext.Current.Session["loginUserEmailID"].ToString();
+            cookieUserIdUserMobileNo = Convert.ToInt64(HttpContext.Current.Session["loginUserMobileNumber"]);
+            cookieUniversityid = Convert.ToInt32(HttpContext.Current.Session["loginUniversityID"]);
+            cookieUserName = HttpContext.Current.Session["loginUserFullName"].ToString();
+            cookieUserImage = HttpContext.Current.Session["ProfileImage"].ToString();
+            cookieserverdate = HttpContext.Current.Session["ServerDate"].ToString();
+            roleid = Convert.ToInt32(HttpContext.Current.Session["loginUserRoleID"]);
+            year = Convert.ToInt32(HttpContext.Current.Session["loginyear"]);
+            semester = Convert.ToInt32(HttpContext.Current.Session["loginsemester"]);
+            collegeID = HttpContext.Current.Session["CollegeID"].ToString();
+            roledescription = HttpContext.Current.Session["loginUserRoledescription"].ToString();
+            univ_Type = Convert.ToInt32(HttpContext.Current.Session["loginUniversity_Type"]);
+            Department_ID = Convert.ToInt32(HttpContext.Current.Session["loginUserDepartmentID"]);
+        }
+    }
+
+    @Html.Hidden("sessionUniversityId", cookieUniversityid)
+    @Html.Hidden("sessionUserId", cookieUserIdUserMaster)
+    @Html.Hidden("sessionEmailID", cookieUserIdUserEmailId)
+    @Html.Hidden("sessionMobileNumber", cookieUserIdUserMobileNo)
+    @Html.Hidden("sessionUserName", cookieUserName)
+    @Html.Hidden("sessionUserImage", cookieUserImage)
+    @Html.Hidden("sessionserverdate", cookieserverdate)
+    @Html.Hidden("sessionroleId", roleid)
+    @Html.Hidden("sessionyear", year)
+    @Html.Hidden("sessionsemester", semester)
+    @Html.Hidden("sessionroledescription", roledescription)
+    @Html.Hidden("sessionUniversity_Type", univ_Type)
+    @Html.Hidden("sessionDepartment_ID", Department_ID)
+
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var userID = '@Session["loginUserID"]';
+            $(document).on('click', '#androidstorelink', function () {
+
+                window.location.href = '/Home/IndexAndroidApp?UnivID=' + $("#sessionUniversityId").val();
+
+            });
+            $(document).on('click', "#dashboard", function () {
+                var roleid = '@Session["loginUserRoleID"]';
+
+                window.location.href = "../Student/Dashboard";
+               // if (roleid == 10) {
+               //     window.location.href = "../UserDashBoard/UserUsageDashboard";
+               // }
+               // else if (roleid == 12) {
+               //     window.location.href = "../CollegeGroupAdmin/DashBoardMain";
+               // }
+               //else if (roleid != 1) {
+               //     window.location.href = "../AdminDashBoard/DashBoardMain";
+               // }
+               // else {
+               //     window.location.href = "../UserDashBoard/UserUsageDashboard";
+               // }
+            });
+
+              $(document).on('click', "#MyProfile", function () {
+                var roleid = '@Session["loginUserRoleID"]';
+
+                window.location.href = "../Student/ViewProfile";
+               // if (roleid == 10) {
+               //     window.location.href = "../UserDashBoard/UserUsageDashboard";
+               // }
+               // else if (roleid == 12) {
+               //     window.location.href = "../CollegeGroupAdmin/DashBoardMain";
+               // }
+               //else if (roleid != 1) {
+               //     window.location.href = "../AdminDashBoard/DashBoardMain";
+               // }
+               // else {
+               //     window.location.href = "../UserDashBoard/UserUsageDashboard";
+               // }
+            });
+
+            $(document).on('click', '#windowsstorelink', function () {
+
+                window.location.href = '/Home/Index?UnivID=' + $("#sessionUniversityId").val();
+
+            });
+
+
+            if ($("#sessionUserImage").val() != "") {
+                d = new Date();
+                $("#loginuserimage").attr("src", "../content/img/ProfileImg/" + $("#sessionUserImage").val() + "?" + d.getTime());
+                $("#UserProfileCroppedImg").attr("src", "../content/img/ProfileImg/" + $("#sessionUserImage").val() + "?" + d.getTime());
+            }
+
+            $("#login-username").text('Hi ' + $("#sessionUserName").val());
+            ViewCartCount(userID);
+            bindLayoutCartDetails(userID);
+
+            if ($("#sessionroledescription").val() != "") {
+
+                $.ajax({
+                    url: "../Content/" + $("#sessionroledescription").val().replace(" ", "-") + ".xml",
+                    async: false,
+                    success: function (xml, textStatus) {
+                        var li = "";
+                        setTimeout(function () {
+                            $(xml).find('Menu').each(function () {
+                                var nli = "";
+                                var item = $(this);
+                                var parentmenuname = item.find('parentMenuName').text();
+                                var parentmenuURL = item.find('parentMenuName').attr('value');
+                                if (parentmenuURL == "")
+                                    li = li + "<li><a>" + parentmenuname + "&nbsp;<span class='caret'></span></a>";
+                                else
+                                    li = li + "<li><a href='" + parentmenuURL + "'>" + parentmenuname + "&nbsp;<span class='caret'></span></a>";
+
+
+                                item.find('child').each(function () {
+                                    var value = $(this).attr('value');
+                                    var label = $(this).text();
+
+                                    nli = nli + "<li><a href='../" + value + "'>" + label + "</a>";
+                                });
+                                if (nli != "") {
+                                    li = li + "<ul class='dropdown-menu' aria-labelledby='dropdownMenu2'>" + nli + "</ul>";
+                                }
+
+
+                                li = li + "</li>";
+                            });
+                            $('#menuBrowser li').remove();
+                            $('#menuBrowser').append(li);
+
+
+                            $('#menu-one-page-menu li').remove();
+                            $('#menu-one-page-menu').append(li);
+                        }, 10);
+
+                    }
+                });
+
+
+            }
+
+        });
+        function ViewCartCount(userId) {
+            $("#lblViewCount").text("");
+            $("#lblViewCountmobile").text("");
+
+
+            if (userId != 0) {
+                $.ajax({
+                    url: '/APIService/APIUserDashBoard/GetViewCartCount?UserId=' + userId,
+                    type: "GET",
+                    success: function (data) {
+                        var rdata = data;
+                        if (parseInt(rdata) > 0) {
+                            $("#lblViewCount").text(" " + rdata);
+                            $("#lblViewCountmobile").text("" + rdata);
+                        }
+                        else {
+                            $("#lblViewCount").text("");
+                            $("#lblViewCountmobile").text("");
+                        }
+                    },
+                    error: function (reponse) {
+                        ShowAlert("error : " + reponse);
+                    },
+                    complete: function () {
+                        //$('#viewCart').trigger('click');
+                    }
+                });
+            }
+            else {
+                var cookiePackageId = $.cookie('packageId');
+                if (cookiePackageId != undefined) {
+                    var arr = cookiePackageId.split(',');
+
+                    if (parseInt(arr.length) > 0) {
+                        $("#lblViewCount").text(" " + arr.length);
+                        $("#lblViewCountmobile").text("" + arr.length);
+                    }
+                    else {
+                        $("#lblViewCount").text("");
+                        $("#lblViewCountmobile").text("");
+                    }
+                }
+            }
+        }
+
+
+        function bindLayoutCartDetails(userID) {
+            $("#FixLayoutViewCartDetails").empty();
+
+            if (userID != 0) {
+
+                $.getJSON("/APIService/APIUserViewCartDetails/GetViewCartDetails?userid=" + userID, function (rData) {
+                    var res = '';
+                    var TotPrice = 0;
+                    if (rData.length > 0) {
+                        $.each(rData, function (i, value) {
+
+                            if (i == 0) {
+                                $("#lblViewCount").text(" " + value.itemCount);
+                                $("#lblViewCountmobile").text("" + value.itemCount);
+                            }
+                            var j = 0;
+                            j = parseInt(j + 1);
+                            $("#BindLayoutViewCart").tmpl(value).appendTo("#FixLayoutViewCartDetails");
+                        });
+                    }
+                    else {
+                        var txt = "No Item(s) in your cart.";
+                        $("#FixLayoutViewCartDetails").text(txt);
+                    }
+                });
+            }
+        }
+
+        var disableclick = '';
+        document.onmousedown = disableclick;
+
+
+    </script>
+
+    <script type="text/javascript">
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script',
+            '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-70037296-1', 'auto');
+        ga('send', 'pageview');
+
+
+
+
+
+
+
+    </script>
+
+    <div id="theme-layout">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header logo_head">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @*<a class="navbar-brand navbar-logo" href="/Home/index"><img alt="Learn Engg" src="../content/img/Learn1.png?V2" class="logo-img"></a>*@
+                    @*<a class="navbar-brand navbar-logo" href="/Student/index"><img alt="Learn Engg" src="../files/Images/learn_logo-02.png?V2" class="logo-img"></a>*@
+                    <a class="navbar-brand navbar-logo" style="margin-top:5px;" href="/Student/index"><img alt="Learn Engg" src="../files/Images/learn_logo-02.png?V2" class="logo-img"></a>
+                </div>
+
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul id="menuBrowser" class="sf-menu"></ul>
+                    @*<ul class="nav navbar-nav navbar-right sf-menu " id="menu">
+            <li title="Existing- User" class="signbutton menu-item menu-item-type-custom menu-item-object-custom"><a data-toggle="modal" accesskey="" role="button" href="#modal-login" id="ClickLoginProcess"> Login</a></li>
+            <li class="dropdown SessionokLoginedUser" style="display:none;">
+
+            </li>
+            <li class="dropdown SessionokLoginedUser" style="display:none;">
+                <a href="#" id="dashboard"> >>> Go to DashBoard</a>
+            </li>
+            <li class="dropdown SessionokLoginedUser" style="display:none;">
+                <a data-toggle="dropdown" class="dropdown-toggle" href="#" id="login-username" aria-expanded="false"> <b class="caret"></b></a>
+                <ul class="dropdown-menu bx_sh_st_br" style="display: none;">
+                    <li>
+                        <a style="padding:0px;" href="#">
+                            <img id="loginuserimage" alt="User image" style="margin:0 auto;" class="img-responsive" src="../Content/img/ProfileImg/profile_img.png" height="100" width="100">
+                        </a>
+                    </li>
+                    <li id="btnstdLogout"><a href="#">Sign Out</a></li>
+                </ul>
+            </li>
+        </ul>*@
+                    <ul class="nav navbar-nav navbar-right" id="menu" style="text-transform:capitalize">
+                        <li title="Existing- User" class="signbutton menu-item menu-item-type-custom menu-item-object-custom"><a data-toggle="modal" accesskey="" role="button" href="#modal-login" id="ClickLoginProcess"> Login</a></li>
+                        <li class="dropdown SessionokLoginedUser" style="display:none;">
+                            @*<a href="#" id="MyProfile">MyProfile</a>*@
+                        </li>
+                        <li class="dropdown SessionokLoginedUser" style="display:none;">
+                            <a href="Dashboard" id="Studentdashboard"><img src="~/Content/img/BackArrow3.jpg" style="width: 28px; border-radius: 15px;" class=" mr-2 rounded" /><span style="margin-left:5px;">DashBoard</span> </a>
+
+                        </li>
+                        <li class="SessionokLoginedUser" style="display:none;margin-top:6px;">
+                            <img  src="~/files/avtar1.png" class="mr-2 rounded" style="margin-top:6px;width: 28px; border-radius: 15px;">
+                        </li>
+                        <li class="dropdown SessionokLoginedUser" style="display:none; margin-top:6px;">
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#" id="login-username" aria-expanded="false"><b class="caret"></b></a>
+                            <ul class="dropdown-menu bx_sh_st_br" style="display: none;">
+                                @*<li>
+                        <a style="padding:0px;" href="#">
+                            <img id="loginuserimage" alt="User image" style="margin:0 auto;" class="img-responsive" src="../Content/img/ProfileImg/profile_img.png" height="100" width="100">
+                        </a>
+                    </li>*@
+                                <li id="btnstdLogout"><a href="#">Log Out</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    @RenderSection("deliverymode", false)
+    <section class="mid_warp" style="margin-top:50px; ">
+
+        <div class="container-fluid loaderdisplay">
+            @RenderBody()
+        </div>
+
+    </section>
+    <br />
+    <br />
+    @*<footer class="footer">
+            <!-- Start Container -->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12 col-xs-12 copyright">
+                        <div class="col-xs-12 col-sm-4 col-md-4">Powered by Infoplus Technologies Pvt. Ltd</div>
+                        <!--     <div class="col-xs-12 col-sm-4 col-md-4"><span>Last update on: <span style="font-family:Baskerville, 'Palatino Linotype', Palatino, 'Century Schoolbook L', 'Times New Roman', serif;letter-spacing:1px;font-size:11px;" id="LatestUpdatedDate"> 05<sup>th</sup> Jan 2016</span> | Version: <b id="LatestVersion">2.0.0</b></span></div> -->
+                        <div class="col-xs-12 col-sm-4 col-md-4">Copyright &copy; 2016 Learnengg. All Rights Reserved.</div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- End Container -->
+        </footer>*@
+
+    <a title="Scroll to top" id="scrollUp" style="display: block;"><i class="fa fa-chevron-up"></i></a>
+    <script type='text/javascript'>
+        /* <![CDATA[ */
+        var waves_script_data = { "menu_padding": "33", "menu_wid_margin": "28", "blog_art_min_width": "230", "pageloader": "0", "header_height": "80" };
+        /* ]]> */
+    </script>
+    <!-- Modal -->
+    <!-- Modal -->
+    <div style="padding-top:50px;" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="modal-register" class="modal fade">
+        <div style="width:912px !important" role="document" class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button aria-label="Close" data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span></button>
+                    <figure>
+                        <img width="40" height="40" src="../Content/img/default.png">
+                        <figcaption>
+                            <h4 id="myModalLabel" class="modal-title title_clr">Instructions to Register, Install and Download Subjects</h4>
+                        </figcaption>
+                    </figure>
+
+                </div>
+                <div class="modal-body">
+                    <div class="text_sty">
+
+                        <ul style="margin-left:0px">
+                            <li> Please Download and Install the LearnEngg Client Installer (available below) for one time Registration only.</li>
+                            <li> During the registration Process, One Time Password(OTP) will be sent to your Registered Mobile Number and E-mail ID.</li>
+                            <li> After Registration, You will be directed to your Dashboard  for downloading the subjects.</li>
+                            <li> Your login credential (UserName &amp; password ) will be sent to your registered E-mail ID.</li>
+                            <li> Internet is required only for downloading and updating the subjects. After downloading,User can view the content in offline mode without internet connectivity. </li>
+                        </ul>
+
+                    </div>
+                    <div>
+                        <span>
+                            <a title="Click and play the vedio for installation procedure" data-toggle="modal" href="#modal-video1" download="">
+                                <button class="btn btn-danger " type="button"><i class="fa fa-video-camera" style="padding:0px 7px"></i>How to Install</button>
+                            </a>
+                        </span>
+                        <span style="float:right">
+                            <a title="LearnEngg Client Installer" href="http://www.learnengg.com/3dm/Client_Setup/LearnEngg_S_Anna_Uni_Client.exe" download="">
+                                <button class="btn btn-danger " type="button"><i class="fa fa-download" style="padding:0px 7px"></i>Download &amp; Install</button>
+                            </a>
+                        </span>
+                    </div>
+
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- old model-->
+    <!-- Modal -->
+    <div class="modal fade" id="modal-login_new" tabindex="-1" role="dialog" aria-labelledby="myModalLabel aria-hidden=" true"" style="padding-top:50px;">
+        <div class="modal-dialog" role="document">
+            <!--Added by hari  Process Start-->
+            <div class="modal-content" id="modelLoginNew">
+                <form id="frmLoginNew">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <figure>
+                            <img src="../Content/img/default.png" width="40" height="40" />
+                            <figcaption>
+                                <h4 class="modal-title title_clr" id="H1">User Login</h4>
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="modal-body">
+                        <span class="error modelErrorTxt"></span>
+                        <div class="form-group">
+                            <input type="text" class="form-control  full-width" name="loginIDnew" id="loginIDnew" placeholder="Email or Mobile Number">
+                        </div>
+                        <div class="form-group">
+                            <input type="Password" class="form-control  full-width" name="Passwordnew" id="Passwordnew" placeholder="Password">
+                        </div>
+                        <center class="cntr_mgrn_btm">
+                            <button type="button" class="btn btn-success " id="btnLoginNew">Login</button>
+                            <br />
+                            <a id="newuserreg" class="new_user" href="#">New Registration</a>
+                            <br />
+                        </center>
+                        @*<h6 class="h6_txt">Note :</h6>*@
+                        <div class="sp_txt_note"> Login is same across all LearnEngg platforms- Web, PC Client, Android App and Others.</div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-content" id="modelactivateuser_new" style="display: none">
+                <form id="frmactivateuser">
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+
+                        <figure>
+                            <img src="../Content/img/default.png" width="40" height="40" />
+                            <figcaption>
+                                <h4 class="modal-title title_clr" id="H2">User - Activation</h4>
+                            </figcaption>
+                        </figure>
+
+
+                        <!--  <h4 class="modal-title title_clr">
+                        Forget Password</h4>-->
+                    </div>
+                    <div class="modal-body">
+                        <span class="error modelErrorTxt"></span>
+                        <div class="form-group">
+                            please wait for OTP. it has been sent to the registred Mobile/Email Address
+                            @*To activate your account, please enter you OTP password below*@
+                            <input type="text" class="form-control  full-width" name="activemobileNo" id="mobileNootpverifySplOffer" placeholder="OTP">
+                        </div>
+                        <button type="submit" id="btnactivateaccount_new" class="btn btn-success ">
+                            Activate
+                        </button>
+                        <a class="backtologin_New" href="#">Back to login</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel aria-hidden=" true"" style="padding-top:50px;">
+        <div class="modal-dialog" role="document">
+            <!--Added by hari  Process Start-->
+
+            <div class="modal-content" id="modelLogin">
+                <form id="frmLogin">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <figure>
+                            <img src="../Content/img/default.png" width="40" height="40" />
+                            <figcaption>
+                                <h4 class="modal-title title_clr" id="H1">User Login</h4>
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="modal-body">
+                        <span class="error modelErrorTxt"></span>
+                        <div class="form-group">
+                            <input type="text" class="form-control  full-width" name="loginID" id="loginID" placeholder="Email or Mobile Number">
+                        </div>
+                        <div class="form-group">
+                            <input type="Password" class="form-control  full-width" name="Password" id="Password" placeholder="Password">
+                        </div>
+                        <center class="cntr_mgrn_btm">
+                            <button type="button" class="btn btn-success" id="btnStudentLogin">Login</button>
+                            <br />
+                            <a id="forStudentPassword" class="forget_pwd" href="#">Forgot Password?</a>&nbsp;
+                            @*<a id="newuser" class="new_user" href="#">New Registration</a>*@
+                            <br />
+                        </center>
+                        @*<h6 class="h6_txt">Note :</h6>*@
+                        <div class="sp_txt_note"> Login is same across all LearnEngg platforms- Web, PC Client, Android App and Others.</div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-content" id="modelactivateuser" style="display: none">
+                <form id="frmactivateuser">
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+
+                        <figure>
+                            <img src="../Content/img/default.png" width="40" height="40" />
+                            <figcaption>
+                                <h4 class="modal-title title_clr" id="H2">User Activation</h4>
+                            </figcaption>
+                        </figure>
+
+
+                        <!--  <h4 class="modal-title title_clr">
+                        Forget Password</h4>-->
+                    </div>
+                    <div class="modal-body">
+                        <span class="error modelErrorTxt"></span>
+                        <div class="form-group">
+                            please wait for OTP. it has been sent to the registred Mobile/Email Address
+                            @*To activate your account, please enter you OTP password below*@
+                            <input type="text" class="form-control  full-width" name="activemobileNo" id="mobileNootpverify" placeholder="OTP">
+                        </div>
+                        <button type="submit" id="btnStdactivateaccount" class="btn btn-success ">
+                            Activate
+                        </button>
+                        <a class="stdbacktologin" href="#">Back to login</a> &nbsp;&nbsp;
+                        <a id="stdbtnresendotp" class="new_user" href="#">Resend OTP</a>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-content" id="modelForgetPassword" style="display: none">
+                <form id="frmForgetPassword">
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+
+                        <figure>
+                            <img src="../Content/img/default.png" width="40" height="40" />
+                            <figcaption>
+                                <h4 class="modal-title title_clr" id="H2">Forget Password</h4>
+                            </figcaption>
+                        </figure>
+
+
+                        <!--  <h4 class="modal-title title_clr">
+                              Forget Password</h4>-->
+                    </div>
+                    <div class="modal-body">
+                        <span class="error modelErrorTxt"></span>
+                        <div class="form-group">
+
+                            <input type="text" class="form-control  full-width" name="mobileNo" id="mobileNo" placeholder="Mobile Number">
+                        </div>
+                        <button type="submit" id="btnstdForgetPassword" class="btn btn-success ">
+                            Send OTP
+                        </button>
+                        <a id="forget_stdbacktoLogin" href="#">Back to login</a>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-content" id="modelPasswordReset" style="display: none">
+                <form id="frmResetPassword">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+
+                        <figure>
+                            <img src="../Content/img/default.png" width="40" height="40" />
+                            <figcaption>
+                                <h4 class="modal-title title_clr" id="H3">Reset Password</h4>
+                            </figcaption>
+                        </figure>
+
+
+                        <!--<h4 class="modal-title title_clr">
+                            Reset Password</h4>-->
+                    </div>
+                    <div class="modal-body">
+                        <span class="error modelErrorTxt"></span>
+                        <div class="form-group">
+
+                            <input type="text" class="form-control  full-width" name="otpCode" id="otpCode" placeholder="Enter OTP Code">
+                        </div>
+                        <div class="form-group">
+
+                            <input type="password" class="form-control  full-width" name="newPassword" id="newPassword" placeholder="New Password">
+                        </div>
+                        <div class="form-group">
+
+                            <input type="password" class="form-control  full-width" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" />
+                        </div>
+                        <button type="submit" id="btnstdResetPassword" class="btn btn-success ">
+                            Reset
+                        </button>
+                        <a id="ResetstdBacktoLogin" href="#">Back to login</a>
+                    </div>
+                    <input type="hidden" value="" name="mobileNo" />
+                </form>
+            </div>
+
+            <!--Added by hari  Process End-->
+        </div>
+
+    </div>
+
+</body>
+
+</html>
+
+<script id="BindLayoutViewCart" type="text/html">
+
+    <!-----Package Binding----->
+    <tr>
+        <td width="250px">
+            <span class="title">${packageName}</span>
+        </td>
+        <td width="80px" style="border-right:none">
+            <span class="amount muted">${PackageSellingPrice}</span>
+        </td>
+    </tr>
+</script>
+<script>
+ window.addEventListener("load", function () {
+        document.getElementById("loading-screen").style.display = "none";
+    });
+    // Disable right-click
+    document.addEventListener("contextmenu", function (event) {
+        //alert("Right click has disabled");
+        event.preventDefault();
+    });
+    // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U (View Source)
+    document.addEventListener("keydown", function (event) {
+
+        if (event.key === "F12") {
+            //alert("F12 Key has disabled!");
+            event.preventDefault();
+        }
+    });
+</script>

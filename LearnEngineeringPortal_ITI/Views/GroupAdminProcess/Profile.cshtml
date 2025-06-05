@@ -1,0 +1,242 @@
+﻿
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_LearnEnggGroupAdminLayout.cshtml";
+}
+
+<style type="text/css">
+    table#t01 tr:nth-child(odd) {
+        background-color: #e7f1fd;
+        ;
+    }
+
+    table#t01 th {
+        background-color: #2060ee;
+        color: white;
+    }
+
+    th, td {
+        padding: 7px;
+        text-align: left;
+        text-align: center;
+        color: #000;
+        font-weight: 500;
+    }
+
+    td {
+        padding: 7px;
+        text-align: left;
+        text-align: center;
+        color: #000;
+        font-weight: 500;
+        opacity: 0.87;
+    }
+
+    table {
+        box-shadow: 0 1px 2px 2px #e6ecf1;
+        background-color: #fff;
+    }
+
+    input[type="text"] {
+        background-image: none !important;
+        margin-left: 20px;
+    }
+
+    .btn-tt {
+        margin-top: 2%;
+        margin-bottom: 10%;
+        margin-right: 4%;
+    }
+
+    .btn-one {
+        padding: 0.4% 3.8%;
+        float: right;
+        border: 1px solid #2060ee;
+        color: #2060ee;
+        font-weight: 400;
+        border-radius: 3px;
+        width: 90px;
+        text-align: center;
+    }
+
+    .btn-two {
+        background-color: #2060ee;
+        padding: 0.4% 3.8%;
+        float: right;
+        border: 1px solid #2060ee;
+        margin-right: 2%;
+        color: #fff;
+        font-weight: 400;
+        border-radius: 3px;
+        width: 90px;
+        text-align: center;
+    }
+
+    .dropdown-toggle::after {
+        display: none !important;
+    }
+
+    .navbar {
+        padding: 0rem 1rem;
+    }
+
+    .mn-hd {
+        color: #fff;
+        padding-left: 2%;
+        margin: 0;
+        font-size: 20px;
+    }
+
+    .mn-hd {
+        color: #fff;
+        padding-left: 2.5%;
+        margin: 0;
+        font-size: 20px;
+    }
+
+    .bg-white {
+        background-color: #2060ee !important;
+    }
+</style>
+
+<div class="content-wrapper">
+
+    <div class="row">
+        <div class="col-md-8">
+
+            <div style="box-shadow: 0 1px 2px 1px #e6ecf1; background-color: #fff !important; padding:2% 4%; color:#000;">
+                <div class="row">
+                    <div class="col-md-2">
+                        <img src="../../files/images/profile-02.png" style="width:60px;">
+                    </div>
+                    <div class="col-md-10">
+                        <h4 style="color: #2060ee; font-weight:600; ">Profile Information</h4>
+                        <p style="color:#000; opacity:0.87; font-size:14px; font-weight:400;">Manage Your Personal details and contact information.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div style="box-shadow: 0 1px 2px 1px #e6ecf1; background-color: #fff !important; padding:7% 6% 3.5% 9%;">
+                <p style="font-size:11px; margin:0; padding-bottom:2%; color: #2060ee; font-weight:600; font-size:12px;">Role</p>
+                <p style="font-weight:600; color:#000; opacity:0.67; font-size:17px;" class="roletype"></p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row" style="margin-top:2%;">
+        <div class="col-md-8">
+            <div style="box-shadow: 0 1px 2px 1px #e6ecf1; background-color: #fff !important; padding:2% 4%; color:#000;">
+                <div class="row">
+                    <div class="col-md-2">
+                        <img src="../../files/images/avtar4.png" style="width:85px; border-radius:50%;">
+                    </div>
+                    <div class="col-md-4">
+
+                        <p style="margin:0; padding-top:7%; font-size:18px; color:#000; font-weight:450; padding-left:15%;">Thirumalai V</p>
+                        <p style="padding-top:1%; font-size:12px; color: #2060ee; font-weight:500; padding-left:15%;" class="roletype"></p>
+
+                    </div>
+                    <div class="col-md-6">
+                        <div style="float:right; margin-top:7%;">
+                            <a href="#" style="opacity:0.87; color:#000; "><img src="../../files/images/profile_edit-01.png" style="width:25px;"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12" style="margin-left:11.5%;">
+
+                        <div style="padding-left:10%; padding-top:2%;">
+                            <form action="#">
+                                <label for="fname" style="width:20%; color:#000; font-weight:500; opacity:0.87;">Name:</label>
+                                <input type="text" id="PName" name="firstname" readonly value="" placeholder="Your name.." style="width:50%; padding:0.5% 2%; color:#000; font-weight:500; border:1px solid rgba(0,0,0,0.2);">
+                                <br>
+                                <label for="fname" style="width:20%; color:#000; font-weight:500; opacity:0.87;">Mail ID: </label>
+                                <input type="text" id="PMail" name="firstname" readonly value="" placeholder="Your mail id.." style="width:50%; padding:0.5% 2%; color:#000; font-weight:500;border:1px solid rgba(0,0,0,0.2);">
+                                <br>
+                                <label for="lname" style="width:20%; color:#000; font-weight:500; opacity:0.87;">Phone Number: </label>
+                                <input type="text" id="PNumber" name="lastname" readonly placeholder="Your Phone Number.." style="width:50%; padding:0.5% 2%; color:#000; font-weight:500; border:1px solid rgba(0,0,0,0.2);;">
+                                @*<br>
+                                <label for="lname" style="width:20%; color:#000; font-weight:500; opacity:0.87;">ITI Name: </label>
+                                <input type="text" id="lname" name="lastname" placeholder="Your ITI Name.." style="width:50%; padding:0.5% 2%;color:#000; font-weight:500; border:1px solid rgba(0,0,0,0.2);">
+                                <br>
+                                <label for="lname" style="width:20%; color:#000; font-weight:500; opacity:0.87;">Trade Name: </label>
+                                <input type="text" id="lname" name="lastname" placeholder="Your Trade Name.." style="width:50%; padding:0.5% 2%; color:#000; font-weight:500; border:1px solid rgba(0,0,0,0.2);">
+                                <br>
+                                <label for="lname" style="width:20%; color:#000; font-weight:500; opacity:0.87;"> Account Details:</label>
+                                <input type="text" id="lname" name="lastname" placeholder="Your Account Details.." style="width:50%; padding:0.5% 2%;color:#000; font-weight:500; border:1px solid rgba(0,0,0,0.2);">
+                                <br>*@
+                            </form>
+
+                            <div class="col-md-12">
+                                <div class="btn-tt" style="padding-top:4%; padding-right:21%;">
+                                    <a href="#">  <span class="btn-one">cancel</span></a>
+                                    <a href="#"> <span class="btn-two">send</span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-4">
+            <p style="font-size:12px; margin:0; padding-bottom:2%; color: #2060ee; font-weight:600; ">Users Count</p>
+            <div style="box-shadow: 0 1px 2px 1px #e6ecf1; background-color: #fff !important; padding:7% 6% 3.5% 9%;" id="UserCount">
+               
+                @*<p style=" border-bottom:1px solid #ddd7d7; padding-bottom:15px; margin:0 20px 0 0; margin-bottom:10px; margin-top:18px; "><span style="color:#000; font-size:14px;  font-weight:500;">State Admin</span> <span style="float:right;  color:#0260ee; font-weight:400; font-size:14px;">07</span></p>
+                <p style=" border-bottom:1px solid #ddd7d7; padding-bottom:15px; margin:0 20px 0 0; margin-bottom:10px; margin-top:23px; "><span style="color:#000; font-size:14px;  font-weight:500;">ITI Admin</span> <span style="float:right;  color:#0260ee; font-weight:400; font-size:14px;">50</span></p>
+                <p style=" border-bottom:1px solid #ddd7d7; padding-bottom:15px; margin:0 20px 0 0; margin-bottom:10px; margin-top:23px; "><span style="color:#000; font-size:14px;  font-weight:500;">Instructor </span> <span style="float:right;  color:#0260ee; font-weight:400; font-size:14px;">450</span></p>
+                <p style=" border-bottom:1px solid #ddd7d7; padding-bottom:15px; margin:0 20px 0 0; margin-bottom:10px; margin-top:23px; "><span style="color:#000; font-size:14px;  font-weight:500;">Students</span> <span style="float:right;  color:#0260ee; font-weight:400; font-size:14px;">556207</span></p>*@
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+<script type="text/javascript">
+   
+    $(document).ready(function () {
+        $('.btn-one').hide();
+        $('.btn-two').hide();
+        $('#UserCount').html();
+
+        $('#PName').val($('#sessionUserName').val());
+        $('#PMail').val($('#sessionEmailID').val());
+        $('#PNumber').val($('#sessionMobileNumber').val());
+        var RoleDesc = $('#sessionroledescription').val();
+        $('.roletype').text(RoleDesc);
+       // alert("RoleDesc" + RoleDesc);
+        var HtmlOutput="";
+        $.ajax({
+            type: 'GET',           
+            dataType: 'json',
+            url: "/APIService/APIAdminReport/getRoleWiseCount?CollegeGrpId=0&RoleDesc="+RoleDesc,
+            beforeSend: function (){
+
+            },
+            success: function (response) {              
+                $.each(response, function (index,value) {
+                   // alert(HtmlOutput);
+                    HtmlOutput += '<p style=" border-bottom:1px solid #ddd7d7; padding-bottom:15px; margin:0 20px 0 0; margin-bottom:10px; margin-top:23px; "><span style="color:#000; font-size:14px;  font-weight:500;">' + value['UserRole'] + '</span> <span style="float:right;  color:#0260ee; font-weight:400; font-size:14px;">' + value['UserCount'] + '</span>';                    
+                   // alert(HtmlOutput);
+                });               
+                $('#UserCount').html(HtmlOutput);
+            },
+            complete: function (xhr, status) {
+
+            },
+            error: function () {
+                alert("No Response");
+            }
+        });
+       
+
+    });
+
+</script>
+

@@ -1,0 +1,338 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.Web;
+
+namespace Odishadtet.Models
+{
+    public class StudentModels
+    {
+    }
+    public class ForgetPasswordModel
+    {
+
+
+        public string mobileNumber { get; set; }
+
+        public long userID { get; set; }
+
+        public int code { get; set; }
+
+        public string message { get; set; }
+
+        public bool Success { get; set; }
+    }
+
+
+    public class HtmlContentModel
+    {
+        public string Content { get; set; }
+    }
+    public class userViewCart
+    {
+
+
+        public long userid { get; set; }
+
+        public string packageName { get; set; }
+
+        public int packageID { get; set; }
+
+        public string packageCode { get; set; }
+
+        public string packagecoverpath { get; set; }
+
+        public int PackageActualPrice { get; set; }
+
+        public int PackageSellingPrice { get; set; }
+
+        public int packageDuration { get; set; }
+
+        public DateTime userCartDate { get; set; }
+
+        public int subTotal { get; set; }
+
+        public int itemCount { get; set; }
+
+        public int deliveryModePrice { get; set; }
+        public int DeliveryProductPrice { get; set; }
+        public int DeliveryShippingPrice { get; set; }
+        public string DeliveryDesc { get; set; }
+        public int deliveryModeType { get; set; }
+
+        public int DiscountPrice { get; set; }
+
+        public List<string> Bundlesubjects { get; set; }
+
+        public int Bundle { get; set; }
+
+        public string OsType { get; set; }
+    }
+
+
+    public class checkLogin
+    {
+
+        public string FirstName { get; set; }
+        public string Password { get; set; }
+
+        public string emailId { get; set; }
+
+        public int roleTypeId { get; set; }
+        public int? year { get; set; }
+        public int? semester { get; set; }
+        public long userId { get; set; }
+        public int? collegegrpId { get; set; }
+        public int OldUserCount { get; set; }
+
+        public string VisitedDate { get; set; }
+        public int NewUserCount { get; set; }
+
+        public string message { get; set; }
+
+        public int actveStatus { get; set; }
+
+        public int isFrstLogin { get; set; }
+        public int Firstloggedin { get; set; }
+        public string roleType { get; set; }
+        public int roleLevel { get; set; }
+
+        public long mobileNumber { get; set; }
+
+        public int universityId { get; set; }
+
+        public string ProfileImage { get; set; }
+
+        public int? DepartmentID { get; set; }
+        public int? CollegeID { get; set; }
+        public int? CollegeGroupID { get; set; }
+        public int role_type_code { get; set; }
+        public string currentDate { get; set; }
+        public int Univ_Type { get; set; }
+        public string privilegeuniversities { get; set; }
+
+    }
+
+
+    public class StudentcheckLogin
+    {
+
+        public string FirstName { get; set; }
+        public string Password { get; set; }
+
+        public string emailId { get; set; }
+
+        public int roleTypeId { get; set; }
+        public int? year { get; set; }
+        public int? semester { get; set; }
+        public long userId { get; set; }
+        public int? collegegrpId { get; set; }
+        public int OldUserCount { get; set; }
+
+        public string VisitedDate { get; set; }
+        public int NewUserCount { get; set; }
+
+        public string message { get; set; }
+
+        public int actveStatus { get; set; }
+
+        public int isFrstLogin { get; set; }
+        public int Firstloggedin { get; set; }
+        public string roleType { get; set; }
+        public int roleLevel { get; set; }
+
+        public long mobileNumber { get; set; }
+
+        public int universityId { get; set; }
+
+        public string ProfileImage { get; set; }
+
+        public int? DepartmentID { get; set; }
+        public int? CollegeID { get; set; }
+        public int? CollegeGroupID { get; set; }
+        public int role_type_code { get; set; }
+        public string currentDate { get; set; }
+        public int Univ_Type { get; set; }
+        public string privilegeuniversities { get; set; }
+        public DateTime dob { get; set; }
+        public string strdob { get; set; }
+        public string roll_no { get; set; }
+        public string DepartmentName { get; set; }
+
+        //25-03-2025
+        public string CollegeName { get; set; }
+        public string AcademicYear { get; set; }
+        public string CourseType { get; set; }
+        public string UserRole_type { get; set; }
+
+
+        public int? FailedLoginAttempts { get; set; }
+        public bool? IsLocked { get; set; }
+        public DateTime? LockoutEndTime { get; set; }
+
+    }
+
+
+    public class purchasedSubjects
+    {
+
+        public long userid { get; set; }
+
+        public string packageName { get; set; }
+
+        public int packageID { get; set; }
+
+        public string packageCode { get; set; }
+
+        public string packagecoverpath { get; set; }
+
+        public decimal actualPrice { get; set; }
+
+        public decimal sellingPrice { get; set; }
+
+        public int? packageDuration { get; set; }
+
+
+    }
+
+    public class wishList
+    {
+
+        public long userid { get; set; }
+
+        public string packageName { get; set; }
+
+        public int packageID { get; set; }
+
+        public string packageCode { get; set; }
+
+        public string packagecoverpath { get; set; }
+
+        public decimal actualPrice { get; set; }
+
+        public decimal sellingPrice { get; set; }
+
+        public int? packageDuration { get; set; }
+    }
+
+    public class usercart
+    {
+        public int packageID { get; set; }
+
+        public decimal actualPrice { get; set; }
+
+        public decimal sellingPrice { get; set; }
+
+        public int? packageDuration { get; set; }
+
+        public long promocodeid { get; set; }
+
+        public DateTime createdon { get; set; }
+    }
+
+    public class Dashboard
+    {
+        public int departmentId { get; set; }
+
+        public string departmentName { get; set; }
+
+        public int PackagegId { get; set; }
+
+        public string PackageName { get; set; }
+
+        public string packageDuration { get; set; }
+
+        public string Pusrchasedon { get; set; }
+
+        public string operatingsystem { get; set; }
+
+        public string SubjectUnitPath { get; set; }
+
+    }
+
+    public class UserRegistraion
+    {
+        public int college_Id { get; set; }
+
+        public string college_Name { get; set; }
+
+        public int department_Id { get; set; }
+
+        public string department_Name { get; set; }
+    }
+
+    public class saveSubjeDetails
+    {
+        public int user_ID { get; set; }
+        public long subj_ID { get; set; }
+        public string sub_Code { get; set; }
+        public string subj_Name { get; set; }
+        public string subj_Version { get; set; }
+        public string subj_CoverParth { get; set; }
+        public int deprtId { get; set; }
+        public string deprtCode { get; set; }
+        public string deprtName { get; set; }
+        public long subjUnit_ID { get; set; }
+        public string subjUnit_code { get; set; }
+        public string subjUnit_Name { get; set; }
+        public string subjUnit_version { get; set; }
+        public string subjUnit_usrVersion { get; set; }
+        public int? isDemo { get; set; }
+        public int unit_orIdx { get; set; }
+        public string subjUnit_Path { get; set; }
+        public DateTime activDurDate { get; set; }
+        public int activesubjdays { get; set; }
+        public DateTime? released_On { get; set; }
+        public int is_updated_to_client { get; set; }
+        public int activDurdays { get; set; }
+        public DateTime? LastmodifiedOn { get; set; }
+        public DateTime? LastClientUpdatedOn { get; set; }
+        public int IsUpdatedSubunitToClient { get; set; }
+        public DateTime? LastSubunitModifiedOn { get; set; }
+        public DateTime? LastSubunitClientUpdatedOn { get; set; }
+        public int YearSem{ get; set; }
+    }
+
+    public class userSubjects
+    {
+      public string Orderid { get;set;}
+      public long usersubmasterid { get;set;}
+      public string userpackageexpiryon  { get;set;}
+      public long subjectid { get;set;}
+      public string subjectname { get;set;}
+
+        }
+
+    public class UserDetails
+    {
+        public long userid { get; set; }
+        public string studentName { get; set; }
+        public string studentPasswrod { get; set; }
+        public int? DepartmentID { get; set; }
+        public string DeptName { get; set; }
+        public long mobileNo { get; set; }
+        public string emailID { get; set; }
+        public int roleType { get; set; }
+        public string collegeName { get; set; }
+        public int? Year { get; set; }
+        public int? semester { get; set; }
+        public int? collegeID { get; set; }
+        public string Univname { get; set; }
+        public string password { get; set; }
+        public string ProfileImg { get; set; }
+    }
+
+    public class yearsemOnDeptID
+    {
+        public int totyear { get; set; }
+        public int maxsemester { get; set; }
+    }
+
+    public class collegelist
+    {
+        public int collegeId { get; set; }
+        public string colgCode { get; set; }
+        public string colgName { get; set; }
+    }
+}

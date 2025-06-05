@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<subject label="Engineering Mechanics - 2024">
+
+<Lessons label="UNIT 1 - BASICS OF MECHANICS AND FORCE SYSTEM">
+	<Chapters label="1.1 Introduction of engineering mechanics" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_1_Chapter_1.html" />
+	<Chapters label="1.2 Physical quantity and Units of measurement" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_1_Chapter_2.html" />
+	<Chapters label="1.3 Introduction to force" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_1_Chapter_3.html" />
+	<Chapters label="1.4 Moment" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_1_Chapter_4.html" />
+	<Chapters label="1.5 Couple" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_1_Chapter_5.html" />
+	<Chapters label="1.6 Principle of moments" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_1_Chapter_6.html" />
+	<Chapters label="1.7 Resultant of forces" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_1_Chapter_7.html" />
+	<Chapters label="1.8 Resultant of coplanar concurrent forces by resolution" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_1_Chapter_8.html" />
+	<Chapters label="1.9 Resultant of coplanar concurrent forces by resolution" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_1_Chapter_9.html" />
+	<Chapters label="1.10 Resultant of coplanar parallel forces" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_1_Chapter_10.html" />
+	<Chapters label="1.11 Resultant of Coplanar parallel forces" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_1_Chapter_11.html" />
+	<Chapters label="1.12 Resultant of two non collinear forces" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_1_Chapter_12.html" />
+	<Chapters label="1.13 Problems on parallelogram law of forces" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_1_Chapter_13.html" />
+	<Chapters label="1.14 Problems on parallelogram law of forces" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_1_Chapter_14.html" />
+	<Chapters label="1.15 Problems involving application of parallelogram law of forces" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_1_Chapter_15.html" />
+	<Chapters label="1.16 Triangle law of forces and polygon law of forces" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_1_Chapter_16.html" />
+	<Chapters label="1.17 Assessment" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_1_Chapter_17.html" />
+	<Chapters label="1.18 FAQ" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_1_Chapter_18.html" />
+</Lessons>
+		 
+<Lessons label="UNIT 2 - EQUILIBRIUM">
+	<Chapters label="2.1 Equilibrium" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_2_Chapter_1.html" />
+	<Chapters label="2.2 Conditions of equilibrium" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_2_Chapter_2.html" />
+	<Chapters label="2.3 Lami's theorem" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_2_Chapter_3.html" />
+	<Chapters label="2.4 Types of beam" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_2_Chapter_4.html" />
+	<Chapters label="2.5 Couple" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_2_Chapter_5.html" />
+	<Chapters label="2.6 Assessment" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_2_Chapter_6.html" />
+	<Chapters label="2.7 FAQ" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_2_Chapter_7.html" />
+</Lessons>
+
+<Lessons label="UNIT 3 - FRICTION">
+	<Chapters label="3.1 Friction" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_3_Chapter_1.html" />
+	<Chapters label="3.2 Terms related to friction" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_3_Chapter_2.html" />
+	<Chapters label="3.3 Resolution of forces – Horizontal plane" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_3_Chapter_3.html" />
+	<Chapters label="3.4 Resolution of forces - Inclined plane" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_3_Chapter_4.html" />
+	<Chapters label="3.5 Rough inclined plane" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_3_Chapter_5.html" />
+	<Chapters label="3.6 Resolution of force – Inclined plane" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_3_Chapter_6.html" />
+	<Chapters label="3.7 Problems on equilibrium of a body on inclined plane" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_3_Chapter_7.html" />
+	<Chapters label="3.8 Problems on friction" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_3_Chapter_8.html" />
+	<Chapters label="3.9 Ladder, Wedge Friction" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_3_Chapter_9.html" />
+	<Chapters label="3.10 Assessment" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_3_Chapter_10.html" />
+	<Chapters label="3.11 FAQ" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_3_Chapter_11.html" />
+</Lessons>
+
+<Lessons label="UNIT 4 - CENTROID AND CENTRE OF GRAVITY">
+	<Chapters label="4.1 Centroid of geometrical plane figures" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_4_Chapter_1.html" />
+    <Chapters label="4.2 Problems on centroid I,T and Z" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_4_Chapter_2.html" />
+	<Chapters label="4.3 Problems on centroid C and L" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_4_Chapter_3.html" />
+	<Chapters label="4.4 Centroid of composite sections" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_4_Chapter_4.html" />
+	<Chapters label="4.5 Centroid of hollow section " url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_4_Chapter_5.html" />
+	<Chapters label="4.6 Centre of gravity" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_4_Chapter_6.html" />
+	<Chapters label="4.7 Assessment" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_4_Chapter_7.html" />
+	<Chapters label="4.8 FAQ" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_4_Chapter_8.html" />
+</Lessons>
+
+<Lessons label="UNIT 5 - SIMPLE LIFTING MACHINE">
+    <Chapters label="5.1 Simple machine" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_5_Chapter_1.html" />
+	<Chapters label="5.2 Law of machines" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_5_Chapter_2.html" />
+	<Chapters label="5.3 Problems on law of machine" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_5_Chapter_3.html" />
+	<Chapters label="5.4 Levers and types of levers" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_5_Chapter_4.html" />
+	<Chapters label="5.5 Problems on levers" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_5_Chapter_5.html" />
+	<Chapters label="5.6 Losses of friction in simple machines" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_5_Chapter_6.html" />
+	<Chapters label="5.7 Reversibility and self locking of a machine" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_5_Chapter_7.html" />
+	<Chapters label="5.8 Simple wheel and axle" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_5_Chapter_8.html" />
+	<Chapters label="5.9 Differential wheel and axle" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_5_Chapter_9.html" />
+	<Chapters label="5.10 Worm and worm wheel" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_5_Chapter_10.html" />
+	<Chapters label="5.11 Single purchase crab winch and Double purchase crab winch" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_5_Chapter_11.html" />
+	<Chapters label="5.12 Screw jack and rack and pinion" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_5_Chapter_12.html" />
+	<Chapters label="5.13 Weston's differential and geared pulley block" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_5_Chapter_13.html" />
+	<Chapters label="5.14 Assessment" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_5_Chapter_14.html" />
+	<Chapters label="5.15 FAQ" url="https://d1z3uzpa1ktps0.cloudfront.net/dipolma/odisha/first_year/first_semester/vls/em/html/Lesson_5_Chapter_15.html" />
+</Lessons>
+
+</subject>

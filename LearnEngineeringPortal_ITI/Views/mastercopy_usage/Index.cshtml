@@ -1,0 +1,89 @@
+﻿@model IEnumerable<Odishadtet.DAL.mastercopy_usage_details>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LearnEnggAdminLayout.cshtml";
+}
+
+<style type="text/css">
+    .inner_mid_wrp-main {
+        float: right;
+        margin: 80px 2% 0;
+        width: 95%;
+    }
+</style>
+
+<section class="inner_mid_wrp-main">
+    <article class="col-sm-12">
+        <div class="in_hd_tt row">
+            <strong class="fa fa-file-text"></strong><span>Master copy usage</span>
+        </div>
+    </article>
+
+
+    <article class="col-sm-12">
+        <section class="sub_wrp row">
+            <table class="table table-bordered">
+                <tr class="hdr_txt_wrp">
+                    <th>
+                        S.No
+                    </th>
+                    <th>
+                        User Name
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th>
+                        Mobile
+                    </th>
+                    <th>
+                        Department Name
+                    </th>
+                    <th>
+                        Semester
+                    </th>
+                    <th>
+                        Requested On
+                    </th>
+
+                    <th>
+                        Details
+                    </th>
+                </tr>
+
+                @foreach (var item in Model.Select((x, i) => new { Data = x, Index = i }))
+            {
+                    <tr>
+                        <td>
+                            @(item.Index + 1)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Data.user_name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Data.email_id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Data.mobile)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Data.department_name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Data.semester)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Data.requested_on)
+                        </td>
+
+                        <td>
+                            @Html.ActionLink("Details", "Details", new { id = item.Data.mastercopy_usage_id })
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </section>
+    </article>
+</section>

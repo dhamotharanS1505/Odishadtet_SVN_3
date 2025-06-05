@@ -1,0 +1,127 @@
+﻿
+@{
+    ViewBag.Title = "Feedback";
+    Layout = "~/Views/Shared/_LearnEnggAdminLayout.cshtml";
+}
+<style type="text/css">
+    .mail_main {
+        border: 1px solid #e6e6e6;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    }
+
+    .mail_rig_hd {
+        list-style: outside none none;
+        margin: 0;
+    }
+
+    .dash_head {
+        border: 1px solid #e6e6e6;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+        margin: 10px 0;
+        padding: 10px;
+    }
+
+    .mail_main ul {
+        border-bottom: 1px solid #ececec;
+        display: block;
+        font-size: 12px;
+        list-style: outside none none;
+        margin: 0;
+        padding: 10px 20px;
+    }
+</style>
+
+<article class="col-sm-12">
+    <div class="in_hd_tt row"><strong class="fa fa-file-text"></strong><span>User Feedback</span></div>
+</article>
+
+
+<article class="col-sm-12">
+
+    <section class="sub_wrp row">
+
+        <section class="full_width reg_wrp">
+            <aside class="dsh_wrp col-md-2">
+
+                <div class="row">
+                    <div class="mail_main_hed">
+                        <ul>
+                            <li>
+                                <h5 class="all"><i class="fa fa-envelope"></i> All<span style="float:right" id="counts"></span></h5>
+
+                            </li>
+                            <li>
+                                <h5 class="dynamicContent"><i class="fa fa-calendar"></i> Date</h5>
+                                <ul class="mail_main_drp" id="createdDate">
+                                    <li>Loading...</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <h5 class="dynamicContent"><i class="fa fa-university"></i> College</h5>
+
+                                <ul class="mail_main_drp" id="college">
+                                    <li>Loading...</li>
+                                </ul>
+                            </li>
+
+                        </ul>
+
+                    </div>
+                </div>
+
+                <div class="loader">
+                    <center>
+                        <img src="../Content/img/pre_loader.gif" />
+                    </center>
+                </div>
+            </aside>
+            <article class="col-sm-4" id="SummarySection">
+                <div id="SummaryView" class="mail_main">
+                    loading...
+                </div>
+            </article>
+            <section class="col-md-10" id="chartSection" style="display:none">
+                <article class="full_width">
+                    <div id="container" class="mail_main_hed"></div>
+                </article>
+            </section>
+
+            <section class="col-md-6" id="detailedsection">
+                <article class="full_width">
+                    <ul class="dash_head mail_rig_hd viewmail">
+                        <li>
+                            <h5>Subject : <span id="SubjectLine"></span> <strong id="CreatedDate"></strong> </h5>
+                        </li>
+                        <li><span>From : </span> <span id="FromEmail"></span></li>
+                    </ul>
+                </article>
+                <article class="full_width">
+                    <div class="dash_head">
+                        <ul>
+                            <li><span id="Message"></span></li>
+                        </ul>
+                    </div>
+                </article>
+            </section>
+
+
+        </section>
+
+    </section>
+</article>
+<div style="display: none">
+    @Html.Hidden("WebServiceUrl", @System.Configuration.ConfigurationManager.AppSettings["localhost"])
+    @Html.Hidden("MailSummaryUrl", "/AdminProcess/mailsummary")
+    @Html.Hidden("MailDetailUrl", "/AdminProcess/maildetails")
+    @Html.Hidden("UpdateReadStatusUrl", "/AdminProcess/UpdateMailStatus")
+    @Html.Hidden("ArchieveMailUrl", "/AdminProcess/ArchieveMail")
+</div>
+
+@section scripts{
+    <script  type="text/javascript" src="~/Scripts/Admin/highcharts.js"></script>
+    <script type="text/javascript" src="~/Scripts/Admin/jquery.feedback.js"></script>
+}
+
+
+
+

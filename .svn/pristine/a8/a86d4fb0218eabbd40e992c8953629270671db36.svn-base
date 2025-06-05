@@ -1,0 +1,558 @@
+﻿
+@{
+    ViewBag.Title = "UsageDashBoard";
+    Layout = "~/Views/Shared/_LearnEnggAdminLayout.cshtml";
+}
+
+
+
+<section class="inner_mid_wrp-main">
+    <article class="col-sm-12">
+        <div class="in_hd_tt row">
+            <strong class="fa fa-file-text"></strong><span><b>Usage Dashboard</b></span>
+        </div>
+    </article>
+
+
+    <article class="ar_sec_dah_nw marsp">
+
+        <section class="row">
+            <div class="col-sm-12">
+                <div class="box_dah_rad">
+
+                    <div class="inr_cl_gray">
+                        <figure> <i class="fa fa-university"></i> </figure>
+                        <div style="width: 99%; height: 80px;">
+                            <div class="col-sm-7 row">
+                                <h1>Overall Usage </h1>
+                                <span>TOTAL USAGE HOURS : <strong id="lbltotalusages"></strong></span><br />
+                                @*<span>TRADE PRACTICAL's : <strong id="lbltradepractical"></strong></span><br />*@
+                            </div>
+                            <div class="col-sm-3">
+                                <b id="lblTotColge"></b>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    @*<div class="col-sm-12 chart_cen" style="height:270px;">
+                        <div class="col-sm-5 ">
+                            <div class="col-sm-12">&nbsp;</div>
+                            <div id="subjectlistview" style="vertical-align:central;">
+                            </div>
+                        </div>
+                        <div class="col-sm-7 ">
+                            <div id="SubjectUsageHours">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12">
+                        <div class="bt_blu_ad">
+                            <a href="#" onclick="navigate(2);">View Details </a>
+                        </div>
+                    </div>*@
+                </div>
+            </div>
+
+        </section>
+
+        <section class="row col-sm-12">
+            &nbsp;
+        </section>
+
+        <section class="row">
+            <div class="col-sm-12">
+                <div class="box_dah_rad">
+                    <div class="inr_cl_gray">
+                        <figure> <i class="fa fa-clock-o"></i> </figure>
+                        <div style="width: 99%; height: 80px;">
+                            <div class="col-sm-7 row">
+                                <h1> TRADEWISE USAGE HOURS</h1>
+
+                            </div>
+                            <div class="col-sm-3">
+                                <b id="spnTotHrs"></b>
+                            </div>
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 chart_cen">
+                        <div id="TradeColumnChartdiv">
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="bt_blu_ad">
+                            <a href="#" onclick="navigate(2);">View Details </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="row">
+            <div class="col-sm-12">
+                <div class="box_dah_rad">
+                    <div class="inr_cl_gray">
+                        <figure> <i class="fa fa-university"></i> </figure>
+                        <div style="width: 99%; height: 80px;">
+                            <div class="col-sm-7 row">
+                                <h1> ITIWISE USAGE HOURS</h1>
+                            </div>
+                            <div class="col-sm-3">
+                                <b id="lblTotColge"></b>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 chart_cen">
+                        <div id="ITIBarChartdiv">
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="bt_blu_ad">
+                            <a href="#" onclick="navigate(3);">View Details </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <div class="col-sm-12">&nbsp;</div>
+
+
+        <section class="row">
+            <div class="col-sm-12">
+                <div class="box_dah_rad">
+                    <div class="inr_cl_gray">
+                        <figure> <i class="fa fa-university"></i> </figure>
+                        <div style="width: 99%; height: 80px;">
+                            <div class="col-sm-7 row">
+                                <h1> MONTHWISE USAGE HOURS</h1>
+                            </div>
+                            <div class="col-sm-3">
+                                <b id="lblTotColge"></b>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 chart_cen">
+                        <div id="MonthBarChartdiv">
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="bt_blu_ad">
+                            <a href="#" onclick="navigate(4);">View Details </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+       
+</article>
+</section>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+    google.load("visualization", "1.1", { packages: ["corechart"] });
+    google.load("visualization", "1.1", { packages: ["table"] });
+    $(function () {
+        BaseITIUsageBarChart();
+        BaseSubjectChart();
+    });
+
+    function navigate(target) {
+        //  UnivCode = "01";
+        var _Url = '../AdminProcess/UsersReadHistory';
+        //if (target == 1) {
+        //    _Url = "StudentRegistrationHistorys";
+        //}
+        //else if (target == 2) {
+        //    _Url = "UsersReadHistory";
+        //}
+        //else if (target == 3) {
+        //    _Url = "CollegeRegistrationReport";
+        //}
+        //else if (target == 4) {
+        //    _Url = "StudentRegistrationHistorysTest";
+        //}
+        window.open(_Url, '_blank');
+    }
+
+    function BaseSubjectChart() {
+
+       
+        $.ajax({
+            type: 'GET',
+            url: '/APIService/APIAdminDashBoardReports/GetUserDashBoardMain',
+            dataType: 'json',         
+            async: 'false',
+            crossOrigin: true,
+            success: function (response) {
+               
+                // fill Trade data
+                var SubjectrData = response.SubjectUsage;
+                $('#SubjectUsageHours').empty();
+                $('#lbltotalusages').empty();
+                $('#lbltradepractical').empty();
+
+               
+
+                $('#lbltotalusages').text(response.TotalUsageHours);
+                $('#lbltradepractical').text(response.TotalPracticalUsage);
+
+                // alert("SubjectrData.length" + SubjectrData.length);
+              
+                // fill trade data
+                if (SubjectrData.length > 0) {
+
+                    var dataarray = [['Month Name', 'Usage Hours']];
+                    for (var i = 0; i < SubjectrData.length; i++) {
+                        dataarray.push([SubjectrData[i].SubjectName, SubjectrData[i].UsageHours]);
+                    }
+                    dataarray.push(['Practicals', response.TotalPracticalUsage]);
+                    SubjectUsageChart(dataarray);
+                    SubjectUsagetable(SubjectrData, response.TotalPracticalUsage);
+                }
+                else {
+                    $('#SubjectUsageHours').css('text-align', 'center').addClass('center').html('<img src="../css/Images/warning.png" />' + "<br/>" + "<strong>DATA NOT FOUND</strong>");
+                }
+
+
+                
+            }
+        });
+    }
+
+    function SubjectUsageChart(dataarray) {        
+
+        google.charts.load("current", { packages: ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);       
+
+        $('#SubjectUsageHours').empty();       
+        function drawChart() {         
+
+            var data = google.visualization.arrayToDataTable(dataarray);   
+            var options = {             
+                pieSliceText: 'value',
+                pieStartAngle: 100,
+              //  title: "Subjectwise Usage",
+                chartArea: { height: '94%', width: '96%'},
+                legend: { position: 'labeled' },
+                height: 260,
+                //width : 600
+                is3D: true
+            }
+            var chart = new google.visualization.PieChart(document.getElementById('SubjectUsageHours'));
+            chart.draw(data, options);
+        };             
+
+    }
+
+
+    function SubjectUsagetable(ChartData, TotalPracticalUsage) {
+
+        // Table preparation
+        google.charts.load("current", { packages: ['table'] });
+        google.charts.setOnLoadCallback(drawTable);
+        $('#subjectlistview').empty();
+
+      //  alert("Before ChartData.length");
+
+        function drawTable() {
+
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Engineering Subjects ');
+            data.addColumn('number', 'Usage Hours');  
+
+          //  alert("ChartData.length" + ChartData.length);
+
+            for (var i = 0; i < ChartData.length; i++) {
+                data.addRow([ChartData[i].SubjectName, ChartData[i].UsageHours]);
+            }
+            data.addRow(['TRADE PRACTICAL', TotalPracticalUsage]);
+
+            var table = new google.visualization.Table(document.getElementById('subjectlistview'));
+            table.draw(data, { showRowNumber: false, width: '100%', height: '100%' });
+        }
+    }
+
+
+    function BaseITIUsageBarChart() {
+
+      
+        $.ajax({
+            type: 'GET',
+            url: '/APIService/APIAdminDashBoardReports/GetDashBoardViewData',
+            dataType: 'json',
+            data: { SubType: 1},
+            async: 'false',
+            crossOrigin: true,
+            success: function (response) {       
+
+                // fill Trade data
+                var TraderData = response.TradeUsage;
+                $('#TradeColumnChartdiv').empty();
+
+                
+                // fill trade data
+                if (TraderData.length > 0) {
+                    TradeUsageBarChart(TraderData);                   
+                }
+                else {                       
+                    $('#TradeColumnChartdiv').css('text-align', 'center').addClass('center').html('<img src="../css/Images/warning.png" />' + "<br/>" + "<strong>DATA NOT FOUND</strong>");
+                }  
+
+
+                // fill ITI data
+                var ITIrData = response.ITIUsage;
+                $('#ITIBarChartdiv').empty();
+
+                if (ITIrData.length > 0) {
+                    ITIUsageBarChart(ITIrData);
+                }
+                else {
+                    $('#ITIBarChartdiv').css('text-align', 'center').addClass('center').html('<img src="../css/Images/warning.png" />' + "<br/>" + "<strong>DATA NOT FOUND</strong>");
+                }  
+
+
+
+                // fill Monthwise data
+                var MonthrData = response.MonthUsage;
+                $('#MonthBarChartdiv').empty();
+
+                if (MonthrData.length > 0) {
+                    MonthUsageBarChart(MonthrData);
+                }
+                else {
+                    $('#MonthBarChartdiv').css('text-align', 'center').addClass('center').html('<img src="../css/Images/warning.png" />' + "<br/>" + "<strong>DATA NOT FOUND</strong>");
+                }   
+            }
+        });
+    }
+
+
+    function TradeUsageBarChart(ChartData) {
+
+
+        google.charts.load("current", { packages: ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+
+            var dataarray = [['Trade Name', 'Usage Hours']];
+            for (var i = 0; i < ChartData.length; i++) {
+                dataarray.push([ChartData[i].TradeName, ChartData[i].UsageHours]);
+            }
+
+
+            var data = google.visualization.arrayToDataTable(dataarray);
+
+            var view = new google.visualization.DataView(data);
+
+
+
+            view.setColumns([0, 1,
+                {
+                    calc: "stringify",
+                    sourceColumn: 1,
+                    type: "string",
+                    role: "annotation"
+                }
+            ]);
+
+            var options = {
+                title: 'TradeWise usage',
+                chartArea: { height: '40%' },
+                height: 550,
+                annotations: {
+                    alwaysOutside: true,
+                    textStyle: {
+                        fontSize: 12,
+                        auraColor: 'none',
+                        color: '#555'
+                    },
+                    boxStyle: {
+                        stroke: '#ccc',
+                        strokeWidth: 1,
+                        gradient: {
+                            color1: '#f3e5f5',
+                            color2: '#f3e5f5',
+                            x1: '0%', y1: '0%',
+                            x2: '100%', y2: '100%'
+                        }
+                    }
+                },
+                hAxis: {
+                    title: 'UsageHours',
+                    minValue: 0,
+                },
+                vAxis: {
+                    title: 'Trade'
+                },
+                bar: { groupWidth: "75%" },
+                legend: { position: "none" },
+                is3D: true
+            };
+            var chart = new google.visualization.BarChart(document.getElementById('TradeColumnChartdiv'));
+            chart.draw(view, options);
+        }
+
+    }
+
+
+    function ITIUsageBarChart(ChartData) { 
+
+
+        google.charts.load("current", { packages: ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+
+            var dataarray = [['ITI Name', 'Usage Hours']];
+            for (var i = 0; i < ChartData.length; i++) {
+                dataarray.push([ChartData[i].ITIName, ChartData[i].UsageHours]);
+            }
+
+            //var data = new google.visualization.DataTable();
+            //data.addColumn('string', 'ITI Name');
+            //data.addColumn('number', 'Usage Hours');
+
+            //for (var i = 0; i < ChartData.length; i++) {
+            //    data.addRow([ChartData[i].ITIName, ChartData[i].UsageHours]);
+            //}
+
+            
+            var data = google.visualization.arrayToDataTable(dataarray);
+            var view = new google.visualization.DataView(data);
+
+            view.setColumns([0, 1,
+                {
+                    calc: "stringify",
+                    sourceColumn: 1,
+                    type: "string",
+                    role: "annotation"
+                }
+            ]);
+
+            var options = {
+                title: 'ITIWise usage',
+                chartArea: { height: '40%' },
+                height: 550,
+                annotations: {
+                    alwaysOutside: true,
+                    textStyle: {
+                        fontSize: 12,
+                        auraColor: 'none',
+                        color: '#555'
+                    },
+                    boxStyle: {
+                        stroke: '#ccc',
+                        strokeWidth: 1,
+                        gradient: {
+                            color1: '#f3e5f5',
+                            color2: '#f3e5f5',
+                            x1: '0%', y1: '0%',
+                            x2: '100%', y2: '100%'
+                        }
+                    }
+                },
+                hAxis: {
+                    title: 'ITI',
+                    minValue: 0,
+                },
+                vAxis: {
+                    title: 'UsageHours'
+                },
+                bar: { groupWidth: "75%" },
+                legend: { position: "none" },
+                is3D: true
+            };
+            var chart = new google.visualization.ColumnChart(document.getElementById('ITIBarChartdiv'));
+            chart.draw(view, options);
+
+        }
+      
+    }
+
+
+    function MonthUsageBarChart(ChartData) {
+
+       
+        google.charts.load("current", { packages: ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+
+            var dataarray = [['Month Name', 'Usage Hours']];
+            for (var i = 0; i < ChartData.length; i++) {
+                dataarray.push([ChartData[i].MonthName, ChartData[i].UsageHours]);
+            }
+
+            //var data = new google.visualization.DataTable();
+            //data.addColumn('string', 'Month Name');
+            //data.addColumn('number', 'Usage Hours');
+
+            //for (var i = 0; i < ChartData.length; i++) {
+            //    data.addRow([ChartData[i].MonthName, ChartData[i].UsageHours]);
+            //}
+
+           // alert(dataarray);
+
+            var data = google.visualization.arrayToDataTable(dataarray);
+            var view = new google.visualization.DataView(data);
+          //  view.setRows(data.getSortedRows({ column: 0, desc: true }));
+
+            view.setColumns([0, 1,
+                {
+                    calc: "stringify",
+                    sourceColumn: 1,
+                    type: "string",
+                    role: "annotation"
+                }
+            ]);
+
+            var options = {
+                title: 'Monthwise usage',
+                sort: 'none',
+                chartArea: { height: '40%' },
+                height: 550,
+                annotations: {
+                    alwaysOutside: true,
+                    textStyle: {
+                        fontSize: 12,
+                        auraColor: 'none',
+                        color: '#555'
+                    },
+                    boxStyle: {
+                        stroke: '#ccc',
+                        strokeWidth: 1,
+                        gradient: {
+                            color1: '#f3e5f5',
+                            color2: '#f3e5f5',
+                            x1: '0%', y1: '0%',
+                            x2: '100%', y2: '100%'
+                        }
+                    }
+                },
+                hAxis: {
+                    title: 'Month',
+                    minValue: 0,
+                },
+                vAxis: {
+                    title: 'UsageHours'
+                },
+                bar: { groupWidth: "75%" },
+                legend: { position: "none" },
+                is3D: true
+            };
+            var chart = new google.visualization.ColumnChart(document.getElementById('MonthBarChartdiv'));
+            chart.draw(view, options);
+        }
+
+    }
+
+</script>

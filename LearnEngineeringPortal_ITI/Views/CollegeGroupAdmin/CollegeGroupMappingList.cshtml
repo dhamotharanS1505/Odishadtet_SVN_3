@@ -1,0 +1,177 @@
+﻿
+@{
+    ViewBag.Title = "CollegeGroupMappingList";
+    Layout = "~/Views/Shared/_LearnEnggGroupAdminLayout.cshtml";
+}
+
+
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js "></script>
+
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js"></script>
+
+<style type="text/css">
+    table#tblReadHistry_ITI tr:nth-child(odd) {
+        background-color: #e7f1fd;
+    }
+
+    table#tblReadHistry_ITI th {
+        background-color: #1875f0;
+        color: white;
+    }
+
+       
+
+    th, td {
+        padding: 7px;
+        text-align: left;
+        text-align: center;
+        color: #000;
+        font-weight: 500;
+    }
+
+    td {
+        padding: 7px;
+        text-align: left;
+        text-align: center;
+        color: #000;
+        font-weight: 500;
+        opacity: 0.87;
+    }
+
+    table {
+        box-shadow: 0 1px 2px 2px #e6ecf1;
+        background-color: #fff;
+    }
+</style>
+
+<style>
+    input[type=text] {
+        border: 2px solid grey;
+        border-radius: 4px;
+        width: 100px;
+    }
+</style>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        loadCollegeGroupsList();
+    });
+
+    function loadCollegeGroupsList() {
+       
+        var urlwebs = '/APIService/APICollegeGroupAdminDashBoardReports/GetGroupCollegesList';
+        $('#tblReadHistry_ITI').DataTable().destroy();       
+
+        $.ajax({
+            beforeSend: function () {
+                $('.loader').show();               
+
+                //$('#tblReadHistry_ITI').DataTable({
+                //    "bDestroy": true
+                //}).fnClearTable();
+             
+                $('#tblReadHistry_ITI_wrapper').hide();
+            },
+            type: 'GET',
+            url: urlwebs,
+            dataType: 'json',
+            success: function (rData) {
+                var res;
+                var sno = 0;
+                var data = rData;                
+
+                for (var i = 0; i < data.length; i++) {
+                    sno = parseInt(sno + 1);
+                    res += '<tr><td width="10%">' + sno + '</td>' +
+                        //'<td id="UserName">' + data[i].userName + '</td>' +
+                        '<td width="20%">' + data[i].GroupName + '</td>' +
+                        '<td width="10%">' + data[i].CollegesCount + '</a></td>' +
+                        '<td width="60%">' + data[i].CollegesName + '</a></td></tr>';
+                }
+                $('#tblReadHistry_ITI tbody').empty();
+                $('#tblReadHistry_ITI_wrapper').hide();
+                $('#tblReadHistry_ITI tbody').empty().html(res);
+
+                setTimeout(function () {
+                    $('#tblReadHistry_ITI').DataTable({
+                        "bProcessing": true,
+                        "bDestroy": true,
+                        "aLengthMenu": [[10, 25, 50, 100, 500, 1000, 5000, 10000], [10, 25, 50, 100, 500, 1000, 5000, 10000]],
+                        "deferRender": true,
+                        //"aoColumnDefs": [{ "sType": "num-html", "aTargets": [7] }, { "sType": "date-dd-mmm-yyyy", "aTargets": [7] }],
+                        "order": [[1, 'desc']],
+                        "buttons": [
+                            'excelHtml5',
+                            'pdfHtml5'
+                        ], dom:
+                        "<'row'<'col-sm-12 div_dis'lBf>>" +
+                        "<'row'<'col-sm-12'tr>>" +
+                        "<'row'<'col-sm-12 div_dis'ip>>"
+                    });
+                }, 100);
+               
+
+            },
+            complete: function () {
+                $('.loader').hide();
+            }
+        });
+    }
+</script>
+
+<div class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="container">
+                <div class="row fist-cnt" style="margin-bottom:2%;">
+                    <div class="col-md-9">
+                        <p class="cnt-ft-txt">Users Read History Summary</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" style="margin-bottom:2%;">      
+            <div class="row">
+                <div class="loader">
+                    <center>
+                        <img src="~/Content/img/pre_loader.gif" />
+                    </center>
+                </div>
+            </div>
+            <div class="row">
+                @*<div class="loader">
+                    <center>
+                        <img src="~/Content/img/pre_loader.gif" />
+                    </center>
+                </div>*@
+                <div class="col-md-12">
+                    <table id="tblReadHistry_ITI" style="width:90%">
+                        <thead>
+                            <tr>
+                                <th>
+                                    S.No
+                                </th>
+                                <th>
+                                    Group Name
+                                </th>
+                                <th>
+                                    Total Colleges
+                                </th>
+                                <th>
+                                    List of Colleges
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+</div>

@@ -1,0 +1,512 @@
+﻿@{
+    ViewBag.Title = "View Cart";
+    Layout = "~/Views/Shared/_LearnEnggLayout.cshtml";
+}
+<section class="page-content-wrapper">
+    <div style="padding:0;" class="col-sm-4">
+        <h1 class="shop_txt">Shopping Cart</h1>
+        <p class="shp_pc-txt">You have picked <b> <span id="FixItemcount">   </span></b> item(s) in your shopping</p>
+    </div>
+    <div style="border: 1px solid rgb(206, 206, 206);" class="col-sm-7 col-sm-offset-1">
+        <div class="sel-mode">
+            <h4>Delivery Media</h4>
+            <div id="checkbox_div">
+                <div class="row" id="FixDeliveryMode">
+
+                </div>
+                <div id="selcetmode" class="col-sm-12 center">
+                    <p style="margin-bottom: 7px;text-align:center" id="desc">  <strong><span class="des-price" id="FixDeliveryDetails"></strong></span></p>
+                    <p style="margin-bottom: 2px;text-align:left;" id="Deliverydesc"> <span class="shp_pc-txt" id="FixDeliveryDesc"></span></p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-md-12 delivery-des">
+        <div class="col-md-3">
+            <p style="margin: 0px;">Delivery Media: <strong><span class="" id="FixDeliveryModeSelected"></span></strong></p>
+        </div>
+
+        <div class="col-md-2">
+            <p style="margin: 0px;">Brand:&nbsp;<strong><span class="" id="FixDeliveryBrand"></span> </strong></p>
+        </div>
+
+        <div class="col-md-3">
+            <p style="margin: 0px;">Media Charges :&nbsp;<i class="fa fa-inr" aria-hidden="true"></i> <strong><span class="" id="FixProductPrice"></span> </strong></p>
+        </div>
+
+        <div class="col-md-2">
+            <p style="margin: 0px;">Shipping Charges:&nbsp;<i class="fa fa-inr" aria-hidden="true"></i> <strong><span class="" id="FixShipping"></span> </strong></p>
+        </div>
+
+        <div class="col-md-2">
+            <p style="margin: 0px;">Total Price:&nbsp;<i class="fa fa-inr" aria-hidden="true"></i> <strong><span class="" id="FixDeliveryPrice"></span> </strong></p>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <article class="cal_his_tab">
+                <div class="table-responsive DVD">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td width="30%" align="left">Subject name</td>
+                                <td width="15%" align="left">Operating System</td>
+                                <td width="15%">Price&nbsp;(<i class="fa fa-inr" aria-hidden="true"></i>)</td>
+                                <td width="15%">Discount Price&nbsp;(<i class="fa fa-inr" aria-hidden="true"></i>)</td>
+                                <td width="15%">Total&nbsp;(<i class="fa fa-inr" aria-hidden="true"></i>)</td>
+                                <td width="10%"> </td>
+                            </tr>
+                        </thead>
+                        <tbody id="FixViewCartDetails"></tbody>
+                        <tfoot style="border-top: 3px solid #ccc;">
+                            <tr>
+
+                                <td align="right" colspan="4"><b>Sub Total &nbsp;&nbsp;<i class="fa fa-inr" aria-hidden="true"></i></b></td>
+                                <td id="FixSubtotal" align="right"></td>
+
+                            </tr>
+                            <tr>
+
+                                <td colspan="4" align="right">
+                                    <b>Media Charges + Shipping Charges &nbsp;&nbsp;<i class="fa fa-inr" aria-hidden="true"></i></b>
+                                    <span id="FixShippingPrice"></span>
+                                <td id="FixShippingCharge" align="right">0</td>
+
+                            </tr>
+                            <tr class="bld_td">
+
+                                <td align="right" colspan="4">Total &nbsp;&nbsp;<i class="fa fa-inr" aria-hidden="true"></i></td>
+                                <td id="FixTotal" align="right"></td>
+
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+
+
+
+
+            </article>
+            <article class="shp_btn_ful-wrp">
+                <div class="cont-shp-btn_wrp">
+
+                    <!---->
+                    <fieldset class="field_cont">
+                        <legend class="lgnd">Continue Shopping:</legend>
+                        <span class="android-btn" id="btnContinueAndroidShop"><a href="#"> <img src="../../LE/img/android1.png" width="30" /> Android App Store</a></span>
+                        <span class="windows-btn" id="btnContinueShop"><a href="#"> <img src="../../LE/img/windows.png" width="30" /> Desktop Store </a></span>
+                    </fieldset>
+                    <!------->
+
+                </div>
+                <div class="upd_btn-wrp" style="margin-bottom:140px;">
+                    <button id="btnCheckout" class="btn btn-primary btn-style" type="button">Proceed to Check Out</button>
+                </div>
+            </article>
+        </div>
+    </div>
+
+</section>
+
+<script language="javascript">
+    $(document).ready(function () {
+        ShowLoader();
+        bindCartDetails();
+        bindDeliveryMode();
+        HideLoader();
+    });
+    $(document).on('click', '.classdeliverymode', function () {
+        bindTotalAmt();
+    });
+    function bindTotalAmt() {
+        var DeliveryMode = $(".classdeliverymode:checked").map(function () {
+            return $(this).attr('rel');
+        }).get();
+        //var Mode = $('#divMode').text();
+        var Mode = $('.classdeliverymode:checked').parent().text();
+
+        var res = DeliveryMode.toString().split("- Rs.");
+        $('#FixDeliveryModeSelected').text(Mode);
+        $('#FixDeliveryBrand').text(res[0]);
+        if (res[1] > 0) {
+            $('#FixDeliveryPrice').text(res[1]);
+            $('#FixShippingCharge').text(res[1]);
+            $('#FixDeliveryDetails').text(res[0] + ' - Rs. ' + res[1]);
+        }
+        else {
+            $('#FixDeliveryPrice').text('FREE');
+            $('#FixShippingCharge').text('FREE');
+            $('#FixProductPrice').text(res[1]);
+            $('#FixShippingCharge').text(res[1]);
+            $('#FixDeliveryDetails').text(res[0] + ' - FREE');
+        }
+        if (res[2] > 0) {
+            $('#FixShippingPrice').text(' [' + res[2] + '+' + res[3] + ']');
+            $('#FixProductPrice').text(res[2]);
+            $('#FixShipping').text(res[3]);
+        }
+        else {
+            $('#FixProductPrice').text('FREE');
+            $('#FixShipping').text('FREE');
+            $('#FixShippingPrice').text(' ');
+        }
+        if (res[4] != "") {
+            $('#FixDeliveryDesc').text(res[4]);
+        }
+        else {
+            $('#FixDeliveryDesc').text("");
+        }
+        var sum = 0;
+        var Total = $("#FixSubtotal").text();
+        var ShippingCharge = res[1];
+        sum = Number(Total) + Number(ShippingCharge);
+        $('#FixTotal').text(sum);
+    }
+
+    function bindDeliveryMode() {
+        $.getJSON("/APIService/APIUserViewCartDetails/GetDeliveryMode", function (rData) {
+            var res = '';
+            $("#FixDeliveryMode").empty();
+            $.each(rData, function (i, value) {
+
+                var j = 0;
+                j = parseInt(j + 1);
+                $("#BindDelivery").tmpl(value).appendTo("#FixDeliveryMode");
+
+            });
+
+        });
+    }
+    function bindCartDetails() {
+        var userID = '@Session["loginUserID"]';
+
+        var packageID = $.cookie('packageId');
+        //$.cookie('packageId', "1,12,15,17,11,29,32", { path: '/' });
+        var subTotal = 0;
+
+        if (userID != 0) {
+            $.getJSON("/APIService/APIUserViewCartDetails/GetViewCartDetails?userid=" + userID, function (rData) {
+                var res = '';
+                var TotPrice = 0;
+                $("#FixViewCartDetails").empty();
+                $('#FixItemcount').text(0);
+                $('#FixSubtotal').text(0);
+                $('#FixDiscount').text(0);
+                $('#FixTotal').text(0);
+                $("#lblViewCount").text(0);
+                if (rData.length > 0) {
+
+                    $.each(rData, function (i, value) {
+                        //  alert(value.Bundlesubjects);
+                        if (i == 0) {
+                            //$('#FixViewCartDetails').text(value.packageName);
+                            $("#lblViewCount").text(" " + value.itemCount);
+                            $('#FixItemcount').text(" " + value.itemCount);
+                            $('#FixSubtotal').text(value.subTotal);
+                            $('#FixTotal').text(value.subTotal);
+                            subTotal = value.subTotal;
+                            var DeliveryMode = $(".classdeliverymode:checked").map(function () {
+                                return $(this).attr('rel');
+                            }).get();
+                            if (DeliveryMode != "") {
+                                bindTotalAmt();
+                            }
+
+                        }
+                        var j = 0;
+                        j = parseInt(j + 1);
+                        if (value.Bundle == 1) {
+                            //  alert(value.Bundlesubjects);
+                            //  value.Bundlesubjects = value.Bundlesubjects.replace(/,/gi, " \r\n\r\n");
+                            //  alert(value.Bundlesubjects);
+
+                            $("#BundleViewCart").tmpl(value).appendTo("#FixViewCartDetails");
+                        } else {
+                            $("#BindViewCart").tmpl(value).appendTo("#FixViewCartDetails");
+                        }
+                        subTotal = value.subTotal;
+                    });
+                }
+                else {
+                    var txt = "No Item(s) in your cart.";
+                    $("#FixViewCartDetails").text(txt);
+
+                }
+            });
+        }
+        else {
+            if (packageID != "") {
+                $.getJSON("/APIService/APIUserViewCartDetails/GetViewCartDetails_BeforeLogin?packageID=" + packageID, function (rData) {
+                    var res = '';
+                    var TotPrice = 0;
+                    $("#FixViewCartDetails").empty();
+                    $.each(rData, function (i, value) {
+                        if (i == 0) {
+                            $('#FixItemcount').text(value.itemCount);
+                            $('#FixSubtotal').text(value.subTotal);
+                            $('#FixTotal').text(value.subTotal);
+                            $('#FixDiscount').text(0);
+                            subTotal = value.subTotal;
+                            var DeliveryMode = $(".classdeliverymode:checked").map(function () {
+                                return $(this).attr('rel');
+                            }).get();
+                            if (DeliveryMode != "") {
+                                $('#FixDeliveryDetails').text(DeliveryMode);
+                                var res = DeliveryMode.toString().split("Rs.");
+                                var sum = 0;
+                                var Total = subTotal;
+                                var ShippingCharge = res[1];
+                                sum = Number(Total) + Number(ShippingCharge);
+                                $('#FixTotal').text(sum);
+                            }
+                            else {
+
+                            }
+                        }
+                        var j = 0;
+                        j = parseInt(j + 1);
+
+
+                        $("#BindViewCart").tmpl(value).appendTo("#FixViewCartDetails");
+                        subTotal = value.subTotal;
+                    });
+                });
+            }
+        }
+
+
+    }
+    $(document).on('click', '#btnRemove', function () {
+        ShowLoader();
+        packageID = $(this).attr('rel');
+        var userID = '@Session["loginUserID"]';
+
+        ShowAlert({
+            title: "Remove from Cart",
+            text: "Are you sure want to remove this item?",
+            type: "info",
+            showCancelButton: true,
+            closeOnConfirm: false,
+            showLoaderOnConfirm: true,
+        },
+        function () {
+            setTimeout(function () {
+                if (userID != 0) {
+                    $.getJSON("/APIService/APIUserViewCartDetails/GetRemovePackage?userId=" + userID + "&packageID=" + packageID, function (rData) {
+                        if (rData == 1) {
+                            bindCartDetails();
+                            bindLayoutCartDetails(userID);
+
+                            ShowAlert("Deleted!", "Your item is removed from your cart.", "success");
+                        }
+                        else {
+                            bindCartDetails();
+                            ShowAlert("Cancelled", "Your Request is Cancelled", "error");
+                        }
+                    });
+                }
+                else {
+
+                    var cookiePackageId = $.cookie('packageId');
+                    if (cookiePackageId != undefined) {
+                        var updatedCookiePackageId = cookiePackageId.replace(packageID + ',', '');
+                        updatedCookiePackageId = updatedCookiePackageId.replace(',' + packageID, '');
+                        updatedCookiePackageId = updatedCookiePackageId.replace(packageID, '');
+                        $.cookie('packageId', updatedCookiePackageId, { path: '/' });
+                    }
+
+                }
+
+            }, 2000);
+        });
+
+
+        //if (confirm("Are you sure want to remove this item?")) {
+        //    if (userID != 0) {
+        //        $.getJSON("/APIService/APIUserViewCartDetails/GetRemovePackage?userId=" + userID + "&packageID=" + packageID, function (rData) {
+        //            if (rData == 1)
+        //            {
+        //                bindCartDetails();
+        //                bindLayoutCartDetails(userID);
+        //            }
+        //            else
+        //            {
+        //                bindCartDetails();
+        //            }
+        //        });
+
+
+        //    }
+        //    else {
+        //        var cookiePackageId = $.cookie('packageId');
+        //        if (cookiePackageId != undefined) {
+        //            var updatedCookiePackageId = cookiePackageId.replace(packageID + ',', '');
+        //            updatedCookiePackageId = updatedCookiePackageId.replace(',' + packageID, '');
+        //            updatedCookiePackageId = updatedCookiePackageId.replace(packageID, '');
+        //            $.cookie('packageId', updatedCookiePackageId, { path: '/' });
+        //        }
+
+
+
+        //    }
+        //}
+        HideLoader();
+    });
+    $(document).on('click', '#btnContinueShop', function () {
+        window.location.href = "/Home/Index";
+
+    });
+
+    $(document).on('click', '#btnContinueAndroidShop', function () {
+        window.location.href = '/Home/IndexAndroidApp?UnivID=' + $("#sessionUniversityId").val();
+
+    });
+
+    $(document).on('click', '#btnCheckout', function () {
+        ShowLoader();
+        var itemCount = $('#FixItemcount').text();
+        if (itemCount > 0) {
+
+            var DeliveryModeID = $(".classdeliverymode:checked").map(function () {
+                return $(this).val();
+            }).get();
+            var Totalamt = Number($("#FixTotal").text());
+
+            if (DeliveryModeID != "") {
+                var UserID = '@Session["loginUserID"]';
+                if (UserID != 0) {
+                    $.getJSON("/APIService/APIUserViewCartDetails/GetUpdateDeliveryMode?userId=" + UserID + "&DeliveryModeId=" + DeliveryModeID,
+                        function (rData) {
+                            if (rData == 1) {
+                                //if (Totalamt > 0) {
+                                //    window.location.href = "/OrderSummary/MyOrder";
+                                //}
+                                // else {
+                                $.getJSON("/APIService/APIPaymentCart/GetSaveUserOrderDetails_fromViewCart",
+                                          {
+                                              pUserId: UserID
+                                          }
+                              , function (data) {
+
+                                  ShowAlert("Order is Processing", "Your Order is processing please wait");
+
+                                  if (data == 0 || data == "0" || data == "" || data == '') {
+
+                                      ShowAlert("Order is not Placed", "Order is not yet placed,your cart item(s) changed.", "warning")
+                                      window.location.reload();
+
+                                  } else {
+
+                                      if (Totalamt == 0) {
+                                          window.location.href = "/OrderSummary/OrderSummaryPage?usersubscribemasterid=" + data;
+                                      }
+                                      else if (Totalamt > 0) {
+                                          window.location.href = "/OrderSummary/MyOrder";
+                                      }
+                                  }
+
+                              });
+                                //}
+                            }
+                            else {
+
+                            }
+                        });
+                }
+                else {
+                    window.location.href = "/Home/Index";
+
+                }
+            }
+            else {
+                ShowAlert("Delivery Media", "Select Delivery Media");
+            }
+        }
+        else {
+            ShowAlert("Alert!", "No Item in your cart");
+
+        }
+        HideLoader();
+    });
+
+
+</script>
+<script id="BindViewCart" type="text/html">
+
+    <!-----Package Binding----->
+
+
+    <tr>
+        <td>
+
+            <span class="title">${packageName}</span>
+        </td>
+
+        <td align="center">
+            <span class="amount muted">${OsType}</span><img src="../../LE/img/${OsType}1.png" width="20" />
+        </td>
+
+        <td align="right">
+            <span class="amount muted">${PackageActualPrice}</span>
+        </td>
+
+        <td align="right">
+            <span class="amount muted">${DiscountPrice}</span>
+        </td>
+
+        <td align="right">
+            <span class="amount muted">${PackageSellingPrice}</span>
+        </td>
+        <td align="center">
+            <a class="remove" id="btnRemove" href="#" rel=${packageID}><span>Remove</span></a>
+        </td>
+    </tr>
+
+</script>
+<script id="subjectTemplate" type="text/html">
+    <ul>{{each Bundlesubjects}}<li>${$value}</li>{{/each}}</ul>
+
+</script>
+
+
+<script id="BundleViewCart" type="text/html">
+    <!-----Package Binding----->
+    <tr>
+        <td>
+            <span class="title">
+                <strong>${packageName}</strong>
+                {{tmpl($data) "#subjectTemplate"}}
+            </span>
+        </td>
+        <td align="center">
+            <span class="amount muted">${OsType}</span> <img src="../../LE/img/${OsType}1.png" width="20" />
+        </td>
+
+        <td align="right">
+            <span class="amount muted">${PackageActualPrice}</span>
+        </td>
+
+        <td align="right">
+            <span class="amount muted">${DiscountPrice}</span>
+        </td>
+
+        <td align="right">
+            <span class="amount muted">${PackageSellingPrice}</span>
+        </td>
+        <td align="center">
+            <a class="remove" id="btnRemove" href="#" rel=${packageID}><span>Remove</span></a>
+        </td>
+    </tr>
+
+</script>
+<script id="BindDelivery" type="text/html">
+
+    <div class="col-sm-3" id="divMode">
+        <input type="radio" class="classdeliverymode" name="deliverymode" id="rdbDeliveryMode" value=${DeliveryOptionID} rel="${Description}- Rs. ${DeliveryOptionPrice} - Rs. ${DeliveryProductPrice} - Rs. ${DeliveryShippingPrice} - Rs. ${DeliveryDesc}" /> ${DeliveryMode}
+    </div>
+
+</script>

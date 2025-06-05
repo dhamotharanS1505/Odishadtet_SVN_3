@@ -1,0 +1,673 @@
+﻿
+@{
+    ViewBag.Title = "UsageDashBoard";
+    Layout = "~/Views/Shared/_LearnEnggAdminLayout.cshtml";
+}
+<script src="~/Scripts/Admin/GoogleChart/jsapi.js"></script>
+<style>
+    #tblUsageUserCnt th, #tblMnthlyUsg th, #tblWeeklyUserCnt th, #tbltradeusghrs th, #tblinstitueUsgHrs th, td {
+        padding: 2px;
+        text-align: center;
+    }
+
+    #tblUsageUserCnt th, #tblWeeklyUserCnt th, #tbltradeusghrs th, #tblinstitueUsgHrs th, #tblMnthlyUsg th, #Overalldivtable th {
+        background-color: #808080;
+        color: white;
+    }
+
+    #tblUsageUserCnt tr:nth-child(even), #tblWeeklyUserCnt tr:nth-child(even),
+    #tbltradeusghrs tr:nth-child(even), #tblinstitueUsgHrs tr:nth-child(even), #tblMnthlyUsg tr:nth-child(even) {
+        background-color: #808080;
+    }
+
+
+
+    #tblUserDetailss td, #tblUserStafDetails td {
+        text-align: left;
+    }
+
+    .box_dah_rad figure {
+        float: left;
+        margin: 5px 10px 0px 0px;
+    }
+
+    #dailyPieChartdiv {
+        position: relative;
+        top: -10px;
+    }
+
+    #WeeklyPieChartdiv {
+        position: relative;
+        top: -10px;
+    }
+
+    #monthlyPieChartdiv {
+        position: relative;
+        top: -10px;
+    }
+
+    #month0 {
+        color: Blue;
+    }
+
+    #month1 {
+        color: Red;
+    }
+
+    #month2 {
+        color: Orange;
+    }
+
+    .fl_in_det {
+        margin: 1px !important;
+        padding: 0 !important;
+    }
+
+    #monthlyPieChartdiv > img {
+        padding-top: 44px;
+    }
+
+    .tab-content {
+        border-bottom: 1px solid #3b5998;
+        border-top: 1px solid #3b5998;
+        min-height: 100px;
+        overflow: auto;
+        padding: 11px 0 !important;
+        width: 100%;
+    }
+
+    .dataTables_scrollBody {
+        height: 145px !important;
+        overflow: auto;
+        width: 100%;
+    }
+
+    .mrgn {
+        margin: 7px 50% 0px 0 !important;
+    }
+
+    .bt_blu_ad {
+        background-color: #2ebcf2 !important;
+        border-radius: 3px !important;
+        color: #fff !important;
+        float: right;
+        margin: 7px 2% 14px 0;
+        padding: 2px 10px;
+    }
+
+    .in_hd_tt span {
+        font-size: 15px;
+        margin: 0 26px 0 10px;
+        text-transform: capitalize;
+    }
+
+    #Overalldivtable {
+        width: 60%;
+        margin: 30%;
+    }
+</style>
+
+<section class="inner_mid_wrp-main">
+    <article class="col-sm-12">
+        <div class="in_hd_tt row">
+            <strong class="fa fa-file-text"></strong><span><b>Dashboard Usage Details</b></span>
+
+        </div>
+
+    </article>
+    <article class="ar_sec_dah_nw marsp">
+        <section class="row">
+            <div class="col-sm-4">
+                <div class="box_dah_rad">
+                    <div style="width: 100%; height:340px;">
+                        <h1 style="text-transform:none !important;margin:10px 0 0 15px;">OVERALL USAGE HOURS <label style="color:blue"></label> <p id="spndailyTotReg"></p></h1>
+                        <div id="Overalldivtablediv" style="width: 99%; height: 250px; float: left;text-align:center">
+                            <table id="Overalldivtable" cellspacing="0">
+                                <thead id="Overalldiv">
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="box_dah_rad">
+                    <div style="width: 100%; height:340px;">
+                        <h1 style="text-transform:none !important;margin:10px 0 0 15px;">TRADE WISE USAGE HOURS <p id="spndailyTotReg"></p></h1>
+                        <div id="TradeWiseChartdiv" style="width: 99%; height: 250px; float: left">
+                        </div>
+                        <div class="col-sm-12" style="width:100%;">
+                            <table id="tbltradeusghrs" style="width:100%;" cellspacing="0">
+                                <thead id="tblheader">
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="box_dah_rad">
+                    <div style="width: 100%; height:340px;">
+                        <h1 style="text-transform:none !important;margin:10px 0 0 15px;">USAGE HOURS  (Top 5 ITI) <p id="spndailyTotReg"></p></h1>
+                        <div id="InstituteChartdiv" style="width: 99%; height: 250px; float: left">
+                            <center>
+                                    <div id="divLoading" style="margin: 0px; padding: 100px; position: fixed; right: 0px;top: 120px; width: 100%; height: 100%; z-index: 30001; opacity: 0.50;">
+                                        <p style="position: absolute; top: 40%; left: 0%; margin:0 auto">
+                                            <img src="~/Content/img/pre_loader.gif" />
+                                        </p>
+                                    </div>
+                                </center>
+                        </div>
+                        <div class="col-sm-12" style="width:100%;">
+                            <table id="tblinstitueUsgHrs" style="width:100%;" cellspacing="0">
+                                <thead id="tblheader">
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <article class="ar_sec_dah_nw">
+            <section class="row">
+                <div class="col-sm-4">
+                    <div class="box_dah_rad">
+                        <div style="height:300px;">
+                            <h1 style="text-transform:none !important;margin:10px 0 0 15px;">MONTHLY USAGE  <p id="spnmonthlyTotReg"></p></h1>
+                            <div class="col-sm-12" id="LastThreeMonthlyChartdiv" style="width: 100%; height: 150px;">
+                            </div>
+                            <div class="col-sm-12" style="width: 99%;height:34px; padding-top: 50px;">
+                                <table id="tblUsageUserCnt" style="width:100%;" cellspacing="0">
+                                    <thead id="tblheader"></thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="box_dah_rad">
+                        <div style="height:300px;">
+                            <h1 style="text-transform:none !important;margin:10px 0 0 15px;">WEEKLY USAGE<label style="color:blue"> (Last 4 Weeks)</label><p id="spnmonthlyTotReg"></p></h1>
+                            <div class="col-sm-12" id="MonthlyChartdiv" style="width: 100%; height: 150px;">
+                            </div>
+                            <div class="col-sm-12" style="width: 99%;height:34px; padding-top: 50px;">
+                                <table id="tblMnthlyUsg" style="width:100%;" cellspacing="0"><thead id="tblheader"></thead><tbody></tbody></table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="box_dah_rad">
+                        <div style="width: 99%; height:300px;">
+                            <h1 style="text-transform:none !important;margin:10px 0 0 15px;">DAILY USAGE DETAILS <label style="color:blue"> (Last 7 Days)</label> <p id="spnweeklyTotReg"></p></h1>
+                            <div id="WeeklyChartdiv">
+                            </div>
+                            <div class="col-sm-12" style="width: 99%;height: 34px;">
+                                <table id="tblWeeklyUserCnt" cellspacing="0" style="width:100%;">
+                                    <thead id="tblheader">
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </article>
+    </article>
+</section>
+
+<script type="text/javascript">
+
+    google.load("visualization", "1.1", { packages: ["corechart"] });
+    google.load("visualization", "1.1", { packages: ["table"] });
+    var UnivId = 0;
+    var UnivCode = 0;
+    var UrlParam = '';
+    var gUnivIds = '';
+    var viewId = 0;
+
+    function LoadAllFunction() {
+
+        TradeWiseUsageChart();
+        InstituteUsageChart();
+        WeeklyUsageChart();
+        MonthlyUsageChart();
+        LastThreeMonthUsageChart();
+    }
+
+
+    $(function () {
+        LoadAllFunction();
+    });
+
+    function TradeWiseUsageChart() {
+
+        $.ajax({
+            type: 'GET',
+            url: '/APIService/APIAdminReport/TotalUsageITI',
+            dataType: 'json',
+            async: 'false',
+            crossOrigin: true,
+            success: function (response) {
+
+                var rData = JSON.parse(response);
+                var studCnt = 0;
+                var staffCnt = 0;
+
+                drawChartTradeWiseUsage(rData);
+            },
+            complete: function () {
+            }
+        });
+    }
+
+    function InstituteUsageChart() {
+
+        $.ajax({
+            type: 'GET',
+            url: '/APIService/APIAdminReport/InstitutewiseUsagehrs',
+            dataType: 'json',
+            async: 'false',
+            crossOrigin: true,
+            success: function (response) {
+
+                var rData = JSON.parse(response);
+                var studCnt = 0;
+                var staffCnt = 0;
+
+                drawChartInstituteUsage(rData);
+            },
+            complete: function () {
+            }
+        });
+    }
+
+    function WeeklyUsageChart() {
+
+        $.ajax({
+            type: 'GET',
+            url: '/APIService/APIAdminReport/DailyUsage',
+            dataType: 'json',
+            async: 'false',
+            crossOrigin: true,
+            success: function (response) {
+                var rData = JSON.parse(response);
+                var studCnt = 0;
+                var staffCnt = 0;
+                //for (var i = 0; i < rData.length; i++) {
+                //    studCnt += parseInt(rData[i].StudentCount);
+                //}
+                //$('#spndailyTotReg').text(studCnt + staffCnt);
+                drawChartWeeklyUsage(rData);
+            },
+            complete: function () {
+            }
+        });
+    }
+
+    function MonthlyUsageChart() {
+
+        $.ajax({
+            type: 'GET',
+            url: '/APIService/APIAdminReport/WeeklyUsage',
+            dataType: 'json',
+            async: 'false',
+            success: function (response) {
+                var studCnt = 0;
+                var staffCnt = 0;
+                var rData = JSON.parse(response);
+                MonthlyUsagePieChart(rData);
+
+            },
+            complete: function () {
+            }
+        });
+    }
+
+    function LastThreeMonthUsageChart() {
+
+        $.ajax({
+            type: 'GET',
+            url: '/APIService/APIAdminReport/MonthlyUsage',
+            dataType: 'json',
+            async: 'false',
+            success: function (response) {
+                var studCnt = 0;
+                var staffCnt = 0;
+                var rData = JSON.parse(response);
+                //for (var i = 0; i < rData.length; i++) {
+                //    studCnt += parseInt(rData[i].StudentCount);
+                //    staffCnt += parseInt(rData[i].StaffCount);
+                //}
+                //$('#spnmonthlyTotReg').text(studCnt + staffCnt);
+                LastThreeMonthUsagePieChart(rData);
+
+            },
+            complete: function () {
+            }
+        });
+    }
+
+    function drawChartTradeWiseUsage(ChartData) {
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Trade');
+        data.addColumn('number', 'UsageHrs');
+
+        for (var i = 0; i < ChartData.length; i++) {
+            data.addRow([ChartData[i].departmentname, ChartData[i].usagehrs]);
+        }
+
+        var res = '';
+        var TotStudCnt = 0;
+        var TotstafCnt = 0;
+        if (ChartData.length > 0) {
+            $('#tbltradeusghrs thead').html('<tr><th>TotalHrs</th><td>' + ChartData[0].totusg + '</td></tr>');
+            $('#Overalldiv').html('<tr><th style="text-align:center;">TotalHrs</th><td>' + ChartData[0].totusg + '</td></tr>');
+        }
+
+        var options = {
+
+            series: {
+                0: { pointShape: 'square' },
+                1: { pointShape: 'diamond' }
+            },
+            //legend:'none'
+            legend: { position: 'top' },
+            animation: {
+                'startup': true,
+                duration: 1000,
+                easing: 'inAndOut'
+            },
+            vAxis: {
+                //gridlines: { count: 6
+                //},
+                title: 'Trades',
+                textStyle: {
+                    fontSize: 12,
+                    bold: true,
+                    italic: false
+                },
+                titleTextStyle: {
+                    bold: true
+                },
+                textPosition: 'out'
+            },
+            hAxis: {
+
+                title: 'Trade Usage'
+            },
+            colors: ['#FF7145', '#230382']
+        };
+
+        var PieChart = new google.visualization.ColumnChart(document.getElementById('TradeWiseChartdiv'));
+        PieChart.draw(data, options);
+
+    };
+
+    function drawChartInstituteUsage(ChartData) {
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'ITI');
+        data.addColumn('number', 'UsageHrs');
+
+        for (var i = 0; i < ChartData.length; i++) {
+            data.addRow([ChartData[i].collegename, ChartData[i].usagehrs]);
+        }
+
+        var res = '';
+        var TotStudCnt = 0;
+        var TotstafCnt = 0;
+        if (ChartData.length > 0) {
+            $('#tblinstitueUsgHrs thead').html('<tr><th>TotalHrs</th><td>' + ChartData[0].totusg + '</td></tr>');
+
+        }
+
+
+
+        var options = {
+
+            series: {
+                0: { pointShape: 'square' },
+                1: { pointShape: 'diamond' }
+            },
+            //legend:'none'
+            legend: { position: 'top' },
+            animation: {
+                'startup': true,
+                duration: 1000,
+                easing: 'inAndOut'
+            },
+            vAxis: {
+                //gridlines: { count: 6
+                //},
+                title: 'ITIs',
+                textStyle: {
+                    fontSize: 12,
+                    bold: true,
+                    italic: false
+                },
+                titleTextStyle: {
+                    bold: true
+                },
+                textPosition: 'out'
+            },
+            hAxis: {
+
+                title: 'Institute Usage'
+            },
+            colors: ['#FF7145', '#230382']
+        };
+
+        var PieChart = new google.visualization.ColumnChart(document.getElementById('InstituteChartdiv'));
+        PieChart.draw(data, options);
+
+    };
+
+    function drawChartWeeklyUsage(ChartData) {
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'CreatedOn');
+        data.addColumn('number', 'UsageHrs');
+
+        for (var i = 0; i < ChartData.length; i++) {
+            data.addRow([ChartData[i].CreatedOn, ChartData[i].studTotalHrs]);
+        }
+
+        var res = '';
+        var TotStudCnt = 0;
+        var TotstafCnt = 0;
+        if (ChartData.length > 0) {
+            //   $('#tblWeeklyUserCnt thead').html('<tr><th>Date</th><th>Instructor Count</th></tr>');
+        }
+        //for (var i = 0; i < ChartData.length; i++) {
+
+        //    if (ChartData[i].StudentCount != 0) {
+        //        TotStudCnt += ChartData[i].StudentCount;
+        //        if (ChartData[i].StaffCount != 0) {
+        //            TotstafCnt += ChartData[i].StaffCount;
+        //            res += '<tr style=" border: 1px solid #ddd;">' +
+        //                   '<td style="font-weight:bold;" >' + ChartData[i].CreatedOn + '</td>' +
+        //                   '<td>' + parseInt(ChartData[i].StudentCount) + '</td>' +
+        //                   '</tr>';
+        //        }
+        //        else {
+        //            res += '<tr style=" border: 1px solid #ddd;">' +
+        //            '<td style="font-weight:bold;" >' + ChartData[i].CreatedOn + '</td>' +
+        //             '<td>' + parseInt(ChartData[i].StudentCount) + '</td>' +
+        //            '</tr>';
+        //        }
+        //    }
+
+        //}
+        //res += '<tr style=" border: 1px solid #ddd;">' +
+        //               '<td style="font-weight:bold;" >Total</td>' +
+        //               '<td>' + TotStudCnt + '</td>' +
+        //               '</tr>';
+
+        //$('#tblWeeklyUserCnt tbody').html(res);
+
+
+        var options = {
+
+            series: {
+                0: { pointShape: 'square' },
+                1: { pointShape: 'diamond' }
+            },
+            //legend:'none'
+            legend: { position: 'top' },
+            animation: {
+                'startup': true,
+                duration: 1000,
+                easing: 'inAndOut'
+            },
+            vAxis: {
+                //gridlines: { count: 6
+                //},
+                title: 'Last 7 Days',
+                textStyle: {
+                    fontSize: 12,
+                    bold: true,
+                    italic: false
+                },
+                titleTextStyle: {
+                    bold: true
+                },
+                textPosition: 'out'
+            },
+            hAxis: {
+
+                title: 'UsageHrs'
+            },
+            colors: ['#FF7145', '#230382']
+        };
+
+        var PieChart = new google.visualization.ColumnChart(document.getElementById('WeeklyChartdiv'));
+        PieChart.draw(data, options);
+
+    };
+
+    function MonthlyUsagePieChart(ChartData) {
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Month');
+        data.addColumn('number', 'UsageHrs');
+
+
+        for (var i = 0; i < ChartData.length; i++) {
+            data.addRow([ChartData[i].Week, ChartData[i].StudentCount]);
+        }
+        //for (var i = 0; i < ChartData.length; i++) {
+        //    data1.addRow([ChartData[i].Month, ChartData[i].StaffCount]);
+        //}
+        var res = '';
+        var TotStudCnt = 0;
+        var TotstafCnt = 0;
+
+
+       
+        var options = {
+
+            series: {
+                0: { pointShape: 'square' },
+                1: { pointShape: 'diamond' }
+            },
+            //legend:'none'
+            legend: { position: 'top' },
+            animation: {
+                'startup': true,
+                duration: 1000,
+                easing: 'inAndOut'
+            },
+
+            vAxis: {
+                //gridlines: { count: 6
+                //},
+                title: 'Last 4 Weeks',
+                textStyle: {
+                    fontSize: 12,
+                    bold: true,
+                    italic: false
+                },
+                titleTextStyle: {
+                    bold: true
+                },
+                textPosition: 'out'
+            },
+            hAxis: {
+
+                title: 'UsageHrs'
+            },
+            width: 380, height: 250,
+            colors: ['#FF7145', '#230382']
+        };
+
+        var PieChart = new google.visualization.ColumnChart(document.getElementById('MonthlyChartdiv'));
+        PieChart.draw(data, options);
+
+
+    }
+
+    function LastThreeMonthUsagePieChart(ChartData) {
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Month');
+        data.addColumn('number', 'StudentCount');
+
+
+        for (var i = 0; i < ChartData.length; i++) {
+            data.addRow([ChartData[i].Month, ChartData[i].StudentCount]);
+        }
+
+        var res = '';
+        var TotStudCnt = 0;
+        var TotstafCnt = 0;
+        //if (ChartData.length > 0) {
+        //    $('#tblUsageUserCnt thead').html('<tr><th>Month</th><th>Instructor Count</th></tr>');
+        //}
+        //for (var i = 0; i < ChartData.length; i++) {
+        //    TotStudCnt += parseInt(ChartData[i].StudentCount);
+        //    TotstafCnt += parseInt(ChartData[i].StaffCount);
+        //    res += '<tr style=" border: 1px solid #ddd;">' +
+        //            '<td id="month' + i + '" style="font-weight:bold;" >' + ChartData[i].Month + '</td>' +
+        //            '<td>' + parseInt(ChartData[i].StudentCount) + '</a></td>' +
+        //            '</tr>';
+
+        //}
+        //res += '<tr style=" border: 1px solid #ddd;">' +
+        //                '<td style="font-weight:bold;" >Total</td>' +
+        //                '<td>' + TotStudCnt + '</td>' +
+        //                '</tr>';
+
+        //$('#tblUsageUserCnt tbody').html(res);
+
+        var options = {
+            title: 'UsageHrs',
+            legend: { position: 'top' },
+            is3D: true,
+            curveType: "function",
+            width: 300, height: 220,
+            //vAxis: {maxValue: 5},
+            chartArea: { width: '100%' }
+
+        };
+
+
+        var PieChart = new google.visualization.PieChart(document.getElementById('LastThreeMonthlyChartdiv'));
+        PieChart.draw(data, options);
+
+
+    }
+
+</script>
+

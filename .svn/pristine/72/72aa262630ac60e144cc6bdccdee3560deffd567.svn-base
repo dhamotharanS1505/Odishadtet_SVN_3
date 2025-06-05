@@ -1,0 +1,1918 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Odishadtet</name>
+    </assembly>
+    <members>
+        <member name="M:Odishadtet.APIServiceControllers.APIAdminAnalyzeActivityController.GetAdminAnalyzeByProductSales(System.Int32,System.DateTime,System.DateTime)">
+            <summary>
+            Gets the admin analyze by product sales.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.APIServiceControllers.APIAdminAnalyzeActivityController.GetAdminAnalyzeBySubjectsMultipleSelection(System.Int32,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Gets the admin analyze by product sales.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.APIServiceControllers.APIProductHomeController.GetDepartmentsList">
+            <summary>
+            Gets the departments list.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.APIServiceControllers.APIProductHomeController.GetSubjectDetails(System.Int32)">
+            <summary>
+            Gets the subject details.
+            </summary>
+            <param name="departmentID">The department identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.APIServiceControllers.APIProductHomeController.GetPackageDetails(System.Int32,System.Int64)">
+            <summary>
+            Gets the package details.
+            </summary>
+            <param name="departId">The depart identifier.</param>
+            <param name="subjectid">The subjectid.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.APIServiceControllers.APIProductHomeController.GetUniversityDetails(System.Int32,System.Int32)">
+            <summary>
+            Gets the university details.
+            </summary>
+            <param name="univtype">The univtype.</param>
+            <param name="loginUserid">The login userid.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.APIServiceControllers.APIProductHomeController.GetUniversityDetails">
+            <summary>
+            Gets the university details.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.APIServiceControllers.APIProductHomeController.GetPackageDetails(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Gets the package details.
+            </summary>
+            <param name="univId">The univ identifier.</param>
+            <param name="departmentId">The department identifier.</param>
+            <param name="userId">The user identifier.</param>
+            <param name="univtype">The univtype.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.Controllers.AdminAnalyzeActivityController.DataAnalyseReportSubjectWise(System.Int32,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Data Analyse Report for subject wise with multiple conditions
+            </summary>
+            <param name="UnivId"></param>
+            <param name="PurStartDate"></param>
+            <param name="PurEndDate"></param>
+            <param name="TraStartDate"></param>
+            <param name="TraEndDate"></param>
+            <param name="UsgStartDate"></param>
+            <param name="UsgEndDate"></param>
+            <param name="UserRole"></param>
+        </member>
+        <member name="M:Odishadtet.Controllers.AdminAnalyzeActivityController.DataAnalyseReportUserwise(System.Int32,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+             Data Analyze report for user wise with multiple conditions
+            </summary>
+            <param name="UnivId"></param>
+            <param name="RegStartDate"></param>
+            <param name="RegEndDate"></param>
+            <param name="PurStartDate"></param>
+            <param name="PurEndDate"></param>
+            <param name="TraStartDate"></param>
+            <param name="TraEndDate"></param>
+            <param name="UsgStartDate"></param>
+            <param name="UsgEndDate"></param>
+        </member>
+        <member name="M:Odishadtet.Controllers.AdminAnalyzeActivityController.DatewiseSalesReport">
+            <summary>
+            DatewiseSalesReport
+            </summary>
+        </member>
+        <member name="M:Odishadtet.Controllers.AdminAnalyzeActivityController.StudentSemestersReport">
+            <summary>
+            StudentSemestersReport for registered and not registered users
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.Controllers.AdminAnalyzeActivityController.ExportSMSdataReport(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Excel report for sms data users
+            </summary>
+        </member>
+        <member name="M:Odishadtet.Controllers.AdminProcessController.UserReadHistoryReportwithfilter(System.Int32,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            UserReadHistoryReportwithfilter
+            </summary>
+            <param name="univId"></param>
+            <param name="clog_id"></param>
+            <param name="sem"></param>
+            <param name="year"></param>
+            <param name="rg_st_dte"></param>
+            <param name="rg_end_dte"></param>
+            <param name="usg_st_dte"></param>
+            <param name="usg_end_dte"></param>
+        </member>
+        <member name="M:Odishadtet.Controllers.AdminProcessController.UserReadHistoryReportAndroidApp(System.Int32,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            UserReadHistoryReportAndroidApp
+            </summary>
+            <param name="univId"></param>
+            <param name="clog_id"></param>
+            <param name="sem"></param>
+            <param name="year"></param>
+            <param name="rg_st_dte"></param>
+            <param name="rg_end_dte"></param>
+            <param name="usg_st_dte"></param>
+            <param name="usg_end_dte"></param>
+        </member>
+        <member name="M:Odishadtet.Controllers.AdminProcessController.ReadHistoryContentAndQA_AndroidApp(System.Int32,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            ReadHistoryContentAndQA_AndroidApp
+            </summary>
+            <param name="univId"></param>
+            <param name="college_id"></param>
+            <param name="semester"></param>
+            <param name="year"></param>
+            <param name="reg_startdate"></param>
+            <param name="reg_end_date"></param>
+            <param name="usg_start_date"></param>
+            <param name="usg_end_date"></param>
+            <param name="contenttype"></param>
+        </member>
+        <member name="M:Odishadtet.Controllers.AdminProcessController.SubjectUnitReadHistorywithFilter(System.Int32,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            SubjectUnitReadHistorywithFilter
+            </summary>
+            <param name="univId"></param>
+            <param name="college_id"></param>
+            <param name="semester"></param>
+            <param name="year"></param>
+            <param name="reg_startdate"></param>
+            <param name="reg_end_date"></param>
+            <param name="usg_start_date"></param>
+            <param name="usg_end_date"></param>
+            <param name="contenttype"></param>
+        </member>
+        <member name="M:Odishadtet.Controllers.AdminProcessController.DataAnalyseReport(System.Int32,System.String,System.String)">
+            <summary>
+            DataAnalyseReport
+            </summary>
+            <param name="UnivId"></param>
+            <param name="startDate"></param>
+            <param name="endDate"></param>
+        </member>
+        <member name="T:Odishadtet.Controllers.HomeController">
+            <summary>
+            Using this class navigating the home page action related to other pages
+            </summary>
+            
+        </member>
+        <member name="M:Odishadtet.Controllers.HomeController.StudentRegistration">
+            <summary>
+            Load Registrtaion form
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.Controllers.HomeController.StudentRegistration(Odishadtet.DAL.user_master)">
+            <summary>
+            To Save User Details 
+            </summary>
+            <param name="user_master"></param>
+            <returns>StudentRegistration.cshtml</returns>
+        </member>
+        <member name="M:Odishadtet.Controllers.UserViewCartDetailsController.ViewMyCart">
+            <summary>
+            To load view cart page
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminAnalyzeService.DateWise_Sales_Report">
+            <summary>
+            DateWise_Sales_Report
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminAnalyzeService.SemesterBatchReport">
+            <summary>
+            SemesterBatchReport for All university
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminAnalyzeService.ExportSMSdataReport(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Excel reports for sms batch data
+            </summary>
+            <param name="univId"></param>
+            <param name="year"></param>
+            <param name="batchyearId"></param>
+            <param name="rpt_type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminReportService.GetUserReadHistory(System.Int32,System.Int32,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            GetUserReadHistory
+            </summary>
+            <param name="userID"></param>
+            <param name="univId"></param>
+            <param name="college_id"></param>
+            <param name="semester"></param>
+            <param name="year"></param>
+            <param name="reg_startdate"></param>
+            <param name="reg_end_date"></param>
+            <param name="usg_start_date"></param>
+            <param name="usg_end_date"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminReportService.GetUserUsageReadHistory(System.Int32,System.Int32,System.String,System.Int32,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            GetUserUsageReadHistory
+            </summary>
+            <param name="userID"></param>
+            <param name="univId"></param>
+            <param name="college_id"></param>
+            <param name="deptid"></param>
+            <param name="semester"></param>
+            <param name="year"></param>
+            <param name="reg_startdate"></param>
+            <param name="reg_end_date"></param>
+            <param name="usg_start_date"></param>
+            <param name="usg_end_date"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminReportService.GetUserTotalHrsReadHistory(System.Int32,System.Int32,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            GetUserTotalHrsReadHistory
+            </summary>
+            <param name="userID"></param>
+            <param name="univId"></param>
+            <param name="college_id"></param>
+            <param name="semester"></param>
+            <param name="year"></param>
+            <param name="reg_startdate"></param>
+            <param name="reg_end_date"></param>
+            <param name="usg_start_date"></param>
+            <param name="usg_end_date"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminReportService.GetTotalHoursUsageReadHistory(System.Int32,System.Int32,System.String,System.Int32,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            GetTotalHoursUsageReadHistory
+            </summary>
+            <param name="userID"></param>
+            <param name="univId"></param>
+            <param name="college_id"></param>
+            <param name="deptid"></param>
+            <param name="semester"></param>
+            <param name="year"></param>
+            <param name="reg_startdate"></param>
+            <param name="reg_end_date"></param>
+            <param name="usg_start_date"></param>
+            <param name="usg_end_date"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminReportService.weeklywiseReport(System.Int32,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            weeklywiseReport
+            </summary>
+            <param name="univId"></param>
+            <param name="college_id"></param>
+            <param name="semester"></param>
+            <param name="year"></param>
+            <param name="reg_startdate"></param>
+            <param name="reg_end_date"></param>
+            <param name="usg_start_date"></param>
+            <param name="usg_end_date"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminReportService.UniversityReadHistorySummary(System.Int32,System.Int32,System.Int32,System.Int32,System.String,System.String,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            UniversityReadHistoryByDeptSummary
+            </summary>
+            <param name="univId"></param>
+            <param name="college_id"></param>
+            <param name="semester"></param>
+            <param name="year"></param>
+            <param name="reg_startdate"></param>
+            <param name="reg_end_date"></param>
+            <param name="usg_start_date"></param>
+            <param name="usg_end_date"></param>
+            <param name="ITIorTrade"></param> 
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminReportService.UniversityReadHistorySummarySpilit(System.Int32,System.Int32,System.Int32,System.Int32,System.String,System.String,System.Int32)">
+            <summary>
+            UniversityReadHistorySummarySpilit
+            </summary>
+            <param name="univId"></param>
+            <param name="college_id"></param>
+            <param name="semester"></param>
+            <param name="year"></param>
+            <param name="reg_startdate"></param>
+            <param name="reg_end_date"></param>
+            <param name="usg_start_date"></param>
+            <param name="usg_end_date"></param>
+            <param name="ITIorTrade"></param> 
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminReportService.UniversityReadHistory(System.Int32,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            UniversityReadHistory
+            </summary>
+            <param name="univId"></param>
+            <param name="college_id"></param>
+            <param name="semester"></param>
+            <param name="year"></param>
+            <param name="reg_startdate"></param>
+            <param name="reg_end_date"></param>
+            <param name="usg_start_date"></param>
+            <param name="usg_end_date"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminReportService.subjectwiseReadHistory(System.Int32,System.Int32,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            subjectwiseReadHistory
+            </summary>
+            <param name="userID"></param>
+            <param name="univId"></param>
+            <param name="college_id"></param>
+            <param name="semester"></param>
+            <param name="year"></param>
+            <param name="reg_startdate"></param>
+            <param name="reg_end_date"></param>
+            <param name="usg_start_date"></param>
+            <param name="usg_end_date"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminReportService.GetLaunchData(System.Int32,System.String,System.String,System.String,System.String)">
+            <summary>
+            GetLaunchData
+            </summary>
+            <param name="univId"></param>
+            <param name="semester"></param>
+            <param name="year"></param>
+            <param name="reg_startdate"></param>
+            <param name="reg_end_date"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminReportService.RegisteredUserUniversityDetails(System.Int32,System.String,System.String,System.Int32,System.String,System.String)">
+            <summary>
+            RegisteredUserUniversityDetails
+            </summary>
+            <param name="univId"></param>
+            <param name="univ_code"></param>
+            <param name="year"></param>
+            <param name="semester"></param>
+            <param name="startdate"></param>
+            <param name="end_date"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminReportService.RegisteredUniversityCollegeDetails(System.String,System.Int32,System.String,System.String,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            RegisteredUniversityCollegeDetails
+            </summary>
+            <param name="year"></param>
+            <param name="semester"></param>
+            <param name="start_date"></param>
+            <param name="end_date"></param>
+            <param name="universityId"></param>
+            <param name="roleid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminReportService.RegisteredUserCollegeDetails(System.String,System.Int32,System.String,System.String,System.String)">
+            <summary>
+            RegisteredUserCollegeDetails
+            </summary>
+            <param name="year"></param>
+            <param name="semester"></param>
+            <param name="start_Date"></param>
+            <param name="end_Date"></param>
+            <param name="universityId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminReportService.RegisteredUserDetails(System.String,System.Int32,System.String,System.String,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            RegisteredUserDetails
+            </summary>
+            <param name="year"></param>
+            <param name="semester"></param>
+            <param name="startDate"></param>
+            <param name="endDate"></param>
+            <param name="univId"></param>
+            <param name="collegeId"></param>
+            <param name="roleid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminReportService.TotalUsage(System.Int32)">
+            <summary>
+            TotalUsage-AdminDashboard
+            </summary>
+            <param name="UnivId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminReportService.WeeklyRegistration">
+            <summary>
+            WeeklyRegistration- AdminDashboard
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminReportService.DailyRegistration">
+            <summary>
+            DailyRegistration -AdminDashboard
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminReportService.MonthlysRegistration">
+            <summary>
+            MonthlysRegistration -AdminDashBoards
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminReportService.TotalRegistration(System.Int32)">
+            <summary>
+            TotalRegistration -AdminDashboard
+            </summary>
+            <param name="UnivId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminReportService.TotalITIRegistration">
+            <summary>
+            TotalITIRegistration
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminReportService.HighestRegisteredTrade">
+            <summary>
+            HighestRegisteredTrade -Registration Dashboard
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminReportService.HighestRegistered_ITI">
+            <summary>
+            HighestRegistered_ITI - Registration Dashboard
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminReportService.SendRoleWiseFeedback(System.Int32,System.String,System.Int32,System.String,System.Int32,System.String,System.Int32,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="user_id"></param>
+            <param name="user_name"></param>
+            <param name="rolle_id"></param>
+            <param name="rolle_desc"></param>
+            <param name="mobile"></param>
+            <param name="email"></param>
+            <param name="college_id"></param>
+            <param name="feedback"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminService.GetOpenOrderDetails(System.String)">
+            <summary>
+            To get all open orders from cart from all users 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminService.UpdatePreparationOrderStatus(System.Int64,System.String,System.String,System.Int32)">
+            <summary>
+            To update the preparation status for all open orders
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminService.UpdateQualityCheckStatus(System.Int64,System.String,System.String,System.Int32)">
+            <summary>
+            To update the quality checking status for all prepared orders from all open orders
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminService.OrderPrepartionDialog(System.String)">
+            <summary>
+            To get current order stauts for particular oder using order reference number
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminService.OrderDetailsDialog(System.String)">
+            <summary>
+            To get  order status for single user using order reference number
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminService.GetUserSubjectDetails(System.Int64,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            To get subjects details for single user based on their university,department,year,semester and mobile number
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminService.LoadGridOrdersPreparation(Odishadtet.Models.JqSearchIn,System.String)">
+            <summary>
+            To Load the Orders status Grid for Open orders status
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminService.LoadOpenOrdersQC_Status(Odishadtet.Models.JqSearchIn,System.String)">
+            <summary>
+            To load open orders quality check status for all prepared orders 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminService.GetUniversityDetailsAdmin(System.String)">
+            <summary>
+            To Get University Details for AdminPage
+            </summary>
+            <param name="mapuniv"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminService.AdminDashBoard(System.String)">
+            <summary>
+            Admin Dashboard 
+            </summary>
+            <param name="mapuniv"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminService.OpenOrdersAdminDashBoard(System.String)">
+            <summary>
+             To get open order status at Admin Dashboard For ONDOOR Orders
+            </summary>
+            <param name="mapuniv"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminService.LastweekOrdersAdminDashBoard(System.String)">
+            <summary>
+            To get Last week  order status for Admin Dashboard
+            </summary>
+            <param name="mapuniv"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminService.VisitedUersChart(System.String)">
+            <summary>
+            To get old and New user count those who visited our site
+            </summary>
+            <param name="mapuniv"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminService.GetDepartmentListForAdminActivity(System.Int32)">
+            <summary>
+             to get department details for AdminActivitycontroller using university id
+            </summary>
+            <param name="univId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminService.GetDateWiseOrderSummary(System.String,System.String)">
+            <summary>
+            To GetDateWiseOrderSummary between two dates
+            </summary>
+            <param name="FromDate"></param>
+            <param name="ToDate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminService.GetUserSubjectsDetails_Activation(System.String)">
+            <summary>
+            get user subject details for subject activation
+            </summary>
+            <param name="UserId"></param>
+            <returns>AllOrderStatusDetailsbuyOnline.cshtml</returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminService.SubjectActivationHistory_UniversityWise_Report">
+            <summary>
+            Show subject activation university wise,total users and total subjects activation details
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminService.SubjectActivationHistory_DateWise_Report(System.Int32)">
+            <summary>
+            Show subject activation Date wise,total users and total subjects,total content and total q/A activation details
+            </summary>
+            <param name="UniversityId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminService.SubjectActivationy_For_HistorReportDetails(System.Int32,System.String)">
+            <summary>
+            Show subject activation Activated for user wise,total users,subjects,subject type,expiry date and university  activation details
+            </summary>
+            <param name="UnivId"></param>
+            <param name="Date"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminService.SubjectActivation_By_HistoryReportDetails(System.Int32,System.String)">
+            <summary>
+            Show subject activation Activated by user wise,total users and total subjects,total content and total q/A activation details
+            </summary>
+            <param name="UnivId"></param>
+            <param name="Date"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminService.LoadSemesterDropDown(System.Int32)">
+            <summary>
+            To Load semester based on department basis
+            </summary>
+            <param name="departmentid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminService.LoadUniversityDropdown">
+            <summary>
+            Loading university details for dropdown
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminService.LoadDepartmentDropdown(System.Int32)">
+            <summary>
+            Loading Department details for dropdown
+            </summary>
+            <param name="universityId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminService.SubjectMasterUploadPopup(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            SubjectMasterUploadPopup 
+            </summary>
+            <param name="selectedUniversity"></param>
+            <param name="Department"></param>
+            <param name="Semester"></param>
+            <param name="Subjectid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminService.SubjectMasterUploadGrid(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            SubjectMasterUploadGrid
+            </summary>
+            <param name="selectedUniversity"></param>
+            <param name="Department"></param>
+            <param name="Semester"></param>
+            <param name="Subjectid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminService.GetOTP(System.Int64)">
+            <summary>
+            To Display OTP using Mobile Number
+            </summary>
+            <param name="Mobile"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminService.GetArchiveFeedbacks">
+            <summary>
+            Get Feedback Details
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminService.GetDateWise_user_Registration_report(System.String,System.String)">
+            <summary>
+            Load Specific Selected Period DateWise user Registration report  
+            </summary>
+            <param name="start_date"></param>
+            <param name="End_date"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminService.DateWise_user_Registration_report_Issues_popup(System.String)">
+            <summary>
+            Load Last Month DateWise user Registration report Initial Grid
+            </summary>
+            <param name="start_date"></param>
+            <param name="End_date"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminService.Univ_DateWise_user_Registration_report_Issues_popup(System.String,System.Int32)">
+            <summary>
+            Univ_DateWise_user_Registration_report_Issues_popup
+            </summary>
+            <param name="PDate"></param>
+            <param name="UnivId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminService.UniversityReadHistoryexportwithfilter(System.Int32,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            UniversityReadHistoryexportwithfilter
+            </summary>
+            <param name="univId"></param>
+            <param name="college_id"></param>
+            <param name="semester"></param>
+            <param name="year"></param>
+            <param name="reg_startdate"></param>
+            <param name="reg_end_date"></param>
+            <param name="usg_start_date"></param>
+            <param name="usg_end_date"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminService.UniversityReadHistoryExportAndroidApp(System.Int32,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            UniversityReadHistoryExportAndroidApp
+            </summary>
+            <param name="univId"></param>
+            <param name="college_id"></param>
+            <param name="semester"></param>
+            <param name="year"></param>
+            <param name="reg_startdate"></param>
+            <param name="reg_end_date"></param>
+            <param name="usg_start_date"></param>
+            <param name="usg_end_date"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminService.ExportReadHistoryContentAndQA_AndroidApp(System.Int32,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="univId"></param>
+            <param name="college_id"></param>
+            <param name="semester"></param>
+            <param name="year"></param>
+            <param name="reg_startdate"></param>
+            <param name="reg_end_date"></param>
+            <param name="usg_start_date"></param>
+            <param name="usg_end_date"></param>
+            <param name="contenttype"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminService.subjectunitwiseReadHistoryReportwithfilter(System.Int32,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            subjectunitwiseReadHistoryReportwithfilter
+            </summary>
+            <param name="univId"></param>
+            <param name="college_id"></param>
+            <param name="semester"></param>
+            <param name="year"></param>
+            <param name="reg_startdate"></param>
+            <param name="reg_end_date"></param>
+            <param name="usg_start_date"></param>
+            <param name="usg_end_date"></param>
+            <param name="contenttype"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminService.ForgetPassword(System.Int64)">
+            <summary>
+            Method for forget password, to send otp to mobile and email
+            </summary>
+            <param name="mobileNo">long</param>
+            <returns>Forget password view model</returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminService.ForgetPasswordCollegeAdmin(System.Int64)">
+            <summary>
+            Method for forget password, to send otp to mobile and email
+            </summary>
+            <param name="mobileNo">long</param>
+            <returns>Forget password view model</returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminService.GetVerificationCodeByMobile(System.Int64,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="MobNo"></param>
+            <param name="emailID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminService.GetVerificationCodeByMobileCollegeAdmin(System.Int64,System.String)">
+            <summary>
+            Method For check the verification code(OTP) from the user using OTP code For Order Placed Conformation
+            </summary>
+            <param name="userId"></param>
+            <param name="otpCode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminService.ResetPassword(System.Int64,System.String,System.String)">
+            <summary>
+            Method for Reset Password
+            </summary>
+            <param name="mobileNo">long</param>
+            <param name="otpCode">string</param>
+            <param name="newPassword">string</param>
+            <returns>Foret password model</returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminService.ResetPasswordCollegeAdmin(System.Int64,System.String,System.String)">
+            <summary>
+            Method for Reset Password
+            </summary>
+            <param name="mobileNo">long</param>
+            <param name="otpCode">string</param>
+            <param name="newPassword">string</param>
+            <returns>Foret password model</returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminService.ResetPasswordEmail(System.String,System.String,System.String)">
+            <summary>
+            Method for Reset Password
+            </summary>
+            <param name="mobileNo">long</param>
+            <param name="otpCode">string</param>
+            <param name="newPassword">string</param>
+            <returns>Foret password model</returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminService.ResetPasswordCollegeAdminEmail(System.String,System.String,System.String)">
+            <summary>
+            Method for Reset Password
+            </summary>
+            <param name="mobileNo">long</param>
+            <param name="otpCode">string</param>
+            <param name="newPassword">string</param>
+            <returns>Foret password model</returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminService.ForgetPasswordEmail(System.String)">
+            <summary>
+            Method for forget password, to send otp to mobile and email
+            </summary>
+            <param name="mobileNo">long</param>
+            <returns>Forget password view model</returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminService.ForgetPasswordCollegeAdminEmail(System.String)">
+            <summary>
+            Method for forget password, to send otp to mobile and email
+            </summary>
+            <param name="mobileNo">long</param>
+            <returns>Forget password view model</returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminService.getCollegeDepartLicenseUsedCounts(System.Int32,System.Int32)">
+            <summary>
+            Gets the college depart license used counts.
+            </summary>
+            <param name="collegeId">The college identifier.</param>
+            <param name="departmentId">The department identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.AdminService.getCollegeDepartSubjectsLicenseUsedCounts(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Gets the college depart license used counts.
+            </summary>
+            <param name="collegeId">The college identifier.</param>
+            <param name="departmentId">The department identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.CollegeGroupAdminReportService.GetUserTotalHrsReadHistory(System.Int32,System.Int32,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            GetUserTotalHrsReadHistory
+            </summary>
+            <param name="userID"></param>
+            <param name="univId"></param>
+            <param name="college_id"></param>
+            <param name="semester"></param>
+            <param name="year"></param>
+            <param name="reg_startdate"></param>
+            <param name="reg_end_date"></param>
+            <param name="usg_start_date"></param>
+            <param name="usg_end_date"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.CollegeGroupAdminReportService.GetTotalHoursUsageReadHistory(System.Int32,System.Int32,System.String,System.Int32,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            GetTotalHoursUsageReadHistory
+            </summary>
+            <param name="userID"></param>
+            <param name="univId"></param>
+            <param name="college_id"></param>
+            <param name="deptid"></param>
+            <param name="semester"></param>
+            <param name="year"></param>
+            <param name="reg_startdate"></param>
+            <param name="reg_end_date"></param>
+            <param name="usg_start_date"></param>
+            <param name="usg_end_date"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.CollegeGroupAdminReportService.TotalUsage(System.Int32)">
+            <summary>
+            TotalUsage-AdminDashboard
+            </summary>
+            <param name="UnivId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.CollegeGroupAdminReportService.WeeklyRegistration">
+            <summary>
+            WeeklyRegistration- AdminDashboard
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.CollegeGroupAdminReportService.DailyRegistration">
+            <summary>
+            DailyRegistration -AdminDashboard
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.CollegeGroupAdminReportService.MonthlysRegistration">
+            <summary>
+            MonthlysRegistration -AdminDashBoards
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.CollegeGroupAdminReportService.TotalRegistration(System.Int32)">
+            <summary>
+            TotalRegistration -AdminDashboard
+            </summary>
+            <param name="UnivId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.CollegeGroupAdminReportService.TotalITIRegistration">
+            <summary>
+            TotalITIRegistration
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.CollegeGroupAdminReportService.HighestRegisteredTrade">
+            <summary>
+            HighestRegisteredTrade -Registration Dashboard
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.CollegeGroupAdminReportService.HighestRegistered_ITI">
+            <summary>
+            HighestRegistered_ITI - Registration Dashboard
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.CollegeGroupAdminReportService.CollegeGroupDashBoardMain(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="CollegeGrpId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.CollegeGroupAdminReportService.GetGroupAdminDepartmentListActivitionextenddays(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="univId"></param>
+            <param name="collegeId"></param>
+            <param name="CollegeGrpId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.CollegeGroupAdminReportService.GetGroupAdminColleges(System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="departmentID"></param>
+            <param name="CollegeGrpId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.CollegeGroupAdminReportService.UniversityGroupAdminReadHistorySummarySpilit(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.String,System.String,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="CollegeGrpId"></param>
+            <param name="DepartmentID"></param>
+            <param name="collegeID"></param>
+            <param name="SubjectID"></param>
+            <param name="SemsterID"></param>
+            <param name="DateFrom"></param>
+            <param name="DateTo"></param>
+            <param name="SubjectType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.CollegeGroupAdminReportService.UniversityReadHistorySummary(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="CollegeGrpId"></param>
+            <param name="DepartmentID"></param>
+            <param name="collegeID"></param>
+            <param name="SubjectID"></param>
+            <param name="SemsterID"></param>
+            <param name="DateFrom"></param>
+            <param name="DateTo"></param>
+            <param name="SubjectType"></param>
+            <param name="ITIorTrade"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.CollegeGroupAdminReportService.RegistrationReportsummary(System.Int32,System.Int32,System.Int32,System.String,System.String,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="deptID"></param>
+            <param name="collegeID"></param>
+            <param name="DateFrom"></param>
+            <param name="DateTo"></param>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.CollegeGroupAdminReportService.RegisteredUniversityCollegeDetails(System.Int32,System.String,System.Int32,System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            RegisteredUniversityCollegeDetails
+            </summary>
+            <param name="year"></param>
+            <param name="semester"></param>
+            <param name="start_date"></param>
+            <param name="end_date"></param>
+            <param name="universityId"></param>
+            <param name="roleid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.CollegeGroupAdminReportService.UniversityReadHistory(System.Int32,System.Int32,System.String,System.Int32,System.Int32,System.String,System.String,System.Int32)">
+            <summary>
+            Universities the read history.
+            </summary>
+            <param name="CollegeGrpId">The college GRP identifier.</param>
+            <param name="departmentID">The department identifier.</param>
+            <param name="collegeID">The college identifier.</param>
+            <param name="SubjectID">The subject identifier.</param>
+            <param name="SemsterID">The semster identifier.</param>
+            <param name="DateFrom">The date from.</param>
+            <param name="DateTo">The date to.</param>
+            <param name="SubjectType">Type of the subject.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.CollegeGroupAdminReportService.GetGroupCollesgesList">
+            <summary>
+            Gets the group collesges list.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.IPaymentService.GetTransactionNumberAgainstPaymentRef(System.String)">
+            <summary>
+            Gets the transaction number against payment reference.
+            </summary>
+            <param name="paymentRef">The payment reference.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Odishadtet.DAL.PaymentService">
+             <summary>
+            Get Payment Details 
+             </summary>
+        </member>
+        <member name="M:Odishadtet.DAL.PaymentService.CancelOrderConfirmation(System.Int32)">
+            <summary>
+            CancelOrderConfirmation with OTP submission
+            </summary>
+            <param name="usersubscribemasterid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.PaymentService.GetOrderDetails(System.Int32,System.Int32)">
+            <summary>
+            GetOrderDetails for overall order details
+            </summary>
+            <param name="userid"></param>
+            <param name="OrderStatus"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.PaymentService.CancelOrderOTP(System.Int64,System.String)">
+            <summary>
+            OTP code for order cancellation using orderid
+            </summary>
+            <param name="actn_user_mobile"></param>
+            <param name="orderId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.PaymentService.LoadCancelOrderCategory">
+            <summary>
+            Loading Cancel orders Category
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.PaymentService.UpdateRefundPayment(Odishadtet.Models.Payment,System.Int32)">
+            <summary>
+            Updates the refund payment.
+            </summary>
+            <param name="pm">The pm.</param>
+            <param name="PaymentType">Type of the payment.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.PaymentService.VerifyCancelOrderAmount(System.Nullable{System.Int32},System.Int64,System.String,System.String,System.Int32,System.String,System.Int32)">
+            <summary>
+            Verifies the cancel order amount.
+            </summary>
+            <param name="usersubscribemasterid">The usersubscribemasterid.</param>
+            <param name="buyer_mobileNo">The buyer mobile no.</param>
+            <param name="ToEmailID">To email identifier.</param>
+            <param name="OrderID">The order identifier.</param>
+            <param name="userid">The userid.</param>
+            <param name="verificationcode">The verificationcode.</param>
+            <param name="AmtToRefund">The amt to refund.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Odishadtet.DAL.ProductService">
+            <summary>
+             To Disply Product and Details
+            </summary>
+            <returns></returns>
+            
+        </member>
+        <member name="M:Odishadtet.DAL.ProductService.GetDepartmentDetails">
+            <summary>
+             To Get Pacakages based Department Details
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.ProductService.GetSubjectDetails(System.Int32)">
+            <summary>
+            To Get Subject Details based On Department
+            </summary>
+            <param name="departmentID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.ProductService.GetPackageDetails(System.Int32,System.Int64)">
+            <summary>
+            To Get Packages Details for Department and Subject
+            </summary>
+            <param name="departId"></param>
+            <param name="subjectid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.ProductService.GetSinglePackageDetails(System.Int32)">
+            <summary>
+            To Get Single packages details
+            </summary>
+            <param name="PackageId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.ProductService.GetDepartmentRelatedPackagesDetails(System.Int32)">
+            <summary>
+            To Get Department Related Packages for single Department
+            </summary>
+            <param name="DepartmentId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.ProductService.GetAvailableDiscountCoupens">
+            <summary>
+            To Get Avilable Discount Coupens for Cart Items
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.ProductService.ApplyDiscountCoupenForUser(System.String)">
+            <summary>
+            To Applying Discount Coupent for cart using Discount Code
+            </summary>
+            <param name="discountCode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.ProductService.CheckAvailablePackageDetails(System.Int32)">
+            <summary>
+            To Check Available pacakges details for single package
+            </summary>
+            <param name="packageid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.ProductService.GetUniversityDetails">
+            <summary>
+            To Get University Details
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.ProductService.GetUniversityDetails(System.Int32,System.Int32)">
+            <summary>
+            To Get University details for Logged in User based on Type
+            </summary>
+            <param name="univtype"></param>
+            <param name="loginUserid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.ProductService.GetDepartmentList(System.Int32,System.Int32)">
+            <summary>
+             To Get Department Details Based on University and University Type
+            </summary>
+            <param name="univId"></param>
+            <param name="univtype"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.ProductService.GetPackageDetails(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            To Get Packages Deatils for University Based Department pacakges for single user and University Type
+            </summary>
+            <param name="univId"></param>
+            <param name="departmentId"></param>
+            <param name="userId"></param>
+            <param name="univtype"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.ProductService.GetSemester(System.Int32,System.Int32)">
+            <summary>
+            To get Semester based on University and University type
+            </summary>
+            <param name="univId"></param>
+            <param name="univType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.ProductService.GetRegulation(System.Int32)">
+            <summary>
+             To Get Regulation for user based on University
+            </summary>
+            <param name="univ_id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.ProductService.GetUniversityId_UnivType(System.Int32)">
+            <summary>
+            To Get univeristy Details single user to see the packages from another university
+            </summary>
+            <param name="univ_Type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.ProductService.GetPackages(System.Int32,System.Int64)">
+            <summary>
+            To get packages details based on department and subject
+            </summary>
+            <param name="departId"></param>
+            <param name="subjectid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.ProductService.SaveUserDetailsForMasterCopyUsage(System.String,System.String,System.Int64,System.String,System.Int32)">
+            <summary>
+            Saves the user details for master copy usage.
+            </summary>
+            <param name="userName">Name of the user.</param>
+            <param name="emailId">The email identifier.</param>
+            <param name="departmentId">The department identifier.</param>
+            <param name="semester">The semester.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.ProductService.Registration_Conformation(System.Int64,System.String)">
+            <summary>
+            Registrations the conformation.
+            </summary>
+            <param name="mobileNo">The mobile no.</param>
+            <param name="ToEmailID">To email identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.ProductService.Registration_OTPConformation(System.Int64,System.String)">
+            <summary>
+            Registrations the otp conformation.
+            </summary>
+            <param name="mastercopy_usage_id">The mastercopy usage identifier.</param>
+            <param name="OTPCode">The otp code.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.ProductService.Registration_ReSendOTP(System.Int64)">
+            <summary>
+            Registrations the re send otp.
+            </summary>
+            <param name="mastercopy_usage_id">The mastercopy usage identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Odishadtet.DAL.StudentService">
+            <summary>
+            Show Student Registration,Login,OTP Details
+            </summary>
+        </member>
+        <member name="M:Odishadtet.DAL.StudentService.RemoveUser(System.Int64,System.Int64)">
+            <summary>
+            
+            </summary>
+            <param name="userMobile"></param>
+            <param name="adminMobile"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.StudentService.GetVerificationCodeByMobileForRefundProcess(System.Int64,System.String)">
+            <summary>
+            Gets the verification code by mobile for refund process.
+            </summary>
+            <param name="MobNo">The mob no.</param>
+            <param name="emailID">The email identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.StudentService.GetVerificationCodeByMobile(System.Int64,System.String)">
+            <summary>
+            To get verification for new user while Registration Process
+            </summary>
+            <param name="MobNo"></param>
+            <param name="emailID"></param>
+            <returns></returns>
+            <summary>
+            Method for Generate And Send OTP To User For Registeration
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.StudentService.GetProfileUpdateOTPCode(System.String,System.Int32)">
+            <summary>
+            Sending otp code through mobile to update profile
+            </summary>
+            <param name="MobNo"></param>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.StudentService.UpdateUserDetails(System.Int32,System.String,System.Int32,System.String,System.Int32,System.Int32,System.String,System.Int32)">
+            <summary>
+            Update user details from user profile
+            </summary>
+            <param name="userid"></param>
+            <param name="userName"></param>
+            <param name="deptId"></param>
+            <param name="year"></param>
+            <param name="sem"></param>
+            <param name="collegeName"></param>
+            <param name="collegeId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.StudentService.SaveNewUserDetails(System.String,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.String,System.Int64)">
+            <summary>
+            Method for Save New User Registeration For Login Purpose
+            </summary>
+            <param name="UserName"></param>
+            <param name="Department"></param>
+            <param name="University"></param>
+            <param name="College"></param>
+            <param name="year"></param>
+            <param name="Semester"></param>
+            <param name="Email"></param>
+            <param name="Mobile"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.StudentService.CheckLoginDetails(System.String,System.String)">
+            <summary>
+            Method for Check User Login Details with User LoginId and Password
+            </summary>
+            <param name="loginID"></param>
+            <param name="Password"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.StudentService.UserSessionDetails(System.String,System.Int64,System.String)">
+            <summary>
+            Method for check Number Of Times User Visited Page  
+            </summary>
+            <param name="sessionID"></param>
+            <param name="loginID"></param>
+            <param name="VisitedPageURL"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.StudentService.ForgetPassword(System.Int64)">
+            <summary>
+            Method for forget password, to send otp to mobile and email
+            </summary>
+            <param name="mobileNo">long</param>
+            <returns>Forget password view model</returns>
+        </member>
+        <member name="M:Odishadtet.DAL.StudentService.ResetPassword(System.Int64,System.String,System.String)">
+            <summary>
+            Method for Reset Password
+            </summary>
+            <param name="mobileNo">long</param>
+            <param name="otpCode">string</param>
+            <param name="newPassword">string</param>
+            <returns>Foret password model</returns>
+        </member>
+        <member name="M:Odishadtet.DAL.StudentService.ChangePassword(System.Int64,System.String)">
+             <summary>
+            To get and chagne current password for logged in user using mobile number and current password
+             </summary>
+             <param name="mobileNum"></param>
+             <param name="currPasswrd"></param>
+             <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.StudentService.GetUserProfileImage(System.Int32)">
+            <summary>
+             To get profile image for logged in user
+            </summary>
+            <param name="UserID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.StudentService.UpdateContactDetails(System.Int32,System.Int64,System.String)">
+            <summary>
+            To Update contact details and login status for single user based on mobile and email
+            </summary>
+            <param name="userid"></param>
+            <param name="mobile"></param>
+            <param name="emailId"></param>
+            <returns></returns>
+            <summary>
+            Method For Update User Contact Details 
+            </summary>
+            <param name="userid"></param>
+            <param name="mobile"></param>
+            <param name="emailId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.StudentService.GetViewCartDetails(System.Int64)">
+            <summary>
+            Method For Get User Purchased Product Details In ViewCart
+            </summary>
+            <param name="UserId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.StudentService.RemovePackage(System.Int32,System.Int32)">
+            <summary>
+            Method For Remove Product From Cart
+            </summary>
+            <param name="UserId"></param>
+            <param name="PackageID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.StudentService.GetEncPasswordString(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="Pass"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.StudentService.GetPasswordString(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="EncPass"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.StudentService.UpdateDeliveryMode(System.Int32,System.Int32)">
+            <summary>
+            Method For Update User selected Delivery Mode in View Cart
+            </summary>
+            <param name="UserId"></param>
+            <param name="DeliveryModeId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.StudentService.GetViewCartCount(System.Int32)">
+            <summary>
+            Method For Show Number Of Products Uount  In User Cart
+            </summary>
+            <param name="UserId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.StudentService.GetDeliveryMode">
+            <summary>
+            Method For Get User Purchased Delivery Mode Type
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.StudentService.InsertPackageToUserCart(System.Int32,System.String)">
+            <summary>
+            Method For Insert User Purchased Product Details Into User View Cart
+            </summary>
+            <param name="UserId"></param>
+            <param name="PackageIds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.StudentService.InsertToUserWishList(System.Int32,System.Int32)">
+            <summary>
+            Method For Insert User Purchased Product Into User WishList
+            </summary>
+            <param name="UserId"></param>
+            <param name="PackageId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.StudentService.GetMyWishList(System.Int32)">
+            <summary>
+            Method For Get User Purchased Product From WishList
+            </summary>
+            <param name="UserId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.StudentService.GetUserPurchasedSubjects(System.Int32)">
+            <summary>
+            Method For Get User Purchased Subject Details
+            </summary>
+            <param name="UserId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.StudentService.UserDashboardDetails(System.Int32)">
+            <summary>
+            Method For Get Student Purchased Subject Details In DashBoard
+            </summary>
+            <param name="userid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.StudentService.UserAddress(System.Int32,System.Int32,System.String,System.Int64,System.String,System.Int32,System.String,System.String,System.Int32,System.String,System.Int32)">
+            <summary>
+            To get user Address details for both new Registered user and logged in user at cart option 
+            </summary>
+            <param name="pUserId"></param>
+            <param name="pAddressType"></param>
+            <param name="pFullName"></param>
+            <param name="pMobileNumber"></param>
+            <param name="pAddress"></param>
+            <param name="pPincode"></param>
+            <param name="pCity"></param>
+            <param name="pState"></param>
+            <param name="pCountry"></param>
+            <param name="pLandmark"></param>
+            <param name="pIsbilling_delivery"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.StudentService.GenerateVerificationCode(System.Int64,System.String)">
+            <summary>
+            To get verification code(OTP) through mobile and email
+            </summary>
+            <param name="MobNo"></param>
+            <param name="emailID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.StudentService.GetActivationKeys">
+            <summary>
+            Method For Get Subject Activation OTP To User Purchased Product After Payment succesed
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.StudentService.CreateActivationCode(System.Int64,System.Int64)">
+            <summary>
+            Method For Send Subject Activation OTP To User Purchased Product After Payment succesed
+            </summary>
+            <param name="user_subscribed_masterid"></param>
+            <param name="created_userid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.StudentService.UpdateActivationCodeForPurchase(System.Int32,System.Int64,System.String)">
+            <summary>
+            Method For Update Subject Activation Code For User Purchased Product 
+            </summary>
+            <param name="Userid"></param>
+            <param name="Mobilenumber"></param>
+            <param name="activationcode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.StudentService.UpdatePackageActivation(System.Int64,System.Int64,System.String)">
+            <summary>
+            Method For Get Activation Code Foom User To Activate Subjects
+            </summary>
+            <param name="activate_MobileNo"></param>
+            <param name="buyer_Mobileno"></param>
+            <param name="activationcode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.StudentService.Registration_Conformation(System.Int64,System.String)">
+            <summary>
+            Method For Get OTP From User To Register
+            </summary>
+            <param name="mobileNo"></param>
+            <param name="ToEmailID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.StudentService.SaveUserSubjectDetails(System.Int32)">
+             <summary>
+            Method To save subjects for new user after verification
+             </summary>
+             <param name="userid"></param>
+             <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.StudentService.OTP_CodeVerification(System.Int32,System.String)">
+            <summary>
+            Method For check the verification code(OTP) from the user using OTP code For Order Placed Conformation
+            </summary>
+            <param name="userId"></param>
+            <param name="otpCode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.StudentService.COD_Conformation(System.Int64,System.String)">
+            <summary>
+            Method For Send OTP To User For Order Placed Conformation
+            </summary>
+            <param name="buyer_mobileNo"></param>
+            <param name="ToEmailID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.StudentService.OrderShipped(System.String,System.String,System.String,System.String)">
+            <summary>
+             Method For Send Sms And E-Mail Order Shipped Details To User
+            </summary>
+            <param name="buyer_mobileNo"></param>
+            <param name="ToEmailID"></param>
+            <param name="orderID"></param>
+            <param name="TrackingID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.StudentService.COD_Cancellation(System.Int64,System.String,System.String)">
+            <summary>
+            Method For Send OTP To User For Conform Cancellation
+            </summary>
+            <param name="buyer_mobileNo"></param>
+            <param name="ToEmailID"></param>
+            <param name="OrderID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.StudentService.COD_Cancellation_approved(System.Int64,System.String,System.String)">
+            <summary>
+             Method For Get OTP Verification from User  
+            </summary>
+            <param name="buyer_mobileNo"></param>
+            <param name="ToEmailID"></param>
+            <param name="OrderID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.StudentService.LoadCollegeList(System.Int32)">
+            <summary>
+             Method For Get College List
+            </summary>
+            <param name="univId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.StudentService.LoadDepartmentList(System.Int32)">
+            <summary>
+            Method For Get Department List
+            </summary>
+            <param name="univId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.StudentService.UpdateTrailPackageOnline(System.Int32,System.Int32)">
+            <summary>
+             Method For Update Trial Product To Online Users
+            </summary>
+            <param name="userid"></param>
+            <param name="packageid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.StudentService.QustionAnsAndroidApp(System.Int32,System.Int32)">
+            <summary>
+            QustionAnsAndroidApp based on univeristy 
+            </summary>
+            <param name="universityId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.DAL.StudentService.UpdateUserProfileImage(System.Int64,System.String)">
+            <summary>
+            save user profile image to database
+            </summary>
+            <param name="UserID"></param>
+            <param name="ImageName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Odishadtet.General.StringDateParseExt.SafeParse(System.String)">
+            <summary>
+            Safes the parse.
+            </summary>
+            <param name="any">Any.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Odishadtet.Models.CustomAuthorization">
+            <summary>
+             CustomAuthorization
+            </summary>
+        </member>
+        <member name="M:Odishadtet.Models.CustomAuthorization.OnAuthorization(System.Web.Mvc.AuthorizationContext)">
+            public void OnAuthorization
+        </member>
+        <member name="P:Odishadtet.Models.propErrorDetails.isError">
+            <summary>
+            Return current process whether is error or not.
+            </summary>
+        </member>
+        <member name="P:Odishadtet.Models.propErrorDetails.errorTitle">
+            <summary>
+            Return error title.
+            </summary>
+        </member>
+        <member name="P:Odishadtet.Models.propErrorDetails.errorMessage">
+            <summary>
+            Return exception description.
+            </summary>
+        </member>
+        <member name="P:Odishadtet.Models.propErrorDetails.returnIntValue">
+            <summary>
+            Return single integer value.
+            </summary>
+        </member>
+        <member name="P:Odishadtet.Models.propErrorDetails.returnStringValue">
+            <summary>
+            Return single string value.
+            </summary>
+        </member>
+        <member name="P:Odishadtet.Models.propErrorDetails.returnBoolValue">
+            <summary>
+            Return single bool value.
+            </summary>
+        </member>
+        <member name="T:TNDET.API_ITI_ServiceControllers.APICollegeGroupAdminDashBoardReportsController">
+            <summary>
+            
+            </summary>
+            
+        </member>
+        <member name="M:TNDET.API_ITI_ServiceControllers.APICollegeGroupAdminDashBoardReportsController.GetGroupAdminDepartmentListActivitionextenddays(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Gets the group admin department list activitionextenddays.
+            </summary>
+            <param name="univId">The univ identifier.</param>
+            <param name="collegeId">The college identifier.</param>
+            <param name="CollegeGrpId">The college GRP identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TNDET.API_ITI_ServiceControllers.APICollegeGroupAdminDashBoardReportsController.GetGroupAdminColleges(System.Int32,System.Int32)">
+            <summary>
+            Gets the group admin colleges.
+            </summary>
+            <param name="departmentID">The department identifier.</param>
+            <param name="CollegeGrpId">The college GRP identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TNDET.API_ITI_ServiceControllers.APICollegeGroupAdminDashBoardReportsController.UniversityGroupAdminReadHistorySummarySpilit(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.String,System.String,System.Int32)">
+            <summary>
+            Universities the group admin read history summary spilit.
+            </summary>
+            <param name="CollegeGrpId">The college GRP identifier.</param>
+            <param name="DepartmentID">The department identifier.</param>
+            <param name="collegeID">The college identifier.</param>
+            <param name="SubjectID">The subject identifier.</param>
+            <param name="SemsterID">The semster identifier.</param>
+            <param name="DateFrom">The date from.</param>
+            <param name="DateTo">The date to.</param>
+            <param name="SubjectType">Type of the subject.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TNDET.API_ITI_ServiceControllers.APICollegeGroupAdminDashBoardReportsController.UniversityReadHistorySummary(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Universities the read history summary.
+            </summary>
+            <param name="CollegeGrpId">The college GRP identifier.</param>
+            <param name="DepartmentID">The department identifier.</param>
+            <param name="collegeID">The college identifier.</param>
+            <param name="SubjectID">The subject identifier.</param>
+            <param name="SemsterID">The semster identifier.</param>
+            <param name="DateFrom">The date from.</param>
+            <param name="DateTo">The date to.</param>
+            <param name="SubjectType">Type of the subject.</param>
+            <param name="FilterType">Type of the filter.</param>
+            <returns></returns>
+        </member>
+        <member name="T:TNDET.WebApiConfig">
+            <summary>
+            WebApiConfig
+            </summary>
+        </member>
+        <member name="T:Resources.DateBetween">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Resources.DateBetween.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Resources.DateBetween.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Resources.DateBetween.sem1_end_date">
+            <summary>
+              Looks up a localized string similar to 24-01-2016.
+            </summary>
+        </member>
+        <member name="P:Resources.DateBetween.sem1_start_date">
+            <summary>
+              Looks up a localized string similar to 01-07-2015.
+            </summary>
+        </member>
+        <member name="P:Resources.DateBetween.sem2_end_date">
+            <summary>
+              Looks up a localized string similar to 30-06-2016.
+            </summary>
+        </member>
+        <member name="P:Resources.DateBetween.sem2_start_date">
+            <summary>
+              Looks up a localized string similar to 25-01-2016.
+            </summary>
+        </member>
+        <member name="T:Resources.RoutingService">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Resources.RoutingService.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Resources.RoutingService.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Resources.RoutingService.WebServiceUrl">
+            <summary>
+              Looks up a localized string similar to http://learnengg.com/webservice.
+            </summary>
+        </member>
+        <member name="P:Resources.RoutingService.WebServiceUrlKtu">
+            <summary>
+              Looks up a localized string similar to http://learnengg.com/webservice_Ktu.
+            </summary>
+        </member>
+        <member name="P:Resources.RoutingService.WebServiceUrlVtu">
+            <summary>
+              Looks up a localized string similar to http://learnengg.com/VTU_StudentService.
+            </summary>
+        </member>
+        <member name="P:Resources.RoutingService.WebServiceUrl_NU">
+            <summary>
+              Looks up a localized string similar to http://learnengg.com/nu_studentservice.
+            </summary>
+        </member>
+        <member name="T:Resources.MailBody">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Resources.MailBody.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Resources.MailBody.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Resources.MailBody.ResetPassword">
+             <summary>
+               Looks up a localized string similar to &lt;!DOCTYPE HTML &gt;
+            &lt;html&gt;
+             &lt;head&gt;
+              &lt;TITLE&gt;Password Changed | Learnengg.com &lt;/TITLE&gt;
+             &lt;/head&gt;
+            
+             &lt;body&gt;
+            &lt;table&gt;
+              &lt;thead&gt;
+                &lt;tr&gt;
+                  &lt;td&gt; Hi #name#, &lt;/td&gt;
+                &lt;/tr&gt;
+              &lt;/thead&gt;
+              &lt;tbody&gt;
+                &lt;tr&gt;
+                  &lt;td&gt; 
+                    Password successfully changed
+                    Your new Learnengg.com password for the account #name# has been set.
+                    
+                    You can now access your account, view your subjects or change your account settings. 
+                    &lt;/td&gt;
+                &lt;/tr&gt;
+              &lt;/tbody&gt;
+              &lt;tfoot&gt;
+                &lt;tr&gt;
+                  &lt; [rest of string was truncated]&quot;;.
+             </summary>
+        </member>
+        <member name="P:LearnEngineeringPortalService_ITI.propErrorDetails.errorName">
+            <summary>
+            Return exception description.
+            </summary>
+        </member>
+        <member name="P:LearnEngineeringPortalService_ITI.propErrorDetails.errorCode">
+            <summary>
+            Return system error code.
+            </summary>
+        </member>
+        <member name="P:LearnEngineeringPortalService_ITI.propErrorDetails.isError">
+            <summary>
+            Return current process whether is error or not.
+            </summary>
+        </member>
+        <member name="P:LearnEngineeringPortalService_ITI.propErrorDetails.errorCategory">
+            <summary>
+            Return error category.ex INFORMATION,SUCCESS
+            </summary>
+        </member>
+        <member name="P:LearnEngineeringPortalService_ITI.propErrorDetails.errorTitle">
+            <summary>
+            Return error title.
+            </summary>
+        </member>
+        <member name="P:LearnEngineeringPortalService_ITI.propErrorDetails.errorPage">
+            <summary>
+            Return error page name.
+            </summary>
+        </member>
+        <member name="P:LearnEngineeringPortalService_ITI.propErrorDetails.errorFunction">
+            <summary>
+            Return error function name.
+            </summary>
+        </member>
+        <member name="P:LearnEngineeringPortalService_ITI.propErrorDetails.errorLine">
+            <summary>
+            Return error line at the function.
+            </summary>
+        </member>
+        <member name="P:LearnEngineeringPortalService_ITI.propErrorDetails.errorColumn">
+            <summary>
+            Return error column at the function.
+            </summary>
+        </member>
+        <member name="P:LearnEngineeringPortalService_ITI.propErrorDetails.errorType">
+            <summary>
+            Return error type.ex. null pointer exception,arthematic exception,etc.
+            </summary>
+        </member>
+        <member name="P:LearnEngineeringPortalService_ITI.propErrorDetails.StackTrace">
+            <summary>
+            Return error stacktrace.full details about the error
+            </summary>
+        </member>
+        <member name="M:LearnEngineeringPortalService_ITI.MailHelper.encrptpwd(System.String,System.Boolean)">
+            <summary>
+            Encrypt the String And PWD
+            </summary>
+            <param name="pwd"></param>
+            <param name="hasing"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LearnEngineeringPortalService_ITI.MailHelper.Decrypt(System.String,System.Boolean)">
+            <summary>
+            Decrypt the String And PWD
+            </summary>
+            <param name="pwd"></param>
+            <param name="hasing"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LearnEngineeringPortalService_ITI.BusinessLogic.Notification.PasswordChange(System.String,System.String)">
+            <summary>
+            Method for send a change password mail
+            </summary>
+            <param name="name">string</param>
+            <param name="emailId">string</param>
+        </member>
+        <member name="M:LearnEngineeringPortalService_ITI.DataAccess.UserMasterAccess.GetAllUsers">
+            <summary>
+            Method for get all users
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LearnEngineeringPortalService_ITI.DataAccess.UserMasterAccess.GetAllRandomCodes">
+            <summary>
+            method for get all user otp codes
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

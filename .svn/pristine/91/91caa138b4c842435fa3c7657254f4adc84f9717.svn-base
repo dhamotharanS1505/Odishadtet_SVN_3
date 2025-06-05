@@ -1,0 +1,68 @@
+﻿@{
+
+    Layout = null;
+}
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('#Uploadfile').val("");
+
+        if ('@ViewBag.Message' == 'success') {
+            confirmDialog("Subjects Uploaded Successfully.");
+        }
+        else if ('@ViewBag.Message' == 'Failure') {
+            confirmDialog("The Attached file is not Supported.");
+        }
+        $('#btnSubmit').click(function (e) {
+            var imgVal = $('#Uploadfile').val();
+            if (imgVal == '') {
+                ShowAlert("Alert !", "Please select file to upload", "error");
+                return false;
+            }
+        });
+
+        $('#btnCancel').click(function () {
+            $('#Uploadfile').val('');
+        });
+    });
+
+    function confirmDialog(message) {
+        ShowAlert({
+            title: "Subject Master Upload ",
+            text: message,
+            showCancelButton: false,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Ok",
+            closeOnConfirm: false,
+            closeOnCancel: true
+        },
+function (isConfirm) {
+    if (isConfirm) {
+        window.location.href = "/AdminActivity/SubjectUpload";
+
+    }
+});
+    }
+
+
+
+</script>
+@using (Html.BeginForm("SubjectUploadPartalView", "AdminActivity", FormMethod.Post, new { enctype = "multipart/form-data", id = "UploadExcelForm" }))
+{
+    <div class="col-sm-12  pop_btn_upld ">
+        <input type="file" name="file" id="Uploadfile" style="display: inline-block; float: left;
+                border: 0px none" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+        <span>
+            <a href="../../Content/SubjectUploadTemplate/SubjectMasterTemplate.xls">
+                <img id="template" src="../../Content/img/Excel_icon.png" class="dwnloadTemplate"
+                     title="dowload template to upload subjects" />
+            </a>
+        </span>
+        <input type="submit" class="fil_in_btn" value="Upload" id="btnSubmit" />
+        <input type="button" class="fil_in_btn" value="Cancel" id="btnCancel" />
+    </div>
+
+}
+
+
+

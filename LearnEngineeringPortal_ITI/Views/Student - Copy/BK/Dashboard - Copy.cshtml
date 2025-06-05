@@ -1,0 +1,445 @@
+﻿
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_StudentLearnEnggAdminLayout.cshtml";
+}
+<style>
+
+    /* Center the dropdown */
+    .dropdown-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /*height: 100vh;*/ /* Full height of the viewport */
+    }
+    .sub-textt {
+        cursor: pointer;
+        z-index: 10; /* Ensures clickability */
+    }
+</style>
+
+
+@*<div class="col-lg-2 col-md-3 col-sm-3 col-xs-4 f-category">
+    <a href="iti/electrician.html">
+        <img alt="Draughtsman Mechanical" class="img-responsive" src="ITI/img/employ-skill.png">
+        <h6>
+            <span class="company-name">Electrician </span> <span class="jobs-count text-muted"></span>
+        </h6>
+    </a>
+</div>*@
+<div class="content-wrapper">
+    @*<div class="row">
+        <div style="border: 1px solid #000; padding: 10px; width: 100%;">
+            <table class="dropdown-container">
+                <tr>
+                    <td style="position:center">
+                        <label>
+                            Semester:
+                        </label>
+                    </td>
+                    <td style="width:10px"></td>
+                    <td style="position:center">
+                        <ul class="fl_in_det  li input" id="Sem">
+                            <li class="ful_w">
+                                <select style="width:150px" id="ddlSemester"></select>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>*@
+    @*<br>
+    <br>*@
+    <div class="row">
+        @*<div id="showimage" style="border: 1px solid #000; padding: 10px; width: 100%;">*@
+        <div>
+        @*<div id="showimage" style="border: 1px solid #000; padding: 10px;">*@
+            <table class="dropdown-container"><tr><td> <div id="imageContainer"></div></td></tr></table>
+
+
+
+
+        </div>
+    </div>
+    <div class="row">
+
+        <div>
+            <table class="dropdown-container">
+                <tr>
+                    <td>
+                        <div id="htmlContainer"></div>
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#hiddenBtn").click(function () {
+                alert("Clicked!"); // Test if event is fired
+                //$(this).next(".sub-nav").toggle();
+        });
+
+            });
+
+
+        $(document).ready(function () {
+            //alert();
+            loadsemester();
+
+            //$('#ddlDepartment').change(function () {
+            //var Department = $("#ddlDepartment").find("option:selected").val();
+            //alert("");
+
+
+            //var container = $('#imageContainer');
+            //container.empty();
+            //container.append('<label style="display: flex; justify- content: center; align - items: center;"> Please select semester </label>');
+            $('#showimage').hide();
+            var Department = 17;
+            $.ajax({
+                type: 'GET',
+                url: '/APIService/APIAdminActivity/LoadSemesterDropdown?departmentid=' + Department,
+                dataType: 'json',
+                crossOrigin: true,
+                success: function (response) {
+                    var rData = response;
+                    //var SubjectDetails = "<option value=''>----- Select Semester ------</option>";
+                    var SubjectDetails = "";
+
+                    for (var x = 0; x < rData.length; x++) {
+                        SubjectDetails = SubjectDetails + "<option value=" + rData[x].semester + ">" + rData[x].semester + "</option>";
+
+                    }
+
+                    $('#ddlSemester').find('option').remove().end().append(SubjectDetails);
+
+
+                },
+                error: function (result) {
+                    alert("Error");
+                }
+            });
+
+            loadsubject();
+            
+            //});
+        });
+
+        function loadsubject() {
+
+            var Semester = 1;
+            //alert(Semester);
+            var Department = 17;
+
+
+            if (Semester == "") {
+                //var container = $('#imageContainer');
+                //container.empty();
+                //container.append('<label> Please select semester </label>');
+                $('#showimage').hide();
+                return;
+            }
+            $.ajax({
+                type: 'GET',
+                //url: '/student/SubjectMasterUploadGridTest?Department=' + Department + '&Semester=' + Semester,
+                url: '/student/StudentSubjectMasterUploadGrid?Department=' + Department + '&Semester=' + Semester,
+                dataType: 'json',
+                crossOrigin: true,
+                success: function (response) {
+
+                    var container = $('#imageContainer');
+                    container.empty();
+                    var rData = response;
+
+                    for (var i = 0; i < rData.length; i++) {
+                        // SubjectDetails = SubjectDetails + "<option value=" + rData[x].semester + ">" + rData[x].semester + "</option>";
+                        //alert('<img src="/odskills/thumbnail/' + rData[x].subject_code + '" width="150" height="150" style="margin:5px;">');
+                        container.append('<img src="/odskills/thumbnail/' + rData[i].subject_code + '.png" width="290" class="image-item" data-name="' + rData[i].subject_code + '" height="400" style="margin:15px;">');
+                        //imageContainer.append('<img src="' + imageUrl + '" class="image-item" data-name="' + imageUrl + '">');
+
+                    }
+
+                    $('#showimage').show();
+                },
+                error: function (result) {
+                    alert("Error");
+                }
+            });
+
+        }
+
+
+
+
+        $('#ddlSemester').change(function () {
+            var Semester = $("#ddlSemester").find("option:selected").val();
+            var Department = 17;
+
+
+            if (Semester == "") {
+                //var container = $('#imageContainer');
+                //container.empty();
+                //container.append('<label> Please select semester </label>');
+                $('#showimage').hide();
+                return;
+            }
+            $.ajax({
+                type: 'GET',
+                //url: '/student/SubjectMasterUploadGridTest?Department=' + Department + '&Semester=' + Semester,
+                url: '/student/StudentSubjectMasterUploadGrid?Department=' + Department + '&Semester=' + Semester,
+                dataType: 'json',
+                crossOrigin: true,
+                success: function (response) {
+                    //var rData = response;
+                    //alert(rData);
+                    //var SubjectDetails = "<option value=''>----- Select Semester ------</option>";
+
+                    //for (var x = 0; x < rData.length; x++) {
+                    //    SubjectDetails = SubjectDetails + "<option value=" + rData[x].semester + ">" + rData[x].semester + "</option>";
+
+                    //}
+
+                    //$('#ddlSemester').find('option').remove().end().append(SubjectDetails);
+
+
+
+                    var container = $('#imageContainer');
+                    container.empty();
+                    //$.each(rData, function (index, image) {
+                    //    alert(image.subject_code);
+                    //    container.append('<img src="/odskills/thumbnail/' + image.subject_code + '" width="150" height="150" style="margin:5px;">');
+                    //});
+                    var rData = response;
+
+                    //alert(rData);
+                    // alert(rData[2].subject_code);
+                    for (var i = 0; i < rData.length; i++) {
+                        // SubjectDetails = SubjectDetails + "<option value=" + rData[x].semester + ">" + rData[x].semester + "</option>";
+                        //alert('<img src="/odskills/thumbnail/' + rData[x].subject_code + '" width="150" height="150" style="margin:5px;">');
+                        container.append('<img src="/odskills/thumbnail/' + rData[i].subject_code + '.png" width="250" class="image-item" data-name="' + rData[i].subject_code + '" height="400" style="margin:15px;">');
+                        //imageContainer.append('<img src="' + imageUrl + '" class="image-item" data-name="' + imageUrl + '">');
+
+                    }
+
+                    $('#showimage').show();
+                },
+                error: function (result) {
+                    alert("Error");
+                }
+            });
+
+
+        });
+
+        //$(document).on('click', '.image-item', function () {
+        //    var imageName = $(this).attr('data-name');
+        //    imageName = "index.html";
+        //    window.location.href = "/Student/PrivatePage?fileName=" + imageName;
+        //    //$.ajax({
+        //    //    type: 'GET',
+        //    //    url: '/Student/PrivatePage?fileName=' + imageName,
+        //    //    //dataType: 'json',
+        //    //    //crossOrigin: true,
+        //    //    success: function (response) {
+        //    //        var encodedHtml = encodeURIComponent(response);
+        //    //        //alert(encodedHtml);
+        //    //        //$('#showimage').hide();
+        //    //        //var container = $('#htmlContainer');
+        //    //        //container.empty();
+        //    //        //container.append(response);
+
+        //    //        //window.location.href = "/Student/Subjects?fileName=" + response;
+        //    //        //window.location.href = "/Student/Subjects??fileName=" + encodedHtml;
+
+        //    //    },
+        //    //    error: function (result) {
+        //    //        alert("Error");
+        //    //    }
+        //    //});
+        //});
+
+        $(document).on('click', '.image-item', function () {
+            var imageName = $(this).attr('data-name');
+            // alert(imageName);
+            imageName = "index.html";
+            //window.location.href = "/Student/PrivatePage?fileName=" + imageName;
+            window.location.href = "/Student/Subjects?fileName=" + imageName;
+            //$.ajax({
+            //    type: 'GET',
+            //    url: '/Student/Subjects?fileName=' + imageName,
+            //    //dataType: 'json',
+            //    //crossOrigin: true,
+            //    success: function (response) {
+            //        var encodedHtml = encodeURIComponent(response);
+            //        alert(encodedHtml);
+            //        //$('#showimage').hide();
+            //        //var container = $('#htmlContainer');
+            //        //container.empty();
+            //        //container.append(response);
+
+            //        //window.location.href = "/Student/Subjects?fileName=" + response;
+            //        //window.location.href = "/Student/Subjects??fileName=" + encodedHtml;
+
+            //    },
+            //    error: function (result) {
+            //        alert("Error");
+            //    }
+            //});
+        });
+
+
+        $(document).on('click', '.sub-textt', function () {
+            alert();
+            var Semester = $(this).attr('data-name');
+            // alert(imageName);
+            imageName = "index.html";
+            
+           
+            //alert(Semester);
+            var Department = 17;
+
+
+            if (Semester == "") {
+                //var container = $('#imageContainer');
+                //container.empty();
+                //container.append('<label> Please select semester </label>');
+                $('#showimage').hide();
+                return;
+            }
+            $.ajax({
+                type: 'GET',
+                //url: '/student/SubjectMasterUploadGridTest?Department=' + Department + '&Semester=' + Semester,
+                url: '/student/StudentSubjectMasterUploadGrid?Department=' + Department + '&Semester=' + Semester,
+                dataType: 'json',
+                crossOrigin: true,
+                success: function (response) {
+
+                    var container = $('#imageContainer');
+                    container.empty();
+                    var rData = response;
+
+                    for (var i = 0; i < rData.length; i++) {
+                        // SubjectDetails = SubjectDetails + "<option value=" + rData[x].semester + ">" + rData[x].semester + "</option>";
+                        //alert('<img src="/odskills/thumbnail/' + rData[x].subject_code + '" width="150" height="150" style="margin:5px;">');
+                        container.append('<img src="/odskills/thumbnail/' + rData[i].subject_code + '.png" width="290" class="image-item" data-name="' + rData[i].subject_code + '" height="400" style="margin:15px;">');
+                        //imageContainer.append('<img src="' + imageUrl + '" class="image-item" data-name="' + imageUrl + '">');
+
+                    }
+
+                    $('#showimage').show();
+                },
+                error: function (result) {
+                    alert("Error");
+                }
+            });
+
+        });
+
+
+        $(document).on('click', '.Sideview-item', function () {
+            var imageName = $(this).attr('data-name');
+            // alert(imageName);
+            imageName = "index.html";
+            //window.location.href = "/Student/PrivatePage?fileName=" + imageName;
+            window.location.href = "/Student/Subjects?fileName=" + imageName;
+            //$.ajax({
+            //    type: 'GET',
+            //    url: '/Student/Subjects?fileName=' + imageName,
+            //    //dataType: 'json',
+            //    //crossOrigin: true,
+            //    success: function (response) {
+            //        var encodedHtml = encodeURIComponent(response);
+            //        alert(encodedHtml);
+            //        //$('#showimage').hide();
+            //        //var container = $('#htmlContainer');
+            //        //container.empty();
+            //        //container.append(response);
+
+            //        //window.location.href = "/Student/Subjects?fileName=" + response;
+            //        //window.location.href = "/Student/Subjects??fileName=" + encodedHtml;
+
+            //    },
+            //    error: function (result) {
+            //        alert("Error");
+            //    }
+            //});
+        });
+
+
+ function loadsemester() {
+            //alert();
+            var laySemester = 1;
+            //alert(Semester);
+            var layDepartment = 17;
+
+     
+            $.ajax({
+                type: 'GET',
+                //url: '/student/SubjectMasterUploadGridTest?Department=' + Department + '&Semester=' + Semester,
+                url: '/student/StudentsemesterMasterUploadGrid?Department=' + layDepartment + '&Semester=' + laySemester,
+                dataType: 'json',
+                crossOrigin: true,
+                success: function (layresponse) {
+
+                    var semcontainer = $('#semcontainer');
+                    semcontainer.empty();
+                    var rData = layresponse;
+                    var sideViewsub = "<ul><p class='left-mu'><b>Semester</b></p>";
+                    var sem = 0;
+
+                    for (var i = 0; i < 2; i++) {
+                       //alert(rData[i].semester);
+                       //alert(rData[i].SubjectDetails);
+                       if (sem != rData[i].semester) {
+
+                           var ind = rData[i].semester == 1 ? "st" : rData[i].semester == 2 ? "nd" : rData[i].semester == 3 ? "rd" : "th";
+                            if (sem == 0){
+                                sideViewsub = sideViewsub + "<li><button id='hiddenBtn' style='display: none;'></button><a href='#'> <img class='left-mu-icon' src='@Url.Content("~/files/images/1_sys-01.png")'><span class='sub-textt' data-name=" + rData[i].semester + ">" + rData[i].semester + ind + " Semester</span><span runat='server' class='toogle-sub-nav material-icons'>keyboard_arrow_right</span></a>";
+                                //sideViewsub = sideViewsub + "<ul class='sub-nav sub-nav1'><li class='sub-sub-mu'><a class='sub-nav1 Sideview-item' id= " + rData[i].subject_code + "> " + rData[i].subject_name + " </a> </li></ul>";
+                                sideViewsub = sideViewsub + "<ul class='sub-nav sub-nav1'><li class='sub-sub-mu'><a class='sub-nav1 Sideview-item' id= " + rData[i].subject_code + "> " + rData[i].subject_name + " </a> </li>";
+                                sem = rData[i].semester;
+                            }
+                            else{
+
+                                sideViewsub = sideViewsub + "</ul></li>";
+                                sideViewsub = sideViewsub + "<li><a href='#'> <img class='left-mu-icon' src='@Url.Content("~/files/images/1_sys-01.png")'><span class='sub-textt' data-name=" + rData[i].semester + ">" + rData[i].semester + ind + " Semester</span><span runat='server' class='toogle-sub-nav material-icons'>keyboard_arrow_right</span></a>";
+                                sideViewsub = sideViewsub + "<ul class='sub-nav sub-nav1'><li class='sub-sub-mu'><a class='sub-nav1 Sideview-item' id= " + rData[i].subject_code + "> " + rData[i].subject_name + " </a> </li>";
+                                sem = rData[i].semester;
+
+                             }
+
+                        }                        
+                        else {
+                           //sideViewsub = sideViewsub + "<ul class='sub-nav sub-nav1'><li class='sub-sub-mu'><a class='sub-nav1 Sideview-item' id= " + rData[i].subject_code + "> " + rData[i].subject_name + " </a> </li></ul>";
+                           sideViewsub = sideViewsub + "<li class='sub-sub-mu'><a class='sub-nav1 Sideview-item' id= " + rData[i].subject_code + "> " + rData[i].subject_name + " </a></li>";
+                           sem = rData[i].semester;
+                        }
+
+                    }
+                   
+                    sideViewsub = sideViewsub + "</ul>";
+                    alert(sideViewsub);
+                    semcontainer.append(sideViewsub);
+                    
+                },
+                error: function (result) {
+                    alert("Error");
+                }
+            });
+
+        }
+
+
+
+</script>

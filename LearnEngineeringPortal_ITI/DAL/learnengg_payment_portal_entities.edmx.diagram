@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7b8c7e92c71a4d3fa1741ceee11c5199" Name="Diagram1" ZoomLevel="34">
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.business_customer" Width="1.5" PointX="3.75" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.business_customer_teams" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.clienttool_user_version" Width="1.5" PointX="0.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.clienttool_version" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.college_master" Width="1.5" PointX="0.75" PointY="19.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.country_master" Width="1.5" PointX="7.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.Demo_SubscribedUser" Width="1.5" PointX="0.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.department_master" Width="1.5" PointX="3.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.department_subject_mapping" Width="1.5" PointX="15.5" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.device_preidentification" Width="1.5" PointX="15.5" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.ExceptionLog" Width="1.5" PointX="10.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.feedback" Width="1.5" PointX="12.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.feedback_poll_userreply" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.Menu" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.MenuPrivilege" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.product_request_master" Width="1.5" PointX="3" PointY="18.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.product_request_master_history" Width="1.5" PointX="6" PointY="18.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.promo_discount_master" Width="1.5" PointX="14.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.promo_package_mapping" Width="1.5" PointX="14.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.promocode_master" Width="1.5" PointX="16.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.purchase_activationmaster" Width="1.5" PointX="8.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.regulation" Width="1.5" PointX="10.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.regulation_master" Width="1.5" PointX="18.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.state_master" Width="1.5" PointX="8.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.status" Width="1.5" PointX="7.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.subject_enc" Width="1.5" PointX="12.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.subject_master" Width="1.5" PointX="13.25" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.subject_master_history" Width="1.5" PointX="18.5" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.subject_unit_master_history" Width="1.5" PointX="19.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.Transaction_Details" Width="1.5" PointX="9.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.univ_semester_master" Width="1.5" PointX="18.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.user_address_details" Width="1.5" PointX="10" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.user_app_subject_read_history" Width="1.5" PointX="19.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.user_cart_details" Width="1.5" PointX="8.25" PointY="30.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.user_feedback" Width="1.5" PointX="5.25" PointY="25.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.user_master_history" Width="1.5" PointX="5.25" PointY="28.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.user_notification_details" Width="1.5" PointX="20.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.user_notification_master" Width="1.5" PointX="20.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.user_random_pass" Width="1.5" PointX="20.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.user_subject_mapping_history" Width="1.5" PointX="12.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.user_subject_read_history_androidapp" Width="2.25" PointX="21.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.user_subject_unit_read_history" Width="1.5" PointX="21.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.user_subject_unit_read_history_androidapp" Width="2.25" PointX="22.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.user_subject_video_history" Width="1.5" PointX="22.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.user_subject_video_history_androidapp" Width="1.5" PointX="22.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.user_subscribe_delivery_mode" Width="1.5" PointX="17.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.user_subscribe_details" Width="1.5" PointX="7.5" PointY="35.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.user_subscribe_master" Width="1.5" PointX="5.25" PointY="37.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.user_subscribe_order_track" Width="1.5" PointX="7.5" PointY="40.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.user_subunit_download_history" Width="1.5" PointX="17.75" PointY="19.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.user_wishlist" Width="1.5" PointX="19.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.user_subject_unit_read_history_restore" Width="3.5" PointX="24.5" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK__product_r__bcust__00AA174D" ManuallyRouted="false" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK__product_r__bcust__05A3D694" ManuallyRouted="false" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK__product_r__bcust__793DFFAF" ManuallyRouted="false" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK__product_r__bcust__id" ManuallyRouted="false" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK__product_r__colle__02925FBF" ManuallyRouted="false" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK__product_r__colle__078C1F06" ManuallyRouted="false" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK__product_r__colle__7A3223E8" ManuallyRouted="false" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK__product_r__colle__id" ManuallyRouted="false" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK_user_address_details_country_master" ManuallyRouted="false" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK__product_r__depar__047AA831" ManuallyRouted="false" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK__product_r__depar__09746778" ManuallyRouted="false" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK__product_r__depar__7B264821" ManuallyRouted="false" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK__product_r__depar__id" ManuallyRouted="false" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK_department_subject_mapping_department_master" ManuallyRouted="false" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK_department_subject_mapping_subject_master" ManuallyRouted="false" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK_device_preidentification_subject_master" ManuallyRouted="false" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK_feedback_poll_userreply_feedback_poll_userreply" ManuallyRouted="false" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK_MenuPrivilege_Menu" ManuallyRouted="false" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK_subject_master_history_subject_master" ManuallyRouted="false" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK_user_subscribe_details_user_subscribe_master" ManuallyRouted="false" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK_user_subscribe_order_track_user_subscribe_master" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.university_master" Width="1.5" PointX="11" PointY="9.125" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK_university_master_state_master" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK_subject_master_UniversityID" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK_subject_master_history_UniversityID" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.user_login_track" Width="1.5" PointX="24.375" PointY="21.75" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.user_session_track" Width="1.5" PointX="24.375" PointY="24.75" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.package_details" Width="1.5" PointX="27.625" PointY="7" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK_package_details_subject_master" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.user_subject_mapping" Width="1.5" PointX="25.375" PointY="12.75" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK_univ_semester_master_university_master" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.user_content_management_track" Width="1.5" PointX="9.875" PointY="21.75" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.user_subject_activation_history" Width="1.5" PointX="15.375" PointY="26.75" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.package_master_track" Width="1.5" PointX="8.375" PointY="22.75" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.user_university_privilege" Width="1.5" PointX="15.25" PointY="22.625" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK_user_university_privilege_university_master" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.package_master" Width="1.5" PointX="2.25" PointY="24.5" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.subject_unit_master" Width="1.5" PointX="15.5" PointY="31.625" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK_package_details_package_master" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK_user_cart_details_package_master" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK_user_subscribe_details_package_master" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK_subject_unit_master_subject_master" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK_user_subunit_download_history_subject_unit_master" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.user_role" Width="1.5" PointX="0.75" PointY="14.375" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK_MenuPrivilege_Role" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.cancel_category_master" Width="1.5" PointX="0.75" PointY="5.75" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.order_cancel_history" Width="1.5" PointX="7.75" PointY="26.75" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.order_cancel_random_pass" Width="1.5" PointX="17.375" PointY="26.75" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.user_trial_subject" Width="1.5" PointX="6.375" PointY="15.75" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.payment_master" Width="1.5" PointX="10.375" PointY="27.75" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.batch_year_master" Width="1.5" PointX="27.375" PointY="11.75" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.sms_batch_data" Width="1.5" PointX="12.375" PointY="27.75" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.payment_refund_master" Width="1.5" PointX="7.5" PointY="49.875" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK_payment_refund_master_user_subscribe_master" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.college_installation_details" Width="1.5" PointX="3" PointY="32" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK_college_installation_details_college_installation_details" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.mastercopy_usage_details" Width="1.5" PointX="27.375" PointY="14.75" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.user_random_pass_college" Width="1.5" PointX="6.375" PointY="11.75" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.college_installation_expiry" Width="1.5" PointX="20.5" PointY="26" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK_college_installation_expiry_college_installation_details" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK_college_installation_expiry_department_master" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK_college_installation_expiry_subject_master" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.college_subject_mapping" Width="1.5" PointX="17.5" PointY="0.75" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK_college_subject_mapping_college_subject_mapping1" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK_college_subject_mapping_college_subject_mapping" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK_college_subject_mapping_department_master" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.college_test_installation_details" Width="1.5" PointX="23.375" PointY="28.75" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.college_test_installation_expiry" Width="1.5" PointX="29.375" PointY="0.75" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.college_subject_test_mapping" Width="1.5" PointX="29.375" PointY="11.75" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.college_group_map" Width="1.5" PointX="31.75" PointY="22.125" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK_college_group_map_college_master" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.user_feedback_master" Width="1.5" PointX="29.375" PointY="16.75" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.college_group_master" Width="1.5" PointX="29.375" PointY="26" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK_college_group_map_college_group_master" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.user_master" Width="1.5" PointX="26.25" PointY="28.125" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK_user_master_college_master" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK_user_master_department_master" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK_user_master_university_master" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK_user_cart_details_user_master" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK_user_feedback_user_master" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK_user_master_history_user_master" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK_user_master_user_role" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK_user_subscribe_master_user_id" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK_user_university_privilege_user_master" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.user_subject_read_history" Width="1.5" PointX="26.375" PointY="21.75" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.student_user_random_pass" Width="1.5" PointX="28.375" PointY="20.75" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.Student_subject_unit_read_history" Width="1.5" PointX="28.375" PointY="29.75" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.Student_subject_read_history" Width="1.5" PointX="30.375" PointY="4.75" />
+        <EntityTypeShape EntityType="subject_delivery_anna_newModel.tbl_Student_user_master" Width="1.5" PointX="32.25" PointY="10.25" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK__tbl_Stude__colle__65F62111" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK__tbl_Stude__Depar__66EA454A" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK__tbl_Stude__role___640DD89F" />
+        <AssociationConnector Association="subject_delivery_anna_newModel.FK__tbl_Stude__univ___6501FCD8" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

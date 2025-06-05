@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "Admin_HelpDeskReport";
+    Layout = "~/Views/Shared/_LearnEnggAdminLayout.cshtml";
+}
+
+<h2>Admin_HelpDeskReport</h2>
+
+
+
+@using (Html.BeginForm("Admin_HelpDeskReport", "AdminProcess", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <table>
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" name="Export" id="Export" value="Export E-Commerce" />
+            </td>
+        </tr>
+    </table>
+}

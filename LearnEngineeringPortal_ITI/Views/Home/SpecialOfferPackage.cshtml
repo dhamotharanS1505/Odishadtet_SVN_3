@@ -1,0 +1,624 @@
+﻿@model Odishadtet.DAL.user_master
+@{
+    ViewBag.Title = "SpecialOfferPackage";
+    Layout = "~/Views/Shared/_LearnEnggLayout.cshtml";
+}
+
+<style type="text/css">
+    #loginIDReg, #PasswordReg, #Mobile, #Email, #Confirmpwd {
+        background: none !important;
+        text-indent: 0 !important;
+        border-radius: 0px;
+    }
+
+    .resend {
+        color: #3399FF;
+        outline: 0 none;
+        text-decoration: underline;
+    }
+
+    #otpcode {
+        width: 30%;
+    }
+
+    .grp_ot-wrp h1 {
+        font-size: 14px;
+    }
+
+    .grp_ot-wrp span {
+        display: block;
+        width: 100%;
+    }
+
+    .bil_add-wrp .grp_ot-wrp > strong {
+        display: block;
+        font-weight: normal;
+        text-transform: capitalize;
+        margin: 10px 0 0 0;
+        border: 0px solid transparent;
+    }
+
+    .form-control {
+        -moz-appearance: none;
+        background: rgba(0, 0, 0, 0) url("../Content/img/v1.png") no-repeat scroll right center;
+        border: 1px solid #ccc;
+        border-radius: 0px;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+        color: #555;
+        padding: 5px 30px 5px 5px;
+        width: 100%;
+    }
+
+
+    @@media only screen and (min-width: 768px) {
+        .modal-dialog {
+            width: 500px;
+        }
+
+        #otpcode {
+            width: 100% !important;
+        }
+    }
+</style>
+
+<div class="main-inr_wrp">
+    <header>
+        <a class="navbar-logo" href="/Home/index"><img alt="Learn Engg" src="../content/img/Learn1.png?V2" class="logo-img_sploffer"></a>
+        <h1>Anna University </h1>
+        <h2>Semester - 1 &nbsp; &nbsp;Q & A App</h2>
+        <h4 class="blink site_title">
+            Welcome Offer - &nbsp;<strong><i class="fa fa-inr"></i><strike>150</strike></strong> <b class="fre_txt">Free</b>
+        </h4>
+    </header>
+    <section class="sec-sploffer">
+        <article class="inr_wrp">
+            <div class="sb_fr-txt  col-sm-8">
+                <div class="col-sm-8">
+                    <p>
+                        <strong class="desk_wrp">For Android Mobile / Tablet users:</strong>
+                    </p>
+                </div>
+                <div class="row">
+                    <div class="col-sm-9">
+                        <span>Computer Programming - &nbsp;<strong class="fre_rup"><i class="fa fa-inr"></i><strike>150</strike></strong> <b class="fre_txt">Free</b> </span>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="bt_lk">
+                            <button type="button" id="2993" class="btn btn-sploffer downloadapp">
+                                <i class="fa fa-download"></i>&nbsp;
+                                Android App
+                            </button>&nbsp;
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-9">
+                        <span>Engineering Graphics - &nbsp;<strong class="fre_rup"><i class="fa fa-inr"></i><strike>150</strike></strong> <b class="fre_txt">Free</b> </span>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="bt_lk">
+                            <button type="button" id="2994" class="btn btn-sploffer downloadapp">
+                                <i class="fa fa-download"></i>&nbsp;
+                                Android App
+                            </button>&nbsp;
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-9">
+                        <span>Engineering Chemistry - I  - &nbsp;<strong class="fre_rup"><i class="fa fa-inr"></i><strike>150</strike></strong> <b class="fre_txt">Free</b> </span>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="bt_lk">
+                            <button type="button" id="2985" class="btn btn-sploffer downloadapp">
+                                <i class="fa fa-download"></i>&nbsp;
+                                Android App
+                            </button>&nbsp;
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-9">
+                        <span>Mathematics - I - &nbsp;<strong class="fre_rup"><i class="fa fa-inr"></i><strike>150</strike></strong> <b class="fre_txt">Free</b> </span>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="bt_lk">
+                            <button type="button" id="2998" class="btn btn-sploffer downloadapp">
+                                <i class="fa fa-download"></i>&nbsp;
+                                Android App
+                            </button>&nbsp;
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-9">
+                        <span>Engineering Physics - I - &nbsp;<strong class="fre_rup"><i class="fa fa-inr"></i><strike>150</strike></strong> <b class="fre_txt">Free</b> </span>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="bt_lk">
+                            <button type="button" id="3018" class="btn btn-sploffer downloadapp">
+                                <i class="fa fa-download"></i>&nbsp;
+                                Android App
+                            </button>&nbsp;
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="col-sm-12">
+                    <p class="txt_desk_wrp"> <strong class="desk_wrp">For Desktop / Laptop users:</strong></p>
+                    <p class="pg_txt"> <strong>Step 1:</strong> Click the below link to register your first year subjects and download the Learnengg client software.</p>
+                    <p class="pg_txt"><strong>Step 2:</strong> After installing client software in your Desktop / Computer, Open the client software and download the subjects.</p><br>
+                    <strong class="fre_rup"><i class="fa fa-inr"></i><strike>750</strike></strong> <b class="fre_txt">Free</b>
+                </div>
+
+                <button type="button" id="1210" class="btn btn-sploffer downloadapp downloadexe">
+                    <i class="fa fa-download"></i>&nbsp;
+                    Desktop App
+                </button>
+                <div class="col-sm-12">
+                    <p class="pg_txt"> <strong>Note:</strong>The above process is necessary for all users.</p>
+                </div>
+            </div>
+        </article>
+    </section>
+
+</div>
+
+<div class="modal fade" id="modal-registeration" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="padding-top:50px;">
+    <div class="modal-dialog modal-reg" role="document">
+        <div class="modal-content" id="modelRegistration">
+            <form id="frmRegistration">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <figure>
+                        <img src="../Content/img/default.png" width="40" height="40" />
+                        <figcaption>
+                            <h4 class="modal-title title_clr" id="H1">New Registration</h4>
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="modal-body">
+                    <span class="error modelErrorTxt"></span>
+                    <div class="form-group">
+                        <input type="text" class="form-control  full-width" name="loginIDReg" id="loginIDReg" placeholder="User Name">
+                    </div>
+                    <div class="form-group">
+                        <input type="Password" class="form-control  full-width" name="PasswordReg" id="PasswordReg" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                        <input type="Password" class="form-control  full-width" name="Confirmpwd" id="Confirmpwd" placeholder="Confirm Password">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control  full-width" name="Mobile" id="Mobile" placeholder="Mobile Number">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control  full-width" name="Email" id="Email" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        @Html.HiddenFor(x => x.collegename)
+                        @Html.DropDownListFor(m => m.collegeid, Enumerable.Empty<SelectListItem>(), "", new { @id = "collegeid", @name = "collegeid", @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.HiddenFor(x => x.department_name)
+                        @Html.DropDownListFor(m => m.DepartmentID, Enumerable.Empty<SelectListItem>(), "", new { @id = "DepartmentID", @name = "DepartmentID", @class = "form-control" })
+                    </div>
+                    <center class="cntr_mgrn_btm">
+                        <button type="button" class="btn btn-success " id="btnRegister">Register</button>
+                        <a id="userlogin" class="new_user" href="#">Login</a>
+                    </center>
+                </div>
+                <input type="hidden" id="Registeredfrom" value="@Request.QueryString["srcURI"]" />
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-otpverification" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="padding-top:50px;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" id="otpverification">
+            <form id="frmRegistration">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <figure>
+                        <img src="../Content/img/default.png" width="40" height="40" />
+                        <figcaption>
+                            <h4 class="modal-title title_clr" id="H1">OTP Verification</h4>
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="modal-body">
+                    <article class="bil_add-wrp">
+                        <strong>
+                            To Complete the Registration
+                        </strong>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="grp_ot-wrp">
+                                    <h1> Enter your ONE TIME PASSWORD: </h1>
+                                    <span>
+                                        <input type="text" id="otpcode" />
+                                    </span>
+                                    <input type="button" id="confirm" class="btn btn-primary" value="Confirm" />
+                                    <strong>
+                                        Didn't received verification code?
+                                        <a id="resendotp" href="#" class="resend">Resend OTP</a>
+                                    </strong>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    <div class="loader">
+                        <center>
+                            Loading...
+                            <img src="~/Content/img/pre_loader.gif" />
+                        </center>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+
+    $(document).ready(function () {
+        LoadDepartmentsList();
+        LoadCollegesList();
+        $('#otpcode').ForceNumericOnly();
+        $('#Mobile').ForceNumericOnly();
+    });
+
+    $(document).on('click', '.downloadapp', function () {
+
+        var packageId = $(this).attr('id');
+        var userID = $("#sessionUserId").val();
+
+        var loggedinUnivID = '@Session["loginUniversityID"]';
+
+        if (userID == null || userID == '' || userID == 0) {
+            $('#modal-registeration').modal('show');
+        }
+        else {
+            if (loggedinUnivID == 1) {
+
+                InsertOrUpdate(packageId, userID);
+            }
+            else {
+                ShowAlert("Alert!", 'Registered University is different', "warning");
+            }
+        }
+    });
+
+    function LoadDepartmentsList() {
+        $.ajax({
+            type: 'GET',
+            dataType: "json",
+            url: '/APIService/APIUserDashBoard/GetLoadDepartmentList?univId=1',
+            success: function (res) {
+                if (res.length > 0) {
+                    var items = "<option value='' selected>-- Select Department --</option>";
+                    $.each(res, function (index, value) {
+                        items += "<option value='" + value.department_Id + "'>" + value.department_Name + "</option>";
+                    });
+                    $("#DepartmentID").html(items);
+                }
+                else {
+                    $("#DepartmentID").html('<option value="" selected>Department Not Availbale</option>');
+                }
+            }, complete: function () { }
+        });
+    }
+
+    function LoadCollegesList() {
+        $.ajax({
+            type: 'GET',
+            dataType: "json",
+            url: '/APIService/APIUserDashBoard/GetLoadCollegeList?univId=1',
+            success: function (res) {
+                if (res.length > 0) {
+                    var items = "<option value='' selected>-- Select College --</option>";
+                    $.each(res, function (index, value) {
+                        items += "<option value='" + value.college_Id + "'>" + value.college_Name + "</option>";
+                    });
+                    $("#collegeid").html(items);
+                }
+                else {
+                    $("#collegeid").html('<option value="" selected>College Not Availbale</option>');
+                }
+            }, complete: function () { }
+        });
+    }
+    function InsertOrUpdate(packagechk, userId) {
+
+        var androidpath;
+        var windowspath;
+
+        if (packagechk == 2993) {
+
+            androidpath = "http://learnengg.com/3dm/Subject_unit_path_APK/01-1-AU-CO-002-400-QA-AM.apk";
+            AndroidRegistration(packagechk, userId, androidpath);
+        }
+        else if (packagechk == 2994) {
+
+            androidpath = "http://learnengg.com/3dm/Subject_unit_path_APK/01-1-AU-CO-003-401-QA-AM.apk";
+            AndroidRegistration(packagechk, userId, androidpath);
+        }
+        else if (packagechk == 2985) {
+
+            androidpath = "http://learnengg.com/3dm/Subject_unit_path_APK/01-1-AU-CO-001-399-QA-AM.apk";
+            AndroidRegistration(packagechk, userId, androidpath);
+        }
+        else if (packagechk == 2998) {
+
+            androidpath = "http://learnengg.com/3dm/Subject_unit_path_APK/01-1-AU-CO-004-402-QA-AM.apk";
+            AndroidRegistration(packagechk, userId, androidpath);
+        }
+        else if (packagechk == 3018) {
+
+            androidpath = "http://learnengg.com/3dm/Subject_unit_path_APK/01-1-AU-CO-005-403-QA-AM.apk";
+            AndroidRegistration(packagechk, userId, androidpath);
+        }
+        else {
+            windowspath = "http://learnengg.com/3dm/Client_Setup/LearnEngg_Common_Web_Client_Setup.exe";
+            WindowsRegistration(packagechk, userId, windowspath);
+        }
+
+    }
+
+    function AndroidRegistration(packagechk, userId, androidpath) {
+        ShowAlert({
+            title: "Package download process",
+            text: "Welcome to Learnengg.com, click OK to download the package,",
+            type: "info",
+            showCancelButton: true,
+            confirmButtonText: "OK",
+            cancelButtonText: "Cancel",
+            closeOnConfirm: false,
+            closeOnCancel: true
+        },
+       function () {
+           $.ajax({
+               url: '/APIService/APIUserViewCartDetails/UpdatePackagesWithoutPayment?userid=' + userId + '&packageid=' + packagechk,
+               type: "GET",
+               success: function (data) {
+                   if (data == 1) {
+                       ShowAlert("Message", 'your order accepted, package is downloading...', "success");
+                       window.location.href = androidpath;
+
+                   }
+               },
+           });
+       });
+    }
+
+    function WindowsRegistration(packagechk, userId, windowspath) {
+        ShowAlert({
+            title: "Package download process",
+            text: "Welcome to Learnengg.com, click OK to download the package,",
+            type: "info",
+            showCancelButton: true,
+            confirmButtonText: "OK",
+            cancelButtonText: "Cancel",
+            closeOnConfirm: false,
+            closeOnCancel: true
+        },
+       function () {
+           $.ajax({
+               url: '/APIService/APIUserViewCartDetails/UpdatePackagesWithoutPaymentforSemester?UserId=' + userId + '&univ_id=1&subject_unit_type=2&semester=1&rule_id=1',
+               type: "GET",
+               success: function (data) {
+                   if (data == 1) {
+                       ShowAlert("Message", 'your order accepted, package is downloading...', "success");
+                       window.location.href = windowspath;
+
+                   }
+               },
+           });
+       });
+    }
+
+
+
+    //--------------Registration form from popup start --------------
+    var userId = '';
+    var res = '';
+    var Mydata;
+    $(function () {
+
+        var phoneNumber = false;
+
+        $("#frmRegistration #Mobile").blur(function () {
+            var value = $("#frmRegistration #Mobile").val();
+            var intRegex = /[0-9 -()+]+$/;
+            if (intRegex.test(value)) {
+                phoneNumber = true;
+            }
+            else {
+                phoneNumber = false;
+            }
+        });
+
+        $("#frmRegistration #Mobile").keyup(function () {
+            var value = $("#frmRegistration #Mobile").val();
+            var intRegex = /[0-9 -()+]+$/;
+            if (intRegex.test(value)) {
+                phoneNumber = true;
+            }
+            else {
+                phoneNumber = false;
+            }
+        });
+
+        $(document).on('click', '#btnRegister', function (e) {
+            e.preventDefault();
+            $('.modelErrorTxt').text('');
+            $('.modelErrorTxt').hide();
+
+            $("#frmRegistration").validate({
+                rules: {
+                    loginIDReg: {
+                        required: true
+                    },
+                    PasswordReg: {
+                        required: true,
+                        minlength: 3
+                    },
+                    Confirmpwd: {
+                        required: true,
+                        minlength: 3
+                    },
+                    Mobile: {
+                        required: true,
+                        number: function () { if (phoneNumber == true) { return true; } },
+                        maxlength: function () { if (phoneNumber == true) { return 10; } else { return 50; } },
+                        minlength: function () { if (phoneNumber == true) { return 10; } }
+                    },
+                    Email: {
+                        required: true
+                    },
+                    DepartmentID: {
+                        required: {
+                            depends: function (e) {
+                                return $("#DepartmentID option:selected").val() == "";
+
+                            }
+                        }
+                    },
+                    collegeid: {
+                        required: {
+                            depends: function (e) {
+                                return $("#collegeid option:selected").val() == "";
+                            }
+                        }
+                    }
+                },
+                messages: {
+                    loginIDReg: { required: "Enter your user name." },
+                    PasswordReg: { required: "Enter your password." },
+                    Confirmpwd: { required: "Enter your confirm password." },
+                    Mobile: { required: "Enter your mobile number." },
+                    Email: { required: "Enter your email." },
+                    DepartmentID: { required: "Select your department." },
+                    collegeid: { required: "Select your college." }
+                }
+            });
+            if ($('#frmRegistration').valid()) {
+                var $this = $(this);
+
+                Mydata = {
+                    FirstName: $('#loginIDReg').val(),
+                    user_name: $('#loginIDReg').val(),
+                    password: $('#PasswordReg').val(),
+                    mobile: $('#Mobile').val(),
+                    email_id: $('#Email').val(),
+                    DepartmentID: $.trim($("#DepartmentID option:selected").val()),
+                    collegeid: $.trim($("#collegeid option:selected").val()),
+                    currentyear: 1,
+                    currentsemester: 1,
+                    univ_id: 1,
+                    role_id: 1,
+                    registered_from: $('#Registeredfrom').val(),
+                    collegename: $.trim($("#collegeid option:selected").text()),
+                    department_name: $.trim($("#DepartmentID option:selected").text())
+                };
+
+
+                if (Mydata.password == $('#Confirmpwd').val()) {
+                    $.ajax({
+                        beforeSend: function () {
+                            $('.loader').show();
+                            ShowAlert({
+                                title: "Registration",
+                                text: "Saving your details please wait for few seconds...",
+                                timer: 6000,
+                                showConfirmButton: true
+                            });
+                            $('#btnRegister').attr("disabled", true);
+                        },
+                        url: "/Home/StudentRegistrationPopUp",
+                        data: Mydata,
+                        type: 'Post',
+                        async: false,
+                        success: function (Rdata) {
+                            var str = Rdata;
+                            res = str.split("_");
+                            if (res[1]) {
+                                $('#modal-registeration').modal('hide');
+                                $('#modal-otpverification').modal('show');
+                                userId = res[1];
+                            }
+                            else {
+                                ShowAlert("Alert", Rdata, "error");
+                            }
+                        },
+                        complete: function () {
+                            $('.loader').hide();
+                            $('#btnRegister').attr("disabled", false);
+                        }
+                    });
+                }
+
+                else {
+                    ShowAlert("Registration", "password doesn't match with confirm password.", "warning");
+                    $('#btnRegister').attr("disabled", false);
+                }
+            }
+
+        });
+    });
+
+    //-------------------Registration End ----------------------
+
+    $(function () {
+        $('#confirm').click(function () {
+            $('#confirm').attr("disabled", true);
+
+            var otpcode = $('#otpcode').val();
+            if (otpcode == 0) {
+                ShowAlert("Registration", "Please Enter the OTP to Complete Registration", "warning")
+            }
+            else {
+
+                $.ajax({
+                    url: '/APIService/APIUserDashBoard/GetOTP_CodeVerification?userId=' + userId + '&otpCode=' + otpcode,
+                    type: 'GET',
+                    cache: false,
+                    success: function (result) {
+                        if (result == 1) {
+                            ShowAlert("OTP Verification", "OTP verified successfully", "success");
+                            $('#modal-otpverification').modal('hide');
+                            $('#modal-login_new').modal('show');
+                        }
+                        else {
+                            ShowAlert("Registration", "OTP is incorrect ,Please Click Resend for OTP", "warning");
+                            $('#confirm').attr("disabled", false);
+                        }
+
+                    }
+                });
+            }
+        });
+
+        $(document).on('click', '#resendotp', function () {
+
+            var $this = $(this);
+            $.ajax({
+                url: '/APIService/APIUserDashBoard/GetVerificationCodeByMobile?MobNo=' + Mydata.mobile + '&emailID=' + Mydata.email_id,
+                type: 'GET',
+                success: function (data) {
+                    if (data == 1) {
+                        ShowAlert("ONE TIME PASSWORD", "OTP has been sent to your Mobile Number", "success");
+                    }
+                },
+                complete: function () {
+                    $this.prop('disabled', true);
+                }
+            });
+        });
+    });
+
+</script>

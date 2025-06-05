@@ -1,0 +1,392 @@
+﻿@{
+    ViewBag.Title = "Andriod App Home Page";
+}
+
+<style type="text/css">
+    .qa_pack_red {
+        color: red !important;
+        font-size: 12px;
+    }
+</style>
+<div class="col-md-12 container mrg_top">
+
+    <div class="row header_cont">
+        <div class="col-md-3 text-center">
+            <fieldset class="field_cont1 cont_width">
+                <legend class="lgnd1">For Desktop,Laptop version click here:</legend>
+                <span class="windows-btn" id="btnContinueShop"><a href="#" id="windowsstorelink" class="a_wind"> <img src="../../LE/img/windows.png" width="30" class="store" /> Desktop Store </a></span>
+            </fieldset>
+        </div>
+        <div class="col-md-6 univ_app">
+            <h2 id="headerText" class="univ_hdr">Anna University</h2>
+            <h3 class="txt_android">Most Important Question & Answer Apps</h3>
+            <h3 class="txt_android">Android App Store For Mobile And Tablet</h3>
+
+        </div>
+        <div class="col-md-3 text-center">
+            <fieldset class="field_cont1 cont_width">
+                <legend class="lgnd1">To View other University Q & A Apps:</legend>
+                <span class="android-btn" id="btnContinueAndroidShop" data-toggle="modal" data-target="#myModalreg">  <a href="#" class="a_adrd"><strong class="fa fa-university"></strong> Select University</a> </span>
+            </fieldset>
+        </div>
+    </div>
+
+    <div class="col-md-12 app_cont">
+        <ul>
+            <li>"Most Important Q & A Apps" contains important Questions and Answers for every chapter/unit. The Questions have been selected from previous year University Question papers and technical importance of the content. Our Experience in last FIVE Semesters has proved that Q & A app has provided greatest opportunity for scoring high & Simply, made pass mark easy to achieve. Questions and Answers are arranged Unit- wise & Answered in point by point method with 2D/3D demonstrations (limited). </li>
+            <li>We provide both the Desktop & Android version in the Learnengg.com website.</li>
+            <li>Android version is given below.</li>
+            <li>For Desktop version, Click the "Desktop Store" link provided on top of this page.</li>
+        </ul>
+    </div>
+
+    <div class="col-md-12 app_offer">
+
+        <span id="offer" class="icon_flat-wrp blink">
+            <p style="color:red;">FREE WELCOME OFFER FOR 1st YEAR</p>
+            <i class="fa fa-flag" aria-hidden="true" style="font-size: 30px;"></i>
+            <span class="icon_flg_wrp">Save</span>  50%  FOR ALL Q & A APP
+        </span>
+    </div>
+
+    <div id="AndroidApp" class="sem_con col-md-12">
+    </div>
+    <br />
+    <br />
+</div>
+
+<div class="modal right fade" id="myModalreg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+    <div class="modal-dialog modal_univ" role="document">
+        <div class="modal-content modal_cont1">
+            <div class="modal-body">
+                <button type="button" class="close modal_clse1" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <p class="prg_univ">
+                    Choose an University to view the Q&A Android Apps
+                    <ul id="UniversityFix"></ul>
+            </div>
+
+        </div><!-- modal-content -->
+    </div><!-- modal-dialog -->
+</div>
+
+<input type="hidden" id="ExtendedUnivid" />
+
+<script type="text/javascript">
+    //Function to get value from url
+    var getUrlParameter = function getUrlParameter(sParam) {
+        var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName,
+            i;
+
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === undefined ? true : sParameterName[1];
+            }
+        }
+    };
+
+    var univ_Id = 0;
+    var univ_Name = '';
+    var user_ID = 0;
+    var univ_Type = 1;
+
+
+
+
+    $(document).ready(function () {
+
+        $('.left_menu_open').click(function () {
+            $('.aside_wid-main').toggleClass('left_on');
+            $('.main_info').toggleClass('left_on_row');
+        });
+
+
+        if (getUrlParameter('UnivID')) {
+            univ_Id = getUrlParameter('UnivID');
+        }
+
+        if ($("#sessionUserId").val() != 0) {
+            univ_Id = $('#sessionUniversityId').val();
+        }
+        LoadUniversity();
+        LoadQPAndroidApp();
+
+
+    });
+
+
+
+    $(document).on('click', '#UniversityFix a', function () {
+        var univeId = $(this).attr('rel');
+
+        if (($('#sessionUniversityId').val() != 0)) {
+            if (univeId != $('#sessionUniversityId').val()) {
+                ShowAlert('Message', 'Your Registered / LoggedIn university is different')
+            }
+        }
+        else {
+            window.location.href = "/Home/IndexAndroidApp?UnivID=" + univeId;
+        }
+    });
+
+    function LoadUniversity() {
+        $.getJSON("/APIService/APIAdminActivity/LoadUniversityDropdown",
+        function (data) {
+
+            $.each(data, function (index, value) {
+                $("#UniversityList").tmpl(value).appendTo("#UniversityFix");
+                if (value.Universityid == univ_Id) {
+                    univ_Name = value.UniversityName;
+                    $('#headerText').html(univ_Name);
+                }
+            });
+        });
+    }
+
+    function LoadQPAndroidApp() {
+        ShowLoader();
+        $.getJSON("/APIService/APIUserDashBoard/QustionAnsAndroidApp",
+            {
+                universityId: univ_Id,
+                userId: $("#sessionUserId").val()
+            },
+            function (data) {
+                $.each(data, function (index, value) {
+
+                    $('#ExtendedUnivid').val(value.UniversityId);
+                    $('#QSemesterFix').tmpl(value).appendTo('#AndroidApp');
+                    $('#QAnswerAppFix').tmpl(value.QPOuterlist).appendTo('#AndroidApp');
+
+
+
+                });
+
+                //for free package
+
+                $('.rupee-FREE').hide();
+                $('.qp_android-FREE').addClass('qa_pack_red');
+
+
+                $('.addeditem-yes').attr("checked", true);
+            });
+
+        HideLoader();
+    }
+
+
+
+    function UnivtypeUnivId() {
+        var univCount = 0;
+        $.get("/APIService/APIProductHome/UnivTypeUniversityId",
+            {
+                univType: univ_Type
+            },
+            function (data) {
+                $.each(data, function (index, value) {
+                    if (univCount == 0) {
+                        univ_Id = value.Universityid;
+                        univCount = univCount + 1;
+                    }
+                });
+            });
+    }
+
+    //------------------------------Add to Cart and Remove From cart--------------------------------
+
+
+
+    $(document).on('click', '.AddtoCart', function () {
+        var packageId = $(this).attr('rel');
+
+        var univ_Id = $('#ExtendedUnivid').val();
+
+        var userID = $("#sessionUserId").val();
+
+        if ($(this).prop('checked') == true) {
+            var loggedinUnivID = '@Session["loginUniversityID"]';
+            if (userID == null || userID == '' || userID == 0) {
+                $('#modal-login').modal('show');
+                $(this).prop('checked', false);
+            }
+            else {
+                if (loggedinUnivID == univ_Id) {
+                    $.ajax({
+                        url: '/APIService/APIUserDashBoard/Getinsertpackageusercarts?userId=' + userID + '&packageId=' + packageId,
+                        type: "GET",
+                        success: function (data) {
+                            $('#modalAlert').modal('show');
+                            ViewCartCount(userID);
+                            bindLayoutCartDetails(userID);
+                            ShowAlert({
+                                title: "ADD TO CART",
+                                text: data,
+                                // type: "success",
+                                showCancelButton: true,
+                                confirmButtonColor: "#DD6B55",
+                                cancelButtonColor: "#8cd4f5",
+                                confirmButtonText: "View Cart",
+                                cancelButtonText: "Continue Shopping",
+                                closeOnConfirm: false,
+                                closeOnCancel: true
+                            },
+function (isConfirm) {
+    if (isConfirm) {
+        window.location.href = '/UserViewCartDetails/ViewMyCart';
+    } else {
+
+    }
+});
+                        },
+                        error: function () {
+                            alert('failure');
+                        }
+                    });
+                } else {
+                    ShowAlert("Alert!", 'Registered University is different', "warning");
+                    $(this).prop('checked', false);
+                }
+            }
+        }
+        else {
+
+            ShowAlert({
+                title: "Remove from Cart",
+                text: "Are you sure want to remove this item?",
+                type: "info",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                showLoaderOnConfirm: true,
+            },
+            function (isConfirm) {
+                if (isConfirm) {
+                    setTimeout(function () {
+
+                        if (userID != 0) {
+                            $.getJSON("/APIService/APIUserViewCartDetails/GetRemovePackage?userId=" + userID + "&packageID=" + packageId, function (rData) {
+                                if (rData == 1) {
+                                    bindLayoutCartDetails(userID);
+                                    ViewCartCount(userID);
+                                    $(this).prop('checked', false);
+                                    ShowAlert("Deleted!", "Your item is removed from your cart.", "success");
+                                }
+                                else {
+                                    ShowAlert("Cancelled", "Your Request is Cancelled", "error");
+                                }
+                            });
+                        }
+
+                    }, 2000);
+                } else {
+                    $('.pack-' + packageId).prop('checked', true).triggerHandler('click');
+                }
+
+
+            });
+
+        }
+
+    });
+
+    $(function () {
+        $(document).on('click', '.Hrenamedata', function () {
+
+            var packageId = $(this).attr('rel');
+
+            var univ_Id = $('#ExtendedUnivid').val();
+            var userID = $("#sessionUserId").val();
+
+            var loggedinUnivID = '@Session["loginUniversityID"]';
+            if (userID == null || userID == '' || userID == 0) {
+                $('#modal-login').modal('show');
+                $(this).prop('checked', false);
+            }
+            else {
+                if (loggedinUnivID == univ_Id) {
+                    $('.pack-' + packageId).prop('checked', true).triggerHandler('click');
+                    $.ajax({
+                        url: '/APIService/APIUserDashBoard/Getinsertpackageusercarts?userId=' + userID + '&packageId=' + packageId,
+                        type: "GET",
+                        success: function (data) {
+                            $('#modalAlert').modal('show');
+                            ViewCartCount(userID);
+                            bindLayoutCartDetails(userID);
+                            ShowAlert({
+                                title: "ADD TO CART",
+                                text: data,
+                                // type: "success",
+                                showCancelButton: true,
+                                confirmButtonColor: "#DD6B55",
+                                cancelButtonColor: "#8cd4f5",
+                                confirmButtonText: "View Cart",
+                                cancelButtonText: "Continue Shopping",
+                                closeOnConfirm: false,
+                                closeOnCancel: true
+                            },
+ function (isConfirm) {
+     if (isConfirm) {
+         window.location.href = '/UserViewCartDetails/ViewMyCart';
+
+     } else {
+
+     }
+ });
+                        },
+                        error: function () {
+                            alert('failure');
+                        }
+                    });
+                } else {
+                    ShowAlert("Alert!", 'Registered University is different', "warning");
+                    $(this).prop('checked', false);
+                }
+            }
+        });
+
+    });
+
+
+</script>
+<script type="text/html" id="UniversityList">
+    <li class="univ-${Universityid}"><a id="univlistid" rel="${Universityid}" href="#">${UniversityName}</a></li>
+</script>
+
+<script id="QAnswerAppFix" type="text/html">
+    <div id="qpall">
+        {{tmpl($data) "#QPList"}}
+    </div>
+</script>
+
+<script id="QSemesterFix" type="text/html">
+    <div class="" style="clear:both">
+        <div id="qpall col-md-12">
+            <br />
+            <h3 class="txt_sem_wrp">Semester - ${Semester} </h3>
+        </div>
+    </div>
+</script>
+
+
+<script id="QPList" type="text/html">
+    <div class="col-md-6">
+        <div class="sem_sub cus_span">
+            &nbsp; &nbsp;
+            <span class="">
+                ${PackageName}
+            </span>
+            <div class="chk_rs sub_btn">
+
+                <div class="chk_mrgn">
+                    <input type="checkbox" class="AddtoCart pack-${PackageId} addeditem-${IsAddedTocart}" id="packageid" rel="${PackageId}" />
+                    <i class="fa fa-inr rupee-${SellingPrice}" area-hidden="true"></i><span class="qp_android-${SellingPrice}">${SellingPrice}</span> &nbsp; &nbsp; <strike><i class="fa fa-inr" area-hidden="true"></i>${ActualPrice}</strike>
+                </div>
+                <div class="Hrenamedata pack-${PackageId}" rel="${PackageId}">
+                    <button class="btn btn-primary btn-style" type="button"> Add To Cart</button>
+                </div>
+            </div>
+            &nbsp; &nbsp;
+        </div>
+    </div>
+</script>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Admin>
+  <Menu>
+    <parentMenuID>1</parentMenuID>
+    <parentMenuName  value="../Home/AdminDashboard">Dashboard</parentMenuName>
+
+  </Menu>
+  
+  <Menu>
+    <parentMenuID>2</parentMenuID>
+    <parentMenuName  value="../Home/ViewProfile">My Profile</parentMenuName>
+    
+  </Menu>
+  
+	<Menu>
+    <parentMenuID>3</parentMenuID>
+    <parentMenuName value="">Orders</parentMenuName>
+    <!-- <child value="../AdminActivity/OpenOrdersDetails">Order Preparation</child> -->
+    <child value="../AdminActivity/OpenOrdersOualityCheck">Preparation and QC</child>
+    <!-- <child value="../AdminActivity/OpenOrdersDeliveryStatus">Delivery</child> -->
+    <child value="../AdminActivity/OpenOrderPaymentStatus">Delivery and Payment</child>
+    <child value="../AdminActivity/FreeSpecialOfferOrders">Free Orders Status</child>
+
+
+  </Menu>
+<!--<Menu>
+
+    <parentMenuID>4</parentMenuID>
+    <parentMenuName value="../AdminActivity/AllOrderStatusDetailsbuyCOD">All Orders Status by COD</parentMenuName>
+
+  </Menu>-->
+
+
+  <Menu>
+    <parentMenuID>5</parentMenuID>
+    <parentMenuName value="">All Orders and Status</parentMenuName>
+    <child value="../AdminActivity/AllOrderStatusDetailsbuyOnline">All Orders Status by Online</child>
+    <child value="../AdminActivity/AllOrderStatusDetailsbuyCOD">All Orders Status by COD</child>
+    <child value="../AdminActivity/AllOrderCancelRefundStatus">All Orders Cancel and Refund </child>
+  </Menu>
+
+	<Menu>
+		<parentMenuID>6</parentMenuID>
+		<parentMenuName value="">Subject Activation</parentMenuName>
+		<child value="../AdminActivity/SubjectActivationExtension">Activate Any Subjects</child>	
+    <child value="../AdminActivity/SubjectActivationHistoryReport">Subject Activation Report</child>
+  </Menu>
+
+  <Menu>
+    <parentMenuID>7</parentMenuID>
+    <parentMenuName value="">Launch Offer </parentMenuName>
+    <child value="../AdminReport/LaunchOfferView">Launch Offer Report</child>
+  </Menu>
+
+
+
+</Admin>

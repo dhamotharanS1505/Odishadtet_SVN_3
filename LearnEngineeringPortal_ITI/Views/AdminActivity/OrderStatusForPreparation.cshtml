@@ -1,0 +1,82 @@
+﻿@model IEnumerable<LearnEnggPaymentPortal.Model.AdminActivity>
+
+@{
+    ViewBag.Title = "OrderStatusForPreparation";
+    Layout = "~/Views/Shared/_TechTeachLayout.cshtml";
+}
+
+<h2>OrderStatusForPreparation</h2>
+
+
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+            <div class="row" >
+                <div class="col-sm-12 pad-0">
+                    <section class="mid_warp col-lg-12">
+
+                        <div class="row" id="subjectfix">
+                            <section class="col-sm-12 pad-0">
+                                <div class="book_view">
+                                    <article style="background-color: rgb(255, 255, 255); padding-right: 0px;" id="hide" class="book_panel_li book_panel col-sm-12">
+                                        <div class="col-sm-12 col-md-12 pad-0">
+                                            <h4>Order Details</h4>
+                                        </div>
+                                        <!---- View More ---->
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    Order Refno
+                                                </div>
+                                                <div class="col-md-2">
+                                                    Order Mobile
+                                                </div>
+                                                <div class="col-md-2">
+                                                    Order Status
+                                                </div>
+                                                <div class="col-md-2">
+                                                    Order On
+                                                </div>
+                                                <div class="col-md-2">
+                                                    Action
+                                                </div>
+                                            </div>
+
+                                            @foreach (var item in Model)
+                                            {
+
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    @Html.DisplayFor(x => item.orderrefno)
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.DisplayFor(Modelitem => item.ordermobile)
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.DisplayFor(Modelitem => item.orderstatus)
+                                                </div>
+                                                <div class="col-md-2">
+                                                    @Html.DisplayFor(Modelitem => item.orderon)
+                                                </div>
+                                                <div class="col-md-2">
+                                                    More
+                                                </div>
+
+                                            </div>
+                                            }
+                                        </div>
+                                    </article>
+                                </div>
+                            </section>
+                        </div>
+
+
+                    </section>
+                </div>
+            </div>
+            <!---- Footer ---->
+            
+
+        </div>
+
+
+    </div>

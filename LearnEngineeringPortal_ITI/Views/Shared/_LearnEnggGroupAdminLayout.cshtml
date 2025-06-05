@@ -1,0 +1,351 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+@Styles.Render("~/Content/cssAdminLayout")
+@Scripts.Render("~/bundles/modernizr")
+@Scripts.Render("~/bundles/JSAdminLayout")
+@RenderSection("scripts", required: false)
+
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<title>ODISHA-DTET</title>
+
+<style>
+    .navbar {
+        border: none !important;
+        margin-bottom: 0;
+    }
+
+    .header {
+        border-bottom: none !important;
+    }
+
+    .navbar {
+        border-radius: 0 !important;
+    }
+
+    body {
+        font-family: "Roboto" !important;
+        font-size: 1.5rem !important;
+    }
+
+    .sidebar .navbar .brand-title {
+        opacity: 1;
+        transition: all 0.5s;
+        padding-right: 0 !important;
+    }
+
+    .sub-textt {
+        padding-left: 18px;
+        opacity: 0.87;
+    }
+
+    .pt-2, .py-2 {
+        padding-top: 1.5rem !important;
+    }
+
+    .sidebar.collapsed .navbar .toggle-sidebar {
+        margin-right: 0px !important;
+    }
+
+    input[type="text"] {
+        border: none !important;
+        border-radius: 4px;
+        width: 100px;
+        margin-left: 0 !important;
+        margin-left: 0px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        font-size: 15px;
+    }
+
+    .dt-txt {
+        border: 1px solid lightgray;
+        width: 136px !important;
+        margin-bottom: 5%;
+        padding-bottom: 4px;
+    }
+
+    .dt-txt-span2 {
+        padding-left: 0 !important;
+    }
+
+    .dt-txt-spn {
+        padding: 1% 4% 3% 4%;
+    }
+
+    .dt-txt {
+        border: 1px solid lightgray;
+        width: 136px !important;
+        margin-bottom: 5%;
+        padding-bottom: 4px;
+    }
+
+    .dt-txt-spnn {
+        padding: 1% 4% 3% 4%;
+        border: 1px solid lightgray;
+        font-size: 15px;
+    }
+</style>
+
+
+@*<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>*@
+<link rel="icon" href="../favicon.ico" sizes="16x16" type="image/png">
+</head>
+<body>
+
+    @{
+
+        int cookieUserIdUserMaster = 0;
+        int cookiecollegegrpId = 0;
+        string cookieUserIdUserEmailId = "";
+        long cookieUserIdUserMobileNo = 0;
+        int cookieUniversityid = 0;
+        string cookieUserName = "";
+        string cookieUserImage = "";
+        string cookieserverdate = "";
+        string roledescription = "";
+        int roleid = 0;
+        string mapuniv = "";
+        string collegeID = "";
+        string rolelevel = "";
+        string dob = "";
+        string roll_no = "";
+        string DepartmentName = "";
+        if (HttpContext.Current.Session["LoginUserID"] != null)
+        {
+            cookieUserIdUserMaster = Convert.ToInt32(HttpContext.Current.Session["LoginUserID"]);
+            cookieUserIdUserEmailId = HttpContext.Current.Session["loginUserEmailID"].ToString();
+            cookieUserIdUserMobileNo = Convert.ToInt64(HttpContext.Current.Session["loginUserMobileNumber"]);
+            cookieUniversityid = Convert.ToInt32(HttpContext.Current.Session["loginUniversityID"]);
+            cookieUserName = HttpContext.Current.Session["loginUserFullName"].ToString();
+            cookieUserImage = HttpContext.Current.Session["ProfileImage"].ToString();
+            cookieserverdate = HttpContext.Current.Session["ServerDate"].ToString();
+            roleid = Convert.ToInt32(HttpContext.Current.Session["loginUserRoleID"]);
+            roledescription = HttpContext.Current.Session["loginUserRoledescription"].ToString();
+            mapuniv = HttpContext.Current.Session["MappedUniversities"].ToString();
+            rolelevel = HttpContext.Current.Session["RoleLevel"].ToString();
+            cookiecollegegrpId = Convert.ToInt32(HttpContext.Current.Session["logincollegegrpId"]);
+            dob = HttpContext.Current.Session["sessiondob"].ToString();
+            roll_no = HttpContext.Current.Session["sessioncoroll_no"].ToString();
+            DepartmentName = HttpContext.Current.Session["loginUserDepartmentName"].ToString();
+        }
+    }
+
+    @Html.Hidden("sessionUniversityId", cookieUniversityid)
+    @Html.Hidden("sessionUserId", cookieUserIdUserMaster)
+    @Html.Hidden("sessionEmailID", cookieUserIdUserEmailId)
+    @Html.Hidden("sessionMobileNumber", cookieUserIdUserMobileNo)
+    @Html.Hidden("sessionUserName", cookieUserName)
+    @Html.Hidden("sessionUserImage", cookieUserImage)
+    @Html.Hidden("sessionserverdate", cookieserverdate)
+    @Html.Hidden("sessionroleId", roleid)
+    @Html.Hidden("sessionroledescription", roledescription)
+    @Html.Hidden("sessionMappedUniv", mapuniv)
+    @Html.Hidden("sessionrolelevel", rolelevel)
+    @Html.Hidden("sessioncollegeID", collegeID)
+    @Html.Hidden("sessioncollegeGrpID", cookiecollegegrpId)
+    @Html.Hidden("sessioncodob", dob)
+    @Html.Hidden("sessioncoroll_no", roll_no)
+    @Html.Hidden("loginUserDepartmentName", DepartmentName)
+
+    <section class="wrapper">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <nav class="navbar navbar-dark bg-primary" style="padding:0 5%;">
+
+                <a class="navbar-brand m-0  brand-title" href='@Url.Action("LoadFirst", "Home","")'><img src="@Url.Content("~/files/images/learn_logo-01.png")" style="width:140px;"></a>
+                <span></span>
+                <a class="navbar-brand py-2 material-icons toggle-sidebar" href="#">menu</a>
+            </nav>
+
+            <nav class="navigation">
+                <p class="left-mu">Menu</p>
+                <ul>
+                    <li>
+                        <a href="#"> <img class="left-mu-icon" src="@Url.Content("~/files/images/home-01.png")"> <span class="sub-textt">Dashboard</span><span class="toogle-sub-nav material-icons">keyboard_arrow_right</span></a>
+                        <ul class="sub-nav CollegeGroupAdmin">
+                            <li class="sub-sub-mu"><a class="CollegeGroupAdmin" id="DashBoardMain" href="@Url.Action("DashBoardMain","CollegeGroupAdmin")"> DashBoard Main </a> </li>
+                            <li class="sub-sub-mu"><a class="CollegeGroupAdmin" id="RegistrationDashBoard" href="@Url.Action("RegistrationDashBoard","CollegeGroupAdmin")">Registration DashBoard </a> </li>
+                            <li class="sub-sub-mu"><a class="CollegeGroupAdmin" id="UsageDashBoard" href="@Url.Action("UsageDashBoard","CollegeGroupAdmin")">Usage DashBoard </a> </li>
+
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><img class="left-mu-icon" src="@Url.Content("~/files/images/reports-01.png")"> <span class="sub-textt"> Reports</span><span class="toogle-sub-nav material-icons">keyboard_arrow_right</span></a>
+                        <ul class="sub-nav GroupAdminProcess">
+                            <li class="sub-sub-mu"><a class="GroupAdminProcess" id="StudentRegistrationHistorys" href="@Url.Action("StudentRegistrationHistorys","GroupAdminProcess")">Registration Report</a></li>
+                            <li class="sub-sub-mu"><a class="GroupAdminProcess" id="UsersReadHistory" href="@Url.Action("UsersReadHistory","GroupAdminProcess")">Usage Detail Report</a></li>
+                            <li class="sub-sub-mu"><a class="GroupAdminProcess" id="UsersSummaryReadHistory" href="@Url.Action("UsersSummaryReadHistory","GroupAdminProcess")">Usage summary</a></li>
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><img class="left-mu-icon" src="@Url.Content("~/files/images/Star-01.png")"> <span class="sub-textt"> Master</span><span class="toogle-sub-nav material-icons">keyboard_arrow_right</span></a>
+                        <ul class="sub-nav">
+                            <li class="sub-sub-mu"><a class="CollegeGroupAdmin" id="CollegeGroupMappingList" href="@Url.Action("CollegeGroupMappingList", "CollegeGroupAdmin")">CollegeGroupsList</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+                <ul style="border-top:1px solid #dedede; margin-top:5px;">
+                    <li id="Profile" style="margin-top:5px;"><a href="@Url.Action("Profile","GroupAdminProcess")"><img class="left-mu-icon" src="@Url.Content("~/files/images/profile-01.png")"> <span class="sub-textt">  My Profile</span></a></li>
+                    <li>
+                        <a href="#" id="btnLogout">
+                            <img src="@Url.Content("~/files/images/logout-01.png")" class="left-mu-icon">
+                            <span class="sub-textt">  Logout</span>
+                        </a>
+                    </li>
+                    @*<li><a href="#"><img src="../files/images/settings-01.png" class="left-mu-icon"> <span class="sub-textt"> Setting</a></li>*@
+                </ul>
+
+                <ul style="border-top:1px solid #dedede; margin-top:5px;">
+                    <li id="FeedBack" style="margin-top:5px;"><a href="@Url.Action("FeedBack","GroupAdminProcess")"><img src="@Url.Content("~/files/images/feedback-01.png")" class="left-mu-icon"><span class="sub-textt"> Feedback</span></a></li>
+                    <li id="Help"><a href="@Url.Action("Help", "GroupAdminProcess")"><img src="@Url.Content("~/files/images/help-01.png")" class="left-mu-icon"> <span class="sub-textt"> Help</span></a></li>
+                </ul>
+            </nav>
+
+        </aside>
+
+
+        <!--RIGHT CONTENT AREA-->
+        <div class="content-area">
+            <header class="header sticky-top">
+
+                <nav class="navbar navbar-light bg-white px-sm-4 ">
+                    <h5 class="mn-hd">ODISHA-DTET - Visual Learning Solution</h5>
+                    <a class="navbar-brand py-2 d-md-none  m-0 material-icons toggle-sidebar" href="#">menu</a>
+                    <ul class="navbar-nav flex-row ml-auto">
+
+                        <li class="nav-item ml-sm-3 user-logedin dropdown">
+                            <a href="#" id="userLogedinDropdown" data-toggle="dropdown" class="nav-link weight-400 dropdown-toggle">
+                                <img src="@Url.Content("~/files/images/avtar4.png")" class="mr-2 rounded" width="28" style="box-shadow:0 2px 2px 2px rgba(0,0,0,0.1);">
+                                <span style="padding-left:3px; font-weight:500;" id="login-username"></span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userLogedinDropdown">
+                                @*<a class="dropdown-item SessionokLoginedUser" href="#">My Account</a>
+                                    <a class="dropdown-item SessionokLoginedUser" href="#">Account Settings</a>*@
+                                <a class="dropdown-item" target="_blank" href="@Url.Action("Help", "GroupAdminProcess")">Help &amp; Support</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" id="btnLogout1" href="#">Log Out</a>
+                            </div>
+                        </li>
+
+                    </ul>
+                </nav>
+            </header>
+            <!-- for registration div selection -->
+            <input type="hidden" id="DivSelOption" value="1" />
+            <div class="content-wrapper">
+                @RenderBody()
+            </div>
+
+
+            <footer class="page-footer">
+                <!-- Start Container -->
+                <div class="ft_ltf_wap">
+                    <div class="col-md-12 col-xs-12 copyright">
+                        Powered by Infoplus Technologies Pvt. Ltd (Version: <b id="LatestVersion">4.0.0</b>)
+                    </div>
+                </div>
+                <!-- End Container -->
+            </footer>
+
+        </div>
+    </section>
+
+
+</body>
+</html>
+
+<script>
+    $(document).ready(function () {
+
+        $("#login-username").text('Hi ' + $("#sessionUserName").val());
+        var pathname = window.location.pathname; // Returns path only (/path/example.html) 
+        var lastURL = pathname.split("/");
+        var backColor = "#1573F3";
+        var newobjlevel1 = "." + lastURL[1];
+        var newobjlevel2 = $("#" + lastURL[2]);
+
+        $(newobjlevel2).parents('li').toggleClass('open');
+        $(newobjlevel2).css('background', backColor);         
+
+    });
+
+
+    // JavaScript Document
+    (function ($) {
+        $.fn.countTo = function (options) {
+            // merge the default plugin settings with the custom options
+            options = $.extend({}, $.fn.countTo.defaults, options || {});
+
+            // how many times to update the value, and how much to increment the value on each update
+            var loops = Math.ceil(options.speed / options.refreshInterval),
+                increment = (options.to - options.from) / loops;
+
+            return $(this).each(function () {
+                var _this = this,
+                    loopCount = 0,
+                    value = options.from,
+                    interval = setInterval(updateTimer, options.refreshInterval);
+
+                function updateTimer() {
+                    value += increment;
+
+                    loopCount++;
+                    $(_this).html(value.toFixed(options.decimals));
+
+                    if (typeof (options.onUpdate) == 'function') {
+                        options.onUpdate.call(_this, value);
+                    }
+
+                    if (loopCount >= loops) {
+                        clearInterval(interval);
+                        value = options.to;
+
+                        if (typeof (options.onComplete) == 'function') {
+                            options.onComplete.call(_this, value);
+                        }
+                    }
+                }
+            });
+        };
+
+        $.fn.countTo.defaults = {
+            from: 0,  // the number the element should start at
+            to: 100,  // the number the element should end at
+            speed: 1000,  // how long it should take to count between the target numbers
+            refreshInterval: 100,  // how often the element should be updated
+            decimals: 0,  // the number of decimal places to show
+            onUpdate: null,  // callback method for every time the element is updated,
+            onComplete: null,  // callback method for when the element finishes updating
+        };
+    })(jQuery);
+
+
+</script>
+
+    <!-- ChartJS -->
+@*<script type="text/javascript" async="" src="~/files/js/analytics.js"></script> *@
+@*<script src="../files/js/Chart.js"></script>
+<script src="../files/js/utils.js"></script>*@
+
+@*<script src="../files/js/moment.js"></script>
+    <script src="../files/js/jquery.js"></script>*@
+@*<script src="~/files/js/popper.js"></script>
+<script src="~/files/js/bootstrap.js"></script>
+<script src="~/files/js/chosen.js"></script>*@
+@*<script src="~/files/js/fullcalendar.js"></script>
+
+<script src="~/files/js/daterangepicker.js"></script>*@
+<script src="~/files/js/custom.js"></script>
+<script src="~/files/js/dashboard.js"></script>
+<script async="" src="~/files/js/js.js"></script>
+

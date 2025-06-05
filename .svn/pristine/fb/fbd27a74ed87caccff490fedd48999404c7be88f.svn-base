@@ -1,0 +1,105 @@
+﻿
+@{
+    ViewBag.Title = "DeliveryAddressPageDetails";
+    Layout = "~/Views/Shared/_LearnEnggLayout.cshtml";
+}
+<style>
+    table, th, td {
+        border: 1px solid;
+    }
+</style>
+<div class="col-sm-12">
+    <div class="col-md-12">
+        <div>
+            <img  alt="Learn Engg" src="../content/img/Learn1.png?V2" class="logo-img" style="width:0%;height:0%;"  tabindex="cfcvghvgh">
+            <center><strong>Order Details</strong></center>
+        </div>
+
+        <div class="panel-body">
+            <div class="table-responsive">
+                <div class="col-sm-12" style="padding:0;">
+                    <div class="panel panel-default height">
+                        <div class="panel-heading text-center">
+                            <h4>Cash On Delivery:Rs.<strong><label id="FixTotal"></label></strong></h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12" style="padding:0;">
+                    <div class="col-md-6">
+                        <div class="panel panel-default height">
+                            <div class="panel-heading">To Address</div>
+                            <div class="panel-body">
+                                <div id="FixDeliveryAddress"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                            <div class="panel panel-default height">
+                                <table style="width:100%">
+                                    <tr>
+                                        <td><strong>Item</strong> </td>
+                                        <td id="FixItem"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Order Id</strong></td>
+                                        <td id="FixOrderId"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Shipped By</strong></td>
+                                        <td>Professional Courier</td>
+                                    </tr>
+                                </table>
+                                <div class="panel-heading">From Address</div>
+                                <div class="panel-body">
+                                    <span>Infoplus Technologies Pvt. Ltd,</span><br />
+                                    <span>Plot No:61,Developed Plost Estate,</span><br />
+                                    <span>Chennai - 600096</span><br />
+                                    <span>Mobile:9962444676,9962255055</span><br />
+                                    <span>(TIN:33440721675)</span>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script id="BindDeliveryAddress" type="text/html">
+    <div class="col-sm-4">
+        ${UserDeliveryName},<br />
+        ${UserDeliveryaddress},<br />
+        ${UserDeliveryCity} - ${UserDeliverypincode},<br />
+        ${UserDeliveryState},<br />
+        ${UserDeliveryCountry},<br />
+        ${UserDeliveryMobileno}
+    </div>
+</script>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        GetOrderDeliveryAddressDetails();
+    });
+    function GetOrderDeliveryAddressDetails() {
+        var userID = $("#sessionUserId").val();
+        $.getJSON("/APIService/APIAdminActivity/GetOrderDeliveryAddressDetails",
+        {
+            userid: userID
+            
+        },
+        function (data) {
+            $.each(data, function (i, value) {
+                if (i == 0) {
+                    $('#FixTotal').text(value.Amount);
+                    $('#FixItem').text(value.DeliveryMode);
+                    $('#FixOrderId').text(value.ClientRefNo);
+                    $("#BindDeliveryAddress").tmpl(value).appendTo("#FixDeliveryAddress");
+
+                }
+            });
+        });
+    }
+</script>

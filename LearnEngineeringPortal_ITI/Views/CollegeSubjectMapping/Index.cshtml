@@ -1,0 +1,106 @@
+﻿@model IEnumerable<Odishadtet.DAL.college_subject_mapping>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LearnEnggAdminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.university_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.rule_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.map_year)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.semester)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.active_status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.created_by)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.created_on)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.active_duration_days)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.active_duration_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.total_license)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.college_master.college_code)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.subject_master.subject_code)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.department_master.department_code)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.university_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.rule_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.map_year)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.semester)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.active_status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.created_by)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.created_on)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.active_duration_days)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.active_duration_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.total_license)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.college_master.college_code)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.subject_master.subject_code)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.department_master.department_code)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.college_subject_mapping_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.college_subject_mapping_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.college_subject_mapping_id })
+        </td>
+    </tr>
+}
+
+</table>

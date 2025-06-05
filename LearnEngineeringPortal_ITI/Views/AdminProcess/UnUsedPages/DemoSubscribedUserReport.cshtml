@@ -1,0 +1,119 @@
+﻿
+@{
+    ViewBag.Title = "DemoSubscribedUserReport";
+    Layout = "~/Views/Shared/_LearnEnggAdminLayout.cshtml";
+}
+
+<article class="col-sm-12">
+    <div class="in_hd_tt row"><strong class="fa fa-file-text"></strong><span>Demo Subscriber Report</span></div>
+</article>
+<script type="text/javascript">
+    $(document).ready(function () {
+        LoadDemoReport();
+    });
+    function LoadDemoReport() {
+        $('#DemoReportGrid').jqGrid({
+
+            url: '/AdminProcess/GetDemoSubscribedUserReport',
+            datatype: 'json',
+            colNames: ['Name', 'College', 'Email', 'Mobile', 'Subscribed Date', 'Region', 'City', 'Country'],
+            colModel: [
+            {
+                name: "SubscriberName",
+                index: 'SubscriberName', key: true, sortable: true, sorttype: 'text', width: 300, search: false, resizable: true, editable: true
+            },
+            {
+                name: "SubscriberCollege",
+                index: 'SubscriberCollege', key: true, sortable: true, sorttype: 'text', width: 500, search: true, resizable: true, editable: true,
+                searchoptions: { sopt: ['cn', 'bw'] }
+            },
+            {
+                name: "SubscriberEmail",
+                index: 'SubscriberEmail', key: true, sortable: false, sorttype: 'text', width: 350, search: false, resizable: true, editable: true
+            },
+            {
+                name: "MobileNumber",
+                index: 'MobileNumber', key: true, sortable: false, sorttype: 'text', width: 250, search: false, resizable: true, editable: true
+            },
+            {
+                name: "SubscribeDate",
+                index: 'SubscribeDateNumber~date', key: true, sortable: true, sorttype: 'date', width: 300, search: true, resizable: true, editable: true,
+                searchoptions: { sopt: ['ge', 'le', 'eq'], align: 'left',
+                    editable: false,
+                    formatter: 'date',
+                    formatoptions: { srcformat: 'm/d/Y', newformat: 'm/d/Y' },
+                    search: true,
+                    dataInit: function (elem) {
+                        var self = this;
+                        $(elem).datepicker({
+                            dateFormat: 'dd-mm-yy',
+                            showButtonPanel: true,
+                            showOn: 'focus',
+                            frozen: false
+                        });
+
+                    }
+                }
+            },
+            {
+                name: "SubscriberRegion",
+                index: 'SubscriberRegion', key: true, sortable: false, sorttype: 'text', width: 150, search: false, resizable: true, editable: true
+            },
+            {
+                name: "SubscriberCity",
+                index: 'SubscriberCity', key: true, sortable: false, sorttype: 'text', width: 250, search: false, resizable: true, editable: true
+            },
+            {
+                name: "SubscriberCountry",
+                index: 'SubscriberCountry', key: true, sortable: false, sorttype: 'text', width: 250, search: false, resizable: true, editable: true
+            }
+            ],
+            rownumbers: true,
+            rowNum: 10,
+            rowList: [10, 20, 30, 50, 100, 200, 500],
+            pager: '#pager',
+            sortname: 'SubscribeDate',
+            sortorder: 'desc',
+            altclass: 'myAltRowClass',
+            altRows: true,
+            height: '275px',
+            autowidth: true,
+            shrinkToFit: true,
+            viewsortcols: [true, 'vertical', true],
+            forceFit: true,
+            toppager: true,
+            emptyrecords: "Empty Records",
+            viewrecords: true,
+            loadComplete: function () {
+                highlightFilteredData.call(this);
+            },
+            gridComplete: function () {
+
+            }
+        });
+        InitiateProperty("DemoReportGrid", "pager");
+    }
+    $(function () {
+        /*To Reload jqgrid after submitting*/
+        function GridRefresh_Reload() {
+            var url = '/Admin/GetDemoSubscribedUserReport';
+            $("#DemoReportGrid").jqGrid('setGridParam', { url: url });
+            $("#DemoReportGrid").trigger("reloadGrid");
+        }
+     });
+</script>
+<article class="col-sm-12">
+    <section class="sub_wrp row">
+        <div id="jqgrid" class="grid_panel" align="center">
+            <table id="DemoReportGrid"></table>
+            <div id="pager"></div>
+        </div>
+    </section>
+</article>
+<div>
+    @Html.Hidden("WebServiceUrl", @System.Configuration.ConfigurationManager.AppSettings["localhost"])
+    @Html.Hidden("WebServiceUrlKtu", @System.Configuration.ConfigurationManager.AppSettings["localhostKtu"])
+    @Html.Hidden("WebServiceUrlVtu", @System.Configuration.ConfigurationManager.AppSettings["localhostvtu"])
+    @Html.Hidden("WebServiceUrl_NU", @System.Configuration.ConfigurationManager.AppSettings["localhostnu"])
+
+</div>

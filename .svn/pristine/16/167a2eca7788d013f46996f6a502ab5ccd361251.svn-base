@@ -1,0 +1,143 @@
+﻿
+@{
+    ViewBag.Title = "StudentSemestersReport";
+    Layout = "~/Views/Shared/_LearnEnggAdminLayout.cshtml";
+}
+<style type="text/css">
+    #ddlsmsreport {
+        -moz-appearance: none;
+        background: rgba(0, 0, 0, 0) url("../Content/img/v1.png") no-repeat scroll right center;
+        border: 1px solid #000;
+        border-radius: 0 !important;
+        padding: 7px 12px;
+    }
+</style>
+<article class="col-sm-12">
+    <div class="in_hd_tt row"><strong class="fa fa-file-text"></strong><span>Students SMS Data Report</span></div>
+</article>
+
+<article class="col-sm-12">
+    <section class="sub_wrp row">
+        <div class="table-responsive">
+            <table id="tblsemreport" class="table table-striped table-bordered" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+
+                        </th>
+                        <th>
+                            S.No
+                        </th>
+                        <th>
+                            University Name
+                        </th>
+                        <th>
+                            Batch Year
+                        </th>
+                        <th>
+                            Year
+                        </th>
+                        <th>
+                            SMS Users
+                        </th>
+                        <th>
+                            Registered Users
+                        </th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <select id="ddlsmsreport">
+            <option value="0">-- Select Report --</option>
+            <option value="1"> SMS data - Registered users</option>
+            <option value="2"> SMS data - Not Registered users</option>
+            <option value="3"> SMS data </option>
+        </select>
+        <input id="btndwnldreport" class="fil_in_btn" value="Download Report" type="button">
+    </section>
+</article>
+<div class="loader">
+    <center>
+        <img src="../Content/img/pre_loader.gif" />
+    </center>
+</div>
+
+<script type="text/javascript">
+    var chkrpt = '';
+
+
+    $(document).ready(function () {
+        sem_report();
+    });
+
+    function sem_report() {
+        $.ajax({
+            beforeSend: function () {
+                $('.loader').show();
+            },
+            url: '/APIService/APIAdminAnalyzeActivity/SemesterBatchReport',
+            type: "GET",
+            datatype: 'json',
+            success: function (data) {
+                if (data != "") {
+                    var rData = data;
+                    var table;
+                    var sno = 0;
+                    for (var i = 0; i < rData.length; i++) {
+
+                        sno = parseInt(sno + 1);
+
+                        table += '<tr>' +
+                                   '<td> <input id="chkrpt" type="checkbox" class="chk" name="chkRpt" value=' + rData[i].universityId + "~" + rData[i].Year + "~" + rData[i].BatchYearId + ' /></td>' +
+                                   '<td>' + sno + '</td>' +
+                                   '<td>' + rData[i].universityName + '</td>' +
+                                   '<td>' + rData[i].BatchYear + '</a></td>' +
+                                   '<td>' + rData[i].Year + '</td>' +
+                                   '<td>' + rData[i].SMSusers + '</td>' +
+                                   '<td>' + rData[i].Registeredusers + '</td></tr>';
+                    }
+
+                    $('#tblsemreport tbody').empty().append(table);
+                }
+                else {
+                    $('#tblsemreport tbody').html('<div class="col-sm-12" style="margin-top:8%;"><strong><h5> Data Not Avaliable.</h5></strong></div>');
+                }
+            }, complete: function () {
+                $('.loader').hide();
+            }
+        });
+    }
+
+    $(document).on('click', '.chk', function (e) {
+        if (this.checked && $('input:checked').length > 1) {
+            e.preventDefault();
+            ShowAlert("SMS Data Report", "Report can't be downloaded for more than one batch year.", "warning");
+        }
+        else {
+            chkrpt = $(".chk:checked").map(function () {
+                return this.value;
+            }).get();
+        }
+    });
+
+    $('#btndwnldreport').click(function () {
+        
+        if (chkrpt == '') {
+            ShowAlert("Alert Message", "Select any one of the batch year, to download the report.", "warning");
+        }
+        else {
+            var reportType = $("#ddlsmsreport option:selected").val();
+            var univId = chkrpt.toString().split("~")[0];
+            var year = chkrpt.toString().split("~")[1];
+            var batchyearId = chkrpt.toString().split("~")[2];
+
+            if (reportType > 0) {
+                window.location.href = "../AdminAnalyzeActivity/ExportSMSdataReport?univId=" + univId + "&year=" + year + "&batchyearId=" + batchyearId + "&rpt_type=" + reportType;
+            }
+            else {
+                ShowAlert("Alert Message", "Select the report type to download", "warning");
+            }
+        }
+    });
+</script>

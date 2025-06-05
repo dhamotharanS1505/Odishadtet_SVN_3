@@ -1,0 +1,235 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Odishadtet.Models;
+using System.Runtime.InteropServices;
+using System.Data;
+
+namespace Odishadtet.DAL
+{
+    public interface IAdminService
+    {
+        List<AdminActivityModel> OrderStatusPrparation();
+
+        List<OpenOrdersDetails> GetOpenOrderDetails(string mapuniv);
+
+        List<OpenOrdersDetails> GetOpenOrderDeliverystatusDetails(string mapuniv);
+
+        JQGrid LoadGridOrdersPreparation(JqSearchIn si, string mapuniv);
+
+        List<AdminActivityModel> GetOrderDeliveryAddressDetails(int userid);
+
+        string UpdatePreparationOrderStatus(long preperedBy, string OrderRefNo, string Comments, int Preparaionstatus);
+
+        string UpdateQualityCheckStatus(long preperedBy, string OrderRefNo, string Comments, int qc_status);
+
+        List<UserSubjectDetails> GetUserDetailsForActivationExtendeddays(long MobileNo);
+
+        List<UserSubjectDetails> GetUserDetailsForSubjectActivation(long MobileNo);
+
+        string SaveUserSubjectDetailsForActivation(int subjectid, string subjectcode, string subjectname, string Subjectversion, int userid, int departmentid, string subjectexpirydate, DateTime subjectexpiryextensiondate, int subjectextensiondays, int activatedby);
+
+        string SaveSubjectActivatedUserDetails(int subjectid, string subjectcode, string subjectname, string Subjectversion, int userid, int departmentid, string subjectexpirydate, DateTime subjectexpiryextensiondate, int subjectextensiondays, int activatedby);
+
+        List<UserSubjectDetails> GetAllUserSubjectDetails(long MobileNo);
+
+        List<UserSubjectDetails> GetOverallSubjectDetails(long MobileNo, int departmentId, int year, int semester, int subjunitType);
+
+        List<UserSubjectDetails> GetUserSubjectDetails(long MobileNo, int univId, int departmentId, int year, int semester);
+
+        string ExtendedDaysActivation(int userId, string subjectId, int extended_days, int sms, int email);
+
+        //string ExtendedDaysActivation(int userId, string subjectId, int extended_days, int sms, int email);
+
+        List<OpenOrdersDetails> OrderPrepartionDialog(string orderRefNo);
+
+        JQGrid LoadGridOpenOrders(JqSearchIn si, string mapuniv);
+
+        JQGrid LoadOpenOrdersQC_Status(JqSearchIn si, string mapuniv);
+
+        List<OrderDetails> OrderDetailsDialog(string orderRefNo);
+
+        JQGrid LoadDeliveryOrdersStatus(JqSearchIn si, string mapuniv);
+
+        JQGrid LoadAllOrdersbuyCODStatus(JqSearchIn si);
+
+        List<OpenOrdersDetails> GetSpecialOfferFreeOrders(string mapuniv);
+
+        JQGrid LoadAllOrdersbuyOnlineStatus(JqSearchIn si, string mapuniv, [Optional]string Pdate);
+
+        JQGrid LoadAllSuccessOrdersforCancelRefund(JqSearchIn si, string mapuniv, [Optional]string Pdate);
+
+        JQGrid LoadFreeOrders_status(JqSearchIn si, string mapuniv);
+
+        string UpdatedeliveryOrderStatus(long preperedBy, string orderRefNo, string comments, int Deliverystatus, string DeliverBy, string DeliveryOn, string CourierName, string Courierno, string CourierContactno, int CourierExpecteddeliverydays);
+
+        string UpdatePaymentOrderStatus(long preperedBy, string OrderRefNo, int paymentamt, int Paymentstatus, Int64 user_subscribed_masterid, Int64 created_userid);
+
+        string UpdatePaymentRefundOrderStatus(long preperedBy, int paymentrefundamt, int Paymentrefundstatus, string OrderRefNo);
+
+        List<Departmentdetails> GetDepartmentListActivitionextenddays(int univId, int collegeId);
+
+        List<Departmentdetails> GetyearsemActivitionextenddays(int univId, int departmentId);
+
+        List<Universitydetails> GetUniversityDetailsAdmin(string mapuniv);
+
+        List<Departmentdetails> GetsemesterSubjectActivation(int univId);
+
+        List<AdminDashboard> AdminDashBoard(string mapuniv);
+
+        List<AdminDashboard> OpenOrdersAdminDashBoard(string mapuniv);
+
+        List<AdminDateWiseSummary> GetDateWiseOrderSummary(string FromDate, string ToDate);
+
+        List<AdminDashboard> LastweekOrdersAdminDashBoard(string mapuniv);
+
+        List<checkLogin> VisitedUersChart(string mapuniv);
+
+        List<userSubjects> GetUserSubjectsDetails_Activation(string OrderID);
+
+        List<Packagedetails_product> GetPackagedetails_productdetails(int univId, int DepartId, int Semester);
+
+        List<Semester_product> GetsemList_productdetails(int univId);
+
+        List<keywords_longdesc_product> GetBindkewords_longDesc_productdetails(int packageid);
+
+        string Update_keyword_longDesc_productdetails(int Sessionuserid, int packageid, string PreviousKeywords, string CurrentKeywords, string PreviousDescription, string CurrentDescription);
+
+        string InsertOrUpdateLicenseExtensionByAdmin(int pUserID, string pSubjectIds, int pSubjectUnitType, int trialDays, int sms, int email, int activatedby);
+
+        singlePackagedetails GetSinglePackage(int PackageId);
+
+        singlePackagedetails GetSinglePackagewithlogin(long UserId, int PackageId);
+
+        string CheckLoginDetails_Update_Keywords_Desc(string Password, int Sessionuserid);
+
+        List<ActivationReport> SubjectActivationy_For_HistorReportDetails(int UnivId, string Date);
+
+        List<ActivationReport> SubjectActivationHistory_DateWise_Report(int UniversityId);
+
+        List<ActivationReport> SubjectActivation_By_HistoryReportDetails(int UnivId, string Date);
+
+        List<ActivationReport> SubjectActivationHistory_UniversityWise_Report();
+
+        List<dropdownloading> LoadSemesterDropDown(int departmentid);
+
+        List<dropdownloading> LoadUniversityDropdown();
+
+        List<dropdownloading> LoadDepartmentDropdown(int universityId);
+
+        string SubjectMasterUploadPopup(int selectedUniversity, int Department, int Semester, int Subjectid);
+
+        string SubjectMasterUploadGrid(int selectedUniversity, int Department, int Semester, int Subjectid);
+        
+
+        string BulkInsertExcel(string fileLocation, string fileName, string fileExtension, string univ_ID, string collegeID, string departmentID, string Year, string Sem);
+
+        string GetOTP(long Mobile);
+
+        List<CollegeList> GetColleges(int CollegeGroupId = 0);
+
+        List<CollegeList> GetColleges(int departmentID, int CollegeGroupId = 0);
+
+        List<SubjectList> GetSubject(int departmentID,int collegeID);
+
+        List<SemesterList> GetSemester(int departmentID, int collegeID);
+
+        FeedbackArchieveViewModel GetArchiveFeedbacks();
+
+        List<Excel_ECommerce> ExportExcel_ECommerce_Report();
+
+        List<OpenOrdersDetails> GetAllOrderstatusDetailsbyOnline(string mapuniv, [Optional] string Pdate);
+
+        List<datewisereport> GetDateWise_user_Registration_report(string start_date, string End_date);
+
+        List<datewisereport> DateWise_user_Registration_report_InitialGrid();
+
+        List<datewisereport_Issues> DateWise_user_Registration_report_Issues_popup(string PDate);
+
+        List<datewisereport> University_user_Registration_report_InitialGrid();
+
+        List<datewisereport> University_Datewise_user_Registration_report_InitialGrid(int UnivId);
+
+        List<datewisereport> University_SemWise_user_Registration_report_Excel(string start_date, string End_date);
+
+        List<datewisereport_Issues> Univ_DateWise_user_Registration_report_Issues_popup(string PDate, int UnivId);
+
+        List<ActivationReport> SubjectActivationHistory_DateWise_Details_Report(int UniversityId, string ActStartDate, string ActEndDate, string UserRole);
+
+        List<UserReadHistoryModel> UniversityReadHistoryexportwithfilter(int univId, string college_id, string semester, string year, string reg_startdate, string reg_end_date, string usg_start_date, string usg_end_date);
+
+        List<UserReadHistoryModel> subjectunitwiseReadHistoryReportwithfilter(int univId, string college_id, string semester, string year, string reg_startdate, string reg_end_date, string usg_start_date, string usg_end_date, int contenttype);
+
+        List<UserReadHistoryModel> UniversityReadHistoryExportAndroidApp(int univId, string college_id, string semester, string year, string reg_startdate, string reg_end_date, string usg_start_date, string usg_end_date);
+
+        List<UserReadHistoryModel> ExportReadHistoryContentAndQA_AndroidApp(int univId, string college_id, string semester, string year, string reg_startdate, string reg_end_date, string usg_start_date, string usg_end_date, int contenttype);
+
+        string SaveCollegeTestSubjectDetails(int collegeId, string primaryMac);
+
+        string getCollegeTestSubjectExpiryDetails(int collegeId, string primaryMac);
+
+        string InsertCollegeTestInstitute(int pCollege_id, string pInstallationCentreName, string pPrimaryMac, int pEnterby);
+
+
+        DataTable VisitorsReport();
+        #region ITI Service 
+        string verifyOtp_updateCollegePassword(int collegeId, string OTP, string pPassword);
+        string CheckCollegeLogin(string loginID, string Password);
+        string InsertCollegeInstitute(int pCollege_id, string pInstallationCentreName, string pPrimaryMac, int pEnterby);
+        string sendOtp_VerifyCollege(int collegeId, long pMobileNo, string emailId, int isSendorResend);
+        string GetCollegeList();
+        string GetDepartmentList();
+        string GetUserIP();
+        string getServerDate();
+        string getCollegeSubjectExpiryDetails(int collegeId, string primaryMac);
+        string GetUserid(long MobNo, string emailID);
+        string SaveRegistrationWithReference(string userName, string password, string emailId, long mobileNo, int collegeid, string collegeName);
+        int GetVerificationCodeByMobile(long pMobileNo, string pEmailID, int isSendorResend);
+        string RandomCodeVerification(int userId, string verifyCode);
+        string CheckLoginDetail(string loginID, string Password);
+        string updateCollegeInstallOn(int collegeId, string primaryMac, int departmentID);
+
+        #endregion
+        // password reset
+
+        string ResetPassword(long mobileNo, string otpCode, string newPassword);
+
+        string ResetPasswordCollegeAdmin(long mobileNo, string otpCode, string newPassword);
+
+        string ForgetPassword(long mobileNo);
+
+        string ForgetPasswordCollegeAdmin(long mobileNo);
+
+
+        string ResetPasswordEmail(string Email, string otpCode, string newPassword);
+
+        string ResetPasswordCollegeAdminEmail(string Email, string otpCode, string newPassword);
+
+        string ForgetPasswordEmail(string Email);
+
+        string ForgetPasswordCollegeAdminEmail(string Email);
+
+        string RemoveTradeSemesterLicense(int pCollegeId, string pPrimaryMac, string pDepartmentSemester);
+
+        string getCollegeTotalLicenseDetails(int collegeId);
+
+        string SaveCollegeTradeSemSubjects(int pCollegeId, string pPrimaryMac, string pDepartmentSemester);
+
+        List<TradeSubjects> GetCollegeNotMappedTrades(int collegeId);
+
+        List<TradeSubjects> GetCollegeMappedTrades(int collegeId);
+
+        string SaveCollegeTradeMapping(int pCollegeId, string pMapTrades, int pTotalLicense, int pDurationDays, int pCreatedBy);
+
+        string RemoveCollegeTradeMapping(int pCollegeId, string pMapTrades);
+
+        string EditCollegeTradeMapping(int pCollegeId, string pMapTrades, int pTotalLicense, int pDurationDays, int pCreatedBy);
+
+        List<CollegeModel> GetCollegeAdministrators(int pcollege_group_id);
+
+        string SampleMail(string pEmailId);
+
+    }
+}

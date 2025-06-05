@@ -1,0 +1,99 @@
+﻿@model Odishadtet.DAL.college_master
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LearnEnggAdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Institute Details</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.college_code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.college_code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.college_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.college_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.active_status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.active_status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.university_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.university_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.enter_on)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.enter_on)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.enter_by)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.enter_by)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.total_license)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.total_license)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.college_mobile)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.college_mobile)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.college_email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.college_email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.password)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.college_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

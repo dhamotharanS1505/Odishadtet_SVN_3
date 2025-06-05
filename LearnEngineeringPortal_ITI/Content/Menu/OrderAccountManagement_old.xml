@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<Admin>
+  <Menu>
+    <parentMenuID>1</parentMenuID>
+    <parentMenuName  value="../Home/AdminDashboard">Dashboard</parentMenuName>
+
+  </Menu>
+  
+  <Menu>
+    <parentMenuID>2</parentMenuID>
+    <parentMenuName  value="../Home/ViewProfile">My Profile</parentMenuName>
+    
+  </Menu>
+  
+	<Menu>
+    <parentMenuID>3</parentMenuID>
+    <parentMenuName value="">Orders</parentMenuName>
+    <child value="../AdminActivity/OpenOrdersDetails">Order Preparation</child>
+	<child value="../AdminActivity/OpenOrdersOualityCheck">Preparation and QC</child>
+<child value="../AdminActivity/OpenOrdersDeliveryStatus">Delivery</child>
+<child value="../AdminActivity/OpenOrderPaymentStatus">Delivery and Payment</child>
+	
+	</Menu>
+
+ <Menu>
+    <parentMenuID>4</parentMenuID>
+    <parentMenuName value="../AdminActivity/AllOrderStatusDetails">All Orders</parentMenuName>
+  </Menu>
+
+	<Menu>
+		<parentMenuID>4</parentMenuID>
+		<parentMenuName value="">Subject Activation</parentMenuName>
+		
+		<child value="../AdminActivity/ActivationExtendDays">Extend subject activation</child>
+	</Menu>
+
+
+
+</Admin>

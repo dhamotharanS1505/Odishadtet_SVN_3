@@ -1,0 +1,1088 @@
+﻿
+@{
+    ViewBag.Title = "OpenOrderPaymentStatus";
+    Layout = "~/Views/Shared/_LearnEnggAdminLayout.cshtml";
+}
+
+<style type="text/css">
+    .row {
+        margin-left: -15px;
+        margin-right: -15px;
+    }
+
+    #status {
+        margin-top: 50px;
+    }
+
+    #printbtn {
+        float: right;
+        margin-right: 0px;
+    }
+
+    .refno {
+        color: #0066c0 !important;
+        text-decoration: none;
+    }
+
+
+    thead tr th {
+        line-height: 15px !important;
+    }
+
+    .ui-state-default.ui-jqgrid-pager.ui-corner-bottom {
+        width: 1049px !important;
+    }
+
+    .ui-state-default.ui-jqgrid-toppager {
+        width: 1047px !important;
+    }
+
+    #Deliverytxtcment {
+        width: 70%;
+        height: 30px;
+    }
+
+    #txtcmentPayment {
+        width: 50%;
+        padding: 6px;
+    }
+
+    .ui-dialog .ui-dialog-buttonpane button {
+        cursor: pointer;
+        margin: 0.5em 0.4em 0.5em 0;
+        padding: 4px;
+    }
+
+    .col-sm-6 > select {
+        border: 1px solid #000;
+        border-radius: 1px !important;
+        margin: 1px !important;
+        width: 70%;
+        padding: 4px;
+        background: rgba(0, 0, 0, 0) url("../Content/img/v1.png") no-repeat scroll right center;
+        -moz-appearance: none;
+    }
+
+    .ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix.ui-draggable-handle > button {
+        background: #fff none repeat scroll 0 0;
+        margin-left: 7%;
+        padding: 0;
+        top: 0 !important;
+    }
+
+    #thead {
+        background: #34addb none repeat scroll 0 0;
+        color: #fff;
+    }
+
+    .ui-dialog-content.ui-widget-content {
+        height: 400px;
+        max-height: none;
+        min-height: 0;
+        width: auto;
+    }
+
+    fieldset.scheduler-border {
+        border: 1px groove #ddd !important;
+        border-radius: 4px;
+        box-shadow: 0 0 0 0 #000;
+        margin: 15px 0;
+        padding: 15px;
+    }
+
+    legend.scheduler-border {
+        font-size: 1.2em !important;
+        font-weight: bold !important;
+        text-align: left !important;
+        width: auto;
+        padding: 0 10px;
+        border-bottom: none;
+    }
+
+    .scheduler-border legend {
+        margin-bottom: 0px !important;
+    }
+
+    #ordersdetails ul {
+        list-style: outside none none;
+        margin: 0;
+        padding: 0;
+    }
+
+        #ordersdetails ul li {
+            font-size: 13px;
+            line-height: 1.5;
+            margin: 0;
+            padding: 0;
+        }
+
+    #ordersdetails table {
+        font-size: 13px;
+        width: 100%;
+    }
+
+    #ordersdetails tfoot {
+        font-weight: bold;
+    }
+
+    #ordersdetails span strong {
+        font-size: 13px;
+        font-weight: normal;
+    }
+
+    #ordersdetails table td:nth-child(2) {
+        text-align: right;
+    }
+
+
+    .topics tr {
+        line-height: 14px !important;
+    }
+
+    .mandatory {
+        color: red;
+    }
+</style>
+
+<article class="col-sm-12">
+    <div class="in_hd_tt row">
+        <strong class="fa fa-file-text"></strong><span>OPEN ORDERS FOR PAYMENT STATUS</span> <span style="float: right;" class="wi_cl_ul" id="fine_drp_3">
+        </span>
+    </div>
+</article>
+
+<input type="hidden" id="user" />
+<script type="text/javascript">
+
+    var orderId = '';
+    var updated_status = 0;
+    var comments = '';
+    var QC_Status = '';
+    var Delivery_Status = '';
+    var PaymentStatus = '';
+    var usersubid = 0;
+
+    $(document).ready(function () {
+        $("#Deliveryon").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "-60:-10",
+            dateFormat: 'dd-mm-yy',
+            maxDate: 0
+        });
+
+
+        $('#mobileno').ForceNumericOnly();
+
+        initDateSearch = function (elem) {
+            setTimeout(function () {
+                $(elem).datepicker({
+                    dateFormat: "dd-mm-yy",
+                    autoSize: true,
+                    changeYear: true,
+                    changeMonth: true,
+                    showWeek: true,
+                    showButtonPanel: true,
+                    onSelect: function (dateText, inst) {
+                        setTimeout(function () {
+                            $('#OpenOrdersgrid')[0].triggerToolbar();
+                        }, 100);
+                    }
+                });
+            }, 100);
+        };
+        openOrderDetails();
+
+    });
+
+
+    function openOrderDetails() {
+
+        $('#OpenOrdersgrid').jqGrid({
+
+            url: '/AdminActivity/OpenOrdersDeliveryStatusgrid',
+            datatype: 'json',
+            colNames: ['', 'Order Id', 'Placed On', 'Payment On', 'Total Items', 'Delivery Mode', 'Name', 'Mobile', 'QC Status', 'Delivery Status', 'Payment Status'],
+            colModel: [
+                 {
+                     name: 'identyvalue', index: 'identyvalue', key: true, sortable: false, search: false, resizable: false, frozen: false, hidden: true,
+                     "formatter": function (k) {
+                         return '<input type="hidden" name="hidActive"  id="usermasterid" value=' + k + '>';
+                     }
+                 },
+                {
+                    name: "OrderRefNo",
+                    index: 'OrderRefNo', key: true, sortable: true, sorttype: 'text', width: 4, search: true, resizable: true, editable: true, searchoptions: { sopt: ['cn', 'bw', 'ew', 'eq'] },
+                    "formatter": function (v) {
+                        return '<a  id="refNo" class="refno" href="#" rel="' + v + '">' + v + '  <i  id="ordersdetails"></i></a>';
+                    }
+                },
+                 {
+                     name: "OrderPlacedOn",
+                     index: 'OrderPlacedOnInt~date', key: true, sortable: true, sorttype: 'text', width: 4, search: true, resizable: true, editable: true, searchoptions: { sopt: ["eq", "ne", "lt", "le", "gt", "ge"], dataInit: initDateSearch },
+                     formatter: '#date', formatoptions: { srcformat: 'd-m-Y', newformat: 'd-M-Y' }
+                 },
+                 {
+                     name: "PaymentDate",
+                     index: 'PaymentDate~date', key: true, sortable: true, sorttype: 'text', width: 5, search: false, resizable: true, editable: true,
+                     searchoptions: { sopt: ['cn', 'bw', 'ew', 'eq'] },
+                     formatter: '#date', formatoptions: { srcformat: 'd/m/Y', newformat: 'd/M/Y' }
+                 },
+                 {
+                     name: "TotalItems",
+                     index: 'TotalItems', key: true, sortable: false, sorttype: 'text', width: 3, search: false, resizable: true, editable: true, align: "center",
+                     searchoptions: { sopt: ['cn', 'bw', 'ew', 'eq'] }
+                 },
+
+                 {
+                     name: "DeliveryMode",
+                     index: 'DeliveryMode', key: true, sortable: true, sorttype: 'text', width: 5, search: true, resizable: true, editable: true, align: "center",
+                     searchoptions: { sopt: ['cn', 'bw', 'ew', 'eq'] }
+                 },
+                {
+                    name: "UserName",
+                    index: 'UserName', key: true, sortable: false, sorttype: 'text', width: 3, search: true, resizable: true, editable: true,
+                    searchoptions: { sopt: ['cn', 'bw', 'ew', 'eq'] }
+                },
+                {
+                    name: "Mobile",
+                    index: 'Mobile', key: true, sortable: false, sorttype: 'text', width: 3, search: true, resizable: true, editable: true,
+                    searchoptions: { sopt: ['cn', 'bw', 'ew', 'eq'] }
+                },
+
+               {
+                   name: "QC_Status",
+                   index: 'QC_Status', key: true, sortable: false, sorttype: 'text', width: 5, search: true, resizable: true, editable: true,
+                   searchoptions: { sopt: ['cn', 'bw', 'ew', 'eq'] },
+                   "formatter": function (v) {
+
+                       QC_Status = v;
+
+                       return QC_Status;
+
+                   }
+               },
+
+               {
+                   name: 'Delivery_Status', index: 'Delivery_Status', key: true, width: 6, sortable: true, search: true, resizable: true, frozen: false,
+                   searchoptions: { sopt: ['cn', 'bw', 'ew', 'eq'] }
+                     , "formatter": function (v) {
+                         Delivery_Status = v;
+                         if (Delivery_Status == 'Delivered') {
+                             return Delivery_Status;
+                         }
+                         if (QC_Status == 'Completed') {
+
+                             return '<a id="btnupdate" class="delivery" style="color:#0066C0;" href="#" rel="' + v + '"><img title="update status" src="../Content/img/edit.png" class="EditIcon" />&nbsp;' + v + '</a>';
+                         }
+                         else {
+                             return v;
+                         }
+                     }
+               },
+
+
+             {
+                 name: 'PaymentStatus', index: 'PaymentStatus', key: true, width: 6, sortable: true, search: true, resizable: true, frozen: false,
+                 searchoptions: { sopt: ['cn', 'bw', 'ew', 'eq'] }
+                  , "formatter": function (v) {
+                      // PaymentStatus = v;
+                      //if (PaymentStatus == 'Received') {
+                      //    return PaymentStatus;
+                      //}
+                      //if (Delivery_Status == 'Delivered') {
+                      //    return '<a id="btnupdate" class="payment" style="color:#0066C0;" href="#" rel="' + v + '"><img title="update status" src="../Content/img/edit.png" class="EditIcon" />&nbsp;' + v + '</a>';
+                      //}
+                      //else {
+                      return v;
+                      //}
+                  }
+             }
+
+            ],
+
+            rownumbers: true,
+            rowNum: 20,
+            rowList: [20, 40, 60, 80, 100, 200, 500, 1000],
+            pager: '#pager',
+            sortname: 'OrderPlacedOn',
+            sortorder: 'asc',
+            altclass: 'myAltRowClass',
+            altRows: true,
+            height: '500px',
+            leff: '253px',
+            width: '1095px',
+            autowidth: true,
+            shrinkToFit: true,
+            viewsortcols: [true, 'vertical', true],
+            forceFit: true, // have to set for column scroll enable while expand the grid
+            toppager: true,
+            emptyrecords: "Empty records",
+            viewrecords: true,
+            loadComplete: function () {
+                highlightFilteredData.call(this);
+            },
+            gridComplete: function () {
+            }
+        });
+        InitiateProperty("OpenOrdersgrid", "pager");
+    }
+
+    function GridRefresh_Reload() {
+        $("#OpenOrdersgrid").trigger("reloadGrid");
+    }
+
+    var className = '';
+    $(function () {
+        $(document).on('click', '#OpenOrdersgrid tbody tr a', function (e) {
+            e.preventDefault();
+
+            className = $(this).attr('class');
+            if (className == 'delivery') {
+                orderId = $(this).closest("tr").find("td").eq(2).text();
+                orderstatus = $(this).attr('rel');
+                ddl_Deliveryorderstatus();
+                fnOpenUpdatedialogDelivery();
+
+            }
+            else if (className == 'payment') {
+                orderId = $(this).closest("tr").find("td").eq(2).text();
+                orderstatus = $(this).attr('rel');
+                ddl_orderstatusPayment();
+                fnOpenUpdatedialogPayment();
+
+            }
+            else if (className == 'refno') {
+                orderId = $(this).closest("tr").find("td").eq(2).text();
+                fnOpenOrdersdialog();
+
+
+            }
+
+        });
+    });
+
+
+    //function ddl_Deliveryorderstatus() {
+    //    if ($.trim(orderstatus) == 'Not yet started') {
+    //        $('#ddlStatus').empty().append('<option value="0">--Select Status--</option><option value="2">In-Progress</option><option value="3">Delivered</option>');
+    //    }
+    //    else if ($.trim(orderstatus) == 'In-Progress') {
+    //        $('#ddlStatus').empty().append('<option value="0">--Select Status--</option><option value="3">Delivered</option>');
+    //    }
+    //    else if ($.trim(orderstatus) == 'Delivered') {
+    //        $('#ddlStatus').empty().append('<option value="0">--Select Status--</option><option value="3">Delivered</option>');
+    //    }
+    //}
+
+    function ddl_orderstatusPayment() {
+
+        if ($.trim(orderstatus) == 'Not yet Receive') {
+            $('#ddlStatuspayment').empty().append('<option value="0">--Select Status--</option><option value="1">Not yet Receive</option><option value="2">Received</option>');
+        }
+        else if ($.trim(orderstatus) == 'Not yet Received') {
+            $('#ddlStatuspayment').empty().append('<option value="0">--Select Status--</option><option value="2">Received</option>');
+        }
+        else if ($.trim(orderstatus) == 'Received') {
+            $('#ddlStatuspayment').empty().append('<option value="0">--Select Status--</option><option value="2">Received</option>');
+        }
+
+    }
+
+    //function fnOpenUpdatedialog() {
+    //    $("#popupdataFix").empty().append(OpenordersUpdate());
+    //    $('#updateorders').dialog({
+    //        resizable: false,
+    //        modal: true,
+    //        title: "Update Order Details",
+    //        height: 550,
+    //        top: 150,
+    //        width: 1000,
+    //        buttons: {
+    //            "Cancel": function () {
+    //                $(this).dialog('close');
+    //            },
+    //            'Submit': function () {
+    //                updatestatusDelivery();
+    //            }
+    //        },
+    //        open: function () {
+    //            $(this).closest(".ui-dialog")
+    //            .find(".ui-dialog-titlebar-close")
+    //            .removeClass("ui-dialog-titlebar-close")
+    //            .html("<span class='ui-button-icon-primary ui-icon ui-icon-closethick'></span>");
+    //        }
+    //    });
+    //    return false;
+    //}
+
+    function fnOpenUpdatedialogPayment() {
+        $("#popupdataFixpaytm").empty().append(OpenordersUpdatepayment());
+        $('#updateordersPayment').dialog({
+            resizable: false,
+            modal: true,
+            title: "Update Order Details",
+            height: 550,
+            top: 150,
+            width: 1000,
+            buttons: {
+                "Cancel": function () {
+                    $(this).dialog('close');
+                },
+                'Submit': function () {
+                    updatestatusPayment();
+                }
+
+            },
+            open: function () {
+                $(this).closest(".ui-dialog")
+                .find(".ui-dialog-titlebar-close")
+                .removeClass("ui-dialog-titlebar-close")
+                .html("<span class='ui-button-icon-primary ui-icon ui-icon-closethick'></span>");
+            }
+        });
+        return false;
+    }
+
+    function fnOpenOrdersdialog() {
+        getordersdetails();
+        $('#openorders_popup').dialog({
+            resizable: false,
+            modal: true,
+            title: "Order Details",
+            height: 570,
+            top: 150,
+            width: 1000,
+            scrollOffset: 0,
+            open: function () {
+                $(this).closest(".ui-dialog")
+                .find(".ui-dialog-titlebar-close")
+                .removeClass("ui-dialog-titlebar-close")
+                .html("<span  id='closeicon' class='ui-button-icon-primary ui-icon ui-icon-closethick'></span>");
+            }
+        });
+        return false;
+    }
+
+    //function OpenordersUpdate() {
+    //    var curr_status = '';
+    //    var modified_date = '';
+    //    var status_count = 0;
+    //    $.getJSON("/APIService/APIAdminActivity/OrderPrepartionDialog",
+    //      {
+    //          orderRefNo: orderId
+    //      },
+    //      function (data) {
+    //          $.each(data, function (index, value) {
+    //              if (curr_status != value.OrderStatus) {
+    //                  if (status_count == 0) {
+    //                      curr_status = value.Delivery_Status;
+    //                      modified_date = value.DeliveryDate;
+    //                      status_count = status_count + 1;
+    //                  }
+    //                  $('#currntStatus').html(curr_status);
+    //                  $('#modified_date').html(modified_date);
+    //              }
+    //              $("#poputbody").tmpl(value).appendTo("#popupdataFix");
+    //              $("#poputbody").tmpl(value).appendTo("#orderdetailsFix");
+    //          });
+    //      });
+    //}
+
+    function OpenordersUpdatepayment() {
+        var curr_status1 = '';
+        var modified_date1 = '';
+        var status_count = 0;
+
+        $.getJSON("/APIService/APIAdminActivity/OrderPrepartionDialog",
+          {
+              orderRefNo: orderId
+          }, function (data) {
+              $.each(data, function (index, value) {
+                  $("#user").val(value.UsersubscribemasterID);
+                  if (curr_status1 != value.OrderStatus) {
+                      if (status_count == 0) {
+                          curr_status1 = value.PaymentStatus;
+                          modified_date1 = value.PaymentDate;
+                          status_count = status_count + 1;
+                      }
+                      $('#currntStatuspayment').html(curr_status1);
+                      $('#modified_datepayment').html(modified_date1);
+                  }
+                  $("#poputbody").tmpl(value).appendTo("#popupdataFixpaytm");
+                  $("#poputbody").tmpl(value).appendTo("#orderdetailsFix");
+              });
+          });
+    }
+
+    //function updatestatusDelivery() {
+    //    updated_status = $("#ddlStatus").find("option:selected").val();
+    //    comments = $('#txtcment').val();
+    //    CourierDeliveryby = $('#Deliveryby').val();
+    //    CourierDeliveryon = $('#Deliveryon').val();
+    //    CourierDelivername = $('#couriername').val();
+    //    CourierDeliveryno = $('#courierno').val();
+    //    CourierDeliveryMobileno = $('#mobileno').val();
+    //    CourierDeliverydays = $('#deliverdays').val();
+    //    if (updated_status != 0  && CourierDeliveryby != '' && CourierDeliveryon != '' && CourierDelivername != '' && CourierDeliveryno != 0 && CourierDeliverydays != '') {
+    //        if (CourierDeliveryMobileno.length != 10) {
+    //            ShowAlert("Delivery  Status Update", "Mobile Number must be 10 digits", "warning");
+    //        }
+    //        else {
+    //            $.post("/APIService/APIAdminActivity/UpdatedeliveryOrderStatus",
+    //                     {
+    //                         preperedBy: $("#sessionUserId").val(),
+    //                         orderRefNo: orderId,
+    //                         comments: comments,
+    //                         Deliverystatus: updated_status,
+    //                         DeliverBy: CourierDeliveryby,
+    //                         DeliveryOn: CourierDeliveryon,
+    //                         CourierName: CourierDelivername,
+    //                         Courierno: CourierDeliveryno,
+    //                         CourierContactno: CourierDeliveryMobileno,
+    //                         CourierExpecteddeliverydays: CourierDeliverydays
+    //                     }, function (data) {
+    //                         if (data == "1") {
+    //                             ShowAlert("Delivery Status Update", "Status Updated", "success");
+    //                             $('#txtcment').val('');
+    //                             $("#ddlStatus").empty().append(ddl_Deliveryorderstatus());
+    //                         }
+    //                     }).done(function () {
+    //                         fnOpenUpdatedialog();
+    //                         GridRefresh_Reload();
+    //                     });
+    //        }
+    //    }
+    //    else {
+    //        ShowAlert("Delivery  Status Update", "Must be Enter All mandatory Fields", "warning");
+    //    }
+    //}
+
+
+    function updatestatusPayment() {
+        updated_status = $("#ddlStatuspayment").find("option:selected").val();
+
+        comments = $('#txtcmentPayment').val();
+        var userID = '@Session["loginUserID"]';
+        usersubid = $("#user").val();
+
+        if (updated_status != 0) {
+            $.post("/APIService/APIAdminActivity/UpdatePaymentOrderStatus",
+                     {
+                         preperedBy: $("#sessionUserId").val(),
+                         orderRefNo: orderId,
+                         comments: comments,
+                         Paymentstatus: updated_status,
+                         created_userid: userID,
+                         user_subscribed_masterid: usersubid
+                     }, function (data) {
+                         if (data == "1") {
+                             ShowAlert("Payment Status Update", "Status Updated", "success");
+                             $('#txtcmentPayment').val('');
+                             $("#ddlStatuspayment").empty().append(ddl_orderstatusPayment());
+                         }
+                     }).done(function () {
+                         fnOpenUpdatedialogPayment();
+                         GridRefresh_Reload();
+                     });
+        }
+        else {
+            ShowAlert("Paymnent Status Update", "Must select Status", "warning");
+        }
+    }
+
+    //------
+
+    function ddl_Deliveryorderstatus() {
+
+        if ($.trim(orderstatus) == 'Not yet Delivery') {
+            $('#DeliveryddlStatus').empty().append('<option value="0">--Select Status--</option><option value="2">In-Progress</option><option value="3">Delivered</option>');
+        }
+        else if ($.trim(orderstatus) == 'In-Progress') {
+            $('#DeliveryddlStatus').empty().append('<option value="0">--Select Status--</option><option value="3">Delivered</option>');
+        }
+
+        else if ($.trim(orderstatus) == 'Delivered') {
+            $('#DeliveryddlStatus').empty().append('<option value="0">--Select Status--</option><option value="3">Delivered</option>');
+        }
+    }
+
+    function fnOpenUpdatedialogDeliveryCancel() {
+        CancelOTP();
+        $('#frmLogin').dialog({
+            resizable: false,
+            modal: true,
+            title: "Cancel Order OTP",
+            height: 300,
+            top: 150,
+            width: 700,
+            buttons: {
+                "Cancel": function () {
+                    $(this).dialog('close');
+                }
+            },
+            open: function () {
+                $(this).closest(".ui-dialog")
+                .find(".ui-dialog-titlebar-close")
+                .removeClass("ui-dialog-titlebar-close")
+                .html("<span class='ui-button-icon-primary ui-icon ui-icon-closethick'></span>");
+            }
+
+        });
+        return false;
+    }
+
+    function fnOpenUpdatedialogDelivery() {
+        $("#popupdataFix").empty().append(OpenordersUpdateDelivery());
+        $('#updateordersDelivery').dialog({
+            resizable: false,
+            modal: true,
+            title: "Update Order Details",
+            height: 550,
+            top: 150,
+            width: 1000,
+            buttons: {
+                "Cancel": function () {
+                    $(this).dialog('close');
+                },
+                'Submit': function () {
+                    updatestatusDelivery();
+                }
+            },
+            open: function () {
+                $(this).closest(".ui-dialog")
+                .find(".ui-dialog-titlebar-close")
+                .removeClass("ui-dialog-titlebar-close")
+                .html("<span class='ui-button-icon-primary ui-icon ui-icon-closethick'></span>");
+            }
+        });
+        return false;
+    }
+
+    function OpenordersUpdateDelivery() {
+        var DeliverycurrentStatus = '';
+        var Deliverymodified_date = '';
+        var status_count = 0;
+        $.getJSON("/APIService/APIAdminActivity/OrderPrepartionDialog",
+          {
+              orderRefNo: orderId
+          },
+          function (data) {
+
+              $.each(data, function (index, value) {
+                  if (DeliverycurrentStatus != value.OrderStatus) {
+                      if (status_count == 0) {
+                          DeliverycurrentStatus = value.Delivery_Status;
+                          modified_date = value.DeliveryDate;
+                          status_count = status_count + 1;
+                      }
+                      $('#DeliverycurrentStatus').html(DeliverycurrentStatus);
+                      $('#Deliverymodified_date').html(modified_date);
+                  }
+                  $("#poputbody").tmpl(value).appendTo("#popupdataFix");
+                  $("#poputbody").tmpl(value).appendTo("#orderdetailsFix");
+
+              });
+          });
+    }
+    function updatestatusDelivery() {
+        updated_status = $("#DeliveryddlStatus").find("option:selected").val();
+        comments = $('#Deliverytxtcment').val();
+        CourierDeliveryby = $('#Deliveryby').val();
+        CourierDeliveryon = $('#Deliveryon').val();
+        CourierDelivername = $('#couriername').val();
+        CourierDeliveryno = $('#courierno').val();
+        CourierDeliveryMobileno = $('#mobileno').val();
+        CourierDeliverydays = $('#deliverdays').val();
+
+        if (updated_status != 0 && CourierDeliveryby != '' && CourierDeliveryon != '' && CourierDelivername != '' && CourierDeliveryno != 0 && CourierDeliverydays != '') {
+            if (CourierDeliveryMobileno.length != 10) {
+                ShowAlert("Delivery  Status Update", "Mobile Number must be 10 digits", "warning");
+            }
+            else {
+                $.post("/APIService/APIAdminActivity/UpdatedeliveryOrderStatus",
+                         {
+                             preperedBy: $("#sessionUserId").val(),
+                             orderRefNo: orderId,
+                             comments: comments,
+                             Deliverystatus: updated_status,
+                             DeliverBy: CourierDeliveryby,
+                             DeliveryOn: CourierDeliveryon,
+                             CourierName: CourierDelivername,
+                             Courierno: CourierDeliveryno,
+                             CourierContactno: CourierDeliveryMobileno,
+                             CourierExpecteddeliverydays: CourierDeliverydays
+
+                         }, function (data) {
+                             if (data == "1") {
+                                 ShowAlert("Delivery Status Update", "Status Updated", "success");
+                                 $('#Deliverytxtcment').val('');
+                                 $('#Deliveryby').val('');
+                                 $('#Deliveryon').val('');
+                                 $('#couriername').val('');
+                                 $('#courierno').val('');
+                                 $('#mobileno').val('');
+                                 $('#deliverdays').val('');
+
+                                 $("#DeliveryddlStatus").empty().append(ddl_Deliveryorderstatus());
+                             }
+                         }).done(function () {
+                             fnOpenUpdatedialogDelivery();
+                             GridRefresh_Reload();
+                         });
+
+            }
+        }
+        else {
+            ShowAlert("Delivery  Status Update", "Must be Enter All mandatory Fields", "warning");
+        }
+    }
+
+
+
+    //-------To get all details of single order -------------
+    function getordersdetails() {
+        $("#purchased").empty();
+        $("#purchased_details").empty();
+
+        $.getJSON("/APIService/APIAdminActivity/OrderDetailsDialog",
+            {
+                orderRefNo: orderId
+            },
+            function (data) {
+                $.each(data, function (index, value) {
+                    if (index == 0) {
+
+                        $("#orders_shippment").tmpl(value).appendTo("#purchased");
+                    }
+                    $("#purchasedorder_details").tmpl(value).appendTo("#purchased_details");
+
+                });
+            }
+        );
+    }
+
+    //----------------------------Print Orders -------------------------------
+
+    $(document).on('click', '#printbtn', function () {
+        $('#printbtn').hide();
+        var divContents = $("#openorders_popup").html();
+        var printWindow = window.open('', '', '', true);
+        printWindow.document.write(divContents);
+        printWindow.document.close();
+        printWindow.print();
+        $('#printbtn').show();
+    });
+</script>
+
+<article class="col-sm-12">
+    <section class="sub_wrp row">
+        <div id="jqgrid" class="grid_panel" align="center">
+            <table id="OpenOrdersgrid"></table>
+            <div id="pager"></div>
+        </div>
+    </section>
+    <div style="margin-bottom: 70px;"></div>
+</article>
+
+
+
+
+<div id="updateordersPayment" style="display: none">
+    <table id="open_orders" class="table table-striped table-bordered" cellspacing="0" style="width:100%;">
+        <thead id="thead">
+            <tr role="row">
+                @*<td><input id="selectCheck" type="checkbox" class="chk" name="checkAll" /> Select All</td>*@
+                <td>
+                    Order Reference No
+                </td>
+                <td>
+                    Order Placed On
+                </td>
+                <td>
+                    Packages Name
+                </td>
+            </tr>
+        </thead>
+        <tbody id="popupdataFixpaytm"></tbody>
+    </table>
+
+    <fieldset class="scheduler-border">
+        <legend class="scheduler-border">Current Status</legend>
+        <div class="col-sm-12">
+            <div class="col-sm-6">
+                Status: <b><span id="currntStatuspayment"></span></b>
+            </div>
+            <div class="col-sm-6">
+                Modified on: &nbsp;&nbsp; <b><span id="modified_datepayment"></span></b>
+            </div>
+        </div>
+    </fieldset>
+
+
+    <div class="col-sm-12">
+        <div class="col-sm-6">
+            Payment Amount:
+            <input type="text" id="txtcmentPayment" />
+        </div>
+        <div class="col-sm-6">
+            Update Status:
+            <select id="ddlStatuspayment"></select>
+        </div>
+    </div>
+</div>
+
+
+<div id="openorders_popup" style="display: none">
+    <div id="purchased">
+
+    </div>
+
+
+    <fieldset class="scheduler-border">
+        <div class="row">
+            <div id="purch_orders" class="col-sm-12">
+                <h5 class="a-spacing-micro"><strong> Orders Details</strong> </h5>
+            </div>
+        </div>
+        <div id="purchased_details" class="col-sm-12">
+
+        </div>
+    </fieldset>
+    <br />
+</div>
+
+
+<script id="poputbody" type="text/html">
+    <tr>
+        @*<td><input id="selectCheck" type="checkbox" class="chk" name="checkAll" value="${PackageId}~${UsersubscribemasterID}" /></td>*@
+        <td>
+            ${OrderRefNo}
+        </td>
+        <td>
+            ${OrderPlacedOn}
+        </td>
+        <td>
+            ${PackageName}
+        </td>
+    </tr>
+</script>
+
+@*fdgfdg*@
+
+<script id="Fixotp" type="text/html">
+    <div>
+    </div>
+</script>
+
+<script id="Fixotpconformation" type="text/html">
+    <div>
+    </div>
+</script>
+
+<article class="col-sm-12">
+    <section class="sub_wrp row">
+        <div id="jqgrid" class="grid_panel" align="center">
+            <table id="OpenOrdersgrid"></table>
+            <div id="pager"></div>
+        </div>
+    </section>
+    <div style="margin-bottom: 70px;"></div>
+</article>
+
+<div id="updateordersDelivery" style="display: none">
+    <table id="open_orders" class="table table-striped table-bordered" cellspacing="0" style="width:100%;">
+        <thead id="thead">
+            <tr role="row">
+                @*<td><input id="selectCheck" type="checkbox" class="chk" name="checkAll" /> Select All</td>*@
+                <td>
+                    Order Reference No
+                </td>
+                <td>
+                    Order Placed On
+                </td>
+                <td>
+                    Packages Name
+                </td>
+            </tr>
+        </thead>
+        <tbody id="popupdataFix"></tbody>
+    </table>
+
+    <fieldset class="scheduler-border">
+        <legend class="scheduler-border">Current Status</legend>
+        <div class="col-sm-12">
+            <div class="col-sm-6">
+                Status: <b><span id="DeliverycurrentStatus"></span></b>
+            </div>
+            <div class="col-sm-6">
+                Modified on: &nbsp;&nbsp; <b><span id="Deliverymodified_date"></span></b>
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset class="scheduler-border">
+        <legend class="scheduler-border">Courier Delivery Details</legend>
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-4">
+                        Delivery By:<span class="mandatory">*</span>  <input type="text" class="pop_txt_wrp" id="Deliveryby" placeholder="Enter Delivery Name" />
+                    </div>
+                    <div class="col-sm-4">
+                        Delivery On:<span class="mandatory">*</span><input type="text" class="pop_txt_wrp" id="Deliveryon" placeholder="Pick Delivery Date" />
+                    </div>
+                    <div class="col-sm-4">
+                        Courier Name:<span class="mandatory">*</span>  <input type="text" class="pop_txt_wrp" id="couriername" placeholder="Enter Courier Name" />
+                    </div>
+                </div>
+                <div class="col-sm-12" style="padding-top:18px;">
+                    <div class="col-sm-4">
+                        Courier No:<span class="mandatory">*</span>  <input type="text" class="pop_txt_wrp" id="courierno" placeholder="Enter Courier No" />
+                    </div>
+                    <div class="col-sm-4">
+                        Contact No:<span class="mandatory">*</span>  <input type="text" class="pop_txt_wrp" id="mobileno" maxlength="10" placeholder="Enter Mobile Number" />
+                    </div>
+                    <div class="col-sm-4">
+                        Expected Delivery Days:<span class="mandatory">*</span> <input type="text" class="pop_txt_wrp" id="deliverdays" style="width:94px" placeholder="Enter Expected Delivery Days" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <div class="col-sm-12">
+        <div class="col-sm-6">
+            Comments:
+            <input type="text" id="Deliverytxtcment" />
+        </div>
+        <div class="col-sm-6">
+            Update Status:<span class="mandatory">*</span>
+            <select id="DeliveryddlStatus"></select>
+        </div>
+    </div>
+</div>
+
+
+<script id="poputbody" type="text/html">
+    <tr>
+        @*<td><input id="selectCheck" type="checkbox" class="chk" name="checkAll" value="${PackageId}" /></td>*@
+        <td>
+            ${OrderRefNo}
+        </td>
+        <td>
+            ${OrderPlacedOn}
+        </td>
+        <td>
+            ${PackageName}
+        </td>
+    </tr>
+</script>
+<script id="orders_shippment" type="text/html">
+    <div class="a-column a-span9 a-spacing-top-mini">
+        <div>
+            Ordered on:<strong><span id="orderedon">${OrderDate}</span></strong> | OrderRefNo: <strong><span id="referno">${OrderRefNo}</span></strong> | Delivery Mode: <strong><span id="deliverymode">${DeliveryMode}</span></strong> | Payment Mode: <strong><span id="paymentmode">${TraxnType}</span></strong><br />
+            MAC-Windows: <strong><span id="macwindows">${PrimaryMacWindows}</span></strong> | MAC-Android: <strong><span id="macandroid">${PrimaryMacAndroid}</span></strong>
+            <button id="printbtn" class="page-numbers btn btn-primary btn-style">Print Order</button>
+        </div>
+    </div>
+
+    <fieldset class="scheduler-border">
+        <div class="row">
+            <div id="ordersdetails" class="col-sm-12">
+                <div class="row">
+                    <div class="col-sm-3  col-md-3 col-lg-3 ">
+                        <h5 class="a-spacing-micro"><strong>Shipping Address</strong></h5>
+                        <ul>
+                            <li>
+                                <span class="id-addr-ux-search-text">${DeliveryUser}</span>
+                            </li>
+                            <li>
+                                <span class="id-addr-ux-search-text">${DeliveryAddress}</span>
+                            </li>
+                            <li>
+                                <span class="id-addr-ux-search-text">${DeliveryContact}</span>
+                            </li>
+                            <li>
+                                <span class="id-addr-ux-search-text">Address Type: ${AddressType}</span>
+                            </li>
+                            <li>
+                                <span class="id-addr-ux-search-text">Landmark: ${Landmark}</span>
+                            </li>
+                            <li>
+                                <span class="id-addr-ux-search-text">${City}, ${State} - ${Pincode}</span>
+                            </li>
+                            <li>
+                                <span class="id-addr-ux-search-text">${Country}</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3  col-md-3 col-lg-3  col-sm-offset-1">
+                        <h5 class="a-spacing-micro"><strong>Ordered by</strong> </h5>
+                        <ul>
+                            <li>
+                                <span class="id-addr-ux-search-text">${UserName}</span>
+                            </li>
+                            <li>
+                                <span class="id-addr-ux-search-text">${UserRole}</span>
+                            </li>
+                            <li>
+                                <span class="id-addr-ux-search-text">${Mobile}</span>
+                            </li>
+                            <li>
+                                <span class="id-addr-ux-search-text">${Email}</span>
+                            </li>
+                            <li>
+                                <span class="id-addr-ux-search-text">${University}</span>
+                            </li>
+                            <li>
+                                <span class="id-addr-ux-search-text">${CollegeName}</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-5  col-md-5 col-lg-5">
+                        <h5 class="a-spacing-micro"><strong>Order Summary</strong>  </h5>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>Item(s) Subtotal: </td>
+                                    <td><i class="fa fa-inr"></i> ${AmountSubtotal}.00</td>
+                                </tr>
+                                <tr>
+                                    <td>Delivery Mode - (${DeliveryMode}) + Shipping:  </td>
+                                    <td><i class="fa fa-inr"></i> ${ShippingAmount}.00</td>
+                                </tr>
+                                <tr>
+                                    <td>Discount:  </td>
+                                    <td><i class="fa fa-inr"></i> ${DiscountAmount}.00</td>
+                                </tr>
+                                <tr>
+                                    <td>Total: </td>
+                                    <td><i class="fa fa-inr"></i> ${TotalAmount}.00</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td>Grand Total: </td>
+                                    <td><i class="fa fa-inr"></i> ${TotalAmount}.00</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+</script>
+
+<script id="purchasedorder_details" type="text/html">
+    <ul>
+        <li>
+            ${SubjectName} -- ${OSType} -- &nbsp; <i class="fa fa-inr"></i> ${SellingAmount}
+            <ul>
+                ---  ${DepartmentName}&nbsp;|&nbsp;  year - ${Year}  &nbsp;|&nbsp;  semester - ${Semester}
+            </ul>
+        </li>
+    </ul>
+</script>

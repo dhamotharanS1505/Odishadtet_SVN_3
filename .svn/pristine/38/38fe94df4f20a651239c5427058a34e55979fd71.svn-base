@@ -1,0 +1,166 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
+using System.Net;
+using System.Web;
+using System.Web.Mvc;
+using LearnEnggPaymentPortal;
+using Odishadtet.DAL;
+using Odishadtet.DAL;
+
+namespace Odishadtet.Controllers.MasterForm
+{
+    public class college_masterController : Controller
+    {
+        private learnengg_payment_portal_entities db = new learnengg_payment_portal_entities();
+
+        // GET: college_master
+        public ActionResult Index()
+        {
+            return View(db.college_master.ToList().OrderBy(x=>x.college_code));
+        }
+
+        // GET: college_master/Details/5
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            college_master college_master = db.college_master.Find(id);
+            if (college_master == null)
+            {
+                return HttpNotFound();
+            }
+            return View(college_master);
+        }
+
+        // GET: college_master/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: college_master/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "college_id,college_code,college_name,total_license,college_mobile,college_email,password")] college_master college_master)
+        {
+            college_master.active_status = 1;
+            college_master.university_id = 1;
+            college_master.enter_on = DateTime.Now;
+            college_master.enter_by = 1;
+
+            if (ModelState.IsValid)
+            {
+                EncryptionDecryption encrypt = new EncryptionDecryption();
+                
+                college_master.password = encrypt.encrptpwd(college_master.password, true);
+                db.college_master.Add(college_master);
+
+                var cgm = new college_group_master()
+                {
+                    college_group_name = college_master.college_name,
+                    college_group_desc = college_master.college_name,
+                    active_status = 1,
+                    enter_by = 1,
+                    enter_on = DateTime.Now
+                };
+                db.college_group_master.Add(cgm);
+
+
+                var cgmm = new college_group_map()
+                {
+                    college_group_map_id = cgm.college_group_id,
+                    college_id = college_master.college_id,                    
+                    enter_by = 1,
+                    enter_on = DateTime.Now
+                };
+                db.college_group_map.Add(cgmm);
+
+                db.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+            return View(college_master);
+        }
+
+        // GET: college_master/Edit/5
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            college_master college_master = db.college_master.Find(id);
+            if (college_master == null)
+            {
+                return HttpNotFound();
+            }
+            return View(college_master);
+        }
+
+        // POST: college_master/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "college_id,college_code,college_name,total_license,college_mobile,college_email")] college_master college_master)
+        {
+            // college_id,college_code,college_name,active_status,university_id, enter_by
+        //    DateTime dt = new DateTime();
+            college_master.enter_on = DateTime.Now; 
+            college_master.password = "1234";
+            college_master.active_status = 1;
+            college_master.enter_by = 1;
+            college_master.university_id = 1;
+
+            if (ModelState.IsValid)
+            {
+                db.Entry(college_master).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(college_master);
+        }
+
+        // GET: college_master/Delete/5
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            college_master college_master = db.college_master.Find(id);
+            if (college_master == null)
+            {
+                return HttpNotFound();
+            }
+            return View(college_master);
+        }
+
+        // POST: college_master/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            college_master college_master = db.college_master.Find(id);
+            db.college_master.Remove(college_master);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+    }
+}

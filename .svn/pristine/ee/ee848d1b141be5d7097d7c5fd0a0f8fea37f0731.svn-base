@@ -1,0 +1,443 @@
+﻿@model Odishadtet.DAL.user_master
+
+@{
+    ViewBag.Title = "StudentRegistration";
+    Layout = " ~/Views/Shared/_LearnEnggLayout.cshtml";
+}
+
+@{ var message = "";
+    message = TempData["success"] as string;
+}
+<input type="hidden" value="@message" id="hdnMessage" />
+<style type="text/css">
+    .sf-menu ul {
+        left: -125px !important;
+    }
+
+
+
+    .form-form-group.col-sm-4 {
+        padding: 0px !important;
+        margin-bottom: 20px;
+    }
+
+    .col-sm-4.control-label {
+        padding: 0px !important;
+    }
+
+    label.error {
+        color: #fb3a3a;
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    #loginID {
+        background: url("../content/img/user_icon.png") no-repeat scroll 0% 0% #fff;
+        text-indent: 20px;
+        border-radius: 7px;
+    }
+
+    #Password, #newPassword, #confirmPassword, #otpCode, #mobileNootpverify {
+        background: url("../Content/img/pass_icon.png") no-repeat scroll 0% 0% #fff;
+        text-indent: 20px;
+        border-radius: 7px;
+    }
+
+    #mobileNo {
+        background: url("../Content/img/mbl_icon.png") no-repeat scroll 0% 0% #fff;
+        text-indent: 20px;
+        border-radius: 7px;
+    }
+
+    .tw-menu-container .sf-menu > li {
+        padding-bottom: 15px !important;
+        padding-top: 15px !important;
+    }
+
+    .bx_sh_st_br img {
+        border: 5px solid #e5e5e5;
+        border-radius: 50%;
+    }
+
+    thead tr th {
+        height: 20px;
+        line-height: 30px;
+    }
+
+    select {
+        border-radius: 5px !important;
+        padding: 0px !important;
+    }
+
+    .btn-block {
+        display: block;
+        margin: 0 -19px;
+        width: 100%;
+    }
+</style>
+
+<script type="text/javascript">
+    var univ_Id = 0;
+    $(document).ready(function () {
+        $("#date_of_birth").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "-60:-10",
+            dateFormat: 'm/d/yy',
+            maxDate: 0
+        });
+
+        if ($("#hdnMessage").val() != "") {
+            var msg = $("#hdnMessage").val();
+            ShowAlert("Registration", msg, "warning");
+            $('#hdnMessage').val('');
+
+        }
+        if ($('#univ_id').val() != 0) {
+            univ_Id = $("#univ_id option:selected").val();
+            LoadCollegesList();
+            LoadDepartmentsList();
+        }
+    });
+
+    function LoadCollegesList() {
+        $.ajax({
+            type: 'GET',
+            dataType: "json",
+            url: '/APIService/APIUserDashBoard/GetLoadCollegeList?univId=' + univ_Id,
+            success: function (res) {
+                if (res.length > 0) {
+                    var items = "<option value='0' selected>Select College</option>";
+                    $.each(res, function (index, value) {
+                        items += "<option value='" + value.college_Id + "'>" + value.college_Name + "</option>";
+                    });
+                    $("#collegeid").html(items);
+                }
+                else {
+                    $("#collegeid").html('<option value="0" selected>College Not Availbale</option>');
+                }
+            }, complete: function () { }
+        });
+    }
+
+    function LoadDepartmentsList() {
+        $.ajax({
+            type: 'GET',
+            dataType: "json",
+            url: '/APIService/APIUserDashBoard/GetLoadDepartmentList?univId=' + univ_Id,
+            success: function (res) {
+                if (res.length > 0) {
+                    var items = "<option value='0' selected>Select Department</option>";
+                    $.each(res, function (index, value) {
+                        items += "<option value='" + value.department_Id + "'>" + value.department_Name + "</option>";
+                    });
+                    $("#DepartmentID").html(items);
+                }
+                else {
+                    $("#DepartmentID").html('<option value="0" selected>Department Not Availbale</option>');
+                }
+            }, complete: function () { }
+        });
+    }
+    $(function () {
+
+        $("#univ_id").change(function () {
+            univ_Id = $("#univ_id option:selected").val();
+
+            LoadCollegesList();
+            LoadDepartmentsList();
+
+        });
+
+        //Form submit button click event
+        $('#register').click(function (e) {
+            e.preventDefault();
+            var firstName = $.trim($('#firstName').val());
+            var usrpwd = $.trim($('#password').val());
+            var role = $.trim($("#role option:selected").val());
+            var email = $.trim($('#email').val());
+            var mobile = $.trim($('#mobile').val());
+            var university = $.trim($("#univ_id option:selected").val());
+            var college = $.trim($("#collegeid option:selected").val());
+            var depart = $.trim($("#DepartmentID option:selected").val());
+            var year = $.trim($("#year option:selected").val());
+            var sem = $.trim($("#semester option:selected").val());
+            var errorMessage = '';
+
+            if (firstName == '') {
+                if (errorMessage != "") {
+                    errorMessage += ",";
+                }
+                errorMessage += "Name";
+            }
+            if (usrpwd == '') {
+                if (errorMessage != "") {
+                    errorMessage += ",";
+                }
+                errorMessage += "Password";
+            }
+            if (role == 0) {
+                if (errorMessage != "") {
+                    errorMessage += ",";
+                }
+                errorMessage += "Role";
+            }
+            if (email == '') {
+                if (errorMessage != "") {
+                    errorMessage += ",";
+                }
+                errorMessage += "Email";
+            }
+            if (mobile == '') {
+                if (errorMessage != "") {
+                    errorMessage += ",";
+                }
+                errorMessage += "Mobile";
+            }
+            if (university == 0) {
+                if (errorMessage != "") {
+                    errorMessage += ",";
+                }
+                errorMessage += "University";
+
+            }
+            if (college == "0") {
+                if (errorMessage != "") {
+                    errorMessage += ",";
+                }
+                errorMessage += "College";
+            }
+            if (depart == "0") {
+                if (errorMessage != "") {
+                    errorMessage += ",";
+                }
+                errorMessage += "Department";
+            }
+            if (year == '') {
+                if (errorMessage != "") {
+                    errorMessage += ",";
+                }
+                errorMessage += "Year";
+            }
+            if (sem == '') {
+                if (errorMessage != "") {
+                    errorMessage += ",";
+                }
+                errorMessage += "Semester";
+            }
+
+            if ((firstName != '') && (usrpwd != '') && (role != 0) && (email != '') && (mobile != '') && (university != 0) && (college != "0") && (depart != "0") && (year != 0) && (sem != 0)) {
+
+                var selectedcollege = $("#collegeid option:selected").text();
+                $("#collegename").val(selectedcollege);
+                var selecteddept = $("#DepartmentID option:selected").text();
+                $("#department_name").val(selecteddept);
+
+                ShowLoader();
+                $("#formsbmt").submit();
+                HideLoader();
+
+
+            }
+            else {
+                if (errorMessage != "") {
+                    ShowAlert("Registration", "The Following Field(s) Mandatory - " + errorMessage, "warning");
+                }
+
+                return false;
+            }
+        });
+
+    });
+
+
+</script>
+
+
+@using (Html.BeginForm("StudentRegistration", "Home", FormMethod.Post, new { id = "formsbmt" }))
+{
+    @Html.AntiForgeryToken()
+
+    <form class="form-control">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <h2 class="h_2">
+            Registration Form
+
+            <span class="mand_row"> <b>* </b> All Fields are Mandatory.</span>
+        </h2>
+
+        <div class="form-form-group col-sm-4">
+            <label class="col-sm-4 control-label">Role:<font color="red">*</font></label>
+            <div class="col-sm-8">
+                @Html.DropDownListFor(m => m.role_id, new SelectList(ViewBag.role_id, "role_id", "role_name"), "Select Role", new { @class = "form-control", id = "role" })
+                @Html.ValidationMessageFor(model => model.role_id, "", new { @class = "field-validation-valid text-danger" })
+            </div>
+        </div>
+
+        <div class="form-form-group col-sm-4">
+            <label class="col-sm-4 control-label">Name:<font color="red">*</font></label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(model => model.user_name, htmlAttributes: new { @class = "form-control", placeholder = "Name", id = "firstName" })
+                @Html.ValidationMessageFor(model => model.user_name, "", new { @class = " field-validation-valid text-danger" })
+            </div>
+        </div>
+
+        <div class="form-form-group col-sm-4">
+            <label class="col-sm-4 control-label">Password:<font color="red">*</font></label>
+            <div class="col-sm-8">
+                @Html.PasswordFor(model => model.password, htmlAttributes: new { @class = "form-control", placeholder = "Password" })
+                @Html.ValidationMessageFor(model => model.password, "", new { @class = "field-validation-valid text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-form-group col-sm-4">
+            <label class="col-sm-4 control-label">Email:<font color="red">*</font></label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(model => model.email_id, htmlAttributes: new { @class = "form-control", placeholder = "Email", id = "email" })
+                @Html.ValidationMessageFor(model => model.email_id, "", new { @class = "field-validation-valid text-danger" })
+            </div>
+        </div>
+
+        <div class="form-form-group col-sm-4">
+            <label class="col-sm-4 control-label">Mobile:<font color="red">*</font></label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(model => model.mobile, htmlAttributes: new { @class = "form-control", placeholder = "Mobile", id = "mobile" })
+                @Html.ValidationMessageFor(model => model.mobile, "", new { @class = "field-validation-valid text-danger" })
+            </div>
+        </div>
+
+        <div class="form-form-group col-sm-4">
+            <label class="col-sm-4 control-label">University:<font color="red">*</font></label>
+            <div class="col-sm-8">
+                @Html.DropDownListFor(m => m.univ_id, new SelectList(ViewBag.univ_id, "univ_id", "university_name"), "Select University", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.univ_id, "", new { @class = "field-validation-valid text-danger" })
+            </div>
+        </div>
+
+        <div class="form-form-group col-sm-4">
+            <label class="col-sm-4 control-label">College:<font color="red">*</font></label>
+            <div class="col-sm-8">
+                @Html.HiddenFor(x => x.collegename)
+                @Html.DropDownListFor(m => m.collegeid, Enumerable.Empty<SelectListItem>
+                (), "Select College", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.collegeid, "", new { @class = "field-validation-valid text-danger" })
+            </div>
+        </div>
+
+        <div class="form-form-group col-sm-4">
+            <label class="col-sm-4 control-label">Department:<font color="red">*</font></label>
+            <div class="col-sm-8">
+                @Html.HiddenFor(x => x.department_name)
+                @Html.DropDownListFor(m => m.DepartmentID, Enumerable.Empty<SelectListItem>
+                (), "Select Department", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DepartmentID, "", new { @class = "field-validation-valid text-danger" })
+            </div>
+        </div>
+
+        <div class="form-form-group col-sm-4">
+            <label class="col-sm-4 control-label">Year:<font color="red">*</font></label>
+            <div class="col-sm-8">
+                @{
+                    List<SelectListItem>
+                        selectyear = new List<SelectListItem>
+                            ();
+                    selectyear.Add(new SelectListItem { Text = "1", Value = "1" });
+                    selectyear.Add(new SelectListItem { Text = "2", Value = "2" });
+                    selectyear.Add(new SelectListItem { Text = "3", Value = "3" });
+                    selectyear.Add(new SelectListItem { Text = "4", Value = "4" });
+                }
+                @Html.DropDownListFor(model => model.currentyear, selectyear, "Select year", new { @class = "form-control", id = "year" })
+            </div>
+        </div>
+
+        <div class="form-form-group col-sm-4">
+            <label for="email" class="col-sm-4 control-label">Semester:<font color="red">*</font></label>
+            <div class="col-sm-8">
+                @{
+                    List<SelectListItem>selectSems = new List<SelectListItem> ();
+                    selectSems.Add(new SelectListItem { Text = "1", Value = "1" });
+                    selectSems.Add(new SelectListItem { Text = "2", Value = "2" });
+                }
+                @Html.DropDownListFor(model => model.currentsemester, selectSems, "Select Semester", new { @class = "form-control", id = "semester" })
+            </div>
+        </div>
+
+        <div class="form-form-group col-sm-4">
+            <label class="col-sm-4 control-label">Country:</label>
+            <div class="col-sm-8">
+                @Html.DropDownListFor(m => m.country, new SelectList(ViewBag.country_id, "country_id", "country_name"), "Select Country", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.country, "", new { @class = "field-validation-valid text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-form-group col-sm-4">
+            <label for="email" class="col-sm-4 control-label">State:</label>
+            <div class="col-sm-8">
+                @Html.DropDownListFor(m => m.state_id, new SelectList(ViewBag.state_id, "state_id", "state_name"), "Select State", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.state_id, "", new { @class = "field-validation-valid text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-form-group col-sm-4">
+            <label for="email" class="col-sm-4 control-label">City:</label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(model => model.city, htmlAttributes: new { @class = "form-control", placeholder = "City" })
+                @Html.ValidationMessageFor(model => model.city, "", new { @class = "field-validation-valid text-danger" })
+            </div>
+        </div>*@
+
+        @*<div class="form-form-group col-sm-8" style="padding:0px !important; margin-bottom:20px">
+            <label for="email" class="col-sm-2 control-label" style="padding-left:0px !important">Address:</label>
+            <div class="col-sm-10">
+                @Html.TextAreaFor(model => model.address, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.address, "", new { @class = "field-validation-valid text-danger" })
+            </div>
+        </div>*@
+
+        @*<div class="form-form-group col-sm-4">
+            <label for="email" class="col-sm-4 control-label">Date of Birth:</label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(model => model.dob, htmlAttributes: new { id = "date_of_birth", @class = "form-control", @readonly = "readonly", placeholder = "Date of Birth" })
+                @Html.ValidationMessageFor(model => model.dob, "", new { @class = "field-validation-valid text-danger" })
+            </div>
+        </div>
+
+        <div class="form-form-group col-sm-4">
+            <label class="control-label col-sm-2" style="padding:0px">Gender:</label>
+            <div class="col-sm-10">
+                <div class="col-sm-4">
+                    <label class="radio-inline">
+                        @Html.RadioButtonFor(m => m.gender, "M", htmlAttributes: new { style = "width: 40px ! important; margin: 6px 13px ! important;" })
+                        <span style="margin-left:44px;">Male</span>
+                    </label>
+                </div>
+                <div class="col-sm-8">
+                    <label class="radio-inline">
+                        @Html.RadioButtonFor(m => m.gender, "M", htmlAttributes: new { style = "width: 10px ! important; margin: 6px 13px ! important;" })
+                        <span style="margin-left:30px;">Female</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-form-group col-sm-4">
+            <label class="col-sm-5 control-label">Reference Mobile:</label>
+            <div class="col-sm-7">
+                @Html.TextBoxFor(model => model.phonenumber, htmlAttributes: new { @class = "form-control", placeholder = "Reference Mobile" })
+                @Html.ValidationMessageFor(model => model.phonenumber, "", new { @class = "field-validation-valid text-danger" })
+            </div>
+        </div>*@
+
+
+        <div class="form-form-group col-sm-12 te_cen">
+            <button type="submit" id="register" class="btn btn-primary btn_1 wbtn-btm">Register</button>
+        </div>
+        <br />
+        <br />
+        <br />
+    </form>
+                    }

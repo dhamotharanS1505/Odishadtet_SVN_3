@@ -1,0 +1,110 @@
+﻿using Odishadtet.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Odishadtet.DAL
+{
+    public interface IAdminReportService
+    {
+        // List<UserReadHistoryModel> UniversityReadHistoryByITISummary(int DepartmentID, int collegeID, int SubjectID, int SemsterID, string DateFrom, string DateTo, int SubjectType, int ITIorTrade);
+
+        List<UserReadHistoryModel> UniversityReadHistorySummarySpilit(int DepartmentID, int collegeID, int SubjectID, int SemsterID, string DateFrom, string DateTo, int SubjectType);
+
+        List<UserReadHistoryModel> UniversityReadHistorySummary(int DepartmentID, int collegeID, int SubjectID, int SemsterID, string DateFrom, string DateTo, int SubjectType, int ITIorTrade,int CollegeGrpId);
+
+        List<UserReadHistoryModel> GetUserReadHistory(int userID, int univId, string college_id, string semester, string year, string reg_startdate, string reg_end_date, string usg_start_date, string usg_end_date);
+
+        List<UserReadHistoryModel> GetUserUsageReadHistory(int userID, int univId, string college_id, int deptid, string semester, string year, string reg_startdate, string reg_end_date, string usg_start_date, string usg_end_date);
+            
+        List<UserReadHistoryModel> weeklywiseReport(int univId, string college_id, string semester, string year, string reg_startdate, string reg_end_date, string usg_start_date, string usg_end_date);
+
+        List<UserReadHistoryModel> UniversityReadHistory(int univId, string college_id, string semester, string year, string reg_startdate, string reg_end_date, string usg_start_date, string usg_end_date);
+
+        List<UserReadHistoryModel> UniversityReadHistory(int departmentID, string collegeID, int SubjectID, int SemsterID, string DateFrom, string DateTo, int SubjectType,int CollegeGrpId);
+
+        JQGrid UniversityUserReadHistory(JqSearchIn si, int DepartId, string CollegeId);
+
+        List<UserReadHistoryModel> UniversityUsersReadHistory(int departmentID, int collegeID, int userId);
+
+        List<UserReadHistoryModel> subjectwiseReadHistory(int userID, int univId, string college_id, string semester, string year, string reg_startdate, string reg_end_date, string usg_start_date, string usg_end_date);
+
+        List<RegisteredUserUniversity> RegisteredUserUniversityDetails(int univId, string univ_code, string year, int semester, string startdate, string end_date);
+
+        List<UnivDetails> RegisteredUniversityCollegeDetails(string year, int semester, string start_date, string end_date, int universityId, int roleid,int CollegeGroupId);
+
+        List<UnivDetails> RegisteredUniversityCollegeDetailsTest(string year, int semester, string start_date, string end_date, int universityId, int roleid);
+
+        List<RegisteredCollegeDetails> RegisteredUserCollegeDetails(string year, int semester, string start_Date, string end_Date, string universityId);
+
+        List<RegisteredDetails> RegisteredUserDetails(string year, int semester, string startDate, string endDate, int univId, int collegeId, int roleid);
+
+        RegistrationReport RegistrationReportsummary(int deptID, int collegeID, string DateFrom, string DateTo, int type,int CollegeGrpId);
+
+        RegistrationReport RegistrationReportsummaryTestNew(int deptID, int collegeID, string DateFrom, string DateTo, int type);
+
+        RegistrationReport RegistrationReportsummaryTest();
+
+        List<RegistrationReport> RegistrationReportCollegesummary(int deptID, int collegeID, string DateFrom, string DateTo, int type,int CollegeGrpId);
+
+        List<RegistrationReport> RegistrationReportCollegesummaryTestNew(int deptID, int collegeID, string DateFrom, string DateTo, int type);
+
+        List<RegistrationReport> RegistrationReportCollegesummaryTest();
+
+        List<RegistrationDetailsReport> RegistrationReportCollegeDetails(int category, int collegeid, int regtype, int deptID, string DateFrom, string DateTo, int CollegeGrpId);
+
+        List<RegistrationDetailsReport> RegistrationReportCollegeDetailsTest(int category, int collegeid);
+
+        string WeeklyRegistration();
+
+        string TotalUsage(int UnivId);
+
+        string DailyRegistration();
+
+        string MonthlysRegistration();
+        
+        string TotalRegistration(int UnivId);
+
+        string TotalUsageITI(int? pUserId = 0, int? pCollegeId = 0);
+
+        string TotalITIRegistration();
+
+        string TotalITIRegistrationTest();
+
+        string InstitutewiseUsagehrs(int? pUserId = 0, int? pCollegeId = 0);
+
+        string HighestRegistered_ITI();
+
+        string HighestRegisteredTrade();
+
+        string DailyUsage(int? pUserId = 0, int? pCollegeId = 0);
+
+        string WeeklyUsage(int? pUserId = 0, int? pCollegeId = 0);
+
+        string MonthlyUsage(int? pUserId = 0, int? pCollegeId = 0);
+        List<UserReadHistoryModel> GetTotalHoursUsageReadHistory(int userID, int univId, string college_id, int deptid, string semester, string year, string reg_startdate, string reg_end_date, string usg_start_date, string usg_end_date);
+
+        List<UserReadHistoryModel> GetUserTotalHrsReadHistory(int userID, int univId, string college_id, string semester, string year, string reg_startdate, string reg_end_date, string usg_start_date, string usg_end_date);
+
+        UserDashBoardViewModel DashBoardMain(int CollegeGrpId);
+
+        UseageDashBoardViewModel UsageDashBoard(int CollegeGrpId,int SubjectType);
+
+        UseageDashBoardViewModel UsageDashBoardTradewise(int CollegeGrpId, int SubjectType);
+
+        RegistrationDashBoardViewModel RegistrationDashBoard(int CollegeGrpId, int SubType);
+
+        RegistrationDashBoardViewModel RegistrationDashBoardDatewiseCount(int CollegeGrpId, int SubType);
+
+        List<RoleCountModel> RoleWiseCounts(int CollegeGrpId, string RoleDesc);
+
+        List<UserFeedback> RoleWiseFeedback(int CollegeGrpId, string RoleDesc, string SearchRole);
+
+        int SendRoleWiseFeedbackData(UserFeedbackData userFeedbackData);
+
+        int SendRoleWiseFeedback(int user_id, string user_name, int rolle_id, string rolle_desc, int mobile, string email, int college_id, string feedback);
+
+    }
+}

@@ -1,0 +1,355 @@
+﻿using Odishadtet.DAL;
+using System;
+using System.Collections.Generic;
+using Odishadtet.Models;
+using System.Runtime.InteropServices;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
+
+namespace Odishadtet.APIServiceControllers
+{
+    public class APIAdminReportController : ApiController
+    {
+        static IAdminReportService _AdminReportRepository;
+
+        public APIAdminReportController(IAdminReportService Productrepository)
+        {
+            if (Productrepository == null)
+            {
+                throw new ArgumentNullException("Productrepository");
+            }
+            _AdminReportRepository = Productrepository;
+        }
+
+        [HttpGet]
+        public List<UserReadHistoryModel> UniversityReadHistorySummary(int DepartmentID, int collegeID, int SubjectID, int SemsterID, string DateFrom, string DateTo, int SubjectType,int FilterType, int CollegeGrpId = 0)
+        {
+            List<UserReadHistoryModel> univreadhistry = new List<UserReadHistoryModel>();
+           
+            univreadhistry = _AdminReportRepository.UniversityReadHistorySummary(DepartmentID, collegeID, SubjectID, SemsterID, DateFrom, DateTo, SubjectType, FilterType, CollegeGrpId);
+           
+            return univreadhistry;
+        }
+
+        [HttpGet]
+        public List<UserReadHistoryModel> UniversityReadHistorySummarySpilit(int DepartmentID, int collegeID, int SubjectID, int SemsterID, string DateFrom, string DateTo, int SubjectType)
+        {
+            List<UserReadHistoryModel> univreadhistry = new List<UserReadHistoryModel>();
+
+            univreadhistry = _AdminReportRepository.UniversityReadHistorySummarySpilit(DepartmentID, collegeID, SubjectID, SemsterID, DateFrom, DateTo, SubjectType);
+
+            return univreadhistry;
+        }
+
+        public List<UserReadHistoryModel> GetUserReadHistory(int userID, int univId, string college_id, string semester, string year, string reg_startdate, string reg_end_date, string usg_start_date, string usg_end_date)
+        {
+            List<UserReadHistoryModel> userReadhistory = _AdminReportRepository.GetUserReadHistory(userID, univId, college_id, semester, year, reg_startdate, reg_end_date, usg_start_date, usg_end_date);
+
+            return userReadhistory;
+        }
+        public List<UserReadHistoryModel> GetUserUsageReadHistory(int userID, int univId, string college_id, int deptId,string semester, string year, string reg_startdate, string reg_end_date, string usg_start_date, string usg_end_date)
+        {
+            List<UserReadHistoryModel> userReadhistory = _AdminReportRepository.GetUserUsageReadHistory(userID, univId, college_id, deptId, semester, year, reg_startdate, reg_end_date, usg_start_date, usg_end_date);
+
+            return userReadhistory;
+        }
+
+        public List<UserReadHistoryModel> GetUserTotalHrsReadHistory(int userID, int univId, string college_id, string semester, string year, string reg_startdate, string reg_end_date, string usg_start_date, string usg_end_date)
+        {
+            List<UserReadHistoryModel> userReadhistory = _AdminReportRepository.GetUserTotalHrsReadHistory(userID, univId, college_id, semester, year, reg_startdate, reg_end_date, usg_start_date, usg_end_date);
+
+            return userReadhistory;
+        }
+        public List<UserReadHistoryModel> GetTotalHoursUsageReadHistory(int userID, int univId, string college_id, int deptId, string semester, string year, string reg_startdate, string reg_end_date, string usg_start_date, string usg_end_date)
+        {
+            List<UserReadHistoryModel> userReadhistory = _AdminReportRepository.GetTotalHoursUsageReadHistory(userID, univId, college_id, deptId, semester, year, reg_startdate, reg_end_date, usg_start_date, usg_end_date);
+
+            return userReadhistory;
+        }
+
+
+
+        [HttpGet]
+        public List<UserReadHistoryModel> weeklywiseReport(int univId, string college_id, string semester, string year, string reg_startdate, string reg_end_date, string usg_start_date, string usg_end_date)
+        {
+            List<UserReadHistoryModel> weeklywiserpt = _AdminReportRepository.weeklywiseReport(univId, college_id, semester, year, reg_startdate, reg_end_date, usg_start_date, usg_end_date);
+
+            return weeklywiserpt;
+        }
+        [HttpGet]
+        public List<UserReadHistoryModel> UniversityReadHistory(int univId, string college_id, string semester, string year, string reg_startdate, string reg_end_date, string usg_start_date, string usg_end_date)
+        {
+            List<UserReadHistoryModel> univreadhistry = _AdminReportRepository.UniversityReadHistory(univId, college_id, semester, year, reg_startdate, reg_end_date, usg_start_date, usg_end_date);
+
+            return univreadhistry;
+        }
+        [HttpGet]
+        public List<UserReadHistoryModel> UniversityReadHistory(int DepartmentID, string collegeID, int SubjectID, int SemsterID, string DateFrom , string DateTo, int SubjectType, int CollegeGrpId=0)
+        {
+            List<UserReadHistoryModel> univreadhistry = _AdminReportRepository.UniversityReadHistory(DepartmentID, collegeID, SubjectID, SemsterID, DateFrom ,DateTo, SubjectType, CollegeGrpId);
+
+            return univreadhistry;
+        }
+        [HttpGet]
+        public List<UserReadHistoryModel> UniversityUsersReadHistory(int DepartmentID, int collegeID,int userID)
+        {
+            List<UserReadHistoryModel> univreadhistry = _AdminReportRepository.UniversityUsersReadHistory(DepartmentID, collegeID,userID);
+
+            return univreadhistry;
+        }
+        [HttpGet]
+        public List<UserReadHistoryModel> subjectwiseReadHistory(int userID, int univId, string college_id, string semester, string year, string reg_startdate, string reg_end_date, string usg_start_date, string usg_end_date)
+        {
+            List<UserReadHistoryModel> subjectwisehstry = _AdminReportRepository.subjectwiseReadHistory(userID, univId, college_id, semester, year, reg_startdate, reg_end_date, usg_start_date, usg_end_date);
+
+            return subjectwisehstry;
+        }
+
+
+        [HttpGet]
+        public List<RegisteredUserUniversity> RegisteredUserUniversityDetails(int univId, string univ_code, string year, int semester, string startdate, string end_date)
+        {
+            List<RegisteredUserUniversity> univregdetails = _AdminReportRepository.RegisteredUserUniversityDetails(univId, univ_code, year, semester, startdate, end_date);
+
+            return univregdetails;
+        }
+
+        [HttpGet]
+        public List<UnivDetails> RegisteredUniversityCollegeDetails(string year, int semester, string start_date, string end_date, int universityId, int roleid,int CollegeGroupId)
+        {
+            List<UnivDetails> regUnivCollegedetails = _AdminReportRepository.RegisteredUniversityCollegeDetails(year, semester, start_date, end_date, universityId, roleid, CollegeGroupId);
+
+            return regUnivCollegedetails;
+
+        }
+
+        [HttpGet]
+        public List<UnivDetails> RegisteredUniversityCollegeDetailsTest(string year, int semester, string start_date, string end_date, int universityId, int roleid)
+        {
+            List<UnivDetails> regUnivCollegedetails = _AdminReportRepository.RegisteredUniversityCollegeDetailsTest(year, semester, start_date, end_date, universityId, roleid);
+
+            return regUnivCollegedetails;
+
+        }
+
+        [HttpGet]
+        public List<RegisteredCollegeDetails> RegisteredUserCollegeDetails(string year, int semester, string start_Date, string end_Date, string universityId)
+        {
+            List<RegisteredCollegeDetails> usercollegedetails = _AdminReportRepository.RegisteredUserCollegeDetails(year, semester, start_Date, end_Date, universityId);
+
+            return usercollegedetails;
+        }
+
+        [HttpGet]
+        public List<RegisteredDetails> RegisteredUserDetails(string year, int semester, string startDate, string endDate, int univId, int collegeId, int roleid)
+        {
+            List<RegisteredDetails> reguserdetails = _AdminReportRepository.RegisteredUserDetails(year, semester, startDate, endDate, univId, collegeId, roleid);
+
+            return reguserdetails;
+        }
+
+        [HttpGet]
+        public RegistrationReport RegistrationReportsummary(int deptID, int collegeID, string DateFrom, string DateTo, int type,int CollegeGrpId)
+        {
+            RegistrationReport Rpt= new RegistrationReport();
+            if (type == 2)
+            {
+                Rpt = _AdminReportRepository.RegistrationReportsummaryTestNew(deptID, collegeID, DateFrom, DateTo, type);               
+            }
+            else
+            {
+                Rpt = _AdminReportRepository.RegistrationReportsummary(deptID, collegeID, DateFrom, DateTo, type, CollegeGrpId);
+            }
+            return Rpt;
+        }
+
+
+        [HttpGet]
+        public RegistrationReport RegistrationReportsummaryTest()
+        {
+            RegistrationReport Rpt = _AdminReportRepository.RegistrationReportsummaryTest();
+            return Rpt;
+        }
+
+
+
+        [HttpGet]
+        public List<RegistrationReport> RegistrationReportCollegesummary(int deptID, int collegeID, string DateFrom, string DateTo, int type,int CollegeGrpId)
+        {
+            List<RegistrationReport> Rpt = new List<RegistrationReport>();
+            if (type == 2)
+            {
+                Rpt = _AdminReportRepository.RegistrationReportCollegesummaryTestNew(deptID, collegeID, DateFrom, DateTo, type);               
+            }
+            else
+            {
+                Rpt = _AdminReportRepository.RegistrationReportCollegesummary(deptID, collegeID, DateFrom, DateTo, type, CollegeGrpId);
+            }
+            return Rpt;
+        }
+
+
+        [HttpGet]
+        public List<RegistrationReport> RegistrationReportCollegesummaryTest()
+        {
+            List<RegistrationReport> Rpt = _AdminReportRepository.RegistrationReportCollegesummaryTest();
+            return Rpt;
+        }
+
+        [HttpGet]
+        public List<RegistrationDetailsReport> RegistrationReportCollegeDetails(int category, int collegeid, int regtype, int deptID, string DateFrom, string DateTo, int CollegeGrpId)
+        {
+            List<RegistrationDetailsReport> Rpt = _AdminReportRepository.RegistrationReportCollegeDetails(category, collegeid, regtype ,deptID, DateFrom, DateTo,  CollegeGrpId);
+            return Rpt;
+        }
+
+        [HttpGet]
+        public List<RegistrationDetailsReport> RegistrationReportCollegeDetailsTest(int category, int collegeid)
+        {
+            List<RegistrationDetailsReport> Rpt = _AdminReportRepository.RegistrationReportCollegeDetailsTest(category, collegeid);
+            return Rpt;
+        }
+        [HttpGet]
+        public string WeeklyRegistration()
+        {
+            string weeklyreg = _AdminReportRepository.WeeklyRegistration();
+
+            return weeklyreg;
+        }
+        [HttpGet]
+        public string TotalUsage(int UnivId)
+        {
+            string totalusg = _AdminReportRepository.TotalUsage(UnivId);
+
+            return totalusg;
+        }
+
+        [HttpGet]
+        public string TotalUsageITI(int? pUserId = 0, int? pCollegeId = 0)
+        {
+            string totalusg = _AdminReportRepository.TotalUsageITI(pUserId,pCollegeId);
+
+            return totalusg;
+        }
+        [HttpGet]
+        public string DailyRegistration()
+        {
+            string dailyreg = _AdminReportRepository.DailyRegistration();
+
+            return dailyreg;
+        }
+
+        [HttpGet]
+        public string MonthlysRegistration()
+        {
+            string monthlyreg = _AdminReportRepository.MonthlysRegistration();
+
+            return monthlyreg;
+
+        }
+        [HttpGet]
+        public string TotalRegistration(int UnivId)
+        {
+            string totalreg = _AdminReportRepository.TotalRegistration(UnivId);
+
+            return totalreg;
+
+        }
+
+        [HttpGet]
+        public string TotalITIRegistration()
+        {
+            string totalreg = _AdminReportRepository.TotalITIRegistration();
+
+            return totalreg;
+
+        }
+
+        [HttpGet]
+        public string TotalITIRegistrationTest()
+        {
+            string totalreg = _AdminReportRepository.TotalITIRegistrationTest();
+
+            return totalreg;
+
+        }
+
+
+        [HttpGet]
+        public string HighestRegisteredTrade()
+        {
+            string highesttrade = _AdminReportRepository.HighestRegisteredTrade();
+            return highesttrade;
+        }
+        [HttpGet]
+        public string HighestRegistered_ITI()
+        {
+            string highestITI = _AdminReportRepository.HighestRegistered_ITI();
+            return highestITI;
+        }
+
+        [HttpGet]
+        public string InstitutewiseUsagehrs(int? pUserId = 0, int? pCollegeId = 0)
+        {
+            string Institutewisehrs = _AdminReportRepository.InstitutewiseUsagehrs(pUserId,pCollegeId);
+
+            return Institutewisehrs;
+        }
+
+
+        [HttpGet]
+        public string DailyUsage(int? pUserId=0, int? pCollegeId = 0)
+        {
+            string DailUsage = _AdminReportRepository.DailyUsage(pUserId,pCollegeId);
+
+            return DailUsage;
+        }
+
+
+        [HttpGet]
+        public string WeeklyUsage(int? pUserId = 0, int? pCollegeId = 0)
+        {
+            string WeeklUsage = _AdminReportRepository.WeeklyUsage(pUserId,pCollegeId);
+
+            return WeeklUsage;
+        }
+
+        [HttpGet]
+        public string MonthlyUsage(int? pUserId = 0, int? pCollegeId = 0)
+        {
+            string MonthlUsage = _AdminReportRepository.MonthlyUsage(pUserId,pCollegeId);
+
+            return MonthlUsage;
+        }
+
+        [HttpGet]
+        public List<RoleCountModel> getRoleWiseCount(int CollegeGrpId, string RoleDesc)
+        {
+            List<RoleCountModel> RolewiseCount = _AdminReportRepository.RoleWiseCounts(CollegeGrpId, RoleDesc); 
+            return RolewiseCount;
+        }
+
+        [HttpGet]
+        public List<UserFeedback> getRoleFeedback(int CollegeGrpId, string RoleDesc, string SearchRole)
+        {
+            List<UserFeedback> RolewiseFeed = _AdminReportRepository.RoleWiseFeedback(CollegeGrpId, RoleDesc, SearchRole);
+            return RolewiseFeed;
+        }
+       
+        [HttpPost]
+        public int sendRoleFeedback(UserFeedbackData userFeedbackData)
+        {
+            int RolewiseFeedResult = _AdminReportRepository.SendRoleWiseFeedbackData(userFeedbackData);
+            return RolewiseFeedResult;
+        }
+        
+        [HttpPost]
+        public int PostNewRoleFeedback(int user_id, string user_name, int rolle_id, string rolle_desc, int mobile, string email, int college_id, string feedback)
+        {
+            int RolewiseFeedResult = _AdminReportRepository.SendRoleWiseFeedback(user_id, user_name, rolle_id, rolle_desc, mobile, email, college_id, feedback);
+            return RolewiseFeedResult; 
+        }
+    }
+}

@@ -1,0 +1,70 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Configuration;
+using System.Text;
+using System.Security.Cryptography;
+
+namespace LearnEnggPaymentPortal
+{
+    public class EncryptionDecryption
+    {
+
+        public string encrptpwd(string pwd, bool hasing)
+        {
+            byte[] keyarray;
+            byte[] encryptarray = UTF8Encoding.UTF8.GetBytes(pwd);
+            AppSettingsReader settingsReader = new AppSettingsReader();
+
+            string key = (string)settingsReader.GetValue("SecurityKey", typeof(String));
+
+            if (hasing)
+            {
+                MD5CryptoServiceProvider hashmd5 = new MD5CryptoServiceProvider();
+                keyarray = hashmd5.ComputeHash(UTF8Encoding.UTF8.GetBytes(key));
+                hashmd5.Clear();
+            }
+            else
+            {
+                keyarray = UTF8Encoding.UTF8.GetBytes(key);
+            }
+            TripleDESCryptoServiceProvider tdes = new TripleDESCryptoServiceProvider();
+            tdes.Key = keyarray;
+            tdes.Mode = CipherMode.ECB;
+            tdes.Padding = PaddingMode.PKCS7;
+            ICryptoTransform ctransform = tdes.CreateEncryptor();
+            byte[] resultarray = ctransform.TransformFinalBlock(encryptarray, 0, encryptarray.Length);
+            tdes.Clear();
+
+            return Convert.ToBase64String(resultarray, 0, resultarray.Length);
+        }
+
+        public string Decryptpwd(string pwd, bool hasing)
+        {
+            byte[] keyarray;
+            byte[] encryptarray = Convert.FromBase64String(pwd);
+            System.Configuration.AppSettingsReader settingsReader = new AppSettingsReader();
+            string key = (string)settingsReader.GetValue("SecurityKey", typeof(String));
+            if (hasing)
+            {
+                MD5CryptoServiceProvider hashmd5 = new MD5CryptoServiceProvider();
+                keyarray = hashmd5.ComputeHash(UTF8Encoding.UTF8.GetBytes(key));
+                hashmd5.Clear();
+            }
+            else
+            {
+                keyarray = UTF8Encoding.UTF8.GetBytes(key);
+            }
+
+            TripleDESCryptoServiceProvider tdes = new TripleDESCryptoServiceProvider();
+            tdes.Key = keyarray;
+            tdes.Mode = CipherMode.ECB;
+            tdes.Padding = PaddingMode.PKCS7;
+            ICryptoTransform ctransform = tdes.CreateDecryptor();
+            byte[] resultarray = ctransform.TransformFinalBlock(encryptarray, 0, encryptarray.Length);
+            tdes.Clear();
+            return UTF8Encoding.UTF8.GetString(resultarray);
+        }
+    }
+}

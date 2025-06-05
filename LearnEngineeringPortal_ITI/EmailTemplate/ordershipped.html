@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Home</title>
+    <meta charset="utf-8">
+    <style type="text/css">
+        .TFtable {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+            .TFtable td {
+                padding: 7px;
+                border: #7e7e7e 1px solid;
+            }
+            /* provide some minimal visual accomodation for IE8 and below */
+            .TFtable tr {
+                background: #b8d1f3;
+            }
+                /*  Define the background color for all the ODD background rows  */
+                .TFtable tr:nth-child(odd) {
+                    background: #fff;
+                }
+                /*  Define the background color for all the EVEN background rows  */
+                .TFtable tr:nth-child(even) {
+                    background: #bdbdbd;
+                }
+    </style>
+</head>
+<body style="background-image:none !important;">
+    <div style="width:750px; height:auto; margin:auto;">
+        <div style="width:750px; margin:auto"> </div>
+        <div class="clr"></div>
+        <div style="width:750px; height:auto;margin:auto;background-position:center top;">
+            <div style="width:750px; height:19px; background-color:#0c53a5;"></div>
+            <div style="width:750px; height:4px; background:url(mail/shadow.png) bottom center repeat-x; background-color:#f3f3f3;"></div>
+            <div style="width:748px !important;border:1px solid #333333">
+                <div style="display:block;width:182px;height:43px;float:left;margin:10px 0 10px 10px"><img src="http://learnengg.com/LE/img/Learn1.png?V2" alt="" width="140" height="42"></div>
+                <div style=" width:100%; clear:both; padding:0; margin:0;"></div>
+                <div style="height:auto;margin:0px;width:auto;padding:0">
+                    <div style="font-family:Arial, Helvetica, sans-serif;font-size:24px;font-weight:bold;color:#666;width:728px; padding:0;margin:0 auto;text-align: center;">Your Order Has Shipped</div>
+                </div>
+                <div style="height: auto;margin:0;width: 100%;">
+                    <!-- Left panel End-->
+                    <!-- middle panel start-->
+                    <!-- Center panel start-->
+                    <div style="height: auto;margin:0px;padding:0 10px;width: 728px;">
+                        <span style="display: block;padding:0;font-family:Arial, Helvetica, sans-serif;font-size:18px;color:#545454;text-align: center;">
+                            Thank you for your purchase!
+                        </span>
+                      
+                            
+
+
+                        
+                        <br>
+                                <span style="display:block;padding:0;font-family:Arial, Helvetica, sans-serif;font-size:14px;color:#545454;text-align:center">
+                                    your learnengg subject order has shipped! you can track it progress online
+                                    <br>  with the tracking number below
+                                </span><br>
+
+
+                        <div style="height:auto;margin:0px;width:auto;padding:0">
+                            <div style="font-family:Arial, Helvetica, sans-serif;font-size:22px;font-weight:bold;color:#666;width:728px; padding:0;margin:0 auto;">Shipping Information</div>
+                        </div>
+                        <table class="TFtable">
+                            <tbody>
+                                <tr>
+                                    <td width="50%">Order ID</td>
+                                    <td width="50%">{orderid}</td>
+                                </tr>
+                                <tr>
+                                    <td width="50%">Shipping Carrier</td>
+                                    <td width="50%">Professional Courier</td>
+                                </tr>
+                                <tr>
+                                    <td width="50%">Tracking Number</td>
+                                    <td width="50%"><strong style="color:#ea4335">{trackingid}</strong></td>
+                                </tr>
+
+
+                            </tbody>
+                        </table>
+
+                                <span style="padding:0;font-family:Arial, Helvetica, sans-serif;font-size:14px;color:#545454;"><!--Using this information, you can also log on to MY ACCOUNT to access the customer control panel.--></span>
+                                <br>
+                                <span style="padding:10px 0 0 0;font-family:Arial, Helvetica, sans-serif;font-size:14px;color:#EA4335;font-weight:bold">Questions?? </span><br>
+                                <span style="padding:0;font-family:Arial, Helvetica, sans-serif;font-size:14px;color:#545454">If you have any questions about our shipment please mail us <a href="">support@learnengg.com</a>.</span><br>
+                                <br>
+                                <span style="padding:10px 0 0 0;font-family:Arial, Helvetica, sans-serif;font-size:14px;color:#EA4335;font-weight:bold">Terms and Condition </span><br>
+                        <span style="padding:0;font-family:Arial, Helvetica, sans-serif;font-size:14px;color:#545454"><a href="http://www.learnengg.com/Terms-And-Conditions" target="_blank"> http://www.learnengg.com/Terms-And-Conditions</a></span><br>
+                                <br>
+                                <span style="padding:10px 0 0 0;font-family:Arial, Helvetica, sans-serif;font-size:12px;color:#0050a9;font-weight:normal">Regards</span><br>
+                                <span style="padding:0 0 0 0;font-family:Arial, Helvetica, sans-serif;font-size:13px;color:#545454;font-weight:bold">Customer Service</span> <br>
+                                <br>
+                                <div style="height:1px;width:728px;background-color:#f2673a;margin:0 0 10px;"></div>
+                                <span style="padding:10px 0 0 0;font-family:Arial, Helvetica, sans-serif;font-size:18px;color:#EA4335;font-weight:bold">LearnEngg.com</span><br>
+                                <span style="padding:5px 0 10px 0;font-family:Arial, Helvetica, sans-serif;font-size:11px;color:#7e7e7e;display:block">
+                                    No 61, Developed Plot Estate, Perungudi,
+                                    Chennai - 600096, TamilNadu, India.
+                                    Toll Free - 1800 102 6488
+                                    Email:support@learnengg.com
+                                </span>
+                        
+                    </div>
+                    <!-- Center panel end-->
+                </div>
+                <!-- middle panel End-->
+                <div class="clr"></div>
+            </div>
+        </div>
+    </div>
+    <div style="background-color:#0c53a5;height:auto;margin:auto;width:740px;padding:10px 0 10px 10px;color:#FFFFFF">
+        <div style="margin:auto; padding:0px;width:750px;font-size:12px;font-family:Arial, Helvetica, sans-serif;">
+            &nbsp;&copy; 2016 learnengg.com <br>
+        </div>
+    </div>
+</body>
+</html>

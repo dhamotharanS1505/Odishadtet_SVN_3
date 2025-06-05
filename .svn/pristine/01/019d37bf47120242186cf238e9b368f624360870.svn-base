@@ -1,0 +1,104 @@
+﻿@model Odishadtet.DAL.mastercopy_usage_details
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LearnEnggAdminLayout.cshtml";
+}
+
+<style type="text/css">
+    .inner_mid_wrp-main {
+        float: right;
+        margin: 80px 2% 0;
+        width: 95%;
+    }
+
+    .dt_pad {
+        padding: 0 15px 15px;
+        text-align: left !important;
+    }
+
+    p {
+        margin: 0 15px 10px;
+    }
+    
+    .btn_wrp {
+        float: left;
+        font-size: 12px;
+        font-weight: 600;
+        margin-top: 5px;
+        min-width: 125px;
+    }
+</style>
+
+<section class="inner_mid_wrp-main">
+    <article class="col-sm-12">
+        <div class="in_hd_tt row">
+            <strong class="fa fa-file-text"></strong><span>Master copy usage</span>
+        </div>
+    </article>
+
+
+    <article class="col-sm-12">
+        <section class="sub_wrp row">
+            <dl class="dl-horizontal">
+                <dt class="dt_pad">
+                    User Name
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.user_name)
+                </dd>
+
+                <dt class="dt_pad">
+                    Email
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.email_id)
+                </dd>
+
+                <dt class="dt_pad">
+                    Mobile
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.mobile)
+                </dd>
+
+                <dt class="dt_pad">
+                    Department Name
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.department_name)
+                </dd>
+
+                <dt class="dt_pad">
+                    Semester
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.semester)
+                </dd>
+
+                <dt class="dt_pad">
+                    Requested On
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.requested_on)
+                </dd>
+
+            </dl>
+
+            <p>
+                <button type="button" id="btnBack" class="btn btn-primary btn-sm btn_wrp ">Back</button> @*@Html.ActionLink("Back to List", "Index")*@
+            </p>
+        </section>
+    </article>
+</section>
+<script type="text/javascript">
+    $('#btnBack').click(function () {
+        window.location.href = "/mastercopy_usage/Index";
+    });
+</script>

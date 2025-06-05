@@ -1,0 +1,121 @@
+﻿@{ViewBag.Title = "Contact";}
+
+<style>
+    p {
+        font-weight: 400;
+        color: #6f6f6f;
+        line-height: 20px;
+    }
+
+    .title {
+        margin-bottom: 20px;
+    }
+
+    .text-priamry {
+        color: #e83a25;
+    }
+
+    .addrs {
+        margin-bottom: 25px;
+    }
+</style>
+<div style="padding:0" class="container">
+    <div class="">
+        <div style="margin-top:70px;" class="col-md-12">
+
+            <ol style="margin-top: 16px;" class="breadcrumb">
+                <li><a href="index.html">Home</a></li>
+                <li class="active">Contact</li>
+            </ol>
+        </div>
+
+        <div class="col-md-12">
+            <div class="col-md-8 pad-0">
+                <div class="title">
+                    <h3>CONTACT <span class="text-priamry">US</span></h3>
+                </div>
+                <div class="subcontnet">
+                    <h4>
+                        <em>Reach out to us and we'll respond as soon as we can. </em>
+                    </h4>
+                    <form>
+                        <div class="">
+                            <div class="col-md-6 pad-left-0">
+                                <div class="form-group">
+                                    <label for="form_name">Firstname *</label>
+                                    <input type="text" required="required" placeholder="Your firstname" class="form-control" name="name" id="form_name">
+                                </div>
+                            </div>
+                            <div class="col-md-6 pad-left-0">
+                                <div class="form-group">
+                                    <label for="form_name">Lastname *</label>
+                                    <input type="text" required="required" placeholder="Your lastname" class="form-control" name="name" id="form_name">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="">
+                            <div class="col-md-6 pad-left-0">
+                                <div class="form-group">
+                                    <label for="form_name">Email *</label>
+                                    <input type="text" required="required" placeholder="Email" class="form-control" name="name" id="form_name">
+                                </div>
+                            </div>
+                            <div class="col-md-6 pad-left-0">
+                                <div class="form-group">
+                                    <label for="form_name">Mobile *</label>
+                                    <input type="text" required="required" placeholder="Mobile" class="form-control" name="name" id="form_name">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="">
+                            <div class="col-md-12 pad-left-0">
+                                <div class="form-group">
+                                    <label for="form_message">Message *</label>
+                                    <textarea required="required" rows="4" placeholder="Write your message here" class="form-control" name="message" id="form_message"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-12 pad-left-0">
+                                <input type="submit" value="Send message" class="btn btn-success btn-send">
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+            <div style="margin-top: 25px;" class="col-md-4 panel panel-success">
+                <div class="addrs">
+                    <h5><span class="text-priamry">EMAIL</span></h5>
+                    <p>techteach@xxx.com</p>
+                </div>
+                <div class="addrs">
+                    <h5><span class="text-priamry">TELEPHONE</span></h5>
+                    <p>Toll Free - 1800 102 6488</p>
+                </div>
+                <div class="addrs">
+                    <h5><span class="text-priamry">ADDRESS</span></h5>
+                    <p>
+                        <b>TECHTEACH</b><br>No:61, Developed Plot Estate, Perungudi,<br>Chennai-600 096,<br>Tamil Nadu,<br>India.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+        <!---- Map---->
+        <div style="margin-bottom: 25px;" class="col-md-12 pad-left-0">
+            <div class="title col-md-12">
+                <h3>LOCATE <span class="text-priamry">US</span></h3>
+            </div>
+            <div class="map col-md-12">
+                <iframe width="100%" height="250" frameborder="0" allowfullscreen="" style="border:0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.2267735567752!2d80.24503111428406!3d12.957335818698226!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a525d10ba40478b%3A0x8684660c57342e65!2sInfoplus+Technologies!5e0!3m2!1sen!2sin!4v1468229648515"></iframe>
+            </div>
+
+        </div>
+
+
+    </div>
+</div>

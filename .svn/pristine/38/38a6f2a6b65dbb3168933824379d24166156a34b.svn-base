@@ -1,0 +1,182 @@
+﻿
+@{
+    ViewBag.Title = "UserPurchaseActivation";
+    Layout = "~/Views/Shared/_LearnEnggLayout.cshtml";
+}
+
+<article class="col-sm-12">
+    <div id="titleheader" class="in_hd_tt row">
+        <strong class="fa fa-file-text"></strong><span>Package Activation</span> <span style="float: right;" class="wi_cl_ul" id="fine_drp_3">
+        </span>
+        @*<section class="sub_wrp row">*@
+        @*<div class="in_hd_tt row"></div>*@
+        @*<div class="col-sm-12" id="divUserInfo">*@
+        @*<section class="sub_wrp row">*@
+            <div class="panel panel-default">
+                <div style="border: 1px  rgb(206, 206, 206);" class="col-sm-4 col-sm-offset-4 about-content">
+                    <div class="sel-mode">
+                        <br />
+                        <table class="topics tr">
+                            <tr>
+                                <td>
+                                    <span>Activate For &nbsp; </span>
+                                </td>
+                                <td>
+                                    <input type="radio" class="PackageActivate" name="PackageActivate" id="rdbPackageActivate" value="1" checked="checked" /> Myself &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <input type="radio" class="PackageActivate" name="PackageActivate" id="rdbPackageActivate" value="2" /> Others
+                                </td>
+
+                            </tr>
+                            <tr id="trBuyer">
+                                <td>
+                                    <span>Mobile Number  </span>
+                                </td>
+                                <td>
+                                    <input type="text" id="txtMobile" placeholder="Enter Mobile Number" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>Activation Code &nbsp;</span>
+                                </td>
+                                <td>
+                                    <input type="text" id="txtActivationCode" placeholder="Enter Activation Code" />
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td colspan="2" align="center">
+                                    <br />
+                                    &nbsp;  <input type="button" id="btnSubmit" value="Submit" class="btn btn-primary btn-style" />
+                                </td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <table>
+                        <tbody id="FixSubjectDetails"></tbody>
+                    </table>
+                </div>
+            </div>
+            @*</div>
+            </div>*@
+        @*</section>*@
+    </div>
+
+</article>
+
+@*<script id="BindSubjectDetails" type="text/html">
+
+    <tr class="semyear-${Years}-${Semester} hidealltmpl">
+        <td style="width:10%"><input id="selectCheck" type="checkbox" class="chk" name="checkAll" value="${SubjectId}~${SubjectCode}~${SubjectName}~${Subjectversion}~${DepartmentId}~${ExpiredDate}" /></td>
+        <td style="width:6%">
+            <span>${Years}</span>
+        </td>
+        <td style="width:10%">
+            <span>${Semester}</span>
+        </td>
+        <td style="width:25%">
+            <span>${DepartmentName}</span>
+        </td>
+        <td style="width:15%">
+            <span>${SubjectCode}</span>
+        </td>
+
+        <td style="width:24%">
+            <span>${SubjectName}</span>
+        </td>
+
+        <td style="width:10%">
+            <span>${ExpiredDate}</span>
+        </td>
+
+    </tr>
+
+</script>*@
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#trBuyer').hide();
+
+    });
+  
+        $("input[type='radio']").click(function () {
+
+            var radioValue = $("input[name='PackageActivate']:checked").val();
+            if (radioValue == 1) {
+                $('#trBuyer').hide();
+            }
+            else {
+                $('#trBuyer').show();
+            }
+
+        });
+    
+    $(function () {
+        $('#btnSubmit').click(function () {
+            ShowLoader();
+            var UserID = '@Session["loginUserID"]';
+            var BuyerMobileNo = $("#sessionMobileNumber").val();
+            var radioValue = $("input[name='PackageActivate']:checked").val();
+            var activateMobileNo = '';
+            if (radioValue == 1) {
+                var activateMobileNo = BuyerMobileNo;
+            }
+            else {
+                var activateMobileNo = $('#txtMobile').val();
+                if (activateMobileNo == "") {
+                    ShowAlert("Package Activation", "Should be enter Mobile Number for Package activation", "warning");
+                    return;
+                }
+            }
+            var ActivationCode = $('#txtActivationCode').val();
+            if (ActivationCode != "") {
+                $.getJSON("/APIService/APIUserDashBoard/GetUpdatePackageActivation?activate_MobileNo=" + activateMobileNo + "&buyer_Mobileno=" + BuyerMobileNo + "&activationcode=" + ActivationCode, function (data) {
+                    if (data != "") {
+                        ShowAlert("Package Activation", data, "success");
+                        return;
+                    }
+                    else {
+                        ShowAlert("Package Activation", 'jnhh'+data, "warning");
+                        return;
+                    }
+                });
+            }
+            else {
+                ShowAlert("Package Activation","Should be enter Activation Code","warning");
+                return;
+            }
+        });
+        HideLoader();
+    });
+    //$(document).on('click', '#btnSubmit', function () {
+    //    ShowLoader();
+    //    alert(1);
+    //    $.getJSON("/APIService/APIAdminActivity/GetAllUserSubjectDetails",
+    //     {
+    //         MobileNo:  $("#sessionMobileNumber").val()
+
+    //     }, function (data) {
+    //         if (data != "") {
+    //             $.each(data, function (index, value) {
+    //                 if (index == 0) {
+
+    //                 }
+    //                 $("#BindSubjectDetails").tmpl(value).appendTo("#FixSubjectDetails");
+
+    //             });
+    //         }
+    //         else {
+    //             $('#FixSubjectDetails').html('<div class="col-sm-12" style="margin-top:8%;" align="center"><strong><h3>Subjects Not Avaliable</h3></strong></div>');
+    //             //$('#Subjects').hide();
+    //             //$("#BindSubjectExtendedDays").tmpl(value).appendTo("#FixSubjectExtendedDays");
+    //             //ShowAlert("Alert!", "No Subjects Avaliable", "warning");
+    //         }
+    //     });
+    //    HideLoader();
+    //});
+
+</script>

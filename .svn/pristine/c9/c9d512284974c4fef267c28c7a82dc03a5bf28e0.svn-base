@@ -1,0 +1,648 @@
+﻿@{
+    ViewBag.Title = "RegistrationDashBoard";
+    Layout = "~/Views/Shared/_LearnEnggAdminLayout.cshtml";
+}
+
+<script src="~/Scripts/Admin/GoogleChart/jsapi.js"></script>
+
+<style>
+    #tblThreeMonthsReg th, #tblMonthlyReg th, #tbldailyUserCnt th, td {
+        padding: 2px;
+        text-align: center;
+    }
+
+    #tblThreeMonthsReg th, #tblMonthlyReg th, #tbldailyUserCnt th {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    #tblThreeMonthsReg tr:nth-child(even), #tblMonthlyReg tr:nth-child(even), #tbldailyUserCnt tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    #tblUserDetailss td, #tblUserStafDetails td {
+        text-align: left;
+    }
+
+    .box_dah_rad figure {
+        float: left;
+        margin: 5px 10px 0px 0px;
+    }
+
+
+    #HighestTradeChartdiv {
+        position: relative;
+        top: -10px;
+    }
+
+    #HighestRegisteredITIChartdiv {
+        position: relative;
+        top: -10px;
+    }
+
+    #month0 {
+        color: Blue;
+    }
+
+    #month1 {
+        color: Red;
+    }
+
+    #month2 {
+        color: Orange;
+    }
+
+    .fl_in_det {
+        margin: 1px !important;
+        padding: 0 !important;
+    }
+
+    #HighestRegisteredITIChartdiv > img {
+        padding-top: 44px;
+    }
+
+    .tab-content {
+        border-bottom: 1px solid #3b5998;
+        border-top: 1px solid #3b5998;
+        min-height: 100px;
+        overflow: auto;
+        padding: 11px 0 !important;
+        width: 100%;
+    }
+
+    .dataTables_scrollBody {
+        height: 145px !important;
+        overflow: auto;
+        width: 100%;
+    }
+
+    .mrgn {
+        margin: 7px 50% 0px 0 !important;
+    }
+
+    .bt_blu_ad {
+        background-color: #2ebcf2 !important;
+        border-radius: 3px !important;
+        color: #fff !important;
+        float: right;
+        margin: 7px 2% 14px 0;
+        padding: 2px 10px;
+    }
+
+    .in_hd_tt span {
+        font-size: 15px;
+        margin: 0 26px 0 10px;
+        text-transform: capitalize;
+    }
+</style>
+<section class="inner_mid_wrp-main">
+
+    <article class="col-sm-12">
+        <div class="in_hd_tt row">
+            <strong class="fa fa-file-text"></strong><span><b>REGISTRATION DASHBOARD</b></span>
+            @*<span>TOTAL INSTRUCTOR REGISTRATION :</span>
+                <span class="txt_span" id="lblStudCnt"></span>
+                <div class="bt_blu_ad mrgn">
+                <a href="#" onclick="navigate(1);">View Details </a>
+                </div>*@
+        </div>
+
+    </article>
+    <article class="ar_sec_dah_nw marsp">
+        <section class="row">
+            <div class="col-sm-4">
+                <div class="box_dah_rad">
+                    <div class="inr_cl_gray">
+                        <figure> <i class="fa fa-university"></i> </figure>
+                        <div style="width: 99%; height: 80px;">
+                            <div class="col-sm-8 row">
+                                <h1>HIGHEST REGISTERED TRADE </h1>
+                                <span>Highest Trade: <strong id="lblRegTrade"></strong></span>
+                            </div>
+                            <div class="col-sm-2">
+                                <b id="lblHighestTrade"></b>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3" id="HighestTradeChartdiv" style="width: 99%; height: 310px;left:25px;">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="box_dah_rad">
+                    <div class="inr_cl_gray">
+                        <figure> <i class="fa fa-clock-o"></i> </figure>
+                        <div style="width: 99%; height: 80px;">
+                            <div class="col-sm-8 row">
+                                <h1>HIGHEST REGISTERED ITI</h1>
+                                <span>Highest ITI : <strong id="highestITIName"></strong></span>
+                            </div>
+                            <div class="col-sm-2">
+                                <b id="spnHighestITI"></b>
+                            </div>
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3" id="HighestRegisteredITIChartdiv" style="width: 99%; height: 310px;left:25px;">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="box_dah_rad" style="height:400px;">
+                    <h1 style="text-transform:none !important;margin:10px 0 0 15px;">LAST 3 MONTHS REGISTRATION <p id="spnmonthlyTotReg"></p></h1>
+                    <div class="col-sm-12" id="LastThreeMonthsChartdiv" style="width: 100%; height: 150px;">
+                    </div>
+                    <div class="col-sm-12" style="width: 99%;height:234px; padding-top: 50px;">
+                        <table id="tblThreeMonthsReg" style="width:100%;" cellspacing="0"><thead id="tblheader"></thead><tbody></tbody></table>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </article>
+    <article class="ar_sec_dah_nw">
+        <section class="row">
+            <div class="col-sm-4">
+                <div class="box_dah_rad">
+                    <div style="width: 99%; height:500px;">
+                        <h1 style="text-transform:none !important;margin:10px 0 0 15px;">MONTHLY REGISTRATION <label style="color:blue">(Last 4 Weeks)</label> <p id="spnweeklyTotReg"></p></h1>
+                        <div id="MonthlyITIChartdiv">
+                        </div>
+                        <div class="col-sm-12" style="width: 99%;height: 100px;">
+                            <table id="tblMonthlyReg" cellspacing="0" style="width:100%;">
+
+                                <thead id="tblheader">
+
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="box_dah_rad">
+                    <div style="width: 99%; height:500px;">
+                        <h1 style="text-transform:none !important;margin:10px 0 0 15px;">DAILY REGISTRATION <label style="color:blue">(Last 7 days)</label> <p id="spndailyTotReg"></p></h1>
+                        <div id="DailyRegChartdiv" style="width: 99%; height: 250px;left:16px;">
+                            <center>
+                                <div id="divLoading" style="margin: 0px; padding: 100px; position: fixed; right: 0px;top: 120px; width: 100%; height: 100%; z-index: 30001; opacity: 0.50;">
+                                    <p style="position: absolute; top: 40%; left: 0%; margin:0 auto">
+                                        <img src="~/Content/img/pre_loader.gif" />
+                                    </p>
+                                </div>
+                            </center>
+                        </div>
+                        <div class="col-sm-12" style="width:100%;">
+                            <table id="tbldailyUserCnt" style="width:100%;" cellspacing="0">
+                                <thead id="tblheader">
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </article>
+
+
+</section>
+
+
+
+
+<script type="text/javascript">
+
+    google.load("visualization", "1.1", { packages: ["corechart"] });
+    google.load("visualization", "1.1", { packages: ["table"] });
+
+    function LoadAllFunction() {
+
+        DailyRegistrationChart();
+        HighestRegisteredITIChart();
+        HighestRegisteredTrade();
+        LastThreeMonthRegChart();
+        MonthlyRegistrationITIChart();
+    }
+
+
+    $(function () {
+        LoadAllFunction();
+    });
+
+
+    function DailyRegistrationChart() {
+
+        $.ajax({
+            type: 'GET',
+            url: '/APIService/APIAdminReport/DailyRegistration',
+            dataType: 'json',
+            async: 'false',
+            crossOrigin: true,
+            success: function (response) {
+                var rData = JSON.parse(response);
+                if (rData.length > 0) {
+                    var studCnt = 0;
+                    for (var i = 0; i < rData.length; i++) {
+                        studCnt += parseInt(rData[i].StudentCount);
+                    }
+                    $('#spndailyTotReg').text(studCnt);
+                    DailyRegistrationITIChart(rData);
+                }
+                else {
+                    $('#DailyRegChartdiv').css('text-align', 'center').html('<img src="../css/Images/warning.png" />' + "<br/>" + "<strong>DATA NOT FOUND</strong>");
+                }
+            },
+            complete: function () {
+            }
+        });
+    }
+
+    function HighestRegisteredITIChart() {
+        $.ajax({
+            type: 'GET',
+            url: '/APIService/APIAdminReport/HighestRegistered_ITI',
+            dataType: 'json',
+            async: 'false',
+            success: function (response) {
+                $('#spnHighestITI').text('');
+                $('#highestITIName').text('');
+                var rData = JSON.parse(response);
+                $('#HighestRegisteredITIChartdiv').empty();
+                if (rData.length > 0) {
+                    if (rData[0].HighestITI != 0) {
+                        $('#highestITIName').text(rData[0].collegeName);
+                        $('#spnHighestITI').text(rData[0].HighestITI);
+                        HighestRegisteredITIPieChart(rData);
+                    }
+                    else {
+                        $('#highestITIName').text(''); $('#spnHighestITI').text('');
+                        $('#HighestRegisteredITIChartdiv').css('text-align', 'center').addClass('center').html('<img src="../css/Images/warning.png" />' + "<br/>" + "<strong>DATA NOT FOUND</strong>");
+                    }
+
+                }
+                else {
+                    $('#HighestRegisteredITIChartdiv').css('text-align', 'center').html('<img src="../css/Images/warning.png" />' + "<br/>" + "<strong>DATA NOT FOUND</strong>");
+                }
+            },
+            complete: function () {
+            }
+        });
+    }
+
+    function HighestRegisteredTrade() {
+
+        $.ajax({
+            type: 'GET',
+            url: '/APIService/APIAdminReport/HighestRegisteredTrade',
+            dataType: 'json',
+            async: 'false',
+            success: function (response) {
+                $('#lblHighestTrade').text('');
+                $('#lblRegTrade').text('');
+                var rData = JSON.parse(response);
+                var studCnt = 0;
+                var staffCnt = 0;
+                if (rData.length > 0) {
+                    $('#lblRegTrade').text(rData[0].deptname);
+                    $('#lblHighestTrade').text(rData[0].highesttrade);
+                    HighestTradePieChart(rData);
+                }
+                else {
+                    $('#HighestTradeChartdiv').css('text-align', 'center').addClass('center').html('<img src="../css/Images/warning.png" />' + "<br/>" + "<strong>DATA NOT FOUND</strong>");
+                }
+            },
+            complete: function () {
+            }
+        });
+    }
+
+    function LastThreeMonthRegChart() {
+
+        $.ajax({
+            type: 'GET',
+            url: '/APIService/APIAdminReport/MonthlysRegistration',
+            dataType: 'json',
+            async: 'false',
+            success: function (response) {
+                var studCnt = 0;
+                var rData = JSON.parse(response);
+                if (rData.length > 0) {
+                    for (var i = 0; i < rData.length; i++) {
+                        studCnt += parseInt(rData[i].StudentCount);
+                    }
+                    $('#spnmonthlyTotReg').text(studCnt);
+                    LastThreeMonthRegPieChart(rData);
+                }
+                else {
+
+                    $('#LastThreeMonthsChartdiv').css('text-align', 'center').addClass('center').html('<img src="../css/Images/warning.png" />' + "<br/>" + "<strong>DATA NOT FOUND</strong>");
+                }
+            },
+            complete: function () {
+            }
+        });
+    }
+
+    function MonthlyRegistrationITIChart() {
+
+        $.ajax({
+            type: 'GET',
+            url: '/APIService/APIAdminReport/WeeklyRegistration',
+            dataType: 'json',
+            async: 'false',
+            success: function (response) {
+                var rData = JSON.parse(response);
+                var studCnt = 0;
+
+                var NotRegColgeCnt = 0;
+                if (rData.length > 0) {
+                    $('#lblRegColge').text(rData[0].RegCollegeCount);
+                    $('#lblTotColge').text(rData[0].TotalCollegeCount);
+                    MonthlyRegITIChart(rData);
+                }
+                else {
+                    $('#MonthlyITIChartdiv').css('text-align', 'center').addClass('center').html('<img src="../css/Images/warning.png" />' + "<br/>" + "<strong>DATA NOT FOUND</strong>");
+                }
+                for (var i = 0; i < rData.length; i++) {
+                    studCnt += parseInt(rData[i].StudentCount);
+                }
+                $('#spnweeklyTotReg').text(studCnt);
+            },
+            complete: function () {
+            }
+        });
+    }
+
+    /*Biding chart data start */
+    
+    function DailyRegistrationITIChart(ChartData) {
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'CreatedOn');
+        data.addColumn('number', 'Instructor');
+
+        for (var i = 0; i < ChartData.length; i++) {
+            data.addRow([ChartData[i].CreatedOn, ChartData[i].StudentCount]);
+        }
+
+        var res = '';
+        var TotStudCnt = 0;
+        var TotstafCnt = 0;
+        if (ChartData.length > 0) {
+            $('#tbldailyUserCnt thead').html('<tr><th>Date</th><th>Instructor Count</th></tr>');
+        }
+        for (var i = 0; i < ChartData.length; i++) {
+
+            if (ChartData[i].StudentCount != 0) {
+                TotStudCnt += ChartData[i].StudentCount;
+
+                res += '<tr style=" border: 1px solid #ddd;">' +
+                '<td style="font-weight:bold;" >' + ChartData[i].CreatedOn + '</td>' +
+                 '<td>' + parseInt(ChartData[i].StudentCount) + '</td>' +
+                '</tr>';
+
+            }
+
+        }
+        res += '<tr style=" border: 1px solid #ddd;">' +
+                       '<td style="font-weight:bold;" >Total</td>' +
+                       '<td>' + TotStudCnt + '</td>' +
+                       '</tr>';
+
+        $('#tbldailyUserCnt tbody').html(res);
+
+
+        var options = {
+
+            series: {
+                0: { pointShape: 'square' },
+                1: { pointShape: 'diamond' }
+            },
+            //legend:'none'
+            legend: { position: 'top' },
+            animation: {
+                'startup': true,
+                duration: 1000,
+                easing: 'inAndOut'
+            },
+            vAxis: {
+                //gridlines: { count: 6
+                //},
+                title: 'Registered Date',
+                textStyle: {
+                    fontSize: 12,
+                    bold: true,
+                    italic: false
+                },
+                titleTextStyle: {
+                    bold: true
+                },
+                textPosition: 'out'
+            },
+            hAxis: {
+
+                title: 'Instructor Count'
+            },
+            width: 350, height: 250,
+            colors: ['#FF7145', '#230382']
+        };
+
+        var PieChart = new google.visualization.ColumnChart(document.getElementById('DailyRegChartdiv'));
+        PieChart.draw(data, options);
+
+    };
+
+    function HighestRegisteredITIPieChart(ChartData) {
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Higest ITI');
+        data.addColumn('number', 'number');
+
+        for (var i = 0; i < ChartData.length; i++) {
+            data.addRow([ChartData[i].collegeName, ChartData[i].HighestITI]);
+        }
+
+        var options = {
+            //pieSliceText:'none',
+            pieSliceText: 'value',
+            pieSliceTextStyle: { fontSize: 14, color: 'black', bold: true },
+            legend: { position: 'labeled', pieSliceText: 'value', alignment: 'start' },
+            colors: ['#FAA13C', '#FADFC0'],
+            pieHole: 0.4,
+            curveType: "function",
+            width: 300, height: 300,
+            //vAxis: {maxValue: 5},
+            chartArea: { width: '120%' }
+
+        };
+
+        var PieChart = new google.visualization.PieChart(document.getElementById('HighestRegisteredITIChartdiv'));
+        PieChart.draw(data, options);
+
+    };
+
+    function HighestTradePieChart(Chartdata) {
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Trade');
+        data.addColumn('number', 'count');
+
+        for (var i = 0; i < Chartdata.length; i++) {
+            data.addRow([Chartdata[i].deptname, Chartdata[i].highesttrade]);
+        }
+
+        var options = {
+            pieSliceText: 'none',
+            pieSliceText: 'value',
+            pieSliceTextStyle: { fontSize: 14, color: 'black', bold: true },
+            legend: { position: 'labeled', pieSliceText: 'value', alignment: 'start' },
+            colors: ['#28F728', '#B6FAB6'],
+            pieHole: 0.4,
+            curveType: "function",
+            width: 300, height: 300,
+            //vAxis: {maxValue: 5},
+            chartArea: { width: '120%' }
+
+        };
+
+        var PieChart = new google.visualization.PieChart(document.getElementById('HighestTradeChartdiv'));
+        PieChart.draw(data, options);
+
+    };
+
+    function LastThreeMonthRegPieChart(ChartData) {
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Month');
+        data.addColumn('number', 'StudentCount');
+
+        for (var i = 0; i < ChartData.length; i++) {
+            data.addRow([ChartData[i].Month, ChartData[i].StudentCount]);
+        }
+
+        var res = '';
+        var TotStudCnt = 0;
+        if (ChartData.length > 0) {
+            $('#tblThreeMonthsReg thead').html('<tr><th>Month</th><th>Instructor Count</th></tr>');
+        }
+        for (var i = 0; i < ChartData.length; i++) {
+            TotStudCnt += parseInt(ChartData[i].StudentCount);
+            res += '<tr style=" border: 1px solid #ddd;">' +
+                    '<td id="month' + i + '" style="font-weight:bold;" >' + ChartData[i].Month + '</td>' +
+                    '<td>' + parseInt(ChartData[i].StudentCount) + '</a></td>' +
+                    '</tr>';
+
+        }
+        res += '<tr style=" border: 1px solid #ddd;">' +
+                        '<td style="font-weight:bold;" >Total</td>' +
+                        '<td>' + TotStudCnt + '</td>' +
+                        '</tr>';
+
+        $('#tblThreeMonthsReg tbody').html(res);
+
+
+        var options = {
+            title: 'Instructor',
+            legend: { position: 'top' },
+            is3D: true,
+            curveType: "function",
+            width: 300, height: 220,
+            //vAxis: {maxValue: 5},
+            chartArea: { width: '100%' }
+
+        };
+
+
+        var PieChart = new google.visualization.PieChart(document.getElementById('LastThreeMonthsChartdiv'));
+        PieChart.draw(data, options);
+
+
+    }
+
+    function MonthlyRegITIChart(ChartData) {
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Week');
+        data.addColumn('number', 'Instructor Count');
+
+
+        for (var i = 0; i < ChartData.length; i++) {
+            data.addRow([ChartData[i].Week, ChartData[i].StudentCount]);
+        }
+        var res = '';
+        var TotStudCnt = 0;
+        var TotstafCnt = 0;
+        if (ChartData.length > 0) {
+
+            $('#tblMonthlyReg thead').html('<tr><th>Week</th><th>Instructor Count</th></tr>');
+        }
+        for (var i = 0; i < ChartData.length; i++) {
+
+            if (ChartData[i].StudentCount != 0) {
+                TotStudCnt += ChartData[i].StudentCount;
+
+                res += '<tr style=" border: 1px solid #ddd;">' +
+                '<td style="font-weight:bold;" >' + ChartData[i].Week + '</td>' +
+                 '<td>' + parseInt(ChartData[i].StudentCount) + '</td>' +
+                '</tr>';
+
+            }
+        }
+        res += '<tr style=" border: 1px solid #ddd;">' +
+                       '<td style="font-weight:bold;" >Total</td>' +
+                       '<td>' + TotStudCnt + '</td>' +
+                       '</tr>';
+
+
+        $('#tblMonthlyReg tbody').html(res);
+
+
+
+        var options = {
+
+            series: {
+                0: { pointShape: 'square' },
+                1: { pointShape: 'diamond' }
+            },
+            legend: { position: 'top' },
+            animation: {
+                'startup': true,
+                duration: 1000,
+                easing: 'inAndOut'
+            },
+            vAxis: {
+                // gridlines: { count: 6
+                //},
+                title: 'Instructors count',
+                textStyle: {
+                    fontSize: 12,
+                    bold: true,
+                    italic: false
+                },
+                titleTextStyle: {
+                    bold: true
+                }
+            },
+
+            hAxis: {
+                //slantedText: true,
+                textPosition: 'out',
+                title: 'Week Wise'
+            },
+            width: 380, height: 250,
+            colors: ['#FFCC66', '#0099CC']
+        };
+
+        var PieChart = new google.visualization.ColumnChart(document.getElementById('MonthlyITIChartdiv'));
+        PieChart.draw(data, options);
+
+    };
+
+    /*Biding chart data  End */
+
+</script>

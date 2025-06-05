@@ -1,0 +1,128 @@
+﻿
+@{
+  
+}
+
+<section class="page-content-wrapper">
+
+    <div style="padding:0;" class="col-sm-6">
+
+        <h1>Shopping Cart</h1>
+        <p>You have picked <span>(1) Items</span> in your shopping</p>
+
+
+    </div>
+
+
+    <div style="border: 1px solid rgb(206, 206, 206);" class="col-sm-4 col-sm-offset-2">
+        <div class="sel-mode">
+
+            <h4>Delivery Mode</h4>
+
+            <div id="checkbox_div">
+
+                <div class="col-sm-4">
+                    <input type="radio" value="DVD" name="mode" checked="checked">&nbsp;DVD
+                </div>
+                <div class="col-sm-4">
+                    <input type="radio" value="USB" name="mode">&nbsp;USB
+                </div>
+                <div class="col-sm-4">
+                    <input type="radio" value="TABLET" name="mode">&nbsp;TABLET
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="col-sm-12 center">
+
+            <p style="margin-bottom: 7px; text-align: center; display: block;" class="DVD">Moser Baer Pro 4.7GB DVD - <span class="des-price"><strong>Rs.35</strong></span></p>
+            <p style="margin-bottom: 7px; text-align: center; display: none;" class="USB">4 GB USB Pendrive - <span class="des-price"><strong>Rs.250</strong></span></p>
+            <p style="margin-bottom: 7px; text-align: center; display: none;" class="TABLET">Lenovo Tablet - <span class="des-price"><strong>Rs.5000</strong></span></p>
+
+        </div>
+
+    </div>
+
+
+    <div class="row">
+        <div class="col-sm-12">
+            <article class="cal_his_tab">
+                <div class="table-responsive DVD" style="display: block;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>Subject name</td>
+                                <td>Price</td>
+                                <td>Delivery Mode:<br><span>DVD</span></td>
+                                <td>Total</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr>
+                                <td>
+                                    <div style="padding:0;" class="col-sm-6">
+                                        <p>
+                                            <span class="title">GE6151 Computer Programming</span><br>
+                                            <span>General Engineering (Anna University)</span>
+                                        </p>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p style="margin-top:40px;">
+                                            <a class="remove"><span class="pull-right">Remove</span></a>
+                                        </p>
+                                    </div>
+                                </td>
+                                <td>Rs.200</td>
+                                <td>Rs.35</td>
+                                <td>Rs.235</td>
+                            </tr>
+
+                        </tbody>
+                        <tfoot style="border-top: 3px solid #ccc;">
+                            <tr>
+                                <td rowspan="3">
+                                    <div class="pro_cod-wrp">
+                                        <h2>Discount code</h2>
+                                        <span> Enter your coupon code if you have one. </span>
+                                        <input type="text" placeholder="Enter your coupon code">
+                                        <button class="btn btn-primary btn-style">Apply Code</button>
+                                    </div>
+                                </td>
+                                <td colspan="2"><b>Sub Total</b></td>
+                                <td><b>Rs.235</b></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><b>Shipping Charge</b></td>
+                                <td>Rs.0</td>
+                            </tr>
+                            <tr class="bld_td">
+                                <td colspan="2">Total</td>
+                                <td>Rs.235</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+
+
+
+
+
+
+            </article>
+            <article class="shp_btn_ful-wrp">
+                <div class="cont-shp-btn_wrp">
+                    <button onclick="location.href=&quot;anna.html&quot;" class="btn btn-primary btn-style" type="button">Continue Shopping</button>
+                </div>
+                <div class="upd_btn-wrp">
+                    <button class="btn btn-primary btn-style" type="button">Update Cart</button>
+                    <span>or</span>
+                    <button onclick="location.href=&quot;checkout.html&quot;" class="btn btn-primary btn-style" type="button">Check Out</button>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>

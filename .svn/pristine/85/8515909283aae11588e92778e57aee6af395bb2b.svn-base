@@ -1,0 +1,1376 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="subject_delivery_anna_newModelStoreContainer" CdmEntityContainer="learnengg_payment_portal_entities">
+    <EntitySetMapping Name="business_customer">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.business_customer">
+        <MappingFragment StoreEntitySet="business_customer">
+          <ScalarProperty Name="bcust_id" ColumnName="bcust_id" />
+          <ScalarProperty Name="bcust_first_name" ColumnName="bcust_first_name" />
+          <ScalarProperty Name="bcust_name" ColumnName="bcust_name" />
+          <ScalarProperty Name="bcust_password" ColumnName="bcust_password" />
+          <ScalarProperty Name="role_id" ColumnName="role_id" />
+          <ScalarProperty Name="bcust_email_id" ColumnName="bcust_email_id" />
+          <ScalarProperty Name="bcust_mobile" ColumnName="bcust_mobile" />
+          <ScalarProperty Name="loggedin_status" ColumnName="loggedin_status" />
+          <ScalarProperty Name="last_loggedin_date" ColumnName="last_loggedin_date" />
+          <ScalarProperty Name="is_first_login" ColumnName="is_first_login" />
+          <ScalarProperty Name="active_status" ColumnName="active_status" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="created_on" ColumnName="created_on" />
+          <ScalarProperty Name="bcust_profileimage" ColumnName="bcust_profileimage" />
+          <ScalarProperty Name="bcust_address" ColumnName="bcust_address" />
+          <ScalarProperty Name="state_id" ColumnName="state_id" />
+          <ScalarProperty Name="country" ColumnName="country" />
+          <ScalarProperty Name="dob" ColumnName="dob" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="phonenumber" ColumnName="phonenumber" />
+          <ScalarProperty Name="Bulk_mail" ColumnName="Bulk_mail" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="business_customer_teams">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.business_customer_teams">
+        <MappingFragment StoreEntitySet="business_customer_teams">
+          <ScalarProperty Name="bcust_teamid" ColumnName="bcust_teamid" />
+          <ScalarProperty Name="bcust_id" ColumnName="bcust_id" />
+          <ScalarProperty Name="bteamCode" ColumnName="bteamCode" />
+          <ScalarProperty Name="bteamName" ColumnName="bteamName" />
+          <ScalarProperty Name="bteamLeadName" ColumnName="bteamLeadName" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+          <ScalarProperty Name="active_status" ColumnName="active_status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="clienttool_user_version">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.clienttool_user_version">
+        <MappingFragment StoreEntitySet="clienttool_user_version">
+          <ScalarProperty Name="client_tool_user_versionid" ColumnName="client_tool_user_versionid" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="tool_version_name" ColumnName="tool_version_name" />
+          <ScalarProperty Name="model_name" ColumnName="model_name" />
+          <ScalarProperty Name="released_on" ColumnName="released_on" />
+          <ScalarProperty Name="reason" ColumnName="reason" />
+          <ScalarProperty Name="is_current_version" ColumnName="is_current_version" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="clienttool_version">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.clienttool_version">
+        <MappingFragment StoreEntitySet="clienttool_version">
+          <ScalarProperty Name="tool_version_id" ColumnName="tool_version_id" />
+          <ScalarProperty Name="tool_version_name" ColumnName="tool_version_name" />
+          <ScalarProperty Name="model_name" ColumnName="model_name" />
+          <ScalarProperty Name="released_on" ColumnName="released_on" />
+          <ScalarProperty Name="reason" ColumnName="reason" />
+          <ScalarProperty Name="is_current_version" ColumnName="is_current_version" />
+          <ScalarProperty Name="path_to_download" ColumnName="path_to_download" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="college_master">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.college_master">
+        <MappingFragment StoreEntitySet="college_master">
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="college_email" ColumnName="college_email" />
+          <ScalarProperty Name="college_mobile" ColumnName="college_mobile" />
+          <ScalarProperty Name="total_license" ColumnName="total_license" />
+          <ScalarProperty Name="college_id" ColumnName="college_id" />
+          <ScalarProperty Name="college_code" ColumnName="college_code" />
+          <ScalarProperty Name="college_name" ColumnName="college_name" />
+          <ScalarProperty Name="active_status" ColumnName="active_status" />
+          <ScalarProperty Name="university_id" ColumnName="university_id" />
+          <ScalarProperty Name="enter_on" ColumnName="enter_on" />
+          <ScalarProperty Name="enter_by" ColumnName="enter_by" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="country_master">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.country_master">
+        <MappingFragment StoreEntitySet="country_master">
+          <ScalarProperty Name="country_id" ColumnName="country_id" />
+          <ScalarProperty Name="country_code" ColumnName="country_code" />
+          <ScalarProperty Name="country_name" ColumnName="country_name" />
+          <ScalarProperty Name="country_mobile_prefix" ColumnName="country_mobile_prefix" />
+          <ScalarProperty Name="active_status" ColumnName="active_status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Demo_SubscribedUser">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.Demo_SubscribedUser">
+        <MappingFragment StoreEntitySet="Demo_SubscribedUser">
+          <ScalarProperty Name="SubscriberUserID" ColumnName="SubscriberUserID" />
+          <ScalarProperty Name="SubscriberName" ColumnName="SubscriberName" />
+          <ScalarProperty Name="SubscriberCollege" ColumnName="SubscriberCollege" />
+          <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+          <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+          <ScalarProperty Name="SubscribedDate" ColumnName="SubscribedDate" />
+          <ScalarProperty Name="Subscriberip" ColumnName="Subscriberip" />
+          <ScalarProperty Name="SubscriberCountry" ColumnName="SubscriberCountry" />
+          <ScalarProperty Name="SubscriberRegion" ColumnName="SubscriberRegion" />
+          <ScalarProperty Name="SubscriberCity" ColumnName="SubscriberCity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="department_master">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.department_master">
+        <MappingFragment StoreEntitySet="department_master">
+          <ScalarProperty Name="dept_video" ColumnName="dept_video" />
+          <ScalarProperty Name="multichoice" ColumnName="multichoice" />
+          <ScalarProperty Name="solvedproblem" ColumnName="solvedproblem" />
+          <ScalarProperty Name="pagecontent" ColumnName="pagecontent" />
+          <ScalarProperty Name="visuals" ColumnName="visuals" />
+          <ScalarProperty Name="coursehours" ColumnName="coursehours" />
+          <ScalarProperty Name="department_id" ColumnName="department_id" />
+          <ScalarProperty Name="department_code" ColumnName="department_code" />
+          <ScalarProperty Name="department_name" ColumnName="department_name" />
+          <ScalarProperty Name="no_of_year" ColumnName="no_of_year" />
+          <ScalarProperty Name="max_semester_per_year" ColumnName="max_semester_per_year" />
+          <ScalarProperty Name="active_status" ColumnName="active_status" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="created_on" ColumnName="created_on" />
+          <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+          <ScalarProperty Name="modified_on" ColumnName="modified_on" />
+          <ScalarProperty Name="UniversityID" ColumnName="UniversityID" />
+          <ScalarProperty Name="dept_img_path" ColumnName="dept_img_path" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="department_subject_mapping">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.department_subject_mapping">
+        <MappingFragment StoreEntitySet="department_subject_mapping">
+          <ScalarProperty Name="department_subject_mapping_id" ColumnName="department_subject_mapping_id" />
+          <ScalarProperty Name="department_id" ColumnName="department_id" />
+          <ScalarProperty Name="subject_id" ColumnName="subject_id" />
+          <ScalarProperty Name="rule_id" ColumnName="rule_id" />
+          <ScalarProperty Name="university_id" ColumnName="university_id" />
+          <ScalarProperty Name="map_year" ColumnName="map_year" />
+          <ScalarProperty Name="semester" ColumnName="semester" />
+          <ScalarProperty Name="active_status" ColumnName="active_status" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="created_on" ColumnName="created_on" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="device_preidentification">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.device_preidentification">
+        <MappingFragment StoreEntitySet="device_preidentification">
+          <ScalarProperty Name="device_preidentification_id" ColumnName="device_preidentification_id" />
+          <ScalarProperty Name="device_id" ColumnName="device_id" />
+          <ScalarProperty Name="subject_id" ColumnName="subject_id" />
+          <ScalarProperty Name="expiry_days" ColumnName="expiry_days" />
+          <ScalarProperty Name="enter_by" ColumnName="enter_by" />
+          <ScalarProperty Name="enter_on" ColumnName="enter_on" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ExceptionLogs">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.ExceptionLog">
+        <MappingFragment StoreEntitySet="ExceptionLog">
+          <ScalarProperty Name="ExceptionID" ColumnName="ExceptionID" />
+          <ScalarProperty Name="ExceptionType" ColumnName="ExceptionType" />
+          <ScalarProperty Name="ExceptionMessage" ColumnName="ExceptionMessage" />
+          <ScalarProperty Name="ExceptionSource" ColumnName="ExceptionSource" />
+          <ScalarProperty Name="ExceptionURL" ColumnName="ExceptionURL" />
+          <ScalarProperty Name="TargetSiteModule" ColumnName="TargetSiteModule" />
+          <ScalarProperty Name="TargetSiteName" ColumnName="TargetSiteName" />
+          <ScalarProperty Name="StackTrace" ColumnName="StackTrace" />
+          <ScalarProperty Name="HelpLink" ColumnName="HelpLink" />
+          <ScalarProperty Name="isFromController" ColumnName="isFromController" />
+          <ScalarProperty Name="ExceptionDate" ColumnName="ExceptionDate" />
+          <ScalarProperty Name="ErrorColumnNumber" ColumnName="ErrorColumnNumber" />
+          <ScalarProperty Name="errorLine" ColumnName="errorLine" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="feedbacks">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.feedback">
+        <MappingFragment StoreEntitySet="feedback">
+          <ScalarProperty Name="fb_id" ColumnName="fb_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="college_name" ColumnName="college_name" />
+          <ScalarProperty Name="subject_name" ColumnName="subject_name" />
+          <ScalarProperty Name="mobile_number" ColumnName="mobile_number" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="message" ColumnName="message" />
+          <ScalarProperty Name="createdon" ColumnName="createdon" />
+          <ScalarProperty Name="isread" ColumnName="isread" />
+          <ScalarProperty Name="readon" ColumnName="readon" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="read_by" ColumnName="read_by" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="feedback_poll_userreply">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.feedback_poll_userreply">
+        <MappingFragment StoreEntitySet="feedback_poll_userreply">
+          <ScalarProperty Name="feedback_poll_userreply_id" ColumnName="feedback_poll_userreply_id" />
+          <ScalarProperty Name="feedback_poll_qanswer1" ColumnName="feedback_poll_qanswer1" />
+          <ScalarProperty Name="feedback_poll_qanswer2" ColumnName="feedback_poll_qanswer2" />
+          <ScalarProperty Name="feedback_poll_qanswer3" ColumnName="feedback_poll_qanswer3" />
+          <ScalarProperty Name="feedback_poll_qanswer4" ColumnName="feedback_poll_qanswer4" />
+          <ScalarProperty Name="feedback_poll_qanswer5" ColumnName="feedback_poll_qanswer5" />
+          <ScalarProperty Name="uname" ColumnName="uname" />
+          <ScalarProperty Name="mobile" ColumnName="mobile" />
+          <ScalarProperty Name="email_id" ColumnName="email_id" />
+          <ScalarProperty Name="polled_on" ColumnName="polled_on" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Menus">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.Menu">
+        <MappingFragment StoreEntitySet="Menu">
+          <ScalarProperty Name="MenuID" ColumnName="MenuID" />
+          <ScalarProperty Name="ParentMenuID" ColumnName="ParentMenuID" />
+          <ScalarProperty Name="MenuText" ColumnName="MenuText" />
+          <ScalarProperty Name="TargetURL" ColumnName="TargetURL" />
+          <ScalarProperty Name="MenuLevel" ColumnName="MenuLevel" />
+          <ScalarProperty Name="MenuOrder" ColumnName="MenuOrder" />
+          <ScalarProperty Name="IsParent" ColumnName="IsParent" />
+          <ScalarProperty Name="active_status" ColumnName="active_status" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="ModuleID" ColumnName="ModuleID" />
+          <ScalarProperty Name="Univ_ID" ColumnName="Univ_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MenuPrivileges">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.MenuPrivilege">
+        <MappingFragment StoreEntitySet="MenuPrivilege">
+          <ScalarProperty Name="MenuPrivilegeID" ColumnName="MenuPrivilegeID" />
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <ScalarProperty Name="MenuID" ColumnName="MenuID" />
+          <ScalarProperty Name="active_status" ColumnName="active_status" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="product_request_master">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.product_request_master">
+        <MappingFragment StoreEntitySet="product_request_master">
+          <ScalarProperty Name="request_id" ColumnName="request_id" />
+          <ScalarProperty Name="bcust_id" ColumnName="bcust_id" />
+          <ScalarProperty Name="college_id" ColumnName="college_id" />
+          <ScalarProperty Name="department_id" ColumnName="department_id" />
+          <ScalarProperty Name="product_count" ColumnName="product_count" />
+          <ScalarProperty Name="remarks" ColumnName="remarks" />
+          <ScalarProperty Name="active_status" ColumnName="active_status" />
+          <ScalarProperty Name="created_on" ColumnName="created_on" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="modified_on" ColumnName="modified_on" />
+          <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+          <ScalarProperty Name="bcustTeam_id" ColumnName="bcustTeam_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="product_request_master_history">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.product_request_master_history">
+        <MappingFragment StoreEntitySet="product_request_master_history">
+          <ScalarProperty Name="request_id" ColumnName="request_id" />
+          <ScalarProperty Name="bcust_id" ColumnName="bcust_id" />
+          <ScalarProperty Name="college_id" ColumnName="college_id" />
+          <ScalarProperty Name="department_id" ColumnName="department_id" />
+          <ScalarProperty Name="product_count" ColumnName="product_count" />
+          <ScalarProperty Name="remarks" ColumnName="remarks" />
+          <ScalarProperty Name="active_status" ColumnName="active_status" />
+          <ScalarProperty Name="created_on" ColumnName="created_on" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="modified_on" ColumnName="modified_on" />
+          <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+          <ScalarProperty Name="closed_on" ColumnName="closed_on" />
+          <ScalarProperty Name="bcustTeam_id" ColumnName="bcustTeam_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="promo_discount_master">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.promo_discount_master">
+        <MappingFragment StoreEntitySet="promo_discount_master">
+          <ScalarProperty Name="discount_id" ColumnName="discount_id" />
+          <ScalarProperty Name="discount_code" ColumnName="discount_code" />
+          <ScalarProperty Name="discount_name" ColumnName="discount_name" />
+          <ScalarProperty Name="discount_desc" ColumnName="discount_desc" />
+          <ScalarProperty Name="discount_expiryon" ColumnName="discount_expiryon" />
+          <ScalarProperty Name="discount_extend_days" ColumnName="discount_extend_days" />
+          <ScalarProperty Name="discount_price" ColumnName="discount_price" />
+          <ScalarProperty Name="active_status" ColumnName="active_status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="promo_package_mapping">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.promo_package_mapping">
+        <MappingFragment StoreEntitySet="promo_package_mapping">
+          <ScalarProperty Name="promo_package_id" ColumnName="promo_package_id" />
+          <ScalarProperty Name="promo_id" ColumnName="promo_id" />
+          <ScalarProperty Name="package_id" ColumnName="package_id" />
+          <ScalarProperty Name="active_status" ColumnName="active_status" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="created_on" ColumnName="created_on" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="promocode_master">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.promocode_master">
+        <MappingFragment StoreEntitySet="promocode_master">
+          <ScalarProperty Name="promo_id" ColumnName="promo_id" />
+          <ScalarProperty Name="promo_code" ColumnName="promo_code" />
+          <ScalarProperty Name="promo_name" ColumnName="promo_name" />
+          <ScalarProperty Name="promo_desc" ColumnName="promo_desc" />
+          <ScalarProperty Name="promo_expiryon" ColumnName="promo_expiryon" />
+          <ScalarProperty Name="promo_extend_days" ColumnName="promo_extend_days" />
+          <ScalarProperty Name="promo_discount_price" ColumnName="promo_discount_price" />
+          <ScalarProperty Name="active_status" ColumnName="active_status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="purchase_activationmaster">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.purchase_activationmaster">
+        <MappingFragment StoreEntitySet="purchase_activationmaster">
+          <ScalarProperty Name="activationmasterid" ColumnName="activationmasterid" />
+          <ScalarProperty Name="user_subscribed_masterid" ColumnName="user_subscribed_masterid" />
+          <ScalarProperty Name="buyer_userid" ColumnName="buyer_userid" />
+          <ScalarProperty Name="buyer_mobileNo" ColumnName="buyer_mobileNo" />
+          <ScalarProperty Name="activationcode" ColumnName="activationcode" />
+          <ScalarProperty Name="created_date" ColumnName="created_date" />
+          <ScalarProperty Name="created_userid" ColumnName="created_userid" />
+          <ScalarProperty Name="activated_userid" ColumnName="activated_userid" />
+          <ScalarProperty Name="activated_date" ColumnName="activated_date" />
+          <ScalarProperty Name="activationstatus" ColumnName="activationstatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="regulations">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.regulation">
+        <MappingFragment StoreEntitySet="regulation">
+          <ScalarProperty Name="rule_id" ColumnName="rule_id" />
+          <ScalarProperty Name="rule_name" ColumnName="rule_name" />
+          <ScalarProperty Name="rule_desc" ColumnName="rule_desc" />
+          <ScalarProperty Name="active_status" ColumnName="active_status" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="created_on" ColumnName="created_on" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="regulation_master">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.regulation_master">
+        <MappingFragment StoreEntitySet="regulation_master">
+          <ScalarProperty Name="rule_id" ColumnName="rule_id" />
+          <ScalarProperty Name="rule_name" ColumnName="rule_name" />
+          <ScalarProperty Name="rule_desc" ColumnName="rule_desc" />
+          <ScalarProperty Name="university_id" ColumnName="university_id" />
+          <ScalarProperty Name="active_status" ColumnName="active_status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="state_master">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.state_master">
+        <MappingFragment StoreEntitySet="state_master">
+          <ScalarProperty Name="state_id" ColumnName="state_id" />
+          <ScalarProperty Name="state_name" ColumnName="state_name" />
+          <ScalarProperty Name="state_short_name" ColumnName="state_short_name" />
+          <ScalarProperty Name="isDelete" ColumnName="isDelete" />
+          <ScalarProperty Name="active_status" ColumnName="active_status" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="created_on" ColumnName="created_on" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="status">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.status">
+        <MappingFragment StoreEntitySet="status">
+          <ScalarProperty Name="status_id" ColumnName="status_id" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="code" ColumnName="code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="subject_enc">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.subject_enc">
+        <MappingFragment StoreEntitySet="subject_enc">
+          <ScalarProperty Name="subject_encid" ColumnName="subject_encid" />
+          <ScalarProperty Name="subject_id" ColumnName="subject_id" />
+          <ScalarProperty Name="enc_data" ColumnName="enc_data" />
+          <ScalarProperty Name="generated_on" ColumnName="generated_on" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="subject_master">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.subject_master">
+        <MappingFragment StoreEntitySet="subject_master">
+          <ScalarProperty Name="subject_id" ColumnName="subject_id" />
+          <ScalarProperty Name="subject_code" ColumnName="subject_code" />
+          <ScalarProperty Name="univ_subject_code" ColumnName="univ_subject_code" />
+          <ScalarProperty Name="subject_name" ColumnName="subject_name" />
+          <ScalarProperty Name="subject_cover_path" ColumnName="subject_cover_path" />
+          <ScalarProperty Name="subject_description" ColumnName="subject_description" />
+          <ScalarProperty Name="active_status" ColumnName="active_status" />
+          <ScalarProperty Name="rule_id" ColumnName="rule_id" />
+          <ScalarProperty Name="created_on" ColumnName="created_on" />
+          <ScalarProperty Name="released_on" ColumnName="released_on" />
+          <ScalarProperty Name="UniversityID" ColumnName="UniversityID" />
+          <ScalarProperty Name="having_questionpaper" ColumnName="having_questionpaper" />
+          <ScalarProperty Name="subject_version" ColumnName="subject_version" />
+          <ScalarProperty Name="active_duration_days" ColumnName="active_duration_days" />
+          <ScalarProperty Name="active_duration_date" ColumnName="active_duration_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="subject_master_history">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.subject_master_history">
+        <MappingFragment StoreEntitySet="subject_master_history">
+          <ScalarProperty Name="subject_historyid" ColumnName="subject_historyid" />
+          <ScalarProperty Name="subject_id" ColumnName="subject_id" />
+          <ScalarProperty Name="subject_code" ColumnName="subject_code" />
+          <ScalarProperty Name="subject_name" ColumnName="subject_name" />
+          <ScalarProperty Name="subject_cover_path" ColumnName="subject_cover_path" />
+          <ScalarProperty Name="subject_description" ColumnName="subject_description" />
+          <ScalarProperty Name="active_status" ColumnName="active_status" />
+          <ScalarProperty Name="rule_id" ColumnName="rule_id" />
+          <ScalarProperty Name="created_on" ColumnName="created_on" />
+          <ScalarProperty Name="released_on" ColumnName="released_on" />
+          <ScalarProperty Name="UniversityID" ColumnName="UniversityID" />
+          <ScalarProperty Name="having_questionpaper" ColumnName="having_questionpaper" />
+          <ScalarProperty Name="subject_version" ColumnName="subject_version" />
+          <ScalarProperty Name="active_duration_days" ColumnName="active_duration_days" />
+          <ScalarProperty Name="active_duration_date" ColumnName="active_duration_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="subject_unit_master_history">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.subject_unit_master_history">
+        <MappingFragment StoreEntitySet="subject_unit_master_history">
+          <ScalarProperty Name="unit_history_id" ColumnName="unit_history_id" />
+          <ScalarProperty Name="unit_id" ColumnName="unit_id" />
+          <ScalarProperty Name="unit_code" ColumnName="unit_code" />
+          <ScalarProperty Name="unit_name" ColumnName="unit_name" />
+          <ScalarProperty Name="subject_id" ColumnName="subject_id" />
+          <ScalarProperty Name="active_status" ColumnName="active_status" />
+          <ScalarProperty Name="subject_unit_path" ColumnName="subject_unit_path" />
+          <ScalarProperty Name="is_demo" ColumnName="is_demo" />
+          <ScalarProperty Name="is_unit_or_index" ColumnName="is_unit_or_index" />
+          <ScalarProperty Name="subject_unit_version" ColumnName="subject_unit_version" />
+          <ScalarProperty Name="released_on" ColumnName="released_on" />
+          <ScalarProperty Name="created_on" ColumnName="created_on" />
+          <ScalarProperty Name="filesize_in_mb" ColumnName="filesize_in_mb" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Transaction_Details">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.Transaction_Details">
+        <MappingFragment StoreEntitySet="Transaction_Details">
+          <ScalarProperty Name="user_trans_id" ColumnName="user_trans_id" />
+          <ScalarProperty Name="trans_date" ColumnName="trans_date" />
+          <ScalarProperty Name="trans_number" ColumnName="trans_number" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="univ_semester_master">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.univ_semester_master">
+        <MappingFragment StoreEntitySet="univ_semester_master">
+          <ScalarProperty Name="univ_semester_id" ColumnName="univ_semester_id" />
+          <ScalarProperty Name="univ_id" ColumnName="univ_id" />
+          <ScalarProperty Name="sem_display" ColumnName="sem_display" />
+          <ScalarProperty Name="semester_name" ColumnName="semester_name" />
+          <ScalarProperty Name="sem_year" ColumnName="sem_year" />
+          <ScalarProperty Name="active_status" ColumnName="active_status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_address_details">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.user_address_details">
+        <MappingFragment StoreEntitySet="user_address_details">
+          <ScalarProperty Name="delivery_address_id" ColumnName="delivery_address_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="address_type" ColumnName="address_type" />
+          <ScalarProperty Name="full_name" ColumnName="full_name" />
+          <ScalarProperty Name="mobile_number" ColumnName="mobile_number" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="pincode" ColumnName="pincode" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="country" ColumnName="country" />
+          <ScalarProperty Name="landmark" ColumnName="landmark" />
+          <ScalarProperty Name="isbilling_delivery" ColumnName="isbilling_delivery" />
+          <ScalarProperty Name="created_on" ColumnName="created_on" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_app_subject_read_history">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.user_app_subject_read_history">
+        <MappingFragment StoreEntitySet="user_app_subject_read_history">
+          <ScalarProperty Name="user_app_read_history_id" ColumnName="user_app_read_history_id" />
+          <ScalarProperty Name="subject_id" ColumnName="subject_id" />
+          <ScalarProperty Name="total_hours" ColumnName="total_hours" />
+          <ScalarProperty Name="usage_date" ColumnName="usage_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_cart_details">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.user_cart_details">
+        <MappingFragment StoreEntitySet="user_cart_details">
+          <ScalarProperty Name="package_display_name" ColumnName="package_display_name" />
+          <ScalarProperty Name="user_cart_details_id" ColumnName="user_cart_details_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="package_id" ColumnName="package_id" />
+          <ScalarProperty Name="delivery_modeid" ColumnName="delivery_modeid" />
+          <ScalarProperty Name="created_on" ColumnName="created_on" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_feedback">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.user_feedback">
+        <MappingFragment StoreEntitySet="user_feedback">
+          <ScalarProperty Name="user_feedback_id" ColumnName="user_feedback_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="feedback" ColumnName="feedback" />
+          <ScalarProperty Name="feedback_on" ColumnName="feedback_on" />
+          <ScalarProperty Name="feedback_category" ColumnName="feedback_category" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_master_history">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.user_master_history">
+        <MappingFragment StoreEntitySet="user_master_history">
+          <ScalarProperty Name="user_historyid" ColumnName="user_historyid" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="user_first_name" ColumnName="user_first_name" />
+          <ScalarProperty Name="user_name" ColumnName="user_name" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="role_id" ColumnName="role_id" />
+          <ScalarProperty Name="email_id" ColumnName="email_id" />
+          <ScalarProperty Name="mobile" ColumnName="mobile" />
+          <ScalarProperty Name="loggedin_status" ColumnName="loggedin_status" />
+          <ScalarProperty Name="last_loggedin_date" ColumnName="last_loggedin_date" />
+          <ScalarProperty Name="is_first_login" ColumnName="is_first_login" />
+          <ScalarProperty Name="active_status" ColumnName="active_status" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="created_on" ColumnName="created_on" />
+          <ScalarProperty Name="modified_by" ColumnName="modified_by" />
+          <ScalarProperty Name="modified_on" ColumnName="modified_on" />
+          <ScalarProperty Name="ProfileImage" ColumnName="ProfileImage" />
+          <ScalarProperty Name="univ_id" ColumnName="univ_id" />
+          <ScalarProperty Name="CollegeName" ColumnName="CollegeName" />
+          <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="state_id" ColumnName="state_id" />
+          <ScalarProperty Name="country" ColumnName="country" />
+          <ScalarProperty Name="dob" ColumnName="dob" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="phonenumber" ColumnName="phonenumber" />
+          <ScalarProperty Name="Bulk_mail" ColumnName="Bulk_mail" />
+          <ScalarProperty Name="primary_imei" ColumnName="primary_imei" />
+          <ScalarProperty Name="primary_mac" ColumnName="primary_mac" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_notification_details">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.user_notification_details">
+        <MappingFragment StoreEntitySet="user_notification_details">
+          <ScalarProperty Name="user_notify_id" ColumnName="user_notify_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="notification_id" ColumnName="notification_id" />
+          <ScalarProperty Name="notification_on" ColumnName="notification_on" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_notification_master">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.user_notification_master">
+        <MappingFragment StoreEntitySet="user_notification_master">
+          <ScalarProperty Name="notification_id" ColumnName="notification_id" />
+          <ScalarProperty Name="notification_message" ColumnName="notification_message" />
+          <ScalarProperty Name="notification_for" ColumnName="notification_for" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="created_on" ColumnName="created_on" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_random_pass">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.user_random_pass">
+        <MappingFragment StoreEntitySet="user_random_pass">
+          <ScalarProperty Name="user_random_id" ColumnName="user_random_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="verification_code" ColumnName="verification_code" />
+          <ScalarProperty Name="generated_time" ColumnName="generated_time" />
+          <ScalarProperty Name="action_type" ColumnName="action_type" />
+          <ScalarProperty Name="user_type" ColumnName="user_type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_subject_mapping_history">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.user_subject_mapping_history">
+        <MappingFragment StoreEntitySet="user_subject_mapping_history">
+          <ScalarProperty Name="user_subject_history_id" ColumnName="user_subject_history_id" />
+          <ScalarProperty Name="user_subject_id" ColumnName="user_subject_id" />
+          <ScalarProperty Name="subject_id" ColumnName="subject_id" />
+          <ScalarProperty Name="subject_code" ColumnName="subject_code" />
+          <ScalarProperty Name="subject_name" ColumnName="subject_name" />
+          <ScalarProperty Name="subject_version" ColumnName="subject_version" />
+          <ScalarProperty Name="subject_cover_path" ColumnName="subject_cover_path" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="department_id" ColumnName="department_id" />
+          <ScalarProperty Name="department_code" ColumnName="department_code" />
+          <ScalarProperty Name="department_name" ColumnName="department_name" />
+          <ScalarProperty Name="download_status" ColumnName="download_status" />
+          <ScalarProperty Name="downloaded_on" ColumnName="downloaded_on" />
+          <ScalarProperty Name="subject_unit_id" ColumnName="subject_unit_id" />
+          <ScalarProperty Name="subject_unit_code" ColumnName="subject_unit_code" />
+          <ScalarProperty Name="subject_unit_name" ColumnName="subject_unit_name" />
+          <ScalarProperty Name="subject_unit_version" ColumnName="subject_unit_version" />
+          <ScalarProperty Name="subject_unit_expiryon" ColumnName="subject_unit_expiryon" />
+          <ScalarProperty Name="is_demo" ColumnName="is_demo" />
+          <ScalarProperty Name="is_unit_or_index" ColumnName="is_unit_or_index" />
+          <ScalarProperty Name="subject_unit_path" ColumnName="subject_unit_path" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_subject_read_history_androidapp">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.user_subject_read_history_androidapp">
+        <MappingFragment StoreEntitySet="user_subject_read_history_androidapp">
+          <ScalarProperty Name="user_read_history_id" ColumnName="user_read_history_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="subject_id" ColumnName="subject_id" />
+          <ScalarProperty Name="total_hours" ColumnName="total_hours" />
+          <ScalarProperty Name="last_read_on" ColumnName="last_read_on" />
+          <ScalarProperty Name="is_updated_to_server" ColumnName="is_updated_to_server" />
+          <ScalarProperty Name="hours_topic_video" ColumnName="hours_topic_video" />
+          <ScalarProperty Name="entered_on" ColumnName="entered_on" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_subject_unit_read_history">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.user_subject_unit_read_history">
+        <MappingFragment StoreEntitySet="user_subject_unit_read_history">
+          <ScalarProperty Name="user_read_unit_history_id" ColumnName="user_read_unit_history_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="subject_id" ColumnName="subject_id" />
+          <ScalarProperty Name="subject_unitid" ColumnName="subject_unitid" />
+          <ScalarProperty Name="total_seconds" ColumnName="total_seconds" />
+          <ScalarProperty Name="last_read_on" ColumnName="last_read_on" />
+          <ScalarProperty Name="is_updated_to_server" ColumnName="is_updated_to_server" />
+          <ScalarProperty Name="read_percentage" ColumnName="read_percentage" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_subject_unit_read_history_androidapp">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.user_subject_unit_read_history_androidapp">
+        <MappingFragment StoreEntitySet="user_subject_unit_read_history_androidapp">
+          <ScalarProperty Name="user_read_unit_history_id" ColumnName="user_read_unit_history_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="subject_id" ColumnName="subject_id" />
+          <ScalarProperty Name="subject_unitid" ColumnName="subject_unitid" />
+          <ScalarProperty Name="total_seconds" ColumnName="total_seconds" />
+          <ScalarProperty Name="last_read_on" ColumnName="last_read_on" />
+          <ScalarProperty Name="is_updated_to_server" ColumnName="is_updated_to_server" />
+          <ScalarProperty Name="read_percentage" ColumnName="read_percentage" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_subject_video_history">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.user_subject_video_history">
+        <MappingFragment StoreEntitySet="user_subject_video_history">
+          <ScalarProperty Name="user_read_video_id" ColumnName="user_read_video_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="subject_id" ColumnName="subject_id" />
+          <ScalarProperty Name="subject_unitid" ColumnName="subject_unitid" />
+          <ScalarProperty Name="subject_videoname" ColumnName="subject_videoname" />
+          <ScalarProperty Name="total_viewed" ColumnName="total_viewed" />
+          <ScalarProperty Name="last_read_on" ColumnName="last_read_on" />
+          <ScalarProperty Name="is_updated_to_server" ColumnName="is_updated_to_server" />
+          <ScalarProperty Name="user_rating" ColumnName="user_rating" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_subject_video_history_androidapp">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.user_subject_video_history_androidapp">
+        <MappingFragment StoreEntitySet="user_subject_video_history_androidapp">
+          <ScalarProperty Name="user_read_video_id" ColumnName="user_read_video_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="subject_id" ColumnName="subject_id" />
+          <ScalarProperty Name="subject_unitid" ColumnName="subject_unitid" />
+          <ScalarProperty Name="subject_videoname" ColumnName="subject_videoname" />
+          <ScalarProperty Name="total_viewed" ColumnName="total_viewed" />
+          <ScalarProperty Name="last_read_on" ColumnName="last_read_on" />
+          <ScalarProperty Name="is_updated_to_server" ColumnName="is_updated_to_server" />
+          <ScalarProperty Name="user_rating" ColumnName="user_rating" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_subscribe_delivery_mode">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.user_subscribe_delivery_mode">
+        <MappingFragment StoreEntitySet="user_subscribe_delivery_mode">
+          <ScalarProperty Name="delivery_desc" ColumnName="delivery_desc" />
+          <ScalarProperty Name="delivery_type" ColumnName="delivery_type" />
+          <ScalarProperty Name="delivery_price" ColumnName="delivery_price" />
+          <ScalarProperty Name="product_price" ColumnName="product_price" />
+          <ScalarProperty Name="user_subscribe_delivery_mode_id" ColumnName="user_subscribe_delivery_mode_id" />
+          <ScalarProperty Name="subscribe_delivery_mode" ColumnName="subscribe_delivery_mode" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="active_status" ColumnName="active_status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_subscribe_details">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.user_subscribe_details">
+        <MappingFragment StoreEntitySet="user_subscribe_details">
+          <ScalarProperty Name="user_subscribe_details_id" ColumnName="user_subscribe_details_id" />
+          <ScalarProperty Name="user_subscribe_master_id" ColumnName="user_subscribe_master_id" />
+          <ScalarProperty Name="package_id" ColumnName="package_id" />
+          <ScalarProperty Name="actual_price" ColumnName="actual_price" />
+          <ScalarProperty Name="selling_price" ColumnName="selling_price" />
+          <ScalarProperty Name="package_validity_days" ColumnName="package_validity_days" />
+          <ScalarProperty Name="package_expiryon" ColumnName="package_expiryon" />
+          <ScalarProperty Name="promocode_id" ColumnName="promocode_id" />
+          <ScalarProperty Name="promo_discount_amt" ColumnName="promo_discount_amt" />
+          <ScalarProperty Name="deliver_status" ColumnName="deliver_status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_subscribe_master">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.user_subscribe_master">
+        <MappingFragment StoreEntitySet="user_subscribe_master">
+          <ScalarProperty Name="refund_by" ColumnName="refund_by" />
+          <ScalarProperty Name="refund_amount" ColumnName="refund_amount" />
+          <ScalarProperty Name="refund_on" ColumnName="refund_on" />
+          <ScalarProperty Name="user_subscribe_master_id" ColumnName="user_subscribe_master_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="payment_ref_no" ColumnName="payment_ref_no" />
+          <ScalarProperty Name="count" ColumnName="count" />
+          <ScalarProperty Name="discount_id" ColumnName="discount_id" />
+          <ScalarProperty Name="discount_amt" ColumnName="discount_amt" />
+          <ScalarProperty Name="TransactionType" ColumnName="TransactionType" />
+          <ScalarProperty Name="payment_status" ColumnName="payment_status" />
+          <ScalarProperty Name="order_status" ColumnName="order_status" />
+          <ScalarProperty Name="user_subscribe_delivery_mode_id" ColumnName="user_subscribe_delivery_mode_id" />
+          <ScalarProperty Name="payment_on" ColumnName="payment_on" />
+          <ScalarProperty Name="created_on" ColumnName="created_on" />
+          <ScalarProperty Name="billing_address_id" ColumnName="billing_address_id" />
+          <ScalarProperty Name="deliver_address_id" ColumnName="deliver_address_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_subscribe_order_track">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.user_subscribe_order_track">
+        <MappingFragment StoreEntitySet="user_subscribe_order_track">
+          <ScalarProperty Name="refundby" ColumnName="refundby" />
+          <ScalarProperty Name="refundamt" ColumnName="refundamt" />
+          <ScalarProperty Name="refundon" ColumnName="refundon" />
+          <ScalarProperty Name="refundstatus" ColumnName="refundstatus" />
+          <ScalarProperty Name="user_subscribe_order_track_id" ColumnName="user_subscribe_order_track_id" />
+          <ScalarProperty Name="user_subscribe_master_id" ColumnName="user_subscribe_master_id" />
+          <ScalarProperty Name="package_id" ColumnName="package_id" />
+          <ScalarProperty Name="orderby" ColumnName="orderby" />
+          <ScalarProperty Name="orderstatus" ColumnName="orderstatus" />
+          <ScalarProperty Name="orderon" ColumnName="orderon" />
+          <ScalarProperty Name="orderrefno" ColumnName="orderrefno" />
+          <ScalarProperty Name="ordermobile" ColumnName="ordermobile" />
+          <ScalarProperty Name="preparedstatus" ColumnName="preparedstatus" />
+          <ScalarProperty Name="preparedon" ColumnName="preparedon" />
+          <ScalarProperty Name="preparedby" ColumnName="preparedby" />
+          <ScalarProperty Name="preparedcomments" ColumnName="preparedcomments" />
+          <ScalarProperty Name="qualitycheckstatus" ColumnName="qualitycheckstatus" />
+          <ScalarProperty Name="qualitycheckon" ColumnName="qualitycheckon" />
+          <ScalarProperty Name="qualitycheckby" ColumnName="qualitycheckby" />
+          <ScalarProperty Name="qualitycheckcomments" ColumnName="qualitycheckcomments" />
+          <ScalarProperty Name="deliverstatus" ColumnName="deliverstatus" />
+          <ScalarProperty Name="deliveron" ColumnName="deliveron" />
+          <ScalarProperty Name="deliverby" ColumnName="deliverby" />
+          <ScalarProperty Name="delivercomments" ColumnName="delivercomments" />
+          <ScalarProperty Name="couriername" ColumnName="couriername" />
+          <ScalarProperty Name="courierrefno" ColumnName="courierrefno" />
+          <ScalarProperty Name="couriercontactno" ColumnName="couriercontactno" />
+          <ScalarProperty Name="expecteddeliverywdays" ColumnName="expecteddeliverywdays" />
+          <ScalarProperty Name="denterby" ColumnName="denterby" />
+          <ScalarProperty Name="denteron" ColumnName="denteron" />
+          <ScalarProperty Name="paystatus" ColumnName="paystatus" />
+          <ScalarProperty Name="payreceiveon" ColumnName="payreceiveon" />
+          <ScalarProperty Name="payreceivedby" ColumnName="payreceivedby" />
+          <ScalarProperty Name="payreceivedamt" ColumnName="payreceivedamt" />
+          <ScalarProperty Name="payenteron" ColumnName="payenteron" />
+          <ScalarProperty Name="activationstatus" ColumnName="activationstatus" />
+          <ScalarProperty Name="activationon" ColumnName="activationon" />
+          <ScalarProperty Name="activationby" ColumnName="activationby" />
+          <ScalarProperty Name="activationmobile" ColumnName="activationmobile" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_subunit_download_history">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.user_subunit_download_history">
+        <MappingFragment StoreEntitySet="user_subunit_download_history">
+          <ScalarProperty Name="user_unit_download_history" ColumnName="user_unit_download_history" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="subject_unit_id" ColumnName="subject_unit_id" />
+          <ScalarProperty Name="downloaded_on" ColumnName="downloaded_on" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_wishlist">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.user_wishlist">
+        <MappingFragment StoreEntitySet="user_wishlist">
+          <ScalarProperty Name="user_wishlist_id" ColumnName="user_wishlist_id" />
+          <ScalarProperty Name="package_id" ColumnName="package_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="created_on" ColumnName="created_on" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_subject_unit_read_history_restore">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.user_subject_unit_read_history_restore">
+        <MappingFragment StoreEntitySet="user_subject_unit_read_history_restore">
+          <ScalarProperty Name="user_read_unit_history_id" ColumnName="user_read_unit_history_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="subject_id" ColumnName="subject_id" />
+          <ScalarProperty Name="subject_unitid" ColumnName="subject_unitid" />
+          <ScalarProperty Name="total_seconds" ColumnName="total_seconds" />
+          <ScalarProperty Name="last_read_on" ColumnName="last_read_on" />
+          <ScalarProperty Name="is_updated_to_server" ColumnName="is_updated_to_server" />
+          <ScalarProperty Name="read_percentage" ColumnName="read_percentage" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_login_track">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.user_login_track">
+        <MappingFragment StoreEntitySet="user_login_track">
+          <ScalarProperty Name="repeated_login_cnt" ColumnName="repeated_login_cnt" />
+          <ScalarProperty Name="is_first_time_login" ColumnName="is_first_time_login" />
+          <ScalarProperty Name="visited_time" ColumnName="visited_time" />
+          <ScalarProperty Name="visited_on" ColumnName="visited_on" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="user_log_id" ColumnName="user_log_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_session_track">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.user_session_track">
+        <MappingFragment StoreEntitySet="user_session_track">
+          <ScalarProperty Name="visited_time" ColumnName="visited_time" />
+          <ScalarProperty Name="visited_on" ColumnName="visited_on" />
+          <ScalarProperty Name="repeated_visit_count" ColumnName="repeated_visit_count" />
+          <ScalarProperty Name="visit_page_url" ColumnName="visit_page_url" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="session_id" ColumnName="session_id" />
+          <ScalarProperty Name="user_session_track_id" ColumnName="user_session_track_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="package_details">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.package_details">
+        <MappingFragment StoreEntitySet="package_details">
+          <ScalarProperty Name="subject_unit_type" ColumnName="subject_unit_type" />
+          <ScalarProperty Name="semester" ColumnName="semester" />
+          <ScalarProperty Name="year" ColumnName="year" />
+          <ScalarProperty Name="department_id" ColumnName="department_id" />
+          <ScalarProperty Name="validity_days" ColumnName="validity_days" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="created_on" ColumnName="created_on" />
+          <ScalarProperty Name="subject_id" ColumnName="subject_id" />
+          <ScalarProperty Name="package_id" ColumnName="package_id" />
+          <ScalarProperty Name="package_detail_id" ColumnName="package_detail_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_subject_mapping">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.user_subject_mapping">
+        <MappingFragment StoreEntitySet="user_subject_mapping">
+          <ScalarProperty Name="yearsem" ColumnName="yearsem" />
+          <ScalarProperty Name="is_purchased" ColumnName="is_purchased" />
+          <ScalarProperty Name="package_expirydate" ColumnName="package_expirydate" />
+          <ScalarProperty Name="last_subunit_client_updated_on" ColumnName="last_subunit_client_updated_on" />
+          <ScalarProperty Name="last_subunit_modified_on" ColumnName="last_subunit_modified_on" />
+          <ScalarProperty Name="is_updated_subunit_to_client" ColumnName="is_updated_subunit_to_client" />
+          <ScalarProperty Name="last_client_updated_on" ColumnName="last_client_updated_on" />
+          <ScalarProperty Name="last_modified_on" ColumnName="last_modified_on" />
+          <ScalarProperty Name="is_updated_to_client" ColumnName="is_updated_to_client" />
+          <ScalarProperty Name="subject_unit_path" ColumnName="subject_unit_path" />
+          <ScalarProperty Name="is_unit_or_index" ColumnName="is_unit_or_index" />
+          <ScalarProperty Name="is_demo" ColumnName="is_demo" />
+          <ScalarProperty Name="is_trial" ColumnName="is_trial" />
+          <ScalarProperty Name="subject_trial_expiryon" ColumnName="subject_trial_expiryon" />
+          <ScalarProperty Name="subject_unit_expiryon" ColumnName="subject_unit_expiryon" />
+          <ScalarProperty Name="subject_unit_user_version" ColumnName="subject_unit_user_version" />
+          <ScalarProperty Name="subject_unit_version" ColumnName="subject_unit_version" />
+          <ScalarProperty Name="subject_unit_name" ColumnName="subject_unit_name" />
+          <ScalarProperty Name="subject_unit_code" ColumnName="subject_unit_code" />
+          <ScalarProperty Name="subject_unit_id" ColumnName="subject_unit_id" />
+          <ScalarProperty Name="downloaded_on" ColumnName="downloaded_on" />
+          <ScalarProperty Name="download_status" ColumnName="download_status" />
+          <ScalarProperty Name="department_name" ColumnName="department_name" />
+          <ScalarProperty Name="department_code" ColumnName="department_code" />
+          <ScalarProperty Name="department_id" ColumnName="department_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="subject_purchasedon" ColumnName="subject_purchasedon" />
+          <ScalarProperty Name="subject_cover_path" ColumnName="subject_cover_path" />
+          <ScalarProperty Name="subject_version" ColumnName="subject_version" />
+          <ScalarProperty Name="subject_name" ColumnName="subject_name" />
+          <ScalarProperty Name="subject_code" ColumnName="subject_code" />
+          <ScalarProperty Name="subject_id" ColumnName="subject_id" />
+          <ScalarProperty Name="user_subject_id" ColumnName="user_subject_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="university_master">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.university_master">
+        <MappingFragment StoreEntitySet="university_master">
+          <ScalarProperty Name="university_type" ColumnName="university_type" />
+          <ScalarProperty Name="isDelete" ColumnName="isDelete" />
+          <ScalarProperty Name="state_id" ColumnName="state_id" />
+          <ScalarProperty Name="university_city" ColumnName="university_city" />
+          <ScalarProperty Name="university_address" ColumnName="university_address" />
+          <ScalarProperty Name="university_shortname" ColumnName="university_shortname" />
+          <ScalarProperty Name="university_name" ColumnName="university_name" />
+          <ScalarProperty Name="university_code" ColumnName="university_code" />
+          <ScalarProperty Name="univ_id" ColumnName="univ_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_subject_activation_history">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.user_subject_activation_history">
+        <MappingFragment StoreEntitySet="user_subject_activation_history">
+          <ScalarProperty Name="activation_product_type" ColumnName="activation_product_type" />
+          <ScalarProperty Name="activation_type" ColumnName="activation_type" />
+          <ScalarProperty Name="activated_by" ColumnName="activated_by" />
+          <ScalarProperty Name="activated_on" ColumnName="activated_on" />
+          <ScalarProperty Name="subject_extension_days" ColumnName="subject_extension_days" />
+          <ScalarProperty Name="subject_expiry_extension_date" ColumnName="subject_expiry_extension_date" />
+          <ScalarProperty Name="subject_expiry_date" ColumnName="subject_expiry_date" />
+          <ScalarProperty Name="department_id" ColumnName="department_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="subject_version" ColumnName="subject_version" />
+          <ScalarProperty Name="subject_name" ColumnName="subject_name" />
+          <ScalarProperty Name="subject_code" ColumnName="subject_code" />
+          <ScalarProperty Name="subject_id" ColumnName="subject_id" />
+          <ScalarProperty Name="user_subject_activation_id" ColumnName="user_subject_activation_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="package_master_track">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.package_master_track">
+        <MappingFragment StoreEntitySet="package_master_track">
+          <ScalarProperty Name="created_on" ColumnName="created_on" />
+          <ScalarProperty Name="package_id" ColumnName="package_id" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="current_words" ColumnName="current_words" />
+          <ScalarProperty Name="previous_words" ColumnName="previous_words" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="package_master_track_id" ColumnName="package_master_track_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_university_privilege">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.user_university_privilege">
+        <MappingFragment StoreEntitySet="user_university_privilege">
+          <ScalarProperty Name="mapped_by" ColumnName="mapped_by" />
+          <ScalarProperty Name="mapped_on" ColumnName="mapped_on" />
+          <ScalarProperty Name="active_status" ColumnName="active_status" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="university_id" ColumnName="university_id" />
+          <ScalarProperty Name="univ_user_privilege_id" ColumnName="univ_user_privilege_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="package_master">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.package_master">
+        <MappingFragment StoreEntitySet="package_master">
+          <ScalarProperty Name="os_type" ColumnName="os_type" />
+          <ScalarProperty Name="package_video_url" ColumnName="package_video_url" />
+          <ScalarProperty Name="keywords" ColumnName="keywords" />
+          <ScalarProperty Name="is_bundle" ColumnName="is_bundle" />
+          <ScalarProperty Name="semester" ColumnName="semester" />
+          <ScalarProperty Name="year" ColumnName="year" />
+          <ScalarProperty Name="univ_id" ColumnName="univ_id" />
+          <ScalarProperty Name="cover_path" ColumnName="cover_path" />
+          <ScalarProperty Name="is_offer_package" ColumnName="is_offer_package" />
+          <ScalarProperty Name="activestatus" ColumnName="activestatus" />
+          <ScalarProperty Name="current_status" ColumnName="current_status" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="created_on" ColumnName="created_on" />
+          <ScalarProperty Name="subject_unit_type" ColumnName="subject_unit_type" />
+          <ScalarProperty Name="rule_id" ColumnName="rule_id" />
+          <ScalarProperty Name="subject_id" ColumnName="subject_id" />
+          <ScalarProperty Name="department_id" ColumnName="department_id" />
+          <ScalarProperty Name="actual_price" ColumnName="actual_price" />
+          <ScalarProperty Name="selling_price" ColumnName="selling_price" />
+          <ScalarProperty Name="short_desc" ColumnName="short_desc" />
+          <ScalarProperty Name="long_desc" ColumnName="long_desc" />
+          <ScalarProperty Name="package_duration_days" ColumnName="package_duration_days" />
+          <ScalarProperty Name="package_name" ColumnName="package_name" />
+          <ScalarProperty Name="package_display_name" ColumnName="package_display_name" />
+          <ScalarProperty Name="package_code" ColumnName="package_code" />
+          <ScalarProperty Name="package_id" ColumnName="package_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="subject_unit_master">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.subject_unit_master">
+        <MappingFragment StoreEntitySet="subject_unit_master">
+          <ScalarProperty Name="os_type" ColumnName="os_type" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="filesize_in_mb" ColumnName="filesize_in_mb" />
+          <ScalarProperty Name="created_on" ColumnName="created_on" />
+          <ScalarProperty Name="released_on" ColumnName="released_on" />
+          <ScalarProperty Name="subject_unit_version" ColumnName="subject_unit_version" />
+          <ScalarProperty Name="subject_unit_type" ColumnName="subject_unit_type" />
+          <ScalarProperty Name="is_unit_or_index" ColumnName="is_unit_or_index" />
+          <ScalarProperty Name="is_demo" ColumnName="is_demo" />
+          <ScalarProperty Name="subject_unit_path" ColumnName="subject_unit_path" />
+          <ScalarProperty Name="active_status" ColumnName="active_status" />
+          <ScalarProperty Name="subject_id" ColumnName="subject_id" />
+          <ScalarProperty Name="unit_name" ColumnName="unit_name" />
+          <ScalarProperty Name="unit_code" ColumnName="unit_code" />
+          <ScalarProperty Name="unit_id" ColumnName="unit_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_role">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.user_role">
+        <MappingFragment StoreEntitySet="user_role">
+          <ScalarProperty Name="role_level" ColumnName="role_level" />
+          <ScalarProperty Name="LandingPage" ColumnName="LandingPage" />
+          <ScalarProperty Name="created_on" ColumnName="created_on" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="active_status" ColumnName="active_status" />
+          <ScalarProperty Name="active_subject_days" ColumnName="active_subject_days" />
+          <ScalarProperty Name="role_type" ColumnName="role_type" />
+          <ScalarProperty Name="role_desc" ColumnName="role_desc" />
+          <ScalarProperty Name="role_name" ColumnName="role_name" />
+          <ScalarProperty Name="role_id" ColumnName="role_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="cancel_category_master">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.cancel_category_master">
+        <MappingFragment StoreEntitySet="cancel_category_master">
+          <ScalarProperty Name="active_status" ColumnName="active_status" />
+          <ScalarProperty Name="category_desc" ColumnName="category_desc" />
+          <ScalarProperty Name="category_name" ColumnName="category_name" />
+          <ScalarProperty Name="category_id" ColumnName="category_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="order_cancel_history">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.order_cancel_history">
+        <MappingFragment StoreEntitySet="order_cancel_history">
+          <ScalarProperty Name="reason" ColumnName="reason" />
+          <ScalarProperty Name="category" ColumnName="category" />
+          <ScalarProperty Name="cancelled_on" ColumnName="cancelled_on" />
+          <ScalarProperty Name="cancelled_by" ColumnName="cancelled_by" />
+          <ScalarProperty Name="order_ref_no" ColumnName="order_ref_no" />
+          <ScalarProperty Name="order_cancel_id" ColumnName="order_cancel_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="order_cancel_random_pass">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.order_cancel_random_pass">
+        <MappingFragment StoreEntitySet="order_cancel_random_pass">
+          <ScalarProperty Name="user_type" ColumnName="user_type" />
+          <ScalarProperty Name="action_type" ColumnName="action_type" />
+          <ScalarProperty Name="generated_time" ColumnName="generated_time" />
+          <ScalarProperty Name="action_user_id" ColumnName="action_user_id" />
+          <ScalarProperty Name="verification_code" ColumnName="verification_code" />
+          <ScalarProperty Name="buyer_mobile" ColumnName="buyer_mobile" />
+          <ScalarProperty Name="order_ref_no" ColumnName="order_ref_no" />
+          <ScalarProperty Name="buyer_user_id" ColumnName="buyer_user_id" />
+          <ScalarProperty Name="user_random_id" ColumnName="user_random_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_trial_subject">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.user_trial_subject">
+        <MappingFragment StoreEntitySet="user_trial_subject">
+          <ScalarProperty Name="created_on" ColumnName="created_on" />
+          <ScalarProperty Name="trail_expiry_on" ColumnName="trail_expiry_on" />
+          <ScalarProperty Name="subject_id" ColumnName="subject_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="user_trial_subject_id" ColumnName="user_trial_subject_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="payment_master">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.payment_master">
+        <MappingFragment StoreEntitySet="payment_master">
+          <ScalarProperty Name="refund_date" ColumnName="refund_date" />
+          <ScalarProperty Name="refund_amt" ColumnName="refund_amt" />
+          <ScalarProperty Name="payment_gatway_id" ColumnName="payment_gatway_id" />
+          <ScalarProperty Name="sms_status" ColumnName="sms_status" />
+          <ScalarProperty Name="request_token" ColumnName="request_token" />
+          <ScalarProperty Name="bal_amt" ColumnName="bal_amt" />
+          <ScalarProperty Name="TPSLRefundID" ColumnName="TPSLRefundID" />
+          <ScalarProperty Name="base_fee" ColumnName="base_fee" />
+          <ScalarProperty Name="service_fee" ColumnName="service_fee" />
+          <ScalarProperty Name="rpst_token" ColumnName="rpst_token" />
+          <ScalarProperty Name="Tpsl_charges" ColumnName="Tpsl_charges" />
+          <ScalarProperty Name="TransactionType" ColumnName="TransactionType" />
+          <ScalarProperty Name="TxnTime" ColumnName="TxnTime" />
+          <ScalarProperty Name="TxnStatus" ColumnName="TxnStatus" />
+          <ScalarProperty Name="TxnDateTime" ColumnName="TxnDateTime" />
+          <ScalarProperty Name="TxnDate" ColumnName="TxnDate" />
+          <ScalarProperty Name="TxnAmount" ColumnName="TxnAmount" />
+          <ScalarProperty Name="TPSLTxnID" ColumnName="TPSLTxnID" />
+          <ScalarProperty Name="TPSLTxnBankCode" ColumnName="TPSLTxnBankCode" />
+          <ScalarProperty Name="ClintTxnRefNo" ColumnName="ClintTxnRefNo" />
+          <ScalarProperty Name="Txn_err_msg" ColumnName="Txn_err_msg" />
+          <ScalarProperty Name="Txn_msg" ColumnName="Txn_msg" />
+          <ScalarProperty Name="user_subscribe_master_id" ColumnName="user_subscribe_master_id" />
+          <ScalarProperty Name="payment_master_id" ColumnName="payment_master_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="batch_year_master">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.batch_year_master">
+        <MappingFragment StoreEntitySet="batch_year_master">
+          <ScalarProperty Name="created_on" ColumnName="created_on" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="active_status" ColumnName="active_status" />
+          <ScalarProperty Name="batch_desc" ColumnName="batch_desc" />
+          <ScalarProperty Name="batch_year" ColumnName="batch_year" />
+          <ScalarProperty Name="batch_year_id" ColumnName="batch_year_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sms_batch_data">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.sms_batch_data">
+        <MappingFragment StoreEntitySet="sms_batch_data">
+          <ScalarProperty Name="university_id" ColumnName="university_id" />
+          <ScalarProperty Name="year" ColumnName="year" />
+          <ScalarProperty Name="batch_year_id" ColumnName="batch_year_id" />
+          <ScalarProperty Name="mobile" ColumnName="mobile" />
+          <ScalarProperty Name="sem_data_id" ColumnName="sem_data_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="payment_refund_master">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.payment_refund_master">
+        <MappingFragment StoreEntitySet="payment_refund_master">
+          <ScalarProperty Name="refund_by" ColumnName="refund_by" />
+          <ScalarProperty Name="refund_date" ColumnName="refund_date" />
+          <ScalarProperty Name="refund_amt" ColumnName="refund_amt" />
+          <ScalarProperty Name="request_token" ColumnName="request_token" />
+          <ScalarProperty Name="TPSLRefundID" ColumnName="TPSLRefundID" />
+          <ScalarProperty Name="ClintTxnRefNo" ColumnName="ClintTxnRefNo" />
+          <ScalarProperty Name="Txn_err_msg" ColumnName="Txn_err_msg" />
+          <ScalarProperty Name="Txn_msg" ColumnName="Txn_msg" />
+          <ScalarProperty Name="user_subscribe_master_id" ColumnName="user_subscribe_master_id" />
+          <ScalarProperty Name="payment_refund_master_id" ColumnName="payment_refund_master_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="college_installation_details">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.college_installation_details">
+        <MappingFragment StoreEntitySet="college_installation_details">
+          <ScalarProperty Name="active_status" ColumnName="active_status" />
+          <ScalarProperty Name="enter_by" ColumnName="enter_by" />
+          <ScalarProperty Name="enter_on" ColumnName="enter_on" />
+          <ScalarProperty Name="primary_mac" ColumnName="primary_mac" />
+          <ScalarProperty Name="installation_centre_name" ColumnName="installation_centre_name" />
+          <ScalarProperty Name="college_id" ColumnName="college_id" />
+          <ScalarProperty Name="college_install_id" ColumnName="college_install_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="mastercopy_usage_details">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.mastercopy_usage_details">
+        <MappingFragment StoreEntitySet="mastercopy_usage_details">
+          <ScalarProperty Name="is_otp_verified" ColumnName="is_otp_verified" />
+          <ScalarProperty Name="otp_code" ColumnName="otp_code" />
+          <ScalarProperty Name="requested_on" ColumnName="requested_on" />
+          <ScalarProperty Name="semester" ColumnName="semester" />
+          <ScalarProperty Name="department_name" ColumnName="department_name" />
+          <ScalarProperty Name="mobile" ColumnName="mobile" />
+          <ScalarProperty Name="email_id" ColumnName="email_id" />
+          <ScalarProperty Name="user_name" ColumnName="user_name" />
+          <ScalarProperty Name="mastercopy_usage_id" ColumnName="mastercopy_usage_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="college_installation_expiry">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.college_installation_expiry">
+        <MappingFragment StoreEntitySet="college_installation_expiry">
+          <ScalarProperty Name="semester" ColumnName="semester" />
+          <ScalarProperty Name="expiry_on" ColumnName="expiry_on" />
+          <ScalarProperty Name="installed_on" ColumnName="installed_on" />
+          <ScalarProperty Name="install_by" ColumnName="install_by" />
+          <ScalarProperty Name="subject_id" ColumnName="subject_id" />
+          <ScalarProperty Name="department_id" ColumnName="department_id" />
+          <ScalarProperty Name="college_install_id" ColumnName="college_install_id" />
+          <ScalarProperty Name="college_installation_expiry_id" ColumnName="college_installation_expiry_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_random_pass_college">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.user_random_pass_college">
+        <MappingFragment StoreEntitySet="user_random_pass_college">
+          <ScalarProperty Name="user_type" ColumnName="user_type" />
+          <ScalarProperty Name="action_type" ColumnName="action_type" />
+          <ScalarProperty Name="college_id" ColumnName="college_id" />
+          <ScalarProperty Name="generated_time" ColumnName="generated_time" />
+          <ScalarProperty Name="verification_code" ColumnName="verification_code" />
+          <ScalarProperty Name="user_college_random_id" ColumnName="user_college_random_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="college_subject_mapping">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.college_subject_mapping">
+        <MappingFragment StoreEntitySet="college_subject_mapping">
+          <ScalarProperty Name="total_license" ColumnName="total_license" />
+          <ScalarProperty Name="active_duration_date" ColumnName="active_duration_date" />
+          <ScalarProperty Name="active_duration_days" ColumnName="active_duration_days" />
+          <ScalarProperty Name="created_on" ColumnName="created_on" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="active_status" ColumnName="active_status" />
+          <ScalarProperty Name="semester" ColumnName="semester" />
+          <ScalarProperty Name="map_year" ColumnName="map_year" />
+          <ScalarProperty Name="rule_id" ColumnName="rule_id" />
+          <ScalarProperty Name="subject_id" ColumnName="subject_id" />
+          <ScalarProperty Name="department_id" ColumnName="department_id" />
+          <ScalarProperty Name="college_id" ColumnName="college_id" />
+          <ScalarProperty Name="university_id" ColumnName="university_id" />
+          <ScalarProperty Name="college_subject_mapping_id" ColumnName="college_subject_mapping_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="college_test_installation_details">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.college_test_installation_details">
+        <MappingFragment StoreEntitySet="college_test_installation_details">
+          <ScalarProperty Name="active_status" ColumnName="active_status" />
+          <ScalarProperty Name="enter_by" ColumnName="enter_by" />
+          <ScalarProperty Name="enter_on" ColumnName="enter_on" />
+          <ScalarProperty Name="primary_mac" ColumnName="primary_mac" />
+          <ScalarProperty Name="installation_centre_name" ColumnName="installation_centre_name" />
+          <ScalarProperty Name="college_id" ColumnName="college_id" />
+          <ScalarProperty Name="college_test_install_id" ColumnName="college_test_install_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="college_test_installation_expiry">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.college_test_installation_expiry">
+        <MappingFragment StoreEntitySet="college_test_installation_expiry">
+          <ScalarProperty Name="semester" ColumnName="semester" />
+          <ScalarProperty Name="expiry_on" ColumnName="expiry_on" />
+          <ScalarProperty Name="installed_on" ColumnName="installed_on" />
+          <ScalarProperty Name="install_by" ColumnName="install_by" />
+          <ScalarProperty Name="subject_id" ColumnName="subject_id" />
+          <ScalarProperty Name="department_id" ColumnName="department_id" />
+          <ScalarProperty Name="college_test_install_id" ColumnName="college_test_install_id" />
+          <ScalarProperty Name="college_test_installation_expiry_id" ColumnName="college_test_installation_expiry_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="college_subject_test_mapping">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.college_subject_test_mapping">
+        <MappingFragment StoreEntitySet="college_subject_test_mapping">
+          <ScalarProperty Name="active_duration_date" ColumnName="active_duration_date" />
+          <ScalarProperty Name="active_duration_days" ColumnName="active_duration_days" />
+          <ScalarProperty Name="created_on" ColumnName="created_on" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="active_status" ColumnName="active_status" />
+          <ScalarProperty Name="semester" ColumnName="semester" />
+          <ScalarProperty Name="map_year" ColumnName="map_year" />
+          <ScalarProperty Name="rule_id" ColumnName="rule_id" />
+          <ScalarProperty Name="subject_id" ColumnName="subject_id" />
+          <ScalarProperty Name="department_id" ColumnName="department_id" />
+          <ScalarProperty Name="college_id" ColumnName="college_id" />
+          <ScalarProperty Name="university_id" ColumnName="university_id" />
+          <ScalarProperty Name="college_subject_test_mapping_id" ColumnName="college_subject_test_mapping_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="college_group_map">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.college_group_map">
+        <MappingFragment StoreEntitySet="college_group_map">
+          <ScalarProperty Name="enter_by" ColumnName="enter_by" />
+          <ScalarProperty Name="enter_on" ColumnName="enter_on" />
+          <ScalarProperty Name="college_group_id" ColumnName="college_group_id" />
+          <ScalarProperty Name="college_id" ColumnName="college_id" />
+          <ScalarProperty Name="college_group_map_id" ColumnName="college_group_map_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_feedback_master">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.user_feedback_master">
+        <MappingFragment StoreEntitySet="user_feedback_master">
+          <ScalarProperty Name="enter_on" ColumnName="enter_on" />
+          <ScalarProperty Name="feedback" ColumnName="feedback" />
+          <ScalarProperty Name="college_id" ColumnName="college_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="mobile" ColumnName="mobile" />
+          <ScalarProperty Name="rolle_id" ColumnName="rolle_id" />
+          <ScalarProperty Name="rolle_desc" ColumnName="rolle_desc" />
+          <ScalarProperty Name="user_name" ColumnName="user_name" />
+          <ScalarProperty Name="user_feedback_id" ColumnName="user_feedback_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="college_group_master">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.college_group_master">
+        <MappingFragment StoreEntitySet="college_group_master">
+          <ScalarProperty Name="enter_by" ColumnName="enter_by" />
+          <ScalarProperty Name="enter_on" ColumnName="enter_on" />
+          <ScalarProperty Name="active_status" ColumnName="active_status" />
+          <ScalarProperty Name="college_group_desc" ColumnName="college_group_desc" />
+          <ScalarProperty Name="college_group_name" ColumnName="college_group_name" />
+          <ScalarProperty Name="college_group_id" ColumnName="college_group_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_master">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.user_master">
+        <MappingFragment StoreEntitySet="user_master">
+          <ScalarProperty Name="college_group_id" ColumnName="college_group_id" />
+          <ScalarProperty Name="primary_andriod_mac" ColumnName="primary_andriod_mac" />
+          <ScalarProperty Name="ref_mobileno" ColumnName="ref_mobileno" />
+          <ScalarProperty Name="roll_number" ColumnName="roll_number" />
+          <ScalarProperty Name="registered_from" ColumnName="registered_from" />
+          <ScalarProperty Name="tool_version_name" ColumnName="tool_version_name" />
+          <ScalarProperty Name="primary_mac" ColumnName="primary_mac" />
+          <ScalarProperty Name="primary_imei" ColumnName="primary_imei" />
+          <ScalarProperty Name="Bulk_mail" ColumnName="Bulk_mail" />
+          <ScalarProperty Name="phonenumber" ColumnName="phonenumber" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="dob" ColumnName="dob" />
+          <ScalarProperty Name="country" ColumnName="country" />
+          <ScalarProperty Name="state_id" ColumnName="state_id" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="currentsemester" ColumnName="currentsemester" />
+          <ScalarProperty Name="currentyear" ColumnName="currentyear" />
+          <ScalarProperty Name="department_name" ColumnName="department_name" />
+          <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+          <ScalarProperty Name="collegename" ColumnName="collegename" />
+          <ScalarProperty Name="collegeid" ColumnName="collegeid" />
+          <ScalarProperty Name="univ_id" ColumnName="univ_id" />
+          <ScalarProperty Name="profileimage" ColumnName="profileimage" />
+          <ScalarProperty Name="created_on" ColumnName="created_on" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="active_status" ColumnName="active_status" />
+          <ScalarProperty Name="is_first_login" ColumnName="is_first_login" />
+          <ScalarProperty Name="last_loggedin_date" ColumnName="last_loggedin_date" />
+          <ScalarProperty Name="loggedin_status" ColumnName="loggedin_status" />
+          <ScalarProperty Name="mobile" ColumnName="mobile" />
+          <ScalarProperty Name="email_id" ColumnName="email_id" />
+          <ScalarProperty Name="role_id" ColumnName="role_id" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="user_name" ColumnName="user_name" />
+          <ScalarProperty Name="user_first_name" ColumnName="user_first_name" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="user_subject_read_history">
+      <EntityTypeMapping TypeName="subject_delivery_anna_newModel.user_subject_read_history">
+        <MappingFragment StoreEntitySet="user_subject_read_history">
+          <ScalarProperty Name="entered_on" ColumnName="entered_on" />
+          <ScalarProperty Name="hours_topic_video" ColumnName="hours_topic_video" />
+          <ScalarProperty Name="is_updated_to_server" ColumnName="is_updated_to_server" />
+          <ScalarProperty Name="last_read_on" ColumnName="last_read_on" />
+          <ScalarProperty Name="total_hours" ColumnName="total_hours" />
+          <ScalarProperty Name="subject_id" ColumnName="subject_id" />
+          <ScalarProperty Name="department_id" ColumnName="department_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="user_read_history_id" ColumnName="user_read_history_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

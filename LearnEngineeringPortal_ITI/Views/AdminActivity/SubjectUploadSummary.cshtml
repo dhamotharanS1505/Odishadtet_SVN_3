@@ -1,0 +1,92 @@
+﻿
+@{
+    ViewBag.Title = "SubjectUploadSummary";
+    Layout = "~/Views/Shared/_LearnEnggAdminLayout.cshtml";
+}
+
+<article class="col-sm-12">
+    <div class="in_hd_tt row">
+        <strong class="fa fa-file-text"></strong><span>Subject Upload Summary</span>
+    </div>
+</article>
+<article class="col-sm-12">
+    <section class="sub_wrp row">
+        <table id="tblUploadSummary" class="table table-striped table-bordered" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>
+                        S.No
+                    </th>
+                    <th>
+                        Uploaded On
+                    </th>
+                    <th>
+                        Uploaded File
+                    </th>
+                    <th>
+                        Download File
+                    </th>
+                    <th>
+                        No of Failures
+                    </th>
+                    <th>
+                        No of Success
+                    </th>
+                    <th>
+                        Total Records
+                    </th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </section>
+</article>
+<div>
+    @Html.Hidden("WebServiceUrl", @Resources.RoutingService.WebServiceUrl)
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        uploadsummary();
+    });
+
+    function uploadsummary() {
+        var result = '';
+        var snCount = 0;
+        $.ajax({
+            beforesend: function () {
+                $('.loader').show();
+            },
+            type: 'GET',
+            url: $('#WebServiceUrl').val() + '/AdminService.svc/adminservice/SubjectUploadSummary',
+            datatype: 'json',
+            crossOrigin: true,
+            success: function (res) {
+                var rdata = res.SubjectUploadSummaryResult;
+
+                for (var i = 0; i < rdata.length; i++) {
+
+                    snCount = parseInt(snCount + 1);
+                    result += '<tr>' + '<td>' + snCount + '</td>' + '<td>' + rdata[i].uploadedOn + '</td>' + '<td>' + rdata[i].infilepath + '</td>' + '<td><a class="downlaod" rel="' + rdata[i].outfilepath + ' " href="#">' + rdata[i].outfilepath + '</a></td>' + '<td>' + rdata[i].No_of_Failures + '</td>' + '<td>' + rdata[i].No_of_Success + '</td>' + '<td>' + rdata[i].Totalrecords + '</td></tr>';
+                    $('#tblUploadSummary tbody').html(result);
+                }
+
+            },
+            error: function (result) {
+                alert("Error");
+            },
+            complete: function () {
+                $('.loader').hide();
+            }
+        });
+    }
+
+    $(document).on('click', '.downlaod', function () {
+        var file = $(this).attr('rel');
+        window.location.href = "/Admin/SubjectMasterUploadResult?downloadfile=" + file;
+    });
+
+
+
+</script>
+
+

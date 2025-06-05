@@ -1,0 +1,222 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        /*image crop panel  css start*/
+
+        .imageBox {
+            background: #fff none no-repeat scroll 0 0;
+            border: 1px solid #aaa;
+            cursor: move;
+            height: 288px;
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+        }
+
+            .imageBox .thumbBox {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 200px;
+                height: 200px;
+                margin-top: -100px;
+                margin-left: -100px;
+                box-sizing: border-box;
+                border: 1px solid rgb(102, 102, 102);
+                box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.5);
+                background: none repeat scroll 0% 0% transparent;
+            }
+
+            .imageBox .spinner {
+                position: absolute;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;
+                text-align: center;
+                background: #cecece none repeat scroll 0 0;
+            }
+
+        .spinner > span {
+            background: #fff none repeat scroll 0 0;
+            border-radius: 10px;
+            box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+            color: #424242;
+            height: auto;
+            left: 50%;
+            margin-left: -100px;
+            margin-top: -30px;
+            padding: 9px 6%;
+            position: absolute;
+            top: 50%;
+        }
+        /*image crop panel end css start*/
+    </style>
+    <link href="~/css/font-awesome.min.css" rel="stylesheet" />
+
+    <script src="~/Scripts/jquery-1.11.1.min.js"></script>
+
+    <script src="~/Scripts/cropbox.js"></script>
+
+    <style>
+        .container {
+            margin: 0 28px 25px;
+        }
+
+        .action {
+            width: auto;
+            height: 30px;
+            margin: 10px 0;
+        }
+
+        #cropped > img {
+            margin-right: 10px;
+        }
+
+        .fl_ri_icon {
+            float: right;
+        }
+
+        .fl_le_panel {
+            float: left;
+        }
+
+        .fl_ri_icon i {
+            margin-left: 6px;
+            padding: 5px;
+            display: inline-block;
+            color: #fff;
+            border-radius: 5px;
+            font-size: 15px;
+        }
+
+        .fl_ri_icon #btnCrop {
+            display: inline-block;
+            vertical-align: middle;
+            background: #44b9c9 none repeat scroll 0 0;
+            font-family: arial;
+            font-size: 12px;
+            height: auto;
+            padding: 6px 9px;
+            text-shadow: 0 0 !important;
+        }
+
+        .fl_ri_icon i.fa-search-plus {
+            background: #7CB342;
+        }
+
+        .fl_ri_icon i.fa-search-minus {
+            background: #DA4E23;
+        }
+
+        .fl_ri_icon i:hover, .fl_ri_icon #btnCrop:hover {
+            background: #0096D4;
+        }
+    </style>
+    <script type="text/javascript">
+        var img = '';
+        $(window).load(function () {
+            var options =
+            {
+                thumbBox: '.thumbBox',
+                spinner: '.spinner'//,
+                // imgSrc: 'avatar.png'
+            }
+            var cropper = $('.imageBox').cropbox(options);
+            $('#file').on('change', function () {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    options.imgSrc = e.target.result;
+                    cropper = $('.imageBox').cropbox(options);
+                }
+                reader.readAsDataURL(this.files[0]);
+                this.files = [];
+            })
+            $('#btnCrop').on('click', function () {
+                img = cropper.getDataURL();
+                $('#cropped').html('');
+                document.getElementById('avatarData').value = img;
+
+                //$('#cropped').append('<img src="' + img + '">');
+
+                //added by hari to upload to server
+
+                $.ajax({
+                    type: "POST",
+                    url: $("#ImgCropForm").attr('action'),
+                    data: $("#ImgCropForm").serialize(),
+                    dataType: "json",
+                    success: function (data) {
+
+                        if (data != null) {
+
+                            parent.GetImagePath(data);
+
+                        }
+
+                    }
+                });
+
+            })
+            $('#btnZoomIn').on('click', function () {
+                cropper.zoomIn();
+            })
+            $('#btnZoomOut').on('click', function () {
+                cropper.zoomOut();
+            })
+        });
+
+
+        //    $(function () {
+        //        $("#btnuploadimg").click(function () {
+        //            $.ajax({
+        //                type: "POST",
+        //                url: $("#ImgCropForm").attr('action'),
+        //                data: $("#ImgCropForm").serialize(),
+        //                dataType: "json",
+        //                success: function (data) {
+        //                    if (data != null) {
+
+        //                    }
+
+        //                }
+        //            });
+        //        });
+        //    });
+    </script>
+</head>
+<body>
+    @using (Html.BeginForm("CropImageUpload", "Home", FormMethod.Post, new { id = "ImgCropForm" }))
+    {
+        <div>
+            <div class="container">
+                <div class="imageBox">
+                    <div class="thumbBox">
+                    </div>
+                    <div class="spinner" style="display: none">
+                        <span>upload your photo</span>
+                    </div>
+                </div>
+                <div id="cropped">
+                </div>
+                <div class="action clearfix">
+                    <div class="fl_le_panel">
+                        <input type="hidden" id="avatarData" name="avatarData" value="">
+                        <input type="file" id="file" accept="image/*" style="cursor:pointer;">
+                    </div>
+                    <div class="fl_ri_icon">
+                        <input type="button" id="btnCrop" value="Set Profile Photo" style="cursor:pointer;">
+                        <i class="fa fa-search-plus" id="btnZoomIn" style="cursor:pointer;"></i>
+                        <i class="fa fa-search-minus" id="btnZoomOut" style="cursor:pointer;"></i>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    }
+</body>
+</html>

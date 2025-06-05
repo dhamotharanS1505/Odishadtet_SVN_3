@@ -1,0 +1,392 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<style type="text/css">
+    .btn {
+        -moz-user-select: none;
+        background-image: none;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        cursor: pointer;
+        display: inline-block;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.42857;
+        margin: 8px 8px 0 0;
+        padding: 6px 12px;
+        text-align: center;
+        vertical-align: middle;
+        white-space: nowrap;
+    }
+
+    .qa_pack_red {
+        color: red;
+        font-size: 12px;
+    }
+    .sub-title {
+        height:65px !important;
+    }
+    #spnsubjectName {
+        font-size:12px;
+        font-weight:600;
+    }
+
+    .txt_li_wrp {
+        color: #2574ab;
+        display: block;
+        font-size: 12px;
+        font-weight: bold;
+        padding: 7px;
+        position: relative;
+    }
+</style>
+
+
+<div class="row">
+    <aside class="col-sm-3 aside_wid-main">
+        <ul class="lft_pan brdr-btm">
+            <li>
+                <h1 id="univtype"><i class="fa fa-university" style="font-size: 26px;" aria-hidden="true"></i>&nbsp;&nbsp; ITI - TRADES</h1>
+            </li>
+            <li>
+                <ul id="TradeListFix" class="univName" style="display: block; margin-top:0px;"></ul>
+            </li>
+        </ul>
+    </aside>
+    <section class="col-sm-9 section_mid-wrp">
+        <div class="book_view">
+            <article class="book_panel bor_non-bkinner">
+                <div id="fine" class="row">
+                    <div class="col-sm-3">
+                        <select class="form-control full-width" id="SemesterFix">
+                            <option value="0">-- Select Semester--</option>
+                        </select>
+                    </div>
+                </div>
+
+            </article>
+            <div id="bundlecontantpanel" class="row">
+
+            </div>
+
+            <article style="" class="book_panel_li book_panel col-sm-12 sub-list">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h1 id="dynamicsubjectheader"></h1>
+                                <h4 id="subjectpackage">Subject(s)</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="subjectcontantpanel" class="col-sm-12 sub_table" style="padding:0">
+
+                    </div>
+                </div>
+            </article>
+
+            <div style="clear:both; margin-bottom:70px !important"></div>
+
+        </div>
+
+    </section>
+</div>
+
+<div class="modal right fade" id="myModaAndroid" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+    <div class="modal-dialog modal_reg" role="document">
+        <div class="modal-content modal_cont1">
+            <div class="modal-body text-center">
+                <button type="button" class="close modal_clse2" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h3>Welcome to Android Store</h3>
+                <p>&nbsp;Question & Answer Android Apps are available </p>
+                <p>&nbsp;<a href="#" id="gotoandroidstore">Go to Q&A Android Apps Store</a></p>
+            </div>
+
+        </div><!-- modal-content -->
+    </div><!-- modal-dialog -->
+</div>
+
+<div class="modal right fade" id="myModalreg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+    <div class="modal-dialog modal_reg" role="document">
+        <div class="modal-content modal_cont1">
+            <div class="modal-body text-center">
+                <button type="button" class="close modal_clse2" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <p>For Previous Regulation Subjects please feel free to contact us</p>
+                <p>
+                    <i class="fa fa-phone-square" aria-hidden="true"></i>
+                    Toll-Free: 1800 102 6488
+                </p>
+                <p>
+                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                    Email: support@learnengg.com
+                </p>
+            </div>
+
+        </div><!-- modal-content -->
+    </div><!-- modal-dialog -->
+</div>
+
+@section deliverymode{
+    <div class="col-md-12 hd_til_txt">
+        <span class="univ_img">
+            <img class="img-responsive" src="../LE/img/university1.png">
+        </span>
+        <span id="headerText">Department of Employment and Training - Tamilnadu</span>
+    </div>
+
+}
+
+<script type="text/javascript">
+    //Function to get value from url
+    var getUrlParameter = function getUrlParameter(sParam) {
+        var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName,
+            i;
+
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === undefined ? true : sParameterName[1];
+            }
+        }
+    };
+
+    //random change of subject div colors
+    var min = 0;
+    var max = 10
+    function randomNumberFromRange() {
+        //return "li-hover-brdr" + Math.floor(Math.random() * (max - min + 1) + min);
+        min = min + 1;
+        if (min == 11) {
+            min = 1;
+        }
+        return "li-hover-brdr" + min;
+    }
+
+    function randomNumberFromcheckborder() {
+        return "left-brdr-" + min;
+
+    }
+
+    var univ_Id = 0;
+    var departId = 0;
+    var univ_Name = '';
+    var user_ID = 0;
+    var univ_Type = 0;
+    var login_univ_Type = 0;
+
+    $(document).ready(function () {
+
+        $('.left_menu_open').click(function () {
+            $('.aside_wid-main').toggleClass('left_on');
+            $('.main_info').toggleClass('left_on_row');
+
+        });
+
+        if (getUrlParameter('UnivID')) {
+            univ_Id = getUrlParameter('UnivID');
+        }
+
+        if (getUrlParameter('UnivType')) {
+            univ_Type = getUrlParameter('UnivType');
+        }
+
+        if ($("#sessionUserId").val() != 0) {
+            univ_Id = $('#sessionUniversityId').val();
+            $('.univ-' + univ_Id).addClass('active');
+        }
+
+        ShowAlert({
+            title: "",
+            text: "Loading . . .",
+            imageUrl: "../../Content/img/pre_loader.gif",
+            imageSize: "autox50",
+            timer: 1000,
+            showConfirmButton: false
+        });
+
+        LoadTradeList();
+        LoadSemester();
+        LoadSubjects();
+
+        var forget = getUrlParameter('login');
+        if (forget == "1") {
+            $('#modal-login').modal('show');
+
+        }
+    });
+
+    function LoadTradeList() {
+        var univCount = 0;
+        $.getJSON("/APIService/APIProductHome/GetDepartmentList",
+        {
+            univId: 1,
+            univtype: 1
+
+        },
+        function (data) {
+            $.each(data, function (index, value) {
+                if (univ_Name == '') {
+                    if (univCount == 0) {
+                        univ_Name = value.DepartmentName;
+                        univCount = univCount + 1;
+                    }
+                }
+
+                $("#TradeList").tmpl(value).appendTo("#TradeListFix");
+                if (value.DepartmentId == univ_Id) {
+                    univ_Name = value.DepartmentName;
+                }
+            });
+
+            $('.univ-' + univ_Id).addClass('active');
+        });
+    }
+
+
+    $(document).on('click', '#university', function () {
+
+        // ShowLoader();
+        $('li').removeClass('active');
+        $(this).parent().addClass('active');
+
+        var univdetails = $(this).attr('rel');
+        univ_Id = univdetails.split('~')[0];
+
+        //Loading subjects based on university
+        $("#subjectcontantpanel").empty().append(LoadSubjects());
+        univ_Name = univdetails.split('~')[1];
+        $('#dynamicsubjectheader').html(univ_Name);
+
+        // Reset All DropdownList and Append from Database
+        $("#SemesterFix").empty().append($("#SemesterFix").html('<option value="0">--Select Semester--</option>'), LoadSemester());
+        HideLoader();
+    });
+
+
+    function LoadSemester() {
+        $.getJSON("/APIService/APIProductHome/GetSemester",
+              {
+                  univId: 1,
+                  univType: 1
+              },
+        function (data) {
+            $.each(data, function (index, value) {
+                $("#SemesterList").tmpl(value).appendTo("#SemesterFix");
+            });
+        });
+    }
+
+
+    function LoadSubjects() {
+        user_ID = $("#sessionUserId").val();
+        ShowLoader();
+        $.getJSON("/APIService/APIProductHome/GetPackageDetails",
+            {
+                univId: 1,
+                departmentId: univ_Id,
+                userId: user_ID,
+                univtype: 1
+            }, function (data) {
+                $.each(data, function (index, value) {
+                    $("#SubjectList").tmpl(value).appendTo("#subjectcontantpanel");
+                });
+
+                var subjectpckg = $("#subjectcontantpanel").html().length;
+                if (subjectpckg == 0) {
+                    $('#subjectpackage').hide();
+                }
+                else {
+                    $('#subjectpackage').show();
+                }
+            });
+        HideLoader();
+    }
+
+    function dropdownchangeEvent() {
+
+        var semester = $("#SemesterFix").find("option:selected").val();
+        if (semester != 0) {
+            $('.hidealltmpl').hide();
+            $('.sems-' + semester).show();
+        }
+        else if (semester == 0) {
+            $('.hidealltmpl').hide();
+            $('.regulation-' + regulation).show();
+        }
+        else if (semester != 0) {
+            $('.hidealltmpl').hide();
+            $('.sems-' + semester).show();
+        }
+
+        else {
+            $('.hidealltmpl').show();
+        }
+
+    }
+
+    $(function () {
+
+        $('#SemesterFix').change(function () {
+
+            dropdownchangeEvent();
+            if (!$('.subjectshow:visible').length) {
+                $('#subjectpackage').hide();
+            }
+            else {
+                $('#subjectpackage').show();
+            }
+        });
+
+    });
+</script>
+
+
+<script id="TradeList" type="text/html">
+    <li class="univ-${DepartmentId}"><a id="university" href="#" rel="${DepartmentId}~${DepartmentName}">${DepartmentName}</a></li>
+</script>
+
+<script id="SemesterList" type="text/html">
+    <option value="${Semester}">${SemDisplay}</option>
+</script>
+
+
+<script id="SubjectList" type="text/html">
+    <div class="col-md-6 col-lg-4 col-xs-12 col-sm-6 subject hidealltmpl sems-${semester} regulation-${Regulation}">
+        <div class="sub_main">
+            <div class="sub-title">
+                <p class="sub_pad"><b>${packageCode}</b></p>
+                <span id="spnsubjectName">${packageName}</span>
+            </div>
+            <div style="clear:both"></div>
+        </div>
+    </div>
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,1558 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LearnEnggLayoutHome.cshtml";
+}
+
+<!-- New Content Given by Felix -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="LearnEngg - for Engineering Courses">
+    <meta name="author" content="">
+
+    <!-- old meta tag-->
+
+    <meta name="description" content="Find ITI subjects like draughtsman machinist, draughtsman civil, motor mechanic vehicle, turner and welder" />
+    <meta name="keywords" content="polytechnic, diploma, mechanical engineering, electrical and electronics engineering, measurement and instrumentation engineering, computer science engineering, automobile engineering, civil engineering, chemical engineering, videos, machinist, motor mechanic vehicle, turner and welder" />
+    <link rel="canonical" href="http://learnengg.com/index.html" />
+    <meta property="og:title" content="Learn ITI Subjects | Learnengg" />
+    <meta property="og:description" content="Find ITI subjects like draughtsman machinist, draughtsman civil, motor mechanic vehicle, turner and welder" />
+    <meta property="og:url" content="http://learnengg.com/index.html" />
+    <meta property="og:site_name" content="learnengg" />
+    <meta property="fb:app_id" content="453155978226046" />
+    <meta property="fb:admins" content="971617166218534,918493694910518" />
+    <meta property="og:type" content="non_profit" />
+    <meta property="og:image" content="LE/img/Learn1.png" />
+
+
+    <link rel='stylesheet' href='../css/index.css' type='text/css' media='all' />
+    <link rel='stylesheet' href='LE/bootstrap.min.css' type='text/css' media='all' />
+
+    <link href="../css/font-awesome.min.css" rel="stylesheet" />
+    <link href="LE/css/style.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="../favicon.ico?v2" type="image/x-icon" />
+
+
+    <link rel='stylesheet' href='LE/revslider/rs-plugin/css/settings.css' type='text/css' media='all' />
+    <link rel='stylesheet' href='LE/css/mmenu.css' type='text/css' media='all' async defer />
+    <link rel='stylesheet' href='LE/js/jquery.bxslider.css' type='text/css' media='all' />
+
+
+    <!--  Old meta tag end -->
+
+
+    <link rel="icon" href="theme_v2/images_v2/favicon.ico">
+
+    <title>ODISHA-DTET</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="theme_v2/css_v2/bootstrap.min.css" rel="stylesheet">
+    <!-- Customized Style CSS -->
+    <link href="theme_v2/css_v2/style.css" rel="stylesheet">
+    <link href="theme_v2/css_v2/responsive.css" rel="stylesheet">
+
+    <link href="theme_v2/css_v2/magnific-popup.css" rel="stylesheet">
+
+    <link href="theme_v2/css_v2/custom-style.css" rel="stylesheet">
+
+    <link href="theme_v2/css_v2/flaticon.css" rel="stylesheet">
+    <link href="theme_v2/css_v2/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="theme_v2/font-awesome_v2/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- Bootstrap core JS -->
+    <!-- slider -->
+    <!-- CSS STYLE-->
+    <link rel="stylesheet" type="text/css" href="theme_v2/css_v2/navstylechange.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="theme_v2/css_v2/noneed.css" media="screen" />
+
+
+    <!--- TRESTIMONIALS CSS -->
+    <link rel="stylesheet" href="theme_v2/css_v2/owl-carousel/owl.carousel.css">
+    <link rel="stylesheet" href="theme_v2/css_v2/owl-carousel/owl.theme.css">
+    <link rel="stylesheet" href="theme_v2/css_v2/owl-carousel/owl.transitions.css">
+
+
+</head>
+
+<body id="ititrade_page" data-spy="scroll" data-target=".navbar-fixed-top">
+
+
+    <div id="iti-page">
+        <div class="container-fluid padding-zero">
+            <div class="row margin-zero">
+                <img alt="ITI Trade" class="full-width dev-hd-img" src="theme_v2/images_v2/banner/iti.jpg">
+            </div>
+        </div>
+    </div>
+
+
+    <!-- End Header Section-->
+
+    <div class="content-section course-section">
+        <h1 class="top-title">VOCATIONAL TRAINING COURSES <br> <span>ITI Trades</span></h1>
+        <div class="container">
+            <div class="tab-content clearfix">
+                <div class="tab-pane active" id="1t">
+                    <div id="owlSectionThreeItem" class="owl-carousel" data-interval="false">
+                        <div class="video-popup">
+                            <p class="video-title">Electrician</p>
+                            <a href="//www.youtube.com/embed/n86MzfWWsQ4?autoplay=1" title="Title">
+                                <span></span>
+                                <img src="theme_v2/images_v2/iti/elect-vid.png">
+                            </a>
+                        </div>
+                        <div class="video-popup">
+                            <p class="video-title">Machinist</p>
+                            <a href="https://www.youtube.com/watch?v=v7E3OjdrUG0" title="Title">
+                                <span></span>
+                                <img src="theme_v2/images_v2/iti/mach-vid.png">
+                            </a>
+                        </div>
+                        <div class="video-popup">
+                            <p class="video-title">Mechanic Motor Vehicle</p>
+                            <a href="https://www.youtube.com/watch?v=J3UHwBrJ5c8" title="Title">
+                                <span></span>
+                                <img src="theme_v2/images_v2/iti/mmv-vid.png">
+                            </a>
+                        </div>
+                        <div class="video-popup">
+                            <p class="video-title">Draughtsman Mechanical</p>
+                            <a href="https://www.youtube.com/watch?v=OwfNzCCYwGw" title="Title">
+                                <span></span>
+                                <img src="theme_v2/images_v2/iti/dramech-vid.png">
+                            </a>
+                        </div>
+                        <div class="video-popup">
+                            <p class="video-title">Fitter</p>
+                            <a href="https://www.youtube.com/watch?v=6XsumAh_jXY" title="Title">
+                                <span></span>
+                                <img src="theme_v2/images_v2/iti/fiiter-vid.png">
+                            </a>
+                        </div>
+                        <div class="video-popup">
+                            <p class="video-title">Welder</p>
+                            <a href="https://www.youtube.com/watch?v=rNjMZ4bj1Xw" title="Title">
+                                <span></span>
+                                <img src="theme_v2/images_v2/iti/welder-vid.png">
+                            </a>
+                        </div>
+                        <div class="video-popup">
+                            <p class="video-title">Draughtsman Civil</p>
+                            <a href="https://www.youtube.com/watch?v=Z2K-TYc1wdQ" title="Title">
+                                <span></span>
+                                <img src="theme_v2/images_v2/iti/dracivil-vid.png">
+                            </a>
+                        </div>
+                        <div class="video-popup">
+                            <p class="video-title">Mechanic Diesel</p>
+                            <a href="https://www.youtube.com/watch?v=2ctC0ggksd0" title="Title">
+                                <span></span>
+                                <img src="theme_v2/images_v2/iti/mechde-vid.png">
+                            </a>
+                        </div>
+                        <div class="video-popup">
+                            <p class="video-title">Turner</p>
+                            <a href="https://www.youtube.com/watch?v=pS5MWpn1iog" title="Title">
+                                <span></span>
+                                <img src="theme_v2/images_v2/iti/turner-vid.png">
+                            </a>
+                        </div>
+                        <div class="video-popup">
+                            <p class="video-title">ICTSM</p>
+                            <a href="https://www.youtube.com/watch?v=djrLDfmuz8c" title="Title">
+                                <span></span>
+                                <img src="theme_v2/images_v2/iti/copa-vid.png">
+                            </a>
+                        </div>
+                        <div class="video-popup">
+                            <p class="video-title">Electronics Mechanic</p>
+                            <a href="https://www.youtube.com/watch?v=N7BT2qUOK0k" title="Title">
+                                <span></span>
+                                <img src="theme_v2/images_v2/iti/elecmech-vid.png">
+                            </a>
+                        </div>
+                        <div class="video-popup">
+                            <p class="video-title">Plumber</p>
+                            <a href="https://www.youtube.com/watch?v=9qT1vru0KAU" title="Title">
+                                <span></span>
+                                <img src="theme_v2/images_v2/iti/plumber-vid.png">
+                            </a>
+                        </div>
+                        <div class="video-popup">
+                            <p class="video-title">Surveyor</p>
+                            <a href="https://www.youtube.com/watch?v=KG9RgezlR0w" title="Title">
+                                <span></span>
+                                <img src="theme_v2/images_v2/iti/surveyor-vid.png">
+                            </a>
+                        </div>
+                        <!--<div class="video-popup">
+                            <p class="video-title">Carpenter</p>
+                            <a href="https://www.youtube.com/watch?v=-j2bvrgFM3U" title="Title">
+                                <span></span>
+                                <img src="theme_v2/images_v2/iti/carpenter-vid.png">
+                            </a>
+                        </div>
+                        <div class="video-popup">
+                            <p class="video-title">Sewing Technology</p>
+                            <a href="https://www.youtube.com/watch?v=222hJRtwpe0" title="Title">
+                                <span></span>
+                                <img src="theme_v2/images_v2/iti/sewing-vid.png">
+                            </a>
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--- top Section---->
+        <div class="margin-bottom-30">
+            <hr class="btm-line"></hr>
+            <h1 class="sub-heading11">3DM ClassRoom - Visual-Rich Digital Content Platform</h1>
+            <div class="container course-obj bg-section1 ">
+                <div class="col-md-5">
+                    <img class="img-responsive" src="theme_v2/images_v2/iti/3dm.png" />
+                </div>
+                <div class="col-md-7 iti-padtop ">
+                    <p><b>3DM ClassRoom</b>Â ITI Trades is an interactive Visual-Rich Digital Content platform for ITI Trades and Vocational Education.</p>
+                    <p>1 Year  and  2 Years ITI Programs, delivered with more 2D / 3D Visuals and Demonstrations. This methodology enhances industry readiness and enhanced employability of modern youths. Thin down urban-rural divide and elevate rural students confidence.</p>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container margin-bottom-30">
+
+            <!---- Aprroach --->
+            <div class="course-obj margin-top-30 margin-bottom-30">
+                <hr class="btm-line"></hr>
+                <h1 class="sub-heading">Approach</h1>
+                <p>Normally  the students of ITI are 10th or +2 Pass outs. The Engineering and Diploma students will learn core engineering subjects from 2nd year. But in ITI, the core subjects are started from 1st semester itself.</p>
+                <p>Imagination of the core engineering is little tough to the fresh students. In 3DM ClassRoom we develop the content in digital format to visualize the concept. Our Unique methodology will help students to learn faster.</p>
+                <div class="text-center approachtab">
+                    <p><strong>Explaining the concept through real life application will lead the learner to</strong></p>
+                    <button class="btn btn-lightgreen">VISUALIZE</button><i class="fa fa-forward" aria-hidden="true"></i>
+                    <button class="btn btn-lightgreen">UNDERSTAND</button><i class="fa fa-forward" aria-hidden="true"></i>
+                    <button class="btn btn-lightgreen">REMEMBER</button><i class="fa fa-forward" aria-hidden="true"></i>
+                    <button class="btn btn-lightgreen">APPLY</button><i class="fa fa-forward" aria-hidden="true"></i>
+                    <button class="btn btn-lightgreen">CREATE</button>
+                </div>
+
+
+                <!--- What We Dlivered--->
+                <div class="clearfix whatwedel margin-top-30 margin-bottom-30">
+                    <hr class="btm-line"></hr>
+                    <h1 class="sub-heading">What We Delivered for Every Trade</h1>
+                    <div class="col-md-6 col-xs-12 del-img">
+                        <img src="theme_v2/images_v2/3dm_class_room.jpg" class="text-center full-width img-responsive" title="3DM Class Room" alt="3DM Class Room">
+                    </div>
+                    <div class="col-md-6 col-xs-12 iti-digcont">
+                        <div class="iti-table">
+                            <table class="table border-collapse iti-table">
+                                <tr class="th-res">
+                                    <th>PAPERS</th>
+                                    <th>4 SEMESTER</th>
+                                    <th>2 SEMESTER</th>
+                                </tr>
+                                <tr>
+                                    <td>Trade Theory</td>
+                                    <td>530 Hrs</td>
+                                    <td>260 Hrs</td>
+                                </tr>
+                                <tr>
+                                    <td>Workshop Calculation & Science</td>
+                                    <td>180 Hrs</td>
+                                    <td>090 Hrs</td>
+                                </tr>
+                                <tr>
+                                    <td>Engineering Drawing</td>
+                                    <td>265 Hrs</td>
+                                    <td>130 Hrs</td>
+                                </tr>
+                                <tr>
+                                    <td>Employability Skills</td>
+                                    <td>110 Hrs</td>
+                                    <td>110 Hrs</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-md-6 digcont-img1">
+                            <img src="theme_v2/images_v2/iti/web.png" class="text-center full-width img-responsive" />
+                        </div>
+                        <div class="col-md-6 digcont-img2">
+                            <img src="theme_v2/images_v2/iti/mmv.png" class="text-center full-width img-responsive" />
+                        </div>
+                    </div>
+                </div>
+
+
+                <!---- Top TRades ---->
+                <div class="clearfix iti-top-trade margin-top-30 margin-bottom-30">
+                    <hr class="btm-line"></hr>
+                    <h1 class="sub-heading">Available Trades</h1>
+
+                    <!--- Mobile ---->
+                    <div class="tab-content hidden-md hidden-lg">
+                        <div role="tabpanel" class="tab-pane active" id="bebtech">
+                            <div class="row topcourse-block clearfix">
+                                <div class="carousel" id="fade-quote-carousel_one" data-ride="carousel" data-interval="3000">
+
+                                    <ol class="carousel-indicators">
+                                        <li data-target="#fade-quote-carousel_one" data-slide-to="0" class="active"></li>
+                                        <li data-target="#fade-quote-carousel_one" data-slide-to="1"></li>
+                                        <li data-target="#fade-quote-carousel_one" data-slide-to="2"></li>
+                                        <li data-target="#fade-quote-carousel_one" data-slide-to="3"></li>
+                                    </ol>
+                                    <div class="carousel-inner" id="index-product">
+                                        <div class="item active">
+                                            <div class="padding-zero col-xs-6 col-sm-3 col-md-3 col-lg-3">
+                                                <div class="carousel_box clearfix">
+
+                                                    <div class="col-md-12 prdct_cont padding-zero clearfix">
+                                                        <div class="carousel_box_inner">
+                                                            <div class="backgrd_color">
+                                                                <div class="image_cont">
+                                                                    <img class="img-responsive" src="theme_v2/images_v2/iti/electrician.jpg" />
+                                                                </div>
+                                                                <h3 class="tit_cont">Electrician</h3>
+
+                                                                <div class="block-subject clearfix">
+                                                                    <span class="pull-left">Content Product</span>
+                                                                    <span class="pull-right">ITI</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="backgrd_overlay">
+                                                                <div class="text">
+                                                                    <ul class="block-subjects">
+                                                                        <li><i class="glyph-icon flaticon-reading"></i>3986 Pages of Content</li>
+                                                                        <li><i class="glyph-icon flaticon-technology"></i>2418 - 3D/2D Visuals</li>
+                                                                        <li><i class="glyph-icon flaticon-light-bulb"></i>554 Solved Problems</li>
+                                                                        <li><i class="glyph-icon flaticon-open-magazine"></i>1621 MCQ</li>
+                                                                        <li><i class="glyph-icon flaticon-pencil-edit-button"></i>14 Semester Papers</li>
+                                                                    </ul>
+                                                                    <div class="view_btn">
+                                                                        <!--<a href="itidesc.html" class="btn btn-success btn-sm" type="button">View Details </a> -->
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--  -->
+
+                                                </div>
+                                            </div>
+                                            <div class="padding-zero col-xs-6 col-sm-3 col-md-3 col-lg-3">
+                                                <div class="carousel_box clearfix">
+
+                                                    <div class="col-md-12  prdct_cont padding-zero clearfix">
+                                                        <div class="carousel_box_inner">
+                                                            <div class="backgrd_color">
+                                                                <div class="image_cont">
+                                                                    <img class="img-responsive" src="theme_v2/images_v2/iti/machinist.jpg" />
+                                                                </div>
+                                                                <h3 class="tit_cont">Machinist</h3>
+                                                                <div class="block-subject clearfix">
+                                                                    <span class="pull-left">Content Product</span>
+                                                                    <span class="pull-right">ITI</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="backgrd_overlay">
+                                                                <div class="text">
+                                                                    <ul class="block-subjects">
+                                                                        <li><i class="glyph-icon flaticon-reading"></i>3465 Pages of Content</li>
+                                                                        <li><i class="glyph-icon flaticon-technology"></i>1654 - 3D/2D Visuals</li>
+                                                                        <li><i class="glyph-icon flaticon-light-bulb"></i>580 Solved Problems</li>
+                                                                        <li><i class="glyph-icon flaticon-open-magazine"></i>1170 MCQ</li>
+                                                                        <li><i class="glyph-icon flaticon-pencil-edit-button"></i>14 Semester Papers</li>
+                                                                    </ul>
+                                                                    <div class="view_btn">
+                                                                        <!--<button class="btn btn-success btn-sm" type="button">View Details </button>  -->
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--  -->
+
+                                                </div>
+                                            </div>
+                                            <div class="padding-zero col-xs-6 col-sm-3 col-md-3 col-lg-3">
+                                                <div class="carousel_box clearfix">
+
+                                                    <div class="col-md-12  prdct_cont padding-zero clearfix">
+                                                        <div class="carousel_box_inner">
+                                                            <div class="backgrd_color">
+                                                                <div class="image_cont">
+                                                                    <img class="img-responsive" src="theme_v2/images_v2/iti/mmv.jpg" />
+                                                                </div>
+                                                                <h3 class="tit_cont">Mechanic Motor Vehicle</h3>
+                                                                <div class="block-subject clearfix">
+                                                                    <span class="pull-left">Content Product</span>
+                                                                    <span class="pull-right">ITI</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="backgrd_overlay">
+                                                                <div class="text">
+                                                                    <ul class="block-subjects">
+                                                                        <li><i class="glyph-icon flaticon-reading"></i>4505 Pages of Content</li>
+                                                                        <li><i class="glyph-icon flaticon-technology"></i>2396 - 3D/2D Visuals</li>
+                                                                        <li><i class="glyph-icon flaticon-light-bulb"></i>580 Solved Problems</li>
+                                                                        <li><i class="glyph-icon flaticon-open-magazine"></i>2056 MCQ</li>
+                                                                        <li><i class="glyph-icon flaticon-pencil-edit-button"></i>14 Semester Papers</li>
+                                                                    </ul>
+                                                                    <div class="view_btn">
+                                                                        <button class="btn btn-success btn-sm" type="button">View Details </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--  -->
+
+                                                </div>
+                                            </div>
+                                            <div class="padding-zero col-xs-6 col-sm-3 col-md-3 col-lg-3">
+                                                <div class="carousel_box clearfix">
+
+                                                    <div class="col-md-12  prdct_cont padding-zero clearfix">
+                                                        <div class="carousel_box_inner">
+                                                            <div class="backgrd_color">
+                                                                <div class="image_cont">
+                                                                    <img class="img-responsive" src="theme_v2/images_v2/iti/dmechanical.jpg" />
+                                                                </div>
+                                                                <h3 class="tit_cont">Draughtsman Mechanical</h3>
+
+                                                                <div class="block-subject clearfix">
+                                                                    <span class="pull-left">Content Product</span>
+                                                                    <span class="pull-right">ITI</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="backgrd_overlay">
+                                                                <div class="text">
+                                                                    <ul class="block-subjects">
+                                                                        <li><i class="glyph-icon flaticon-reading"></i>4200 Pages of Content</li>
+                                                                        <li><i class="glyph-icon flaticon-technology"></i>1969 - 3D/2D Visuals</li>
+                                                                        <li><i class="glyph-icon flaticon-light-bulb"></i>684 Solved Problems</li>
+                                                                        <li><i class="glyph-icon flaticon-open-magazine"></i>1637 MCQ</li>
+                                                                        <li><i class="glyph-icon flaticon-pencil-edit-button"></i>14 Semester Papers</li>
+                                                                    </ul>
+                                                                    <div class="view_btn">
+                                                                        <button class="btn btn-success btn-sm" type="button">View Details </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--  -->
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <div class="padding-zero col-xs-6 col-sm-3 col-md-3 col-lg-3">
+                                                <div class="carousel_box clearfix">
+
+                                                    <div class="col-md-12 prdct_cont padding-zero clearfix">
+                                                        <div class="carousel_box_inner">
+                                                            <div class="backgrd_color">
+                                                                <div class="image_cont">
+                                                                    <img class="img-responsive" src="theme_v2/images_v2/iti/fitter.jpg" />
+                                                                </div>
+                                                                <h3 class="tit_cont">Fitter</h3>
+                                                                <div class="block-subject clearfix">
+                                                                    <span class="pull-left">Content Product</span>
+                                                                    <span class="pull-right">ITI</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="backgrd_overlay">
+                                                                <div class="text">
+                                                                    <ul class="block-subjects">
+                                                                        <li><i class="glyph-icon flaticon-reading"></i>3678 Pages of Content</li>
+                                                                        <li><i class="glyph-icon flaticon-technology"></i>1914 - 3D/2D Visuals</li>
+                                                                        <li><i class="glyph-icon flaticon-light-bulb"></i>580 Solved Problems</li>
+                                                                        <li><i class="glyph-icon flaticon-open-magazine"></i>1702 MCQ</li>
+                                                                        <li><i class="glyph-icon flaticon-pencil-edit-button"></i>14 Semester Papers</li>
+                                                                    </ul>
+                                                                    <div class="view_btn">
+                                                                        <button class="btn btn-success btn-sm" type="button">View Details </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--  -->
+
+                                                </div>
+                                            </div>
+                                            <div class="padding-zero col-xs-6 col-sm-3 col-md-3 col-lg-3">
+                                                <div class="carousel_box clearfix">
+
+                                                    <div class="col-md-12  prdct_cont padding-zero clearfix">
+                                                        <div class="carousel_box_inner">
+                                                            <div class="backgrd_color">
+                                                                <div class="image_cont">
+                                                                    <img class="img-responsive" src="theme_v2/images_v2/iti/welder.jpg" />
+                                                                </div>
+                                                                <h3 class="tit_cont">Welder</h3>
+
+                                                                <div class="block-subject clearfix">
+                                                                    <span class="pull-left">Content Product</span>
+                                                                    <span class="pull-right">ITI</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="backgrd_overlay">
+                                                                <div class="text">
+                                                                    <ul class="block-subjects">
+                                                                        <li><i class="glyph-icon flaticon-reading"></i>2355 Pages of Content</li>
+                                                                        <li><i class="glyph-icon flaticon-technology"></i>996 - 3D/2D Visuals</li>
+                                                                        <li><i class="glyph-icon flaticon-light-bulb"></i>333 Solved Problems</li>
+                                                                        <li><i class="glyph-icon flaticon-open-magazine"></i>1017 MCQ</li>
+                                                                        <li><i class="glyph-icon flaticon-pencil-edit-button"></i>8 Semester Papers</li>
+                                                                    </ul>
+                                                                    <div class="view_btn">
+                                                                        <button class="btn btn-success btn-sm" type="button">View Details </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--  -->
+
+                                                </div>
+                                            </div>
+                                            <div class="padding-zero col-xs-6 col-sm-3 col-md-3 col-lg-3">
+                                                <div class="carousel_box clearfix">
+
+                                                    <div class="col-md-12  prdct_cont padding-zero clearfix">
+                                                        <div class="carousel_box_inner">
+                                                            <div class="backgrd_color">
+                                                                <div class="image_cont">
+                                                                    <img class="img-responsive" src="theme_v2/images_v2/iti/dcivil.jpg" />
+                                                                </div>
+                                                                <h3 class="tit_cont">Draughtsman Civil</h3>
+
+                                                                <div class="block-subject clearfix">
+                                                                    <span class="pull-left">Content Product</span>
+                                                                    <span class="pull-right">ITI</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="backgrd_overlay">
+                                                                <div class="text">
+                                                                    <ul class="block-subjects">
+                                                                        <li><i class="glyph-icon flaticon-reading"></i>3586 Pages of Content</li>
+                                                                        <li><i class="glyph-icon flaticon-technology"></i>1751 - 3D/2D Visuals</li>
+                                                                        <li><i class="glyph-icon flaticon-light-bulb"></i>580 Solved Problems</li>
+                                                                        <li><i class="glyph-icon flaticon-open-magazine"></i>1726 MCQ</li>
+                                                                        <li><i class="glyph-icon flaticon-pencil-edit-button"></i>14 Semester Papers</li>
+                                                                    </ul>
+                                                                    <div class="view_btn">
+                                                                        <button class="btn btn-success btn-sm" type="button">View Details </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--  -->
+
+                                                </div>
+                                            </div>
+                                            <div class="padding-zero col-xs-6 col-sm-3 col-md-3 col-lg-3">
+                                                <div class="carousel_box clearfix">
+
+                                                    <div class="col-md-12  prdct_cont padding-zero clearfix">
+                                                        <div class="carousel_box_inner">
+                                                            <div class="backgrd_color">
+                                                                <div class="image_cont">
+                                                                    <img class="img-responsive" src="theme_v2/images_v2/iti/mechanic_diesel.jpg" />
+                                                                </div>
+                                                                <h3 class="tit_cont">Mechanic Diesel</h3>
+                                                                <div class="block-subject clearfix">
+                                                                    <span class="pull-left">Content Product</span>
+                                                                    <span class="pull-right">ITI</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="backgrd_overlay">
+                                                                <div class="text">
+                                                                    <ul class="block-subjects">
+                                                                        <li><i class="glyph-icon flaticon-reading"></i>2759 Pages of Content</li>
+                                                                        <li><i class="glyph-icon flaticon-technology"></i>1522 - 3D/2D Visuals</li>
+                                                                        <li><i class="glyph-icon flaticon-light-bulb"></i>333 Solved Problems</li>
+                                                                        <li><i class="glyph-icon flaticon-open-magazine"></i>1123 MCQ</li>
+                                                                        <li><i class="glyph-icon flaticon-pencil-edit-button"></i>8 Semester Papers</li>
+                                                                    </ul>
+                                                                    <div class="view_btn">
+                                                                        <button class="btn btn-success btn-sm" type="button">View Details </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--  -->
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <div class="padding-zero col-xs-6 col-sm-3 col-md-3 col-lg-3">
+                                                <div class="carousel_box clearfix">
+
+                                                    <div class="col-md-12  prdct_cont padding-zero clearfix">
+                                                        <div class="carousel_box_inner">
+                                                            <div class="backgrd_color">
+                                                                <div class="image_cont">
+                                                                    <img class="img-responsive" src="theme_v2/images_v2/iti/turner.jpg" />
+                                                                </div>
+                                                                <h3 class="tit_cont">Turner</h3>
+                                                                <div class="block-subject clearfix">
+                                                                    <span class="pull-left">Content Product</span>
+                                                                    <span class="pull-right">ITI</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="backgrd_overlay">
+                                                                <div class="text">
+                                                                    <ul class="block-subjects">
+                                                                        <li><i class="glyph-icon flaticon-reading"></i>3477 Pages of Content</li>
+                                                                        <li><i class="glyph-icon flaticon-technology"></i>1585 - 3D/2D Visuals</li>
+                                                                        <li><i class="glyph-icon flaticon-light-bulb"></i>580 Solved Problems</li>
+                                                                        <li><i class="glyph-icon flaticon-open-magazine"></i>1685 MCQ</li>
+                                                                        <li><i class="glyph-icon flaticon-pencil-edit-button"></i>14 Semester Papers</li>
+                                                                    </ul>
+                                                                    <div class="view_btn">
+                                                                        <button class="btn btn-success btn-sm" type="button">View Details </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--  -->
+
+                                                </div>
+                                            </div>
+                                            <div class="padding-zero col-xs-6 col-sm-3 col-md-3 col-lg-3">
+                                                <div class="carousel_box clearfix">
+
+                                                    <div class="col-md-12  prdct_cont padding-zero clearfix">
+                                                        <div class="carousel_box_inner">
+                                                            <div class="backgrd_color">
+                                                                <div class="image_cont">
+                                                                    <img class="img-responsive" src="theme_v2/images_v2/iti/copa.jpg" />
+                                                                </div>
+                                                                <h3 class="tit_cont">ICTSM</h3>
+
+                                                                <div class="block-subject clearfix">
+                                                                    <span class="pull-left">Content Product</span>
+                                                                    <span class="pull-right">ITI</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="backgrd_overlay">
+                                                                <div class="text">
+                                                                    <ul class="block-subjects">
+                                                                        <li><i class="glyph-icon flaticon-reading"></i>746 Pages of Content</li>
+                                                                        <li><i class="glyph-icon flaticon-technology"></i>394 - 3D/2D Visuals</li>
+                                                                        <li><i class="glyph-icon flaticon-light-bulb"></i>0 Solved Problems</li>
+                                                                        <li><i class="glyph-icon flaticon-open-magazine"></i>164 MCQ</li>
+                                                                        <li><i class="glyph-icon flaticon-pencil-edit-button"></i>4 Semester Papers</li>
+                                                                    </ul>
+                                                                    <div class="view_btn">
+                                                                        <button class="btn btn-success btn-sm" type="button">View Details </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--  -->
+
+                                                </div>
+                                            </div>
+                                            <div class="padding-zero col-xs-6 col-sm-3 col-md-3 col-lg-3">
+                                                <div class="carousel_box clearfix">
+
+                                                    <div class="col-md-12  prdct_cont padding-zero clearfix">
+                                                        <div class="carousel_box_inner">
+                                                            <div class="backgrd_color">
+                                                                <div class="image_cont">
+                                                                    <img class="img-responsive" src="theme_v2/images_v2/iti/elec_mechanic.jpg" />
+                                                                </div>
+                                                                <h3 class="tit_cont">Electronics Mechanic</h3>
+
+                                                                <div class="block-subject clearfix">
+                                                                    <span class="pull-left">Content Product</span>
+                                                                    <span class="pull-right">ITI</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="backgrd_overlay">
+                                                                <div class="text">
+                                                                    <ul class="block-subjects">
+                                                                        <li><i class="glyph-icon flaticon-reading"></i>4303 Pages of Content</li>
+                                                                        <li><i class="glyph-icon flaticon-technology"></i>2419 - 3D/2D Visuals</li>
+                                                                        <li><i class="glyph-icon flaticon-light-bulb"></i>483 Solved Problems</li>
+                                                                        <li><i class="glyph-icon flaticon-open-magazine"></i>1569 MCQ</li>
+                                                                        <li><i class="glyph-icon flaticon-pencil-edit-button"></i>14 Semester Papers</li>
+                                                                    </ul>
+                                                                    <div class="view_btn">
+                                                                        <button class="btn btn-success btn-sm" type="button">View Details </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--  -->
+
+                                                </div>
+                                            </div>
+                                            <div class="padding-zero col-xs-6 col-sm-3 col-md-3 col-lg-3">
+                                                <div class="carousel_box clearfix">
+
+                                                    <div class="col-md-12  prdct_cont padding-zero clearfix">
+                                                        <div class="carousel_box_inner">
+                                                            <div class="backgrd_color">
+                                                                <div class="image_cont">
+                                                                    <img class="img-responsive" src="theme_v2/images_v2/iti/plumber.jpg" />
+                                                                </div>
+                                                                <h3 class="tit_cont">Plumber</h3>
+
+                                                                <div class="block-subject clearfix">
+                                                                    <span class="pull-left">Content Product</span>
+                                                                    <span class="pull-right">ITI</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="backgrd_overlay">
+                                                                <div class="text">
+                                                                    <ul class="block-subjects">
+                                                                        <li><i class="glyph-icon flaticon-reading"></i>2449 Pages of Content</li>
+                                                                        <li><i class="glyph-icon flaticon-technology"></i>1236 - 3D/2D Visuals</li>
+                                                                        <li><i class="glyph-icon flaticon-light-bulb"></i>333 Solved Problems</li>
+                                                                        <li><i class="glyph-icon flaticon-open-magazine"></i>1143 MCQ</li>
+                                                                        <li><i class="glyph-icon flaticon-pencil-edit-button"></i>8 Semester Papers</li>
+                                                                    </ul>
+                                                                    <div class="view_btn">
+                                                                        <button class="btn btn-success btn-sm" type="button">View Details </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--  -->
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <div class="padding-zero col-xs-6 col-sm-3 col-md-3 col-lg-3">
+                                                <div class="carousel_box clearfix">
+
+                                                    <div class="col-md-12  prdct_cont padding-zero clearfix">
+                                                        <div class="carousel_box_inner">
+                                                            <div class="backgrd_color">
+                                                                <div class="image_cont">
+                                                                    <img class="img-responsive" src="theme_v2/images_v2/iti/surveyor.jpg" />
+                                                                </div>
+                                                                <h3 class="tit_cont">Surveyor</h3>
+                                                                <div class="block-subject clearfix">
+                                                                    <span class="pull-left">Content Product</span>
+                                                                    <span class="pull-right">ITI</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="backgrd_overlay">
+                                                                <div class="text">
+                                                                    <ul class="block-subjects">
+                                                                        <li><i class="glyph-icon flaticon-reading"></i>1629 Pages of Content</li>
+                                                                        <li><i class="glyph-icon flaticon-technology"></i>809 - 3D/2D Visuals</li>
+                                                                        <li><i class="glyph-icon flaticon-light-bulb"></i>367 Solved Problems</li>
+                                                                        <li><i class="glyph-icon flaticon-open-magazine"></i>758 MCQ</li>
+                                                                        <li><i class="glyph-icon flaticon-pencil-edit-button"></i>6 Semester Papers</li>
+                                                                    </ul>
+                                                                    <div class="view_btn">
+                                                                        <button class="btn btn-success btn-sm" type="button">View Details </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--  -->
+
+                                                </div>
+                                            </div>
+                                            <!--<div class="padding-zero col-xs-6 col-sm-3 col-md-3 col-lg-3">
+                                                <div class="carousel_box clearfix">
+
+                                                    <div class="col-md-12  prdct_cont padding-zero clearfix">
+                                                        <div class="carousel_box_inner">
+                                                            <div class="backgrd_color">
+                                                                <div class="image_cont">
+                                                                    <img class="img-responsive" src="theme_v2/images_v2/iti/carpenter.jpg"/>
+                                                                </div>
+                                                                <h3 class="tit_cont">Carpenter</h3>
+
+                                                                <div class="block-subject clearfix">
+                                                                    <span class="pull-left">Content Product</span>
+                                                                    <span class="pull-right">ITI</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="backgrd_overlay">
+                                                                 <div class="text">
+                                                                    <ul class="block-subjects">
+                                                                        <li><i class="glyph-icon flaticon-reading"></i>1954 Pages of Content</li>
+                                                                        <li><i class="glyph-icon flaticon-technology"></i>1129 - 3D/2D Visuals</li>
+                                                                        <li><i class="glyph-icon flaticon-light-bulb"></i>333 Solved Problems</li>
+                                                                        <li><i class="glyph-icon flaticon-open-magazine"></i>983 MCQ</li>
+                                                                        <li><i class="glyph-icon flaticon-pencil-edit-button"></i>8 Semester Papers</li>
+                                                                    </ul>
+                                                                    <div class="view_btn">
+                                                                        <button class="btn btn-success btn-sm" type="button">View Details </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>-->
+                                            <!--<div class="padding-zero col-xs-6 col-sm-3 col-md-3 col-lg-3">
+                                                <div class="carousel_box clearfix">
+
+                                                    <div class="col-md-12  prdct_cont padding-zero clearfix">
+                                                        <div class="carousel_box_inner">
+                                                            <div class="backgrd_color">
+                                                                <div class="image_cont">
+                                                                    <img class="img-responsive" src="theme_v2/images_v2/iti/sewtech.jpg"/>
+                                                                </div>
+                                                                <h3 class="tit_cont">Sewing Technology</h3>
+
+                                                                <div class="block-subject clearfix">
+                                                                    <span class="pull-left">Content Product</span>
+                                                                    <span class="pull-right">ITI</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="backgrd_overlay">
+                                                                 <div class="text">
+                                                                    <ul class="block-subjects">
+                                                                        <li><i class="glyph-icon flaticon-reading"></i>839 Pages of Content</li>
+                                                                        <li><i class="glyph-icon flaticon-technology"></i>293 - 3D/2D Visuals</li>
+                                                                        <li><i class="glyph-icon flaticon-light-bulb"></i>5 Solved Problems</li>
+                                                                        <li><i class="glyph-icon flaticon-open-magazine"></i>396 MCQ</li>
+                                                                        <li><i class="glyph-icon flaticon-pencil-edit-button"></i>4 Semester Papers</li>
+                                                                    </ul>
+                                                                    <div class="view_btn">
+                                                                        <button class="btn btn-success btn-sm" type="button">View Details </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!---- Desktop ---->
+                    <div class="topcourse-block clearfix hidden-xs hidden-sm ">
+                        <div class="col-md-3 col-xs-12 col-sm-6">
+                            <div class="carousel_box clearfix">
+
+                                <div class="col-md-12 col-xs-5 prdct_cont padding-zero clearfix">
+                                    <div class="carousel_box_inner">
+                                        <div class="backgrd_color">
+                                            <div class="image_cont">
+                                                <img src="theme_v2/images_v2/iti/electrician.jpg" />
+                                            </div>
+                                            <h3 class="tit_cont">Electrician</h3>
+
+                                            <div class="block-subject clearfix">
+                                                <span class="pull-left">Content Product</span>
+                                                <span class="pull-right">ITI</span>
+                                            </div>
+                                        </div>
+                                        <div class="backgrd_overlay">
+                                            <div class="text">
+                                                <ul class="block-subjects">
+                                                    <li><i class="glyph-icon flaticon-reading"></i>3986 Pages of Content</li>
+                                                    <li><i class="glyph-icon flaticon-technology"></i>2418 - 3D/2D Visuals</li>
+                                                    <li><i class="glyph-icon flaticon-light-bulb"></i>554 Solved Problems</li>
+                                                    <li><i class="glyph-icon flaticon-open-magazine"></i>1621 MCQ</li>
+                                                    <li><i class="glyph-icon flaticon-pencil-edit-button"></i>14 Semester Papers</li>
+                                                </ul>
+                                                <div class="view_btn">
+                                                    <!--<a href="itidesc.html" class="btn btn-success btn-sm" type="button">View Details </a>  -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--  -->
+
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-xs-12 col-sm-6">
+                            <div class="carousel_box clearfix">
+                                <div class="col-md-12 col-xs-5 prdct_cont padding-zero clearfix">
+                                    <div class="carousel_box_inner">
+                                        <div class="backgrd_color">
+                                            <div class="image_cont">
+                                                <img src="theme_v2/images_v2/iti/machinist.jpg" />
+                                            </div>
+                                            <h3 class="tit_cont">Machinist</h3>
+
+                                            <div class="block-subject clearfix">
+                                                <span class="pull-left">Content Product</span>
+                                                <span class="pull-right">ITI</span>
+                                            </div>
+                                        </div>
+                                        <div class="backgrd_overlay">
+                                            <div class="text">
+                                                <ul class="block-subjects">
+                                                    <li><i class="glyph-icon flaticon-reading"></i>3465 Pages of Content</li>
+                                                    <li><i class="glyph-icon flaticon-technology"></i>1654 - 3D/2D Visuals</li>
+                                                    <li><i class="glyph-icon flaticon-light-bulb"></i>580 Solved Problems</li>
+                                                    <li><i class="glyph-icon flaticon-open-magazine"></i>1170 MCQ</li>
+                                                    <li><i class="glyph-icon flaticon-pencil-edit-button"></i>14 Semester Papers</li>
+                                                </ul>
+                                                <div class="view_btn">
+                                                    <!--<button class="btn btn-success btn-sm" type="button">View Details </button>  -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-xs-12 col-sm-6">
+                            <div class="carousel_box clearfix">
+                                <div class="col-md-12 col-xs-5 prdct_cont padding-zero clearfix">
+                                    <div class="carousel_box_inner">
+                                        <div class="backgrd_color">
+                                            <div class="image_cont">
+                                                <img src="theme_v2/images_v2/iti/mmv.jpg" />
+                                            </div>
+                                            <h3 class="tit_cont">Mechanic Motor Vehicle</h3>
+
+                                            <div class="block-subject clearfix">
+                                                <span class="pull-left">Content Product</span>
+                                                <span class="pull-right">ITI</span>
+                                            </div>
+                                        </div>
+                                        <div class="backgrd_overlay">
+                                            <div class="text">
+                                                <ul class="block-subjects">
+                                                    <li><i class="glyph-icon flaticon-reading"></i>4505 Pages of Content</li>
+                                                    <li><i class="glyph-icon flaticon-technology"></i>2396 - 3D/2D Visuals</li>
+                                                    <li><i class="glyph-icon flaticon-light-bulb"></i>580 Solved Problems</li>
+                                                    <li><i class="glyph-icon flaticon-open-magazine"></i>2056 MCQ</li>
+                                                    <li><i class="glyph-icon flaticon-pencil-edit-button"></i>14 Semester Papers</li>
+                                                </ul>
+                                                <div class="view_btn">
+                                                    <!--<button class="btn btn-success btn-sm" type="button">View Details </button>-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-xs-12 col-sm-6">
+                            <div class="carousel_box clearfix">
+                                <div class="col-md-12 col-xs-5 prdct_cont padding-zero clearfix">
+                                    <div class="carousel_box_inner">
+                                        <div class="backgrd_color">
+                                            <div class="image_cont">
+                                                <img src="theme_v2/images_v2/iti/dmechanical.jpg" />
+                                            </div>
+                                            <h3 class="tit_cont">Draughtsman Mechanical</h3>
+
+                                            <div class="block-subject clearfix">
+                                                <span class="pull-left">Content Product</span>
+                                                <span class="pull-right">ITI</span>
+                                            </div>
+                                        </div>
+                                        <div class="backgrd_overlay">
+                                            <div class="text">
+                                                <ul class="block-subjects">
+                                                    <li><i class="glyph-icon flaticon-reading"></i>4200 Pages of Content</li>
+                                                    <li><i class="glyph-icon flaticon-technology"></i>1969 - 3D/2D Visuals</li>
+                                                    <li><i class="glyph-icon flaticon-light-bulb"></i>684 Solved Problems</li>
+                                                    <li><i class="glyph-icon flaticon-open-magazine"></i>1637 MCQ</li>
+                                                    <li><i class="glyph-icon flaticon-pencil-edit-button"></i>14 Semester Papers</li>
+                                                </ul>
+                                                <div class="view_btn">
+                                                    <!--<button class="btn btn-success btn-sm" type="button">View Details </button>-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-xs-12 col-sm-6">
+                            <div class="carousel_box clearfix">
+                                <div class="col-md-12 col-xs-5 prdct_cont padding-zero clearfix">
+                                    <div class="carousel_box_inner">
+                                        <div class="backgrd_color">
+                                            <div class="image_cont">
+                                                <img src="theme_v2/images_v2/iti/fitter.jpg" />
+                                            </div>
+                                            <h3 class="tit_cont">Fitter</h3>
+
+                                            <div class="block-subject clearfix">
+                                                <span class="pull-left">Content Product</span>
+                                                <span class="pull-right">ITI</span>
+                                            </div>
+                                        </div>
+                                        <div class="backgrd_overlay">
+                                            <div class="text">
+                                                <ul class="block-subjects">
+                                                    <li><i class="glyph-icon flaticon-reading"></i>3678 Pages of Content</li>
+                                                    <li><i class="glyph-icon flaticon-technology"></i>1914 - 3D/2D Visuals</li>
+                                                    <li><i class="glyph-icon flaticon-light-bulb"></i>580 Solved Problems</li>
+                                                    <li><i class="glyph-icon flaticon-open-magazine"></i>1702 MCQ</li>
+                                                    <li><i class="glyph-icon flaticon-pencil-edit-button"></i>14 Semester Papers</li>
+                                                </ul>
+                                                <div class="view_btn">
+                                                    <!--<button class="btn btn-success btn-sm" type="button">View Details </button>-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-xs-12 col-sm-6">
+                            <div class="carousel_box clearfix">
+                                <div class="col-md-12 col-xs-5 prdct_cont padding-zero clearfix">
+                                    <div class="carousel_box_inner">
+                                        <div class="backgrd_color">
+                                            <div class="image_cont">
+                                                <img src="theme_v2/images_v2/iti/welder.jpg" />
+                                            </div>
+                                            <h3 class="tit_cont">Welder</h3>
+
+                                            <div class="block-subject clearfix">
+                                                <span class="pull-left">Content Product</span>
+                                                <span class="pull-right">ITI</span>
+                                            </div>
+                                        </div>
+                                        <div class="backgrd_overlay">
+                                            <div class="text">
+                                                <ul class="block-subjects">
+                                                    <li><i class="glyph-icon flaticon-reading"></i>2355 Pages of Content</li>
+                                                    <li><i class="glyph-icon flaticon-technology"></i>996 - 3D/2D Visuals</li>
+                                                    <li><i class="glyph-icon flaticon-light-bulb"></i>333 Solved Problems</li>
+                                                    <li><i class="glyph-icon flaticon-open-magazine"></i>1017 MCQ</li>
+                                                    <li><i class="glyph-icon flaticon-pencil-edit-button"></i>8 Semester Papers</li>
+                                                </ul>
+                                                <div class="view_btn">
+                                                    <!--<button class="btn btn-success btn-sm" type="button">View Details </button>-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-xs-12 col-sm-6">
+                            <div class="carousel_box clearfix">
+                                <div class="col-md-12 col-xs-5 prdct_cont padding-zero clearfix">
+                                    <div class="carousel_box_inner">
+                                        <div class="backgrd_color">
+                                            <div class="image_cont">
+                                                <img src="theme_v2/images_v2/iti/dcivil.jpg" />
+                                            </div>
+                                            <h3 class="tit_cont">Draughtsman Civil</h3>
+
+                                            <div class="block-subject clearfix">
+                                                <span class="pull-left">Content Product</span>
+                                                <span class="pull-right">ITI</span>
+                                            </div>
+                                        </div>
+                                        <div class="backgrd_overlay">
+                                            <div class="text">
+                                                <ul class="block-subjects">
+                                                    <li><i class="glyph-icon flaticon-reading"></i>3586 Pages of Content</li>
+                                                    <li><i class="glyph-icon flaticon-technology"></i>1751 - 3D/2D Visuals</li>
+                                                    <li><i class="glyph-icon flaticon-light-bulb"></i>580 Solved Problems</li>
+                                                    <li><i class="glyph-icon flaticon-open-magazine"></i>1726 MCQ</li>
+                                                    <li><i class="glyph-icon flaticon-pencil-edit-button"></i>14 Semester Papers</li>
+                                                </ul>
+                                                <div class="view_btn">
+                                                    <!--<button class="btn btn-success btn-sm" type="button">View Details </button>-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-xs-12 col-sm-6">
+                            <div class="carousel_box clearfix">
+                                <div class="col-md-12 col-xs-5 prdct_cont padding-zero clearfix">
+                                    <div class="carousel_box_inner">
+                                        <div class="backgrd_color">
+                                            <div class="image_cont">
+                                                <img src="theme_v2/images_v2/iti/mechanic_diesel.jpg" />
+                                            </div>
+                                            <h3 class="tit_cont">Mechanic Diesel</h3>
+
+                                            <div class="block-subject clearfix">
+                                                <span class="pull-left">Content Product</span>
+                                                <span class="pull-right">ITI</span>
+                                            </div>
+                                        </div>
+                                        <div class="backgrd_overlay">
+                                            <div class="text">
+                                                <ul class="block-subjects">
+                                                    <li><i class="glyph-icon flaticon-reading"></i>2759 Pages of Content</li>
+                                                    <li><i class="glyph-icon flaticon-technology"></i>1522 - 3D/2D Visuals</li>
+                                                    <li><i class="glyph-icon flaticon-light-bulb"></i>333 Solved Problems</li>
+                                                    <li><i class="glyph-icon flaticon-open-magazine"></i>1123 MCQ</li>
+                                                    <li><i class="glyph-icon flaticon-pencil-edit-button"></i>8 Semester Papers</li>
+                                                </ul>
+                                                <div class="view_btn">
+                                                    <!--<button class="btn btn-success btn-sm" type="button">View Details </button> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-xs-12 col-sm-6">
+                            <div class="carousel_box clearfix">
+                                <div class="col-md-12 col-xs-5 prdct_cont padding-zero clearfix">
+                                    <div class="carousel_box_inner">
+                                        <div class="backgrd_color">
+                                            <div class="image_cont">
+                                                <img src="theme_v2/images_v2/iti/turner.jpg" />
+                                            </div>
+                                            <h3 class="tit_cont">Turner</h3>
+
+                                            <div class="block-subject clearfix">
+                                                <span class="pull-left">Content Product</span>
+                                                <span class="pull-right">ITI</span>
+                                            </div>
+                                        </div>
+                                        <div class="backgrd_overlay">
+                                            <div class="text">
+                                                <ul class="block-subjects">
+                                                    <li><i class="glyph-icon flaticon-reading"></i>3477 Pages of Content</li>
+                                                    <li><i class="glyph-icon flaticon-technology"></i>1585 - 3D/2D Visuals</li>
+                                                    <li><i class="glyph-icon flaticon-light-bulb"></i>580 Solved Problems</li>
+                                                    <li><i class="glyph-icon flaticon-open-magazine"></i>1685 MCQ</li>
+                                                    <li><i class="glyph-icon flaticon-pencil-edit-button"></i>14 Semester Papers</li>
+                                                </ul>
+                                                <div class="view_btn">
+                                                    <!--<button class="btn btn-success btn-sm" type="button">View Details </button> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-xs-12 col-sm-6">
+                            <div class="carousel_box clearfix">
+                                <div class="col-md-12 col-xs-5 prdct_cont padding-zero clearfix">
+                                    <div class="carousel_box_inner">
+                                        <div class="backgrd_color">
+                                            <div class="image_cont">
+                                                <img src="theme_v2/images_v2/iti/copa.jpg" />
+                                            </div>
+                                            <h3 class="tit_cont">ICTSM</h3>
+
+                                            <div class="block-subject clearfix">
+                                                <span class="pull-left">Content Product</span>
+                                                <span class="pull-right">ITI</span>
+                                            </div>
+                                        </div>
+                                        <div class="backgrd_overlay">
+                                            <div class="text">
+                                                <ul class="block-subjects">
+                                                    <li><i class="glyph-icon flaticon-reading"></i>746 Pages of Content</li>
+                                                    <li><i class="glyph-icon flaticon-technology"></i>394 - 3D/2D Visuals</li>
+                                                    <li><i class="glyph-icon flaticon-light-bulb"></i>0 Solved Problems</li>
+                                                    <li><i class="glyph-icon flaticon-open-magazine"></i>164 MCQ</li>
+                                                    <li><i class="glyph-icon flaticon-pencil-edit-button"></i>4 Semester Papers</li>
+                                                </ul>
+                                                <div class="view_btn">
+                                                    <!--<button class="btn btn-success btn-sm" type="button">View Details </button>-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-xs-12 col-sm-6">
+                            <div class="carousel_box clearfix">
+                                <div class="col-md-12 col-xs-5 prdct_cont padding-zero clearfix">
+                                    <div class="carousel_box_inner">
+                                        <div class="backgrd_color">
+                                            <div class="image_cont">
+                                                <img src="theme_v2/images_v2/iti/elec_mechanic.jpg" />
+                                            </div>
+                                            <h3 class="tit_cont">Electronics Mechanic</h3>
+
+                                            <div class="block-subject clearfix">
+                                                <span class="pull-left">Content Product</span>
+                                                <span class="pull-right">ITI</span>
+                                            </div>
+                                        </div>
+                                        <div class="backgrd_overlay">
+                                            <div class="text">
+                                                <ul class="block-subjects">
+                                                    <li><i class="glyph-icon flaticon-reading"></i>4303 Pages of Content</li>
+                                                    <li><i class="glyph-icon flaticon-technology"></i>2419 - 3D/2D Visuals</li>
+                                                    <li><i class="glyph-icon flaticon-light-bulb"></i>483 Solved Problems</li>
+                                                    <li><i class="glyph-icon flaticon-open-magazine"></i>1569 MCQ</li>
+                                                    <li><i class="glyph-icon flaticon-pencil-edit-button"></i>14 Semester Papers</li>
+                                                </ul>
+                                                <div class="view_btn">
+                                                    <!--<button class="btn btn-success btn-sm" type="button">View Details </button>  -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-xs-12 col-sm-6">
+                            <div class="carousel_box clearfix">
+                                <div class="col-md-12 col-xs-5 prdct_cont padding-zero clearfix">
+                                    <div class="carousel_box_inner">
+                                        <div class="backgrd_color">
+                                            <div class="image_cont">
+                                                <img src="theme_v2/images_v2/iti/plumber.jpg" />
+                                            </div>
+                                            <h3 class="tit_cont">Plumber</h3>
+
+                                            <div class="block-subject clearfix">
+                                                <span class="pull-left">Content Product</span>
+                                                <span class="pull-right">ITI</span>
+                                            </div>
+                                        </div>
+                                        <div class="backgrd_overlay">
+                                            <div class="text">
+                                                <ul class="block-subjects">
+                                                    <li><i class="glyph-icon flaticon-reading"></i>2449 Pages of Content</li>
+                                                    <li><i class="glyph-icon flaticon-technology"></i>1236 - 3D/2D Visuals</li>
+                                                    <li><i class="glyph-icon flaticon-light-bulb"></i>333 Solved Problems</li>
+                                                    <li><i class="glyph-icon flaticon-open-magazine"></i>1143 MCQ</li>
+                                                    <li><i class="glyph-icon flaticon-pencil-edit-button"></i>8 Semester Papers</li>
+                                                </ul>
+                                                <div class="view_btn">
+                                                    <!--<button class="btn btn-success btn-sm" type="button">View Details </button>-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-xs-12 col-sm-6">
+                            <div class="carousel_box clearfix">
+                                <div class="col-md-12 col-xs-5 prdct_cont padding-zero clearfix">
+                                    <div class="carousel_box_inner">
+                                        <div class="backgrd_color">
+                                            <div class="image_cont">
+                                                <img src="theme_v2/images_v2/iti/surveyor.jpg" />
+                                            </div>
+                                            <h3 class="tit_cont">Surveyor</h3>
+
+                                            <div class="block-subject clearfix">
+                                                <span class="pull-left">Content Product</span>
+                                                <span class="pull-right">ITI</span>
+                                            </div>
+                                        </div>
+                                        <div class="backgrd_overlay">
+                                            <div class="text">
+                                                <ul class="block-subjects">
+                                                    <li><i class="glyph-icon flaticon-reading"></i>1629 Pages of Content</li>
+                                                    <li><i class="glyph-icon flaticon-technology"></i>809 - 3D/2D Visuals</li>
+                                                    <li><i class="glyph-icon flaticon-light-bulb"></i>367 Solved Problems</li>
+                                                    <li><i class="glyph-icon flaticon-open-magazine"></i>758 MCQ</li>
+                                                    <li><i class="glyph-icon flaticon-pencil-edit-button"></i>6 Semester Papers</li>
+                                                </ul>
+                                                <div class="view_btn">
+                                                    <!--<button class="btn btn-success btn-sm" type="button">View Details </button>-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div class="col-md-3 col-xs-12 col-sm-6">
+                            <div class="carousel_box clearfix">
+                                <div class="col-md-12 col-xs-5 prdct_cont padding-zero clearfix">
+                                    <div class="carousel_box_inner">
+                                        <div class="backgrd_color">
+                                            <div class="image_cont">
+                                                <img src="theme_v2/images_v2/iti/carpenter.jpg"/>
+                                            </div>
+                                            <h3 class="tit_cont">Carpenter</h3>
+
+                                            <div class="block-subject clearfix">
+                                                <span class="pull-left">Content Product</span>
+                                                <span class="pull-right">ITI</span>
+                                            </div>
+                                        </div>
+                                        <div class="backgrd_overlay">
+                                             <div class="text">
+                                                <ul class="block-subjects">
+                                                    <li><i class="glyph-icon flaticon-reading"></i>1954 Pages of Content</li>
+                                                    <li><i class="glyph-icon flaticon-technology"></i>1129 - 3D/2D Visuals</li>
+                                                    <li><i class="glyph-icon flaticon-light-bulb"></i>333 Solved Problems</li>
+                                                    <li><i class="glyph-icon flaticon-open-magazine"></i>983 MCQ</li>
+                                                    <li><i class="glyph-icon flaticon-pencil-edit-button"></i>8 Semester Papers</li>
+                                                </ul>
+                                                <div class="view_btn">
+                                                    <button class="btn btn-success btn-sm" type="button">View Details </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-xs-12 col-sm-6">
+                            <div class="carousel_box clearfix">
+                                <div class="col-md-12 col-xs-5 prdct_cont padding-zero clearfix">
+                                    <div class="carousel_box_inner">
+                                        <div class="backgrd_color">
+                                            <div class="image_cont">
+                                                <img src="theme_v2/images_v2/iti/sewtech.jpg"/>
+                                            </div>
+                                            <h3 class="tit_cont">Sewing Technology</h3>
+
+                                            <div class="block-subject clearfix">
+                                                <span class="pull-left">Content Product</span>
+                                                <span class="pull-right">ITI</span>
+                                            </div>
+                                        </div>
+                                        <div class="backgrd_overlay">
+                                             <div class="text">
+                                                <ul class="block-subjects">
+                                                    <li><i class="glyph-icon flaticon-reading"></i>839 Pages of Content</li>
+                                                    <li><i class="glyph-icon flaticon-technology"></i>293 - 3D/2D Visuals</li>
+                                                    <li><i class="glyph-icon flaticon-light-bulb"></i>5 Solved Problems</li>
+                                                    <li><i class="glyph-icon flaticon-open-magazine"></i>396 MCQ</li>
+                                                    <li><i class="glyph-icon flaticon-pencil-edit-button"></i>4 Semester Papers</li>
+                                                </ul>
+                                                <div class="view_btn">
+                                                    <button class="btn btn-success btn-sm" type="button">View Details </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>-->
+                    </div>
+
+                    <!--- ITI-Demo ---->
+
+                    <div class="col-md-12 col-xs-12 iti-subcont clearfix margin-top-30">
+                        <h1 class="clearifx sub-heading">www.learnengg.com | Toll Free - 1800 102 6488 | support@3dmclassroom.com</h1>
+                        <!--<div class="video-popup">
+                            <a href="https://www.youtube.com/watch?v=LebFo4eYn_s" title="Title">
+                                <button class="btn btn-warning">View Demo</button>
+                            </a>
+                        </div>-->
+                    </div>
+
+                </div>
+
+
+
+
+                <!--- Benefitis --->
+                <div class="clearfix margin-bottom-30 margin-top-30">
+                    <hr class="btm-line"></hr>
+                    <h1 class="sub-heading">Benefits of implementing 3DM ClassRoom</h1>
+                    <div class="col-sm-4 text-center">
+                        <img src="theme_v2/images_v2/iti/iti.jpg">
+                        <h2 class="benefit-title" style="color: #f27181;">ITI</h2>
+                        <img src="theme_v2/images_v2/iti/school-border-red.png" width="auto" height="auto">
+                        <ul class="benefits-list">
+                            <li>Enhanced Employability of the outgoing students</li>
+                            <li>Addressing the core issue of lack of faculties</li>
+                            <li>Supplementing lack of industry visits</li>
+                            <li>Complementing lack of adequate infrastructure</li>
+                            <li>complete the syllabus within allocated duration</li>
+                            <li>Improved attendance</li>
+                            <li>Thin down the urban-rural divide</li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4 text-center">
+                        <img src="theme_v2/images_v2/iti/instructors.jpg">
+                        <h2 class="benefit-title" style="color: #2fb6be;">INSTRUCTORS</h2>
+                        <img src="theme_v2/images_v2/iti/school-border-blue.png" width="auto" height="auto">
+                        <ul class="benefits-list">
+                            <li>Enhanced Employability of the outgoing students</li>
+                            <li>Addressing the core issue of lack of faculties</li>
+                            <li>Supplementing lack of industry visits</li>
+                            <li>Complementing lack of adequate infrastructure</li>
+                            <li>complete the syllabus within allocated duration</li>
+                            <li>Improved attendance</li>
+                            <li>Thin down the urban-rural divide</li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4 text-center">
+                        <img src="theme_v2/images_v2/iti/students.jpg">
+                        <h2 class="benefit-title" style="color: #d3b004;">STUDENTS</h2>
+                        <img src="theme_v2/images_v2/iti/school-border-yellow.png" width="auto" height="auto">
+                        <ul class="benefits-list">
+                            <li>Enhanced Employability of the outgoing students</li>
+                            <li>Addressing the core issue of lack of faculties</li>
+                            <li>Supplementing lack of industry visits</li>
+                            <li>Complementing lack of adequate infrastructure</li>
+                            <li>complete the syllabus within allocated duration</li>
+                            <li>Improved attendance</li>
+                            <li>Thin down the urban-rural divide</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!----->
+
+        </div> <!-- /header-section -->
+        <!-- Footer Menu -->
+        <!-- /Social Icon -->
+        <!---
+        <a href="#0" class="cd-btn">
+            <i class="fa fa-comments-o" aria-hidden="true"></i>
+            <span class="hidden-xs hidden-sm">Feedback</span>
+        </a>
+        --->
+        <div class="chat-fixed col-xs-12 col-md-2 col-lg-2 col-sm-4 ">
+            <a href="#0" class="cd-btn-cb col-xs-6 ">
+                <i class="fa fa-phone" aria-hidden="true"></i>
+                <span class="  ">Call Back</span>
+            </a>
+            <a href="#0" class="cd-btn-lc col-xs-6">
+                <i class="fa fa-weixin" aria-hidden="true"></i>
+                <span class="     ">Live Chat</span>
+            </a>
+        </div>
+        <!-- Feedback Start --
+        <div id="feedback" class="cd-panel from-right"></div>
+        -->
+        <!-- Call Back Start -->
+        <div id="callback" class="cd-panel-cb from-right"></div>
+
+        <!-- Live Chat Start -->
+        <div id="livechat" class="cd-panel-lc from-right"></div>
+
+        <!-- Fotoer -->
+        <footer id="footer-bottom" class="clearfix"></footer>
+
+
+
+
+</body>
+</html>
+
+
+<!-- New Content End -->
+<!-- End Main -->
+
+
+<script type="text/javascript">
+    //Function to get value from url
+    var getUrlParameter = function getUrlParameter(sParam) {
+        var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName,
+            i;
+
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === undefined ? true : sParameterName[1];
+            }
+        }
+    };
+
+    //random change of subject div colors
+    var min = 0;
+    var max = 10
+    function randomNumberFromRange() {
+        //return "li-hover-brdr" + Math.floor(Math.random() * (max - min + 1) + min);
+        min = min + 1;
+        if (min == 11) {
+            min = 1;
+        }
+        return "li-hover-brdr" + min;
+    }
+
+    function randomNumberFromcheckborder() {
+        return "left-brdr-" + min;
+
+    }
+
+    var univ_Id = 0;
+    var departId = 0;
+    var univ_Name = '';
+    var user_ID = 0;
+    var univ_Type = 0;
+    var login_univ_Type = 0;
+
+    $(document).ready(function () {
+
+        $('.left_menu_open').click(function () {
+            $('.aside_wid-main').toggleClass('left_on');
+            $('.main_info').toggleClass('left_on_row');
+
+        });
+
+        if (getUrlParameter('UnivID')) {
+            univ_Id = getUrlParameter('UnivID');
+        }
+
+        if (getUrlParameter('UnivType')) {
+            univ_Type = getUrlParameter('UnivType');
+        }
+
+        if ($("#sessionUserId").val() != 0) {
+            univ_Id = $('#sessionUniversityId').val();
+            $('.univ-' + univ_Id).addClass('active');
+        }
+
+        ShowAlert({
+            title: "",
+            text: "Loading . . .",
+            imageUrl: "../../Content/img/pre_loader.gif",
+            imageSize: "autox50",
+            timer: 1000,
+            showConfirmButton: false
+        });
+
+        //LoadTradeList();
+        //LoadSemester();
+        //LoadSubjects();
+
+        var forget = getUrlParameter('login');
+        if (forget == "1") {
+            $('#modal-login').modal('show');
+
+        }
+    });
+
+    </script>

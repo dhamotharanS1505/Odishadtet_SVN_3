@@ -1,0 +1,536 @@
+﻿@{
+    ViewBag.Title = "SubjectUpload";
+    Layout = "~/Views/Shared/_LearnEnggAdminLayout.cshtml";
+}
+<style>
+    .pop_btn_upld {
+        display: block;
+        margin: 10px 0;
+        text-align: center;
+    }
+
+    .fileUpload {
+        position: fixed;
+        overflow: hidden;
+        margin: 0;
+    }
+
+        .fileUpload input.upload {
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin: 0;
+            padding: 0;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0;
+            filter: alpha(opacity=0);
+        }
+
+    .file_to_upload input[type="text"] {
+        padding: 6px 0;
+        width: 69% !important;
+    }
+
+    .qq-upload-button {
+        direction: ltr;
+        left: 83% !important;
+        overflow: hidden;
+        position: relative;
+        top: -28px !important;
+    }
+
+    .file_to_upload > input {
+        width: 60%;
+    }
+</style>
+<article class="col-sm-12">
+    <div class="in_hd_tt row">
+        <strong class="fa fa-file-text"></strong><span>Import Subjects</span>
+    </div>
+</article>
+<article class="col-sm-12"></article>
+<article class="col-sm-12">
+    <div class="sub_wp_bx row">
+        <div style="float: left">
+            <input type="button" class="fil_in_btn" value="Filter" id="btnFilter" data-toggle="modal"
+                   data-target="#FilterModel" rel="btn" />
+            <input type="button" class="fil_in_btn" value="Clear Filter" id="refreshFilter" />
+        </div>
+        <div style="float: right">
+            <input type="button" class="fil_in_btn" value="Upload Subjects" id="btnUpload" data-toggle="modal"
+                   data-target="#FilterModel_pop" rel="btn" />
+        </div>
+        <div style="float: right">
+            <a href="#" onclick="navigate(1);">
+                <input type="button" class="fil_in_btn" value="Summary" id="btnsummary" />
+            </a>
+        </div>
+    </div>
+    <div>
+        <h5 id="DynamicFilteredData"></h5>
+    </div>
+</article>
+<article class="col-sm-12">
+    <section class="sub_wrp row">
+        <table id="tblImportExcel" class="table table-striped table-bordered" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>
+                        S.No
+                    </th>
+                    <th>
+                        University Name
+                    </th>
+                    <th>
+                        Department Name
+                    </th>
+                    <th>
+                        Semester
+                    </th>
+                    <th>
+                        Subject Code
+                    </th>
+                    <th>
+                        Subject Name
+                    </th>
+                    <th>
+                        No.Of Units
+                    </th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </section>
+</article>
+<div class="modal fade" id="RegStudent" role="dialog">
+    <div class="modal-dialog custom_pop">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">
+                    ×
+                </button>
+                <h4 id="Subject" class="pop_hed"></h4>
+            </div>
+            <div class="modal-body">
+                <section class="pop_head full_width">
+                    <div class="row down_panel" id="SubjectUnitDetails">
+                        <div class="loader">
+                            <center>
+                                Loading...
+                                <img src="~/Content/img/pre_loader.gif" />
+                            </center>
+                           
+                        </div>
+                        <table id="tblChild" class="table table-striped table-bordered wd_tb" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        S.No
+                                    </th>
+                                    <th>
+                                        Unit Code
+                                    </th>
+                                    <th>
+                                        Unit Name
+                                    </th>
+                                    <th>
+                                        Subject Unit Path
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="FilterModel_pop" role="dialog">
+    <div class="modal-dialog custom_pop custom_pop_1">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button id="closepopup" data-dismiss="modal" class="close" type="button">
+                    ×
+                </button>
+                <h4 id="CollegeName" class="pop_hed">
+                    Upload Subject Master
+                </h4>
+            </div>
+            <div class="col-sm-12" style="margin: 20px 0 0 0">
+                <div class="col-sm-12 row">
+                    <span class="title_browse">Choose your file to upload subjects</span> <span style="float: left; width: 100%;">
+                        <span style="float: right;"></span>
+                    </span>
+                </div>
+            </div>
+            <div>
+                @Html.Partial("SubjectUploadPartalView")
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="FilterModel" role="dialog">
+    <div class="modal-dialog custom_pop custom_pop_1">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button id="closepopup_filter" data-dismiss="modal" class="close" type="button">
+                    ×
+                </button>
+                <h4 id="UserrName" class="pop_hed">
+                    Filter Subject Details
+                </h4>
+            </div>
+            <div class="modal-body clearfix">
+                <div class="grp_mar_btm">
+                    <h5 class="col-sm-12">
+                        <span class="br_bt_hed_til"><b></b></span>
+                    </h5>
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-4" id="fine_drp_1">
+                                <label>
+                                    University:
+                                </label>
+                                <ul class="fl_in_det li input" id="univ">
+                                    <li class="ful_w">
+                                        <select id="ddlUniversity"></select>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-sm-4" id="fine_drp_1">
+                                <label>
+                                    Department:
+                                </label>
+                                <ul class="fl_in_det  li input" id="colg">
+                                    <li class="ful_w">
+                                        <select id="ddlDepartment"></select>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-sm-4" id="fine_drp_1">
+                                <label>
+                                    Semester:
+                                </label>
+                                <ul class="fl_in_det  li input" id="Sem">
+                                    <li class="ful_w">
+                                        <select id="ddlSemester"></select>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <span class="alg_mid_btn">
+                        <input type="button" id="btnApplyFilter" value="Apply Filter" class="fil_in_btn">
+                        <div class="loader">
+                            <center>
+                                Loading...
+                                <img src="~/Content/img/pre_loader.gif" />
+                            </center>
+                        </div>
+                        <input type="button" id="btnClearFilter" value="Clear Filter" class="fil_in_btn" />
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    function LoadUniversity() {
+        $.ajax({
+            type: 'GET',
+            url: '/APIService/APIAdminActivity/LoadUniversityDropdown',
+            dataType: 'json',
+            success: function (data) {
+                var rData = data;
+                var markup = "<option value=''>------- Select University -------</option>";
+
+                for (var x = 0; x < rData.length; x++) {
+
+                    markup = markup + "<option value=" + rData[x].Universityid + ">" + rData[x].UniversityName + "</option>";
+
+                }
+
+                $('#ddlUniversity').find('option').remove().end().append(markup);
+
+            },
+            error: function (result) {
+                alert("Error");
+            }
+        });
+    }
+
+    $(function () {
+        $('#ddlUniversity').change(function () {
+            var selectedUniversity = $("#ddlUniversity").find("option:selected").val();
+            $.ajax({
+                type: 'GET',
+                url: '/APIService/APIAdminActivity/LoadDepartmentDropdown?universityId=' + selectedUniversity,
+                dataType: 'json',
+                crossOrigin: true,
+
+                success: function (data) {
+
+                    var DepartementDetails = "<option value=''>----- Select Department -----</option>";
+
+                    for (var x = 0; x < data.length; x++) {
+                        DepartementDetails = DepartementDetails + "<option value=" + data[x].Departmentid + ">" + data[x].DepartmentName + "</option>";
+
+                    }
+
+                    $('#ddlDepartment').find('option').remove().end().append(DepartementDetails);
+
+
+                },
+                error: function (result) {
+                    alert("Error");
+
+                }
+            });
+
+        });
+    });
+
+    $(function () {
+        $('#ddlDepartment').change(function () {
+            var Department = $("#ddlDepartment").find("option:selected").val();
+            $.ajax({
+                type: 'GET',
+                url: '/APIService/APIAdminActivity/LoadSemesterDropdown?departmentid=' + Department,
+                dataType: 'json',
+                crossOrigin: true,
+                success: function (response) {
+                    var rData = response;
+                    var SubjectDetails = "<option value=''>----- Select Semester ------</option>";
+
+                    for (var x = 0; x < rData.length; x++) {
+                        SubjectDetails = SubjectDetails + "<option value=" + rData[x].semester + ">" + rData[x].semester + "</option>";
+
+                    }
+
+                    $('#ddlSemester').find('option').remove().end().append(SubjectDetails);
+
+
+                },
+                error: function (result) {
+                    alert("Error");
+                }
+            });
+
+
+        });
+    });
+
+    function showDataUnitDetails(selectedUniversity, Department, Semester, Subjectid) {
+        $('#tblChild').DataTable({
+            "bDestroy": true
+        }).fnClearTable();
+
+        $.ajax({
+
+            type: 'GET',
+            url: '/APIService/APIAdminActivity/SubjectMasterUploadPopup?selectedUniversity=' + selectedUniversity + '&Department=' + Department + '&Semester=' + Semester + '&Subjectid=' + Subjectid,
+            dataType: 'json',
+            async: 'false',
+            crossOrigin: true,
+            success: function (response) {
+                var rData = JSON.parse(response);
+                var res;
+                var j = 0;
+
+                for (var i = 0; i < rData.length; i++) {
+
+                    j = parseInt(j + 1);
+                    res += '<tr><td>' + j + '</td>' +
+                            '<td>' + rData[i].unitCode + '</td>' +
+                            '<td class="unitnames">' + rData[i].unitName + '</td>' +
+                            '<td>' + rData[i].subjectunitpath + '</td></tr>';
+
+                }
+
+                $('#tblChild tbody').html(res);
+                $('#tblChild').DataTable({
+                    "bProcessing": true,
+                    "bDestroy": true
+                });
+
+            },
+
+            error: function (result) {
+                alert("Error");
+            }
+        });
+    }
+
+    var selectedUniversity = '';
+    var Department = '';
+    var Semester = '';
+    var Subjectid = '';
+    function showData(selectedUniversity, Department, Semester, Subjectid) {
+
+        $('#tblImportExcel').DataTable({
+            "bDestroy": true
+        }).fnClearTable();
+
+        if (selectedUniversity == 0 && Department == 0 && Semester == 0 && Subjectid == 0) {
+            urlwebs = '/APIService/APIAdminActivity/SubjectMasterUploadGrid?selectedUniversity=' + selectedUniversity + '&Department=' + Department + '&Semester=' + Semester + '&Subjectid=' + Subjectid;
+        }
+        else {
+
+            urlwebs = '/APIService/APIAdminActivity/SubjectMasterUploadGrid?selectedUniversity=' + selectedUniversity + '&Department=' + Department + '&Semester=' + Semester + '&Subjectid=' + Subjectid;
+        }
+        $.ajax({
+            beforeSend: function () {
+                $('.loader').show();
+            },
+            type: 'GET',
+            url: urlwebs,
+            dataType: 'json',
+            crossOrigin: true,
+            async: false,
+            success: function (response) {
+
+                var rData = JSON.parse(response);
+                var res;
+                var j = 0;
+
+                for (var i = 0; i < rData.length; i++) {
+
+                    j = parseInt(j + 1);
+                    res += '<tr><td>' + j + '</td>' +
+                        '<td>' + rData[i].university + '</td>' +
+                        '<td>' + rData[i].deptName + '</td>' +
+                        '<td>' + rData[i].semester + '</td>' +
+                        '<td>' + rData[i].subjectCode + '</td>' +
+                        '<td class="Subjectname">' + rData[i].subjectName + '</td>' +
+                        '<td><a id="regClg"  data-toggle="modal" data-target="#RegStudent"  rel="' + rData[i].universityid + "~" + rData[i].departmentid + "~" + rData[i].semester + "~" + rData[i].Subjectid + '"  href="#">' + rData[i].unitCount + ' </a></td></tr>';
+
+                }
+
+                $('#tblImportExcel tbody').html(res);
+                $('#tblImportExcel').DataTable({
+                    "bProcessing": true,
+                    "bDestroy": true
+                });
+
+            },
+
+            error: function (result) {
+                alert("Error");
+            },
+            complete: function () {
+                $('.loader').hide();
+            }
+        });
+    }
+
+    $(function () {
+        $('#btnApplyFilter').click(function () {
+
+            $('#tblImportExcel').DataTable({
+                "bDestroy": true
+            }).fnClearTable();
+
+            var searchResult = "<b>Filtered Results For:  </b>";
+
+            var selectedUniversity = $("#ddlUniversity").find("option:selected").val();
+
+            var Department = $("#ddlDepartment").find("option:selected").val();
+
+            var Semester = $("#ddlSemester").find("option:selected").val();
+
+            var Subjectid = 0;
+            var universityName = $("#ddlUniversity option:selected").text();
+            var deptName = $("#ddlDepartment option:selected").text();
+            var semester = $("#ddlSemester option:selected").val();
+
+            if (selectedUniversity != "--- Select University ---") {
+
+                searchResult += "  University:" + " " + " " + "<b>" + universityName + "</b>";
+            }
+            if (Department == '') {
+                Department = 0;
+            }
+            else {
+                searchResult += "  Department:" + " " + " " + "<b>" + deptName + "</b> ";
+            }
+
+            if (Semester == '') {
+                Semester = 0;
+            }
+            else {
+                searchResult += "  Semester: <b>" + semester + "</b>";
+            }
+            showData(selectedUniversity, Department, Semester, Subjectid);
+
+            $('#closepopup_filter').trigger('click');
+
+            $("#DynamicFilteredData").html(searchResult).css('font-weight', 'Medium');
+
+        });
+    });
+
+
+    $('#refreshFilter').click(function () {
+
+        $("#DynamicFilteredData").html('');
+        clearpopup();
+        $('#tblImportExcel').DataTable({
+            "bDestroy": true
+        }).fnClearTable();
+        showData(selectedUniversity, Department, Semester, Subjectid);
+    });
+
+    $('#btnClearFilter').click(function () {
+        clearpopup();
+    });
+
+    function clearpopup() {
+        $("#ddlUniversity").empty().append(LoadUniversity());
+        $("#ddlDepartment").text('');
+        $("#ddlSemester").val(0);
+    }
+
+    $(document).ready(function () {
+        LoadUniversity();
+        selectedUniversity = 0;
+        Department = 0;
+        Semester = 0;
+        Subjectid = 0;
+        showData(selectedUniversity, Department, Semester, Subjectid);
+
+
+        $(document).on('click', '#regClg', function (e) {
+            e.preventDefault();
+
+            $('#tblChild table tbody').html('Loading.Please wait...');
+
+            var universityid = $(this).attr('rel');
+            var selectedUniversity = universityid.split('~')[0];
+            var departmentid = $(this).attr('rel');
+            var Department = departmentid.split('~')[1];
+            var semester = $(this).attr('rel');
+            var Semester = semester.split('~')[2];
+            var Subjectid = $(this).attr('rel');
+            var Subjectid = Subjectid.split('~')[3];
+
+            var subjectName = $(this).parent().parent().find(".Subjectname").text();
+            $("#Subject").html(" Subject Name:  " + "<b>" + subjectName + "</b>");
+            showDataUnitDetails(selectedUniversity, Department, Semester, Subjectid);
+
+        });
+    });
+    function navigate(target) {
+        var _Url = '';
+        if (target == 1) {
+            _Url = "SubjectUploadSummary";
+        }
+        window.open(_Url, '_blank');
+    }
+</script>
+

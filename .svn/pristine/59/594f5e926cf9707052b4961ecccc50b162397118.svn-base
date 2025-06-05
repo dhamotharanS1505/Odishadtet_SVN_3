@@ -1,0 +1,729 @@
+﻿
+@{
+    ViewBag.Title = "DataAnalyzeReport";
+    Layout = "~/Views/Shared/_LearnEnggAdminLayout.cshtml";
+}
+
+<style>
+    .wrapper {
+        background: none;
+    }
+
+    .btn {
+        min-width: 85px;
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    .modal-header {
+        border-bottom: none !important;
+        padding: 15px;
+    }
+
+    .md_cnt_hgt {
+        height: 400px;
+    }
+
+    #EndDate_reg {
+        margin-top: 0 !important;
+    }
+
+    #FilterModel .modal-dialog {
+        width: 55% !important;
+    }
+
+    .mrg-btm {
+        margin-bottom: 8px;
+    }
+
+    .fl_in_det li.date_p input {
+        display: block;
+        margin-right: 0 !important;
+        padding: 8px;
+        width: 84% !important;
+    }
+</style>
+<div class="col-md-12" style="margin-top:20px;">
+    <div>
+        <form class="form-horizontal col-sm-12">
+            <div class="col-sm-12 status-title">
+                <fieldset class="field_cont">
+                    <legend class="lgnd1" align="center">Analyze Report Type</legend>
+                    <div id="fine_drp_1" class="col-sm-5 sel-univ ">
+                        <label class="control-label">Report Type<font style="color:red">*</font></label>
+                        <select id="ddlusageType" class="form-control">
+                            <option value="0">--Select Report Type--</option>
+                            <option value="1">subject wise report</option>
+                            <option value="2">user wise report</option>
+                        </select>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="col-sm-12">
+                <fieldset class="field_cont">
+                    <legend class="lgnd1" align="center">Data Analyze Report</legend>
+                    <table id="tblMasterMainUser" class="table table-striped table-bordered">
+                        <thead>
+                            <tr class="head-bg">
+                                <th>S.No</th>
+                                <th>University Name</th>
+                                <th>Registered Count</th>
+                                <th>Trial Count</th>
+                                <th>Purchased Count</th>
+                                <th>Usage Hours</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodyFix"></tbody>
+                    </table>
+                    <table id="tblMasterMainSubj" class="table table-striped table-bordered">
+                        <thead>
+                            <tr class="head-bg">
+                                <th>S.No</th>
+                                <th>University Name</th>
+                                <th>Total Subjects</th>
+                                <th>Trial Count</th>
+                                <th>Purchased Count</th>
+                                <th>Usage Count</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodyFix"></tbody>
+                    </table>
+                </fieldset>
+            </div>
+            <div class="table-responsive col-sm-12 marg-tab">
+                <div class="grp_mar_btm">
+                    <fieldset class="field_cont">
+                        <legend class="lgnd1" align="center">Data Filtering</legend>
+                        <div class="col-sm-3 sel-date">
+                            <button id="btnClear" class="btn btn-primary btn-sm pull-right">Clear</button>
+                            <button id="btnfilter" class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#FilterModel">Filter</button>
+                        </div>
+                        <div style="float:right;">
+                            <button id="btnReport" class="btn btn-primary btn-sm pull-right">Download Report</button>
+                            <button id="btnSubmit" class="btn btn-primary btn-sm pull-right">Submit</button>
+                        </div>
+                        <h5 id="DynamicFilteredData"></h5>
+                    </fieldset>
+                </div>
+                <table id="tblMasterSubj" class="table table-striped table-bordered">
+                    <thead>
+                        <tr class="head-bg">
+                            <th>S.No</th>
+                            <th>Subject Name</th>
+                            <th class="PurchasedCount">Content Product</th>
+                            <th class="PurchasedCount">Q&A Android App</th>
+                            <th class="PurchasedCount">Q&A Desktop</th>
+                            <th class="TrialCount">Trial Count</th>
+                            <th class="UsageCount">Usage Count</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbodyFix"></tbody>
+                </table>
+                <table id="tblMasterUser" class="table table-striped table-bordered" style="display:none;">
+                    <thead>
+                        <tr class="head-bg">
+                            <th>S.No</th>
+                            <th>User Name</th>
+                            <th>Mobile</th>
+                            <th>University</th>
+                            <th>Department</th>
+                            <th>Year</th>
+                            <th>Trial count</th>
+                            <th>Purchased count</th>
+                            <th>Usage hours</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbodyFix"></tbody>
+                </table>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<div class="loader">
+    <center>
+        <img src="../Content/img/pre_loader.gif" />
+    </center>
+</div>
+<div class="modal fade" id="FilterModel" role="dialog">
+    <div class="modal-dialog custom_pop_1">
+        <div class="modal-content md_cnt_hgt">
+            <div class="modal-header">
+                <button id="closepopup" data-dismiss="modal" class="close" type="button">
+                    ×
+                </button>
+                <h4 id="UserrName" class="pop_hed">
+                    Filter Data Analyze Details
+                </h4>
+            </div>
+            <table class="table btm-none">
+                <tr class="sel-chck">
+                    <th>
+                        <label id="userwise">
+                            <input type="checkbox" value="1" class="chk">&nbsp;Registration
+                        </label>
+                        <label>
+                            <input type="checkbox" value="2" class="chk">&nbsp;Trialed
+                        </label>
+                        <label>
+                            <input type="checkbox" value="3" class="chk">&nbsp;Purchased
+                        </label>
+                        <label>
+                            <input type="checkbox" value="4" class="chk">&nbsp;Usage
+                        </label>
+                    </th>
+                </tr>
+            </table>
+            <div id="usersubject" class="modal-body clearfix row pop_pdng_wrp mrg-btm">
+                <div class="col-sm-2">
+                    <label>
+                        <strong> <span>REGISTRATION:</span> </strong>
+                    </label>
+                </div>
+                <div class="col-sm-5">
+                    <ul class="fl_in_det">
+                        <li class="date_p">
+                            <input align="left" type="text" id="rg_startdate" placeholder="Start Date" readonly="readonly"
+                                   title="start date should be lesser than end date" />
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-sm-5">
+                    <ul class="fl_in_det">
+                        <li class="date_p">
+                            <input align="left" type="text" id="rg_end_date" placeholder="End Date" readonly="readonly"
+                                   title="End date should be greater than start date" />
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-body clearfix row pop_pdng_wrp mrg-btm">
+                <div class="col-sm-2">
+                    <label>
+                        <strong><span>TRIALED:</span> </strong>
+                    </label>
+                </div>
+                <div class="col-sm-5">
+                    <ul class="fl_in_det">
+                        <li class="date_p">
+                            <input align="left" type="text" id="tr_startdate" placeholder="Start Date" readonly="readonly"
+                                   title="start date should be lesser than end date" />
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-sm-5">
+                    <ul class="fl_in_det">
+                        <li class="date_p">
+                            <input align="left" type="text" id="tr_end_date" placeholder="End Date" readonly="readonly"
+                                   title="End date should be greater than start date" />
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-body clearfix row pop_pdng_wrp mrg-btm">
+                <div class="col-sm-2">
+                    <label>
+                        <strong><span>PURCHASED:</span> </strong>
+                    </label>
+                </div>
+                <div class="col-sm-5">
+                    <ul class="fl_in_det">
+                        <li class="date_p">
+                            <input align="left" type="text" id="pr_startdate" placeholder="Start Date" readonly="readonly"
+                                   title="start date should be lesser than end date" />
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-sm-5">
+                    <ul class="fl_in_det">
+                        <li class="date_p">
+                            <input align="left" type="text" id="pr_end_date" placeholder="End Date" readonly="readonly"
+                                   title="End date should be greater than start date" />
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-body clearfix row pop_pdng_wrp">
+                <div class="col-sm-2">
+                    <label>
+                        <strong><span>USAGE:</span> </strong>
+
+                    </label>
+                </div>
+                <div class="col-sm-5">
+                    <ul class="fl_in_det">
+                        <li class="date_p">
+                            <input align="left" type="text" id="usg_startdate" placeholder="Start Date" readonly="readonly"
+                                   title="start date should be lesser than end date" />
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-sm-5">
+                    <ul class="fl_in_det">
+                        <li class="date_p">
+                            <input align="left" type="text" id="usg_end_date" placeholder="End Date" readonly="readonly"
+                                   title="End date should be greater than start date" />
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-12 pop_btn">
+                <input align="middle" type="button" class="fil_in_btn_aply" value="Apply Filter" id="btnApplyFilter" />
+                <input align="middle" type="button" class="fil_in_btn_aply" value="Clear Filter" id="btnClearFilter" />
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    var change_type = 0;
+    var univId = 0;
+    var checkedType = 0;
+    var report_typetxt = '';
+    var scltreportType = '';
+
+    var reg_st_date = '';
+    var reg_end_date = '';
+
+    var trl_st_date = '';
+    var trl_end_date = '';
+
+    var pur_st_date = '';
+    var pur_end_date = '';
+
+    var usg_st_date = '';
+    var usg_end_date = '';
+
+    $(document).ready(function () {
+
+    });
+
+    function userwiseAnalyzeData() {
+        $.ajax({
+            beforeSend: function () {
+                $('.loader').show();
+            },
+            url: '/APIService/APIAdminAnalyzeActivity/GetAdminAnalyzeDataByUuniversityall',
+            type: "GET",
+            datatype: 'json',
+            success: function (data) {
+                if (data != "") {
+                    var rData = data;
+                    var table;
+                    var j = 0;
+                    for (var i = 0; i < rData.length; i++) {
+                        j = parseInt(j + 1);
+                        table +=
+                                   '<tr>' +
+                                   '<td>' + j + '</td>' +
+                                   '<td>' + rData[i].univ_name + '</td>' +
+                                   '<td><a id="univid" rel="' + rData[i].univ_id + '" href="#">' + rData[i].registered_count + '</a></td>' +
+                                   '<td>' + rData[i].purchased_count + '</td>' +
+                                   '<td>' + rData[i].trail_count + '</td>' +
+                                   '<td>' + rData[i].Total_Usage_hours + '</td></tr>';
+                    }
+
+                    $('#tblMasterMainUser tbody').empty().append(table);
+                }
+                else {
+                    $('#tblMasterMainUser tbody').html('<div class="col-sm-12" style="margin-top:8%;"><strong><h5> Data Not Avaliable.</h5></strong></div>');
+                }
+
+            },
+            complete: function () {
+                $('.loader').hide();
+            }
+        });
+    }
+
+    function subjectwiseAnalyzeData() {
+        $.ajax({
+            beforeSend: function () {
+                $('.loader').show();
+            },
+            url: '/APIService/APIAdminAnalyzeActivity/GetAdminAnalyzeSubjectDataByUuniversityall',
+            type: "GET",
+            datatype: 'json',
+            success: function (data) {
+                if (data != "") {
+                    var rData = data;
+                    var table;
+                    var j = 0;
+                    for (var i = 0; i < rData.length; i++) {
+                        j = parseInt(j + 1);
+                        table +=
+                                   '<tr>' +
+                                   '<td>' + j + '</td>' +
+                                   '<td>' + rData[i].univ_name + '</td>' +
+                                   '<td>' + rData[i].actual_subject_count + '</td>' +
+                                   '<td>' + rData[i].trail_count + '</td>' +
+                                   '<td>' + rData[i].purchased_count + '</td>' +
+                                   '<td>' + rData[i].Usage_Count + '</td></tr>';
+                    }
+
+                    $('#tblMasterMainSubj tbody').empty().append(table);
+                }
+                else {
+                    $('#tblMasterMainSubj tbody').html('<div class="col-sm-12" style="margin-top:8%;"><strong><h5> Data Not Avaliable.</h5></strong></div>');
+                }
+
+            },
+            complete: function () {
+                $('.loader').hide();
+            }
+        });
+    }
+
+
+    $(document).on('click', '.chk', function () {
+        checkedType = $(".chk:checked").map(function () {
+            return this.value;
+        }).get();
+        report_typetxt = $(".chk:checked").map(function () {
+            return $(this).closest('label').text();
+        }).get();
+    });
+
+    $(function () {
+
+        $('#ddlusageType').change(function () {
+            change_type = $("#ddlusageType :selected").val();
+            if (change_type == 1) {
+                subjectwiseAnalyzeData();
+                $('#tblMasterUser').hide();
+                $('#tblMasterMainUser').hide();
+                $('#userwise').hide();
+                $('#usersubject').hide();
+                $('#tblMasterSubj').show();
+                $('#tblMasterMainSubj').show();
+            }
+            else if (change_type == 2) {
+                userwiseAnalyzeData();
+                $('#tblMasterSubj').hide();
+                $('#tblMasterMainSubj').hide();
+                $('#userwise').show();
+                $('#usersubject').show();
+                $('#tblMasterUser').show();
+                $('#tblMasterMainUser').show();
+            }
+        });
+
+        $(document).on('click', '#univid', function () {
+            univId = $(this).attr('rel');
+        });
+
+    });
+
+    $('#btnApplyFilter').click(function () {
+
+        var searchResult = "<b>Filter Applied For:    </b>";
+
+        reg_st_date = $("#rg_startdate").val();
+        reg_end_date = $("#rg_end_date").val();
+
+        trl_st_date = $("#tr_startdate").val();
+        trl_end_date = $("#tr_end_date").val();
+
+        pur_st_date = $("#pr_startdate").val();
+        pur_end_date = $("#pr_end_date").val();
+
+        usg_st_date = $("#usg_startdate").val();
+        usg_end_date = $("#usg_end_date").val();
+
+        var universityName = $("#ddlUniversity option:selected").text();
+        if (universityName != "--Select Universtiy--") {
+
+            searchResult += "<b>" + universityName + "</b>";
+        }
+        if (report_typetxt == '') {
+            report_typetxt = 0;
+        }
+        else {
+            searchResult += "  Data Type: <b>" + report_typetxt + "</b><br/>";
+        }
+        if (reg_st_date == '') {
+            reg_st_date = 0;
+        }
+        else {
+            searchResult += "  Reg Start date: <b>" + reg_st_date + "</b>";
+        }
+
+        if (reg_end_date == '') {
+            reg_end_date = 0;
+        }
+        else {
+            searchResult += "  Reg End date: <b>" + reg_end_date + "</b><br/>";
+        }
+        if (trl_st_date == '') {
+            trl_st_date = 0;
+        }
+        else {
+            searchResult += "  Trial Start date: <b>" + trl_st_date + "</b>";
+        }
+
+        if (trl_end_date == '') {
+            trl_end_date = 0;
+        }
+        else {
+            searchResult += "  Trial End date: <b>" + trl_end_date + "</b><br/>";
+        }
+        if (pur_st_date == '') {
+            pur_st_date = 0;
+        }
+        else {
+            searchResult += "  Purchase Start date: <b>" + pur_st_date + "</b>";
+        }
+
+        if (pur_end_date == '') {
+            pur_end_date = 0;
+        }
+        else {
+            searchResult += "  Purchase End date: <b>" + pur_end_date + "</b><br/>";
+        }
+
+        if (usg_st_date == '') {
+            usg_st_date = 0;
+        }
+        else {
+            searchResult += "  Usage Start date: <b>" + usg_st_date + "</b>";
+        }
+
+        if (usg_end_date == '') {
+            usg_end_date = 0;
+        }
+        else {
+            searchResult += "  Usage End date: <b>" + usg_end_date + "</b>";
+        }
+
+        $('#closepopup').trigger('click');
+
+        $("#DynamicFilteredData").html(searchResult).css('font-weight', 'Normal');
+    });
+
+    $(document).on('click', '#btnSubmit', function (e) {
+        e.preventDefault();
+
+        if (change_type > 0) {
+
+            if (checkedType.length > 0) {
+
+                if (change_type == 1) {
+
+                    dataAnalseReport_Subjectwise();
+                }
+                else if(univId > 0) {
+                    dataAnalseReport_Userwise();
+                }
+            }
+            else {
+                ShowAlert("Message", "Choose any one of type to load data at filter", "warning");
+            }
+        }
+        else {
+            ShowAlert("Alert Message", "Select required fields for action", "error");
+        }
+    });
+
+    function dataAnalseReport_Subjectwise() {
+        univId = 1;
+        $.ajax({
+            beforeSend: function () {
+                $('.loader').show();
+            },
+            url: '/APIService/APIAdminAnalyzeActivity/GetAdminAnalyzeBySubjectsMultipleSelection?UnivId=' + univId + '&PurStartDate=' + pur_st_date + '&PurEndDate=' + pur_end_date + '&TraStartDate=' + trl_st_date + '&TraEndDate=' + trl_end_date + '&UsgStartDate=' + usg_st_date + '&UsgEndDate=' + usg_end_date,
+            //url: '',
+            type: "GET",
+            datatype: 'json',
+            success: function (data) {
+                if (data != "") {
+                    var rData = data;
+                    var table;
+                    var j = 0;
+                    for (var i = 0; i < rData.length; i++) {
+                        j = parseInt(j + 1);
+                        table +=
+                                   '<tr>' +
+                                   '<td>' + j + '</td>' +
+                                   '<td>' + rData[i].subject_name + '</td>' +
+                                   '<td class="PurchasedCount">' + rData[i].total_purchased_content + '</td>' +
+                                   '<td class="PurchasedCount">' + rData[i].total_purchased_qa_desktop + '</td>' +
+                                   '<td class="PurchasedCount">' + rData[i].total_purchased_qa_android + '</td>' +
+                                   '<td class="TrialCount">' + rData[i].trail_count + '</td>' +
+                                   '<td class="UsageCount">' + rData[i].usagehrs + '</td></tr>';
+                    }
+                    //$('#tblMasterSubj tr td ').toggle();
+
+                    $('#tblMasterSubj tbody').empty().append(table);
+                   
+                    if (pur_st_date == "0" && pur_end_date == "0") {
+                    
+                        $('.PurchasedCount').hide();
+                    }
+                    else
+                    {
+                        $('.PurchasedCount').show();
+                    }
+                    if (trl_st_date == "0" && trl_end_date == "0") {
+                        $('.TrialCount').hide();
+                    }
+                    else {
+                        $('.TrialCount').show();
+                    }
+                    if (usg_st_date == "0" && usg_st_date == "0") {
+                        $('.UsageCount').hide();
+                    }
+                    else {
+                        $('.UsageCount').show();
+                    }
+
+                }
+                else {
+                    $('#tblMasterSubj tbody').html('<div class="col-sm-12" style="margin-top:8%;"><strong><h5> Data Not Avaliable.</h5></strong></div>');
+                }
+
+            },
+            complete: function () {
+                $('.loader').hide();
+            }
+        });
+    }
+
+    $(document).on('click', '#btnClear', function (e) {
+        e.preventDefault();
+
+        clearpopupfields();
+
+        univId = 0;
+        scltreportType = 0;
+        selectedtype = 0;
+        reg_st_date = 0;
+        reg_end_date = 0;
+        trl_st_date = 0;
+        trl_end_date = 0;
+        pur_st_date = 0;
+        pur_end_date = 0;
+        usg_st_date = 0;
+        usg_end_date = 0;
+
+        $('input:checkbox').removeAttr('checked');
+
+        $("#DynamicFilteredData").html('');
+
+        $('#ddlreport').multiselect('deselectAll', false);
+        $('#ddlreport').multiselect('updateButtonText');
+
+        $("#ddlUniversity").empty().append($("#ddlUniversity").html('<option value="0">--Select University--</option>'), LoadUniversity());
+        $("#ddlusageType").empty().append($("#ddlusageType").html('<option value="0">--Select Report Type--</option> <option value="1">subject wise report</option><option value="2">user wise report</option>'));
+    });
+
+
+    function dataAnalseReport_Userwise() {
+        $.ajax({
+            beforeSend: function () {
+                $('.loader').show();
+            },
+             url: '/APIService/APIAdminAnalyzeActivity/GetAdminAnalyzeForUserMultipleSelection?UnivId=' + univId + '&RegStartDate=' + reg_st_date + '&RegEndDate=' + reg_end_date + '&PurStartDate=' + pur_st_date + '&PurEndDate=' + pur_end_date + '&TraStartDate=' + trl_st_date + '&TraEndDate=' + trl_end_date + '&UsgStartDate=' + usg_st_date + '&UsgEndDate=' + usg_end_date,
+            
+            type: "GET",
+            datatype: 'json',
+            success: function (data) {
+                if (data != "") {
+                    var rData = data;
+                    var table;
+                    var j = 0;
+                    for (var i = 0; i < rData.length; i++) {
+                        j = parseInt(j + 1);
+                        table +=
+                                   '<tr>' +
+                                   '<td>' + j + '</td>' +
+                                   '<td id="userData" rel=' + rData[i].user_id + '>' + rData[i].user_name + '</td>' +
+                                   '<td>' + rData[i].mobileno + '</td>' +
+                                   '<td id="univData"rel=' + rData[i].univ_id + '>' + rData[i].univ_name + '</td>' +
+                                   '<td>' + rData[i].trail_count + '</td>' +
+                                   '<td>' + rData[i].purchased_count + '</td>' +
+                                   '<td>' + rData[i].Usage_hours + '</td></tr>';
+                    }
+
+                    $('#tblMasterUser tbody').empty().append(table);
+                }
+                else {
+                    $('#tblMasterUser tbody').html('<div class="col-sm-12" style="margin-top:8%;"><strong><h5> Data Not Avaliable.</h5></strong></div>');
+                }
+            },
+            complete: function () {
+                $('.loader').hide();
+            }
+        });
+    }
+
+
+    $('#btnfilter').click(function () {
+
+        $("#rg_startdate").datepicker({ dateFormat: 'dd-mm-yy' });
+        $("#rg_end_date").datepicker({ dateFormat: 'dd-mm-yy' });
+
+        $("#tr_startdate").datepicker({ dateFormat: 'dd-mm-yy' });
+        $("#tr_end_date").datepicker({ dateFormat: 'dd-mm-yy' });
+
+        $("#pr_startdate").datepicker({ dateFormat: 'dd-mm-yy' });
+        $("#pr_end_date").datepicker({ dateFormat: 'dd-mm-yy' });
+
+        $("#usg_startdate").datepicker({ dateFormat: 'dd-mm-yy' });
+        $("#usg_end_date").datepicker({ dateFormat: 'dd-mm-yy' });
+    });
+
+    function clearpopupfields() {
+
+        $("#rg_startdate").val('');
+        $("#rg_end_date").val('');
+
+        $("#tr_startdate").val('');
+        $("#tr_end_date").val('');
+
+        $("#pr_startdate").val('');
+        $("#pr_end_date").val('');
+
+        $("#usg_startdate").val('');
+        $("#usg_end_date").val('');
+
+    }
+
+    $(document).on('click', '#btnReport', function (e) {
+        e.preventDefault();
+        
+        if (univId > 0 && change_type > 0) {
+
+            if (checkedType.length > 0) {
+
+                if (change_type == 1) {
+                    window.location.href = "../AdminAnalyzeActivity/DataAnalyseReportSubjectWise?UnivId=" + univId + "&PurStartDate=" + pur_st_date + "&PurEndDate=" + pur_end_date + "&TraStartDate=" + trl_st_date + "&TraEndDate=" + trl_end_date + "&UsgStartDate=" + usg_st_date + "&UsgEndDate=" + usg_end_date;
+                }
+                else {
+                    window.location.href = "../AdminAnalyzeActivity/DataAnalyseReportUserwise?UnivId=" + univId + "&RegStartDate=" + reg_st_date + "&RegEndDate=" + reg_end_date + "&PurStartDate=" + pur_st_date + "&PurEndDate=" + pur_end_date + "&TraStartDate=" + trl_st_date + "&TraEndDate=" + trl_end_date + "&UsgStartDate=" + usg_st_date + "&UsgEndDate=" + usg_end_date;
+                }
+            }
+            else {
+                ShowAlert("Alert Message", "For Report, Choose Any one of data type in filter.", "error");
+            }
+        }
+        else {
+            ShowAlert("Alert Message", "Select Required fields.", "error");
+        }
+    });
+
+    $('#btnClearFilter').click(function () {
+
+        clearpopupfields();
+    });
+
+
+</script>
+
+<script id="UniversityList" type="text/html">
+    <option value="${Universityid}">${UniversityName}</option>
+</script>
+
+

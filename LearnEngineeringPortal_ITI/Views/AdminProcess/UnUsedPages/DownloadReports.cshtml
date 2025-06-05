@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewBag.Title = "DownloadReports";
+    Layout = "~/Views/Shared/_PopupLayout.cshtml";
+}
+
+<article class="col-sm-12">
+    <div class="in_hd_tt row"><strong class="fa fa-file-text"></strong><span>Complete Report Download</span></div>
+</article>
+<article class="col-sm-12">
+    <section class="sub_wrp row">
+        <center>
+            <table>
+                <tr>
+                    <td>University</td>
+                    <td>
+                        <select style="width:200px;" class="chk" id="ddlUniversity">
+                            @* <option value="0">Select</option>*@
+                            <option value="1">Anna University</option>
+                            <option value="2">KTU</option>
+                            <option value="3">JNTUH</option>
+                            <option value="4">JNTUA</option>
+                            <option value="5">JNTUK</option>
+                            <option value="6">Andhra University</option>
+                            <option value="8">Visvesvaraya Technological University</option>
+                            <option value="88">VTU-MOU</option>
+                            <option value="22">KTU-MOU</option>
+
+                            @*<option value="1-NU">Nigeria University</option>*@
+                        </select>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td>RoleType</td>
+                    <td>
+                        <select style="width:200px;" class="chk" id="ddlRole">
+                            @*<option value="0">Select</option>*@
+                            <option value="1">Student</option>
+                            <option value="2">Staff</option>
+                        </select>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td></td>
+                    <td><input type="button" value="Download" id="dwnreport" /></td>
+                </tr>
+            </table>
+        </center>
+    </section>
+
+</article>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $("#dwnreport").show();
+
+        $('#dwnreport').click(function () {
+            window.location.href = "../AdminProcess/ReportbyUniversity?univID=" + $("#ddlUniversity").val() + "&roleID=" + $("#ddlRole").val();
+        });
+
+    });
+</script>
+
+

@@ -1,0 +1,152 @@
+﻿@model Odishadtet.Models.checkLogin
+@{
+    ViewBag.Title = "OTPVerification";
+    Layout = "~/Views/Shared/_LearnEnggLayout.cshtml";
+}
+<style type="text/css">
+    .resend {
+        color: #3399FF;
+        outline: 0 none;
+        text-decoration: underline;
+    }
+
+    #otpcode {
+        width: 30%;
+    }
+
+    .grp_ot-wrp h1 {
+        font-size: 14px;
+    }
+
+    .grp_ot-wrp span {
+        display: block;
+        width: 100%;
+    }
+
+    .bil_add-wrp .grp_ot-wrp > strong {
+        display: block;
+        font-weight: normal;
+        text-transform: capitalize;
+        margin: 10px 0 0 0;
+        border: 0px solid transparent;
+    }
+</style>
+
+<article class="bil_add-wrp">
+    <strong>
+        Registration Activation Process:
+    </strong>
+    <div class="row">
+        <div class="col-sm-12">
+            Dear
+            <b> @Html.DisplayFor(x => x.FirstName),</b>
+
+        </div>
+        <div class="col-sm-12 col-sm-offset-1">
+            <b> OTP has been sent to the Following registered Mobile/Email Address.</b>
+        </div>
+
+        <div class="col-sm-12 col-sm-offset-1">
+            <b>Mobile:</b>
+            <span id="mobile"> @Html.DisplayFor(m => m.mobileNumber)</span>
+        </div>
+        <div class="col-sm-12 col-sm-offset-1">
+            <b> Email ID:</b>
+            <span id="email">@Html.DisplayFor(m => m.emailId)</span>
+        </div>
+    </div>
+</article>
+<article class="bil_add-wrp">
+    <strong>
+        To Complete the Registration
+    </strong>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="grp_ot-wrp">
+                <h1> Enter your ONE TIME PASSWORD: </h1>
+                <span>
+                    <input type="text" id="otpcode" />
+                </span>
+                <input type="button" id="confirm" class="btn btn-primary" value="Confirm" />
+                <strong>
+                    Didn't received verification code?
+                    <a id="resendotp" href="#" class="resend">Resend OTP</a>
+                </strong>
+            </div>
+
+        </div>
+
+    </div>
+</article>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#otpcode').ForceNumericOnly();
+
+    });
+    var userid = '@ViewBag.userid';
+    $(function () {
+        $('#confirm').click(function () {
+            var otpcode = $('#otpcode').val();
+            if (otpcode == 0) {
+                ShowAlert("Registration", "Please Enter the OTP to Complete Registration", "warning")
+            }
+            else {
+                $.ajax({
+                    url: '/APIService/APIUserDashBoard/GetOTP_CodeVerification?userId=' + userid + '&otpCode=' + otpcode,
+                    type: 'GET',
+                    cache: false,
+                    success: function (result) {
+                        if (result == 1) {
+                            confirmDialog("Registered Successfully");
+                        }
+                        else {
+                            ShowAlert("Registration", "OTP is incorrect ,Please Click Resend for OTP", "warning");
+                        }
+
+                    }
+                });
+            }
+        });
+
+        $(document).on('click', '#resendotp', function () {
+
+            var $this = $(this);
+
+            var mobileNum = $('#mobile').text();
+            var email_id = $('#email').text();
+            $.ajax({
+                url: '/APIService/APIUserDashBoard/GetVerificationCodeByMobile?MobNo=' + mobileNum + '&emailID=' + email_id,
+                type: 'GET',
+                success: function (data) {
+                    if (data == 1) {
+                        ShowAlert("ONE TIME PASSWORD", "OTP has been sent to your Mobile Number", "success");
+                    }
+                },
+                complete: function () {
+                    $this.prop('disabled', true);
+
+                }
+            });
+        });
+    });
+
+    function confirmDialog(message) {
+        ShowAlert({
+            title: "Registration",
+            text: message,
+            showCancelButton: false,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Ok",
+            closeOnConfirm: false,
+            closeOnCancel: true
+        },
+function (isConfirm) {
+    if (isConfirm) {
+        window.location.href = "/Home/Index?login=1";
+
+    }
+
+});
+    }
+</script>

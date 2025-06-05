@@ -1,0 +1,836 @@
+﻿
+@{
+    ViewBag.Title = "AllOrderStatusDetails";
+    Layout = "~/Views/Shared/_LearnEnggAdminLayout.cshtml";
+
+}
+
+
+
+<style type="text/css">
+    .row {
+        margin-left: -15px;
+        margin-right: -15px;
+    }
+
+    thead tr th {
+        line-height: 15px !important;
+    }
+
+
+
+    #txtcment {
+        width: 70%;
+    }
+
+    .ui-dialog .ui-dialog-buttonpane button {
+        cursor: pointer;
+        margin: 0.5em 0.4em 0.5em 0;
+        padding: 4px;
+    }
+
+    .col-sm-6 > select {
+        border: 1px solid #000;
+        border-radius: 1px !important;
+        margin: 1px !important;
+        width: 70%;
+        padding: 4px;
+        background: rgba(0, 0, 0, 0) url("../Content/img/v1.png") no-repeat scroll right center;
+        -moz-appearance: none;
+    }
+
+    .ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix.ui-draggable-handle > button {
+        background: #fff none repeat scroll 0 0;
+        margin-left: 7%;
+        padding: 0;
+        top: 0 !important;
+    }
+
+    #thead {
+        background: #34addb none repeat scroll 0 0;
+        color: #fff;
+    }
+
+    .ui-dialog-content.ui-widget-content {
+        border: 1px solid #808080;
+        height: 400px;
+        max-height: none;
+        min-height: 0;
+        width: auto;
+    }
+
+    fieldset.scheduler-border {
+        border: 1px groove #ddd !important;
+        padding: 0 1.4em 1.4em 1.4em !important;
+        margin: 0 0 1.5em 0 !important;
+        -webkit-box-shadow: 0px 0px 0px 0px #000;
+        box-shadow: 0px 0px 0px 0px #000;
+        clear:both;
+    }
+
+    legend.scheduler-border {
+        font-size: 1.2em !important;
+        font-weight: bold !important;
+        text-align: left !important;
+        width: auto;
+        padding: 0 10px;
+        border-bottom: none;
+    }
+
+    .scheduler-border legend {
+        margin-bottom: 0px !important;
+    }
+
+    .topics tr {
+        line-height: 14px !important;
+    }
+
+    .mandatory {
+        color: red;
+    }
+</style>
+
+<article class="col-sm-12">
+    <div class="in_hd_tt row">
+        <strong class="fa fa-file-text"></strong><span>All Order Status In COD</span> <span style="float: right;" class="wi_cl_ul" id="fine_drp_3">
+        </span>
+    </div>
+</article>
+
+<input type="hidden" id="user" />
+<script type="text/javascript">
+
+    var orderId = '';
+    var updated_status = 0;
+    var comments = '';
+    var QC_Status = '';
+    var Delivery_Status = '';
+    var PaymentStatus = '';
+    var usersubid = 0;
+    var CancelOrderStatus = 0;
+    var paymentrefundstatus = 0;
+    var Result = '';
+
+    $(document).ready(function () {
+        $("#Deliveryon").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "-60:-10",
+            dateFormat: 'dd-mm-yy',
+            maxDate: 0
+        });
+        $('#refundamt').ForceNumericOnly();
+
+        initDateSearch = function (elem) {
+            setTimeout(function () {
+                $(elem).datepicker({
+                    dateFormat: "dd-mm-yy",
+                    autoSize: true,
+                    changeYear: true,
+                    changeMonth: true,
+                    showWeek: true,
+                    showButtonPanel: true,
+                    onSelect: function (dateText, inst) {
+                        setTimeout(function () {
+                            $('#OpenOrdersgrid')[0].triggerToolbar();
+                        }, 100);
+                    }
+                });
+            }, 100);
+        };
+        openOrderDetails();
+    //    $('#OpenOrdersgrid').jqGrid('sortGrid', 'OrderPlacedOn', true, 'desc')
+    //.jqGrid('sortGrid', 'OrderRefNo', true, 'desc')
+    });
+
+
+    function openOrderDetails() {
+
+        $('#OpenOrdersgrid').jqGrid({
+
+            url: '/AdminActivity/AllOrdersStatusgrid',
+            datatype: 'json',
+            colNames: ['', '','Order Id','Placed On','Payment On','Total Items','Delivery Mode','Name','Mobile','Order Status','License','Cancellation'],
+            colModel: [
+                {
+                    name: 'Identyvalue', index: 'Identyvalue', key: true, sortable: false, search: false, resizable: false, frozen: false, hidden: true,
+                    "formatter": function (v) {
+                        return '<input type="hidden"  id="sub" name="hidActive" value=' + v + '>';
+                    }
+                },
+                {
+                    name: 'paymentrefundstatus', index: 'paymentrefundstatus', key: true, sortable: false, search: false, resizable: false, frozen: false, hidden: true,
+                    "formatter": function (v) {
+                        paymentrefundstatus = v;
+                        return '<input type="hidden"  id="subs" name="hidActive" value=' + paymentrefundstatus + '>';
+                    }
+                },
+                {
+                    name: "OrderRefNo",
+                    index: 'OrderRefNo', key: true, sortable: true, sorttype: 'text', width: 4, search: true, resizable: true, editable: true, searchoptions: { sopt: ['cn', 'bw', 'ew', 'eq'] }
+                },
+                 {
+                     name: "OrderPlacedOn",
+                     index: 'OrderPlacedOnInt~date', key: true, sortable: true, sorttype: 'text', width: 4, search: true, resizable: true, editable: true, searchoptions: { sopt: ["eq", "ne", "lt", "le", "gt", "ge"], dataInit: initDateSearch },
+                     formatter: '#date', formatoptions: { srcformat: 'd-m-Y', newformat: 'd-M-Y' }
+                 },
+                 {
+                     name: "PaymentDate",
+                     index: 'PaymentDate~date', key: true, sortable: true, sorttype: 'text', width: 4, search: true, resizable: true, editable: true,
+                     searchoptions: { sopt: ['cn', 'bw', 'ew', 'eq'] },
+                     formatter: '#date', formatoptions: { srcformat: 'd/m/Y', newformat: 'd/M/Y' }
+                 },
+                 {
+                     name: "TotalItems",
+                     index: 'TotalItems', key: true, sortable: false, sorttype: 'text', width: 3, search: false, resizable: true, editable: true, align: "center",
+                     searchoptions: { sopt: ['cn', 'bw', 'ew', 'eq'] }
+                 },
+
+                 {
+                     name: "DeliveryMode",
+                     index: 'DeliveryMode', key: true, sortable: true, sorttype: 'text', width: 5, search: true, resizable: true, editable: true, align: "center",
+                     searchoptions: { sopt: ['cn', 'bw', 'ew', 'eq'] }
+                 },
+                {
+                    name: "UserName",
+                    index: 'UserName', key: true, sortable: true, sorttype: 'text', width: 3, search: true, resizable: true, editable: true,
+                    searchoptions: { sopt: ['cn', 'bw', 'ew', 'eq'] }
+                },
+                {
+                    name: "Mobile",
+                    index: 'Mobile', key: true, sortable: true, sorttype: 'text', width: 3, search: true, resizable: true, editable: true,
+                    searchoptions: { sopt: ['cn', 'bw', 'ew', 'eq'] }
+                },
+
+                 {
+                     name: "OrderStatus",
+                     index: 'OrderStatus', key: true, sortable: true, sorttype: 'text', width:4, search: true, resizable: true, editable: true,
+                     searchoptions: { sopt: ['cn', 'bw', 'ew', 'eq'] }
+                     //"formatter": function (v) {
+                     //    return v;
+                     //}
+                 },
+                   {
+                       name: "Activation",
+                       index: 'Activation', key: true, sortable: true, sorttype: 'text', width: 4, search: true, resizable: true, editable: true,
+                       searchoptions: { sopt: ['cn', 'bw', 'ew', 'eq'] },
+                       "formatter": function (v) {
+                           return '<a id="btnActivation" class="Activation" title="Subject Activation"  href="#" rel="' + v + '" style="color:#0066c0 !important;text-decoration:none;">&nbsp;<i  title="update" class="fa fa-pencil-square  EditIcon"></i>Activation(Comming Soon)</a>';
+                       }
+                   },
+                
+             {
+                 name: 'CancelOrderStatus', index: 'CancelOrderStatus', key: true, width: 6, sortable: true, search: true, resizable: true, frozen: false,
+                 "formatter": function (v) {
+                     CancelOrderStatus = v;
+                     Result = '';
+
+                      if (CancelOrderStatus == 2) {
+                          return  '<a id="btncancelled" class="Deliverycancelled" title="Cancel"  href="#" rel="' + v + '" style="color:#0066c0 !important;text-decoration:none;">&nbsp;<i  title="update" class="fa fa-pencil-square  EditIcon"></i>Cancelled</a>';
+                      }
+                      //if (CancelOrderStatus == 2 && paymentrefundstatus == 1) {
+                      //    Result+= '<html><center>Refund</center></html>';
+                      //}
+                      else {
+                          return  '<a id="btncancel" class="Deliverycancel" title="Cancel"  rel="' + v + '" href="#" style="color:#0066c0 !important;text-decoration: none;"><center>Cancel</center></a>';
+                      }
+                     // return Result;
+                     //<i class="fa fa-ban fa-2x" aria-hidden="true" style="color:red; background-color:white;background-image:none"></i>
+                 }
+             }
+
+
+            ],
+
+            rownumbers: true,
+            rowNum: 10,
+            rowList: [10, 20, 30, 50, 100, 200, 500, 1000],
+            pager: '#pager',
+            sortname: 'OrderPlacedOn,OrderRefNo',
+            //+'OrderRefNo'
+            sortorder: 'desc',
+            altclass: 'myAltRowClass',
+            altRows: true,
+            height: '291px',
+            width: '1093px',
+            autowidth: true,
+            shrinkToFit: true,
+            viewsortcols: [true, 'vertical', true],
+            forceFit: true, // have to set for column scroll enable while expand the grid
+            toppager: true,
+            emptyrecords: "Empty records",
+            viewrecords: true,
+            loadComplete: function () {
+                highlightFilteredData.call(this);
+            },
+            gridComplete: function () {
+            }
+        });
+        InitiateProperty("OpenOrdersgrid", "pager");
+    }
+
+    function GridRefresh_Reload() {
+        $("#OpenOrdersgrid").trigger("reloadGrid");
+    }
+
+    var className = '';
+    $(function () {
+        $(document).on('click', '#OpenOrdersgrid tbody tr a', function (e) {
+            e.preventDefault();
+
+            className = $(this).attr('class');
+            //if (className == 'delivery') {
+            //    orderId = $(this).closest("tr").find("td").eq(1).text();
+            //    orderstatus = $(this).attr('rel');
+            //    ddl_Deliveryorderstatus();
+            //    fnOpenUpdatedialog();
+            //}
+            //else {
+            if (className == 'payment') {
+                orderId = $(this).closest("tr").find("td").eq(3).text();
+                orderstatus = $(this).attr('rel');
+                ddl_orderstatusPayment();
+                fnOpenUpdatedialogPayment();
+
+            }
+            else if (className == 'Deliverycancel') {
+                orderid = $(this).closest("tr").find("td").eq(3).text();
+                orderstatus = $(this).attr('rel');
+                fnOpenUpdatedialogDeliveryCancel();
+
+            }
+            else if (className == 'Deliverycancelled')
+            {
+                orderid = $(this).closest("tr").find("td").eq(3).text();
+                orderstatus = $(this).attr('rel');
+                fnOpenUpdatedialogPaymentrefund();
+            }
+
+        });
+    });
+
+    function fnOpenUpdatedialogDeliveryCancel() {
+        CancelOTP();
+        $('#frmLogin').dialog({
+            resizable: false,
+            modal: true,
+            title: "Cancel Order OTP",
+            height: 300,
+            top: 150,
+            width: 700,
+            buttons: {
+                "Cancel": function () {
+                    $(this).dialog('close');
+                }
+            },
+            open: function () {
+                $(this).closest(".ui-dialog")
+                .find(".ui-dialog-titlebar-close")
+                .removeClass("ui-dialog-titlebar-close")
+                .html("<span class='ui-button-icon-primary ui-icon ui-icon-closethick'></span>");
+            }
+
+        });
+        return false;
+    }
+
+    function fnOpenUpdatedialogPaymentrefund() {
+        $("#popupdataFixpaytm").empty().append(OpenordersUpdatepaymentrefund());
+        $('#PaymentRefund').dialog({
+            resizable: false,
+            modal: true,
+            title: "Payment Refund Details",
+            height: 300,
+            top: 150,
+            width: 700,
+            buttons: {
+                "Cancel": function () {
+                    $(this).dialog('close');
+                },
+                'Submit': function () {
+                    updatestatusPaymentRefund();
+                }
+            },
+            open: function () {
+                $(this).closest(".ui-dialog")
+                .find(".ui-dialog-titlebar-close")
+                .removeClass("ui-dialog-titlebar-close")
+                .html("<span class='ui-button-icon-primary ui-icon ui-icon-closethick'></span>");
+            }
+        });
+        return false;
+    }
+
+
+ // -------------------------payment refund update---------------------------
+
+    function updatestatusPaymentRefund() {
+        payment = $('#refundamt').val();
+        var userID = '@Session["loginUserID"]';
+        usersubid = $("#user").val();
+        if (payment != '') {
+            $.post("/Service/APIAdminActivity/UpdatePaymentRefundOrderStatus",
+                     {
+                         preperedBy: $("#sessionUserId").val(),
+                         OrderRefNo: orderid,
+                         paymentrefundamt: payment,
+                         Paymentrefundstatus: 1
+                     }, function (data) {
+                         if (data == "1") {
+                             $('#PaymentRefund'). show();
+                                 ShowAlert("Payment Status Update", "Status Updated", "success");
+                                 $('#refundamt').val('');
+                                 $('#refundamt').prop('disabled', true);
+                             }
+                             else if (data == "2")
+                             {
+                                 $('#PaymentRefund').hide();
+                             ShowAlert("Payment Status Update", "Already Payment Refund Status Updated", "warning");
+                         }
+                             //else if (data == "-1") {
+                             //    $('#PaymentRefund').hide();
+                             //    ShowAlert("Payment Status Update", "Payment Not Refund Sucessfully", "warning");
+                             //}
+                     }).done(function () {
+                         fnOpenUpdatedialogPaymentrefund();
+                         GridRefresh_Reload();
+                     });
+        }
+        else
+        {
+            ShowAlert("Payment Refund  Status Update", "Must Enter Refund Amount", "error");
+        }
+    }
+
+
+    function ddl_orderstatusPayment() {
+
+        if ($.trim(orderstatus) == 'Not yet Receive') {
+            $('#ddlStatuspayment').empty().append('<option value="0">--Select Status--</option><option value="1">Not yet Receive</option><option value="2">Received</option>');
+        }
+        else if ($.trim(orderstatus) == 'Not yet Received') {
+            $('#ddlStatuspayment').empty().append('<option value="0">--Select Status--</option><option value="2">Received</option>');
+        }
+        else if ($.trim(orderstatus) == 'Received') {
+            $('#ddlStatuspayment').empty().append('<option value="0">--Select Status--</option><option value="2">Received</option>');
+        }
+
+    }
+
+
+    //function fnOpenUpdatedialog() {
+    //    $("#popupdataFix").empty().append(OpenordersUpdate());
+    //    $('#updateorders').dialog({
+    //        resizable: false,
+    //        modal: true,
+    //        title: "Update Order Details",
+    //        height: 550,
+    //        top: 150,
+    //        width: 1000,
+    //        buttons: {
+    //            "Cancel": function () {
+    //                $(this).dialog('close');
+    //            },
+    //            'Submit': function () {
+    //                updatestatusDelivery();
+    //            }
+    //        },
+    //        open: function () {
+    //            $(this).closest(".ui-dialog")
+    //            .find(".ui-dialog-titlebar-close")
+    //            .removeClass("ui-dialog-titlebar-close")
+    //            .html("<span class='ui-button-icon-primary ui-icon ui-icon-closethick'></span>");
+    //        }
+    //    });
+    //    return false;
+    //}
+
+    function fnOpenUpdatedialogPayment() {
+        $("#popupdataFixpaytm").empty().append(OpenordersUpdatepayment());
+        $('#updateordersPayment').dialog({
+            resizable: false,
+            modal: true,
+            title: "Update Order Details",
+            height: 550,
+            top: 150,
+            width: 1000,
+            buttons: {
+                "Cancel": function () {
+                    $(this).dialog('close');
+                },
+                'Submit': function () {
+                    updatestatusPayment();
+                }
+
+            },
+            open: function () {
+                $(this).closest(".ui-dialog")
+                .find(".ui-dialog-titlebar-close")
+                .removeClass("ui-dialog-titlebar-close")
+                .html("<span class='ui-button-icon-primary ui-icon ui-icon-closethick'></span>");
+            }
+        });
+        return false;
+    }
+
+    //function OpenordersUpdate() {
+    //    var curr_status = '';
+    //    var modified_date = '';
+    //    var status_count = 0;
+    //    $.getJSON("/Service/APIAdminActivity/OrderPrepartionDialog",
+    //      {
+    //          orderRefNo: orderId
+    //      },
+    //      function (data) {
+    //          $.each(data, function (index, value) {
+    //              if (curr_status != value.OrderStatus) {
+    //                  if (status_count == 0) {
+    //                      curr_status = value.Delivery_Status;
+    //                      modified_date = value.DeliveryDate;
+    //                      status_count = status_count + 1;
+    //                  }
+    //                  $('#currntStatus').html(curr_status);
+    //                  $('#modified_date').html(modified_date);
+    //              }
+    //              $("#poputbody").tmpl(value).appendTo("#popupdataFix");
+    //              $("#poputbody").tmpl(value).appendTo("#orderdetailsFix");
+    //          });
+    //      });
+    //}
+
+    function OpenordersUpdatepayment() {
+        var curr_status1 = '';
+        var modified_date1 = '';
+        var status_count = 0;
+
+        $.getJSON("/Service/APIAdminActivity/OrderPrepartionDialog",
+          {
+              orderRefNo: orderId
+          }, function (data) {
+              $.each(data, function (index, value) {
+                  $("#user").val(value.UsersubscribemasterID);
+                  if (curr_status1 != value.OrderStatus) {
+                      if (status_count == 0) {
+                          curr_status1 = value.PaymentStatus;
+                          modified_date1 = value.PaymentDate;
+                          status_count = status_count + 1;
+                      }
+                      $('#currntStatuspayment').html(curr_status1);
+                      $('#modified_datepayment').html(modified_date1);
+                  }
+                  $("#poputbody").tmpl(value).appendTo("#popupdataFixpaytm");
+                  $("#poputbody").tmpl(value).appendTo("#orderdetailsFix");
+
+              });
+          });
+    }
+
+    function OpenordersUpdatepaymentrefund() {
+        var paymentreceiveamt = '';
+        var paymentrefundby ='';
+        var status_count = 0;
+        $.getJSON("/Service/APIAdminActivity/OrderPrepartionDialog",
+          {
+              orderRefNo: orderid
+          }, function (data) {
+              $.each(data, function (index, value) {
+                  $("#user").val(value.UsersubscribemasterID);
+                      if (status_count == 0) {
+                          paymentreceiveamt = value.PaymentReceivedamt;
+                          paymentrefundby = value.paymentReveicedOn;
+                          status_count = status_count + 1;
+                      }
+                      $('#paymentamt').html(paymentreceiveamt);
+                      $('#refundby').html(paymentrefundby);
+              });
+          });
+    }
+
+    var check = $("#user").val();
+    function updatestatusPayment() {
+        updated_status = $("#ddlStatuspaymentrefund").find("option:selected").val();
+        comments = $('#txtcmentPayment').val();
+        var userID = '@Session["loginUserID"]';
+        usersubid = $("#user").val();
+        if (updated_status != 0) {
+            $.post("/Service/APIAdminActivity/UpdatePaymentOrderStatus",
+                     {
+                         preperedBy: $("#sessionUserId").val(),
+                         orderRefNo: orderId,
+                         paymentamt:  comments,
+                         Paymentstatus: updated_status,
+                         created_userid: userID,
+                         user_subscribed_masterid: usersubid
+                     }, function (data) {
+
+                         if (data == "1") {
+                             ShowAlert("Payment Status Update", "Status Updated", "success");
+                             $('#txtcmentPayment').val('');
+                             $("#ddlStatuspayment").empty().append(ddl_orderstatusPayment());
+                         }
+                     }).done(function () {
+                         fnOpenUpdatedialogPayment();
+                         GridRefresh_Reload();
+                     });
+        }
+        else {
+            ShowAlert("Paymnent Status Update", "Must select Status", "warning");
+        }
+    }
+
+//----------------------CheckUsageActivationBeforecancelorder and sent otp for order cancellation ------------------------------
+function CancelOTP() {
+        ShowLoader();
+        $('#OTP').val('');
+        //var purchaseon=$('#orderpurchasedon').val();
+        //var usage=$('#Usageactivationcancel').val();
+        //var  orderid=$('#ClientRefOrderId').val();
+        $('#divPayment').attr('href', '#collapseFour');
+        var Emailid = $("#sessionEmailID").val();
+        var BuyerMobileNo = $("#sessionMobileNumber").val();
+        //var usersubscribemasterID = @Request.QueryString["usersubscribemasterid"];
+        usersubscribemasterID = $('#sub').val();
+        $('#FixUserOrderNO').val(orderid);
+        $.getJSON("/Service/APIPaymentCart/GetUsageActviatonCancelOrder",
+        {
+            usersubscribemasterid: usersubscribemasterID,
+            buyer_mobileNo: BuyerMobileNo,
+            ToEmailID: Emailid,
+            OrderID: orderid
+        },
+        function (data) {
+            if (data == "1") {
+                $('#frmLogin').show();
+                ShowAlert("Cancel", "OTP Send Sucessfully To Your Registered Mobile Number", "success");
+                GridRefresh_Reload();
+            }
+            else if (data == "-1") {
+                $('#frmLogin').dialog('close');
+                ShowAlert("Cancel", "Order Not Cancelled Because No Activation", "error");
+            }
+            else if (data == "0") {
+                $('#frmLogin').dialog('close');
+                ShowAlert("Cancel", "Order Already Cancelled", "error");
+            }
+
+        });
+
+        HideLoader();
+}
+
+
+//----------------------Resend otp for order cancellation ------------------------------
+
+    $(document).on('click', '#Resendotp', function () {
+        ShowLoader();
+        //var purchaseon=$('#orderpurchasedon').val();
+        //var usage=$('#Usageactivationcancel').val();
+        //var  orderid=$('#ClientRefOrderId').val();
+        $('#divPayment').attr('href', '#collapseFour');
+        var Emailid = $("#sessionEmailID").val();
+        var BuyerMobileNo = $("#sessionMobileNumber").val();
+        //var usersubscribemasterID = @Request.QueryString["usersubscribemasterid"];
+        usersubscribemasterID = $('#sub').val();
+        $.getJSON("/Service/APIPaymentCart/GetUsageActviatonCancelOrder",
+        {
+            usersubscribemasterid: usersubscribemasterID,
+            buyer_mobileNo: BuyerMobileNo,
+            ToEmailID: Emailid,
+            OrderID: orderid
+        },
+        function (data) {
+            if (data == "1") {
+                ShowAlert("Cancel", "OTP Send Sucessfully To Your Registered Mobile Number", "success");
+            }
+            else if (data == "-1") {
+                ShowAlert("Cancel", "There is no Order TO Cancellation", "error");
+
+            }
+
+        });
+        HideLoader();
+    });
+
+ //-------------------conformotpcancellation--------------------------------------------
+
+    $(document).on('click', '#btnConformCancelOTP', function () {
+        ShowLoader();
+        //var usersubscribemasterID = @Request.QueryString["usersubscribemasterid"];
+        $('#divPayment').attr('href', '#collapseFour');
+        var Emailid = $("#sessionEmailID").val();
+        var BuyerMobileNo = $("#sessionMobileNumber").val();
+        usersubscribemasterID = $('#sub').val();
+        var otp = $('#OTP').val();
+        var userID = '@Session["loginUserID"]';
+        if (usersubscribemasterID != null) {
+            if (otp != "") {
+                $.getJSON("/Service/APIPaymentCart/GetCancelOrder",
+                {
+                    usersubscribemasterid: usersubscribemasterID,
+                    buyer_mobileNo: BuyerMobileNo,
+                    ToEmailID: Emailid,
+                    OrderID: orderid,
+                    userid: userID,
+                    verificationcode: otp
+                },
+                function (data) {
+                    if (data != null) {
+                        if (data == "Order Cancel successfully") {
+                            ShowAlert("Cancel", data, "success");
+                            $('#OTP').val('');
+                            $('#btnCancel').prop('disabled', true);
+
+                        }
+                        else if (data == "Order Not Cancelled:There is no Item To Cancel") {
+                            ShowAlert("Cancel", data, "error");
+                            $('#OTP').val('');
+                            $('#btnCancel').prop('disabled', true);
+                        }
+                        else if (data == "InValid OTP") {
+                            ShowAlert("Cancel", data, "error");
+                            $('#OTP').val('');
+                            $('#btnCancel').prop('disabled', true);
+                        }
+                    }
+                    else {
+                        ShowAlert("Cancel", "There Is No Item To Cancel", "error");
+                    }
+                });
+            }
+            else {
+                ShowAlert("Cancel", "Must Enter OTP", "error");
+
+            }
+        }
+        else {
+            ShowAlert("Alert !", "No Data In Your Cart", "warning");
+        }
+
+        HideLoader();
+    });
+
+</script>
+
+<article class="col-sm-12">
+    <section class="sub_wrp row">
+        <div id="jqgrid" class="grid_panel" align="center">
+            <table id="OpenOrdersgrid"></table>
+            <div id="pager"></div>
+        </div>
+    </section>
+    <div style="margin-bottom: 70px;"></div>
+</article>
+
+<div id="updateordersPayment" style="display: none">
+    <table id="open_orders" class="table table-striped table-bordered" cellspacing="0" style="width:100%;">
+        <thead id="thead">
+            <tr role="row">
+                @*<td><input id="selectCheck" type="checkbox" class="chk" name="checkAll" /> Select All</td>*@
+                <td>
+                    Order Reference No
+                </td>
+                <td>
+                    Order Placed On
+                </td>
+                <td>
+                    Packages Name
+                </td>
+            </tr>
+        </thead>
+        <tbody id="popupdataFixpaytm"></tbody>
+    </table>
+
+    <fieldset class="scheduler-border">
+        <legend class="scheduler-border">Current Status</legend>
+        <div class="col-sm-12">
+            <div class="col-sm-6">
+                Status: <b><span id="currntStatuspayment"></span></b>
+            </div>
+            <div class="col-sm-6">
+                Modified on: &nbsp;&nbsp; <b><span id="modified_datepayment"></span></b>
+            </div>
+        </div>
+    </fieldset>
+
+
+    <div class="col-sm-12">
+        <div class="col-sm-6">
+            Comments:
+            <input type="text" id="txtcmentPayment" />
+        </div>
+        <div class="col-sm-6">
+            Update Status:
+            <select id="ddlStatuspayment"></select>
+        </div>
+    </div>
+</div>
+
+<script id="poputbody" type="text/html">
+    <tr>
+        @*<td><input id="selectCheck" type="checkbox" class="chk" name="checkAll" value="${PackageId}~${UsersubscribemasterID}" /></td>*@
+        <td>
+            ${OrderRefNo}
+        </td>
+        <td>
+            ${OrderPlacedOn}
+        </td>
+        <td>
+            ${PackageName}
+        </td>
+    </tr>
+</script>
+
+<!--OTP Popup-->
+
+<div id="frmLogin" style="display:none">
+    <center>
+        <div class="form-group">
+            <label><strong>Order Number</strong></label>
+            <input type="text" id="FixUserOrderNO" readonly="readonly" />
+        </div>
+        <div class="form-group">
+            <label><strong>Enter OTP</strong></label>
+            <input type="text" id="OTP" placeholder="Enter OTP" />
+        </div>
+        <center>
+            <button type="button" class="btn btn-success " id="btnConformCancelOTP">Submit</button>
+            <br /><br />
+            <a id="Resendotp" href="#" style="color:blue;">Resend OTP</a>
+        </center>
+    </center>
+</div>
+
+<!--paymentrefund Popup-->
+
+<div id="PaymentRefund" style="display: none">
+    <center>
+            @*<div class="form-group">
+                <label>Refund On:</label>
+                <input type="text" id="FixUserOrderNO" readonly="readonly" />
+            </div>
+            <div class="form-group">
+                <label><strong>Refund By:</strong></label>
+                <input type="text" id="OTP" placeholder="Enter OTP" />
+            </div>*@ 
+
+        <fieldset class="scheduler-border">
+            <legend class="scheduler-border">Payment Details</legend>
+            <div class="col-sm-12">
+                <div class="col-sm-4">
+                    Payment Amount: <b><span id="paymentamt"></span></b>
+                </div>
+                <div class="col-sm-8">
+                    Payment ReceivedOn:&nbsp;<b><span id="refundby"></span></b>
+                </div>
+            </div>
+        </fieldset>   
+</center>
+    <center>
+        <div class="form-group">
+            <label><strong> Refund Amount:</strong></label>
+            <input type="text" id="refundamt" placeholder="Enter Refund Amount" />
+        </div>
+    </center>
+</div>
+
+ 

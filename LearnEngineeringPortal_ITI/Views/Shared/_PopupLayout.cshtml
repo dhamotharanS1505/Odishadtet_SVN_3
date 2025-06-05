@@ -1,0 +1,184 @@
+﻿
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnEngg Portal</title>
+
+
+    @Styles.Render("~/Content/cssAdminLayout")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/JSAdminLayout")
+    @RenderSection("scripts", required: false)
+
+    @*<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>*@
+    <link rel="icon" href="../favicon.ico" sizes="16x16" type="image/png">
+
+
+
+</head>
+
+
+<body id="one-page-home" class="page  page-template-default custom-background waves-pagebuilder menu-fixed header-logo_left theme-full">
+    @{
+
+        int cookieUserIdUserMaster = 0;
+        string cookieUserIdUserEmailId = "";
+        long cookieUserIdUserMobileNo = 0;
+        int cookieUniversityid = 0;
+        string cookieUserName = "";
+        string cookieUserImage = "";
+        string cookieserverdate = "";
+        string roledescription = "";
+        int roleid = 0;
+        if (HttpContext.Current.Session["LoginUserID"] != null)
+        {
+
+            cookieUserIdUserMaster = Convert.ToInt32(HttpContext.Current.Session["LoginUserID"]);
+            cookieUserIdUserEmailId = HttpContext.Current.Session["loginUserEmailID"].ToString();
+            cookieUserIdUserMobileNo = Convert.ToInt64(HttpContext.Current.Session["loginUserMobileNumber"]);
+            cookieUniversityid = Convert.ToInt32(HttpContext.Current.Session["loginUniversityID"]);
+            cookieUserName = HttpContext.Current.Session["loginUserFullName"].ToString();
+            cookieUserImage = HttpContext.Current.Session["ProfileImage"].ToString();
+            cookieserverdate = HttpContext.Current.Session["ServerDate"].ToString();
+            roleid = Convert.ToInt32(HttpContext.Current.Session["loginUserRoleID"]);
+            roledescription = HttpContext.Current.Session["loginUserRoledescription"].ToString();
+
+        }
+    }
+
+    @Html.Hidden("sessionUniversityId", cookieUniversityid)
+    @Html.Hidden("sessionUserId", cookieUserIdUserMaster)
+    @Html.Hidden("sessionEmailID", cookieUserIdUserEmailId)
+    @Html.Hidden("sessionMobileNumber", cookieUserIdUserMobileNo)
+    @Html.Hidden("sessionUserName", cookieUserName)
+    @Html.Hidden("sessionUserImage", cookieUserImage)
+    @Html.Hidden("sessionserverdate", cookieserverdate)
+    @Html.Hidden("sessionroleId", roleid)
+    @Html.Hidden("sessionroledescription", roledescription)
+
+    <style type="text/css">
+        .clocktime {
+            padding-left: 10px;
+        }
+
+        .user_info {
+            z-index: 150;
+            position: absolute;
+            display: none;
+            top: 43px;
+            width: auto;
+            background: #ffffff;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
+            border: 1px solid #dae0e8;
+            border-bottom: 5px solid #5CCDDE;
+            right: 250px;
+            border-top: 0px;
+        }
+
+            .user_info:after {
+                border-color: transparent transparent #fff;
+                border-style: solid;
+                border-width: 7px;
+                clear: both;
+                content: "";
+                display: block;
+                right: 15px;
+                margin-left: -7px;
+                position: absolute;
+                top: -14px;
+            }
+
+            .user_info li {
+                display: block;
+            }
+
+                .user_info li a {
+                    display: block;
+                    padding: 10px;
+                    color: #454e59;
+                }
+
+                    .user_info li a:hover {
+                        background: #5CCDDE;
+                        color: #ffffff;
+                    }
+
+        table.scroll tbody,
+        table.scroll thead {
+            display: block;
+        }
+
+        thead tr th {
+            /*height: 100px;*/
+            line-height: 30px;
+            /* text-align: left; */
+        }
+
+        table.scroll tbody {
+            height: 200px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+    </style>
+   
+   
+    <div class="wrapper">
+
+        <header class="header_bg">
+            <div class="col-sm-2">
+               
+                <div class="logo"><a class="logo1"><img alt="Learn Engg" src="../content/img/Learn2.png?V2" class="logo-img" style="height: 40px; margin-top:-14px"></a></div>
+            </div>
+            <div class="col-sm-3" style="margin-top:5px">
+                <span class="" id="clock1" style="color:white"></span>
+            </div>
+            <div class="col-lg-7">
+              
+
+            </div>
+
+
+
+         
+
+
+        </header>
+        <section class="container-fluid">
+
+            <div class="row">
+
+             <section class="inner_mid_wrp-main_popup">
+                    <article class="cnt_wrp-main">
+                        <div class="row">
+                            @RenderBody()
+                        </div>
+                    </article>
+                </section>
+            </div>
+
+
+
+
+            <section class="mid_warp ">
+                <div class="container-fluid">
+                    <div class="container loaderdisplay">
+
+                    </div>
+                </div>
+            </section>
+
+
+
+
+          
+
+
+
+</body>
+</html>
+
+
+

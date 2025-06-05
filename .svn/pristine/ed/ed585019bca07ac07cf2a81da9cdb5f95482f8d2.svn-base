@@ -1,0 +1,451 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Home</title>
+    <meta charset="utf-8">
+   
+    <style type="text/css">
+        .TFtable {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+            .TFtable td {
+                padding: 7px;
+                border: #7e7e7e 1px solid;
+            }
+            /* provide some minimal visual accomodation for IE8 and below */
+            .TFtable tr {
+                background: #b8d1f3;
+            }
+                /*  Define the background color for all the ODD background rows  */
+                .TFtable tr:nth-child(odd) {
+                    background: #fff;
+                }
+                /*  Define the background color for all the EVEN background rows  */
+                .TFtable tr:nth-child(even) {
+                    background: #bdbdbd;
+                }
+
+        .panel-body {
+            padding: 15px;
+        }
+
+        .table-responsive {
+            min-height: 0.01%;
+            overflow-x: auto;
+        }
+
+        .shp_btn_ful-wrp {
+            margin: 20px 0;
+        }
+
+        .upd_btn-wrp {
+            float: right;
+        }
+
+        .table {
+            margin-bottom: 20px;
+            max-width: 100%;
+            width: 100%;
+        }
+
+        .col-md-12 {
+            width: 100%;
+        }
+
+        .col-md-4 {
+            width: 33.3333%;
+        }
+
+        .height {
+            min-height: 200px;
+        }
+
+        .panel-default {
+            border-color: #ddd;
+        }
+
+        .panel {
+            background-color: #fff;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+        }
+
+        .panel-heading::after {
+            color: grey;
+            content: "";
+            float: right;
+            font-family: "Glyphicons Halflings";
+            margin-top: -22px;
+        }
+
+        .panel-default > .panel-heading {
+            background-color: #f5f5f5;
+            border-color: #ddd;
+            color: #333;
+        }
+
+        .panel-heading {
+            border-bottom: 1px solid transparent;
+            border-top-left-radius: 3px;
+            border-top-right-radius: 3px;
+            padding: 10px 15px;
+        }
+
+        .table-condensed > tbody > tr > td, .table-condensed > tbody > tr > th, .table-condensed > tfoot > tr > td, .table-condensed > tfoot > tr > th, .table-condensed > thead > tr > td, .table-condensed > thead > tr > th {
+            padding: 5px;
+        }
+
+        .table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+            border-top: 1px solid #ddd;
+            line-height: 1.42857;
+            padding: 8px;
+            vertical-align: top;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .table > tbody > tr > .highrow {
+            border-top: 3px solid;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+        .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9 {
+    float: left;
+}
+
+         .ordr_title
+{
+    font-size:15px !important;
+    color:#fff !important; 
+    
+}
+    h3.text-left
+{
+margin:0px;
+}
+    .panel-body
+{
+padding: 0px 15px;
+}
+    .fr_usr_txt {
+    font-size:16px;
+    font-weight:bold;
+}
+    .btn_hvr {
+    color:#fff !important;
+}
+    .panel-heading.head_title {    
+    background-color: #2574AB;
+    padding: 5px 15px;
+    border-radius:0;
+    font-weight:normal;
+}
+ .shp_btn_ful-wrp {
+    margin: 20px 0;
+}
+ .order_md4_top{
+    margin-top:40px;
+}
+ .upd_btn-wrp {
+    float: right;
+}
+
+    .upd_btn-wrp input[type="button"] {
+        background-image: linear-gradient(#4285f4, #2775d1);
+        border: 1px solid #2073d4;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 18px;
+        padding: 16px 30px;
+        text-transform: uppercase;
+    }
+
+    .upd_btn-wrp span {
+        margin: 0 7px;
+        font-weight: 300;
+        text-transform: uppercase;
+    }
+    .wid_full-wrp{
+   width:100% !important;
+   border-right: 1px solid #ddd;
+}
+.mar-top{
+ margin: 20px 0 0;
+    padding: 0;
+}
+    #msform {
+    margin: 10px auto;
+    position: relative;
+    text-align: center;
+    /*width: 100%;
+    border: 1px solid #C8C8C8;*/
+    padding: 10px 10px 0 10px;
+}
+    .ord_sum_tab table {
+    border-collapse: collapse;
+    width: 100%;
+    text-align: left;
+    font-weight: 300;
+}
+
+.ord_sum_tab thead td {
+    background-color: #2574AB !important;
+    font-size: 12px;
+    text-transform: capitalize;
+    padding-left: 8px;
+    border: 1px solid #ececec;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+
+.ord_sum_tab tr {
+    border-bottom: 1px solid #ececec;
+}
+
+.ord_sum_tab tbody td {
+    font-weight: normal;
+    border: 1px solid #ececec;
+    padding: 10px;
+    font-size: 13px;
+}
+
+.ord_sum_tab tfoot td {
+    font-weight: normal;
+    border: 1px solid #ececec;
+    padding: 10px;
+    font-size: 13px;
+
+}
+
+.ord_sum_tab tbody tr:nth-child(even) {
+    background-color: #eaeaea;
+}
+
+.ord_sum_tab h1 {
+    font-size: 15px;
+    font-weight: 300;
+}
+.ord_sum_tab p {
+    margin: 10px 0;
+    font-weight: 300;
+}
+
+.ord_sum_tab b {
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.ord_sum_tab .bld_td td {
+    font-weight: bold;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+#progressbar
+{
+    margin-bottom:0 !important;
+}
+#progressbar {
+    overflow: hidden;
+    /*CSS counters to number the steps*/
+    counter-reset: step;
+}
+ #progressbar li {
+        list-style-type: none;
+        color: #000;
+        text-transform: uppercase;
+        font-size: 12px;
+        width: 33.33%;
+        float: left;
+        position: relative;
+    }
+
+        #progressbar li:before {
+            background: #63BEED none repeat scroll 0 0;
+            border-radius: 100%;
+            color: #fff;
+            content: counter(step, decimal);
+            counter-increment: step;
+            display: block;
+            font-size: 15px;
+            height: 40px;
+            line-height: 38px;
+            margin: 0 auto 15px;
+            width: 40px;
+        }
+        /*progressbar connectors*/
+        #progressbar li:after {
+            content: '';
+            width: 98%;
+            height: 2px;
+            background: #63BEED;
+            position: absolute;
+            left: -49%;
+            top: 20px;
+            z-index: 0; /*put it behind the numbers*/
+        }
+
+        #progressbar li:first-child:after {
+            /*connector not needed before the first step*/
+            content: none;
+        }
+        /*marking active/completed steps green*/
+        /*The number of the step and the connector before it = green*/
+        #progressbar li.active:before, #progressbar li.active:after {
+            background: #63BEED;
+            color: white;
+        }
+         .height {
+        min-height: 200px;
+    }
+
+    .table > .tbody > tr > .emptyrow {
+        border-top: none;
+    }
+
+    .table > thead > tr > .emptyrow {
+        border-bottom: none;
+    }
+
+    .table > tbody > tr > .highrow {
+        border-top: 3px solid;
+    }
+
+    .panel-heading:after {
+        /* symbol for "opening" panels */
+        font-family: 'Glyphicons Halflings'; /* essential for enabling glyphicon */
+        content: ""; /* adjust as needed, taken from bootstrap.css */
+        float: right; /* adjust as needed */
+        color: grey;
+        margin-top: -22px; /* adjust as needed */
+    }
+
+    .dataTables_wrapper {
+        overflow: hidden;
+    }
+
+    .button {
+        float: right;
+    }
+
+    .sub_dwn-wrp table td {
+        border-right: 1px solid #ececec;
+        padding: 10px;
+        width: 20%;
+    }
+    .btn-primary {
+    background-color: #2574ab !important;
+    border-color: #2574ab;
+    color: #fff;
+}
+.btn {
+    -moz-user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.42857;
+    margin-bottom: 0;
+    padding: 6px 12px !important;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+    </style>
+</head>
+<body style="background-image:none !important;">
+    <div style="width:750px; height:auto; margin:auto;">
+        <div style="width:750px; margin:auto"> </div>
+        <div class="clr"></div>
+        <div style="width:750px; height:auto;margin:auto;background-position:center top;">
+            <div style="width:750px; height:19px; background-color:#0c53a5;"></div>
+            <div style="width:750px; height:4px; background:url(mail/shadow.png) bottom center repeat-x; background-color:#f3f3f3;"></div>
+            <div style="width:748px !important;border:1px solid #333333">
+                <div style="display:block;width:182px;height:43px;float:left;margin:10px 0 10px 10px"><img src="http://learnengg.com/LE/img/Learn1.png?V2" alt="" width="140" height="42"></div>
+                <div style=" width:100%; clear:both; padding:0; margin:0;"></div>
+                <div style="height:auto;margin:0px;width:auto;padding:0">
+                    <div style="font-family:Arial, Helvetica, sans-serif;font-size:24px;font-weight:bold;color:#666;width:728px; padding:0;margin:0 auto;text-align: center;">Your order has been received</div>
+                </div>
+                <div style="height: auto;margin:0;width: 100%;">
+                    <!-- Left panel End-->
+                    <!-- middle panel start-->
+                    <!-- Center panel start-->
+                    <div style="height: auto;margin:0px;padding:0 10px;width: 728px;">
+                        <span style="display: block;padding:0;font-family:Arial, Helvetica, sans-serif;font-size:18px;color:#545454;text-align: center;">
+                            Thank you for your purchase!
+                        </span><br>
+                        
+                            
+                        <div style="height:auto;margin:0px;width:auto;padding:0">
+                            <div style="font-family:Arial, Helvetica, sans-serif;font-size:22px;font-weight:bold;color:#666;width:728px; padding:0;margin:0 auto;">Order Summary</div>
+                        </div>
+                        <div class="panel-body">
+                            <article class="shp_btn_ful-wrp">
+                                <div class="dwn_wrp_fin">
+                                    <p><span class="fr_usr_txt">Requesting “First Time” </span>users to download & install client software from the below link. After installing, open the Client Software and download the purchased subject. </p>
+                                            <div class="col-xs-4 order_md4_top">
+                                                <div class="col-xs-6">
+                                                    <a href="http://learnengg.com/3dm/Client_Setup/LearnEngg_Common_Web_Client_Setup.exe" class="downloadClient">
+                                                        <input class="btn btn-primary btn_hvr" style="background-color:#2574ab;" type="button" value="Client Software Download" />
+                                                    </a>
+                                                </div>
+                                            </div>
+                                </div>
+                            </article>
+                        </div>
+                        <div></div>
+                        <br />
+                        <div>{orderid}</div>
+
+                        
+                        <br>
+                                <span style="display:block;padding:0;font-family:Arial, Helvetica, sans-serif;font-size:14px;color:#545454;text-align:center">
+                                   <br> 
+                                </span><br>
+                                <span style="padding:0;font-family:Arial, Helvetica, sans-serif;font-size:14px;color:#545454;"><!--Using this information, you can also log on to MY ACCOUNT to access the customer control panel.--></span>
+                                <br>
+                                <span style="padding:10px 0 0 0;font-family:Arial, Helvetica, sans-serif;font-size:14px;color:#EA4335;font-weight:bold">Questions?? </span><br>
+                                <span style="padding:0;font-family:Arial, Helvetica, sans-serif;font-size:14px;color:#545454">If you have any questions about our shipment please mail us <a href="">support@learnengg.com</a>.</span><br>
+                                <br>
+                                <span style="padding:10px 0 0 0;font-family:Arial, Helvetica, sans-serif;font-size:14px;color:#EA4335;font-weight:bold">Terms and Condition </span><br>
+                        <span style="padding:0;font-family:Arial, Helvetica, sans-serif;font-size:14px;color:#545454"><a href="http://www.learnengg.com/Terms-And-Conditions" target="_blank"> http://www.learnengg.com/Terms-And-Conditions</a></span><br>
+                                <br>
+                                <span style="padding:10px 0 0 0;font-family:Arial, Helvetica, sans-serif;font-size:12px;color:#0050a9;font-weight:normal">Regards</span><br>
+                                <span style="padding:0 0 0 0;font-family:Arial, Helvetica, sans-serif;font-size:13px;color:#545454;font-weight:bold">Customer Service</span> <br>
+                                <br>
+                                <div style="height:1px;width:728px;background-color:#f2673a;margin:0 0 10px;"></div>
+                                <span style="padding:10px 0 0 0;font-family:Arial, Helvetica, sans-serif;font-size:18px;color:#EA4335;font-weight:bold">LearnEngg.com</span><br>
+                                <span style="padding:5px 0 10px 0;font-family:Arial, Helvetica, sans-serif;font-size:11px;color:#7e7e7e;display:block">
+                                    No 61, Developed Plot Estate, Perungudi,
+                                    Chennai - 600096, TamilNadu, India.
+                                    Toll Free - 1800 102 6488
+                                    Email:support@learnengg.com
+                                </span>
+                        
+                    </div>
+                    <!-- Center panel end-->
+                </div>
+                <!-- middle panel End-->
+                <div class="clr"></div>
+            </div>
+        </div>
+    </div>
+    <div style="background-color:#0c53a5;height:auto;margin:auto;width:740px;padding:10px 0 10px 10px;color:#FFFFFF">
+        <div style="margin:auto; padding:0px;width:750px;font-size:12px;font-family:Arial, Helvetica, sans-serif;">
+            &nbsp;&copy; 2016 learnengg.com <br>
+        </div>
+    </div>
+</body>
+</html>

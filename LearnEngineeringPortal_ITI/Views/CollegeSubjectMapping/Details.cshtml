@@ -1,0 +1,123 @@
+﻿@model Odishadtet.DAL.college_subject_mapping
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LearnEnggAdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>college_subject_mapping</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.university_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.university_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.rule_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.rule_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.map_year)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.map_year)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.semester)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.semester)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.active_status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.active_status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.created_by)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.created_by)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.created_on)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.created_on)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.active_duration_days)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.active_duration_days)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.active_duration_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.active_duration_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.total_license)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.total_license)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.college_master.college_code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.college_master.college_code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.subject_master.subject_code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.subject_master.subject_code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.department_master.department_code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.department_master.department_code)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.college_subject_mapping_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,119 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_StudentLearnEnggviewLayout.cshtml";
+}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>HTML Display</title>
+    @*<base id="BaseId">*@
+
+    <style>
+        .sidebar {
+            display: none;
+        }
+
+            .sidebar + .content-area {
+                margin-left: 0px;
+                transition: margin 0.5s;
+            }
+
+    </style>
+</head>
+<body>
+    <div style="margin-top:10px">
+        <!-- Store ViewBag data in a hidden element -->
+        <input type="hidden" id="hiddenMessage" value="@ViewBag.HtmlContent" />
+        @*<div style="margin-top:150px" id="htmlContainer"></div>*@
+
+        @*<div>
+            <input type="button" value="Go to Dashboard" src="~/student/Dashboard"/>
+        </div>*@
+
+        <div>
+            @*<iframe id="htmlContainer" width="100%" height="600px"  style="border: none;"></iframe>*@
+            <iframe id="htmlContainer" width="100%"  style="border: none;"></iframe>
+        </div>
+ </div>
+    <script>
+        $(document).ready(function () {
+
+            var message = $("#hiddenMessage").val();
+           // alert("ViewBag Message: " + message);
+            $('#htmlContainer').attr('src', '/Student/PrivatePage?fileName=' + message);
+
+        });
+
+        function adjustIframeHeight() {
+            //alert(window.innerHeight);
+            let iframe = document.getElementById("htmlContainer");
+            iframe.style.height = (window.innerHeight * 0.83) + "px"; // Set height to full screen height
+            //iframe.style.marginTop = "10px";
+           // $('#htmlContainer').style.height = window.innerHeight + "px";
+        }
+        window.onload = adjustIframeHeight;
+        window.onresize = adjustIframeHeight; // Adjust when screen resizes
+
+
+   //     $(document).ready(function () {
+   //         //var imageName = $(this).attr('data-name');
+   //         //imageName = "index.html";
+   //         var message = $("#hiddenMessage").val();
+   //        alert("ViewBag Message: " + message);
+   //         //window.location.href = "/Student/PrivatePage?fileName=" + imageName;
+   //         // $('#htmlContainer').attr('src', imageName);
+   //         $('#htmlContainer').attr('src', '/Student/PrivatePage?fileName=' + message);
+
+			//////$('#BaseId').attr('href', "http://testlearn.learnengg.com/odskills/OD-CO-VLS-24-004/");
+   //////         $('#htmlContainer').attr('src', imageName);
+
+
+
+   //         //$.ajax({
+   //         //    url: '/Student/GetServerUrl',
+   //         //    type: 'POST',
+   //         //    data: { serverUrl: window.location.origin }, // Gets protocol + domain
+   //         //    success: function (response) {
+   //         //        alert("Server URL: " + response.url);
+   //         //        $('#BaseId').attr('href', response.url);
+   //         //$('#htmlContainer').attr('src', imageName);
+   //         //        //console.log();
+   //         //    },
+   //         //    error: function (xhr, status, error) {
+   //         //        //console.error("Error: ", error);
+   //         //    }
+   //         //});
+
+
+
+
+
+   //         //$.ajax({
+   //         //    type: 'GET',
+   //         //    url: '/Student/PrivatePage?fileName=' + message,
+   //         //    //dataType: 'json',
+   //         //    //crossOrigin: true,
+   //         //    success: function (response) {
+   //         //        //var encodedHtml = encodeURIComponent(response);
+   //         //        //alert(encodedHtml);
+   //         //        //$('#showimage').hide();
+   //         //        var container = $('#htmlContainer');
+   //         //        container.empty();
+   //         //        container.append(response);
+
+   //         //        //$("#htmlContainer").html(response);
+   //         //        //window.location.href = "/Student/Subjects?fileName=" + response;
+   //         //        //window.location.href = "/Student/Subjects??fileName=" + encodedHtml;
+
+   //         //    },
+   //         //    error: function (result) {
+   //         //        alert("Error");
+   //         //    }
+   //         //});
+   //     });
+
+    </script>
+</body>
+</html>

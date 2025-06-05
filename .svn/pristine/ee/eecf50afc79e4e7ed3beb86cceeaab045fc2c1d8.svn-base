@@ -1,0 +1,7182 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Web;
+using Odishadtet.Models;
+using System.Web.Script.Serialization;
+using System.Data.Entity;
+using Odishadtet.General;
+using System.Data.Entity.SqlServer;
+using Odishadtet.DAL;
+using Odishadtet.General;
+
+namespace Odishadtet.DAL
+{
+    public class CollegeGroupAdminReportService : ICollegeGroupAdminReportService
+    {
+        string PageName = "CollegeGroupAdminReportService.cs";
+        DateTime Sem_Startdate;
+        DateTime Sem_End_date;
+
+        ///// <summary>
+        ///// GetUserReadHistory
+        ///// </summary>
+        ///// <param name="userID"></param>
+        ///// <param name="univId"></param>
+        ///// <param name="college_id"></param>
+        ///// <param name="semester"></param>
+        ///// <param name="year"></param>
+        ///// <param name="reg_startdate"></param>
+        ///// <param name="reg_end_date"></param>
+        ///// <param name="usg_start_date"></param>
+        ///// <param name="usg_end_date"></param>
+        ///// <returns></returns>
+        //public List<UserReadHistoryModel> GetUserReadHistory(int userID, int univId, string college_id, string semester, string year, string reg_startdate, string reg_end_date, string usg_start_date, string usg_end_date)
+        //{
+        //    List<UserReadHistoryModel> UserReadHistory = new List<UserReadHistoryModel>();
+
+        //    string[] ddlyear = new string[50];
+        //    List<int> selyear = new List<int>();
+        //    ddlyear = year.Split('-').ToArray();
+        //    if (ddlyear[0].ToString() != "0")
+        //    {
+        //        for (int j = 0; j < ddlyear.Length; j++)
+        //        {
+        //            selyear.Add(Convert.ToInt16(ddlyear[j].ToString()));
+        //        }
+
+        //    }
+
+        //    string[] ddlCollege = new string[100];
+        //    List<int> collge = new List<int>();
+        //    ddlCollege = college_id.Split('-').ToArray();
+        //    if (ddlCollege[0].ToString() != "0")
+        //    {
+        //        for (int i = 0; i < ddlCollege.Length; i++)
+        //        {
+        //            collge.Add(Convert.ToInt32(ddlCollege[i].ToString()));
+        //        }
+        //    }
+
+        //    string[] ddlSemester = new string[50];
+        //    List<int> sems = new List<int>();
+        //    ddlSemester = semester.Split('-').ToArray();
+        //    if (ddlSemester[0].ToString() != "0")
+        //    {
+        //        for (int k = 0; k < ddlSemester.Length; k++)
+        //        {
+        //            sems.Add(Convert.ToInt16(ddlSemester[k].ToString()));
+        //        }
+        //    }
+        //    using (learnengg_payment_portal_entities contextsdce = new learnengg_payment_portal_entities())
+        //    {
+        //        try
+        //        {
+
+        //            var regCount = (from sm in contextsdce.subject_master
+        //                            join usrh in contextsdce.user_subject_read_history on sm.subject_id equals usrh.subject_id
+        //                            join um in contextsdce.user_master on usrh.user_id equals um.user_id
+        //                            // join usm in contextsdce.user_subject_mapping on um.user_id equals usm.user_id
+        //                            // join pm in contextsdce.package_master on sm.subject_id equals pm.subject_id
+        //                            // join unvm in contextsdce.university_master on um.univ_id equals unvm.univ_id
+        //                            join cm in contextsdce.college_master on um.collegeid equals cm.college_id
+        //                            join csm in contextsdce.college_subject_mapping on sm.subject_id equals csm.subject_id
+        //                            join dm in contextsdce.department_master on csm.department_id equals dm.department_id
+        //                            where um.univ_id == cm.university_id
+        //                            && csm.college_id == cm.college_id
+        //                            // && usm.subject_id == sm.subject_id
+        //                            // && sm.UniversityID == pm.univ_id  && usm.department_id == pm.department_id
+        //                            && um.user_id == userID && usrh.department_id == csm.department_id
+        //                            && um.active_status == 1 && cm.active_status == 1
+        //                            group new { sm, usrh, csm, dm } by new { sm.subject_id, csm.semester } into t
+        //                            select new
+        //                            {
+        //                                subjectid = t.FirstOrDefault().sm.subject_id,
+        //                                subjectname = t.FirstOrDefault().sm.subject_code + " - " + t.FirstOrDefault().sm.subject_name,
+        //                                departmentName = t.FirstOrDefault().dm.department_name,
+        //                                totalhours = t.Sum(a => a.usrh.total_hours),
+        //                                lastreadon = t.Max(a => a.usrh.last_read_on),
+        //                                userrole = "INSTRUCTOR ",
+        //                                semester = t.FirstOrDefault().csm.semester,
+        //                                univ_Id = 1
+
+        //                            }).Distinct().ToList();
+
+        //            if (selyear.Count() > 0)
+        //            {
+        //                var datanew = regCount.ToList();
+        //                regCount.Clear();
+        //                //regCount.AddRange(datanew.Where(x => selyear.Contains(x.currentyear)));
+        //            }
+
+        //            //if (sems.Count() > 0)
+        //            //{
+        //            //    var datanew = regCount.ToList();
+        //            //    regCount.Clear();
+        //            //    regCount.AddRange(datanew.Where(x => sems.Contains(x.semester)));
+        //            //}
+        //            //if (usg_start_date != "0")
+        //            //{
+        //            //    string usg_startdate = usg_start_date + " " + "00:00:00 AM";
+        //            //    DateTime usgStart_date = DateTime.ParseExact(usg_startdate, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+        //            //    var datanew = regCount.ToList();
+        //            //    regCount.Clear();
+        //            //    regCount.AddRange(datanew.Where(x => x.last_read_on >= usgStart_date));
+        //            //}
+
+        //            //if (usg_end_date != "0")
+        //            //{
+        //            //    string usg_End_date = usg_end_date + " " + "11:59:00 PM";
+        //            //    DateTime usgEnd_date = DateTime.ParseExact(usg_End_date, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+        //            //    var datanew = regCount.ToList();
+        //            //    regCount.Clear();
+        //            //    regCount.AddRange(datanew.Where(x => x.last_read_on <= usgEnd_date));
+        //            //}
+
+        //            UserReadHistory = (from g in regCount
+
+        //                               select new UserReadHistoryModel
+        //                               {
+        //                                   departmentName = g.departmentName,
+        //                                   subjectId = g.subjectid,
+        //                                   subjectName = g.subjectname,
+        //                                   Semester = g.semester,
+        //                                   totalhrs = string.Format("{0:00}:{1:00}:{2:00}", g.totalhours / 3600, (g.totalhours / 60) % 60, g.totalhours % 60),
+        //                                   lastReadOn = g.lastreadon.ToString("dd-MMM-yyyy"),
+        //                                   userRole = g.userrole
+        //                               }).OrderByDescending(t => t.lastReadOn).ToList();
+        //            return UserReadHistory;
+
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            contextsdce.Dispose();
+        //            Log.WriteLogMessage(PageName, "AdminReportservice", "GetUserReadHistory", ex.Message, "error");
+        //            throw ex;
+        //        }
+        //        finally
+        //        {
+        //            contextsdce.Dispose();
+        //        }
+        //    }
+
+
+        //}
+
+        ///// <summary>
+        ///// GetUserUsageReadHistory
+        ///// </summary>
+        ///// <param name="userID"></param>
+        ///// <param name="univId"></param>
+        ///// <param name="college_id"></param>
+        ///// <param name="deptid"></param>
+        ///// <param name="semester"></param>
+        ///// <param name="year"></param>
+        ///// <param name="reg_startdate"></param>
+        ///// <param name="reg_end_date"></param>
+        ///// <param name="usg_start_date"></param>
+        ///// <param name="usg_end_date"></param>
+        ///// <returns></returns>
+        //public List<UserReadHistoryModel> GetUserUsageReadHistory(int userID, int univId, string college_id, int deptid, string semester, string year, string reg_startdate, string reg_end_date, string usg_start_date, string usg_end_date)
+        //{
+        //    List<UserReadHistoryModel> UserReadHistory = new List<UserReadHistoryModel>();
+
+        //    string[] ddlyear = new string[50];
+        //    List<int> selyear = new List<int>();
+        //    ddlyear = year.Split('-').ToArray();
+        //    if (ddlyear[0].ToString() != "0")
+        //    {
+        //        for (int j = 0; j < ddlyear.Length; j++)
+        //        {
+        //            selyear.Add(Convert.ToInt16(ddlyear[j].ToString()));
+        //        }
+
+        //    }
+
+        //    string[] ddlCollege = new string[100];
+        //    List<int> collge = new List<int>();
+        //    ddlCollege = college_id.Split('-').ToArray();
+        //    if (ddlCollege[0].ToString() != "0")
+        //    {
+        //        for (int i = 0; i < ddlCollege.Length; i++)
+        //        {
+        //            collge.Add(Convert.ToInt32(ddlCollege[i].ToString()));
+        //        }
+        //    }
+
+        //    string[] ddlSemester = new string[50];
+        //    List<int> sems = new List<int>();
+        //    ddlSemester = semester.Split('-').ToArray();
+        //    if (ddlSemester[0].ToString() != "0")
+        //    {
+        //        for (int k = 0; k < ddlSemester.Length; k++)
+        //        {
+        //            sems.Add(Convert.ToInt16(ddlSemester[k].ToString()));
+        //        }
+        //    }
+        //    using (learnengg_payment_portal_entities contextsdce = new learnengg_payment_portal_entities())
+        //    {
+        //        try
+        //        {
+
+        //            var regCount = (from sm in contextsdce.subject_master
+        //                            join usrh in contextsdce.user_subject_read_history on sm.subject_id equals usrh.subject_id
+        //                            join um in contextsdce.user_master on usrh.user_id equals um.user_id
+        //                            // join usm in contextsdce.user_subject_mapping on um.user_id equals usm.user_id
+        //                            //  join pm in contextsdce.package_master on sm.subject_id equals pm.subject_id
+        //                            //   join unvm in contextsdce.university_master on um.univ_id equals unvm.univ_id
+        //                            join cm in contextsdce.college_master on um.collegeid equals cm.college_id
+        //                            join csm in contextsdce.college_subject_mapping on sm.subject_id equals csm.subject_id
+        //                            join dm in contextsdce.department_master on csm.department_id equals dm.department_id
+        //                            where um.univ_id == cm.university_id
+        //                            && csm.college_id == cm.college_id
+        //                            //   && usm.subject_id == sm.subject_id
+        //                            //   && sm.UniversityID == pm.univ_id  && usm.department_id == pm.department_id
+        //                            && um.user_id == userID && usrh.department_id == csm.department_id
+        //                            && um.active_status == 1 && cm.active_status == 1
+        //                            && dm.department_id == deptid
+        //                            group new { sm, usrh, csm, dm } by new { sm.subject_id, csm.semester } into t
+        //                            select new
+        //                            {
+        //                                subjectid = t.FirstOrDefault().sm.subject_id,
+        //                                subjectname = t.FirstOrDefault().sm.subject_code + " - " + t.FirstOrDefault().sm.subject_name,
+        //                                departmentName = t.FirstOrDefault().dm.department_name,
+        //                                totalhours = t.Sum(a => a.usrh.total_hours),
+        //                                lastreadon = t.Max(a => a.usrh.last_read_on),
+        //                                userrole = "INSTRUCTOR ",
+        //                                semester = t.FirstOrDefault().csm.semester,
+        //                                univ_Id = 1
+
+        //                            }).Distinct().ToList();
+
+        //            if (selyear.Count() > 0)
+        //            {
+        //                var datanew = regCount.ToList();
+        //                regCount.Clear();
+        //                //regCount.AddRange(datanew.Where(x => selyear.Contains(x.currentyear)));
+        //            }
+
+        //            //if (sems.Count() > 0)
+        //            //{
+        //            //    var datanew = regCount.ToList();
+        //            //    regCount.Clear();
+        //            //    regCount.AddRange(datanew.Where(x => sems.Contains(x.semester)));
+        //            //}
+        //            //if (usg_start_date != "0")
+        //            //{
+        //            //    string usg_startdate = usg_start_date + " " + "00:00:00 AM";
+        //            //    DateTime usgStart_date = DateTime.ParseExact(usg_startdate, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+        //            //    var datanew = regCount.ToList();
+        //            //    regCount.Clear();
+        //            //    regCount.AddRange(datanew.Where(x => x.last_read_on >= usgStart_date));
+        //            //}
+
+        //            //if (usg_end_date != "0")
+        //            //{
+        //            //    string usg_End_date = usg_end_date + " " + "11:59:00 PM";
+        //            //    DateTime usgEnd_date = DateTime.ParseExact(usg_End_date, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+        //            //    var datanew = regCount.ToList();
+        //            //    regCount.Clear();
+        //            //    regCount.AddRange(datanew.Where(x => x.last_read_on <= usgEnd_date));
+        //            //}
+
+        //            UserReadHistory = (from g in regCount
+
+        //                               select new UserReadHistoryModel
+        //                               {
+        //                                   departmentName = g.departmentName,
+        //                                   subjectId = g.subjectid,
+        //                                   subjectName = g.subjectname,
+        //                                   Semester = g.semester,
+        //                                   totalhrs = string.Format("{0:00}:{1:00}:{2:00}", g.totalhours / 3600, (g.totalhours / 60) % 60, g.totalhours % 60),
+        //                                   lastReadOn = g.lastreadon.ToString("dd-MMM-yyyy"),
+        //                                   userRole = g.userrole
+        //                               }).OrderByDescending(t => t.lastReadOn).ToList();
+        //            return UserReadHistory;
+
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            contextsdce.Dispose();
+        //            Log.WriteLogMessage(PageName, "AdminReportservice", "GetUserReadHistory", ex.Message, "error");
+        //            throw ex;
+        //        }
+        //        finally
+        //        {
+        //            contextsdce.Dispose();
+        //        }
+        //    }
+
+
+        //}
+
+
+        /// <summary>
+        /// GetUserTotalHrsReadHistory
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <param name="univId"></param>
+        /// <param name="college_id"></param>
+        /// <param name="semester"></param>
+        /// <param name="year"></param>
+        /// <param name="reg_startdate"></param>
+        /// <param name="reg_end_date"></param>
+        /// <param name="usg_start_date"></param>
+        /// <param name="usg_end_date"></param>
+        /// <returns></returns>
+        public List<UserReadHistoryModel> GetUserTotalHrsReadHistory(int userID, int univId, string college_id, string semester, string year, string reg_startdate, string reg_end_date, string usg_start_date, string usg_end_date)
+        {
+            List<UserReadHistoryModel> UserReadHistory = new List<UserReadHistoryModel>();
+
+            string[] ddlyear = new string[50];
+            List<int> selyear = new List<int>();
+            ddlyear = year.Split('-').ToArray();
+            if (ddlyear[0].ToString() != "0")
+            {
+                for (int j = 0; j < ddlyear.Length; j++)
+                {
+                    selyear.Add(Convert.ToInt16(ddlyear[j].ToString()));
+                }
+
+            }
+
+            string[] ddlCollege = new string[100];
+            List<int> collge = new List<int>();
+            ddlCollege = college_id.Split('-').ToArray();
+            if (ddlCollege[0].ToString() != "0")
+            {
+                for (int i = 0; i < ddlCollege.Length; i++)
+                {
+                    collge.Add(Convert.ToInt32(ddlCollege[i].ToString()));
+                }
+            }
+
+            string[] ddlSemester = new string[50];
+            List<int> sems = new List<int>();
+            ddlSemester = semester.Split('-').ToArray();
+            if (ddlSemester[0].ToString() != "0")
+            {
+                for (int k = 0; k < ddlSemester.Length; k++)
+                {
+                    sems.Add(Convert.ToInt16(ddlSemester[k].ToString()));
+                }
+            }
+            using (learnengg_payment_portal_entities contextsdce = new learnengg_payment_portal_entities())
+            {
+                try
+                {
+
+                    var regCount = (from sm in contextsdce.subject_master
+                                    join usrh in contextsdce.user_subject_read_history on sm.subject_id equals usrh.subject_id
+                                    join um in contextsdce.user_master on usrh.user_id equals um.user_id
+                                    // join usm in contextsdce.user_subject_mapping on um.user_id equals usm.user_id
+                                    // join pm in contextsdce.package_master on sm.subject_id equals pm.subject_id
+                                    // join unvm in contextsdce.university_master on um.univ_id equals unvm.univ_id
+                                    join cm in contextsdce.college_master on um.collegeid equals cm.college_id
+                                    join csm in contextsdce.college_subject_mapping on sm.subject_id equals csm.subject_id
+                                    join dm in contextsdce.department_master on csm.department_id equals dm.department_id
+                                    where um.univ_id == cm.university_id
+                                    && csm.college_id == cm.college_id
+                                    // && usm.subject_id == sm.subject_id
+                                    // && sm.UniversityID == pm.univ_id  && usm.department_id == pm.department_id
+                                    && um.user_id == userID && usrh.department_id == csm.department_id
+                                    && um.active_status == 1 && cm.active_status == 1
+                                    //group new { sm, usrh, csm, dm } by new { sm.subject_id, csm.semester } into t
+                                    select new
+                                    {
+                                        subjectid = sm.subject_id,
+                                        subjectname = sm.subject_code + " - " + sm.subject_name,
+                                        departmentName = dm.department_name,
+                                        totalhours = usrh.total_hours,
+                                        lastreadon = usrh.last_read_on,
+                                        userrole = "INSTRUCTOR ",
+                                        semester = csm.semester,
+                                        univ_Id = 1
+
+                                    }).Distinct().ToList();
+
+                    if (selyear.Count() > 0)
+                    {
+                        var datanew = regCount.ToList();
+                        regCount.Clear();
+                        //regCount.AddRange(datanew.Where(x => selyear.Contains(x.currentyear)));
+                    }
+
+                    //if (sems.Count() > 0)
+                    //{
+                    //    var datanew = regCount.ToList();
+                    //    regCount.Clear();
+                    //    regCount.AddRange(datanew.Where(x => sems.Contains(x.semester)));
+                    //}
+                    //if (usg_start_date != "0")
+                    //{
+                    //    string usg_startdate = usg_start_date + " " + "00:00:00 AM";
+                    //    DateTime usgStart_date = DateTime.ParseExact(usg_startdate, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+                    //    var datanew = regCount.ToList();
+                    //    regCount.Clear();
+                    //    regCount.AddRange(datanew.Where(x => x.last_read_on >= usgStart_date));
+                    //}
+
+                    //if (usg_end_date != "0")
+                    //{
+                    //    string usg_End_date = usg_end_date + " " + "11:59:00 PM";
+                    //    DateTime usgEnd_date = DateTime.ParseExact(usg_End_date, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+                    //    var datanew = regCount.ToList();
+                    //    regCount.Clear();
+                    //    regCount.AddRange(datanew.Where(x => x.last_read_on <= usgEnd_date));
+                    //}
+
+                    UserReadHistory = (from g in regCount
+
+                                       select new UserReadHistoryModel
+                                       {
+                                           departmentName = g.departmentName,
+                                           subjectId = g.subjectid,
+                                           subjectName = g.subjectname,
+                                           Semester = g.semester,
+                                           totalhrs = string.Format("{0:00}:{1:00}:{2:00}", g.totalhours / 3600, (g.totalhours / 60) % 60, g.totalhours % 60),
+                                           lastReadOn = g.lastreadon.ToString("dd-MMM-yyyy"),
+                                           userRole = g.userrole
+
+                                       }).OrderByDescending(t => t.lastReadDate).ToList();
+                    return UserReadHistory;
+
+                }
+                catch (Exception ex)
+                {
+                    contextsdce.Dispose();
+                    Log.WriteLogMessage(PageName, "AdminReportservice", "GetUserReadHistory", ex.Message, "error");
+                    throw ex;
+                }
+                finally
+                {
+                    contextsdce.Dispose();
+                }
+            }
+
+
+        }
+
+        /// <summary>
+        /// GetTotalHoursUsageReadHistory
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <param name="univId"></param>
+        /// <param name="college_id"></param>
+        /// <param name="deptid"></param>
+        /// <param name="semester"></param>
+        /// <param name="year"></param>
+        /// <param name="reg_startdate"></param>
+        /// <param name="reg_end_date"></param>
+        /// <param name="usg_start_date"></param>
+        /// <param name="usg_end_date"></param>
+        /// <returns></returns>
+        public List<UserReadHistoryModel> GetTotalHoursUsageReadHistory(int userID, int univId, string college_id, int deptid, string semester, string year, string reg_startdate, string reg_end_date, string usg_start_date, string usg_end_date)
+        {
+            List<UserReadHistoryModel> UserReadHistory = new List<UserReadHistoryModel>();
+
+            string[] ddlyear = new string[50];
+            List<int> selyear = new List<int>();
+            ddlyear = year.Split('-').ToArray();
+            if (ddlyear[0].ToString() != "0")
+            {
+                for (int j = 0; j < ddlyear.Length; j++)
+                {
+                    selyear.Add(Convert.ToInt16(ddlyear[j].ToString()));
+                }
+
+            }
+
+            string[] ddlCollege = new string[100];
+            List<int> collge = new List<int>();
+            ddlCollege = college_id.Split('-').ToArray();
+            if (ddlCollege[0].ToString() != "0")
+            {
+                for (int i = 0; i < ddlCollege.Length; i++)
+                {
+                    collge.Add(Convert.ToInt32(ddlCollege[i].ToString()));
+                }
+            }
+
+            string[] ddlSemester = new string[50];
+            List<int> sems = new List<int>();
+            ddlSemester = semester.Split('-').ToArray();
+            if (ddlSemester[0].ToString() != "0")
+            {
+                for (int k = 0; k < ddlSemester.Length; k++)
+                {
+                    sems.Add(Convert.ToInt16(ddlSemester[k].ToString()));
+                }
+            }
+            using (learnengg_payment_portal_entities contextsdce = new learnengg_payment_portal_entities())
+            {
+                try
+                {
+
+                    var regCount = (from sm in contextsdce.subject_master
+                                    join usrh in contextsdce.user_subject_read_history on sm.subject_id equals usrh.subject_id
+                                    join um in contextsdce.user_master on usrh.user_id equals um.user_id
+                                    // join usm in contextsdce.user_subject_mapping on um.user_id equals usm.user_id
+                                    // join pm in contextsdce.package_master on sm.subject_id equals pm.subject_id
+                                    // join unvm in contextsdce.university_master on um.univ_id equals unvm.univ_id
+                                    join cm in contextsdce.college_master on um.collegeid equals cm.college_id
+                                    join csm in contextsdce.college_subject_mapping on sm.subject_id equals csm.subject_id
+                                    join dm in contextsdce.department_master on csm.department_id equals dm.department_id
+                                    where um.univ_id == cm.university_id
+                                    && csm.college_id == cm.college_id
+                                    // && usm.subject_id == sm.subject_id
+                                    // && sm.UniversityID == pm.univ_id  && usm.department_id == pm.department_id
+                                    && um.user_id == userID && usrh.department_id == csm.department_id
+                                    && um.active_status == 1 && cm.active_status == 1
+                                    && dm.department_id == deptid
+                                    //group new { sm, usrh, csm, dm } by new { sm.subject_id, csm.semester } into t
+                                    select new
+                                    {
+                                        subjectid = sm.subject_id,
+                                        subjectname = sm.subject_code + " - " + sm.subject_name,
+                                        departmentName = dm.department_name,
+                                        totalhours = usrh.total_hours,
+                                        lastreadon = usrh.last_read_on,
+                                        userrole = "INSTRUCTOR ",
+                                        semester = csm.semester,
+                                        univ_Id = 1
+
+                                    }).Distinct().ToList();
+
+                    if (selyear.Count() > 0)
+                    {
+                        var datanew = regCount.ToList();
+                        regCount.Clear();
+                        //regCount.AddRange(datanew.Where(x => selyear.Contains(x.currentyear)));
+                    }
+
+                    //if (sems.Count() > 0)
+                    //{
+                    //    var datanew = regCount.ToList();
+                    //    regCount.Clear();
+                    //    regCount.AddRange(datanew.Where(x => sems.Contains(x.semester)));
+                    //}
+                    //if (usg_start_date != "0")
+                    //{
+                    //    string usg_startdate = usg_start_date + " " + "00:00:00 AM";
+                    //    DateTime usgStart_date = DateTime.ParseExact(usg_startdate, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+                    //    var datanew = regCount.ToList();
+                    //    regCount.Clear();
+                    //    regCount.AddRange(datanew.Where(x => x.last_read_on >= usgStart_date));
+                    //}
+
+                    //if (usg_end_date != "0")
+                    //{
+                    //    string usg_End_date = usg_end_date + " " + "11:59:00 PM";
+                    //    DateTime usgEnd_date = DateTime.ParseExact(usg_End_date, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+                    //    var datanew = regCount.ToList();
+                    //    regCount.Clear();
+                    //    regCount.AddRange(datanew.Where(x => x.last_read_on <= usgEnd_date));
+                    //}
+
+                    UserReadHistory = (from g in regCount
+
+                                       select new UserReadHistoryModel
+                                       {
+                                           departmentName = g.departmentName,
+                                           subjectId = g.subjectid,
+                                           subjectName = g.subjectname,
+                                           Semester = g.semester,
+                                           totalhrs = string.Format("{0:00}:{1:00}:{2:00}", g.totalhours / 3600, (g.totalhours / 60) % 60, g.totalhours % 60),
+                                           lastReadOn = g.lastreadon.ToString("dd-MMM-yyyy"),
+                                           lastReadDate = g.lastreadon.Date,
+                                           userRole = g.userrole
+                                       }).OrderByDescending(t => t.lastReadDate).ToList();
+                    return UserReadHistory;
+
+                }
+                catch (Exception ex)
+                {
+                    contextsdce.Dispose();
+                    Log.WriteLogMessage(PageName, "AdminReportservice", "GetUserReadHistory", ex.Message, "error");
+                    throw ex;
+                }
+                finally
+                {
+                    contextsdce.Dispose();
+                }
+            }
+
+
+        }
+
+
+
+        ///// <summary>
+        ///// weeklywiseReport
+        ///// </summary>
+        ///// <param name="univId"></param>
+        ///// <param name="college_id"></param>
+        ///// <param name="semester"></param>
+        ///// <param name="year"></param>
+        ///// <param name="reg_startdate"></param>
+        ///// <param name="reg_end_date"></param>
+        ///// <param name="usg_start_date"></param>
+        ///// <param name="usg_end_date"></param>
+        ///// <returns></returns>
+        //public List<UserReadHistoryModel> weeklywiseReport(int univId, string college_id, string semester, string year, string reg_startdate, string reg_end_date, string usg_start_date, string usg_end_date)
+        //{
+        //    List<UserReadHistoryModel> readHistory = new List<UserReadHistoryModel>();
+
+        //    string[] ddlyear = new string[50];
+        //    List<int> selyear = new List<int>();
+        //    ddlyear = year.Split('-').ToArray();
+        //    if (ddlyear[0].ToString() != "0")
+        //    {
+        //        for (int j = 0; j < ddlyear.Length; j++)
+        //        {
+        //            selyear.Add(Convert.ToInt16(ddlyear[j].ToString()));
+        //        }
+
+        //    }
+
+        //    string[] ddlCollege = new string[100];
+        //    List<int> collge = new List<int>();
+        //    ddlCollege = college_id.Split('-').ToArray();
+        //    if (ddlCollege[0].ToString() != "0")
+        //    {
+        //        for (int i = 0; i < ddlCollege.Length; i++)
+        //        {
+        //            collge.Add(Convert.ToInt32(ddlCollege[i].ToString()));
+        //        }
+        //    }
+
+        //    string[] ddlSemester = new string[50];
+        //    List<int> sems = new List<int>();
+        //    ddlSemester = semester.Split('-').ToArray();
+        //    if (ddlSemester[0].ToString() != "0")
+        //    {
+        //        for (int k = 0; k < ddlSemester.Length; k++)
+        //        {
+        //            sems.Add(Convert.ToInt16(ddlSemester[k].ToString()));
+        //        }
+        //    }
+        //    using (learnengg_payment_portal_entities contextsdce = new learnengg_payment_portal_entities())
+        //    {
+        //        try
+        //        {
+        //            var regCount = (from sm in contextsdce.subject_master
+        //                            join usrh in contextsdce.user_subject_read_history on sm.subject_id equals usrh.subject_id
+        //                            join um in contextsdce.user_master on usrh.user_id equals um.user_id
+        //                            join dpsm in contextsdce.department_subject_mapping on um.DepartmentID equals dpsm.department_id
+        //                            join unvm in contextsdce.university_master on um.univ_id equals unvm.univ_id
+        //                            join cm in contextsdce.college_master on um.collegeid equals cm.college_id
+        //                            where um.univ_id == cm.university_id && sm.subject_id == dpsm.subject_id && (um.role_id == 1 || um.role_id == 2) && um.active_status == 1
+
+        //                            orderby usrh.total_hours descending
+        //                            select new
+        //                            {
+        //                                userReadHistryId = usrh.user_read_history_id,
+        //                                username = um.user_name,
+        //                                userid = um.user_id,
+        //                                collegename = um.collegename,
+        //                                collegeid = um.collegeid,
+        //                                subjectcount = sm.subject_id,
+        //                                totalhours = usrh.total_hours,
+        //                                lastreadon = (DateTime)usrh.last_read_on,
+        //                                univName = unvm.university_name,
+        //                                univ_Id = um.univ_id,
+        //                                userrole = um.role_id == 1 ? "INSTRUCTOR " : "INSTRUCTOR ",
+        //                                dpsm.map_year,
+        //                                dpsm.semester,
+        //                                um.currentyear,
+        //                                um.created_on,
+        //                                usrh.last_read_on
+
+        //                            }).ToList();
+
+        //            if (univId != 0)
+        //            {
+        //                var datanew = regCount.ToList();
+        //                regCount.Clear();
+        //                regCount.AddRange(datanew.Where(x => x.univ_Id == univId));
+        //            }
+        //            if (selyear.Count() > 0)
+        //            {
+        //                var datanew = regCount.ToList();
+        //                regCount.Clear();
+        //                //regCount.AddRange(datanew.Where(x => selyear.Contains(x.currentyear)));
+        //            }
+
+        //            if (sems.Count() > 0)
+        //            {
+        //                var datanew = regCount.ToList();
+        //                regCount.Clear();
+        //                regCount.AddRange(datanew.Where(x => sems.Contains(x.semester)));
+        //            }
+        //            if (collge.Count() > 0)
+        //            {
+        //                var datanew = regCount.ToList();
+        //                regCount.Clear();
+        //                regCount.AddRange(datanew.Where(x => collge.Contains(x.collegeid ?? 0)));
+
+        //            }
+        //            if (reg_startdate != "0")
+        //            {
+        //                string Reg_stdate = reg_startdate + " " + "00:00:00 AM";
+        //                DateTime start_date = DateTime.ParseExact(Reg_stdate, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+        //                var datanew = regCount.ToList();
+        //                regCount.Clear();
+        //                regCount.AddRange(datanew.Where(x => x.created_on >= start_date));
+        //            }
+        //            if (usg_start_date != "0")
+        //            {
+        //                string usg_startdate = usg_start_date + " " + "00:00:00 AM";
+        //                DateTime usgStart_date = DateTime.ParseExact(usg_startdate, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+        //                var datanew = regCount.ToList();
+        //                regCount.Clear();
+        //                regCount.AddRange(datanew.Where(x => x.last_read_on >= usgStart_date));
+        //            }
+
+        //            if (reg_end_date != "0")
+        //            {
+        //                string Reg_edate = reg_end_date + " " + "11:59:00 PM";
+        //                DateTime End_date = DateTime.ParseExact(Reg_edate, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+        //                var datanew = regCount.ToList();
+        //                regCount.Clear();
+        //                regCount.AddRange(datanew.Where(x => x.created_on <= End_date));
+        //            }
+        //            if (usg_end_date != "0")
+        //            {
+        //                string usg_End_date = usg_end_date + " " + "11:59:00 PM";
+        //                DateTime usgEnd_date = DateTime.ParseExact(usg_End_date, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+        //                var datanew = regCount.ToList();
+        //                regCount.Clear();
+        //                regCount.AddRange(datanew.Where(x => x.last_read_on <= usgEnd_date));
+        //            }
+
+        //            readHistory = (from g in regCount
+
+        //                           group g by new { g.lastreadon.Month, g.lastreadon.Year, univId = g.univ_Id } into t
+        //                           select new UserReadHistoryModel
+        //                           {
+        //                               userName = t.FirstOrDefault().username,
+        //                               userId = t.FirstOrDefault().userid,
+        //                               collegeName = t.FirstOrDefault().collegename,
+        //                               collegeId = t.FirstOrDefault().collegeid,
+        //                               subjectCount = t.Select(x => x.subjectcount).Distinct().Count(),
+        //                               totalSeconds = t.Sum(x => x.totalhours),
+        //                               totalhrs = string.Format("{0:00}:{1:00}:{2:00}", t.Sum(x => (x.totalhours)) / 3600, (t.Sum(x => (x.totalhours)) / 60) % 60, t.Sum(x => (x.totalhours)) % 60),
+        //                               lastReadOn = (t.FirstOrDefault().lastreadon.ToString("dd-MMM-yyyy")),
+        //                               // week1 = t.Select(x => x.lastreadon.Month < 7).Sum(x => x.totalhours),
+        //                               week1Sec = t.Where(x => x.lastreadon.Day >= 1 && x.lastreadon.Day <= 7).Sum(x => x.totalhours),
+        //                               week2Sec = t.Where(x => x.lastreadon.Day >= 8 && x.lastreadon.Day <= 14).Sum(x => x.totalhours),
+        //                               week3Sec = t.Where(x => x.lastreadon.Day >= 15 && x.lastreadon.Day <= 21).Sum(x => x.totalhours),
+        //                               week4Sec = t.Where(x => x.lastreadon.Day >= 22 && x.lastreadon.Day <= 31).Sum(x => x.totalhours),
+        //                               week1 = string.Format("{0:00}:{1:00}:{2:00}", t.Where(x => x.lastreadon.Day >= 1 && x.lastreadon.Day <= 7).Sum(s => s.totalhours) / 3600, (t.Where(x => x.lastreadon.Day >= 1 && x.lastreadon.Day <= 7).Sum(s => s.totalhours) % 3600) / 60, t.Where(x => x.lastreadon.Day >= 1 && x.lastreadon.Day <= 7).Sum(s => s.totalhours) % 60),
+        //                               week2 = string.Format("{0:00}:{1:00}:{2:00}", t.Where(x => x.lastreadon.Day >= 8 && x.lastreadon.Day <= 14).Sum(s => s.totalhours) / 3600, (t.Where(x => x.lastreadon.Day >= 8 && x.lastreadon.Day <= 14).Sum(s => s.totalhours) % 3600) / 60, t.Where(x => x.lastreadon.Day >= 8 && x.lastreadon.Day <= 14).Sum(s => s.totalhours) % 60),
+        //                               week3 = string.Format("{0:00}:{1:00}:{2:00}", t.Where(x => x.lastreadon.Day >= 15 && x.lastreadon.Day <= 21).Sum(s => s.totalhours) / 3600, (t.Where(x => x.lastreadon.Day >= 15 && x.lastreadon.Day <= 21).Sum(s => s.totalhours) % 3600) / 60, t.Where(x => x.lastreadon.Day >= 15 && x.lastreadon.Day <= 21).Sum(s => s.totalhours) % 60),
+        //                               week4 = string.Format("{0:00}:{1:00}:{2:00}", t.Where(x => x.lastreadon.Day >= 22 && x.lastreadon.Day <= 31).Sum(s => s.totalhours) / 3600, (t.Where(x => x.lastreadon.Day >= 22 && x.lastreadon.Day <= 31).Sum(s => s.totalhours) % 3600) / 60, t.Where(x => x.lastreadon.Day >= 22 && x.lastreadon.Day <= 31).Sum(s => s.totalhours) % 60),
+        //                               //Total =string.Format("{0:00}:{1:00}:{2:00}",
+        //                               univName = t.FirstOrDefault().univName,
+        //                               //month = t.Key.Month.ToString(),
+        //                               monthOrderBy = t.Key.Month,
+        //                               yearOrderBy = t.Key.Year,
+        //                               month = t.FirstOrDefault().lastreadon.ToString("yyyy-MMM"),
+        //                               userRole = t.FirstOrDefault().userrole,
+        //                               userCount = t.Count(),
+
+
+        //                           }).OrderByDescending(t => t.yearOrderBy).ThenByDescending(t => t.monthOrderBy).Distinct().ToList();
+
+        //            int week1tot = 0;
+        //            int week2tot = 0;
+        //            int week3tot = 0;
+        //            int week4tot = 0;
+        //            int weektotal = 0;
+        //            for (int i = 0; i < readHistory.Count(); i++)
+        //            {
+        //                week1tot += Convert.ToInt32(readHistory[i].week1Sec);
+        //                week2tot += Convert.ToInt32(readHistory[i].week2Sec);
+        //                week3tot += Convert.ToInt32(readHistory[i].week3Sec);
+        //                week4tot += Convert.ToInt32(readHistory[i].week4Sec);
+        //            }
+        //            weektotal = week1tot + week2tot + week3tot + week4tot;
+        //            string week1total = string.Format("{0:00}:{1:00}:{2:00}", week1tot / 3600, (week1tot % 3600) / 60, week1tot % 60);
+        //            string week2total = string.Format("{0:00}:{1:00}:{2:00}", week2tot / 3600, (week2tot % 3600) / 60, week2tot % 60);
+        //            string week3total = string.Format("{0:00}:{1:00}:{2:00}", week3tot / 3600, (week3tot % 3600) / 60, week3tot % 60);
+        //            string week4total = string.Format("{0:00}:{1:00}:{2:00}", week4tot / 3600, (week4tot % 3600) / 60, week4tot % 60);
+        //            string weekOverAllTotal = string.Format("{0:00}:{1:00}:{2:00}", weektotal / 3600, (weektotal % 3600) / 60, weektotal % 60);
+
+        //            UserReadHistoryModel objnew = new UserReadHistoryModel();
+        //            objnew.userCount = 0;
+        //            objnew.totalhrs = weekOverAllTotal;
+        //            objnew.totalSeconds = 0;
+        //            objnew.univName = "";
+        //            objnew.userId = 0;
+        //            objnew.userName = "";
+        //            objnew.userRole = "";
+        //            objnew.week1Sec = 0;
+        //            objnew.week2Sec = 0;
+        //            objnew.week3Sec = 0;
+        //            objnew.week4Sec = 0;
+        //            objnew.collegeId = 0;
+        //            objnew.collegeName = "";
+        //            objnew.lastReadOn = "";
+        //            objnew.month = "";
+        //            objnew.univName = "";
+        //            objnew.subjectCount = 0;
+        //            objnew.week1 = week1total;
+        //            objnew.week2 = week2total;
+        //            objnew.week3 = week3total;
+        //            objnew.week4 = week4total;
+
+        //            readHistory.Add(objnew);
+
+        //            return readHistory;
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            contextsdce.Dispose();
+        //            Log.WriteLogMessage(PageName, "AdminReportservice", "weeklywiseReport", ex.Message, "error");
+        //            throw ex;
+        //        }
+        //        finally
+        //        {
+        //            contextsdce.Dispose();
+        //        }
+        //    }
+
+        //}
+        ///// <summary>
+        ///// UniversityReadHistoryByDeptSummary
+        ///// </summary>
+        ///// <param name="univId"></param>
+        ///// <param name="college_id"></param>
+        ///// <param name="semester"></param>
+        ///// <param name="year"></param>
+        ///// <param name="reg_startdate"></param>
+        ///// <param name="reg_end_date"></param>
+        ///// <param name="usg_start_date"></param>
+        ///// <param name="usg_end_date"></param>
+        ///// <param name="ITIorTrade"></param> 
+        ///// <returns></returns>
+        //public List<UserReadHistoryModel> UniversityReadHistorySummary(int DepartmentID, int collegeID, int SubjectID, int SemsterID, string DateFrom, string DateTo, int SubjectType, int ITIorTrade)
+        //{
+        //    List<UserReadHistoryModel> readHistory = new List<UserReadHistoryModel>();
+        //    List<UserReadHistoryModel> readHistoryswap = new List<UserReadHistoryModel>();
+
+        //    DateTime usgEnd_date = DateTime.Now;
+        //    DateTime usgStart_date = DateTime.Now;
+
+        //    if (DateTo != "0")
+        //    {
+        //        string usg_endate = DateTo + " " + "00:00:00 AM";
+        //        usgEnd_date = DateTime.ParseExact(usg_endate, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+        //    }
+
+        //    if (DateFrom != "0")
+        //    {
+        //        string usg_startdate = DateFrom + " " + "00:00:00 AM";
+        //        usgStart_date = DateTime.ParseExact(usg_startdate, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+        //    }
+
+
+        //    using (learnengg_payment_portal_entities contextsdce = new learnengg_payment_portal_entities())
+        //    {
+        //        try
+        //        {
+        //            if (DateFrom != "0" && DateTo != "0")
+        //            {
+
+        //                var regCount = (from sm in contextsdce.subject_master
+        //                                join usrh in contextsdce.user_subject_read_history on sm.subject_id equals usrh.subject_id
+        //                                join um in contextsdce.user_master on usrh.user_id equals um.user_id
+        //                                join dpsm in contextsdce.college_subject_mapping on usrh.department_id equals dpsm.department_id
+        //                                join dm in contextsdce.department_master on dpsm.department_id equals dm.department_id
+        //                                join cm in contextsdce.college_master on um.collegeid equals cm.college_id
+        //                                where sm.subject_id == dpsm.subject_id
+        //                                   && usrh.last_read_on >= usgStart_date && usrh.last_read_on <= usgEnd_date
+        //                                && um.active_status == 1 && cm.active_status == 1 && dpsm.college_id == cm.college_id
+        //                                orderby usrh.total_hours descending
+        //                                group new { cm, usrh, dpsm, um } by new { cm.college_id, cm.college_name, sm.subject_id, dpsm.map_year, dpsm.semester, dpsm.department_id, dm.department_name } into g
+        //                                select new
+        //                                {
+        //                                    collegename = g.Key.college_name,
+        //                                    collegeid = g.Key.college_id,
+        //                                    subjectId = g.Key.subject_id,
+        //                                    totalhours = g.Select(x => x.usrh.total_hours).Sum(),
+        //                                    totalusers = g.Select(x => x.um.user_id).Distinct().Count(),
+        //                                    map_year = g.Key.map_year,
+        //                                    semester = g.Key.semester,
+        //                                    DepartmentId = g.Key.department_id,
+        //                                    DepartmentName = g.Key.department_name
+        //                                }).ToList();
+
+        //                readHistoryswap = (from g in regCount
+        //                                   group g by new { g.DepartmentId, g.DepartmentName, g.collegeid, g.map_year, g.semester, g.subjectId } into t
+        //                                   select new UserReadHistoryModel
+        //                                   {
+        //                                       departmentName = t.Key.DepartmentName,
+        //                                       departmentId = t.Key.DepartmentId,
+        //                                       collegeId = t.Key.collegeid,
+        //                                       subjectId = t.Key.subjectId,
+        //                                       Semester = t.Key.semester,
+        //                                       totalSeconds = t.Sum(x => x.totalhours),
+        //                                       userCount = t.Sum(x => x.totalusers)
+        //                                       //    totalhrs = string.Format("{0:00}:{1:00}:{2:00}", t.Sum(x => x.totalhours) / 3600, (t.Sum(x => x.totalhours) / 60) % 60, t.Sum(x => x.totalhours) % 60)
+        //                                   }).OrderByDescending(t => t.totalSeconds).ToList();
+        //            }
+        //            else if (DateFrom != "0" && DateTo == "0")
+        //            {
+
+        //                var regCount = (from sm in contextsdce.subject_master
+        //                                join usrh in contextsdce.user_subject_read_history on sm.subject_id equals usrh.subject_id
+        //                                join um in contextsdce.user_master on usrh.user_id equals um.user_id
+        //                                join dpsm in contextsdce.college_subject_mapping on usrh.department_id equals dpsm.department_id
+        //                                join dm in contextsdce.department_master on dpsm.department_id equals dm.department_id
+        //                                join cm in contextsdce.college_master on um.collegeid equals cm.college_id
+        //                                where sm.subject_id == dpsm.subject_id
+        //                                   && usrh.last_read_on >= usgStart_date
+        //                                && um.active_status == 1 && cm.active_status == 1 && dpsm.college_id == cm.college_id
+        //                                orderby usrh.total_hours descending
+        //                                group new { cm, usrh, dpsm, um } by new { cm.college_id, cm.college_name, sm.subject_id, dpsm.map_year, dpsm.semester, dpsm.department_id, dm.department_name } into g
+        //                                select new
+        //                                {
+        //                                    collegename = g.Key.college_name,
+        //                                    collegeid = g.Key.college_id,
+        //                                    subjectId = g.Key.subject_id,
+        //                                    totalhours = g.Select(x => x.usrh.total_hours).Sum(),
+        //                                    totalusers = g.Select(x => x.um.user_id).Distinct().Count(),
+        //                                    map_year = g.Key.map_year,
+        //                                    semester = g.Key.semester,
+        //                                    DepartmentId = g.Key.department_id,
+        //                                    DepartmentName = g.Key.department_name
+        //                                }).ToList();
+
+        //                readHistoryswap = (from g in regCount
+        //                                   group g by new { g.DepartmentId, g.DepartmentName, g.collegeid, g.map_year, g.semester, g.subjectId } into t
+        //                                   select new UserReadHistoryModel
+        //                                   {
+        //                                       departmentName = t.Key.DepartmentName,
+        //                                       departmentId = t.Key.DepartmentId,
+        //                                       collegeId = t.Key.collegeid,
+        //                                       subjectId = t.Key.subjectId,
+        //                                       Semester = t.Key.semester,
+        //                                       totalSeconds = t.Sum(x => x.totalhours),
+        //                                       userCount = t.Sum(x => x.totalusers)
+        //                                       //    totalhrs = string.Format("{0:00}:{1:00}:{2:00}", t.Sum(x => x.totalhours) / 3600, (t.Sum(x => x.totalhours) / 60) % 60, t.Sum(x => x.totalhours) % 60)
+        //                                   }).OrderByDescending(t => t.totalSeconds).ToList();
+        //            }
+        //            else if (DateFrom == "0" && DateTo != "0")
+        //            {
+
+        //                var regCount = (from sm in contextsdce.subject_master
+        //                                join usrh in contextsdce.user_subject_read_history on sm.subject_id equals usrh.subject_id
+        //                                join um in contextsdce.user_master on usrh.user_id equals um.user_id
+        //                                join dpsm in contextsdce.college_subject_mapping on usrh.department_id equals dpsm.department_id
+        //                                join dm in contextsdce.department_master on dpsm.department_id equals dm.department_id
+        //                                join cm in contextsdce.college_master on um.collegeid equals cm.college_id
+        //                                where sm.subject_id == dpsm.subject_id
+        //                                   && usrh.last_read_on <= usgEnd_date
+        //                                && um.active_status == 1 && cm.active_status == 1 && dpsm.college_id == cm.college_id
+        //                                orderby usrh.total_hours descending
+        //                                group new { cm, usrh, dpsm, um } by new { cm.college_id, cm.college_name, sm.subject_id, dpsm.map_year, dpsm.semester, dpsm.department_id, dm.department_name } into g
+        //                                select new
+        //                                {
+        //                                    collegename = g.Key.college_name,
+        //                                    collegeid = g.Key.college_id,
+        //                                    subjectId = g.Key.subject_id,
+        //                                    totalhours = g.Select(x => x.usrh.total_hours).Sum(),
+        //                                    totalusers = g.Select(x => x.um.user_id).Distinct().Count(),
+        //                                    map_year = g.Key.map_year,
+        //                                    semester = g.Key.semester,
+        //                                    DepartmentId = g.Key.department_id,
+        //                                    DepartmentName = g.Key.department_name
+        //                                }).ToList();
+
+        //                readHistoryswap = (from g in regCount
+        //                                   group g by new { g.DepartmentId, g.DepartmentName, g.collegeid, g.map_year, g.semester, g.subjectId } into t
+        //                                   select new UserReadHistoryModel
+        //                                   {
+        //                                       departmentName = t.Key.DepartmentName,
+        //                                       departmentId = t.Key.DepartmentId,
+        //                                       collegeId = t.Key.collegeid,
+        //                                       subjectId = t.Key.subjectId,
+        //                                       Semester = t.Key.semester,
+        //                                       totalSeconds = t.Sum(x => x.totalhours),
+        //                                       userCount = t.Sum(x => x.totalusers)
+        //                                       //    totalhrs = string.Format("{0:00}:{1:00}:{2:00}", t.Sum(x => x.totalhours) / 3600, (t.Sum(x => x.totalhours) / 60) % 60, t.Sum(x => x.totalhours) % 60)
+        //                                   }).OrderByDescending(t => t.totalSeconds).ToList();
+        //            }
+        //            else
+        //            {
+        //                var regCount = (from sm in contextsdce.subject_master
+        //                                join usrh in contextsdce.user_subject_read_history on sm.subject_id equals usrh.subject_id
+        //                                join um in contextsdce.user_master on usrh.user_id equals um.user_id
+        //                                join dpsm in contextsdce.college_subject_mapping on usrh.department_id equals dpsm.department_id
+        //                                join dm in contextsdce.department_master on dpsm.department_id equals dm.department_id
+        //                                join cm in contextsdce.college_master on um.collegeid equals cm.college_id
+        //                                where sm.subject_id == dpsm.subject_id
+        //                                //   && usrh.last_read_on >= usgStart_date && usrh.last_read_on <= usgEnd_date
+        //                                && um.active_status == 1 && cm.active_status == 1 && dpsm.college_id == cm.college_id
+        //                                orderby usrh.total_hours descending
+        //                                group new { cm, usrh, dpsm, um } by new { cm.college_id, cm.college_name, sm.subject_id, dpsm.map_year, dpsm.semester, dpsm.department_id, dm.department_name } into g
+        //                                select new
+        //                                {
+        //                                    collegename = g.Key.college_name,
+        //                                    collegeid = g.Key.college_id,
+        //                                    subjectId = g.Key.subject_id,
+        //                                    totalhours = g.Select(x => x.usrh.total_hours).Sum(),
+        //                                    totalusers = g.Select(x => x.um.user_id).Distinct().Count(),
+        //                                    map_year = g.Key.map_year,
+        //                                    semester = g.Key.semester,
+        //                                    DepartmentId = g.Key.department_id,
+        //                                    DepartmentName = g.Key.department_name
+        //                                }).ToList();
+
+        //                readHistoryswap = (from g in regCount
+        //                                   group g by new { g.DepartmentId, g.DepartmentName, g.collegeid, g.collegename, g.map_year, g.semester, g.subjectId } into t
+        //                                   select new UserReadHistoryModel
+        //                                   {
+        //                                       departmentName = t.Key.DepartmentName,
+        //                                       departmentId = t.Key.DepartmentId,
+        //                                       collegeId = t.Key.collegeid,
+        //                                       collegeName = t.Key.collegename,
+        //                                       subjectId = t.Key.subjectId,
+        //                                       Semester = t.Key.semester,
+        //                                       totalSeconds = t.Sum(x => x.totalhours),
+        //                                       userCount = t.Sum(x => x.totalusers)
+        //                                       //    totalhrs = string.Format("{0:00}:{1:00}:{2:00}", t.Sum(x => x.totalhours) / 3600, (t.Sum(x => x.totalhours) / 60) % 60, t.Sum(x => x.totalhours) % 60)
+        //                                   }).OrderByDescending(t => t.totalSeconds).ToList();
+        //            }
+
+        //            if (DepartmentID > 0)
+        //            {
+        //                var datanew = readHistoryswap.ToList();
+        //                readHistoryswap.Clear();
+        //                readHistoryswap.AddRange(datanew.Where(x => x.departmentId == DepartmentID));
+        //            }
+
+        //            if (collegeID > 0)
+        //            {
+        //                var datanew = readHistoryswap.ToList();
+        //                readHistoryswap.Clear();
+        //                readHistoryswap.AddRange(datanew.Where(x => x.collegeId == collegeID));
+        //            }
+
+        //            if (SubjectID > 0)
+        //            {
+        //                var datanew = readHistoryswap.ToList();
+        //                readHistoryswap.Clear();
+        //                readHistoryswap.AddRange(datanew.Where(x => x.subjectId == SubjectID));
+        //            }
+
+        //            if (SemsterID > 0)
+        //            {
+        //                var datanew = readHistoryswap.ToList();
+        //                readHistoryswap.Clear();
+        //                readHistoryswap.AddRange(datanew.Where(x => x.Semester == SemsterID));
+        //            }
+
+        //            if (SubjectType == 2)
+        //            {
+        //                readHistory = (from g in readHistoryswap
+        //                               group g by new { g.departmentId, g.departmentName } into t
+        //                               select new UserReadHistoryModel
+        //                               {
+        //                                   departmentName = t.Key.departmentName,
+        //                                   departmentId = t.Key.departmentId,
+        //                                   TradeCount = t.Select(x => x.collegeId).Distinct().Count(),
+        //                                   subjectCount = t.Select(x => x.subjectId).Distinct().Count(),
+        //                                   totalSeconds = t.Sum(x => x.totalSeconds),
+        //                                   userCount = t.Sum(x => x.userCount),
+        //                                   totalhrs = string.Format("{0:00}:{1:00}:{2:00}", t.Sum(x => x.totalSeconds) / 3600, (t.Sum(x => x.totalSeconds) / 60) % 60, t.Sum(x => x.totalSeconds) % 60)
+        //                               }).OrderByDescending(t => t.totalSeconds).ToList();
+        //            }
+        //            else
+        //            {
+        //                readHistory = (from g in readHistoryswap
+        //                               group g by new { g.collegeId, g.collegeName } into t
+        //                               select new UserReadHistoryModel
+        //                               {
+        //                                   collegeName = t.Key.collegeName,
+        //                                   collegeId = t.Key.collegeId,
+        //                                   TradeCount = t.Select(x => x.departmentId).Distinct().Count(),
+        //                                   subjectCount = t.Select(x => x.subjectId).Distinct().Count(),
+        //                                   totalSeconds = t.Sum(x => x.totalSeconds),
+        //                                   userCount = t.Sum(x => x.userCount),
+        //                                   totalhrs = string.Format("{0:00}:{1:00}:{2:00}", t.Sum(x => x.totalSeconds) / 3600, (t.Sum(x => x.totalSeconds) / 60) % 60, t.Sum(x => x.totalSeconds) % 60)
+        //                               }).OrderByDescending(t => t.totalSeconds).ToList();
+
+        //            }
+        //            return readHistory;
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            contextsdce.Dispose();
+        //            Log.WriteLogMessage(PageName, "AdminReportservice", "UniversityReadHistorySummary", ex.Message, "error");
+        //            throw ex;
+        //        }
+        //        finally
+        //        {
+        //            contextsdce.Dispose();
+        //        }
+        //    }
+        //}
+
+
+        ///// <summary>
+        ///// UniversityReadHistorySummarySpilit
+        ///// </summary>
+        ///// <param name="univId"></param>
+        ///// <param name="college_id"></param>
+        ///// <param name="semester"></param>
+        ///// <param name="year"></param>
+        ///// <param name="reg_startdate"></param>
+        ///// <param name="reg_end_date"></param>
+        ///// <param name="usg_start_date"></param>
+        ///// <param name="usg_end_date"></param>
+        ///// <param name="ITIorTrade"></param> 
+        ///// <returns></returns>
+        //public List<UserReadHistoryModel> UniversityReadHistorySummarySpilit(int DepartmentID, int collegeID, int SubjectID, int SemsterID, string DateFrom, string DateTo, int SubjectType)
+        //{
+        //    List<UserReadHistoryModel> readHistory = new List<UserReadHistoryModel>();
+        //    List<UserReadHistoryModel> readHistoryswap = new List<UserReadHistoryModel>();
+
+        //    DateTime usgEnd_date = DateTime.Now;
+        //    DateTime usgStart_date = DateTime.Now;
+
+        //    if (DateTo != "0")
+        //    {
+        //        string usg_endate = DateTo + " " + "00:00:00 AM";
+        //        usgEnd_date = DateTime.ParseExact(usg_endate, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);               
+        //    }
+
+        //    if (DateFrom != "0")
+        //    {
+        //        string usg_startdate = DateFrom + " " + "00:00:00 AM";
+        //        usgStart_date = DateTime.ParseExact(usg_startdate, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);              
+        //    }
+
+
+        //    using (learnengg_payment_portal_entities contextsdce = new learnengg_payment_portal_entities())
+        //    {
+        //        try
+        //        {
+        //            if (DateFrom != "0" && DateTo != "0")
+        //            {
+
+        //                var regCount = (from sm in contextsdce.subject_master
+        //                                join usrh in contextsdce.user_subject_read_history on sm.subject_id equals usrh.subject_id
+        //                                join um in contextsdce.user_master on usrh.user_id equals um.user_id
+        //                                join dpsm in contextsdce.college_subject_mapping on usrh.department_id equals dpsm.department_id
+        //                                join dm in contextsdce.department_master on dpsm.department_id equals dm.department_id
+        //                                join cm in contextsdce.college_master on um.collegeid equals cm.college_id
+        //                                where sm.subject_id == dpsm.subject_id
+        //                                   && usrh.last_read_on >= usgStart_date && usrh.last_read_on <= usgEnd_date
+        //                                && um.active_status == 1 && cm.active_status == 1 && dpsm.college_id == cm.college_id
+        //                                orderby usrh.total_hours descending
+        //                                group new { cm, usrh, dpsm, um } by new { cm.college_id, cm.college_name, sm.subject_id, dpsm.map_year, dpsm.semester, dpsm.department_id, dm.department_name } into g
+        //                                select new
+        //                                {
+        //                                    collegename = g.Key.college_name,
+        //                                    collegeid = g.Key.college_id,
+        //                                    subjectId = g.Key.subject_id,
+        //                                    totalhours = g.Select(x => x.usrh.total_hours).Sum(),
+        //                                    totalusers = g.Select(x => x.um.user_id).Distinct().Count(),
+        //                                    map_year = g.Key.map_year,
+        //                                    semester = g.Key.semester,
+        //                                    DepartmentId = g.Key.department_id,
+        //                                    DepartmentName = g.Key.department_name
+        //                                }).ToList();
+
+        //                readHistoryswap = (from g in regCount
+        //                                   group g by new { g.DepartmentId, g.DepartmentName, g.collegeid, g.map_year, g.semester, g.subjectId } into t
+        //                                   select new UserReadHistoryModel
+        //                                   {
+        //                                       departmentName = t.Key.DepartmentName,
+        //                                       departmentId = t.Key.DepartmentId,
+        //                                       collegeId = t.Key.collegeid,
+        //                                       subjectId = t.Key.subjectId,
+        //                                       Semester = t.Key.semester,
+        //                                       totalSeconds = t.Sum(x => x.totalhours),
+        //                                       userCount = t.Sum(x => x.totalusers)
+        //                                       //    totalhrs = string.Format("{0:00}:{1:00}:{2:00}", t.Sum(x => x.totalhours) / 3600, (t.Sum(x => x.totalhours) / 60) % 60, t.Sum(x => x.totalhours) % 60)
+        //                                   }).OrderByDescending(t => t.totalSeconds).ToList();
+        //            }
+        //            else if (DateFrom != "0" && DateTo == "0")
+        //            {
+
+        //                var regCount = (from sm in contextsdce.subject_master
+        //                                join usrh in contextsdce.user_subject_read_history on sm.subject_id equals usrh.subject_id
+        //                                join um in contextsdce.user_master on usrh.user_id equals um.user_id
+        //                                join dpsm in contextsdce.college_subject_mapping on usrh.department_id equals dpsm.department_id
+        //                                join dm in contextsdce.department_master on dpsm.department_id equals dm.department_id
+        //                                join cm in contextsdce.college_master on um.collegeid equals cm.college_id
+        //                                where sm.subject_id == dpsm.subject_id
+        //                                   && usrh.last_read_on >= usgStart_date 
+        //                                && um.active_status == 1 && cm.active_status == 1 && dpsm.college_id == cm.college_id
+        //                                orderby usrh.total_hours descending
+        //                                group new { cm, usrh, dpsm, um } by new { cm.college_id, cm.college_name, sm.subject_id, dpsm.map_year, dpsm.semester, dpsm.department_id, dm.department_name } into g
+        //                                select new
+        //                                {
+        //                                    collegename = g.Key.college_name,
+        //                                    collegeid = g.Key.college_id,
+        //                                    subjectId = g.Key.subject_id,
+        //                                    totalhours = g.Select(x => x.usrh.total_hours).Sum(),
+        //                                    totalusers = g.Select(x => x.um.user_id).Distinct().Count(),
+        //                                    map_year = g.Key.map_year,
+        //                                    semester = g.Key.semester,
+        //                                    DepartmentId = g.Key.department_id,
+        //                                    DepartmentName = g.Key.department_name
+        //                                }).ToList();
+
+        //                readHistoryswap = (from g in regCount
+        //                                   group g by new { g.DepartmentId, g.DepartmentName, g.collegeid, g.map_year, g.semester, g.subjectId } into t
+        //                                   select new UserReadHistoryModel
+        //                                   {
+        //                                       departmentName = t.Key.DepartmentName,
+        //                                       departmentId = t.Key.DepartmentId,
+        //                                       collegeId = t.Key.collegeid,
+        //                                       subjectId = t.Key.subjectId,
+        //                                       Semester = t.Key.semester,
+        //                                       totalSeconds = t.Sum(x => x.totalhours),
+        //                                       userCount = t.Sum(x => x.totalusers)
+        //                                       //    totalhrs = string.Format("{0:00}:{1:00}:{2:00}", t.Sum(x => x.totalhours) / 3600, (t.Sum(x => x.totalhours) / 60) % 60, t.Sum(x => x.totalhours) % 60)
+        //                                   }).OrderByDescending(t => t.totalSeconds).ToList();
+        //            }
+        //            else if (DateFrom == "0" && DateTo != "0")
+        //            {
+
+        //                var regCount = (from sm in contextsdce.subject_master
+        //                                join usrh in contextsdce.user_subject_read_history on sm.subject_id equals usrh.subject_id
+        //                                join um in contextsdce.user_master on usrh.user_id equals um.user_id
+        //                                join dpsm in contextsdce.college_subject_mapping on usrh.department_id equals dpsm.department_id
+        //                                join dm in contextsdce.department_master on dpsm.department_id equals dm.department_id
+        //                                join cm in contextsdce.college_master on um.collegeid equals cm.college_id
+        //                                where sm.subject_id == dpsm.subject_id
+        //                                   && usrh.last_read_on <= usgEnd_date
+        //                                && um.active_status == 1 && cm.active_status == 1 && dpsm.college_id == cm.college_id
+        //                                orderby usrh.total_hours descending
+        //                                group new { cm, usrh, dpsm, um } by new { cm.college_id, cm.college_name, sm.subject_id, dpsm.map_year, dpsm.semester, dpsm.department_id, dm.department_name } into g
+        //                                select new
+        //                                {
+        //                                    collegename = g.Key.college_name,
+        //                                    collegeid = g.Key.college_id,
+        //                                    subjectId = g.Key.subject_id,
+        //                                    totalhours = g.Select(x => x.usrh.total_hours).Sum(),
+        //                                    totalusers = g.Select(x => x.um.user_id).Distinct().Count(),
+        //                                    map_year = g.Key.map_year,
+        //                                    semester = g.Key.semester,
+        //                                    DepartmentId = g.Key.department_id,
+        //                                    DepartmentName = g.Key.department_name
+        //                                }).ToList();
+
+        //                readHistoryswap = (from g in regCount
+        //                                   group g by new { g.DepartmentId, g.DepartmentName, g.collegeid, g.map_year, g.semester, g.subjectId } into t
+        //                                   select new UserReadHistoryModel
+        //                                   {
+        //                                       departmentName = t.Key.DepartmentName,
+        //                                       departmentId = t.Key.DepartmentId,
+        //                                       collegeId = t.Key.collegeid,
+        //                                       subjectId = t.Key.subjectId,
+        //                                       Semester = t.Key.semester,
+        //                                       totalSeconds = t.Sum(x => x.totalhours),
+        //                                       userCount = t.Sum(x => x.totalusers)
+        //                                       //    totalhrs = string.Format("{0:00}:{1:00}:{2:00}", t.Sum(x => x.totalhours) / 3600, (t.Sum(x => x.totalhours) / 60) % 60, t.Sum(x => x.totalhours) % 60)
+        //                                   }).OrderByDescending(t => t.totalSeconds).ToList();
+        //            }
+        //            else
+        //            {
+        //                var regCount = (from sm in contextsdce.subject_master
+        //                                join usrh in contextsdce.user_subject_read_history on sm.subject_id equals usrh.subject_id
+        //                                join um in contextsdce.user_master on usrh.user_id equals um.user_id
+        //                                join dpsm in contextsdce.college_subject_mapping on usrh.department_id equals dpsm.department_id
+        //                                join dm in contextsdce.department_master on dpsm.department_id equals dm.department_id
+        //                                join cm in contextsdce.college_master on um.collegeid equals cm.college_id
+        //                                where sm.subject_id == dpsm.subject_id
+        //                                //   && usrh.last_read_on >= usgStart_date && usrh.last_read_on <= usgEnd_date
+        //                                && um.active_status == 1 && cm.active_status == 1 && dpsm.college_id == cm.college_id
+        //                                orderby usrh.total_hours descending
+        //                                group new { cm, usrh, dpsm, um } by new { cm.college_id, cm.college_name, sm.subject_id, dpsm.map_year, dpsm.semester, dpsm.department_id, dm.department_name } into g
+        //                                select new
+        //                                {
+        //                                    collegename = g.Key.college_name,
+        //                                    collegeid = g.Key.college_id,
+        //                                    subjectId = g.Key.subject_id,
+        //                                    totalhours = g.Select(x => x.usrh.total_hours).Sum(),
+        //                                    totalusers = g.Select(x => x.um.user_id).Distinct().Count(),
+        //                                    map_year = g.Key.map_year,
+        //                                    semester = g.Key.semester,
+        //                                    DepartmentId = g.Key.department_id,
+        //                                    DepartmentName = g.Key.department_name
+        //                                }).ToList();
+
+        //                readHistoryswap = (from g in regCount
+        //                                   group g by new { g.DepartmentId, g.DepartmentName, g.collegeid, g.collegename, g.map_year, g.semester, g.subjectId } into t
+        //                                   select new UserReadHistoryModel
+        //                                   {
+        //                                       departmentName = t.Key.DepartmentName,
+        //                                       departmentId = t.Key.DepartmentId,
+        //                                       collegeId = t.Key.collegeid,
+        //                                       collegeName = t.Key.collegename,
+        //                                       subjectId = t.Key.subjectId,
+        //                                       Semester = t.Key.semester,
+        //                                       totalSeconds = t.Sum(x => x.totalhours),
+        //                                       userCount = t.Sum(x => x.totalusers)
+        //                                       //    totalhrs = string.Format("{0:00}:{1:00}:{2:00}", t.Sum(x => x.totalhours) / 3600, (t.Sum(x => x.totalhours) / 60) % 60, t.Sum(x => x.totalhours) % 60)
+        //                                   }).OrderByDescending(t => t.totalSeconds).ToList();
+        //            }
+
+        //            if (DepartmentID > 0)
+        //            {
+        //                var datanew = readHistoryswap.ToList();
+        //                readHistoryswap.Clear();
+        //                readHistoryswap.AddRange(datanew.Where(x => x.departmentId == DepartmentID));                       
+        //            }
+
+        //            if (collegeID > 0)
+        //            {
+        //                var datanew = readHistoryswap.ToList();
+        //                readHistoryswap.Clear();
+        //                readHistoryswap.AddRange(datanew.Where(x => x.collegeId == collegeID));
+        //            }
+
+        //            if(SubjectID > 0)
+        //            {
+        //                var datanew = readHistoryswap.ToList();
+        //                readHistoryswap.Clear();
+        //                readHistoryswap.AddRange(datanew.Where(x => x.subjectId == SubjectID));
+        //            }
+
+        //            if (SemsterID > 0)
+        //            {
+        //                var datanew = readHistoryswap.ToList();
+        //                readHistoryswap.Clear();
+        //                readHistoryswap.AddRange(datanew.Where(x => x.Semester == SemsterID));
+        //            }
+
+        //            if (SubjectType == 2)
+        //            {
+        //                readHistory = (from g in readHistoryswap
+        //                               group g by new { g.departmentId, g.departmentName } into t
+        //                               select new UserReadHistoryModel
+        //                               {
+        //                                   departmentName = t.Key.departmentName,
+        //                                   departmentId = t.Key.departmentId,
+        //                                   TradeCount = t.Select(x => x.collegeId).Distinct().Count(),
+        //                                   subjectCount = t.Select(x => x.subjectId).Distinct().Count(),
+        //                                   totalSeconds = t.Sum(x => x.totalSeconds),
+        //                                   userCount = t.Sum(x => x.userCount),
+        //                                   totalhrs = string.Format("{0:00}:{1:00}:{2:00}", t.Sum(x => x.totalSeconds) / 3600, (t.Sum(x => x.totalSeconds) / 60) % 60, t.Sum(x => x.totalSeconds) % 60)
+        //                               }).OrderByDescending(t => t.totalSeconds).ToList();
+        //            }
+        //            else
+        //            {
+        //                readHistory = (from g in readHistoryswap
+        //                               group g by new { g.collegeId, g.collegeName } into t
+        //                               select new UserReadHistoryModel
+        //                               {
+        //                                   collegeName = t.Key.collegeName,
+        //                                   collegeId = t.Key.collegeId,
+        //                                   TradeCount = t.Select(x => x.departmentId).Distinct().Count(),
+        //                                   subjectCount = t.Select(x => x.subjectId).Distinct().Count(),
+        //                                   totalSeconds = t.Sum(x => x.totalSeconds),
+        //                                   userCount = t.Sum(x => x.userCount),
+        //                                   totalhrs = string.Format("{0:00}:{1:00}:{2:00}", t.Sum(x => x.totalSeconds) / 3600, (t.Sum(x => x.totalSeconds) / 60) % 60, t.Sum(x => x.totalSeconds) % 60)
+        //                               }).OrderByDescending(t => t.totalSeconds).ToList();
+
+        //            }                  
+        //            return readHistory;
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            contextsdce.Dispose();
+        //            Log.WriteLogMessage(PageName, "AdminReportservice", "UniversityReadHistorySummary", ex.Message, "error");
+        //            throw ex;
+        //        }
+        //        finally
+        //        {
+        //            contextsdce.Dispose();
+        //        }
+        //    }
+        //}
+
+        ///// <summary>
+        ///// UniversityReadHistory
+        ///// </summary>
+        ///// <param name="univId"></param>
+        ///// <param name="college_id"></param>
+        ///// <param name="semester"></param>
+        ///// <param name="year"></param>
+        ///// <param name="reg_startdate"></param>
+        ///// <param name="reg_end_date"></param>
+        ///// <param name="usg_start_date"></param>
+        ///// <param name="usg_end_date"></param>
+        ///// <returns></returns>
+        //public List<UserReadHistoryModel> UniversityReadHistory(int univId, string college_id, string semester, string year, string reg_startdate, string reg_end_date, string usg_start_date, string usg_end_date)
+        //{
+        //    List<UserReadHistoryModel> readHistory = new List<UserReadHistoryModel>();
+
+        //    string[] ddlyear = new string[50];
+        //    List<int> selyear = new List<int>();
+        //    ddlyear = year.Split('-').ToArray();
+        //    if (ddlyear[0].ToString() != "0")
+        //    {
+        //        for (int j = 0; j < ddlyear.Length; j++)
+        //        {
+        //            selyear.Add(Convert.ToInt16(ddlyear[j].ToString()));
+        //        }
+
+        //    }
+
+        //    string[] ddlCollege = new string[100];
+        //    List<int> collge = new List<int>();
+        //    ddlCollege = college_id.Split('-').ToArray();
+        //    if (ddlCollege[0].ToString() != "0")
+        //    {
+        //        for (int i = 0; i < ddlCollege.Length; i++)
+        //        {
+        //            collge.Add(Convert.ToInt32(ddlCollege[i].ToString()));
+        //        }
+        //    }
+
+        //    string[] ddlSemester = new string[50];
+        //    List<int> sems = new List<int>();
+        //    ddlSemester = semester.Split('-').ToArray();
+        //    if (ddlSemester[0].ToString() != "0")
+        //    {
+        //        for (int k = 0; k < ddlSemester.Length; k++)
+        //        {
+        //            sems.Add(Convert.ToInt16(ddlSemester[k].ToString()));
+        //        }
+        //    }
+        //    using (learnengg_payment_portal_entities contextsdce = new learnengg_payment_portal_entities())
+        //    {
+        //        try
+        //        {
+
+
+        //            var regCount = (from sm in contextsdce.subject_master
+        //                            join usrh in contextsdce.user_subject_read_history on sm.subject_id equals usrh.subject_id
+        //                            join um in contextsdce.user_master on usrh.user_id equals um.user_id
+        //                            join dpsm in contextsdce.college_subject_mapping on um.DepartmentID equals dpsm.department_id
+        //                            join cm in contextsdce.college_master on um.collegeid equals cm.college_id
+        //                            where sm.subject_id == dpsm.subject_id
+        //                            && um.active_status == 1 && cm.active_status == 1 && dpsm.college_id == cm.college_id
+        //                            orderby usrh.total_hours descending
+        //                            select new
+        //                            {
+        //                                userReadHistryId = usrh.user_read_history_id,
+        //                                username = um.user_name,
+        //                                mobile = um.mobile,
+        //                                userid = um.user_id,
+        //                                collegename = um.collegename,
+        //                                collegeid = um.collegeid,
+        //                                subjectcount = sm.subject_id,
+        //                                totalhours = usrh.total_hours,
+        //                                lastreadon = usrh.last_read_on,
+        //                                userrole = um.role_id == 1 ? "INSTRUCTOR " : "INSTRUCTOR ",
+        //                                dpsm.map_year,
+        //                                dpsm.semester,
+        //                                um.currentyear,
+        //                                um.created_on,
+        //                                usrh.last_read_on,
+        //                                univ_Id = um.univ_id,
+        //                                dpsm.department_id
+
+
+        //                            }).ToList();
+        //            if (univId != 0)
+        //            {
+        //                var datanew = regCount.ToList();
+        //                regCount.Clear();
+        //                regCount.AddRange(datanew.Where(x => x.univ_Id == univId));
+        //            }
+
+        //            if (collge.Count() > 0)
+        //            {
+        //                var datanew = regCount.ToList();
+        //                regCount.Clear();
+        //                regCount.AddRange(datanew.Where(x => collge.Contains(x.collegeid ?? 0)));
+
+        //            }
+        //            if (reg_startdate != "0")
+        //            {
+        //                string Reg_stdate = reg_startdate + " " + "00:00:00 AM";
+        //                DateTime start_date = DateTime.ParseExact(Reg_stdate, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+        //                var datanew = regCount.ToList();
+        //                regCount.Clear();
+        //                regCount.AddRange(datanew.Where(x => x.created_on >= start_date));
+        //            }
+        //            if (usg_start_date != "0")
+        //            {
+        //                string usg_startdate = usg_start_date + " " + "00:00:00 AM";
+        //                DateTime usgStart_date = DateTime.ParseExact(usg_startdate, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+        //                var datanew = regCount.ToList();
+        //                regCount.Clear();
+        //                regCount.AddRange(datanew.Where(x => x.last_read_on >= usgStart_date));
+        //            }
+
+        //            if (reg_end_date != "0")
+        //            {
+        //                string Reg_edate = reg_end_date + " " + "11:59:00 PM";
+        //                string usg_End_date = usg_end_date + " " + "11:59:00 PM";
+        //                DateTime End_date = DateTime.ParseExact(Reg_edate, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+        //                var datanew = regCount.ToList();
+        //                regCount.Clear();
+        //                regCount.AddRange(datanew.Where(x => x.created_on <= End_date));
+        //            }
+        //            if (usg_end_date != "0")
+        //            {
+        //                string usg_End_date = usg_end_date + " " + "11:59:00 PM";
+        //                DateTime usgEnd_date = DateTime.ParseExact(usg_End_date, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+        //                var datanew = regCount.ToList();
+        //                regCount.Clear();
+        //                regCount.AddRange(datanew.Where(x => x.last_read_on <= usgEnd_date));
+        //            }
+
+
+        //            readHistory = (from g in regCount
+        //                           group g by g.userid into t
+        //                           select new UserReadHistoryModel
+        //                           {
+        //                               userName = t.FirstOrDefault().username,
+        //                               userId = t.FirstOrDefault().userid,
+        //                               collegeName = t.FirstOrDefault().collegename,
+        //                               collegeId = t.FirstOrDefault().collegeid,
+        //                               subjectCount = t.Select(x => x.subjectcount).Distinct().Count(),
+        //                               totalSeconds = t.Sum(x => x.totalhours),
+        //                               Mobile = t.FirstOrDefault().mobile,
+        //                               totalhrs = string.Format("{0:00}:{1:00}:{2:00}", t.Sum(x => x.totalhours) / 3600, (t.Sum(x => x.totalhours) / 60) % 60, t.Sum(x => x.totalhours) % 60),
+        //                               lastReadOn = t.Max(x => x.lastreadon).ToString("dd-MMM-yyyy"),
+        //                               userRole = t.FirstOrDefault().userrole,
+        //                               userCount = t.Count(),
+        //                               TradeCount = t.Select(x => x.department_id).Distinct().Count(),
+        //                               RegisteredOn = t.FirstOrDefault().created_on.ToString("dd-MMM-yyyy"),
+        //                           }).OrderByDescending(t => t.totalSeconds).ToList();
+
+        //            return readHistory;
+
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            contextsdce.Dispose();
+        //            Log.WriteLogMessage(PageName, "AdminReportservice", "UniversityReadHistory", ex.Message, "error");
+        //            throw ex;
+        //        }
+        //        finally
+        //        {
+        //            contextsdce.Dispose();
+        //        }
+        //    }
+
+        //}
+
+        //public JQGrid UniversityUserReadHistory(JqSearchIn si, int DepartId, string CollegeId)
+        //{
+        //    List<UserReadHistoryModel> objSourceDataListToDeSerialize = new List<UserReadHistoryModel>();
+        //    try
+        //    {
+        //        si = si.InitialiseObject(si);
+
+        //        objSourceDataListToDeSerialize = UniversityReadHistory(DepartId, CollegeId, 0, 0, "0", "0", 1);
+
+        //        if (!string.IsNullOrEmpty(si.whereString))
+        //        {
+        //            objSourceDataListToDeSerialize = objSourceDataListToDeSerialize.AsQueryable().Where(si.whereString).OrderBy(si.ShortingQuery).ToList();
+
+        //        }
+        //        else if (!string.IsNullOrEmpty(si.ShortingQuery))
+        //        {
+        //            objSourceDataListToDeSerialize = objSourceDataListToDeSerialize.AsQueryable().OrderBy(si.ShortingQuery).ToList();
+        //            //objSourceDataListToDeSerialize = objSourceDataListToDeSerialize.AsQueryable().ToList();
+        //        }
+        //        si.sidx = null;
+        //        si.sord = null;
+        //    }
+
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+
+        //    var Data = si.SetObjectListDataInitialise(objSourceDataListToDeSerialize, si);
+
+        //    var GridData = new JQGrid
+        //    {
+        //        total = si.totalPages,
+        //        page = si.page,
+        //        records = si.TotalRecCount,
+        //        rows = (
+        //         from client in Data
+        //         select new
+        //         {
+        //             // i = client.Identyvalue,
+        //             cell = new string[] {
+
+        //                 client.userName+"",
+        //                 client.collegeName+"",
+        //                 client.totalhrs+"",
+        //                 client.subjectCount+"",
+        //                 client.lastReadOnDate == null ? "" : client.lastReadOnDate.ToString("dd-MM-yyyy HH:mm:ss"),
+        //                 client.Mobile+"",                        
+        //                 //client.currentyear,
+        //                 //client.Semester+"",                         
+        //                 client.RegisteredOnDate==null ? "": client.RegisteredOnDate.ToString("dd-MM-yyyy HH:mm:ss")
+        //             }
+        //         }).ToArray()
+        //    };
+        //    return GridData;
+        //}
+
+        //public List<UserReadHistoryModel> UniversityReadHistory(int departmentID, string collegeID, int SubjectID, int SemsterID, string DateFrom, string DateTo, int SubjectType)
+        //{
+        //    List<UserReadHistoryModel> readHistory = new List<UserReadHistoryModel>();
+
+
+
+        //    string[] ddlCollege = new string[100];
+        //    List<int> collge = new List<int>();
+        //    ddlCollege = collegeID.Split('-').ToArray();
+        //    if (ddlCollege[0].ToString() != "0")
+        //    {
+        //        for (int i = 0; i < ddlCollege.Length; i++)
+        //        {
+        //            collge.Add(Convert.ToInt32(ddlCollege[i].ToString()));
+        //        }
+        //    }
+
+
+        //    using (learnengg_payment_portal_entities contextsdce = new learnengg_payment_portal_entities())
+        //    {
+        //        try
+        //        {
+
+
+        //            var regCount = (from sm in contextsdce.subject_master
+        //                            join usrh in contextsdce.user_subject_read_history on sm.subject_id equals usrh.subject_id
+        //                            join um in contextsdce.user_master on usrh.user_id equals um.user_id
+        //                            join dpsm in contextsdce.college_subject_mapping on sm.subject_id equals dpsm.subject_id
+        //                            join cm in contextsdce.college_master on um.collegeid equals cm.college_id
+        //                            where um.active_status == 1 && cm.active_status == 1 && dpsm.college_id == cm.college_id && usrh.department_id == dpsm.department_id
+        //                            && sm.having_questionpaper == SubjectType
+        //                            orderby usrh.total_hours descending
+        //                            select new
+        //                            {
+        //                                userReadHistryId = usrh.user_read_history_id,
+        //                                username = um.user_name,
+        //                                mobile = um.mobile,
+        //                                userid = um.user_id,
+        //                                collegename = um.collegename,
+        //                                collegeid = um.collegeid,
+        //                                subjectid = sm.subject_id,
+        //                                totalhours = usrh.total_hours,
+        //                                lastreadon = usrh.last_read_on,
+        //                                userrole = um.role_id == 1 ? "INSTRUCTOR " : "INSTRUCTOR ",
+        //                                dpsm.map_year,
+        //                                dpsm.semester,
+        //                                um.currentyear,
+        //                                um.created_on,
+        //                                usrh.last_read_on,
+        //                                univ_Id = um.univ_id,
+        //                                dpsm.department_id
+
+
+        //                            }).ToList();
+        //            if (departmentID != 0)
+        //            {
+        //                var datanew = regCount.ToList();
+        //                regCount.Clear();
+        //                regCount.AddRange(datanew.Where(x => x.department_id == departmentID));
+        //            }
+
+        //            if (collge.Count() > 0)
+        //            {
+        //                var datanew = regCount.ToList();
+        //                regCount.Clear();
+        //                regCount.AddRange(datanew.Where(x => collge.Contains(x.collegeid ?? 0)));
+        //            }
+
+        //            if (SubjectID != 0)
+        //            {
+        //                var datanew = regCount.ToList();
+        //                regCount.Clear();
+        //                regCount.AddRange(datanew.Where(x => x.subjectid == SubjectID));
+        //            }
+
+        //            if (SemsterID != 0)
+        //            {
+        //                var datanew = regCount.ToList();
+        //                regCount.Clear();
+        //                regCount.AddRange(datanew.Where(x => x.semester == SemsterID));
+        //            }
+
+        //            if (!DateFrom.Equals("0"))
+        //            {
+        //                string Reg_sdate = DateFrom + " " + "11:59:00 PM";
+        //                DateTime start_date = DateTime.ParseExact(Reg_sdate, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+        //                var datanew = regCount.ToList();
+        //                regCount.Clear();
+        //                regCount.AddRange(datanew.Where(x => x.lastreadon >= start_date));
+        //            }
+        //            if (!DateTo.Equals("0"))
+        //            {
+        //                string usg_End_date = DateTo + " " + "11:59:00 PM";
+        //                DateTime usgEnd_date = DateTime.ParseExact(usg_End_date, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+        //                var datanew = regCount.ToList();
+        //                regCount.Clear();
+        //                regCount.AddRange(datanew.Where(x => x.last_read_on <= usgEnd_date));
+        //            }
+
+
+
+        //            readHistory = (from g in regCount
+        //                           group g by g.userid into t
+        //                           select new UserReadHistoryModel
+        //                           {
+        //                               userName = t.FirstOrDefault().username,
+        //                               userId = t.FirstOrDefault().userid,
+        //                               collegeName = t.FirstOrDefault().collegename,
+        //                               collegeId = t.FirstOrDefault().collegeid,
+        //                               Semester = t.FirstOrDefault().semester,
+        //                               subjectCount = t.Select(x => x.subjectid).Distinct().Count(),
+        //                               subjectCnt = t.Select(x => x.subjectid).Distinct().Count(),
+        //                               totalSeconds = t.Sum(x => x.totalhours),
+        //                               Mobile = t.FirstOrDefault().mobile,
+        //                               totalhrs = string.Format("{0:00}:{1:00}:{2:00}", t.Sum(x => x.totalhours) / 3600, (t.Sum(x => x.totalhours) / 60) % 60, t.Sum(x => x.totalhours) % 60),
+        //                               lastReadOn = t.Max(x => x.lastreadon).ToString("dd-MMM-yyyy"),
+        //                               lastReadOnDate = t.Max(x => x.lastreadon),
+        //                               lastReadOnInt = Convert.ToInt64(t.Max(x => x.lastreadon).ToString("yyyyMMdd")),
+        //                               userRole = t.FirstOrDefault().userrole,
+        //                               userCount = t.Count(),
+        //                               TradeCount = t.Select(x => x.department_id).Distinct().Count(),
+        //                               RegisteredOn = t.FirstOrDefault().created_on.ToString("dd-MMM-yyyy"),
+        //                               RegisteredOnDate = t.FirstOrDefault().created_on,
+        //                               RegisteredOnInt = Convert.ToInt64(t.FirstOrDefault().created_on.ToString("yyyyMMdd"))
+        //                           }).OrderByDescending(t => t.totalSeconds).ToList();
+
+        //            return readHistory;
+
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            contextsdce.Dispose();
+        //            Log.WriteLogMessage(PageName, "AdminReportservice", "UniversityReadHistory", ex.Message, "error");
+        //            throw ex;
+        //        }
+        //        finally
+        //        {
+        //            contextsdce.Dispose();
+        //        }
+        //    }
+
+        //}
+
+
+        //public List<UserReadHistoryModel> UniversityUsersReadHistory(int departmentID, int collegeID, int userId)
+        //{
+        //    List<UserReadHistoryModel> readHistory = new List<UserReadHistoryModel>();
+
+        //    using (learnengg_payment_portal_entities contextsdce = new learnengg_payment_portal_entities())
+        //    {
+        //        try
+        //        {
+
+
+        //            var regCount = (from sm in contextsdce.subject_master
+        //                            join usrh in contextsdce.user_subject_read_history on sm.subject_id equals usrh.subject_id
+        //                            join um in contextsdce.user_master on usrh.user_id equals um.user_id
+        //                            join dpsm in contextsdce.college_subject_mapping on sm.subject_id equals dpsm.subject_id
+        //                            join cm in contextsdce.college_master on um.collegeid equals cm.college_id
+        //                            where um.active_status == 1 && cm.active_status == 1 && dpsm.college_id == cm.college_id && usrh.department_id == dpsm.department_id
+        //                            && cm.college_id == collegeID
+        //                            orderby usrh.total_hours descending
+        //                            select new
+        //                            {
+        //                                userReadHistryId = usrh.user_read_history_id,
+        //                                username = um.user_name,
+        //                                mobile = um.mobile,
+        //                                userid = um.user_id,
+        //                                collegename = um.collegename,
+        //                                collegeid = um.collegeid,
+        //                                subjectcount = sm.subject_id,
+        //                                totalhours = usrh.total_hours,
+        //                                lastreadon = usrh.last_read_on,
+        //                                userrole = um.role_id == 1 ? "INSTRUCTOR " : "INSTRUCTOR ",
+        //                                dpsm.map_year,
+        //                                dpsm.semester,
+        //                                um.currentyear,
+        //                                um.created_on,
+        //                                usrh.last_read_on,
+        //                                univ_Id = um.univ_id,
+        //                                dpsm.department_id
+
+
+        //                            }).ToList();
+
+        //            if (userId != 0)
+        //            {
+        //                var datanew = regCount.ToList();
+        //                regCount.Clear();
+        //                regCount.AddRange(datanew.Where(x => x.userid == userId));
+        //            }
+        //            if (departmentID != 0)
+        //            {
+        //                var datanew = regCount.ToList();
+        //                regCount.Clear();
+        //                regCount.AddRange(datanew.Where(x => x.department_id == departmentID));
+        //            }
+
+        //            //if (collge.Count() > 0)
+        //            //{
+        //            //    var datanew = regCount.ToList();
+        //            //    regCount.Clear();
+        //            //    regCount.AddRange(datanew.Where(x => collge.Contains(x.collegeid ?? 0)));
+
+        //            //}
+
+
+        //            readHistory = (from g in regCount
+        //                           group g by g.userid into t
+        //                           select new UserReadHistoryModel
+        //                           {
+        //                               userName = t.FirstOrDefault().username,
+        //                               userId = t.FirstOrDefault().userid,
+        //                               collegeName = t.FirstOrDefault().collegename,
+        //                               collegeId = t.FirstOrDefault().collegeid,
+        //                               Semester = t.FirstOrDefault().semester,
+        //                               subjectCount = t.Select(x => x.subjectcount).Distinct().Count(),
+        //                               totalSeconds = t.Sum(x => x.totalhours),
+        //                               Mobile = t.FirstOrDefault().mobile,
+        //                               totalhrs = string.Format("{0:00}:{1:00}:{2:00}", t.Sum(x => x.totalhours) / 3600, (t.Sum(x => x.totalhours) / 60) % 60, t.Sum(x => x.totalhours) % 60),
+        //                               lastReadOn = t.Max(x => x.lastreadon).ToString("dd-MMM-yyyy"),
+        //                               userRole = t.FirstOrDefault().userrole,
+        //                               userCount = t.Count(),
+        //                               TradeCount = t.Select(x => x.department_id).Distinct().Count(),
+        //                               RegisteredOn = t.FirstOrDefault().created_on.ToString("dd-MMM-yyyy"),
+        //                           }).OrderByDescending(t => t.totalSeconds).ToList();
+
+        //            return readHistory;
+
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            contextsdce.Dispose();
+        //            Log.WriteLogMessage(PageName, "AdminReportservice", "UniversityReadHistory", ex.Message, "error");
+        //            throw ex;
+        //        }
+        //        finally
+        //        {
+        //            contextsdce.Dispose();
+        //        }
+        //    }
+
+        //}
+
+        ///// <summary>
+        ///// subjectwiseReadHistory
+        ///// </summary>
+        ///// <param name="userID"></param>
+        ///// <param name="univId"></param>
+        ///// <param name="college_id"></param>
+        ///// <param name="semester"></param>
+        ///// <param name="year"></param>
+        ///// <param name="reg_startdate"></param>
+        ///// <param name="reg_end_date"></param>
+        ///// <param name="usg_start_date"></param>
+        ///// <param name="usg_end_date"></param>
+        ///// <returns></returns>
+        //public List<UserReadHistoryModel> subjectwiseReadHistory(int userID, int univId, string college_id, string semester, string year, string reg_startdate, string reg_end_date, string usg_start_date, string usg_end_date)
+        //{
+
+        //    List<UserReadHistoryModel> readHistory = new List<UserReadHistoryModel>();
+
+        //    string[] ddlyear = new string[50];
+        //    List<int> selyear = new List<int>();
+        //    ddlyear = year.Split('-').ToArray();
+        //    if (ddlyear[0].ToString() != "0")
+        //    {
+        //        for (int j = 0; j < ddlyear.Length; j++)
+        //        {
+        //            selyear.Add(Convert.ToInt16(ddlyear[j].ToString()));
+        //        }
+
+        //    }
+
+        //    string[] ddlCollege = new string[100];
+        //    List<int> collge = new List<int>();
+        //    ddlCollege = college_id.Split('-').ToArray();
+        //    if (ddlCollege[0].ToString() != "0")
+        //    {
+        //        for (int i = 0; i < ddlCollege.Length; i++)
+        //        {
+        //            collge.Add(Convert.ToInt32(ddlCollege[i].ToString()));
+        //        }
+        //    }
+
+        //    string[] ddlSemester = new string[50];
+        //    List<int> sems = new List<int>();
+        //    ddlSemester = semester.Split('-').ToArray();
+        //    if (ddlSemester[0].ToString() != "0")
+        //    {
+        //        for (int k = 0; k < ddlSemester.Length; k++)
+        //        {
+        //            sems.Add(Convert.ToInt16(ddlSemester[k].ToString()));
+        //        }
+        //    }
+        //    using (learnengg_payment_portal_entities contextsdce = new learnengg_payment_portal_entities())
+        //    {
+        //        try
+        //        {
+        //            var regCount = (from sm in contextsdce.subject_master
+        //                            join usrh in contextsdce.user_subject_unit_read_history on sm.subject_id equals usrh.subject_id
+        //                            join um in contextsdce.user_master on usrh.user_id equals um.user_id
+        //                            join unvm in contextsdce.university_master on um.univ_id equals unvm.univ_id
+        //                            join dpsm in contextsdce.department_subject_mapping on um.DepartmentID equals dpsm.department_id
+        //                            join cm in contextsdce.college_master on um.collegeid equals cm.college_id
+        //                            where um.user_id == userID && um.univ_id == cm.university_id && dpsm.subject_id == sm.subject_id
+
+        //                            orderby usrh.total_seconds descending
+        //                            select new
+        //                            {
+
+        //                                username = um.user_name,
+        //                                userid = um.user_id,
+        //                                collegename = um.collegename,
+        //                                collegeid = um.collegeid,
+        //                                subjectname = sm.subject_name,
+        //                                subjectcount = sm.subject_id,
+        //                                totalhours = usrh.total_seconds,
+        //                                lastreadon = usrh.last_read_on,
+        //                                userrole = um.role_id == 1 ? "INSTRUCTOR " : "INSTRUCTOR ",
+        //                                dpsm.map_year,
+        //                                dpsm.semester,
+        //                                um.currentyear,
+        //                                um.created_on,
+        //                                usrh.last_read_on,
+        //                                univ_Id = um.univ_id
+
+        //                            }).ToList();
+
+        //            if (selyear.Count() > 0)
+        //            {
+        //                var datanew = regCount.ToList();
+        //                regCount.Clear();
+        //                regCount.AddRange(datanew.Where(x => selyear.Contains(x.map_year)));
+        //            }
+
+        //            if (sems.Count() > 0)
+        //            {
+        //                var datanew = regCount.ToList();
+        //                regCount.Clear();
+        //                regCount.AddRange(datanew.Where(x => sems.Contains(x.semester)));
+        //            }
+        //            if (usg_start_date != "0")
+        //            {
+        //                string usg_startdate = usg_start_date + " " + "00:00:00 AM";
+        //                DateTime usgStart_date = DateTime.ParseExact(usg_startdate, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+        //                var datanew = regCount.ToList();
+        //                regCount.Clear();
+        //                regCount.AddRange(datanew.Where(x => x.last_read_on >= usgStart_date));
+        //            }
+
+        //            if (usg_end_date != "0")
+        //            {
+        //                string usg_End_date = usg_end_date + " " + "11:59:00 PM";
+        //                DateTime usgEnd_date = DateTime.ParseExact(usg_End_date, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+        //                var datanew = regCount.ToList();
+        //                regCount.Clear();
+        //                regCount.AddRange(datanew.Where(x => x.last_read_on <= usgEnd_date));
+        //            }
+
+
+        //            readHistory = (from g in regCount
+        //                           group g by g.subjectcount into t
+        //                           select new UserReadHistoryModel
+        //                           {
+        //                               userName = t.FirstOrDefault().username,
+        //                               userId = t.FirstOrDefault().userid,
+        //                               collegeName = t.FirstOrDefault().collegename,
+        //                               collegeId = t.FirstOrDefault().collegeid,
+        //                               subjectCount = t.Count(),
+        //                               subjectName = t.FirstOrDefault().subjectname,
+        //                               totalSeconds = t.Sum(x => x.totalhours),
+        //                               totalhrs = string.Format("{0:00}:{1:00}:{2:00}", t.Sum(x => (x.totalhours)) / 3600, (t.Sum(x => (x.totalhours)) / 60) % 60, t.Sum(x => (x.totalhours)) % 60),
+        //                               lastReadOn = t.Max(x => x.lastreadon).ToString("dd-MMM-yyyy"),
+        //                               userRole = t.FirstOrDefault().userrole
+        //                           }).OrderByDescending(t => t.totalSeconds).ToList();
+
+        //            return readHistory;
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            contextsdce.Dispose();
+        //            Log.WriteLogMessage(PageName, "AdminReportservice", "subjectwiseReadHistory", ex.Message, "error");
+        //            throw ex;
+        //        }
+        //        finally
+        //        {
+        //            contextsdce.Dispose();
+        //        }
+        //    }
+
+        //}
+
+        ///// <summary>
+        ///// GetLaunchData
+        ///// </summary>
+        ///// <param name="univId"></param>
+        ///// <param name="semester"></param>
+        ///// <param name="year"></param>
+        ///// <param name="reg_startdate"></param>
+        ///// <param name="reg_end_date"></param>
+        ///// <returns></returns>
+        //public List<UserReadHistoryModel> GetLaunchData(int univId, string semester, string year, string reg_startdate, string reg_end_date)
+        //{
+
+        //    List<UserReadHistoryModel> readHistory = new List<UserReadHistoryModel>();
+
+        //    string[] ddlyear = new string[50];
+        //    List<int> selyear = new List<int>();
+        //    ddlyear = year.Split('-').ToArray();
+        //    if (ddlyear[0].ToString() != "0")
+        //    {
+        //        for (int j = 0; j < ddlyear.Length; j++)
+        //        {
+        //            selyear.Add(Convert.ToInt16(ddlyear[j].ToString()));
+        //        }
+
+        //    }
+
+
+
+        //    string[] ddlSemester = new string[50];
+        //    List<int> sems = new List<int>();
+        //    ddlSemester = semester.Split('-').ToArray();
+        //    if (ddlSemester[0].ToString() != "0")
+        //    {
+        //        for (int k = 0; k < ddlSemester.Length; k++)
+        //        {
+        //            sems.Add(Convert.ToInt16(ddlSemester[k].ToString()));
+        //        }
+        //    }
+        //    using (learnengg_payment_portal_entities contextsdce = new learnengg_payment_portal_entities())
+        //    {
+        //        try
+        //        {
+        //            //var regCount = (from um in contextsdce.user_master  
+        //            //    join usm in contextsdce.user_subject_mapping on um.user_id equals usm.user_id
+        //            //    join sunit in contextsdce.subject_unit_master  on usm.subject_unit_id equals sunit.unit_id
+        //            //    join dsm in contextsdce.department_subject_mapping on  usm.subject_id equals dsm.subject_id
+        //            //    join dm in contextsdce.department_master on dsm.department_id equals dm.department_id
+        //            //    join univ in contextsdce.university_master on   um.univ_id equals univ.univ_id
+        //            //    where
+        //            //    um.registered_from > 4 && um.univ_id == 8 && sunit.subject_unit_type == 4
+        //            //    && dsm.semester == 1 && um.DepartmentID == dsm.department_id
+        //            //    group univ by univ.univ_id into grpunivlaunchoffer
+        //            //    select new
+        //            //    {
+        //            //        username = um.user_name,
+        //            //        userid = um.user_id,
+        //            //        collegename = um.collegename,
+        //            //        collegeid = um.collegeid,
+        //            //        subjectname = sm.subject_name,
+        //            //        subjectcount = sm.subject_id,
+        //            //        totalhours = usrh.total_seconds,
+        //            //        lastreadon = usrh.last_read_on,
+        //            //        userrole = um.role_id == 1 ? "Student" : "Staff",
+        //            //        dpsm.map_year,
+        //            //        dpsm.semester,
+        //            //        um.currentyear,
+        //            //        um.created_on,
+        //            //        usrh.last_read_on,
+        //            //        univ_Id = um.univ_id
+
+        //            //    }).ToList();
+
+        //            //if (selyear.Count() > 0)
+        //            //{
+        //            //    var datanew = regCount.ToList();
+        //            //    regCount.Clear();
+        //            //    regCount.AddRange(datanew.Where(x => selyear.Contains(x.map_year)));
+        //            //}
+
+        //            //if (sems.Count() > 0)
+        //            //{
+        //            //    var datanew = regCount.ToList();
+        //            //    regCount.Clear();
+        //            //    regCount.AddRange(datanew.Where(x => sems.Contains(x.semester)));
+        //            //}
+
+
+
+        //            //readHistory = (from g in regCount
+        //            //               group g by g.subjectcount into t
+        //            //               select new UserReadHistoryModel
+        //            //               {
+        //            //                   userName = t.FirstOrDefault().username,
+        //            //                   userId = t.FirstOrDefault().userid,
+        //            //                   collegeName = t.FirstOrDefault().collegename,
+        //            //                   collegeId = t.FirstOrDefault().collegeid,
+        //            //                   subjectCount = t.Count(),
+        //            //                   subjectName = t.FirstOrDefault().subjectname,
+        //            //                   totalSeconds = t.Sum(x => x.totalhours),
+        //            //                   totalhrs = string.Format("{0:00}:{1:00}:{2:00}", t.Sum(x => (x.totalhours)) / 3600, (t.Sum(x => (x.totalhours)) / 60) % 60, t.Sum(x => (x.totalhours)) % 60),
+        //            //                   lastReadOn = t.Max(x => x.lastreadon).ToString("dd-MMM-yyyy"),
+        //            //                   userRole = t.FirstOrDefault().userrole
+        //            //               }).OrderByDescending(t => t.totalSeconds).ToList();
+
+        //            return readHistory;
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            contextsdce.Dispose();
+        //            Log.WriteLogMessage(PageName, "AdminReportservice", "subjectwiseReadHistory", ex.Message, "error");
+        //            throw ex;
+        //        }
+        //        finally
+        //        {
+        //            contextsdce.Dispose();
+        //        }
+        //    }
+
+        //}
+
+        ///// <summary>
+        ///// RegisteredUserUniversityDetails
+        ///// </summary>
+        ///// <param name="univId"></param>
+        ///// <param name="univ_code"></param>
+        ///// <param name="year"></param>
+        ///// <param name="semester"></param>
+        ///// <param name="startdate"></param>
+        ///// <param name="end_date"></param>
+        ///// <returns></returns>
+        //public List<RegisteredUserUniversity> RegisteredUserUniversityDetails(int univId, string univ_code, string year, int semester, string startdate, string end_date)
+        //{
+
+
+        //    string[] ddlyear = new string[50];
+        //    List<int> selyear = new List<int>();
+        //    ddlyear = year.Split('-').ToArray();
+        //    if (ddlyear[0].ToString() != "0")
+        //    {
+        //        for (int j = 0; j < ddlyear.Length; j++)
+        //        {
+        //            selyear.Add(Convert.ToInt16(ddlyear[j].ToString()));
+        //        }
+
+        //    }
+
+        //    if (semester == 1)
+        //    {
+        //        Sem_Startdate = DateTime.ParseExact(Resources.DateBetween.sem1_start_date, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+        //        Sem_Startdate.ToString("yyyy-MM-dd");
+
+
+        //        Sem_End_date = DateTime.ParseExact(Resources.DateBetween.sem1_end_date, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+        //        Sem_End_date.ToString("yyyy-MM-dd");
+        //    }
+        //    if (semester == 2)
+        //    {
+        //        Sem_Startdate = DateTime.ParseExact(Resources.DateBetween.sem2_start_date, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+        //        Sem_Startdate.ToString("yyyy-MM-dd");
+
+        //        Sem_End_date = DateTime.ParseExact(Resources.DateBetween.sem2_end_date, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+        //        Sem_End_date.ToString("yyyy-MM-dd");
+        //    }
+
+        //    List<RegisteredUserUniversity> University = new List<RegisteredUserUniversity>();
+
+        //    using (learnengg_payment_portal_entities contextsdce = new learnengg_payment_portal_entities())
+        //    {
+        //        try
+        //        {
+        //            var collegedetails = (from um in contextsdce.user_master
+        //                                  join umm in contextsdce.university_master on um.univ_id equals umm.univ_id
+        //                                  join colgmas in contextsdce.college_master on um.collegeid equals colgmas.college_id
+        //                                  where um.univ_id == colgmas.university_id &&
+        //                                  um.role_id != 3 && um.active_status == 1
+
+        //                                  select new
+        //                                  {
+        //                                      um.univ_id,
+        //                                      umm.university_name,
+        //                                      umm.university_code,
+        //                                      um.role_id,
+        //                                      um.collegeid,
+        //                                      studentcount = um.role_id == 1 ? 1 : 0,
+        //                                      staffcount = um.role_id == 2 ? 1 : 0,
+        //                                      um.currentyear,
+        //                                      um.currentsemester,
+        //                                      um.created_on
+        //                                  }).ToList();
+
+        //            if (univId != 0)
+        //            {
+        //                var datanew = collegedetails.ToList();
+        //                collegedetails.Clear();
+        //                collegedetails.AddRange(datanew.Where(x => x.univ_id == univId && x.university_code == univ_code));
+        //            }
+
+        //            if (selyear.Count() > 0)
+        //            {
+        //                var datanew = collegedetails.ToList();
+        //                collegedetails.Clear();
+        //                //collegedetails.AddRange(datanew.Where(x => selyear.Contains(x.currentyear)));
+        //            }
+
+        //            if (semester != 0)
+        //            {
+        //                var datanew = collegedetails.ToList();
+        //                collegedetails.Clear();
+        //                collegedetails.AddRange(datanew.Where(x => x.created_on >= Sem_Startdate && x.created_on <= Sem_End_date));
+        //            }
+        //            if (startdate != "0")
+        //            {
+        //                string stdate = startdate + " " + "00:00:00 AM";
+        //                DateTime start_date = DateTime.ParseExact(stdate, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+        //                var datanew = collegedetails.ToList();
+        //                collegedetails.Clear();
+        //                collegedetails.AddRange(datanew.Where(x => x.created_on >= start_date));
+        //            }
+
+        //            if (end_date != "0")
+        //            {
+        //                string edate = end_date + " " + "11:59:59 PM";
+        //                DateTime End_date = DateTime.ParseExact(edate, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+        //                var datanew = collegedetails.ToList();
+        //                collegedetails.Clear();
+        //                collegedetails.AddRange(datanew.Where(x => x.created_on <= End_date));
+        //            }
+
+        //            University = (from t in collegedetails
+        //                          group t by new { t.univ_id, t.university_name } into g
+        //                          select new RegisteredUserUniversity
+        //                          {
+        //                              universityid = g.FirstOrDefault().univ_id,
+        //                              universityname = g.FirstOrDefault().university_name,
+        //                              roleid = g.FirstOrDefault().role_id,
+        //                              CollegeCount = g.Select(t => t.collegeid).Distinct().Count(),
+        //                              StudentCount = g.Sum(t => t.studentcount),
+        //                              StaffCount = g.Sum(t => t.staffcount), // Sum, not Max
+        //                              TotalRegistration = g.Sum(t => t.studentcount) + g.Sum(t => (t.staffcount.Equals(null) ? 0 : t.staffcount))
+        //                          }).Distinct().OrderByDescending(x => x.StudentCount).ToList();
+
+        //            return University;
+
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            contextsdce.Dispose();
+        //            Log.WriteLogMessage(PageName, "RegistrationReport", "RegisteredUserUniversityDetails", ex.Message, "error");
+        //            throw;
+        //        }
+        //        finally
+        //        {
+        //            contextsdce.Dispose();
+        //        }
+
+        //    }
+        //}
+
+        ///// <summary>
+        ///// RegisteredUniversityCollegeDetails
+        ///// </summary>
+        ///// <param name="year"></param>
+        ///// <param name="semester"></param>
+        ///// <param name="start_date"></param>
+        ///// <param name="end_date"></param>
+        ///// <param name="universityId"></param>
+        ///// <param name="roleid"></param>
+        ///// <returns></returns>
+        //public List<UnivDetails> RegisteredUniversityCollegeDetails(string year, int semester, string start_date, string end_date, int universityId, int roleid)
+        //{
+
+        //    string[] ddlyear = new string[50];
+        //    List<int> selyear = new List<int>();
+        //    ddlyear = year.Split('-').ToArray();
+        //    if (ddlyear[0].ToString() != "0")
+        //    {
+        //        for (int j = 0; j < ddlyear.Length; j++)
+        //        {
+        //            selyear.Add(Convert.ToInt16(ddlyear[j].ToString()));
+        //        }
+
+        //    }
+        //    if (semester == 1)
+        //    {
+        //        Sem_Startdate = DateTime.ParseExact(Resources.DateBetween.sem1_start_date, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+        //        Sem_Startdate.ToString("yyyy-MM-dd");
+
+        //        Sem_End_date = DateTime.ParseExact(Resources.DateBetween.sem1_end_date, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+        //        Sem_End_date.ToString("yyyy-MM-dd");
+        //    }
+        //    if (semester == 2)
+        //    {
+
+        //        Sem_Startdate = DateTime.ParseExact(Resources.DateBetween.sem2_start_date, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+        //        Sem_Startdate.ToString("yyyy-MM-dd");
+
+        //        Sem_End_date = DateTime.ParseExact(Resources.DateBetween.sem2_end_date, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+        //        Sem_End_date.ToString("yyyy-MM-dd");
+        //    }
+
+        //    List<UnivDetails> Registereduniv = new List<UnivDetails>();
+
+        //    using (learnengg_payment_portal_entities contextsdce = new learnengg_payment_portal_entities())
+        //    {
+        //        try
+        //        {
+
+        //            var regUniversity = (from um in contextsdce.user_master.AsEnumerable()
+        //                                 join cm in contextsdce.college_master on um.collegeid equals cm.college_id
+        //                                 where um.univ_id == cm.university_id && um.univ_id == universityId && um.role_id == roleid
+        //                                 && um.active_status == 1
+        //                                 select new
+        //                                 {
+        //                                     um.univ_id,
+        //                                     cm.college_name,
+        //                                     um.user_name,
+        //                                     um.email_id,
+        //                                     um.mobile,
+        //                                     um.created_on,
+        //                                     um.currentyear,
+        //                                     um.currentsemester
+        //                                 }).ToList();
+
+        //            if (selyear.Count() > 0)
+        //            {
+        //                var datanew = regUniversity.ToList();
+        //                regUniversity.Clear();
+        //                //regUniversity.AddRange(datanew.Where(x => selyear.Contains(x.currentyear)));
+        //            }
+
+        //            if (semester != 0)
+        //            {
+        //                var datanew = regUniversity.ToList();
+        //                regUniversity.Clear();
+        //                regUniversity.AddRange(datanew.Where(x => x.created_on >= Sem_Startdate && x.created_on <= Sem_End_date));
+        //            }
+        //            if (start_date != "0")
+        //            {
+        //                string stdate = start_date + " " + "00:00:00 AM";
+        //                DateTime Startdate = DateTime.ParseExact(stdate, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+        //                var datanew = regUniversity.ToList();
+        //                regUniversity.Clear();
+        //                regUniversity.AddRange(datanew.Where(x => x.created_on >= Startdate));
+        //            }
+
+        //            if (end_date != "0")
+        //            {
+        //                string edate = end_date + " " + "11:59:59 PM";
+        //                DateTime End_date = DateTime.ParseExact(edate, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+        //                var datanew = regUniversity.ToList();
+        //                regUniversity.Clear();
+        //                regUniversity.AddRange(datanew.Where(x => x.created_on <= End_date));
+        //            }
+
+
+        //            Registereduniv = (from t in regUniversity
+        //                              select new UnivDetails
+        //                              {
+        //                                  //collegeid = um.collegeid,  
+        //                                  universityid = t.univ_id,
+        //                                  CollegeName = t.college_name,
+        //                                  userName = t.user_name,
+        //                                  Emailid = t.email_id,
+        //                                  Mobile = t.mobile,
+        //                                  //user_id = um.user_id,
+        //                                  RegisteredOn = t.created_on.ToString("dd-MMM-yyyy"),
+        //                                  createdon = t.created_on
+
+        //                              }).Distinct().ToList();
+
+        //            Registereduniv = Registereduniv.OrderByDescending(c => c.createdon.Date)
+        //                 .ThenBy(c => c.createdon.TimeOfDay).ToList();
+
+        //            return Registereduniv;
+
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            contextsdce.Dispose();
+        //            Log.WriteLogMessage(PageName, "RegistrationReport", "RegisteredUniversityCollegeDetails", ex.Message, "error");
+        //            throw ex;
+        //        }
+        //        finally
+        //        {
+        //            contextsdce.Dispose();
+        //        }
+        //    }
+
+        //}
+
+
+
+        ///// <summary>
+        ///// RegisteredUserCollegeDetails
+        ///// </summary>
+        ///// <param name="year"></param>
+        ///// <param name="semester"></param>
+        ///// <param name="start_Date"></param>
+        ///// <param name="end_Date"></param>
+        ///// <param name="universityId"></param>
+        ///// <returns></returns>
+        //public List<RegisteredCollegeDetails> RegisteredUserCollegeDetails(string year, int semester, string start_Date, string end_Date, string universityId)
+        //{
+
+        //    string[] uniID = new string[100];
+        //    List<int> univ = new List<int>();
+        //    uniID = universityId.Split('_').ToArray();
+        //    if (uniID[0].ToString() != "0")
+        //    {
+        //        for (int i = 0; i < uniID.Length; i++)
+        //        {
+        //            univ.Add(Convert.ToInt16(uniID[i].ToString()));
+        //        }
+        //    }
+
+        //    string[] ddlyear = new string[50];
+        //    List<int> selyear = new List<int>();
+        //    ddlyear = year.Split('-').ToArray();
+        //    if (ddlyear[0].ToString() != "0")
+        //    {
+        //        for (int j = 0; j < ddlyear.Length; j++)
+        //        {
+        //            selyear.Add(Convert.ToInt16(ddlyear[j].ToString()));
+        //        }
+
+        //    }
+        //    if (semester == 1)
+        //    {
+        //        Sem_Startdate = DateTime.ParseExact(Resources.DateBetween.sem1_start_date, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+        //        Sem_Startdate.ToString("yyyy-MM-dd");
+
+        //        Sem_End_date = DateTime.ParseExact(Resources.DateBetween.sem1_end_date, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+        //        Sem_End_date.ToString("yyyy-MM-dd");
+        //    }
+        //    if (semester == 2)
+        //    {
+
+        //        Sem_Startdate = DateTime.ParseExact(Resources.DateBetween.sem2_start_date, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+        //        Sem_Startdate.ToString("yyyy-MM-dd");
+
+        //        Sem_End_date = DateTime.ParseExact(Resources.DateBetween.sem2_end_date, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+        //        Sem_End_date.ToString("yyyy-MM-dd");
+        //    }
+        //    List<RegisteredCollegeDetails> RegisteredCollege = new List<RegisteredCollegeDetails>();
+
+        //    using (learnengg_payment_portal_entities contextsdce = new learnengg_payment_portal_entities())
+        //    {
+        //        try
+        //        {
+        //            var collegedetails = (from um in contextsdce.user_master
+        //                                  join unvmas in contextsdce.university_master on um.univ_id equals unvmas.univ_id
+        //                                  join colmas in contextsdce.college_master on um.collegeid equals colmas.college_id
+        //                                  where colmas.university_id == um.univ_id && um.role_id != 3 &&
+        //                                  um.active_status == 1
+        //                                  select new
+        //                                  {
+        //                                      colmas.college_id,
+        //                                      um.univ_id,
+        //                                      unvmas.university_name,
+        //                                      colmas.college_name,
+        //                                      colmas.college_code,
+        //                                      um.role_id,
+        //                                      studentcount = um.role_id == 1 ? 1 : 0,
+        //                                      staffcount = um.role_id == 2 ? 1 : 0,
+        //                                      um.currentsemester,
+        //                                      um.currentyear,
+        //                                      um.created_on
+        //                                  }).ToList();
+
+        //            if (univ.Count() > 0)
+        //            {
+        //                var datanew = collegedetails.ToList();
+        //                collegedetails.Clear();
+        //                collegedetails.AddRange(datanew.Where(x => univ.Contains(x.univ_id ?? 0)));
+        //            }
+        //            if (selyear.Count() > 0)
+        //            {
+        //                var datanew = collegedetails.ToList();
+        //                collegedetails.Clear();
+        //                //collegedetails.AddRange(datanew.Where(x => selyear.Contains(x.currentyear)));
+        //            }
+
+        //            if (semester != 0)
+        //            {
+        //                var datanew = collegedetails.ToList();
+        //                collegedetails.Clear();
+        //                collegedetails.AddRange(datanew.Where(x => x.created_on >= Sem_Startdate && x.created_on <= Sem_End_date));
+        //            }
+        //            if (start_Date != "0")
+        //            {
+        //                string stdate = start_Date + " " + "00:00:00 AM";
+        //                DateTime Startdate = DateTime.ParseExact(stdate, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+        //                var datanew = collegedetails.ToList();
+        //                collegedetails.Clear();
+        //                collegedetails.AddRange(datanew.Where(x => x.created_on >= Startdate));
+        //            }
+
+        //            if (end_Date != "0")
+        //            {
+        //                string edate = end_Date + " " + "11:59:59 PM";
+        //                DateTime End_date = DateTime.ParseExact(edate, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+        //                var datanew = collegedetails.ToList();
+        //                collegedetails.Clear();
+        //                collegedetails.AddRange(datanew.Where(x => x.created_on <= End_date));
+        //            }
+
+
+        //            RegisteredCollege = (from t in collegedetails
+        //                                 group t by t.college_id into g
+        //                                 select new RegisteredCollegeDetails
+        //                                 {
+        //                                     collegeid = g.Key,
+        //                                     universityid = g.FirstOrDefault().univ_id,
+        //                                     universityName = g.FirstOrDefault().university_name,
+        //                                     CollegeName = g.FirstOrDefault().college_name.ToString() + " - " + g.FirstOrDefault().college_code.ToString(),
+        //                                     roleid = g.FirstOrDefault().role_id,
+        //                                     StudentCount = g.Sum(t => t.studentcount),
+        //                                     StaffCount = g.Sum(t => t.staffcount) // Sum, not Max
+        //                                 }).OrderByDescending(x => x.StudentCount).Distinct().ToList();
+
+        //            return RegisteredCollege;
+
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            contextsdce.Dispose();
+        //            Log.WriteLogMessage(PageName, "RegReport", "RegisteredUserCollegeDetails", ex.Message, "error");
+        //            throw;
+        //        }
+        //        finally
+        //        {
+        //            contextsdce.Dispose();
+        //        }
+        //    }
+
+        //}
+
+        ///// <summary>
+        ///// RegisteredUserDetails
+        ///// </summary>
+        ///// <param name="year"></param>
+        ///// <param name="semester"></param>
+        ///// <param name="startDate"></param>
+        ///// <param name="endDate"></param>
+        ///// <param name="univId"></param>
+        ///// <param name="collegeId"></param>
+        ///// <param name="roleid"></param>
+        ///// <returns></returns>
+        //public List<RegisteredDetails> RegisteredUserDetails(string year, int semester, string startDate, string endDate, int univId, int collegeId, int roleid)
+        //{
+
+        //    string[] ddlyear = new string[50];
+        //    List<int> selyear = new List<int>();
+        //    ddlyear = year.Split('-').ToArray();
+        //    if (ddlyear[0].ToString() != "0")
+        //    {
+        //        for (int j = 0; j < ddlyear.Length; j++)
+        //        {
+        //            selyear.Add(Convert.ToInt16(ddlyear[j].ToString()));
+        //        }
+
+        //    }
+        //    if (semester == 1)
+        //    {
+        //        Sem_Startdate = DateTime.ParseExact(Resources.DateBetween.sem1_start_date, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+        //        Sem_Startdate.ToString("yyyy-MM-dd");
+
+        //        Sem_End_date = DateTime.ParseExact(Resources.DateBetween.sem1_end_date, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+        //        Sem_End_date.ToString("yyyy-MM-dd");
+        //    }
+        //    if (semester == 2)
+        //    {
+
+        //        Sem_Startdate = DateTime.ParseExact(Resources.DateBetween.sem2_start_date, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+        //        Sem_Startdate.ToString("yyyy-MM-dd");
+
+        //        Sem_End_date = DateTime.ParseExact(Resources.DateBetween.sem2_end_date, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+        //        Sem_End_date.ToString("yyyy-MM-dd");
+        //    }
+
+        //    List<RegisteredDetails> Registeredusers = new List<RegisteredDetails>();
+
+        //    using (learnengg_payment_portal_entities contextsdce = new learnengg_payment_portal_entities())
+        //    {
+        //        try
+        //        {
+        //            var regUsers = (from um in contextsdce.user_master.AsEnumerable()
+        //                            join cm in contextsdce.college_master on um.collegeid equals cm.college_id
+        //                            where um.univ_id == cm.university_id && um.collegeid == collegeId && um.role_id == roleid
+        //                            && um.active_status == 1 && um.univ_id == univId
+
+        //                            select new
+        //                            {
+        //                                um.collegeid,
+        //                                um.univ_id,
+        //                                cm.college_name,
+        //                                um.user_name,
+        //                                um.mobile,
+        //                                um.email_id,
+        //                                um.user_id,
+        //                                um.created_on,
+        //                                um.currentsemester,
+        //                                um.currentyear
+        //                            }).ToList();
+
+        //            if (selyear.Count() > 0)
+        //            {
+        //                var datanew = regUsers.ToList();
+        //                regUsers.Clear();
+        //                //regUsers.AddRange(datanew.Where(x => selyear.Contains(x.currentyear)));
+        //            }
+
+        //            if (semester != 0)
+        //            {
+        //                var datanew = regUsers.ToList();
+        //                regUsers.Clear();
+        //                regUsers.AddRange(datanew.Where(x => x.created_on >= Sem_Startdate && x.created_on <= Sem_End_date));
+        //            }
+        //            if (startDate != "0")
+        //            {
+        //                string stdate = startDate + " " + "00:00:00 AM";
+        //                DateTime Startdate = DateTime.ParseExact(stdate, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+        //                var datanew = regUsers.ToList();
+        //                regUsers.Clear();
+        //                regUsers.AddRange(datanew.Where(x => x.created_on >= Startdate));
+        //            }
+
+        //            if (endDate != "0")
+        //            {
+        //                string edate = endDate + " " + "11:59:59 PM";
+        //                DateTime End_date = DateTime.ParseExact(edate, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+        //                var datanew = regUsers.ToList();
+        //                regUsers.Clear();
+        //                regUsers.AddRange(datanew.Where(x => x.created_on <= End_date));
+        //            }
+
+        //            Registeredusers = (from g in regUsers
+        //                               select new RegisteredDetails
+        //                               {
+        //                                   collegeid = g.collegeid,
+        //                                   universityid = g.univ_id,
+        //                                   CollegeName = g.college_name,
+        //                                   userName = g.user_name,
+        //                                   Emailid = g.email_id,
+        //                                   Mobile = g.mobile,
+        //                                   user_id = g.user_id,
+        //                                   RegisteredOn = g.created_on.ToString("dd-MMM-yyyy"),
+        //                                   createdon = g.created_on
+        //                               }).Distinct().ToList();
+
+        //            Registeredusers = Registeredusers.OrderByDescending(c => c.createdon.Date)
+        //                 .ThenBy(c => c.createdon.TimeOfDay).ToList();
+
+        //            return Registeredusers;
+
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            contextsdce.Dispose();
+        //            Log.WriteLogMessage(PageName, "RegReport", "RegisteredUserDetails", ex.Message, "error");
+        //            throw;
+        //        }
+        //        finally
+        //        {
+        //            contextsdce.Dispose();
+        //        }
+        //    }
+
+        //}
+
+        //public RegistrationReport RegistrationReportsummary(int deptID, int collegeID, string DateFrom, string DateTo, int type)
+        //{
+        //    RegistrationReport rpt = new RegistrationReport();
+        //    try
+        //    {
+        //        using (learnengg_payment_portal_entities contextsdce = new learnengg_payment_portal_entities())
+        //        {
+        //            //var RegistrationTradeRptQuery = from cm in contextsdce.college_master
+        //            //                                join cid in contextsdce.college_installation_details on cm.college_id equals cid.college_id
+        //            //                                join cde in contextsdce.college_installation_expiry on cid.college_install_id equals cde.college_install_id
+        //            //                                join sub in contextsdce.subject_master on cde.subject_id equals sub.subject_id
+        //            //                                where cde.installed_on != null && sub.having_questionpaper == type
+        //            //                                group new { cm, cid, cde } by new { cm.college_name, cde.college_install_id, cde.department_id } into collegegrp
+        //            //                                select new { collegeId = collegegrp.Key, collegedetails = collegegrp };
+
+
+        //            var RegistrationRptsummary = (from cm in contextsdce.college_master
+        //                                          join cid in contextsdce.college_installation_details on cm.college_id equals cid.college_id //into collegeInstallationLeft
+        //                                                                                                                                      //  from cid in collegeInstallationLeft.DefaultIfEmpty()
+        //                                          join cie in contextsdce.college_installation_expiry on cid.college_install_id equals cie.college_install_id // into collegeInstallationExpiryLeft
+        //                                          join sub in contextsdce.subject_master on cie.subject_id equals sub.subject_id
+        //                                          //join dm in contextsdce.department_master on cie.department_id equals dm.department_id
+        //                                          // from cie in collegeInstallationExpiryLeft.DefaultIfEmpty().Where(x=>x.installed_on!=null)
+        //                                        // join um in contextsdce.user_master on cm.college_id equals um.collegeid  into userInstallationLeft
+        //                                       //   from um in userInstallationLeft.DefaultIfEmpty().Where(x=>x.active_status==1 && x.role_id<3)
+        //                                          where  cie.installed_on !=null && 
+        //                                          sub.having_questionpaper == type // && cm.active_status ==1
+        //                                          select new
+        //                                          {
+        //                                              desktop = cie.college_install_id,
+        //                                              DesktopregisterDate = cid.enter_on,
+        //                                              college = cm.college_id,
+        //                                              user = 0,
+        //                                              UserregisterDate = DateTime.Now,
+        //                                              department = cie.department_id
+        //                                          }).Distinct().ToList();
+
+
+        //            // RANGE VARIABLE for filter
+        //            if (deptID != 0)
+        //            {
+        //                var datanew = RegistrationRptsummary.ToList();
+        //                RegistrationRptsummary.Clear();
+        //                RegistrationRptsummary.AddRange(datanew.Where(x => x.department == deptID));
+        //            }
+
+        //            if (collegeID > 0)
+        //            {
+        //                var datanew = RegistrationRptsummary.ToList();
+        //                RegistrationRptsummary.Clear();
+        //                RegistrationRptsummary.AddRange(datanew.Where(x => x.college == collegeID));
+        //            }
+
+        //            if (!DateFrom.Equals("0"))
+        //            {
+        //                string Reg_sdate = DateFrom + " " + "11:59:00 PM";
+        //                DateTime start_date = DateTime.ParseExact(Reg_sdate, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+        //                var datanew = RegistrationRptsummary.ToList();
+        //                RegistrationRptsummary.Clear();
+        //                RegistrationRptsummary.AddRange(datanew.Where(x => x.DesktopregisterDate >= start_date));
+        //            }
+        //            if (!DateTo.Equals("0"))
+        //            {
+        //                string usg_End_date = DateTo + " " + "11:59:00 PM";
+        //                DateTime usgEnd_date = DateTime.ParseExact(usg_End_date, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+        //                var datanew = RegistrationRptsummary.ToList();
+        //                RegistrationRptsummary.Clear();
+        //                RegistrationRptsummary.AddRange(datanew.Where(x => x.DesktopregisterDate <= usgEnd_date));
+        //            }
+
+
+        //            var FinalResult = (from result in RegistrationRptsummary                                     
+        //                               group new { result} by result.college into resultgroup
+        //                               select new RegistrationReport
+        //                               {
+        //                                   TotalDesktop = resultgroup.Select(x => x.result.desktop).Distinct().Count(),
+        //                                   TotalITI = resultgroup.Select(x => x.result.college).Distinct().Count()
+        //                                 //  TotalInstructors = resultgroup.Select(x => x.um !=null ? x.um.user_id: 0).Distinct().Count()
+        //                               });
+
+
+        //            var FinalUserResult = (from cm in contextsdce.college_master
+        //                               join um in contextsdce.user_master on cm.college_id equals um.collegeid                                                                                                               
+        //                               where um.active_status == 1 && cm.active_status == 1 &&  um.role_id <3
+        //                               group new {  um } by um.collegeid into resultgroup
+        //                               select new RegistrationReport
+        //                               {                                          
+        //                                   TotalInstructors = resultgroup.Select(x=>x.um.user_id).Distinct().Count()
+        //                               });
+
+        //            rpt.TotalDesktop = FinalResult.Sum(y => y.TotalDesktop);
+        //            rpt.TotalITI = FinalResult.Sum(y => y.TotalITI);
+        //            rpt.TotalInstructors = FinalUserResult.Sum(y => y.TotalInstructors);
+
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        rpt = null;
+        //    }
+        //    return rpt;
+        //}
+
+
+        //public List<RegistrationReport> RegistrationReportCollegesummaryDuplicate(int deptID, int collegeID, string DateFrom, string DateTo)
+        //{
+        //    List<RegistrationReport> RegistrationRptsummary = new List<RegistrationReport>();
+        //    List<RegistrationReport> FRegistrationRptsummary = new List<RegistrationReport>();
+        //    List<RegistrationReport> ZRegistrationRptsummary = new List<RegistrationReport>();
+        //    try
+        //    {
+        //        using (learnengg_payment_portal_entities contextsdce = new learnengg_payment_portal_entities())
+        //        {
+        //            var RegistrationDesktopRptQuery = from cm in contextsdce.college_master
+        //                                              join cid in contextsdce.college_installation_details on cm.college_id equals cid.college_id
+        //                                              join cde in contextsdce.college_installation_expiry on cid.college_install_id equals cde.college_install_id
+        //                                              where cde.installed_on != null
+        //                                              group new { cm, cid } by new { cm.college_name } into collegegrp
+        //                                              select new { collegeId = collegegrp.Key, collegedetails = collegegrp };
+
+        //            foreach (var Desktopdetails in RegistrationDesktopRptQuery)
+        //            {
+        //                RegistrationReport rept = new RegistrationReport();
+        //                rept.ITIName = Desktopdetails.collegedetails.FirstOrDefault().cm.college_name + '[' + Desktopdetails.collegedetails.FirstOrDefault().cm.college_code + ']';
+        //                rept.CollegeId = Desktopdetails.collegedetails.FirstOrDefault().cm.college_id;
+        //                rept.TotalDesktop = Desktopdetails.collegedetails.Select(p => p.cid.college_install_id).Count();
+        //                //  rept.activeationMinDate = Desktopdetails.collegedetails.Select(p => p.cid.enter_on.Date).Min();
+        //                rept.activeationMinDate = Desktopdetails.collegedetails.Select(p => p.cid.enter_on.Date).Min();
+
+        //                //rept.RegDate = null;
+        //                //rept.activeationMinDate = DbFunctions.TruncateTime(Desktopdetails.collegedetails.Select(p => p.cid.enter_on).Min()) ?? DateTime.Now;
+        //                rept.TotalInstructors = 0;
+        //                rept.TotalTrades = 0;
+        //                RegistrationRptsummary.Add(rept);
+        //            }
+
+        //            var RegistrationTradeRptQuery = from cm in contextsdce.college_master
+        //                                            join cid in contextsdce.college_installation_details on cm.college_id equals cid.college_id
+        //                                            join cde in contextsdce.college_installation_expiry on cid.college_install_id equals cde.college_install_id
+        //                                            where cde.installed_on != null
+        //                                            group new { cm, cde } by new { cm.college_name, cde.college_install_id, cde.department_id } into collegegrp
+        //                                            select new { collegeId = collegegrp.Key, collegedetails = collegegrp };
+
+        //            foreach (var Tradedetails in RegistrationTradeRptQuery)
+        //            {
+        //                RegistrationReport rept = new RegistrationReport();
+        //                rept.CollegeId = Tradedetails.collegedetails.FirstOrDefault().cm.college_id;
+        //                rept.ITIName = Tradedetails.collegedetails.FirstOrDefault().cm.college_name + '[' + Tradedetails.collegedetails.FirstOrDefault().cm.college_code + ']'; ;
+        //                rept.TotalDesktop = 0;
+        //                rept.TotalInstructors = 0;
+        //                rept.activeationMinDate = DateTime.Now.Date;
+        //                rept.TradeRegDate = Convert.ToDateTime(Tradedetails.collegedetails.Select(p => p.cde.installed_on));
+        //                rept.TotalTrades = Tradedetails.collegedetails.Select(p => p.cde.department_id).Distinct().Count();
+        //                RegistrationRptsummary.Add(rept);
+        //            }
+
+        //            var RegistrationInstructorRptQuery = from cm in contextsdce.college_master
+        //                                                 join um in contextsdce.user_master on cm.college_id equals um.collegeid
+        //                                                 group new { cm, um } by new { cm.college_name } into collegegrp
+        //                                                 select new { collegeId = collegegrp.Key, collegedetails = collegegrp };
+
+        //            foreach (var Userdetails in RegistrationInstructorRptQuery)
+        //            {
+        //                RegistrationReport rept = new RegistrationReport();
+        //                rept.CollegeId = Userdetails.collegedetails.FirstOrDefault().cm.college_id;
+        //                rept.ITIName = Userdetails.collegedetails.FirstOrDefault().cm.college_name + '[' + Userdetails.collegedetails.FirstOrDefault().cm.college_code + ']'; ;
+        //                rept.TotalDesktop = 0;
+        //                rept.TotalInstructors = Userdetails.collegedetails.Select(p => p.um.user_id).Distinct().Count();
+        //                rept.TotalTrades = 0;
+        //                rept.activeationMinDate = DateTime.Now.Date;
+        //                RegistrationRptsummary.Add(rept);
+        //            }
+        //        }
+
+
+
+
+        //        var FRegistrationRpt = (from RRS in RegistrationRptsummary
+        //                                group RRS by RRS.ITIName into Fcollegegrp
+        //                                select new { college = Fcollegegrp.Key, collegegrp = Fcollegegrp }).ToList();
+
+        //        foreach (var fresult in FRegistrationRpt)
+        //        {
+        //            RegistrationReport rept = new RegistrationReport();
+        //            rept.ITIName = fresult.collegegrp.FirstOrDefault().ITIName.ToString();
+        //            rept.CollegeId = fresult.collegegrp.FirstOrDefault().CollegeId;
+        //            rept.TotalDesktop = fresult.collegegrp.Sum(p => p.TotalDesktop) == 0 ? 0 : fresult.collegegrp.Sum(p => p.TotalDesktop);
+        //            rept.TotalInstructors = fresult.collegegrp.Sum(p => p.TotalInstructors) == 0 ? 0 : fresult.collegegrp.Sum(p => p.TotalInstructors);
+        //            rept.TotalTrades = fresult.collegegrp.Sum(p => p.TotalTrades) == 0 ? 0 : fresult.collegegrp.Sum(p => p.TotalTrades);
+        //            rept.activeationMinDate = fresult.collegegrp.Min(p => p.activeationMinDate);
+        //            FRegistrationRptsummary.Add(rept);
+        //        }
+
+
+        //        var FPRegistrationRpt = (from RRS in FRegistrationRptsummary
+        //                                 select new
+        //                                 {
+        //                                     ITIName = RRS.ITIName,
+        //                                     CollegeId = RRS.CollegeId,
+        //                                     TotalDesktop = RRS.TotalDesktop,
+        //                                     TotalInstructors = RRS.TotalInstructors,
+        //                                     TotalTrades = RRS.TotalTrades,
+        //                                     TxnDate = RRS.activeationMinDate,
+        //                                 }).ToList().OrderByDescending(X => X.TxnDate);
+
+        //        foreach (var fresult in FPRegistrationRpt)
+        //        {
+        //            RegistrationReport rept = new RegistrationReport();
+        //            rept.ITIName = fresult.ITIName.ToString();
+        //            rept.CollegeId = fresult.CollegeId;
+        //            rept.TotalDesktop = fresult.TotalDesktop;
+        //            rept.TotalInstructors = fresult.TotalInstructors;
+        //            rept.TotalTrades = fresult.TotalTrades;
+        //            //  rept.activeationMinDate = (DateTime)DbFunctions.TruncateTime(fresult.activeatioMinDate);
+        //            // rept.activeationMinDate = DateTime.ParseExact(fresult.TxnDate.ToShortDateString() , "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture);
+        //            rept.activeationMinDate = fresult.TxnDate.Date;
+        //            ZRegistrationRptsummary.Add(rept);
+        //        }
+
+
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ZRegistrationRptsummary = null;
+        //    }
+        //    return ZRegistrationRptsummary;
+        //}
+
+        //public List<RegistrationReport> RegistrationReportCollegesummary(int deptID, int collegeID, string DateFrom, string DateTo, int type)
+        //{
+        //    List<RegistrationReport> RegistrationRptsummary = new List<RegistrationReport>();
+        //    List<RegistrationReport> FRegistrationRptsummary = new List<RegistrationReport>();
+        //    List<RegistrationReport> ZRegistrationRptsummary = new List<RegistrationReport>();
+        //    try
+        //    {
+        //        using (learnengg_payment_portal_entities contextsdce = new learnengg_payment_portal_entities())
+        //        {
+
+        //            var RegistrationTradeRptQuery = from cm in contextsdce.college_master
+        //                                            join cid in contextsdce.college_installation_details on cm.college_id equals cid.college_id
+        //                                            join cde in contextsdce.college_installation_expiry on cid.college_install_id equals cde.college_install_id
+        //                                            join sub in contextsdce.subject_master on cde.subject_id equals sub.subject_id
+        //                                            where cde.installed_on != null  && sub.having_questionpaper == type 
+        //                                            group new { cm, cid, cde } by new { cm.college_name, cde.college_install_id, cde.department_id } into collegegrp
+        //                                            select new { collegeId = collegegrp.Key, collegedetails = collegegrp };
+
+        //            foreach (var Tradedetails in RegistrationTradeRptQuery)
+        //            {
+        //                RegistrationReport rept = new RegistrationReport();
+        //                rept.CollegeId = Tradedetails.collegedetails.FirstOrDefault().cm.college_id;
+        //                rept.ITIName = Tradedetails.collegedetails.FirstOrDefault().cm.college_name + '[' + Tradedetails.collegedetails.FirstOrDefault().cm.college_code + ']';
+        //                //    rept.TotalDesktop =  (int)Tradedetails.collegedetails.FirstOrDefault().cde.college_install_id;
+        //                //int Desktopuniq = 0;
+        //                //var tempDepartId = int.TryParse((Tradedetails.collegedetails.FirstOrDefault().cde.college_install_id+""),out Desktopuniq);
+        //                rept.TotalDesktop = (int)Tradedetails.collegedetails.FirstOrDefault().cde.college_install_id;
+        //                rept.TotalInstructors = 0;
+        //                rept.activeationMinDate = DateTime.Now.Date;
+        //                rept.DeskTopRegDate = (DateTime)Tradedetails.collegedetails.FirstOrDefault().cid.enter_on;
+        //                rept.activeationMinDateStr = Tradedetails.collegedetails.FirstOrDefault().cid.enter_on.ToShortDateString();
+        //                rept.TradeRegDate = (DateTime)Tradedetails.collegedetails.FirstOrDefault().cde.installed_on;
+        //                //int tradeuniq = 0;
+        //                //var tempDepartId = int.TryParse((Tradedetails.collegedetails.FirstOrDefault().cde.college_install_id + "0" + Tradedetails.collegedetails.FirstOrDefault().cde.department_id), out tradeuniq);
+        //                //rept.TotalTrades = tradeuniq;
+
+        //                rept.TotalTrades = Tradedetails.collegedetails.Select(p => p.cid.college_install_id).Distinct().Count();
+        //                rept.Trade = Tradedetails.collegedetails.FirstOrDefault().cde.department_id;
+        //                RegistrationRptsummary.Add(rept);
+        //            }
+
+        //            var RegistrationInstructorRptQuery = from cm in contextsdce.college_master
+        //                                                 join um in contextsdce.user_master on cm.college_id equals um.collegeid
+        //                                                 where um.role_id<3 && um.active_status == 1 && cm.active_status == 1
+        //                                                 group new { cm, um } by new { cm.college_name } into collegegrp
+        //                                                 select new { collegeId = collegegrp.Key, collegedetails = collegegrp };
+
+        //            foreach (var Userdetails in RegistrationInstructorRptQuery)
+        //            {
+        //                RegistrationReport rept = new RegistrationReport();
+        //                rept.CollegeId = Userdetails.collegedetails.FirstOrDefault().cm.college_id;
+        //                rept.ITIName = Userdetails.collegedetails.FirstOrDefault().cm.college_name + '[' + Userdetails.collegedetails.FirstOrDefault().cm.college_code + ']'; ;
+        //                rept.TotalDesktop = 0;
+        //                rept.TotalInstructors = Userdetails.collegedetails.Select(p => p.um.user_id).Distinct().Count();
+        //                rept.TotalTrades = 0;
+        //                //  rept.activeationMinDate = DateTime.Now.Date;
+        //                RegistrationRptsummary.Add(rept);
+        //            }
+        //        }
+
+        //        // RANGE VARIABLE for filter
+        //        if (deptID != 0)
+        //        {
+        //            var datanew = RegistrationRptsummary.ToList();
+        //            RegistrationRptsummary.Clear();
+        //            RegistrationRptsummary.AddRange(datanew.Where(x => x.Trade == deptID));
+        //        }
+
+        //        if (collegeID > 0)
+        //        {
+        //            var datanew = RegistrationRptsummary.ToList();
+        //            RegistrationRptsummary.Clear();
+        //            RegistrationRptsummary.AddRange(datanew.Where(x => x.CollegeId == collegeID));
+        //        }
+
+        //        if (!DateFrom.Equals("0"))
+        //        {
+        //            string Reg_sdate = DateFrom + " " + "11:59:00 PM";
+        //            DateTime start_date = DateTime.ParseExact(Reg_sdate, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+        //            var datanew = RegistrationRptsummary.ToList();
+        //            RegistrationRptsummary.Clear();
+        //            RegistrationRptsummary.AddRange(datanew.Where(x => x.DeskTopRegDate >= start_date));
+        //        }
+        //        if (!DateTo.Equals("0"))
+        //        {
+        //            string usg_End_date = DateTo + " " + "11:59:00 PM";
+        //            DateTime usgEnd_date = DateTime.ParseExact(usg_End_date, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+        //            var datanew = RegistrationRptsummary.ToList();
+        //            RegistrationRptsummary.Clear();
+        //            RegistrationRptsummary.AddRange(datanew.Where(x => x.DeskTopRegDate <= usgEnd_date));
+        //        }
+
+
+
+
+        //        var FRegistrationRpt = (from RRS in RegistrationRptsummary
+        //                                group RRS by RRS.ITIName into Fcollegegrp
+        //                                select new { college = Fcollegegrp.Key, collegegrp = Fcollegegrp }).ToList();
+
+        //        foreach (var fresult in FRegistrationRpt)
+        //        {
+        //            RegistrationReport rept = new RegistrationReport();
+        //            rept.ITIName = fresult.collegegrp.FirstOrDefault().ITIName.ToString();
+        //            rept.CollegeId = fresult.collegegrp.FirstOrDefault().CollegeId;
+        //            rept.TotalDesktop = fresult.collegegrp.Where(k => k.TotalDesktop > 0).Select(p => p.TotalDesktop).Distinct().Count();
+        //            // rept.TotalDesktop = fresult.collegegrp.Sum(p => p.TotalDesktop) == 0 ? 0 : fresult.collegegrp.Sum(p => p.TotalDesktop);
+        //            //rept.TotalDesktop = fresult.collegegrp.Sum(p => p.TotalDesktop) == 0 ? 0 : fresult.collegegrp.Sum(p => p.TotalDesktop);
+        //            rept.TotalInstructors = fresult.collegegrp.Sum(p => p.TotalInstructors) == 0 ? 0 : fresult.collegegrp.Sum(p => p.TotalInstructors);
+        //            //rept.TotalTrades = fresult.collegegrp.Select(p => p.TotalTrades).Distinct().Count();
+        //            rept.TotalTrades = fresult.collegegrp.Sum(p => p.TotalTrades) == 0 ? 0 : fresult.collegegrp.Sum(p => p.TotalTrades);
+        //            rept.activeationMinDate = fresult.collegegrp.Max(p => p.DeskTopRegDate).Date;
+        //            rept.activeationMinDateStr = fresult.collegegrp.Max(p => p.DeskTopRegDate).ToShortDateString();
+        //            FRegistrationRptsummary.Add(rept);
+        //        }
+
+
+        //        var FPRegistrationRpt = (from RRS in FRegistrationRptsummary
+        //                                 select new
+        //                                 {
+        //                                     ITIName = RRS.ITIName,
+        //                                     CollegeId = RRS.CollegeId,
+        //                                     TotalDesktop = RRS.TotalDesktop,
+        //                                     TotalInstructors = RRS.TotalInstructors,
+        //                                     TotalTrades = RRS.TotalTrades,
+        //                                     TxnDate = RRS.activeationMinDate,
+        //                                 }).ToList().OrderByDescending(X => X.TxnDate);
+
+        //        foreach (var fresult in FPRegistrationRpt)
+        //        {
+        //            RegistrationReport rept = new RegistrationReport();
+        //            rept.ITIName = fresult.ITIName.ToString();
+        //            rept.CollegeId = fresult.CollegeId;
+        //            rept.TotalDesktop = fresult.TotalDesktop;
+        //            rept.TotalInstructors = fresult.TotalInstructors;
+        //            rept.TotalTrades = fresult.TotalTrades;
+        //            //  rept.activeationMinDate = (DateTime)DbFunctions.TruncateTime(fresult.activeatioMinDate);
+        //            // rept.activeationMinDate = DateTime.ParseExact(fresult.TxnDate.ToShortDateString() , "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture);
+        //            rept.activeationMinDate = fresult.TxnDate.Date;
+        //            rept.activeationMinDateStr = fresult.TxnDate.Date.ToShortDateString();
+        //            ZRegistrationRptsummary.Add(rept);
+        //        }
+
+
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ZRegistrationRptsummary = null;
+        //    }
+        //    return ZRegistrationRptsummary;
+        //}
+
+
+        //public List<RegistrationDetailsReport> RegistrationReportCollegeDetails(int category, int collegeid, int regtype, int deptID, string DateFrom, string DateTo)
+        //{
+        //    List<RegistrationDetailsReport> RegistrationRptdetails = new List<RegistrationDetailsReport>();
+
+        //    try
+        //    {
+        //        using (learnengg_payment_portal_entities contextsdce = new learnengg_payment_portal_entities())
+        //        {
+        //            if (category == 1)
+        //            {
+
+        //                var RegistrationRptdetailsQuery = (from rpt in contextsdce.user_master
+        //                                                   where rpt.collegeid == collegeid
+        //                                                   select new { username = rpt.user_name, regdate = rpt.created_on }).ToList();
+
+        //                foreach (var result in RegistrationRptdetailsQuery)
+        //                {
+        //                    RegistrationDetailsReport repta = new RegistrationDetailsReport();
+        //                    repta.InstructorName = result.username;
+        //                    repta.RegisteredOn = result.regdate.ToShortDateString();
+        //                    RegistrationRptdetails.Add(repta);
+        //                }
+        //            }
+        //            else if (category == 2)
+        //            {
+        //                // if it is test registration
+        //                if (regtype == 2)
+        //                {
+        //                    var RegistrationRptdetailsQuery = (from rpt in contextsdce.college_test_installation_details
+        //                                                       join rptd in contextsdce.college_test_installation_expiry on rpt.college_test_install_id equals rptd.college_test_install_id
+        //                                                       join sub in contextsdce.subject_master on rptd.subject_id equals sub.subject_id
+        //                                                       where rpt.college_id == collegeid && rptd.installed_on != null  // && sub.having_questionpaper == regtype
+        //                                                       select new { username = rpt.installation_centre_name, installid = rpt.college_test_install_id, tradeid = rptd.department_id, regdate = rpt.enter_on }).ToList();
+
+        //                    foreach (var result in RegistrationRptdetailsQuery)
+        //                    {
+        //                        RegistrationDetailsReport reptz = new RegistrationDetailsReport();
+        //                        reptz.InstructorName = result.username;
+        //                        reptz.TradeId = result.tradeid;
+        //                        reptz.CollegeInstallId = result.installid;
+        //                        reptz.RegisteredOn = result.regdate.ToShortDateString();
+        //                        reptz.RegisteredOnDate = (DateTime)result.regdate;
+        //                        RegistrationRptdetails.Add(reptz);
+        //                    }
+        //                }
+        //                else { 
+
+        //                    var RegistrationRptdetailsQuery = (from rpt in contextsdce.college_installation_details
+        //                                                   join rptd in contextsdce.college_installation_expiry on rpt.college_install_id equals rptd.college_install_id
+        //                                                   join sub in contextsdce.subject_master on rptd.subject_id equals sub.subject_id
+        //                                                   where rpt.college_id == collegeid && rptd.installed_on != null && sub.having_questionpaper == regtype
+        //                                                   select new { username = rpt.installation_centre_name, installid = rpt.college_install_id, tradeid = rptd.department_id, regdate = rpt.enter_on }).ToList();
+
+        //                    foreach (var result in RegistrationRptdetailsQuery)
+        //                    {
+        //                        RegistrationDetailsReport reptz = new RegistrationDetailsReport();
+        //                        reptz.InstructorName = result.username;
+        //                        reptz.TradeId = result.tradeid;
+        //                        reptz.CollegeInstallId = result.installid;
+        //                        reptz.RegisteredOn = result.regdate.ToShortDateString();
+        //                        reptz.RegisteredOnDate = (DateTime)result.regdate;
+        //                        RegistrationRptdetails.Add(reptz);
+        //                    }
+        //                }
+        //            }
+        //            else if (category == 3)
+        //            {
+
+        //                if (regtype == 2)
+        //                {
+        //                    var RegistrationRptdetailsQuery = (from rpt in contextsdce.college_test_installation_details
+        //                                                       join rptd in contextsdce.college_test_installation_expiry on rpt.college_test_install_id equals rptd.college_test_install_id
+        //                                                       join dept in contextsdce.department_master on rptd.department_id equals dept.department_id
+        //                                                       join sub in contextsdce.subject_master on rptd.subject_id equals sub.subject_id
+        //                                                       where rpt.college_id == collegeid && rptd.installed_on != null // && sub.having_questionpaper == regtype
+        //                                                       group new { rptd, dept, rpt } by new { rptd.college_test_install_id, dept.department_name } into grp
+        //                                                       select new { username = grp.Key.department_name, regdate = grp }).ToList();
+
+        //                    foreach (var result in RegistrationRptdetailsQuery)
+        //                    {
+        //                        RegistrationDetailsReport repts = new RegistrationDetailsReport();
+        //                        // rept.InstructorName = result.username;
+        //                        //  rept.RegisteredOn = result.regdate.ToShortDateString(); 
+        //                        // rept.DesktopName = result.regdate.FirstOrDefault().rpt.installation_centre_name;
+        //                        repts.TradeId = result.regdate.FirstOrDefault().rptd.department_id;
+        //                        repts.InstructorName = result.regdate.FirstOrDefault().dept.department_name;
+        //                        repts.RegisteredOn = result.regdate.FirstOrDefault().rptd.installed_on.ToString();
+        //                        repts.RegisteredOnDate = (DateTime)result.regdate.FirstOrDefault().rptd.installed_on;
+        //                        RegistrationRptdetails.Add(repts);
+        //                    }
+        //                }
+        //                else
+        //                {
+        //                    var RegistrationRptdetailsQuery = (from rpt in contextsdce.college_installation_details
+        //                                                       join rptd in contextsdce.college_installation_expiry on rpt.college_install_id equals rptd.college_install_id
+        //                                                       join dept in contextsdce.department_master on rptd.department_id equals dept.department_id
+        //                                                       join sub in contextsdce.subject_master on rptd.subject_id equals sub.subject_id
+        //                                                       where rpt.college_id == collegeid && rptd.installed_on != null && sub.having_questionpaper == regtype
+        //                                                       group new { rptd, dept, rpt } by new { rptd.college_install_id, dept.department_name } into grp
+        //                                                       select new { username = grp.Key.department_name, regdate = grp }).ToList();
+
+        //                    foreach (var result in RegistrationRptdetailsQuery)
+        //                    {
+        //                        RegistrationDetailsReport repts = new RegistrationDetailsReport();
+        //                        // rept.InstructorName = result.username;
+        //                        //  rept.RegisteredOn = result.regdate.ToShortDateString(); 
+        //                        // rept.DesktopName = result.regdate.FirstOrDefault().rpt.installation_centre_name;
+        //                        repts.TradeId = result.regdate.FirstOrDefault().rptd.department_id;
+        //                        repts.InstructorName = result.regdate.FirstOrDefault().dept.department_name;
+        //                        repts.RegisteredOn = result.regdate.FirstOrDefault().rptd.installed_on.ToString();
+        //                        repts.RegisteredOnDate = (DateTime)result.regdate.FirstOrDefault().rptd.installed_on;
+        //                        RegistrationRptdetails.Add(repts);
+        //                    }
+        //                }
+
+
+        //            }
+
+        //        }
+
+        //        if (deptID != 0)
+        //        {
+        //            var datanew = RegistrationRptdetails.ToList();
+        //            RegistrationRptdetails.Clear();
+        //            RegistrationRptdetails.AddRange(datanew.Where(x => x.TradeId == deptID));
+        //        }
+
+        //        if (!DateFrom.Equals("0"))
+        //        {
+        //            string Reg_sdate = DateFrom + " " + "11:59:00 PM";
+        //            DateTime start_date = DateTime.ParseExact(Reg_sdate, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+        //            var datanew = RegistrationRptdetails.ToList();
+        //            RegistrationRptdetails.Clear();
+        //            RegistrationRptdetails.AddRange(datanew.Where(x => x.RegisteredOnDate >= start_date));
+        //        }
+        //        if (!DateTo.Equals("0"))
+        //        {
+        //            string usg_End_date = DateTo + " " + "11:59:00 PM";
+        //            DateTime usgEnd_date = DateTime.ParseExact(usg_End_date, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+        //            var datanew = RegistrationRptdetails.ToList();
+        //            RegistrationRptdetails.Clear();
+        //            RegistrationRptdetails.AddRange(datanew.Where(x => x.RegisteredOnDate <= usgEnd_date));
+        //        }
+
+
+        //        if (category == 2)
+        //        {
+        //            RegistrationRptdetails  = (from IntermediateResult in RegistrationRptdetails
+        //                                                        group IntermediateResult by IntermediateResult.CollegeInstallId into result
+        //                     select new RegistrationDetailsReport
+        //                    {
+        //                              TradeId = result.FirstOrDefault().TradeId,
+        //                              InstructorName = result.FirstOrDefault().InstructorName,
+        //                              RegisteredOn = result.FirstOrDefault().RegisteredOn
+        //                    }).ToList();                    
+
+        //        }
+        //        //else if (category == 3)
+        //        //{
+        //        //    RegistrationRptdetails = (from IntermediateResult in RegistrationRptdetails
+        //        //                              group IntermediateResult by new { IntermediateResult.CollegeInstallId, IntermediateResult.TradeId } into result
+        //        //                              select new RegistrationDetailsReport
+        //        //                              {
+        //        //                                  TradeId = result.FirstOrDefault().TradeId,
+        //        //                                  InstructorName = result.FirstOrDefault().InstructorName,
+        //        //                                  RegisteredOn = result.FirstOrDefault().RegisteredOn
+        //        //                              }).ToList();
+        //        //}
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //    }
+
+        //    return RegistrationRptdetails;
+        //}
+
+
+        /// <summary>
+        /// TotalUsage-AdminDashboard
+        /// </summary>
+        /// <param name="UnivId"></param>
+        /// <returns></returns>
+        public string TotalUsage(int UnivId)
+        {
+            JavaScriptSerializer Jserializer = new JavaScriptSerializer();
+            List<RegisteredUsers> TotUsageHrs = new List<RegisteredUsers>();
+            using (learnengg_payment_portal_entities contextsdce = new learnengg_payment_portal_entities())
+            {
+                try
+                {
+                    var userCount = (from sm in contextsdce.subject_master
+                                     join usrh in contextsdce.user_subject_read_history on sm.subject_id equals usrh.subject_id
+                                     join um in contextsdce.user_master on usrh.user_id equals um.user_id
+                                     // join dpsm in contextsdce.department_subject_mapping on um.DepartmentID equals dpsm.department_id
+                                     // join unvm in contextsdce.university_master on um.univ_id equals unvm.univ_id
+                                     join cm in contextsdce.college_master on um.collegeid equals cm.college_id
+                                     where (um.role_id == 1 || um.role_id == 2) && um.active_status == 1
+                                     //  && um.univ_id == cm.university_id && sm.subject_id == dpsm.subject_id && um.univ_id == UnivId
+                                     select new
+                                     {
+                                         um.created_on,
+                                         um.univ_id,
+                                         um.role_id,
+                                         um.user_id,
+                                         studentcount = um.role_id == 1 ? 1 : 0,
+                                         staffcount = um.role_id == 2 ? 1 : 0,
+                                         studtotalHrs = um.role_id == 1 ? usrh.total_hours : 0
+                                         ,
+                                         staftotalHrs = um.role_id == 2 ? usrh.total_hours : 0
+                                     }).ToList();
+                    var chartdata = (from t in userCount
+                                     group t by t.univ_id into g
+                                     select new
+                                     {
+                                         groupId = 1,
+                                         StudentCount = g.Where(t => t.role_id == 1).Select(p => p.user_id).Distinct().Count(),
+                                         StaffCount = g.Where(t => t.role_id == 2).Select(p => p.user_id).Distinct().Count(),
+                                         studTotalHrs = g.Sum(t => t.studtotalHrs),
+                                         stafTotalHrs = g.Sum(t => t.staftotalHrs)
+                                     }).ToList();
+                    chartdata = (from c in chartdata
+                                 group c by c.groupId into g
+                                 select new
+                                 {
+                                     groupId = g.FirstOrDefault().groupId,
+                                     StudentCount = g.Select(t => t.StudentCount).Sum(),
+                                     StaffCount = g.Select(t => t.StaffCount).Sum(),
+                                     studTotalHrs = g.Select(t => t.studTotalHrs).Sum() / 3600,
+                                     stafTotalHrs = g.Select(t => t.stafTotalHrs).Sum() / 3600,
+                                 }).ToList();
+
+                    return Jserializer.Serialize(chartdata);
+
+                }
+                catch (Exception ex)
+                {
+                    contextsdce.Dispose();
+                    Log.WriteLogMessage(PageName, "AdminDashBoard", "TotalRegistration", ex.Message, "error");
+                    throw ex;
+                }
+                finally
+                {
+                    contextsdce.Dispose();
+                }
+            }
+
+        }
+
+        
+        /// <summary>
+           /// WeeklyRegistration- AdminDashboard
+           /// </summary>
+           /// <returns></returns>
+        public string WeeklyRegistration()
+        {
+
+            JavaScriptSerializer Jserializer = new JavaScriptSerializer();
+
+            List<RegisteredUsers> weeklyChartData = new List<RegisteredUsers>();
+            List<RegisteredUsers> ChartData = new List<RegisteredUsers>();
+
+            using (learnengg_payment_portal_entities contextsdce = new learnengg_payment_portal_entities())
+            {
+                try
+                {
+                    DateTime startdate = DateTime.ParseExact(DateTime.Now.AddDays(-27).ToString("dd-MM-yyyy") + " " + "00:00:00 AM", "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+                    int RegcollegeCount = (from c in contextsdce.college_master
+                                           join um in contextsdce.user_master on c.college_id equals um.collegeid
+                                           join unm in contextsdce.university_master on um.univ_id equals unm.univ_id
+                                           where c.active_status == 1 && um.univ_id == c.university_id
+                                           select new { um.collegeid }).Distinct().Count();
+
+                    int TotcollegeCount = (from c in contextsdce.college_master
+                                           where c.active_status == 1
+                                           select new { c.college_id }).Distinct().Count();
+
+                    var userCount = (from um in contextsdce.user_master
+                                     where um.active_status == 1
+                                      && (um.created_on >= startdate)
+                                     select new { um.created_on, studentcount = um.user_id >= 1 ? 1 : 0 }).OrderBy(x => x.created_on).ToList();
+
+                    var chartdata = (from t in userCount
+                                     where t.created_on <= startdate.AddDays(6) && t.created_on >= startdate
+                                     group t by t.created_on.ToString("dd-MMM-yyyy") into g
+                                     select new
+                                     {
+                                         week = "1st Week",
+                                         weekDate = g.FirstOrDefault().created_on,
+                                         CreatedOn = g.Key,
+                                         StudentCount = g.Select(t => t.studentcount).Sum()
+                                     }).ToList();
+
+
+                    var week1 = new List<RegisteredUsers>();
+
+                    if (chartdata.Count() > 0)
+                    {
+
+                        week1 = (from s in chartdata
+                                 group s by s.week into g
+                                 select new RegisteredUsers
+                                 {
+                                     _day = "(" + startdate.ToString("dd-MMM") + " to " + startdate.AddDays(6).ToString("dd-MMM") + ")",
+                                     // _day = "(" + g.FirstOrDefault().weekDate.ToString("dd-MMM") + " to " + g.LastOrDefault().weekDate.ToString("dd-MMM") + ")",
+                                     StudentCount = g.Sum(t => t.StudentCount),
+                                 }).ToList();
+                    }
+                    else
+                    {
+                        week1.Add(new RegisteredUsers
+                        {
+                            _day = "(" + startdate.ToString("dd-MMM") + " to " + startdate.AddDays(6).ToString("dd-MMM") + ")",
+                            StudentCount = 0,
+                        });
+                    }
+                    chartdata.Clear();
+
+                    chartdata = (from t in userCount
+                                 where t.created_on <= startdate.AddDays(13) && t.created_on >= startdate.AddDays(7)
+                                 group t by t.created_on.ToString("dd-MMM-yyyy") into g
+                                 select new
+                                 {
+                                     week = "2nd Week",
+                                     weekDate = g.FirstOrDefault().created_on,
+                                     CreatedOn = g.Key,
+                                     StudentCount = g.Select(t => t.studentcount).Sum()
+
+                                 }).ToList();
+
+                    var week2 = new List<RegisteredUsers>();
+
+                    if (chartdata.Count() > 0)
+                    {
+
+                        week2 = (from s in chartdata
+                                 group s by s.week into g
+                                 select new RegisteredUsers
+                                 {
+                                     _day = "(" + startdate.AddDays(7).ToString("dd-MMM") + " to " + startdate.AddDays(13).ToString("dd-MMM") + ")",
+                                     //_day = "(" + g.FirstOrDefault().weekDate.ToString("dd-MMM") + " to " + g.LastOrDefault().weekDate.ToString("dd-MMM") + ")",
+                                     StudentCount = g.Sum(t => t.StudentCount)
+                                 }).ToList();
+                    }
+                    else
+                    {
+                        week2.Add(new RegisteredUsers
+                        {
+                            _day = "(" + startdate.AddDays(7).ToString("dd-MMM") + " to " + startdate.AddDays(13).ToString("dd-MMM") + ")",
+                            StudentCount = 0,
+                            StaffCount = 0
+                        });
+                    }
+                    chartdata.Clear();
+                    chartdata = (from t in userCount
+                                 where t.created_on <= startdate.AddDays(20) && t.created_on >= startdate.AddDays(14)
+                                 group t by t.created_on.ToString("dd-MMM-yyyy") into g
+                                 select new
+                                 {
+                                     week = "3rd Week",
+                                     weekDate = g.FirstOrDefault().created_on,
+                                     CreatedOn = g.Key,
+                                     StudentCount = g.Select(t => t.studentcount).Sum()
+
+                                 }).ToList();
+
+                    var week3 = new List<RegisteredUsers>();
+
+                    if (chartdata.Count() > 0)
+                    {
+                        week3 = (from s in chartdata
+                                 group s by s.week into g
+                                 select new RegisteredUsers
+                                 {
+                                     _day = "(" + startdate.AddDays(14).ToString("dd-MMM") + " to " + startdate.AddDays(20).ToString("dd-MMM") + ")",
+                                     //_day = "(" + g.FirstOrDefault().weekDate.ToString("dd-MMM") + " to " + g.LastOrDefault().weekDate.ToString("dd-MMM") + ")",
+                                     StudentCount = g.Sum(t => t.StudentCount)
+
+                                 }).ToList();
+                    }
+                    else
+                    {
+                        week3.Add(new RegisteredUsers
+                        {
+                            _day = "(" + startdate.AddDays(14).ToString("dd-MMM") + " to " + startdate.AddDays(20).ToString("dd-MMM") + ")",
+                            StudentCount = 0,
+                        });
+                    }
+                    chartdata.Clear();
+
+                    chartdata = (from t in userCount
+                                 where t.created_on <= startdate.AddDays(27) && t.created_on >= startdate.AddDays(21)
+                                 group t by t.created_on.ToString("dd-MMM-yyyy") into g
+                                 select new
+                                 {
+                                     week = "4th Week",
+                                     weekDate = g.FirstOrDefault().created_on,
+                                     CreatedOn = g.Key,
+                                     StudentCount = g.Select(t => t.studentcount).Sum(),
+
+                                 }).ToList();
+
+                    var week4 = new List<RegisteredUsers>();
+
+                    if (chartdata.Count() > 0)
+                    {
+
+                        week4 = (from s in chartdata
+                                 group s by s.week into g
+                                 select new RegisteredUsers
+                                 {
+                                     _day = "(" + startdate.AddDays(21).ToString("dd-MMM") + " to " + startdate.AddDays(27).ToString("dd-MMM") + ")",
+                                     //_day = "(" + g.FirstOrDefault().weekDate.ToString("dd-MMM") + " to " + g.LastOrDefault().weekDate.ToString("dd-MMM") + ")",
+                                     StudentCount = g.Sum(t => t.StudentCount)
+
+                                 }).ToList();
+                    }
+                    else
+                    {
+                        week4.Add(new RegisteredUsers
+                        {
+                            _day = "(" + startdate.AddDays(21).ToString("dd-MMM") + " to " + startdate.AddDays(27).ToString("dd-MMM") + ")",
+                            StudentCount = 0,
+                        });
+                    }
+
+                    RegisteredUsers objweek1 = new RegisteredUsers();
+                    objweek1.Weekwise = "1st Week";
+                    objweek1.Week = week1.Count != 0 ? week1.FirstOrDefault()._day : "";
+                    objweek1.StudentCount = week1.Count != 0 ? week1.FirstOrDefault().StudentCount : 0;
+                    weeklyChartData.Add(objweek1);
+
+                    RegisteredUsers objweek2 = new RegisteredUsers();
+                    objweek2.Weekwise = "2nd Week";
+                    objweek2.Week = week2.Count != 0 ? week2.FirstOrDefault()._day : "";
+                    objweek2.StudentCount = week2.Count != 0 ? week2.FirstOrDefault().StudentCount : 0;
+                    weeklyChartData.Add(objweek2);
+
+                    RegisteredUsers objweek3 = new RegisteredUsers();
+                    objweek3.Weekwise = "3rd Week";
+                    objweek3.Week = week3.Count != 0 ? week3.FirstOrDefault()._day : "";
+                    objweek3.StudentCount = week3.Count != 0 ? week3.FirstOrDefault().StudentCount : 0;
+                    weeklyChartData.Add(objweek3);
+
+                    RegisteredUsers objweek4 = new RegisteredUsers();
+                    objweek4.Weekwise = "4th Week";
+                    objweek4.Week = week4.Count != 0 ? week4.FirstOrDefault()._day : "";
+                    objweek4.StudentCount = week4.Count != 0 ? week4.FirstOrDefault().StudentCount : 0;
+                    weeklyChartData.Add(objweek4);
+
+
+                    return Jserializer.Serialize(weeklyChartData);
+
+                }
+                catch (Exception ex)
+                {
+                    contextsdce.Dispose();
+                    Log.WriteLogMessage(PageName, "AdminDashBoard", "WeeklyRegistration", ex.Message, "error");
+                    throw ex;
+                }
+                finally
+                {
+                    contextsdce.Dispose();
+                }
+            }
+
+
+        }
+
+        /// <summary>
+        /// DailyRegistration -AdminDashboard
+        /// </summary>
+        /// <returns></returns>
+        public string DailyRegistration()
+        {
+            JavaScriptSerializer Jserializer = new JavaScriptSerializer();
+            List<RegisteredUsers> dailyChartData = new List<RegisteredUsers>();
+            List<RegisteredUsers> ChartData = new List<RegisteredUsers>();
+            using (learnengg_payment_portal_entities contextsdce = new learnengg_payment_portal_entities())
+            {
+                try
+                {
+                    DateTime startdate = DateTime.ParseExact(DateTime.Now.AddDays(-6).ToString("dd-MM-yyyy") + " " + "00:00:00 AM", "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+                    var userCount = (from um in contextsdce.user_master
+                                     where um.active_status == 1 && (um.created_on >= startdate)
+                                     select new { um.created_on, studentcount = um.user_id > 1 ? 1 : 0 }).ToList();
+                    dailyChartData = (from t in userCount
+                                      group t by t.created_on.ToString("dd-MMM-yyyy") into g
+                                      select new RegisteredUsers
+                                      {
+                                          Created_On = g.FirstOrDefault().created_on,
+                                          CreatedOn = g.FirstOrDefault().created_on.ToString("dd-MMM"),
+                                          StudentCount = g.Sum(t => t.studentcount)
+                                      }).OrderByDescending(t => t.Created_On).ToList();
+
+                    return Jserializer.Serialize(dailyChartData);
+
+                }
+                catch (Exception ex)
+                {
+                    contextsdce.Dispose();
+                    Log.WriteLogMessage(PageName, "AdminDashBoard", "DailyRegistration", ex.Message, "error");
+                    throw ex;
+                }
+                finally
+                {
+                    contextsdce.Dispose();
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// MonthlysRegistration -AdminDashBoards
+        /// </summary>
+        /// <returns></returns>
+        public string MonthlysRegistration()
+        {
+
+            JavaScriptSerializer Jserializer = new JavaScriptSerializer();
+            List<RegisteredUsers> MonthlyChartData = new List<RegisteredUsers>();
+            List<RegisteredUsers> ChartData = new List<RegisteredUsers>();
+            using (learnengg_payment_portal_entities contextsdce = new learnengg_payment_portal_entities())
+            {
+                try
+                {
+
+                    DateTime startdate = DateTime.ParseExact(DateTime.Now.AddMonths(-2).ToString("dd-MM-yyyy") + " " + "00:00:00 AM", "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+                    var userCount = (from um in contextsdce.user_master
+                                     where um.active_status == 1 && (um.created_on >= startdate)
+                                     select new
+                                     {
+                                         um.created_on,
+                                         studentcount = um.user_id > 1 ? 1 : 0,
+                                     }).ToList();
+                    ChartData = (from t in userCount
+                                 group t by t.created_on.Month into g
+                                 select new RegisteredUsers
+                                 {
+                                     Month = g.FirstOrDefault().created_on.ToString("MMM"),
+                                     StudentCount = g.Sum(t => t.studentcount)
+                                 }).ToList();
+
+                    return Jserializer.Serialize(ChartData);
+
+                }
+                catch (Exception ex)
+                {
+                    Log.WriteLogMessage(PageName, "AdminDashBoard", "MonthlyRegistration", ex.Message, "error");
+
+                    throw ex;
+                }
+                finally
+                {
+                    contextsdce.Dispose();
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// TotalRegistration -AdminDashboard
+        /// </summary>
+        /// <param name="UnivId"></param>
+        /// <returns></returns>
+        public string TotalRegistration(int UnivId)
+        {
+            JavaScriptSerializer Jserializer = new JavaScriptSerializer();
+            List<RegisteredUsers> TotRegChartData = new List<RegisteredUsers>();
+            using (learnengg_payment_portal_entities contextsdce = new learnengg_payment_portal_entities())
+            {
+                try
+                {
+
+                    var userCount = (from um in contextsdce.user_master
+                                     join umm in contextsdce.university_master on um.univ_id equals umm.univ_id
+                                     join colgmas in contextsdce.college_master on um.collegeid equals colgmas.college_id
+                                     where (um.role_id == 1 || um.role_id == 2) && um.univ_id == UnivId && um.active_status == 1 && um.univ_id == colgmas.university_id
+                                     select new { um.univ_id, studentcount = um.role_id == 1 ? 1 : 0, staffcount = um.role_id == 2 ? 1 : 0 }).ToList();
+                    var chartdata = (from t in userCount
+                                     group t by t.univ_id into g
+                                     select new
+                                     {
+                                         groupId = 1,
+                                         StudentCount = g.Select(t => t.studentcount).Sum(),
+                                         StaffCount = g.Select(t => t.staffcount).Sum(),
+                                     }).ToList();
+                    TotRegChartData = (from c in chartdata
+                                       group c by c.groupId into g
+                                       select new RegisteredUsers
+                                       {
+                                           StudentCount = g.Select(t => t.StudentCount).Sum(),
+                                           StaffCount = g.Select(t => t.StaffCount).Sum()
+                                       }).ToList();
+                    string ser = Jserializer.Serialize(TotRegChartData);
+                    return Jserializer.Serialize(TotRegChartData);
+
+                }
+                catch (Exception ex)
+                {
+                    contextsdce.Dispose();
+                    Log.WriteLogMessage(PageName, "AdminDashBoard", "TotalRegistration", ex.Message, "error");
+                    throw ex;
+                }
+                finally
+                {
+                    contextsdce.Dispose();
+                }
+            }
+
+        }
+
+
+        /// <summary>
+        /// TotalITIRegistration
+        /// </summary>
+        /// <returns></returns>
+        public string TotalITIRegistration()
+        {
+            JavaScriptSerializer Jserializer = new JavaScriptSerializer();
+            try
+            {
+                using (learnengg_payment_portal_entities contextsdce = new learnengg_payment_portal_entities())
+                {
+                    int RegcollegeCount = (from c in contextsdce.college_master
+                                           join unm in contextsdce.college_installation_details on c.college_id equals unm.college_id
+                                           where c.active_status == 1
+                                           select new { unm.college_id }).Distinct().Count();
+
+                    int TotcollegeCount = (from c in contextsdce.college_master
+                                           where c.active_status == 1
+                                           select new { c.college_id }).Distinct().Count();
+
+                    var ChartData = new
+                    {
+                        Totcollege = TotcollegeCount,
+                        Regcollege = RegcollegeCount
+                    };
+
+                    return Jserializer.Serialize(ChartData);
+                }
+            }
+            catch (Exception ex)
+            {
+                return "0";
+            }
+
+        }
+
+
+        public string TotalITIRegistrationTest()
+        {
+            JavaScriptSerializer Jserializer = new JavaScriptSerializer();
+            try
+            {
+                using (learnengg_payment_portal_entities contextsdce = new learnengg_payment_portal_entities())
+                {
+                    int RegcollegeCount = (from c in contextsdce.college_master
+                                           join unm in contextsdce.college_test_installation_details on c.college_id equals unm.college_id
+                                           where c.active_status == 1
+                                           select new { unm.college_id }).Distinct().Count();
+
+                    int TotcollegeCount = (from c in contextsdce.college_master
+                                           where c.active_status == 1
+                                           select new { c.college_id }).Distinct().Count();
+
+                    var ChartData = new
+                    {
+                        Totcollege = TotcollegeCount,
+                        Regcollege = RegcollegeCount
+                    };
+
+                    return Jserializer.Serialize(ChartData);
+                }
+            }
+            catch (Exception ex)
+            {
+                return "0";
+            }
+
+        }
+
+        /// <summary>
+        /// HighestRegisteredTrade -Registration Dashboard
+        /// </summary>
+        /// <returns></returns>
+        public string HighestRegisteredTrade()
+        {
+            JavaScriptSerializer Jserializer = new JavaScriptSerializer();
+            using (learnengg_payment_portal_entities contextsdce = new learnengg_payment_portal_entities())
+            {
+                try
+                {
+                    var trade = (from cie in contextsdce.college_installation_expiry
+                                 join dm in contextsdce.department_master on cie.department_id equals dm.department_id
+                                 join cid in contextsdce.college_installation_details on cie.college_install_id equals cid.college_install_id
+                                 where cie.installed_on != null
+                                 group new { cie, dm, cid } by cie.department_id into dptgrp
+                                 select new
+                                 {
+                                     deparmentid = dptgrp.Key,
+                                     departgrp = dptgrp,
+                                     highesttrade = dptgrp.Select(x => x.cid.college_install_id).Distinct().Count()
+                                     //highesttrade = dptgrp.Select(x => x.cie.department_id).Distinct().Count()
+                                 }).ToList();
+
+
+
+                    var maxtrade = (from s in trade
+                                    group s by s.deparmentid into g
+                                    select new
+                                    {
+                                        deptname = g.FirstOrDefault().departgrp.FirstOrDefault().dm.department_name,
+                                        highesttrade = g.FirstOrDefault().highesttrade
+                                    }).OrderByDescending(x => x.highesttrade).ToList();
+
+                    return Jserializer.Serialize(maxtrade);
+
+
+                }
+                catch (Exception ex)
+                {
+                    contextsdce.Dispose();
+                    Log.WriteLogMessage(PageName, "RegistrationDashBoard", "HigestRegisteredTrade", ex.Message, "error");
+                    throw ex;
+                }
+                finally
+                {
+                    contextsdce.Dispose();
+                }
+            }
+        }
+
+        /// <summary>
+        /// HighestRegistered_ITI - Registration Dashboard
+        /// </summary>
+        /// <returns></returns>
+        public string HighestRegistered_ITI()
+        {
+            JavaScriptSerializer Jserializer = new JavaScriptSerializer();
+            using (learnengg_payment_portal_entities contextsdce = new learnengg_payment_portal_entities())
+            {
+                try
+                {
+                    var trade = (from cid in contextsdce.college_installation_details
+                                 join cm in contextsdce.college_master on cid.college_id equals cm.college_id
+                                 join cie in contextsdce.college_installation_expiry on cid.college_install_id equals cie.college_install_id
+                                 where cie.installed_on != null
+                                 group new { cm, cid, cie } by new { cid.college_id, cie.college_install_id } into cmgrp
+                                 select new
+                                 {
+                                     collegid = cmgrp.Key.college_id,
+                                     collegrp = cmgrp,
+                                     collegeName = cmgrp.FirstOrDefault().cm.college_code + " - " + cmgrp.FirstOrDefault().cm.college_name,
+                                     highest_iti = cmgrp.Select(x => x.cie.department_id).Distinct().Count()
+                                     //  highest_iti = cmgrp.Select(x => x.cid.college_install_id).Count()
+                                 }).ToList();
+
+
+                    var maxtrade = (from s in trade
+                                    group s by s.collegid into g
+                                    select new
+                                    {
+                                        collegeName = g.FirstOrDefault().collegeName,
+                                        HighestITI = g.Sum(a => a.highest_iti)
+                                    }).OrderByDescending(x => x.HighestITI).ToList();
+
+                    return Jserializer.Serialize(maxtrade);
+
+
+                }
+                catch (Exception ex)
+                {
+                    contextsdce.Dispose();
+                    Log.WriteLogMessage(PageName, "RegistrationDashBoard", "HigestRegisteredTrade", ex.Message, "error");
+                    throw ex;
+                }
+                finally
+                {
+                    contextsdce.Dispose();
+                }
+            }
+        }
+
+
+        public string InstitutewiseUsagehrs(int? pUserId = 0,int? pCollegeId=0)
+        {
+            JavaScriptSerializer Jserializer = new JavaScriptSerializer();
+            List<RegisteredUsers> TotUsageHrs = new List<RegisteredUsers>();
+            using (learnengg_payment_portal_entities contextsdce = new learnengg_payment_portal_entities())
+            {
+                try
+                {
+                    if (pUserId > 0)
+                    {
+                        int totalusg = OverAllUsage(pUserId);
+
+                        var userCount = (from sm in contextsdce.subject_master
+                                         join usrh in contextsdce.user_subject_read_history on sm.subject_id equals usrh.subject_id
+                                         join csm in contextsdce.college_subject_mapping on sm.subject_id equals csm.subject_id
+                                         join um in contextsdce.user_master on usrh.user_id equals um.user_id
+                                         join cm in contextsdce.college_master on um.collegeid equals cm.college_id
+                                         where um.active_status == 1 && csm.department_id == usrh.department_id && csm.college_id == um.collegeid
+                                         && um.user_id == pUserId
+                                         group new { cm, usrh } by cm.college_id into collegegrp
+                                         select new
+                                         {
+                                             collegeid = collegegrp.Key,
+                                             colleggrp = collegegrp
+                                         }).ToList();
+
+                        var chartdata = (from t in userCount
+                                         select new
+                                         {
+                                             groupId = 1,
+                                             collegename = t.colleggrp.FirstOrDefault().cm.college_code + " - " + t.colleggrp.FirstOrDefault().cm.college_name,
+                                             usagehrs = t.colleggrp.Sum(p => p.usrh.total_hours) / 3600,
+                                             totusg = totalusg / 3600
+                                         }).OrderByDescending(a => a.usagehrs).ToList().Take(5);
+
+
+                        return Jserializer.Serialize(chartdata);
+                    }
+                    else if (pCollegeId> 0)
+                    {
+                        int totalusg = OverAllUsage(pUserId,pCollegeId);
+
+                        var userCount = (from sm in contextsdce.subject_master
+                                         join usrh in contextsdce.user_subject_read_history on sm.subject_id equals usrh.subject_id
+                                         join csm in contextsdce.college_subject_mapping on sm.subject_id equals csm.subject_id
+                                         join um in contextsdce.user_master on usrh.user_id equals um.user_id
+                                         join cm in contextsdce.college_master on um.collegeid equals cm.college_id
+                                         where um.active_status == 1 && csm.department_id == usrh.department_id && csm.college_id == um.collegeid
+                                         && um.collegeid== pCollegeId
+                                         group new { cm, usrh } by cm.college_id into collegegrp
+                                         select new
+                                         {
+                                             collegeid = collegegrp.Key,
+                                             colleggrp = collegegrp
+                                         }).ToList();
+
+                        var chartdata = (from t in userCount
+                                         select new
+                                         {
+                                             groupId = 1,
+                                             collegename = t.colleggrp.FirstOrDefault().cm.college_code + " - " + t.colleggrp.FirstOrDefault().cm.college_name,
+                                             usagehrs = t.colleggrp.Sum(p => p.usrh.total_hours) / 3600,
+                                             totusg = totalusg / 3600
+                                         }).OrderByDescending(a => a.usagehrs).ToList().Take(5);
+
+
+                        return Jserializer.Serialize(chartdata);
+                    }
+                    else
+                    {
+                        int totalusg = OverAllUsage(pUserId);
+
+                        var userCount = (from sm in contextsdce.subject_master
+                                         join usrh in contextsdce.user_subject_read_history on sm.subject_id equals usrh.subject_id
+                                         join csm in contextsdce.college_subject_mapping on sm.subject_id equals csm.subject_id
+                                         join um in contextsdce.user_master on usrh.user_id equals um.user_id
+                                         join cm in contextsdce.college_master on um.collegeid equals cm.college_id
+
+                                         where um.active_status == 1 && csm.department_id == usrh.department_id && csm.college_id == um.collegeid
+                                         group new { cm, usrh } by cm.college_id into collegegrp
+                                         select new
+                                         {
+                                             collegeid = collegegrp.Key,
+                                             colleggrp = collegegrp
+                                         }).ToList();
+
+                        var chartdata = (from t in userCount
+                                         select new
+                                         {
+                                             groupId = 1,
+                                             collegename = t.colleggrp.FirstOrDefault().cm.college_code + " - " + t.colleggrp.FirstOrDefault().cm.college_name,
+                                             usagehrs = t.colleggrp.Sum(p => p.usrh.total_hours) / 3600,
+                                             totusg = totalusg / 3600
+                                         }).OrderByDescending(a => a.usagehrs).ToList().Take(5);
+
+
+                        return Jserializer.Serialize(chartdata);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    contextsdce.Dispose();
+                    Log.WriteLogMessage(PageName, "AdminDashBoard", "TotalRegistration", ex.Message, "error");
+                    throw ex;
+                }
+                finally
+                {
+                    contextsdce.Dispose();
+                }
+            }
+
+        }
+
+        public string DailyUsage(int? pUserId = 0,int? pCollegeId=0)
+        {
+            JavaScriptSerializer Jserializer = new JavaScriptSerializer();
+            List<RegisteredUsers> dailyChartData = new List<RegisteredUsers>();
+            List<RegisteredUsers> ChartData = new List<RegisteredUsers>();
+            using (learnengg_payment_portal_entities contextsdce = new learnengg_payment_portal_entities())
+            {
+                try
+                {
+                    DateTime startdate = DateTime.ParseExact(DateTime.Now.AddDays(-6).ToString("dd-MM-yyyy") + " " + "00:00:00 AM", "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+
+                    if (pUserId > 0)
+                    {
+                        var userCount = (from um in contextsdce.user_master
+                                         join usrh in contextsdce.user_subject_read_history on um.user_id equals usrh.user_id
+                                         where um.active_status == 1 && um.user_id == pUserId
+                                         && (usrh.last_read_on >= startdate)
+                                         group new { usrh } by new { readdate = DbFunctions.TruncateTime(usrh.last_read_on) } into usagegrp
+                                         select new { readdate = usagegrp.Key, usagegp = usagegrp }).ToList();
+                        dailyChartData = (from t in userCount
+                                          select new RegisteredUsers
+                                          {
+                                              // CreatedOn = t.readdate.ToString(),
+                                              CreatedOn = t.usagegp.FirstOrDefault().usrh.last_read_on.ToString("dd-MM-yyyy"),
+                                              studTotalHrs = t.usagegp.Sum(p => p.usrh.total_hours) / 3600
+
+                                          }).OrderByDescending(t => t.Created_On).ToList();
+                    }
+                    else if (pCollegeId> 0)
+                    {
+                        var userCount = (from um in contextsdce.user_master
+                                         join usrh in contextsdce.user_subject_read_history on um.user_id equals usrh.user_id
+                                         where um.active_status == 1 && um.collegeid == pCollegeId
+                                         && (usrh.last_read_on >= startdate)
+                                         group new { usrh } by new { readdate = DbFunctions.TruncateTime(usrh.last_read_on) } into usagegrp
+                                         select new { readdate = usagegrp.Key, usagegp = usagegrp }).ToList();
+                        dailyChartData = (from t in userCount
+                                          select new RegisteredUsers
+                                          {
+                                              // CreatedOn = t.readdate.ToString(),
+                                              CreatedOn = t.usagegp.FirstOrDefault().usrh.last_read_on.ToString("dd-MM-yyyy"),
+                                              studTotalHrs = t.usagegp.Sum(p => p.usrh.total_hours) / 3600
+
+                                          }).OrderByDescending(t => t.Created_On).ToList();
+                    }
+                    else
+                    {
+                        var userCount = (from um in contextsdce.user_master
+                                         join usrh in contextsdce.user_subject_read_history on um.user_id equals usrh.user_id
+                                         where um.active_status == 1
+                                         && (usrh.last_read_on >= startdate)
+                                         group new { usrh } by new { readdate = DbFunctions.TruncateTime(usrh.last_read_on) } into usagegrp
+                                         select new { readdate = usagegrp.Key, usagegp = usagegrp }).ToList();
+                        dailyChartData = (from t in userCount
+                                          select new RegisteredUsers
+                                          {
+                                              // CreatedOn = t.readdate.ToString(),
+                                              CreatedOn = t.usagegp.FirstOrDefault().usrh.last_read_on.ToString("dd-MM-yyyy"),
+                                              studTotalHrs = t.usagegp.Sum(p => p.usrh.total_hours) / 3600
+
+                                          }).OrderByDescending(t => t.Created_On).ToList();
+                    }
+
+                    return Jserializer.Serialize(dailyChartData);
+
+                }
+                catch (Exception ex)
+                {
+                    contextsdce.Dispose();
+                    Log.WriteLogMessage(PageName, "AdminDashBoard", "DailyRegistration", ex.Message, "error");
+                    throw ex;
+                }
+                finally
+                {
+                    contextsdce.Dispose();
+                }
+            }
+        }
+
+        public string WeeklyUsage(int? pUserId = 0, int? pCollegeId = 0)
+        {
+            JavaScriptSerializer Jserializer = new JavaScriptSerializer();
+            List<RegisteredUsers> weeklyChartData = new List<RegisteredUsers>();
+            List<RegisteredUsers> ChartData = new List<RegisteredUsers>();
+            using (learnengg_payment_portal_entities contextsdce = new learnengg_payment_portal_entities())
+            {
+                try
+                {
+                    DateTime startdate = DateTime.ParseExact(DateTime.Now.AddDays(-27).ToString("dd-MM-yyyy") + " " + "00:00:00 AM", "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+                    if (pUserId > 0)
+                    {
+                        var userCount = (from um in contextsdce.user_master
+                                         join usrh in contextsdce.user_subject_read_history on um.user_id equals usrh.user_id
+                                         where um.active_status == 1 && um.user_id == pUserId
+                                          && (usrh.last_read_on >= startdate)
+                                         group new { usrh } by new { readdate = DbFunctions.TruncateTime(usrh.last_read_on) } into usagegrp
+                                         select new { readdate = usagegrp.Key, usagegp = usagegrp }).ToList();
+
+                        var weeklyData = (from t in userCount
+                                          select new RegisteredUsers
+                                          {
+                                              // CreatedOn = t.readdate.ToString(),
+                                              CreatedOn = t.usagegp.FirstOrDefault().usrh.last_read_on.ToString("dd-MM-yyyy"),
+                                              Created_On = t.usagegp.FirstOrDefault().usrh.last_read_on,
+                                              studTotalHrs = t.usagegp.Sum(p => p.usrh.total_hours) / 3600
+                                          }).OrderByDescending(t => t.Created_On).ToList();
+
+
+                        var chartdata = (from t in weeklyData
+                                         where t.Created_On <= startdate.AddDays(6) && t.Created_On >= startdate
+                                         group t by t.Created_On.ToString("dd-MMM-yyyy") into g
+                                         select new
+                                         {
+                                             week = "1st Week",
+                                             weekDate = g.FirstOrDefault().Created_On,
+                                             CreatedOn = g.Key,
+                                             StudentCount = g.Select(t => t.studTotalHrs).Sum()
+                                         }).ToList();
+
+
+                        List<RegisteredUsers> week1 = new List<RegisteredUsers>();
+
+                        if (chartdata.Count() > 0)
+                        {
+
+                            week1 = (from s in chartdata
+                                     group s by s.week into g
+                                     select new RegisteredUsers
+                                     {
+                                         _day = "(" + startdate.ToString("dd-MMM") + " to " + startdate.AddDays(6).ToString("dd-MMM") + ")",
+                                         // _day = "(" + g.FirstOrDefault().weekDate.ToString("dd-MMM") + " to " + g.LastOrDefault().weekDate.ToString("dd-MMM") + ")",
+                                         StudentCount = g.Sum(t => t.StudentCount),
+                                     }).ToList();
+                        }
+                        else
+                        {
+                            week1.Add(new RegisteredUsers
+                            {
+                                _day = "(" + startdate.ToString("dd-MMM") + " to " + startdate.AddDays(6).ToString("dd-MMM") + ")",
+                                StudentCount = 0,
+                            });
+                        }
+                        chartdata.Clear();
+
+                        chartdata = (from t in weeklyData
+                                     where t.Created_On <= startdate.AddDays(13) && t.Created_On >= startdate.AddDays(7)
+                                     group t by t.Created_On.ToString("dd-MMM-yyyy") into g
+                                     select new
+                                     {
+                                         week = "2nd Week",
+                                         weekDate = g.FirstOrDefault().Created_On,
+                                         CreatedOn = g.Key,
+                                         StudentCount = g.Select(t => t.studTotalHrs).Sum()
+
+                                     }).ToList();
+
+
+                        List<RegisteredUsers> week2 = new List<RegisteredUsers>();
+                        if (chartdata.Count() > 0)
+                        {
+
+                            week2 = (from s in chartdata
+                                     group s by s.week into g
+                                     select new RegisteredUsers
+                                     {
+                                         _day = "(" + startdate.AddDays(7).ToString("dd-MMM") + " to " + startdate.AddDays(13).ToString("dd-MMM") + ")",
+                                         //_day = "(" + g.FirstOrDefault().weekDate.ToString("dd-MMM") + " to " + g.LastOrDefault().weekDate.ToString("dd-MMM") + ")",
+                                         StudentCount = g.Sum(t => t.StudentCount)
+                                     }).ToList();
+                        }
+                        else
+                        {
+                            week2.Add(new RegisteredUsers
+                            {
+                                _day = "(" + startdate.AddDays(7).ToString("dd-MMM") + " to " + startdate.AddDays(13).ToString("dd-MMM") + ")",
+                                StudentCount = 0,
+                                StaffCount = 0
+                            });
+                        }
+
+
+
+                        chartdata.Clear();
+                        chartdata = (from t in weeklyData
+                                     where t.Created_On <= startdate.AddDays(20) && t.Created_On >= startdate.AddDays(14)
+                                     group t by t.Created_On.ToString("dd-MMM-yyyy") into g
+                                     select new
+                                     {
+                                         week = "3rd Week",
+                                         weekDate = g.FirstOrDefault().Created_On,
+                                         CreatedOn = g.Key,
+                                         StudentCount = g.Select(t => t.studTotalHrs).Sum()
+
+                                     }).ToList();
+
+                        List<RegisteredUsers> week3 = new List<RegisteredUsers>();
+
+                        if (chartdata.Count() > 0)
+                        {
+                            week3 = (from s in chartdata
+                                     group s by s.week into g
+                                     select new RegisteredUsers
+                                     {
+                                         _day = "(" + startdate.AddDays(14).ToString("dd-MMM") + " to " + startdate.AddDays(20).ToString("dd-MMM") + ")",
+                                         //_day = "(" + g.FirstOrDefault().weekDate.ToString("dd-MMM") + " to " + g.LastOrDefault().weekDate.ToString("dd-MMM") + ")",
+                                         StudentCount = g.Sum(t => t.StudentCount)
+
+                                     }).ToList();
+                        }
+                        else
+                        {
+                            week3.Add(new RegisteredUsers
+                            {
+                                _day = "(" + startdate.AddDays(14).ToString("dd-MMM") + " to " + startdate.AddDays(20).ToString("dd-MMM") + ")",
+                                StudentCount = 0,
+                            });
+                        }
+                        chartdata.Clear();
+
+                        chartdata = (from t in weeklyData
+                                     where t.Created_On <= startdate.AddDays(27) && t.Created_On >= startdate.AddDays(21)
+                                     group t by t.Created_On.ToString("dd-MMM-yyyy") into g
+                                     select new
+                                     {
+                                         week = "4th Week",
+                                         weekDate = g.FirstOrDefault().Created_On,
+                                         CreatedOn = g.Key,
+                                         StudentCount = g.Select(t => t.studTotalHrs).Sum(),
+
+                                     }).ToList();
+
+                        List<RegisteredUsers> week4 = new List<RegisteredUsers>();
+
+                        if (chartdata.Count() > 0)
+                        {
+
+                            week4 = (from s in chartdata
+                                     group s by s.week into g
+                                     select new RegisteredUsers
+                                     {
+                                         _day = "(" + startdate.AddDays(21).ToString("dd-MMM") + " to " + startdate.AddDays(27).ToString("dd-MMM") + ")",
+                                         //_day = "(" + g.FirstOrDefault().weekDate.ToString("dd-MMM") + " to " + g.LastOrDefault().weekDate.ToString("dd-MMM") + ")",
+                                         StudentCount = g.Sum(t => t.StudentCount)
+
+                                     }).ToList();
+                        }
+                        else
+                        {
+                            week4.Add(new RegisteredUsers
+                            {
+                                _day = "(" + startdate.AddDays(21).ToString("dd-MMM") + " to " + startdate.AddDays(27).ToString("dd-MMM") + ")",
+                                StudentCount = 0,
+                            });
+                        }
+                        RegisteredUsers objweek1 = new RegisteredUsers();
+                        objweek1.Weekwise = "1st Week";
+                        objweek1.Week = week1.Count != 0 ? week1.FirstOrDefault()._day : "";
+                        objweek1.StudentCount = week1.Count != 0 ? week1.FirstOrDefault().StudentCount : 0;
+                        weeklyChartData.Add(objweek1);
+
+                        RegisteredUsers objweek2 = new RegisteredUsers();
+                        objweek2.Weekwise = "2nd Week";
+                        objweek2.Week = week2.Count != 0 ? week2.FirstOrDefault()._day : "";
+                        objweek2.StudentCount = week2.Count != 0 ? week2.FirstOrDefault().StudentCount : 0;
+                        weeklyChartData.Add(objweek2);
+
+                        RegisteredUsers objweek3 = new RegisteredUsers();
+                        objweek3.Weekwise = "3rd Week";
+                        objweek3.Week = week3.Count != 0 ? week3.FirstOrDefault()._day : "";
+                        objweek3.StudentCount = week3.Count != 0 ? week3.FirstOrDefault().StudentCount : 0;
+                        weeklyChartData.Add(objweek3);
+
+                        RegisteredUsers objweek4 = new RegisteredUsers();
+                        objweek4.Weekwise = "4th Week";
+                        objweek4.Week = week4.Count != 0 ? week4.FirstOrDefault()._day : "";
+                        objweek4.StudentCount = week4.Count != 0 ? week4.FirstOrDefault().StudentCount : 0;
+                        weeklyChartData.Add(objweek4);
+                    }
+                    else if (pCollegeId> 0)
+                    {
+                        var userCount = (from um in contextsdce.user_master
+                                         join usrh in contextsdce.user_subject_read_history on um.user_id equals usrh.user_id
+                                         where um.active_status == 1 && um.collegeid== pCollegeId
+                                          && (usrh.last_read_on >= startdate)
+                                         group new { usrh } by new { readdate = DbFunctions.TruncateTime(usrh.last_read_on) } into usagegrp
+                                         select new { readdate = usagegrp.Key, usagegp = usagegrp }).ToList();
+
+                        var weeklyData = (from t in userCount
+                                          select new RegisteredUsers
+                                          {
+                                              // CreatedOn = t.readdate.ToString(),
+                                              CreatedOn = t.usagegp.FirstOrDefault().usrh.last_read_on.ToString("dd-MM-yyyy"),
+                                              Created_On = t.usagegp.FirstOrDefault().usrh.last_read_on,
+                                              studTotalHrs = t.usagegp.Sum(p => p.usrh.total_hours) / 3600
+                                          }).OrderByDescending(t => t.Created_On).ToList();
+
+
+                        var chartdata = (from t in weeklyData
+                                         where t.Created_On <= startdate.AddDays(6) && t.Created_On >= startdate
+                                         group t by t.Created_On.ToString("dd-MMM-yyyy") into g
+                                         select new
+                                         {
+                                             week = "1st Week",
+                                             weekDate = g.FirstOrDefault().Created_On,
+                                             CreatedOn = g.Key,
+                                             StudentCount = g.Select(t => t.studTotalHrs).Sum()
+                                         }).ToList();
+
+
+                        List<RegisteredUsers> week1 = new List<RegisteredUsers>();
+
+                        if (chartdata.Count() > 0)
+                        {
+
+                            week1 = (from s in chartdata
+                                     group s by s.week into g
+                                     select new RegisteredUsers
+                                     {
+                                         _day = "(" + startdate.ToString("dd-MMM") + " to " + startdate.AddDays(6).ToString("dd-MMM") + ")",
+                                         // _day = "(" + g.FirstOrDefault().weekDate.ToString("dd-MMM") + " to " + g.LastOrDefault().weekDate.ToString("dd-MMM") + ")",
+                                         StudentCount = g.Sum(t => t.StudentCount),
+                                     }).ToList();
+                        }
+                        else
+                        {
+                            week1.Add(new RegisteredUsers
+                            {
+                                _day = "(" + startdate.ToString("dd-MMM") + " to " + startdate.AddDays(6).ToString("dd-MMM") + ")",
+                                StudentCount = 0,
+                            });
+                        }
+                        chartdata.Clear();
+
+                        chartdata = (from t in weeklyData
+                                     where t.Created_On <= startdate.AddDays(13) && t.Created_On >= startdate.AddDays(7)
+                                     group t by t.Created_On.ToString("dd-MMM-yyyy") into g
+                                     select new
+                                     {
+                                         week = "2nd Week",
+                                         weekDate = g.FirstOrDefault().Created_On,
+                                         CreatedOn = g.Key,
+                                         StudentCount = g.Select(t => t.studTotalHrs).Sum()
+
+                                     }).ToList();
+
+
+                        List<RegisteredUsers> week2 = new List<RegisteredUsers>();
+                        if (chartdata.Count() > 0)
+                        {
+
+                            week2 = (from s in chartdata
+                                     group s by s.week into g
+                                     select new RegisteredUsers
+                                     {
+                                         _day = "(" + startdate.AddDays(7).ToString("dd-MMM") + " to " + startdate.AddDays(13).ToString("dd-MMM") + ")",
+                                         //_day = "(" + g.FirstOrDefault().weekDate.ToString("dd-MMM") + " to " + g.LastOrDefault().weekDate.ToString("dd-MMM") + ")",
+                                         StudentCount = g.Sum(t => t.StudentCount)
+                                     }).ToList();
+                        }
+                        else
+                        {
+                            week2.Add(new RegisteredUsers
+                            {
+                                _day = "(" + startdate.AddDays(7).ToString("dd-MMM") + " to " + startdate.AddDays(13).ToString("dd-MMM") + ")",
+                                StudentCount = 0,
+                                StaffCount = 0
+                            });
+                        }
+
+
+
+                        chartdata.Clear();
+                        chartdata = (from t in weeklyData
+                                     where t.Created_On <= startdate.AddDays(20) && t.Created_On >= startdate.AddDays(14)
+                                     group t by t.Created_On.ToString("dd-MMM-yyyy") into g
+                                     select new
+                                     {
+                                         week = "3rd Week",
+                                         weekDate = g.FirstOrDefault().Created_On,
+                                         CreatedOn = g.Key,
+                                         StudentCount = g.Select(t => t.studTotalHrs).Sum()
+
+                                     }).ToList();
+
+                        List<RegisteredUsers> week3 = new List<RegisteredUsers>();
+
+                        if (chartdata.Count() > 0)
+                        {
+                            week3 = (from s in chartdata
+                                     group s by s.week into g
+                                     select new RegisteredUsers
+                                     {
+                                         _day = "(" + startdate.AddDays(14).ToString("dd-MMM") + " to " + startdate.AddDays(20).ToString("dd-MMM") + ")",
+                                         //_day = "(" + g.FirstOrDefault().weekDate.ToString("dd-MMM") + " to " + g.LastOrDefault().weekDate.ToString("dd-MMM") + ")",
+                                         StudentCount = g.Sum(t => t.StudentCount)
+
+                                     }).ToList();
+                        }
+                        else
+                        {
+                            week3.Add(new RegisteredUsers
+                            {
+                                _day = "(" + startdate.AddDays(14).ToString("dd-MMM") + " to " + startdate.AddDays(20).ToString("dd-MMM") + ")",
+                                StudentCount = 0,
+                            });
+                        }
+                        chartdata.Clear();
+
+                        chartdata = (from t in weeklyData
+                                     where t.Created_On <= startdate.AddDays(27) && t.Created_On >= startdate.AddDays(21)
+                                     group t by t.Created_On.ToString("dd-MMM-yyyy") into g
+                                     select new
+                                     {
+                                         week = "4th Week",
+                                         weekDate = g.FirstOrDefault().Created_On,
+                                         CreatedOn = g.Key,
+                                         StudentCount = g.Select(t => t.studTotalHrs).Sum(),
+
+                                     }).ToList();
+
+                        List<RegisteredUsers> week4 = new List<RegisteredUsers>();
+
+                        if (chartdata.Count() > 0)
+                        {
+
+                            week4 = (from s in chartdata
+                                     group s by s.week into g
+                                     select new RegisteredUsers
+                                     {
+                                         _day = "(" + startdate.AddDays(21).ToString("dd-MMM") + " to " + startdate.AddDays(27).ToString("dd-MMM") + ")",
+                                         //_day = "(" + g.FirstOrDefault().weekDate.ToString("dd-MMM") + " to " + g.LastOrDefault().weekDate.ToString("dd-MMM") + ")",
+                                         StudentCount = g.Sum(t => t.StudentCount)
+
+                                     }).ToList();
+                        }
+                        else
+                        {
+                            week4.Add(new RegisteredUsers
+                            {
+                                _day = "(" + startdate.AddDays(21).ToString("dd-MMM") + " to " + startdate.AddDays(27).ToString("dd-MMM") + ")",
+                                StudentCount = 0,
+                            });
+                        }
+                        RegisteredUsers objweek1 = new RegisteredUsers();
+                        objweek1.Weekwise = "1st Week";
+                        objweek1.Week = week1.Count != 0 ? week1.FirstOrDefault()._day : "";
+                        objweek1.StudentCount = week1.Count != 0 ? week1.FirstOrDefault().StudentCount : 0;
+                        weeklyChartData.Add(objweek1);
+
+                        RegisteredUsers objweek2 = new RegisteredUsers();
+                        objweek2.Weekwise = "2nd Week";
+                        objweek2.Week = week2.Count != 0 ? week2.FirstOrDefault()._day : "";
+                        objweek2.StudentCount = week2.Count != 0 ? week2.FirstOrDefault().StudentCount : 0;
+                        weeklyChartData.Add(objweek2);
+
+                        RegisteredUsers objweek3 = new RegisteredUsers();
+                        objweek3.Weekwise = "3rd Week";
+                        objweek3.Week = week3.Count != 0 ? week3.FirstOrDefault()._day : "";
+                        objweek3.StudentCount = week3.Count != 0 ? week3.FirstOrDefault().StudentCount : 0;
+                        weeklyChartData.Add(objweek3);
+
+                        RegisteredUsers objweek4 = new RegisteredUsers();
+                        objweek4.Weekwise = "4th Week";
+                        objweek4.Week = week4.Count != 0 ? week4.FirstOrDefault()._day : "";
+                        objweek4.StudentCount = week4.Count != 0 ? week4.FirstOrDefault().StudentCount : 0;
+                        weeklyChartData.Add(objweek4);
+                    }
+                    else
+                    {
+                        var userCount = (from um in contextsdce.user_master
+                                         join usrh in contextsdce.user_subject_read_history on um.user_id equals usrh.user_id
+                                         where um.active_status == 1
+                                          && (usrh.last_read_on >= startdate)
+                                         group new { usrh } by new { readdate = DbFunctions.TruncateTime(usrh.last_read_on) } into usagegrp
+                                         select new { readdate = usagegrp.Key, usagegp = usagegrp }).ToList();
+
+                        var weeklyData = (from t in userCount
+                                          select new RegisteredUsers
+                                          {
+                                              // CreatedOn = t.readdate.ToString(),
+                                              CreatedOn = t.usagegp.FirstOrDefault().usrh.last_read_on.ToString("dd-MM-yyyy"),
+                                              Created_On = t.usagegp.FirstOrDefault().usrh.last_read_on,
+                                              studTotalHrs = t.usagegp.Sum(p => p.usrh.total_hours) / 3600
+                                          }).OrderByDescending(t => t.Created_On).ToList();
+
+
+                        var chartdata = (from t in weeklyData
+                                         where t.Created_On <= startdate.AddDays(6) && t.Created_On >= startdate
+                                         group t by t.Created_On.ToString("dd-MMM-yyyy") into g
+                                         select new
+                                         {
+                                             week = "1st Week",
+                                             weekDate = g.FirstOrDefault().Created_On,
+                                             CreatedOn = g.Key,
+                                             StudentCount = g.Select(t => t.studTotalHrs).Sum()
+                                         }).ToList();
+
+
+                        List<RegisteredUsers> week1 = new List<RegisteredUsers>();
+
+                        if (chartdata.Count() > 0)
+                        {
+
+                            week1 = (from s in chartdata
+                                     group s by s.week into g
+                                     select new RegisteredUsers
+                                     {
+                                         _day = "(" + startdate.ToString("dd-MMM") + " to " + startdate.AddDays(6).ToString("dd-MMM") + ")",
+                                         // _day = "(" + g.FirstOrDefault().weekDate.ToString("dd-MMM") + " to " + g.LastOrDefault().weekDate.ToString("dd-MMM") + ")",
+                                         StudentCount = g.Sum(t => t.StudentCount),
+                                     }).ToList();
+                        }
+                        else
+                        {
+                            week1.Add(new RegisteredUsers
+                            {
+                                _day = "(" + startdate.ToString("dd-MMM") + " to " + startdate.AddDays(6).ToString("dd-MMM") + ")",
+                                StudentCount = 0,
+                            });
+                        }
+                        chartdata.Clear();
+
+                        chartdata = (from t in weeklyData
+                                     where t.Created_On <= startdate.AddDays(13) && t.Created_On >= startdate.AddDays(7)
+                                     group t by t.Created_On.ToString("dd-MMM-yyyy") into g
+                                     select new
+                                     {
+                                         week = "2nd Week",
+                                         weekDate = g.FirstOrDefault().Created_On,
+                                         CreatedOn = g.Key,
+                                         StudentCount = g.Select(t => t.studTotalHrs).Sum()
+
+                                     }).ToList();
+
+                        List<RegisteredUsers> week2 = new List<RegisteredUsers>();
+
+                        if (chartdata.Count() > 0)
+                        {
+
+                            week2 = (from s in chartdata
+                                     group s by s.week into g
+                                     select new RegisteredUsers
+                                     {
+                                         _day = "(" + startdate.AddDays(7).ToString("dd-MMM") + " to " + startdate.AddDays(13).ToString("dd-MMM") + ")",
+                                         //_day = "(" + g.FirstOrDefault().weekDate.ToString("dd-MMM") + " to " + g.LastOrDefault().weekDate.ToString("dd-MMM") + ")",
+                                         StudentCount = g.Sum(t => t.StudentCount)
+                                     }).ToList();
+                        }
+                        else
+                        {
+                            week2.Add(new RegisteredUsers
+                            {
+                                _day = "(" + startdate.AddDays(7).ToString("dd-MMM") + " to " + startdate.AddDays(13).ToString("dd-MMM") + ")",
+                                StudentCount = 0,
+                                StaffCount = 0
+                            });
+                        }
+
+
+
+                        chartdata.Clear();
+                        chartdata = (from t in weeklyData
+                                     where t.Created_On <= startdate.AddDays(20) && t.Created_On >= startdate.AddDays(14)
+                                     group t by t.Created_On.ToString("dd-MMM-yyyy") into g
+                                     select new
+                                     {
+                                         week = "3rd Week",
+                                         weekDate = g.FirstOrDefault().Created_On,
+                                         CreatedOn = g.Key,
+                                         StudentCount = g.Select(t => t.studTotalHrs).Sum()
+
+                                     }).ToList();
+                        List<RegisteredUsers> week3 = new List<RegisteredUsers>();
+
+
+                        if (chartdata.Count() > 0)
+                        {
+                            week3 = (from s in chartdata
+                                     group s by s.week into g
+                                     select new RegisteredUsers
+                                     {
+                                         _day = "(" + startdate.AddDays(14).ToString("dd-MMM") + " to " + startdate.AddDays(20).ToString("dd-MMM") + ")",
+                                         //_day = "(" + g.FirstOrDefault().weekDate.ToString("dd-MMM") + " to " + g.LastOrDefault().weekDate.ToString("dd-MMM") + ")",
+                                         StudentCount = g.Sum(t => t.StudentCount)
+
+                                     }).ToList();
+                        }
+                        else
+                        {
+                            week3.Add(new RegisteredUsers
+                            {
+                                _day = "(" + startdate.AddDays(14).ToString("dd-MMM") + " to " + startdate.AddDays(20).ToString("dd-MMM") + ")",
+                                StudentCount = 0,
+                            });
+                        }
+                        chartdata.Clear();
+
+                        chartdata = (from t in weeklyData
+                                     where t.Created_On <= startdate.AddDays(27) && t.Created_On >= startdate.AddDays(21)
+                                     group t by t.Created_On.ToString("dd-MMM-yyyy") into g
+                                     select new
+                                     {
+                                         week = "4th Week",
+                                         weekDate = g.FirstOrDefault().Created_On,
+                                         CreatedOn = g.Key,
+                                         StudentCount = g.Select(t => t.studTotalHrs).Sum(),
+
+                                     }).ToList();
+
+
+                        List<RegisteredUsers> week4 = new List<RegisteredUsers>();
+                        if (chartdata.Count() > 0)
+                        {
+
+                            week4 = (from s in chartdata
+                                     group s by s.week into g
+                                     select new RegisteredUsers
+                                     {
+                                         _day = "(" + startdate.AddDays(21).ToString("dd-MMM") + " to " + startdate.AddDays(27).ToString("dd-MMM") + ")",
+                                         //_day = "(" + g.FirstOrDefault().weekDate.ToString("dd-MMM") + " to " + g.LastOrDefault().weekDate.ToString("dd-MMM") + ")",
+                                         StudentCount = g.Sum(t => t.StudentCount)
+
+                                     }).ToList();
+                        }
+                        else
+                        {
+                            week4.Add(new RegisteredUsers
+                            {
+                                _day = "(" + startdate.AddDays(21).ToString("dd-MMM") + " to " + startdate.AddDays(27).ToString("dd-MMM") + ")",
+                                StudentCount = 0,
+                            });
+                        }
+                        RegisteredUsers objweek1 = new RegisteredUsers();
+                        objweek1.Weekwise = "1st Week";
+                        objweek1.Week = week1.Count != 0 ? week1.FirstOrDefault()._day : "";
+                        objweek1.StudentCount = week1.Count != 0 ? week1.FirstOrDefault().StudentCount : 0;
+                        weeklyChartData.Add(objweek1);
+
+                        RegisteredUsers objweek2 = new RegisteredUsers();
+                        objweek2.Weekwise = "2nd Week";
+                        objweek2.Week = week2.Count != 0 ? week2.FirstOrDefault()._day : "";
+                        objweek2.StudentCount = week2.Count != 0 ? week2.FirstOrDefault().StudentCount : 0;
+                        weeklyChartData.Add(objweek2);
+
+                        RegisteredUsers objweek3 = new RegisteredUsers();
+                        objweek3.Weekwise = "3rd Week";
+                        objweek3.Week = week3.Count != 0 ? week3.FirstOrDefault()._day : "";
+                        objweek3.StudentCount = week3.Count != 0 ? week3.FirstOrDefault().StudentCount : 0;
+                        weeklyChartData.Add(objweek3);
+
+                        RegisteredUsers objweek4 = new RegisteredUsers();
+                        objweek4.Weekwise = "4th Week";
+                        objweek4.Week = week4.Count != 0 ? week4.FirstOrDefault()._day : "";
+                        objweek4.StudentCount = week4.Count != 0 ? week4.FirstOrDefault().StudentCount : 0;
+                        weeklyChartData.Add(objweek4);
+                    }
+
+
+
+
+                    return Jserializer.Serialize(weeklyChartData); ;
+                }
+                catch (Exception ex)
+                {
+                    contextsdce.Dispose();
+                    Log.WriteLogMessage(PageName, "AdminDashBoard", "DailyRegistration", ex.Message, "error");
+                    throw ex;
+                }
+                finally
+                {
+                    contextsdce.Dispose();
+                }
+            }
+        }
+
+
+        public string MonthlyUsage(int? pUserId = 0,int? pCollegeId = 0)
+        {
+
+            JavaScriptSerializer Jserializer = new JavaScriptSerializer();
+            List<RegisteredUsers> MonthlyChartData = new List<RegisteredUsers>();
+            List<RegisteredUsers> ChartData = new List<RegisteredUsers>();
+            using (learnengg_payment_portal_entities contextsdce = new learnengg_payment_portal_entities())
+            {
+                try
+                {
+
+                    DateTime startdate = DateTime.ParseExact(DateTime.Now.AddMonths(-12).ToString("dd-MM-yyyy") + " " + "00:00:00 AM", "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+                    if (pUserId > 0)
+                    {
+                        var userCount = (from um in contextsdce.user_master
+                                         join usrh in contextsdce.user_subject_read_history on um.user_id equals usrh.user_id
+                                         where um.active_status == 1 // && (usrh.last_read_on >= startdate) 
+                                         && um.user_id == pUserId
+                                         select new
+                                         {
+                                             usrh.last_read_on,
+                                             usagehrs = usrh.total_hours
+                                         }).ToList();
+                        ChartData = (from t in userCount
+                                     group t by t.last_read_on.Month into g
+                                     select new RegisteredUsers
+                                     {
+                                         Month = g.FirstOrDefault().last_read_on.ToString("MMM"),
+                                         StudentCount = (g.Sum(t => t.usagehrs) / 3600) // + (g.Sum(t => t.usagehrs) % 3600)>0.7 ? 1 :0
+                                     }).ToList();
+                    }
+                    else if (pCollegeId> 0)
+                    {
+                        var userCount = (from um in contextsdce.user_master
+                                         join usrh in contextsdce.user_subject_read_history on um.user_id equals usrh.user_id
+                                         where um.active_status == 1 // && (usrh.last_read_on >= startdate) 
+                                         && um.collegeid == pCollegeId
+                                         select new
+                                         {
+                                             usrh.last_read_on,
+                                             usagehrs = usrh.total_hours
+                                         }).ToList();
+                        ChartData = (from t in userCount
+                                     group t by t.last_read_on.Month into g
+                                     select new RegisteredUsers
+                                     {
+                                         Month = g.FirstOrDefault().last_read_on.ToString("MMM"),
+                                         StudentCount = (g.Sum(t => t.usagehrs) / 3600) // + (g.Sum(t => t.usagehrs) % 3600)>0.7 ? 1 :0
+                                     }).ToList();
+                    }
+                    else
+                    {
+
+                        var userCount = (from um in contextsdce.user_master
+                                         join usrh in contextsdce.user_subject_read_history on um.user_id equals usrh.user_id
+                                         where um.active_status == 1 // && (usrh.last_read_on >= startdate)
+                                         select new
+                                         {
+                                             usrh.last_read_on,
+                                             usagehrs = usrh.total_hours
+                                         }).ToList();
+                        ChartData = (from t in userCount
+                                     group t by t.last_read_on.Month into g
+                                     select new RegisteredUsers
+                                     {
+                                         Month = g.FirstOrDefault().last_read_on.ToString("MMM"),
+                                         StudentCount = (g.Sum(t => t.usagehrs) / 3600) // + ((g.Sum(t => t.usagehrs) % 3600) > 0.7 ? 1 : 0)
+                                     }).ToList();
+                    }
+
+                    return Jserializer.Serialize(ChartData);
+
+                }
+                catch (Exception ex)
+                {
+                    Log.WriteLogMessage(PageName, "AdminDashBoard", "MonthlyRegistration", ex.Message, "error");
+
+                    throw ex;
+                }
+                finally
+                {
+                    contextsdce.Dispose();
+                }
+            }
+
+        }
+
+
+        public int OverAllUsage(int? pUserId = 0,int? pCollegeId=0 )
+        {
+
+            JavaScriptSerializer Jserializer = new JavaScriptSerializer();
+            using (learnengg_payment_portal_entities contextsdce = new learnengg_payment_portal_entities())
+            {
+                try
+                {
+                    int tothrs = 0;
+                    if (pUserId > 0)
+                    {
+                        var userCount = (from um in contextsdce.user_master
+                                         join usrh in contextsdce.user_subject_read_history on um.user_id equals usrh.user_id
+                                         where um.active_status == 1 && um.user_id == pUserId
+                                         select new
+                                         {
+                                             usrh.last_read_on,
+                                             usagehrs = usrh.total_hours
+                                         }).ToList();
+
+                        // RegisteredUsers ru = new RegisteredUsers();
+                        foreach (var rs in userCount)
+                        {
+                            tothrs = tothrs + rs.usagehrs;
+                        }
+                    }
+                    if (pCollegeId> 0)
+                    {
+                        var userCount = (from um in contextsdce.user_master
+                                         join cm in contextsdce.college_master on um.collegeid equals cm.college_id
+                                         join usrh in contextsdce.user_subject_read_history on um.user_id equals usrh.user_id
+                                         where um.active_status == 1 && um.collegeid == pCollegeId
+                                         select new
+                                         {
+                                             usrh.last_read_on,
+                                             usagehrs = usrh.total_hours
+                                         }).ToList();
+
+                        // RegisteredUsers ru = new RegisteredUsers();
+                        foreach (var rs in userCount)
+                        {
+                            tothrs = tothrs + rs.usagehrs;
+                        }
+                    }
+                    else
+                    {
+                        var userCount = (from um in contextsdce.user_master
+                                         join usrh in contextsdce.user_subject_read_history on um.user_id equals usrh.user_id
+                                         where um.active_status == 1
+                                         select new
+                                         {
+                                             usrh.last_read_on,
+                                             usagehrs = usrh.total_hours
+                                         }).ToList();
+
+                        // RegisteredUsers ru = new RegisteredUsers();
+                        foreach (var rs in userCount)
+                        {
+                            tothrs = tothrs + rs.usagehrs;
+                        }
+                    }
+                    // ru.studTotalHrs = tothrs;
+                    return tothrs;
+
+                }
+                catch (Exception ex)
+                {
+                    Log.WriteLogMessage(PageName, "AdminDashBoard", "MonthlyRegistration", ex.Message, "error");
+                    return 0;
+                    throw ex;
+                }
+                finally
+                {
+                    contextsdce.Dispose();
+                }
+            }
+
+        }
+
+
+
+        public string TotalUsageITI(int? pUserId = 0, int? pCollegeId = 0)
+        {
+            JavaScriptSerializer Jserializer = new JavaScriptSerializer();
+            List<RegisteredUsers> TotUsageHrs = new List<RegisteredUsers>();
+            using (learnengg_payment_portal_entities contextsdce = new learnengg_payment_portal_entities())
+            {
+                try
+                {
+                    if (pUserId > 0)
+                    {
+
+                        int totUsage = OverAllUsage(pUserId);
+                        var userCount = (from sm in contextsdce.subject_master
+                                         join usrh in contextsdce.user_subject_read_history on sm.subject_id equals usrh.subject_id
+                                         join um in contextsdce.user_master on usrh.user_id equals um.user_id
+                                         join dpsm in contextsdce.college_subject_mapping on sm.subject_id equals dpsm.subject_id
+                                         // join unvm in contextsdce.university_master on um.univ_id equals unvm.univ_id
+                                         join cm in contextsdce.college_master on um.collegeid equals cm.college_id
+                                         join dm in contextsdce.department_master on dpsm.department_id equals dm.department_id
+                                         where um.active_status == 1 && dpsm.college_id == cm.college_id && usrh.department_id == dm.department_id
+                                         && um.user_id == pUserId
+                                         group new { dm, usrh } by dm.department_id into deptgrp
+                                         //  && um.univ_id == cm.university_id && sm.subject_id == dpsm.subject_id && um.univ_id == UnivId
+                                         select new
+                                         {
+                                             deparmentId = deptgrp.FirstOrDefault().dm.department_id,
+                                             departmentName = deptgrp.FirstOrDefault().dm.department_name,
+                                             totalhrs = deptgrp.Sum(a => a.usrh.total_hours),
+                                             totalUsage = totUsage
+                                         }).ToList();
+                        int totusg = 0;
+                        var chartdata = (from t in userCount
+                                         select new
+                                         {
+                                             departmentid = t.deparmentId,
+                                             departmentname = t.departmentName,
+                                             usagehrs = t.totalhrs / 3600,
+                                             totusg = t.totalUsage / 3600
+                                         }).OrderByDescending(a => a.usagehrs).ToList();
+
+
+
+                        //foreach(var result in userCount)
+                        //{
+                        //        var chartdata1=(new {
+                        //                         groupId = 1,
+                        //                         departmentname = result.departgrp.Select(p => p.dm.department_name),
+                        //                         usagehrs = result.departgrp.Sum(p => p.usrh.total_hours) != 0 ? result.departgrp.Sum(p => p.usrh.total_hours) / 3600 : 0,
+                        //                         totusg = totusg + result.departgrp.Sum(p => p.usrh.total_hours) != 0 ? t.departgrp.Sum(p => p.usrh.total_hours) / 3600 : 0
+                        //       });
+                        //}  
+                        return Jserializer.Serialize(chartdata);
+                    }
+                    else if (pCollegeId > 0)
+                    {
+
+                        int totUsage = OverAllUsage(pUserId,pCollegeId);
+                        var userCount = (from sm in contextsdce.subject_master
+                                         join usrh in contextsdce.user_subject_read_history on sm.subject_id equals usrh.subject_id
+                                         join um in contextsdce.user_master on usrh.user_id equals um.user_id
+                                         join dpsm in contextsdce.college_subject_mapping on sm.subject_id equals dpsm.subject_id
+                                         // join unvm in contextsdce.university_master on um.univ_id equals unvm.univ_id
+                                         join cm in contextsdce.college_master on um.collegeid equals cm.college_id
+                                         join dm in contextsdce.department_master on dpsm.department_id equals dm.department_id
+                                         where um.active_status == 1 && dpsm.college_id == cm.college_id && usrh.department_id == dm.department_id
+                                         && um.collegeid == pCollegeId
+                                         group new { dm, usrh } by dm.department_id into deptgrp
+                                         //  && um.univ_id == cm.university_id && sm.subject_id == dpsm.subject_id && um.univ_id == UnivId
+                                         select new
+                                         {
+                                             deparmentId = deptgrp.FirstOrDefault().dm.department_id,
+                                             departmentName = deptgrp.FirstOrDefault().dm.department_name,
+                                             totalhrs = deptgrp.Sum(a => a.usrh.total_hours),
+                                             totalUsage = totUsage
+                                         }).ToList();
+                        int totusg = 0;
+                        var chartdata = (from t in userCount
+                                         select new
+                                         {
+                                             departmentid = t.deparmentId,
+                                             departmentname = t.departmentName,
+                                             usagehrs = t.totalhrs / 3600,
+                                             totusg = t.totalUsage / 3600
+                                         }).OrderByDescending(a => a.usagehrs).ToList();
+
+
+
+                        //foreach(var result in userCount)
+                        //{
+                        //        var chartdata1=(new {
+                        //                         groupId = 1,
+                        //                         departmentname = result.departgrp.Select(p => p.dm.department_name),
+                        //                         usagehrs = result.departgrp.Sum(p => p.usrh.total_hours) != 0 ? result.departgrp.Sum(p => p.usrh.total_hours) / 3600 : 0,
+                        //                         totusg = totusg + result.departgrp.Sum(p => p.usrh.total_hours) != 0 ? t.departgrp.Sum(p => p.usrh.total_hours) / 3600 : 0
+                        //       });
+                        //}  
+                        return Jserializer.Serialize(chartdata);
+                    }
+                    else
+                    {
+                        int totUsage = OverAllUsage(pUserId);
+                        var userCount = (from sm in contextsdce.subject_master
+                                         join usrh in contextsdce.user_subject_read_history on sm.subject_id equals usrh.subject_id
+                                         join um in contextsdce.user_master on usrh.user_id equals um.user_id
+                                         join dpsm in contextsdce.college_subject_mapping on sm.subject_id equals dpsm.subject_id
+                                         // join unvm in contextsdce.university_master on um.univ_id equals unvm.univ_id
+                                         join cm in contextsdce.college_master on um.collegeid equals cm.college_id
+                                         join dm in contextsdce.department_master on dpsm.department_id equals dm.department_id
+                                         where um.active_status == 1 && dpsm.college_id == cm.college_id && usrh.department_id == dm.department_id
+                                         group new { dm, usrh } by dm.department_id into deptgrp
+                                         //  && um.univ_id == cm.university_id && sm.subject_id == dpsm.subject_id && um.univ_id == UnivId
+                                         select new
+                                         {
+                                             deparmentId = deptgrp.FirstOrDefault().dm.department_id,
+                                             departmentName = deptgrp.FirstOrDefault().dm.department_name,
+                                             totalhrs = deptgrp.Sum(a => a.usrh.total_hours),
+                                             totalUsage = totUsage
+                                         }).ToList();
+                        int totusg = 0;
+                        var chartdata = (from t in userCount
+                                         select new
+                                         {
+                                             departmentid = t.deparmentId,
+                                             departmentname = t.departmentName,
+                                             usagehrs = t.totalhrs / 3600,
+                                             totusg = t.totalUsage / 3600
+                                         }).OrderByDescending(a => a.usagehrs).ToList();
+
+
+
+                        //foreach(var result in userCount)
+                        //{
+                        //        var chartdata1=(new {
+                        //                         groupId = 1,
+                        //                         departmentname = result.departgrp.Select(p => p.dm.department_name),
+                        //                         usagehrs = result.departgrp.Sum(p => p.usrh.total_hours) != 0 ? result.departgrp.Sum(p => p.usrh.total_hours) / 3600 : 0,
+                        //                         totusg = totusg + result.departgrp.Sum(p => p.usrh.total_hours) != 0 ? t.departgrp.Sum(p => p.usrh.total_hours) / 3600 : 0
+                        //       });
+                        //}  
+                        return Jserializer.Serialize(chartdata);
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    contextsdce.Dispose();
+                    Log.WriteLogMessage(PageName, "AdminDashBoard", "TotalRegistration", ex.Message, "error");
+                    throw ex;
+                }
+                finally
+                {
+                    contextsdce.Dispose();
+                }
+            }
+
+        }
+
+
+
+        public UserDashBoardViewModel DashBoardMain(int CollegeGrpId)
+        {
+            JavaScriptSerializer Jserializer = new JavaScriptSerializer();
+            UserDashBoardViewModel UserDashBoardVModel = new UserDashBoardViewModel();
+                        
+            using (learnengg_payment_portal_entities contextsdce = new learnengg_payment_portal_entities())
+            {
+                try
+                {
+                    int TotalITIz = (from cm in contextsdce.college_master                                    
+                                     join umgrpm in contextsdce.college_group_map on cm.college_id equals umgrpm.college_id
+                                     join umgrp in contextsdce.college_group_master on umgrpm.college_group_id equals umgrp.college_group_id
+                                     where cm.active_status == 1 && umgrp.college_group_id == CollegeGrpId
+                                     select cm.college_id).Distinct().Count();
+                    UserDashBoardVModel.TotalITI = TotalITIz;                    
+
+                    int RegisteredUserCount = (from cm in contextsdce.college_master
+                                               join um in contextsdce.user_master on cm.college_id equals um.collegeid
+                                               join umgrpm in contextsdce.college_group_map on cm.college_id equals umgrpm.college_id
+                                               join umgrp in contextsdce.college_group_master on umgrpm.college_group_id equals umgrp.college_group_id
+                                               where um.active_status == 1 && cm.active_status == 1 && um.role_id<3 && umgrp.college_group_id == CollegeGrpId
+                                               select um.user_id).Distinct().Count();
+                    UserDashBoardVModel.TotalRegisteredUsers = RegisteredUserCount;
+
+                    // Total Registered ITI
+                    int RegisteredDesktopCount = (from cm in contextsdce.college_master
+                                                  join um in contextsdce.user_master on cm.college_id equals um.collegeid
+                                                  join umgrpm in contextsdce.college_group_map on cm.college_id equals umgrpm.college_id
+                                                  join umgrp in contextsdce.college_group_master on umgrpm.college_group_id equals umgrp.college_group_id
+                                                  join cid in contextsdce.college_installation_details on umgrpm.college_id equals cid.college_id
+                                                   join cde in contextsdce.college_installation_expiry on cid.college_install_id equals cde.college_install_id
+                                                where cid.active_status == 1 && cde.installed_on != null && umgrp.college_group_id == CollegeGrpId
+                                                  select cid.college_install_id).Distinct().Count();
+                    UserDashBoardVModel.TotalRegisteredDesktops = RegisteredDesktopCount;
+
+                    // Total Test Registered ITI
+                    int TestRegisteredUserCount = (from cm in contextsdce.college_master
+                                                   join um in contextsdce.user_master on cm.college_id equals um.collegeid
+                                                   join umgrpm in contextsdce.college_group_map on cm.college_id equals umgrpm.college_id
+                                                   join umgrp in contextsdce.college_group_master on umgrpm.college_group_id equals umgrp.college_group_id
+                                                   join cid in contextsdce.college_test_installation_details on umgrpm.college_id equals cid.college_id
+                                                   join cde in contextsdce.college_test_installation_expiry on cid.college_test_install_id equals cde.college_test_install_id
+                                                   where cid.active_status == 1 && cde.installed_on != null && umgrp.college_group_id == CollegeGrpId
+                                                   select cid.college_id).Distinct().Count();
+                    UserDashBoardVModel.TestRegisteredITI = TestRegisteredUserCount;
+
+                    
+
+                    // Total Theory Registered ITI 
+                    int TheoryRegisteredUserCount = (from cm in contextsdce.college_master
+                                                     join um in contextsdce.user_master on cm.college_id equals um.collegeid
+                                                     join umgrpm in contextsdce.college_group_map on cm.college_id equals umgrpm.college_id
+                                                     join umgrp in contextsdce.college_group_master on umgrpm.college_group_id equals umgrp.college_group_id
+                                                     join cid in contextsdce.college_installation_details on umgrpm.college_id equals cid.college_id
+                                                     join cde in contextsdce.college_installation_expiry on cid.college_install_id equals cde.college_install_id
+                                                     join sub in contextsdce.subject_master on cde.subject_id equals sub.subject_id
+                                               where cid.active_status == 1 && sub.having_questionpaper == 0 && cde.installed_on!=null && umgrp.college_group_id == CollegeGrpId
+                                                     select cid.college_id).Distinct().Count();
+                    UserDashBoardVModel.TheoryRegisteredITI = TheoryRegisteredUserCount;
+                    
+                    // Total practical Registered ITI
+                    int PracticalRegisteredUserCount = (from cm in contextsdce.college_master
+                                                        join um in contextsdce.user_master on cm.college_id equals um.collegeid
+                                                        join umgrpm in contextsdce.college_group_map on cm.college_id equals umgrpm.college_id
+                                                        join umgrp in contextsdce.college_group_master on umgrpm.college_group_id equals umgrp.college_group_id
+                                                        join cid in contextsdce.college_installation_details on umgrpm.college_id equals cid.college_id
+                                                        join cde in contextsdce.college_installation_expiry on cid.college_install_id equals cde.college_install_id
+                                                        join sub in contextsdce.subject_master on cde.subject_id equals sub.subject_id
+                                                         where cid.active_status == 1 && sub.having_questionpaper == 1 && cde.installed_on != null && umgrp.college_group_id == CollegeGrpId
+                                                        select cid.college_id).Distinct().Count();
+                    UserDashBoardVModel.PracticalRegisteredITI = PracticalRegisteredUserCount;
+
+
+                    UserDashBoardVModel.TotalRegisteredITI = TestRegisteredUserCount + TheoryRegisteredUserCount + PracticalRegisteredUserCount;
+
+                    // Total usage
+                    int? TotalUsage = 0;
+                    TotalUsage = (from sub in contextsdce.subject_master
+                                      join usrh in contextsdce.user_subject_read_history on sub.subject_id equals usrh.subject_id
+                                      join um in contextsdce.user_master on usrh.user_id equals um.user_id
+                                      join cm in contextsdce.college_master on um.collegeid equals cm.college_id 
+                                      join umgrpm in contextsdce.college_group_map on cm.college_id equals umgrpm.college_id
+                                      join umgrp in contextsdce.college_group_master on umgrpm.college_group_id equals umgrp.college_group_id
+                                  where sub.active_status == 1 && umgrp.college_group_id == CollegeGrpId
+                                  select usrh.total_hours).DefaultIfEmpty(0).Sum();
+                    UserDashBoardVModel.TotalUsageHrs = TotalUsage > 0 ? string.Format("{0:00}:{1:00}:{2:00}", TotalUsage / 3600, (TotalUsage / 60) % 60, TotalUsage % 60) : "0";
+
+                   // Total practical usage
+                    int PracticalUsage = 0;
+                    PracticalUsage = (from sub in contextsdce.subject_master
+                                          join usrh in contextsdce.user_subject_read_history on sub.subject_id equals usrh.subject_id
+                                          join um in contextsdce.user_master on usrh.user_id equals um.user_id
+                                          join cm in contextsdce.college_master on um.collegeid equals cm.college_id
+                                          join umgrpm in contextsdce.college_group_map on cm.college_id equals umgrpm.college_id
+                                          join umgrp in contextsdce.college_group_master on umgrpm.college_group_id equals umgrp.college_group_id
+                                      where sub.active_status == 1 && sub.having_questionpaper == 1 && umgrp.college_group_id == CollegeGrpId
+                                      select usrh.total_hours).DefaultIfEmpty(0).Sum();
+                    UserDashBoardVModel.TotalPracticalUsage = PracticalUsage > 0 ? PracticalUsage / 3600 : 0;
+
+                    // Theory subjectwise Usage
+                    var TheorysubjectwiseUsage = (from sub in contextsdce.subject_master
+                                                  join usrh in contextsdce.user_subject_read_history on sub.subject_id equals usrh.subject_id
+                                                  join um in contextsdce.user_master on usrh.user_id equals um.user_id
+                                                  join cm in contextsdce.college_master on um.collegeid equals cm.college_id
+                                                  join umgrpm in contextsdce.college_group_map on cm.college_id equals umgrpm.college_id
+                                                  join umgrp in contextsdce.college_group_master on umgrpm.college_group_id equals umgrp.college_group_id
+                                                  where sub.active_status == 1 && sub.having_questionpaper == 0 && umgrp.college_group_id == CollegeGrpId
+                                                  group new { sub, usrh } by sub.subject_name into subjectwisegroup
+                                                  select new {
+                                                     //  subjectId=subjectwisegroup.Key,
+                                                       subjectName=subjectwisegroup.Key,//.FirstOrDefault().sub.subject_name,
+                                                       totalhours = subjectwisegroup.Sum(x=>x.usrh.total_hours)                                                    
+                                                  });
+
+                    List<SubjectwiseUsage> _SubjectUsage = new List<SubjectwiseUsage>();
+                    foreach (var subgroupobject in TheorysubjectwiseUsage)
+                    {
+                        SubjectwiseUsage SubUsage = new SubjectwiseUsage();
+                       // SubUsage.SubjectId = subgroupobject.subjectId;
+                        SubUsage.SubjectName = subgroupobject.subjectName;
+                        SubUsage.UsageHours = subgroupobject.totalhours>1500? subgroupobject.totalhours / 3600:0;
+                        _SubjectUsage.Add(SubUsage);
+                    }
+
+                    UserDashBoardVModel.SubjectUsage = _SubjectUsage;
+
+                    return UserDashBoardVModel;
+
+                }
+                catch (Exception ex)
+                {
+                    Log.WriteLogMessage(PageName, "AdminDashBoard", "DashBoardMain", ex.Message, "error");
+
+                    throw ex;
+                }
+                finally
+                {
+                    contextsdce.Dispose();
+                }
+            }
+
+        }
+
+
+        public UseageDashBoardViewModel UsageDashBoard(int SubjectType)
+        {
+            JavaScriptSerializer Jserializer = new JavaScriptSerializer();
+            UseageDashBoardViewModel UseageDashBoardVModel = new UseageDashBoardViewModel();
+
+            using (learnengg_payment_portal_entities contextsdce = new learnengg_payment_portal_entities())
+            {
+                try
+                {
+
+                    var TagIds = new[] { "52", "53", "54", "60", "61", "95", "96", "117", "118", "131", "132" };
+                    // Tradewise Usage
+                    var TradewiseUsage = (from sub in contextsdce.subject_master
+                                          join usrh in contextsdce.user_subject_read_history on sub.subject_id equals usrh.subject_id
+                                          join dsm in contextsdce.department_subject_mapping on sub.subject_id equals dsm.subject_id
+                                          join dm in contextsdce.department_master on dsm.department_id equals dm.department_id
+                                          where sub.active_status == 1 && sub.having_questionpaper == SubjectType
+                                          &&  usrh.department_id == dsm.department_id
+                                          // && TagIds.Contains(sub.subject_id.ToString())
+                                          group new { sub, usrh } by dm.department_name into tradewisegroup
+                                          select new
+                                          {
+                                              //  subjectId=subjectwisegroup.Key,
+                                              tradeName = tradewisegroup.Key,//.FirstOrDefault().sub.subject_name,
+                                              totalhours = tradewisegroup.Sum(x => x.usrh.total_hours)
+                                          }).OrderByDescending(x=>x.totalhours);
+
+                    //var FinalTradewiseUsage = from Result in TradewiseUsage
+                    //                          union Result2 in TradewiseUsage select Result;
+
+                    List < TradewiseUsage > _TradeUsage = new List<TradewiseUsage>();
+                    foreach (var tradgroupobject in TradewiseUsage)
+                    {
+                        TradewiseUsage SubUsage = new TradewiseUsage();
+                        SubUsage.TradeName = tradgroupobject.tradeName;
+                        SubUsage.UsageHours = tradgroupobject.totalhours > 1800 ? tradgroupobject.totalhours / 3600 : 0;
+                        _TradeUsage.Add(SubUsage);
+                    }
+                    UseageDashBoardVModel.TradeUsage = _TradeUsage;
+
+
+                    // ITIwise Usage
+                    var CollegewiseUsage = (from um in contextsdce.user_master
+                                            join usrh in contextsdce.user_subject_read_history on um.user_id equals usrh.user_id
+                                            join sub in contextsdce.subject_master on usrh.subject_id equals sub.subject_id
+                                          //  join csm in contextsdce.college_subject_mapping on um.collegeid equals csm.college_id
+                                            join cm in contextsdce.college_master on um.collegeid equals cm.college_id
+                                            where cm.active_status == 1 && sub.having_questionpaper == SubjectType
+                                            group new { cm, usrh } by cm.college_name into collegewisegroup
+                                            select new
+                                            {
+                                                collegeName = collegewisegroup.Key,//.FirstOrDefault().sub.subject_name,
+                                                totalhours = collegewisegroup.Sum(x => x.usrh.total_hours)
+                                            }).OrderBy(x => x.collegeName);
+
+                    List<ITIwiseUsage> _ITIUsage = new List<ITIwiseUsage>();
+                    foreach (var collegegroupobject in CollegewiseUsage)
+                    {
+                        ITIwiseUsage SubUsage = new ITIwiseUsage();
+                        SubUsage.ITIName = collegegroupobject.collegeName;
+                        SubUsage.UsageHours = collegegroupobject.totalhours > 1800 ? collegegroupobject.totalhours / 3600 : 0;
+                        _ITIUsage.Add(SubUsage);
+                    }
+                    UseageDashBoardVModel.ITIUsage = _ITIUsage;
+
+
+                    // Montwise Usage
+                    var MonthwiseUsage = (from um in contextsdce.user_master
+                                          join usrh in contextsdce.user_subject_read_history on um.user_id equals usrh.user_id
+                                          join sub in contextsdce.subject_master on usrh.subject_id equals sub.subject_id
+                                   //     join csm in contextsdce.college_subject_mapping on um.collegeid equals csm.college_id
+                                   //     join cm in contextsdce.college_master on um.collegeid equals cm.college_id
+                                          where  sub.having_questionpaper == SubjectType
+                                          group new { usrh } by new { usageYear = usrh.last_read_on.Year, usageMonth = SqlFunctions.DateName("month", usrh.last_read_on), monthValue= usrh.last_read_on.Month } into monthwisegroup
+                                          orderby monthwisegroup.Key.usageYear, monthwisegroup.Key.monthValue
+                                          select new
+                                          {
+                                              MonthName = (monthwisegroup.Key.usageMonth + "-" + monthwisegroup.Key.usageYear),                                            
+                                              totalhours = monthwisegroup.Sum(x => x.usrh.total_hours)
+                                          });
+
+                    List<MonthwiseUsage> _MonthUsage = new List<MonthwiseUsage>();
+                    foreach (var Monthgroupobject in MonthwiseUsage)
+                    {
+                        MonthwiseUsage SubUsage = new MonthwiseUsage();
+                        SubUsage.MonthName = Monthgroupobject.MonthName;                      
+                        SubUsage.UsageHours = Monthgroupobject.totalhours > 1800 ? Monthgroupobject.totalhours / 3600 : 0;
+                        _MonthUsage.Add(SubUsage);
+                    }               
+                    UseageDashBoardVModel.MonthUsage = _MonthUsage;
+
+                    return UseageDashBoardVModel;
+
+                }
+                catch (Exception ex)
+                {
+                    Log.WriteLogMessage(PageName, "AdminDashBoard", "DashBoardMain", ex.Message, "error");
+
+                    throw ex;
+                }
+                finally
+                {
+                    contextsdce.Dispose();
+                }
+            }
+
+        }
+
+
+
+        public RegistrationDashBoardViewModel CollegeGroupRegistrationDashBoard(int CollegeGrpId, int SubjectType)
+        {
+            JavaScriptSerializer Jserializer = new JavaScriptSerializer();
+            RegistrationDashBoardViewModel RegistrationDashBoardVModel = new RegistrationDashBoardViewModel();
+
+            using (learnengg_payment_portal_entities contextsdce = new learnengg_payment_portal_entities())
+            {
+                try
+                {
+                    // Tradewise Usage
+                    var TradewiseUsage = (from dm in contextsdce.department_master
+                                          join cie in contextsdce.college_installation_expiry on dm.department_id equals cie.department_id
+                                          join cid in contextsdce.college_installation_details on cie.college_install_id equals cid.college_install_id
+                                          join cm in contextsdce.college_master on cid.college_id equals cm.college_id
+                                          join umgrpm in contextsdce.college_group_map on cm.college_id equals umgrpm.college_id
+                                          join umgrp in contextsdce.college_group_master on umgrpm.college_group_id equals umgrp.college_group_id
+                                          join sub in contextsdce.subject_master on cie.subject_id equals sub.subject_id
+                                          where sub.having_questionpaper == SubjectType && cie.installed_on != null && umgrp.college_group_id == CollegeGrpId
+                                          group new { sub, cie, cid } by new {  dm.department_name} into tradewisegroup
+                                          select new
+                                          {
+                                              //  subjectId=subjectwisegroup.Key,
+                                              tradeName = tradewisegroup.Key.department_name,//.FirstOrDefault().sub.subject_name,
+                                            //  TotalRegistration = tradewisegroup.Count()
+                                              TotalRegistration = tradewisegroup.Select(x => x.cie.college_install_id).Distinct().Count()
+                                          }).OrderByDescending(x=>x.TotalRegistration);
+
+                    List<TradewiseUsage> _TradeUsage = new List<TradewiseUsage>();
+
+                    foreach (var tradgroupobject in TradewiseUsage)
+                    {
+                        TradewiseUsage SubUsage = new TradewiseUsage();
+                        SubUsage.TradeName = tradgroupobject.tradeName;
+                        SubUsage.TotalRegistration = tradgroupobject.TotalRegistration;
+                        _TradeUsage.Add(SubUsage);
+                    }
+                    RegistrationDashBoardVModel.TradeUsage = _TradeUsage;
+
+                    if (TradewiseUsage.Count() > 0)
+                    {
+                        var topTrade = TradewiseUsage.OrderByDescending(x => x.TotalRegistration).First();
+                        RegistrationDashBoardVModel.HighestRegisteredTrade = topTrade.tradeName;
+                        RegistrationDashBoardVModel.RegisteredITICount = topTrade.TotalRegistration;
+                    }
+                    else
+                    {
+                        RegistrationDashBoardVModel.HighestRegisteredTrade = "";
+                        RegistrationDashBoardVModel.RegisteredITICount = 0;
+
+                    }
+
+
+                    // ITIwise Usage
+                    var CollegewiseUsage = (from dm in contextsdce.department_master
+                                            join cie in contextsdce.college_installation_expiry on dm.department_id equals cie.department_id
+                                            join cid in contextsdce.college_installation_details on cie.college_install_id equals cid.college_install_id
+                                            join sub in contextsdce.subject_master on cie.subject_id equals sub.subject_id
+                                            join cm in contextsdce.college_master on cid.college_id equals cm.college_id
+                                            join umgrpm in contextsdce.college_group_map on cm.college_id equals umgrpm.college_id
+                                            join umgrp in contextsdce.college_group_master on umgrpm.college_group_id equals umgrp.college_group_id
+                                            where cm.active_status == 1 && sub.having_questionpaper == SubjectType && cie.installed_on != null && umgrp.college_group_id == CollegeGrpId
+                                            group new { cm, cie } by new { cm.college_name } into collegewisegroup
+                                                  select new 
+                                                  {
+                                                      collegeName = collegewisegroup.Key.college_name,//.FirstOrDefault().sub.subject_name,
+                                                      TotalRegistration = collegewisegroup.Select(x=>x.cie.college_install_id).Distinct().Count()
+                                                  }).OrderBy(x => x.collegeName);
+
+                    List<ITIwiseUsage> _ITIUsage = new List<ITIwiseUsage>();
+                    foreach (var collegegroupobject in CollegewiseUsage)
+                    {
+                        ITIwiseUsage SubUsage = new ITIwiseUsage();                      
+                        SubUsage.ITIName = collegegroupobject.collegeName;
+                        SubUsage.TotalRegistration = collegegroupobject.TotalRegistration ;
+                        _ITIUsage.Add(SubUsage);
+                    }
+                    RegistrationDashBoardVModel.ITIUsage = _ITIUsage;
+
+                    if (CollegewiseUsage.Count() > 0)
+                    {
+                        var topITI = CollegewiseUsage.OrderByDescending(x => x.TotalRegistration).First();
+                        RegistrationDashBoardVModel.HighestRegisteredITIName = topITI.collegeName;
+                        RegistrationDashBoardVModel.RegisteredTradeCount = topITI.TotalRegistration;
+                    }
+                    else
+                    {
+                        RegistrationDashBoardVModel.HighestRegisteredITIName = "";
+                        RegistrationDashBoardVModel.RegisteredTradeCount = 0;
+                    }
+
+
+                    // Montwise Usage
+                    var MonthwiseUsage = (from dm in contextsdce.department_master
+                                          join cie in contextsdce.college_installation_expiry on dm.department_id equals cie.department_id
+                                          join cid in contextsdce.college_installation_details on cie.college_install_id equals cid.college_install_id
+                                          join sub in contextsdce.subject_master on cie.subject_id equals sub.subject_id
+                                          join cm in contextsdce.college_master on cid.college_id equals cm.college_id
+                                          join umgrpm in contextsdce.college_group_map on cm.college_id equals umgrpm.college_id
+                                          join umgrp in contextsdce.college_group_master on umgrpm.college_group_id equals umgrp.college_group_id
+                                          where cm.active_status == 1 && sub.having_questionpaper == SubjectType && cie.installed_on != null && umgrp.college_group_id == CollegeGrpId
+                                          //   let dt = cie.installed_on
+                                          group new { cm, cid,cie } by new {  usageYear= cid.enter_on.Year, usageMonth= SqlFunctions.DateName("month", cid.enter_on), Monthorder = cid.enter_on.Month } into monthwisegroup
+                                          orderby monthwisegroup.Key.usageYear, monthwisegroup.Key.Monthorder
+                                          select new
+                                            {
+                                                MonthName =  (monthwisegroup.Key.usageMonth +"-"+monthwisegroup.Key.usageYear),                                                
+                                                TotalRegistration = monthwisegroup.Select(z=> z.cie.college_install_id).Distinct().Count()
+                                          });
+
+                    List<MonthwiseUsage> _MonthUsage = new List<MonthwiseUsage>();
+                    foreach (var Monthgroupobject in MonthwiseUsage)
+                    {
+                        MonthwiseUsage SubUsage = new MonthwiseUsage();
+                        SubUsage.MonthName = Monthgroupobject.MonthName;
+                        SubUsage.TotalRegistration = Monthgroupobject.TotalRegistration;
+                        _MonthUsage.Add(SubUsage);
+                    }
+                    RegistrationDashBoardVModel.MonthUsage = _MonthUsage;
+                    return RegistrationDashBoardVModel;
+                }
+                catch (Exception ex)
+                {
+                    Log.WriteLogMessage(PageName, "AdminDashBoard", "DashBoardMain", ex.Message, "error");
+
+                    throw ex;
+                }
+                finally
+                {
+                    contextsdce.Dispose();
+                }
+            }
+
+        }
+
+        public UseageDashBoardViewModel CollegeGroupUsageDashBoard(int SubjectType, int CollegeGrpId)
+        {
+            JavaScriptSerializer Jserializer = new JavaScriptSerializer();
+            UseageDashBoardViewModel UseageDashBoardVModel = new UseageDashBoardViewModel();
+
+            using (learnengg_payment_portal_entities contextsdce = new learnengg_payment_portal_entities())
+            {
+                try
+                {
+
+                    var TagIds = new[] { "52", "53", "54", "60", "61", "95", "96", "117", "118", "131", "132" };
+                    // Tradewise Usage
+                    var TradewiseUsage = (from sub in contextsdce.subject_master
+                                          join usrh in contextsdce.user_subject_read_history on sub.subject_id equals usrh.subject_id
+                                          join um in contextsdce.user_master on usrh.user_id equals um.user_id
+                                          join cm in contextsdce.college_master on um.collegeid equals cm.college_id
+                                          join umgrpm in contextsdce.college_group_map on cm.college_id equals umgrpm.college_id
+                                          join umgrp in contextsdce.college_group_master on umgrpm.college_group_id equals umgrp.college_group_id
+                                          join dsm in contextsdce.department_subject_mapping on sub.subject_id equals dsm.subject_id
+                                          join dm in contextsdce.department_master on dsm.department_id equals dm.department_id
+                                          where sub.active_status == 1 // && sub.having_questionpaper == SubjectType
+                                          && usrh.department_id == dsm.department_id && umgrp.college_group_id == CollegeGrpId
+                                          // && TagIds.Contains(sub.subject_id.ToString())
+                                          group new { sub, usrh } by dm.department_name into tradewisegroup
+                                          select new
+                                          {
+                                              //  subjectId=subjectwisegroup.Key,
+                                              tradeName = tradewisegroup.Key,//.FirstOrDefault().sub.subject_name,
+                                              totalhours = tradewisegroup.Sum(x => x.usrh.total_hours)
+                                          }).OrderByDescending(x => x.totalhours);
+
+                    //var FinalTradewiseUsage = from Result in TradewiseUsage
+                    //                          union Result2 in TradewiseUsage select Result;
+
+                    List<TradewiseUsage> _TradeUsage = new List<TradewiseUsage>();
+                    foreach (var tradgroupobject in TradewiseUsage)
+                    {
+                        TradewiseUsage SubUsage = new TradewiseUsage();
+                        SubUsage.TradeName = tradgroupobject.tradeName;
+                        SubUsage.UsageHoursDeci = tradgroupobject.totalhours > 1800 ? Math.Round(Convert.ToDecimal(tradgroupobject.totalhours / (Decimal)3600), 1) : 0;
+                        _TradeUsage.Add(SubUsage);
+                    }
+                    UseageDashBoardVModel.TradeUsage = _TradeUsage;
+
+
+                    // ITIwise Usage
+                    var CollegewiseUsage = (from um in contextsdce.user_master
+                                            join usrh in contextsdce.user_subject_read_history on um.user_id equals usrh.user_id
+                                            join sub in contextsdce.subject_master on usrh.subject_id equals sub.subject_id
+                                            //  join csm in contextsdce.college_subject_mapping on um.collegeid equals csm.college_id
+                                            join cm in contextsdce.college_master on um.collegeid equals cm.college_id
+                                            join umgrpm in contextsdce.college_group_map on cm.college_id equals umgrpm.college_id
+                                            join umgrp in contextsdce.college_group_master on umgrpm.college_group_id equals umgrp.college_group_id
+                                            where cm.active_status == 1 && umgrp.college_group_id == CollegeGrpId // && sub.having_questionpaper == SubjectType 
+                                            group new { cm, usrh } by cm.college_name into collegewisegroup
+                                            select new
+                                            {
+                                                collegeName = collegewisegroup.Key,//.FirstOrDefault().sub.subject_name,
+                                                totalhours = collegewisegroup.Sum(x => x.usrh.total_hours)
+                                            }).OrderBy(x => x.collegeName);
+
+                    List<ITIwiseUsage> _ITIUsage = new List<ITIwiseUsage>();
+                    foreach (var collegegroupobject in CollegewiseUsage)
+                    {
+                        ITIwiseUsage SubUsage = new ITIwiseUsage();
+                        SubUsage.ITIName = collegegroupobject.collegeName;
+                        SubUsage.UsageHoursDeci = collegegroupobject.totalhours > 1800 ? Math.Round(Convert.ToDecimal(collegegroupobject.totalhours / (Decimal)3600), 1) : 0;
+                        _ITIUsage.Add(SubUsage);
+                    }
+                    UseageDashBoardVModel.ITIUsage = _ITIUsage;
+
+
+                    // Montwise Usage
+                    var MonthwiseUsage = (from um in contextsdce.user_master
+                                          join usrh in contextsdce.user_subject_read_history on um.user_id equals usrh.user_id
+                                          join cm in contextsdce.college_master on um.collegeid equals cm.college_id
+                                          join umgrpm in contextsdce.college_group_map on cm.college_id equals umgrpm.college_id
+                                          join umgrp in contextsdce.college_group_master on umgrpm.college_group_id equals umgrp.college_group_id
+                                          join sub in contextsdce.subject_master on usrh.subject_id equals sub.subject_id
+                                          //     join csm in contextsdce.college_subject_mapping on um.collegeid equals csm.college_id
+                                          //     join cm in contextsdce.college_master on um.collegeid equals cm.college_id
+                                          where umgrp.college_group_id == CollegeGrpId // && sub.having_questionpaper == SubjectType 
+                                          group new { usrh } by new { usageYear = usrh.last_read_on.Year, usageMonth = SqlFunctions.DateName("month", usrh.last_read_on), monthValue = usrh.last_read_on.Month } into monthwisegroup
+                                          orderby monthwisegroup.Key.usageYear, monthwisegroup.Key.monthValue
+                                          select new
+                                          {
+                                              MonthName = (monthwisegroup.Key.usageMonth + "-" + monthwisegroup.Key.usageYear),
+                                              totalhours = monthwisegroup.Sum(x => x.usrh.total_hours)
+                                          });
+
+                    List<MonthwiseUsage> _MonthUsage = new List<MonthwiseUsage>();
+                    foreach (var Monthgroupobject in MonthwiseUsage)
+                    {
+                        MonthwiseUsage SubUsage = new MonthwiseUsage();
+                        SubUsage.MonthName = Monthgroupobject.MonthName;
+                        SubUsage.UsageHoursDeci = Monthgroupobject.totalhours > 1800 ? Math.Round(Convert.ToDecimal(Monthgroupobject.totalhours / (Decimal)3600), 1) : 0;
+                        _MonthUsage.Add(SubUsage);
+                    }
+                    UseageDashBoardVModel.MonthUsage = _MonthUsage;
+
+                    return UseageDashBoardVModel;
+
+                }
+                catch (Exception ex)
+                {
+                    Log.WriteLogMessage(PageName, "AdminDashBoard", "DashBoardMain", ex.Message, "error");
+
+                    throw ex;
+                }
+                finally
+                {
+                    contextsdce.Dispose();
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="CollegeGrpId"></param>
+        /// <returns></returns>
+        public UserDashBoardViewModel CollegeGroupDashBoardMain(int CollegeGrpId)
+        {
+            JavaScriptSerializer Jserializer = new JavaScriptSerializer();
+            UserDashBoardViewModel UserDashBoardVModel = new UserDashBoardViewModel();
+
+            using (learnengg_payment_portal_entities contextsdce = new learnengg_payment_portal_entities())
+            {
+                try
+                {
+                    int TotalITIz = (from cm in contextsdce.college_master
+                                     where cm.active_status == 1
+                                     select cm.college_id).Distinct().Count();
+                    UserDashBoardVModel.TotalITI = TotalITIz;
+
+                    int RegisteredUserCount = (from cm in contextsdce.college_master
+                                               join um in contextsdce.user_master on cm.college_id equals um.collegeid
+                                               where um.active_status == 1 && cm.active_status == 1 && um.role_id < 3
+                                               select um.user_id).Distinct().Count();
+                    UserDashBoardVModel.TotalRegisteredUsers = RegisteredUserCount;
+
+                    // Total Registered ITI
+                    int RegisteredDesktopCount = (from cid in contextsdce.college_installation_details
+                                                  join cde in contextsdce.college_installation_expiry on cid.college_install_id equals cde.college_install_id
+                                                  where cid.active_status == 1 && cde.installed_on != null
+                                                  select cid.college_install_id).Distinct().Count();
+                    UserDashBoardVModel.TotalRegisteredDesktops = RegisteredDesktopCount;
+
+                    // Total Test Registered ITI
+                    int TestRegisteredUserCount = (from cid in contextsdce.college_test_installation_details
+                                                   join cde in contextsdce.college_test_installation_expiry on cid.college_test_install_id equals cde.college_test_install_id
+                                                   where cid.active_status == 1 && cde.installed_on != null
+                                                   select cid.college_id).Distinct().Count();
+                    UserDashBoardVModel.TestRegisteredITI = TestRegisteredUserCount;
+
+
+
+                    // Total Theory Registered ITI 
+                    int TheoryRegisteredUserCount = (from cid in contextsdce.college_installation_details
+                                                     join cde in contextsdce.college_installation_expiry on cid.college_install_id equals cde.college_install_id
+                                                     join sub in contextsdce.subject_master on cde.subject_id equals sub.subject_id
+                                                     where cid.active_status == 1 && sub.having_questionpaper == 0 && cde.installed_on != null
+                                                     select cid.college_id).Distinct().Count();
+                    UserDashBoardVModel.TheoryRegisteredITI = TheoryRegisteredUserCount;
+
+                    // Total practical Registered ITI
+                    int PracticalRegisteredUserCount = (from cid in contextsdce.college_installation_details
+                                                        join cde in contextsdce.college_installation_expiry on cid.college_install_id equals cde.college_install_id
+                                                        join sub in contextsdce.subject_master on cde.subject_id equals sub.subject_id
+                                                        where cid.active_status == 1 && sub.having_questionpaper == 1 && cde.installed_on != null
+                                                        select cid.college_id).Distinct().Count();
+                    UserDashBoardVModel.PracticalRegisteredITI = PracticalRegisteredUserCount;
+
+
+                    UserDashBoardVModel.TotalRegisteredITI = TestRegisteredUserCount + TheoryRegisteredUserCount + PracticalRegisteredUserCount;
+
+                    // Total usage
+                    int TotalUsage = 0;
+                    TotalUsage = (from sub in contextsdce.subject_master
+                                  join usrh in contextsdce.user_subject_read_history on sub.subject_id equals usrh.subject_id
+                                  join um in contextsdce.user_master on usrh.user_id equals um.user_id
+                                  join cm in contextsdce.college_master on um.collegeid equals cm.college_id
+                                  join umgrpm in contextsdce.college_group_map on cm.college_id equals umgrpm.college_id
+                                  join umgrp in contextsdce.college_group_master on umgrpm.college_group_id equals umgrp.college_group_id
+                                  where sub.active_status == 1 && umgrp.college_group_id == CollegeGrpId
+                                  select usrh.total_hours).DefaultIfEmpty(0).Sum();
+                    UserDashBoardVModel.TotalUsageHrs = TotalUsage > 0 ? string.Format("{0:00}:{1:00}:{2:00}", Math.Round(Convert.ToDecimal(TotalUsage / 3600)), Math.Round(Convert.ToDecimal(TotalUsage / 60)) % 60, TotalUsage % 60) : "0";
+
+                    // Total practical usage
+                    int PracticalUsage = 0;
+                    PracticalUsage = (from sub in contextsdce.subject_master
+                                      join usrh in contextsdce.user_subject_read_history on sub.subject_id equals usrh.subject_id
+                                      join um in contextsdce.user_master on usrh.user_id equals um.user_id
+                                      join cm in contextsdce.college_master on um.collegeid equals cm.college_id
+                                      join umgrpm in contextsdce.college_group_map on cm.college_id equals umgrpm.college_id
+                                      join umgrp in contextsdce.college_group_master on umgrpm.college_group_id equals umgrp.college_group_id
+                                      where sub.active_status == 1 && sub.having_questionpaper == 1 && umgrp.college_group_id == CollegeGrpId
+                                      select usrh.total_hours).DefaultIfEmpty(0).Sum();
+                    UserDashBoardVModel.TotalPracticalUsage = PracticalUsage > 0 ? PracticalUsage / 3600 : 0;
+
+                    // Theory subjectwise Usage
+                    var TheorysubjectwiseUsage = (from sub in contextsdce.subject_master
+                                                  join usrh in contextsdce.user_subject_read_history on sub.subject_id equals usrh.subject_id
+                                                  join um in contextsdce.user_master on usrh.user_id equals um.user_id
+                                                  join cm in contextsdce.college_master on um.collegeid equals cm.college_id
+                                                  join umgrpm in contextsdce.college_group_map on cm.college_id equals umgrpm.college_id
+                                                  join umgrp in contextsdce.college_group_master on umgrpm.college_group_id equals umgrp.college_group_id
+                                                  where sub.active_status == 1 && sub.having_questionpaper == 0 && umgrp.college_group_id == CollegeGrpId
+                                                  group new { sub, usrh } by sub.subject_name into subjectwisegroup
+                                                  select new
+                                                  {
+                                                      //  subjectId=subjectwisegroup.Key,
+                                                      subjectName = subjectwisegroup.Key,//.FirstOrDefault().sub.subject_name,
+                                                      totalhours = subjectwisegroup.Sum(x => x.usrh.total_hours)
+                                                  });
+
+                    List<SubjectwiseUsage> _SubjectUsage = new List<SubjectwiseUsage>();
+                    foreach (var subgroupobject in TheorysubjectwiseUsage)
+                    {
+                        SubjectwiseUsage SubUsage = new SubjectwiseUsage();
+                        // SubUsage.SubjectId = subgroupobject.subjectId;
+                        SubUsage.SubjectName = subgroupobject.subjectName;
+                        SubUsage.UsageHours = subgroupobject.totalhours > 1500 ? subgroupobject.totalhours / 3600 : 0;
+                        _SubjectUsage.Add(SubUsage);
+                    }
+
+                    UserDashBoardVModel.SubjectUsage = _SubjectUsage;
+
+                    return UserDashBoardVModel;
+
+                }
+                catch (Exception ex)
+                {
+                    Log.WriteLogMessage(PageName, "AdminDashBoard", "DashBoardMain", ex.Message, "error");
+
+                    throw ex;
+                }
+                finally
+                {
+                    contextsdce.Dispose();
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="univId"></param>
+        /// <param name="collegeId"></param>
+        /// <param name="CollegeGrpId"></param>
+        /// <returns></returns>
+        public List<Departmentdetails> GetGroupAdminDepartmentListActivitionextenddays(int univId, int collegeId, int CollegeGrpId)
+        {
+            using (learnengg_payment_portal_entities contextsdce = new learnengg_payment_portal_entities())
+            {
+                List<Departmentdetails> department = new List<Departmentdetails>();
+                try
+                {
+                    if (collegeId == 0)
+                    {
+                        department = (from univ in contextsdce.university_master
+                                      join dept in contextsdce.department_master on univ.univ_id equals dept.UniversityID
+                                      join colsubj in contextsdce.college_subject_mapping on dept.department_id equals colsubj.department_id
+                                      join cm in contextsdce.college_master on colsubj.college_id equals cm.college_id
+                                      join umgrpm in contextsdce.college_group_map on cm.college_id equals umgrpm.college_id
+                                      join umgrp in contextsdce.college_group_master on umgrpm.college_group_id equals umgrp.college_group_id
+                                      where dept.UniversityID == univId && umgrp.college_group_id == CollegeGrpId
+                                      && dept.active_status == 1
+                                      select new Departmentdetails
+                                      {
+                                          DepartmentId = dept.department_id,
+                                          UniversityId = dept.UniversityID,
+                                          DepartmentName = dept.department_name.TrimEnd()
+                                      }).Distinct().OrderBy(x => x.DepartmentName).ToList();
+                    }
+                    else
+                    {
+                        department = (from univ in contextsdce.university_master
+                                      join dept in contextsdce.department_master on univ.univ_id equals dept.UniversityID
+                                      join csm in contextsdce.college_subject_mapping on dept.department_id equals csm.department_id
+                                      join cm in contextsdce.college_master on csm.college_id equals cm.college_id
+                                      join umgrpm in contextsdce.college_group_map on cm.college_id equals umgrpm.college_id
+                                      join umgrp in contextsdce.college_group_master on umgrpm.college_group_id equals umgrp.college_group_id
+                                      where csm.university_id == univ.univ_id && dept.UniversityID == univId && csm.college_id == collegeId
+                                      && dept.active_status == 1 && umgrp.college_group_id == CollegeGrpId
+                                      select new Departmentdetails
+                                      {
+                                          DepartmentId = dept.department_id,
+                                          UniversityId = dept.UniversityID,
+                                          DepartmentName = dept.department_name.TrimEnd()
+                                      }).Distinct().OrderBy(x => x.DepartmentName).ToList();
+                    }
+                    return department;
+
+                }
+                catch (Exception ex)
+                {
+                    contextsdce.Dispose();
+                    Log.WriteLogMessage(PageName, "AdminService", "GetDepartmentListActivitionextenddays", ex.Message, "error");
+                    throw ex;
+                }
+                finally
+                {
+                    contextsdce.Dispose();
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="departmentID"></param>
+        /// <param name="CollegeGrpId"></param>
+        /// <returns></returns>
+        public List<CollegeList> GetGroupAdminColleges(int departmentID,int CollegeGrpId)
+        {
+            using (learnengg_payment_portal_entities contextsdce = new learnengg_payment_portal_entities())
+            {
+                List<CollegeList> college = new List<CollegeList>();
+                try
+                {
+                    if (departmentID > 0)
+                    {
+                        college = (from cm in contextsdce.college_master
+                                   join csm in contextsdce.college_subject_mapping on cm.college_id equals csm.college_id                                
+                                   join umgrpm in contextsdce.college_group_map on cm.college_id equals umgrpm.college_id
+                                   join umgrp in contextsdce.college_group_master on umgrpm.college_group_id equals umgrp.college_group_id
+
+                                   where cm.active_status == 1 && csm.department_id == departmentID && umgrp.college_group_id == CollegeGrpId
+                                   select new CollegeList
+                                   {
+                                       college_Id = cm.college_id,
+                                       college_Name = cm.college_code + " - " + cm.college_name
+                                   }).Distinct().OrderBy(x => x.college_Name).ToList();
+                    }
+                    else
+                    {
+                        college = (from cm in contextsdce.college_master
+                                   join csm in contextsdce.college_subject_mapping on cm.college_id equals csm.college_id                                   
+                                   join umgrpm in contextsdce.college_group_map on cm.college_id equals umgrpm.college_id
+                                   join umgrp in contextsdce.college_group_master on umgrpm.college_group_id equals umgrp.college_group_id
+                                   where cm.active_status == 1 && umgrp.college_group_id == CollegeGrpId
+                                   select new CollegeList
+                                   {
+                                       college_Id = cm.college_id,
+                                       college_Name = cm.college_code + " - " + cm.college_name
+                                   }).Distinct().OrderBy(x => x.college_Name).ToList();
+
+                    }
+                    return college;
+
+                }
+                catch (Exception ex)
+                {
+                    contextsdce.Dispose();
+                    Log.WriteLogMessage(PageName, "AdminService", "GetColleges", ex.Message, "error");
+                    throw ex;
+                }
+                finally
+                {
+                    contextsdce.Dispose();
+                }
+            }
+        }
+
+
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="CollegeGrpId"></param>
+      /// <param name="DepartmentID"></param>
+      /// <param name="collegeID"></param>
+      /// <param name="SubjectID"></param>
+      /// <param name="SemsterID"></param>
+      /// <param name="DateFrom"></param>
+      /// <param name="DateTo"></param>
+      /// <param name="SubjectType"></param>
+      /// <returns></returns>
+        public List<UserReadHistoryModel> UniversityGroupAdminReadHistorySummarySpilit(int CollegeGrpId,int DepartmentID, int collegeID, int SubjectID, int SemsterID, string DateFrom, string DateTo, int SubjectType)
+        {
+            List<UserReadHistoryModel> readHistory = new List<UserReadHistoryModel>();
+            List<UserReadHistoryModel> readHistoryswap = new List<UserReadHistoryModel>();
+
+            DateTime usgEnd_date = DateTime.Now;
+            DateTime usgStart_date = DateTime.Now;
+
+            if (DateTo != "0")
+            {
+                string usg_endate = DateTo + " " + "00:00:00 AM";
+                usgEnd_date = DateTime.ParseExact(usg_endate, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+            }
+
+            if (DateFrom != "0")
+            {
+                string usg_startdate = DateFrom + " " + "00:00:00 AM";
+                usgStart_date = DateTime.ParseExact(usg_startdate, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+            }
+
+
+            using (learnengg_payment_portal_entities contextsdce = new learnengg_payment_portal_entities())
+            {
+                try
+                {
+                    if (DateFrom != "0" && DateTo != "0")
+                    {
+
+                        var regCount = (from sm in contextsdce.subject_master
+                                        join usrh in contextsdce.user_subject_read_history on sm.subject_id equals usrh.subject_id
+                                        join um in contextsdce.user_master on usrh.user_id equals um.user_id
+                                        join dpsm in contextsdce.college_subject_mapping on usrh.department_id equals dpsm.department_id
+                                        join dm in contextsdce.department_master on dpsm.department_id equals dm.department_id
+                                        join cm in contextsdce.college_master on um.collegeid equals cm.college_id
+                                        join umgrpm in contextsdce.college_group_map on cm.college_id equals umgrpm.college_id
+                                        join umgrp in contextsdce.college_group_master on umgrpm.college_group_id equals umgrp.college_group_id
+                                        where sm.subject_id == dpsm.subject_id && umgrp.college_group_id == CollegeGrpId
+                                           && usrh.last_read_on >= usgStart_date && usrh.last_read_on <= usgEnd_date
+                                        && um.active_status == 1 && cm.active_status == 1 && dpsm.college_id == cm.college_id
+                                        orderby usrh.total_hours descending
+                                        group new { cm, usrh, dpsm, um } by new { cm.college_id, cm.college_name, sm.subject_id, dpsm.map_year, dpsm.semester, dpsm.department_id, dm.department_name } into g
+                                        select new
+                                        {
+                                            collegename = g.Key.college_name,
+                                            collegeid = g.Key.college_id,
+                                            subjectId = g.Key.subject_id,
+                                            totalhours = g.Select(x => x.usrh.total_hours).Sum(),
+                                            totalusers = g.Select(x => x.um.user_id).Distinct().Count(),
+                                            map_year = g.Key.map_year,
+                                            semester = g.Key.semester,
+                                            DepartmentId = g.Key.department_id,
+                                            DepartmentName = g.Key.department_name
+                                        }).ToList();
+
+                        readHistoryswap = (from g in regCount
+                                           group g by new { g.DepartmentId, g.DepartmentName, g.collegeid, g.map_year, g.semester, g.subjectId } into t
+                                           select new UserReadHistoryModel
+                                           {
+                                               departmentName = t.Key.DepartmentName,
+                                               departmentId = t.Key.DepartmentId,
+                                               collegeId = t.Key.collegeid,
+                                               subjectId = t.Key.subjectId,
+                                               Semester = t.Key.semester,
+                                               totalSeconds = t.Sum(x => x.totalhours),
+                                               userCount = t.Sum(x => x.totalusers)
+                                               //    totalhrs = string.Format("{0:00}:{1:00}:{2:00}", t.Sum(x => x.totalhours) / 3600, (t.Sum(x => x.totalhours) / 60) % 60, t.Sum(x => x.totalhours) % 60)
+                                           }).OrderByDescending(t => t.totalSeconds).ToList();
+                    }
+                    else if (DateFrom != "0" && DateTo == "0")
+                    {
+
+                        var regCount = (from sm in contextsdce.subject_master
+                                        join usrh in contextsdce.user_subject_read_history on sm.subject_id equals usrh.subject_id
+                                        join um in contextsdce.user_master on usrh.user_id equals um.user_id
+                                        join dpsm in contextsdce.college_subject_mapping on usrh.department_id equals dpsm.department_id
+                                        join dm in contextsdce.department_master on dpsm.department_id equals dm.department_id
+                                        join cm in contextsdce.college_master on um.collegeid equals cm.college_id
+                                        join umgrpm in contextsdce.college_group_map on cm.college_id equals umgrpm.college_id
+                                        join umgrp in contextsdce.college_group_master on umgrpm.college_group_id equals umgrp.college_group_id
+                                        where sm.subject_id == dpsm.subject_id && umgrp.college_group_id == CollegeGrpId
+                                           && usrh.last_read_on >= usgStart_date
+                                        && um.active_status == 1 && cm.active_status == 1 && dpsm.college_id == cm.college_id
+                                        orderby usrh.total_hours descending
+                                        group new { cm, usrh, dpsm, um } by new { cm.college_id, cm.college_name, sm.subject_id, dpsm.map_year, dpsm.semester, dpsm.department_id, dm.department_name } into g
+                                        select new
+                                        {
+                                            collegename = g.Key.college_name,
+                                            collegeid = g.Key.college_id,
+                                            subjectId = g.Key.subject_id,
+                                            totalhours = g.Select(x => x.usrh.total_hours).Sum(),
+                                            totalusers = g.Select(x => x.um.user_id).Distinct().Count(),
+                                            map_year = g.Key.map_year,
+                                            semester = g.Key.semester,
+                                            DepartmentId = g.Key.department_id,
+                                            DepartmentName = g.Key.department_name
+                                        }).ToList();
+
+                        readHistoryswap = (from g in regCount
+                                           group g by new { g.DepartmentId, g.DepartmentName, g.collegeid, g.map_year, g.semester, g.subjectId } into t
+                                           select new UserReadHistoryModel
+                                           {
+                                               departmentName = t.Key.DepartmentName,
+                                               departmentId = t.Key.DepartmentId,
+                                               collegeId = t.Key.collegeid,
+                                               subjectId = t.Key.subjectId,
+                                               Semester = t.Key.semester,
+                                               totalSeconds = t.Sum(x => x.totalhours),
+                                               userCount = t.Sum(x => x.totalusers)
+                                               //    totalhrs = string.Format("{0:00}:{1:00}:{2:00}", t.Sum(x => x.totalhours) / 3600, (t.Sum(x => x.totalhours) / 60) % 60, t.Sum(x => x.totalhours) % 60)
+                                           }).OrderByDescending(t => t.totalSeconds).ToList();
+                    }
+                    else if (DateFrom == "0" && DateTo != "0")
+                    {
+
+                        var regCount = (from sm in contextsdce.subject_master
+                                        join usrh in contextsdce.user_subject_read_history on sm.subject_id equals usrh.subject_id
+                                        join um in contextsdce.user_master on usrh.user_id equals um.user_id
+                                        join dpsm in contextsdce.college_subject_mapping on usrh.department_id equals dpsm.department_id
+                                        join dm in contextsdce.department_master on dpsm.department_id equals dm.department_id
+                                        join cm in contextsdce.college_master on um.collegeid equals cm.college_id
+                                        join umgrpm in contextsdce.college_group_map on cm.college_id equals umgrpm.college_id
+                                        join umgrp in contextsdce.college_group_master on umgrpm.college_group_id equals umgrp.college_group_id
+                                        where sm.subject_id == dpsm.subject_id && umgrp.college_group_id == CollegeGrpId
+                                           && usrh.last_read_on <= usgEnd_date
+                                        && um.active_status == 1 && cm.active_status == 1 && dpsm.college_id == cm.college_id
+                                        orderby usrh.total_hours descending
+                                        group new { cm, usrh, dpsm, um } by new { cm.college_id, cm.college_name, sm.subject_id, dpsm.map_year, dpsm.semester, dpsm.department_id, dm.department_name } into g
+                                        select new
+                                        {
+                                            collegename = g.Key.college_name,
+                                            collegeid = g.Key.college_id,
+                                            subjectId = g.Key.subject_id,
+                                            totalhours = g.Select(x => x.usrh.total_hours).Sum(),
+                                            totalusers = g.Select(x => x.um.user_id).Distinct().Count(),
+                                            map_year = g.Key.map_year,
+                                            semester = g.Key.semester,
+                                            DepartmentId = g.Key.department_id,
+                                            DepartmentName = g.Key.department_name
+                                        }).ToList();
+
+                        readHistoryswap = (from g in regCount
+                                           group g by new { g.DepartmentId, g.DepartmentName, g.collegeid, g.map_year, g.semester, g.subjectId } into t
+                                           select new UserReadHistoryModel
+                                           {
+                                               departmentName = t.Key.DepartmentName,
+                                               departmentId = t.Key.DepartmentId,
+                                               collegeId = t.Key.collegeid,
+                                               subjectId = t.Key.subjectId,
+                                               Semester = t.Key.semester,
+                                               totalSeconds = t.Sum(x => x.totalhours),
+                                               userCount = t.Sum(x => x.totalusers)
+                                               //    totalhrs = string.Format("{0:00}:{1:00}:{2:00}", t.Sum(x => x.totalhours) / 3600, (t.Sum(x => x.totalhours) / 60) % 60, t.Sum(x => x.totalhours) % 60)
+                                           }).OrderByDescending(t => t.totalSeconds).ToList();
+                    }
+                    else
+                    {
+                        var regCount = (from sm in contextsdce.subject_master
+                                        join usrh in contextsdce.user_subject_read_history on sm.subject_id equals usrh.subject_id
+                                        join um in contextsdce.user_master on usrh.user_id equals um.user_id
+                                        join dpsm in contextsdce.college_subject_mapping on usrh.department_id equals dpsm.department_id
+                                        join dm in contextsdce.department_master on dpsm.department_id equals dm.department_id
+                                        join cm in contextsdce.college_master on um.collegeid equals cm.college_id
+                                        join umgrpm in contextsdce.college_group_map on cm.college_id equals umgrpm.college_id
+                                        join umgrp in contextsdce.college_group_master on umgrpm.college_group_id equals umgrp.college_group_id
+                                        where sm.subject_id == dpsm.subject_id && umgrp.college_group_id == CollegeGrpId
+                                        //   && usrh.last_read_on >= usgStart_date && usrh.last_read_on <= usgEnd_date
+                                        && um.active_status == 1 && cm.active_status == 1 && dpsm.college_id == cm.college_id
+                                        orderby usrh.total_hours descending
+                                        group new { cm, usrh, dpsm, um } by new { cm.college_id, cm.college_name, sm.subject_id, dpsm.map_year, dpsm.semester, dpsm.department_id, dm.department_name } into g
+                                        select new
+                                        {
+                                            collegename = g.Key.college_name,
+                                            collegeid = g.Key.college_id,
+                                            subjectId = g.Key.subject_id,
+                                            totalhours = g.Select(x => x.usrh.total_hours).Sum(),
+                                            totalusers = g.Select(x => x.um.user_id).Distinct().Count(),
+                                            map_year = g.Key.map_year,
+                                            semester = g.Key.semester,
+                                            DepartmentId = g.Key.department_id,
+                                            DepartmentName = g.Key.department_name
+                                        }).ToList();
+
+                        readHistoryswap = (from g in regCount
+                                           group g by new { g.DepartmentId, g.DepartmentName, g.collegeid, g.collegename, g.map_year, g.semester, g.subjectId } into t
+                                           select new UserReadHistoryModel
+                                           {
+                                               departmentName = t.Key.DepartmentName,
+                                               departmentId = t.Key.DepartmentId,
+                                               collegeId = t.Key.collegeid,
+                                               collegeName = t.Key.collegename,
+                                               subjectId = t.Key.subjectId,
+                                               Semester = t.Key.semester,
+                                               totalSeconds = t.Sum(x => x.totalhours),
+                                               userCount = t.Sum(x => x.totalusers)
+                                               //    totalhrs = string.Format("{0:00}:{1:00}:{2:00}", t.Sum(x => x.totalhours) / 3600, (t.Sum(x => x.totalhours) / 60) % 60, t.Sum(x => x.totalhours) % 60)
+                                           }).OrderByDescending(t => t.totalSeconds).ToList();
+                    }
+
+                    if (DepartmentID > 0)
+                    {
+                        var datanew = readHistoryswap.ToList();
+                        readHistoryswap.Clear();
+                        readHistoryswap.AddRange(datanew.Where(x => x.departmentId == DepartmentID));
+                    }
+
+                    if (collegeID > 0)
+                    {
+                        var datanew = readHistoryswap.ToList();
+                        readHistoryswap.Clear();
+                        readHistoryswap.AddRange(datanew.Where(x => x.collegeId == collegeID));
+                    }
+
+                    if (SubjectID > 0)
+                    {
+                        var datanew = readHistoryswap.ToList();
+                        readHistoryswap.Clear();
+                        readHistoryswap.AddRange(datanew.Where(x => x.subjectId == SubjectID));
+                    }
+
+                    if (SemsterID > 0)
+                    {
+                        var datanew = readHistoryswap.ToList();
+                        readHistoryswap.Clear();
+                        readHistoryswap.AddRange(datanew.Where(x => x.Semester == SemsterID));
+                    }
+
+                    if (SubjectType == 2)
+                    {
+                        readHistory = (from g in readHistoryswap
+                                       group g by new { g.departmentId, g.departmentName } into t
+                                       select new UserReadHistoryModel
+                                       {
+                                           departmentName = t.Key.departmentName,
+                                           departmentId = t.Key.departmentId,
+                                           TradeCount = t.Select(x => x.collegeId).Distinct().Count(),
+                                           subjectCount = t.Select(x => x.subjectId).Distinct().Count(),
+                                           totalSeconds = t.Sum(x => x.totalSeconds),
+                                           userCount = t.Sum(x => x.userCount),
+                                           totalhrs = string.Format("{0:00}:{1:00}:{2:00}", t.Sum(x => x.totalSeconds) / 3600, (t.Sum(x => x.totalSeconds) / 60) % 60, t.Sum(x => x.totalSeconds) % 60)
+                                       }).OrderByDescending(t => t.totalSeconds).ToList();
+                    }
+                    else
+                    {
+                        readHistory = (from g in readHistoryswap
+                                       group g by new { g.collegeId, g.collegeName } into t
+                                       select new UserReadHistoryModel
+                                       {
+                                           collegeName = t.Key.collegeName,
+                                           collegeId = t.Key.collegeId,
+                                           TradeCount = t.Select(x => x.departmentId).Distinct().Count(),
+                                           subjectCount = t.Select(x => x.subjectId).Distinct().Count(),
+                                           totalSeconds = t.Sum(x => x.totalSeconds),
+                                           userCount = t.Sum(x => x.userCount),
+                                           totalhrs = string.Format("{0:00}:{1:00}:{2:00}", t.Sum(x => x.totalSeconds) / 3600, (t.Sum(x => x.totalSeconds) / 60) % 60, t.Sum(x => x.totalSeconds) % 60)
+                                       }).OrderByDescending(t => t.totalSeconds).ToList();
+
+                    }
+                    return readHistory;
+                }
+                catch (Exception ex)
+                {
+                    contextsdce.Dispose();
+                    Log.WriteLogMessage(PageName, "AdminReportservice", "UniversityReadHistorySummary", ex.Message, "error");
+                    throw ex;
+                }
+                finally
+                {
+                    contextsdce.Dispose();
+                }
+            }
+        }
+
+
+       /// <summary>
+       /// 
+       /// </summary>
+       /// <param name="CollegeGrpId"></param>
+       /// <param name="DepartmentID"></param>
+       /// <param name="collegeID"></param>
+       /// <param name="SubjectID"></param>
+       /// <param name="SemsterID"></param>
+       /// <param name="DateFrom"></param>
+       /// <param name="DateTo"></param>
+       /// <param name="SubjectType"></param>
+       /// <param name="ITIorTrade"></param>
+       /// <returns></returns>
+        public List<UserReadHistoryModel> UniversityReadHistorySummary(int CollegeGrpId, int DepartmentID, int collegeID, int SubjectID, int SemsterID, string DateFrom, string DateTo, int SubjectType, int ITIorTrade)
+        {
+            List<UserReadHistoryModel> readHistory = new List<UserReadHistoryModel>();
+            List<UserReadHistoryModel> readHistoryswap = new List<UserReadHistoryModel>();
+
+            DateTime usgEnd_date = DateTime.Now;
+            DateTime usgStart_date = DateTime.Now;
+
+            if (DateTo != "0")
+            {
+                string usg_endate = DateTo + " " + "00:00:00 AM";
+                usgEnd_date = DateTime.ParseExact(usg_endate, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+            }
+
+            if (DateFrom != "0")
+            {
+                string usg_startdate = DateFrom + " " + "00:00:00 AM";
+                usgStart_date = DateTime.ParseExact(usg_startdate, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+            }
+
+
+            using (learnengg_payment_portal_entities contextsdce = new learnengg_payment_portal_entities())
+            {
+                try
+                {
+                    if (DateFrom != "0" && DateTo != "0")
+                    {
+
+                        var regCount = (from sm in contextsdce.subject_master
+                                        join usrh in contextsdce.user_subject_read_history on sm.subject_id equals usrh.subject_id
+                                        join um in contextsdce.user_master on usrh.user_id equals um.user_id
+                                        join dpsm in contextsdce.college_subject_mapping on usrh.department_id equals dpsm.department_id
+                                        join dm in contextsdce.department_master on dpsm.department_id equals dm.department_id
+                                        join cm in contextsdce.college_master on um.collegeid equals cm.college_id
+                                        join umgrpm in contextsdce.college_group_map on cm.college_id equals umgrpm.college_id
+                                        join umgrp in contextsdce.college_group_master on umgrpm.college_group_id equals umgrp.college_group_id
+                                        where sm.subject_id == dpsm.subject_id && umgrp.college_group_id == CollegeGrpId
+                                           && usrh.last_read_on >= usgStart_date && usrh.last_read_on <= usgEnd_date
+                                        && um.active_status == 1 && cm.active_status == 1 && dpsm.college_id == cm.college_id
+                                        orderby usrh.total_hours descending
+                                        group new { cm, usrh, dpsm, um } by new { cm.college_id, cm.college_name, sm.subject_id, dpsm.map_year, dpsm.semester, dpsm.department_id, dm.department_name } into g
+                                        select new
+                                        {
+                                            collegename = g.Key.college_name,
+                                            collegeid = g.Key.college_id,
+                                            subjectId = g.Key.subject_id,
+                                            totalhours = g.Select(x => x.usrh.total_hours).Sum(),
+                                            totalusers = g.Select(x => x.um.user_id).Distinct().Count(),
+                                            map_year = g.Key.map_year,
+                                            semester = g.Key.semester,
+                                            DepartmentId = g.Key.department_id,
+                                            DepartmentName = g.Key.department_name
+                                        }).ToList();
+
+                        readHistoryswap = (from g in regCount
+                                           group g by new { g.DepartmentId, g.DepartmentName, g.collegeid, g.map_year, g.semester, g.subjectId } into t
+                                           select new UserReadHistoryModel
+                                           {
+                                               departmentName = t.Key.DepartmentName,
+                                               departmentId = t.Key.DepartmentId,
+                                               collegeId = t.Key.collegeid,
+                                               subjectId = t.Key.subjectId,
+                                               Semester = t.Key.semester,
+                                               totalSeconds = t.Sum(x => x.totalhours),
+                                               userCount = t.Sum(x => x.totalusers)
+                                               //    totalhrs = string.Format("{0:00}:{1:00}:{2:00}", t.Sum(x => x.totalhours) / 3600, (t.Sum(x => x.totalhours) / 60) % 60, t.Sum(x => x.totalhours) % 60)
+                                           }).OrderByDescending(t => t.totalSeconds).ToList();
+                    }
+                    else if (DateFrom != "0" && DateTo == "0")
+                    {
+
+                        var regCount = (from sm in contextsdce.subject_master
+                                        join usrh in contextsdce.user_subject_read_history on sm.subject_id equals usrh.subject_id
+                                        join um in contextsdce.user_master on usrh.user_id equals um.user_id
+                                        join dpsm in contextsdce.college_subject_mapping on usrh.department_id equals dpsm.department_id
+                                        join dm in contextsdce.department_master on dpsm.department_id equals dm.department_id
+                                        join cm in contextsdce.college_master on um.collegeid equals cm.college_id
+                                        join umgrpm in contextsdce.college_group_map on cm.college_id equals umgrpm.college_id
+                                        join umgrp in contextsdce.college_group_master on umgrpm.college_group_id equals umgrp.college_group_id
+                                        where sm.subject_id == dpsm.subject_id  && umgrp.college_group_id == CollegeGrpId
+                                           && usrh.last_read_on >= usgStart_date
+                                        && um.active_status == 1 && cm.active_status == 1 && dpsm.college_id == cm.college_id
+                                        orderby usrh.total_hours descending
+                                        group new { cm, usrh, dpsm, um } by new { cm.college_id, cm.college_name, sm.subject_id, dpsm.map_year, dpsm.semester, dpsm.department_id, dm.department_name } into g
+                                        select new
+                                        {
+                                            collegename = g.Key.college_name,
+                                            collegeid = g.Key.college_id,
+                                            subjectId = g.Key.subject_id,
+                                            totalhours = g.Select(x => x.usrh.total_hours).Sum(),
+                                            totalusers = g.Select(x => x.um.user_id).Distinct().Count(),
+                                            map_year = g.Key.map_year,
+                                            semester = g.Key.semester,
+                                            DepartmentId = g.Key.department_id,
+                                            DepartmentName = g.Key.department_name
+                                        }).ToList();
+
+                        readHistoryswap = (from g in regCount
+                                           group g by new { g.DepartmentId, g.DepartmentName, g.collegeid, g.map_year, g.semester, g.subjectId } into t
+                                           select new UserReadHistoryModel
+                                           {
+                                               departmentName = t.Key.DepartmentName,
+                                               departmentId = t.Key.DepartmentId,
+                                               collegeId = t.Key.collegeid,
+                                               subjectId = t.Key.subjectId,
+                                               Semester = t.Key.semester,
+                                               totalSeconds = t.Sum(x => x.totalhours),
+                                               userCount = t.Sum(x => x.totalusers)
+                                               //    totalhrs = string.Format("{0:00}:{1:00}:{2:00}", t.Sum(x => x.totalhours) / 3600, (t.Sum(x => x.totalhours) / 60) % 60, t.Sum(x => x.totalhours) % 60)
+                                           }).OrderByDescending(t => t.totalSeconds).ToList();
+                    }
+                    else if (DateFrom == "0" && DateTo != "0")
+                    {
+
+                        var regCount = (from sm in contextsdce.subject_master
+                                        join usrh in contextsdce.user_subject_read_history on sm.subject_id equals usrh.subject_id
+                                        join um in contextsdce.user_master on usrh.user_id equals um.user_id
+                                        join dpsm in contextsdce.college_subject_mapping on usrh.department_id equals dpsm.department_id
+                                        join dm in contextsdce.department_master on dpsm.department_id equals dm.department_id
+                                        join cm in contextsdce.college_master on um.collegeid equals cm.college_id
+                                        join umgrpm in contextsdce.college_group_map on cm.college_id equals umgrpm.college_id
+                                        join umgrp in contextsdce.college_group_master on umgrpm.college_group_id equals umgrp.college_group_id
+                                        where sm.subject_id == dpsm.subject_id && umgrp.college_group_id == CollegeGrpId
+                                           && usrh.last_read_on <= usgEnd_date
+                                        && um.active_status == 1 && cm.active_status == 1 && dpsm.college_id == cm.college_id
+                                        orderby usrh.total_hours descending
+                                        group new { cm, usrh, dpsm, um } by new { cm.college_id, cm.college_name, sm.subject_id, dpsm.map_year, dpsm.semester, dpsm.department_id, dm.department_name } into g
+                                        select new
+                                        {
+                                            collegename = g.Key.college_name,
+                                            collegeid = g.Key.college_id,
+                                            subjectId = g.Key.subject_id,
+                                            totalhours = g.Select(x => x.usrh.total_hours).Sum(),
+                                            totalusers = g.Select(x => x.um.user_id).Distinct().Count(),
+                                            map_year = g.Key.map_year,
+                                            semester = g.Key.semester,
+                                            DepartmentId = g.Key.department_id,
+                                            DepartmentName = g.Key.department_name
+                                        }).ToList();
+
+                        readHistoryswap = (from g in regCount
+                                           group g by new { g.DepartmentId, g.DepartmentName, g.collegeid, g.map_year, g.semester, g.subjectId } into t
+                                           select new UserReadHistoryModel
+                                           {
+                                               departmentName = t.Key.DepartmentName,
+                                               departmentId = t.Key.DepartmentId,
+                                               collegeId = t.Key.collegeid,
+                                               subjectId = t.Key.subjectId,
+                                               Semester = t.Key.semester,
+                                               totalSeconds = t.Sum(x => x.totalhours),
+                                               userCount = t.Sum(x => x.totalusers)
+                                               //    totalhrs = string.Format("{0:00}:{1:00}:{2:00}", t.Sum(x => x.totalhours) / 3600, (t.Sum(x => x.totalhours) / 60) % 60, t.Sum(x => x.totalhours) % 60)
+                                           }).OrderByDescending(t => t.totalSeconds).ToList();
+                    }
+                    else
+                    {
+                        var regCount = (from sm in contextsdce.subject_master
+                                        join usrh in contextsdce.user_subject_read_history on sm.subject_id equals usrh.subject_id
+                                        join um in contextsdce.user_master on usrh.user_id equals um.user_id
+                                        join dpsm in contextsdce.college_subject_mapping on usrh.department_id equals dpsm.department_id
+                                        join dm in contextsdce.department_master on dpsm.department_id equals dm.department_id
+                                        join cm in contextsdce.college_master on um.collegeid equals cm.college_id
+                                        join umgrpm in contextsdce.college_group_map on cm.college_id equals umgrpm.college_id
+                                        join umgrp in contextsdce.college_group_master on umgrpm.college_group_id equals umgrp.college_group_id
+                                        where sm.subject_id == dpsm.subject_id && umgrp.college_group_id == CollegeGrpId
+                                        //   && usrh.last_read_on >= usgStart_date && usrh.last_read_on <= usgEnd_date
+                                        && um.active_status == 1 && cm.active_status == 1 && dpsm.college_id == cm.college_id
+                                        orderby usrh.total_hours descending
+                                        group new { cm, usrh, dpsm, um } by new { cm.college_id, cm.college_name, sm.subject_id, dpsm.map_year, dpsm.semester, dpsm.department_id, dm.department_name } into g
+                                        select new
+                                        {
+                                            collegename = g.Key.college_name,
+                                            collegeid = g.Key.college_id,
+                                            subjectId = g.Key.subject_id,
+                                            totalhours = g.Select(x => x.usrh.total_hours).Sum(),
+                                            totalusers = g.Select(x => x.um.user_id).Distinct().Count(),
+                                            map_year = g.Key.map_year,
+                                            semester = g.Key.semester,
+                                            DepartmentId = g.Key.department_id,
+                                            DepartmentName = g.Key.department_name
+                                        }).ToList();
+
+                        readHistoryswap = (from g in regCount
+                                           group g by new { g.DepartmentId, g.DepartmentName, g.collegeid, g.collegename, g.map_year, g.semester, g.subjectId } into t
+                                           select new UserReadHistoryModel
+                                           {
+                                               departmentName = t.Key.DepartmentName,
+                                               departmentId = t.Key.DepartmentId,
+                                               collegeId = t.Key.collegeid,
+                                               collegeName = t.Key.collegename,
+                                               subjectId = t.Key.subjectId,
+                                               Semester = t.Key.semester,
+                                               totalSeconds = t.Sum(x => x.totalhours),
+                                               userCount = t.Sum(x => x.totalusers)
+                                               //    totalhrs = string.Format("{0:00}:{1:00}:{2:00}", t.Sum(x => x.totalhours) / 3600, (t.Sum(x => x.totalhours) / 60) % 60, t.Sum(x => x.totalhours) % 60)
+                                           }).OrderByDescending(t => t.totalSeconds).ToList();
+                    }
+
+                    if (DepartmentID > 0)
+                    {
+                        var datanew = readHistoryswap.ToList();
+                        readHistoryswap.Clear();
+                        readHistoryswap.AddRange(datanew.Where(x => x.departmentId == DepartmentID));
+                    }
+
+                    if (collegeID > 0)
+                    {
+                        var datanew = readHistoryswap.ToList();
+                        readHistoryswap.Clear();
+                        readHistoryswap.AddRange(datanew.Where(x => x.collegeId == collegeID));
+                    }
+
+                    if (SubjectID > 0)
+                    {
+                        var datanew = readHistoryswap.ToList();
+                        readHistoryswap.Clear();
+                        readHistoryswap.AddRange(datanew.Where(x => x.subjectId == SubjectID));
+                    }
+
+                    if (SemsterID > 0)
+                    {
+                        var datanew = readHistoryswap.ToList();
+                        readHistoryswap.Clear();
+                        readHistoryswap.AddRange(datanew.Where(x => x.Semester == SemsterID));
+                    }
+
+                    if (SubjectType == 2)
+                    {
+                        readHistory = (from g in readHistoryswap
+                                       group g by new { g.departmentId, g.departmentName } into t
+                                       select new UserReadHistoryModel
+                                       {
+                                           departmentName = t.Key.departmentName,
+                                           departmentId = t.Key.departmentId,
+                                           TradeCount = t.Select(x => x.collegeId).Distinct().Count(),
+                                           subjectCount = t.Select(x => x.subjectId).Distinct().Count(),
+                                           totalSeconds = t.Sum(x => x.totalSeconds),
+                                           userCount = t.Sum(x => x.userCount),
+                                           totalhrs = string.Format("{0:00}:{1:00}:{2:00}", t.Sum(x => x.totalSeconds) / 3600, (t.Sum(x => x.totalSeconds) / 60) % 60, t.Sum(x => x.totalSeconds) % 60)
+                                       }).OrderByDescending(t => t.totalSeconds).ToList();
+                    }
+                    else
+                    {
+                        readHistory = (from g in readHistoryswap
+                                       group g by new { g.collegeId, g.collegeName } into t
+                                       select new UserReadHistoryModel
+                                       {
+                                           collegeName = t.Key.collegeName,
+                                           collegeId = t.Key.collegeId,
+                                           TradeCount = t.Select(x => x.departmentId).Distinct().Count(),
+                                           subjectCount = t.Select(x => x.subjectId).Distinct().Count(),
+                                           totalSeconds = t.Sum(x => x.totalSeconds),
+                                           userCount = t.Sum(x => x.userCount),
+                                           totalhrs = string.Format("{0:00}:{1:00}:{2:00}", t.Sum(x => x.totalSeconds) / 3600, (t.Sum(x => x.totalSeconds) / 60) % 60, t.Sum(x => x.totalSeconds) % 60)
+                                       }).OrderByDescending(t => t.totalSeconds).ToList();
+
+                    }
+                    return readHistory;
+                }
+                catch (Exception ex)
+                {
+                    contextsdce.Dispose();
+                    Log.WriteLogMessage(PageName, "AdminReportservice", "UniversityReadHistorySummary", ex.Message, "error");
+                    throw ex;
+                }
+                finally
+                {
+                    contextsdce.Dispose();
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="deptID"></param>
+        /// <param name="collegeID"></param>
+        /// <param name="DateFrom"></param>
+        /// <param name="DateTo"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
+
+        public RegistrationReport RegistrationReportsummary(int CollegeGrpId, int deptID, int collegeID, string DateFrom, string DateTo, int type)
+        {
+            RegistrationReport rpt = new RegistrationReport();
+            try
+            {
+                using (learnengg_payment_portal_entities contextsdce = new learnengg_payment_portal_entities())
+                {
+                   
+
+
+                    var RegistrationRptsummary = (from cm in contextsdce.college_master                                                 
+                                                  join umgrpm in contextsdce.college_group_map on cm.college_id equals umgrpm.college_id
+                                                  join umgrp in contextsdce.college_group_master on umgrpm.college_group_id equals umgrp.college_group_id                                             
+                                                  join cid in contextsdce.college_installation_details on cm.college_id equals cid.college_id //  into collegeInstallationLeft
+                                                                                                                                              //  from cid in collegeInstallationLeft.DefaultIfEmpty()
+                                                  join cie in contextsdce.college_installation_expiry on cid.college_install_id equals cie.college_install_id // into collegeInstallationExpiryLeft
+                                                  join sub in contextsdce.subject_master on cie.subject_id equals sub.subject_id
+                                                  //join dm in contextsdce.department_master on cie.department_id equals dm.department_id
+                                                  // from cie in collegeInstallationExpiryLeft.DefaultIfEmpty().Where(x=>x.installed_on!=null)
+                                                  // join um in contextsdce.user_master on cm.college_id equals um.collegeid  into userInstallationLeft
+                                                  //   from um in userInstallationLeft.DefaultIfEmpty().Where(x=>x.active_status==1 && x.role_id<3)
+                                                  where cie.installed_on != null && umgrp.college_group_id == CollegeGrpId &&
+                                                  sub.having_questionpaper == type // && cm.active_status ==1
+                                                  select new
+                                                  {
+                                                      desktop = cie.college_install_id,
+                                                      DesktopregisterDate = cid.enter_on,
+                                                      college = cm.college_id,
+                                                      user = 0,
+                                                      UserregisterDate = DateTime.Now,
+                                                      department = cie.department_id
+                                                  }).Distinct().ToList();
+
+
+                    // RANGE VARIABLE for filter
+                    if (deptID != 0)
+                    {
+                        var datanew = RegistrationRptsummary.ToList();
+                        RegistrationRptsummary.Clear();
+                        RegistrationRptsummary.AddRange(datanew.Where(x => x.department == deptID));
+                    }
+
+                    if (collegeID > 0)
+                    {
+                        var datanew = RegistrationRptsummary.ToList();
+                        RegistrationRptsummary.Clear();
+                        RegistrationRptsummary.AddRange(datanew.Where(x => x.college == collegeID));
+                    }
+
+                    if (!DateFrom.Equals("0"))
+                    {
+                        string Reg_sdate = DateFrom + " " + "11:59:00 PM";
+                        DateTime start_date = DateTime.ParseExact(Reg_sdate, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+                        var datanew = RegistrationRptsummary.ToList();
+                        RegistrationRptsummary.Clear();
+                        RegistrationRptsummary.AddRange(datanew.Where(x => x.DesktopregisterDate >= start_date));
+                    }
+                    if (!DateTo.Equals("0"))
+                    {
+                        string usg_End_date = DateTo + " " + "11:59:00 PM";
+                        DateTime usgEnd_date = DateTime.ParseExact(usg_End_date, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+                        var datanew = RegistrationRptsummary.ToList();
+                        RegistrationRptsummary.Clear();
+                        RegistrationRptsummary.AddRange(datanew.Where(x => x.DesktopregisterDate <= usgEnd_date));
+                    }
+
+
+                    var FinalResult = (from result in RegistrationRptsummary
+                                       group new { result } by result.college into resultgroup
+                                       select new RegistrationReport
+                                       {
+                                           TotalDesktop = resultgroup.Select(x => x.result.desktop).Distinct().Count(),
+                                           TotalITI = resultgroup.Select(x => x.result.college).Distinct().Count()
+                                           //  TotalInstructors = resultgroup.Select(x => x.um !=null ? x.um.user_id: 0).Distinct().Count()
+                                       });
+
+
+                    var FinalUserResult = (from cm in contextsdce.college_master
+                                           join um in contextsdce.user_master on cm.college_id equals um.collegeid                                        
+                                           join umgrpm in contextsdce.college_group_map on cm.college_id equals umgrpm.college_id
+                                           join umgrp in contextsdce.college_group_master on umgrpm.college_group_id equals umgrp.college_group_id
+                                           where um.active_status == 1 && cm.active_status == 1 && um.role_id < 3 && umgrp.college_group_id == CollegeGrpId
+                                           group new { um } by um.collegeid into resultgroup
+                                           select new RegistrationReport
+                                           {
+                                               CollegeId = resultgroup.Key ?? 0,
+                                               TotalInstructors = resultgroup.Select(x => x.um.user_id).Distinct().Count()
+                                           }).ToList();                   
+
+                    if (collegeID > 0)
+                    {
+                        var datanew1 = FinalUserResult.ToList();
+                        FinalUserResult.Clear();
+                        FinalUserResult.AddRange(datanew1.Where(x => x.CollegeId == collegeID));
+                    }
+
+                    rpt.TotalDesktop = FinalResult.Sum(y => y.TotalDesktop);
+                    rpt.TotalITI = FinalResult.Sum(y => y.TotalITI);
+                    rpt.TotalInstructors = FinalUserResult.Sum(y => y.TotalInstructors);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                rpt = null;
+            }
+            return rpt;
+        }
+
+        /// <summary>
+        /// RegisteredUniversityCollegeDetails
+        /// </summary>
+        /// <param name="year"></param>
+        /// <param name="semester"></param>
+        /// <param name="start_date"></param>
+        /// <param name="end_date"></param>
+        /// <param name="universityId"></param>
+        /// <param name="roleid"></param>
+        /// <returns></returns>
+        public List<UnivDetails> RegisteredUniversityCollegeDetails(int CollegeGrpId, string year, int semester, string start_date, string end_date, int universityId, int roleid)
+        {
+
+            string[] ddlyear = new string[50];
+            List<int> selyear = new List<int>();
+            ddlyear = year.Split('-').ToArray();
+            if (ddlyear[0].ToString() != "0")
+            {
+                for (int j = 0; j < ddlyear.Length; j++)
+                {
+                    selyear.Add(Convert.ToInt16(ddlyear[j].ToString()));
+                }
+
+            }
+            if (semester == 1)
+            {
+                Sem_Startdate = DateTime.ParseExact(Resources.DateBetween.sem1_start_date, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+                Sem_Startdate.ToString("yyyy-MM-dd");
+
+                Sem_End_date = DateTime.ParseExact(Resources.DateBetween.sem1_end_date, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+                Sem_End_date.ToString("yyyy-MM-dd");
+            }
+            if (semester == 2)
+            {
+
+                Sem_Startdate = DateTime.ParseExact(Resources.DateBetween.sem2_start_date, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+                Sem_Startdate.ToString("yyyy-MM-dd");
+
+                Sem_End_date = DateTime.ParseExact(Resources.DateBetween.sem2_end_date, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+                Sem_End_date.ToString("yyyy-MM-dd");
+            }
+
+            List<UnivDetails> Registereduniv = new List<UnivDetails>();
+
+            using (learnengg_payment_portal_entities contextsdce = new learnengg_payment_portal_entities())
+            {
+                try
+                {
+
+                    var regUniversity = (from um in contextsdce.user_master.AsEnumerable()
+                                         join cm in contextsdce.college_master on um.collegeid equals cm.college_id
+                                         join umgrpm in contextsdce.college_group_map on cm.college_id equals umgrpm.college_id
+                                         join umgrp in contextsdce.college_group_master on umgrpm.college_group_id equals umgrp.college_group_id
+                                         where um.univ_id == cm.university_id && um.univ_id == universityId && um.role_id == roleid
+                                         && um.active_status == 1 && umgrp.college_group_id == CollegeGrpId
+                                         select new
+                                         {
+                                             um.univ_id,
+                                             cm.college_name,
+                                             um.user_name,
+                                             um.email_id,
+                                             um.mobile,
+                                             um.created_on,
+                                             um.currentyear,
+                                             um.currentsemester
+                                         }).ToList();
+
+                    if (selyear.Count() > 0)
+                    {
+                        var datanew = regUniversity.ToList();
+                        regUniversity.Clear();
+                        //regUniversity.AddRange(datanew.Where(x => selyear.Contains(x.currentyear)));
+                    }
+
+                    if (semester != 0)
+                    {
+                        var datanew = regUniversity.ToList();
+                        regUniversity.Clear();
+                        regUniversity.AddRange(datanew.Where(x => x.created_on >= Sem_Startdate && x.created_on <= Sem_End_date));
+                    }
+                    if (start_date != "0")
+                    {
+                        string stdate = start_date + " " + "00:00:00 AM";
+                        DateTime Startdate = DateTime.ParseExact(stdate, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+                        var datanew = regUniversity.ToList();
+                        regUniversity.Clear();
+                        regUniversity.AddRange(datanew.Where(x => x.created_on >= Startdate));
+                    }
+
+                    if (end_date != "0")
+                    {
+                        string edate = end_date + " " + "11:59:59 PM";
+                        DateTime End_date = DateTime.ParseExact(edate, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+                        var datanew = regUniversity.ToList();
+                        regUniversity.Clear();
+                        regUniversity.AddRange(datanew.Where(x => x.created_on <= End_date));
+                    }
+
+
+                    Registereduniv = (from t in regUniversity
+                                      select new UnivDetails
+                                      {
+                                          //collegeid = um.collegeid,  
+                                          universityid = t.univ_id,
+                                          CollegeName = t.college_name,
+                                          userName = t.user_name,
+                                          Emailid = t.email_id,
+                                          Mobile = t.mobile,
+                                          //user_id = um.user_id,
+                                          RegisteredOn = t.created_on.ToString("dd-MMM-yyyy"),
+                                          createdon = t.created_on
+
+                                      }).Distinct().ToList();
+
+                    Registereduniv = Registereduniv.OrderByDescending(c => c.createdon.Date)
+                         .ThenBy(c => c.createdon.TimeOfDay).ToList();
+
+                    return Registereduniv;
+
+                }
+                catch (Exception ex)
+                {
+                    contextsdce.Dispose();
+                    Log.WriteLogMessage(PageName, "RegistrationReport", "RegisteredUniversityCollegeDetails", ex.Message, "error");
+                    throw ex;
+                }
+                finally
+                {
+                    contextsdce.Dispose();
+                }
+            }
+
+        }
+
+        public List<RegistrationReport> RegistrationReportCollegesummary(int CollegeGrpId, int deptID, int collegeID, string DateFrom, string DateTo, int type)
+        {
+            List<RegistrationReport> RegistrationRptsummary = new List<RegistrationReport>();
+            List<RegistrationReport> FRegistrationRptsummary = new List<RegistrationReport>();
+            List<RegistrationReport> ZRegistrationRptsummary = new List<RegistrationReport>();
+            try
+            {
+                using (learnengg_payment_portal_entities contextsdce = new learnengg_payment_portal_entities())
+                {
+
+                    var RegistrationTradeRptQuery = from cm in contextsdce.college_master                                                   
+                                                    join umgrpm in contextsdce.college_group_map on cm.college_id equals umgrpm.college_id
+                                                    join umgrp in contextsdce.college_group_master on umgrpm.college_group_id equals umgrp.college_group_id
+                                                    join cid in contextsdce.college_installation_details on cm.college_id equals cid.college_id
+                                                    join cde in contextsdce.college_installation_expiry on cid.college_install_id equals cde.college_install_id
+                                                    join sub in contextsdce.subject_master on cde.subject_id equals sub.subject_id
+                                                    where cde.installed_on != null && sub.having_questionpaper == type && umgrp.college_group_id == CollegeGrpId
+                                                    group new { cm, cid, cde } by new { cm.college_name, cde.college_install_id, cde.department_id } into collegegrp
+                                                    select new { collegeId = collegegrp.Key, collegedetails = collegegrp };
+
+                    foreach (var Tradedetails in RegistrationTradeRptQuery)
+                    {
+                        RegistrationReport rept = new RegistrationReport();
+                        rept.CollegeId = Tradedetails.collegedetails.FirstOrDefault().cm.college_id;
+                        rept.ITIName = Tradedetails.collegedetails.FirstOrDefault().cm.college_name + '[' + Tradedetails.collegedetails.FirstOrDefault().cm.college_code + ']';
+                        //    rept.TotalDesktop =  (int)Tradedetails.collegedetails.FirstOrDefault().cde.college_install_id;
+                        //int Desktopuniq = 0;
+                        //var tempDepartId = int.TryParse((Tradedetails.collegedetails.FirstOrDefault().cde.college_install_id+""),out Desktopuniq);
+                        rept.TotalDesktop = (int)Tradedetails.collegedetails.FirstOrDefault().cde.college_install_id;
+                        rept.TotalInstructors = 0;
+                        rept.activeationMinDate = DateTime.Now.Date;
+                        rept.DeskTopRegDate = (DateTime)Tradedetails.collegedetails.FirstOrDefault().cid.enter_on;
+                        rept.activeationMinDateStr = Tradedetails.collegedetails.FirstOrDefault().cid.enter_on.ToShortDateString();
+                        rept.TradeRegDate = (DateTime)Tradedetails.collegedetails.FirstOrDefault().cde.installed_on;
+                        //int tradeuniq = 0;
+                        //var tempDepartId = int.TryParse((Tradedetails.collegedetails.FirstOrDefault().cde.college_install_id + "0" + Tradedetails.collegedetails.FirstOrDefault().cde.department_id), out tradeuniq);
+                        //rept.TotalTrades = tradeuniq;
+
+                        rept.TotalTrades = Tradedetails.collegedetails.Select(p => p.cid.college_install_id).Distinct().Count();
+                        rept.Trade = Tradedetails.collegedetails.FirstOrDefault().cde.department_id;
+                        RegistrationRptsummary.Add(rept);
+                    }
+
+                    var RegistrationInstructorRptQuery = from cm in contextsdce.college_master                                                         
+                                                         join umgrpm in contextsdce.college_group_map on cm.college_id equals umgrpm.college_id
+                                                         join umgrp in contextsdce.college_group_master on umgrpm.college_group_id equals umgrp.college_group_id
+                                                         join um in contextsdce.user_master on cm.college_id equals um.collegeid
+                                                         where um.role_id < 3 && um.active_status == 1 && cm.active_status == 1 && umgrp.college_group_id == CollegeGrpId
+                                                         group new { cm, um } by new { cm.college_name } into collegegrp
+                                                         select new { collegeId = collegegrp.Key, collegedetails = collegegrp };
+
+                    foreach (var Userdetails in RegistrationInstructorRptQuery)
+                    {
+                        RegistrationReport rept = new RegistrationReport();
+                        rept.CollegeId = Userdetails.collegedetails.FirstOrDefault().cm.college_id;
+                        rept.ITIName = Userdetails.collegedetails.FirstOrDefault().cm.college_name + '[' + Userdetails.collegedetails.FirstOrDefault().cm.college_code + ']'; ;
+                        rept.TotalDesktop = 0;
+                        rept.TotalInstructors = Userdetails.collegedetails.Select(p => p.um.user_id).Distinct().Count();
+                        rept.TotalTrades = 0;
+                        //  rept.activeationMinDate = DateTime.Now.Date;
+                        RegistrationRptsummary.Add(rept);
+                    }
+                }
+
+                // RANGE VARIABLE for filter
+                if (deptID != 0)
+                {
+                    var datanew = RegistrationRptsummary.ToList();
+                    RegistrationRptsummary.Clear();
+                    RegistrationRptsummary.AddRange(datanew.Where(x => x.Trade == deptID));
+                }
+
+                if (collegeID > 0)
+                {
+                    var datanew = RegistrationRptsummary.ToList();
+                    RegistrationRptsummary.Clear();
+                    RegistrationRptsummary.AddRange(datanew.Where(x => x.CollegeId == collegeID));
+                }
+
+                if (!DateFrom.Equals("0"))
+                {
+                    string Reg_sdate = DateFrom + " " + "11:59:00 PM";
+                    DateTime start_date = DateTime.ParseExact(Reg_sdate, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+                    var datanew = RegistrationRptsummary.ToList();
+                    RegistrationRptsummary.Clear();
+                    RegistrationRptsummary.AddRange(datanew.Where(x => x.DeskTopRegDate >= start_date));
+                }
+                if (!DateTo.Equals("0"))
+                {
+                    string usg_End_date = DateTo + " " + "11:59:00 PM";
+                    DateTime usgEnd_date = DateTime.ParseExact(usg_End_date, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+                    var datanew = RegistrationRptsummary.ToList();
+                    RegistrationRptsummary.Clear();
+                    RegistrationRptsummary.AddRange(datanew.Where(x => x.DeskTopRegDate <= usgEnd_date));
+                }
+
+
+
+
+                var FRegistrationRpt = (from RRS in RegistrationRptsummary
+                                        group RRS by RRS.ITIName into Fcollegegrp
+                                        select new { college = Fcollegegrp.Key, collegegrp = Fcollegegrp }).ToList();
+
+                foreach (var fresult in FRegistrationRpt)
+                {
+                    RegistrationReport rept = new RegistrationReport();
+                    rept.ITIName = fresult.collegegrp.FirstOrDefault().ITIName.ToString();
+                    rept.CollegeId = fresult.collegegrp.FirstOrDefault().CollegeId;
+                    rept.TotalDesktop = fresult.collegegrp.Where(k => k.TotalDesktop > 0).Select(p => p.TotalDesktop).Distinct().Count();
+                    // rept.TotalDesktop = fresult.collegegrp.Sum(p => p.TotalDesktop) == 0 ? 0 : fresult.collegegrp.Sum(p => p.TotalDesktop);
+                    //rept.TotalDesktop = fresult.collegegrp.Sum(p => p.TotalDesktop) == 0 ? 0 : fresult.collegegrp.Sum(p => p.TotalDesktop);
+                    rept.TotalInstructors = fresult.collegegrp.Sum(p => p.TotalInstructors) == 0 ? 0 : fresult.collegegrp.Sum(p => p.TotalInstructors);
+                    //rept.TotalTrades = fresult.collegegrp.Select(p => p.TotalTrades).Distinct().Count();
+                    rept.TotalTrades = fresult.collegegrp.Sum(p => p.TotalTrades) == 0 ? 0 : fresult.collegegrp.Sum(p => p.TotalTrades);
+                    rept.activeationMinDate = fresult.collegegrp.Max(p => p.DeskTopRegDate).Date;
+                    rept.activeationMinDateStr = fresult.collegegrp.Max(p => p.DeskTopRegDate).ToShortDateString();
+                    FRegistrationRptsummary.Add(rept);
+                }
+
+
+                var FPRegistrationRpt = (from RRS in FRegistrationRptsummary
+                                         select new
+                                         {
+                                             ITIName = RRS.ITIName,
+                                             CollegeId = RRS.CollegeId,
+                                             TotalDesktop = RRS.TotalDesktop,
+                                             TotalInstructors = RRS.TotalInstructors,
+                                             TotalTrades = RRS.TotalTrades,
+                                             TxnDate = RRS.activeationMinDate,
+                                         }).ToList().OrderByDescending(X => X.TxnDate);
+
+                foreach (var fresult in FPRegistrationRpt)
+                {
+                    RegistrationReport rept = new RegistrationReport();
+                    rept.ITIName = fresult.ITIName.ToString();
+                    rept.CollegeId = fresult.CollegeId;
+                    rept.TotalDesktop = fresult.TotalDesktop;
+                    rept.TotalInstructors = fresult.TotalInstructors;
+                    rept.TotalTrades = fresult.TotalTrades;
+                    //  rept.activeationMinDate = (DateTime)DbFunctions.TruncateTime(fresult.activeatioMinDate);
+                    // rept.activeationMinDate = DateTime.ParseExact(fresult.TxnDate.ToShortDateString() , "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                    rept.activeationMinDate = fresult.TxnDate.Date;
+                    rept.activeationMinDateStr = fresult.TxnDate.Date.ToShortDateString();
+                    ZRegistrationRptsummary.Add(rept);
+                }
+
+
+
+            }
+            catch (Exception ex)
+            {
+                ZRegistrationRptsummary = null;
+            }
+            return ZRegistrationRptsummary;
+        }
+
+
+        public List<RegistrationDetailsReport> RegistrationReportCollegeDetails(int CollegeGrpId, int category, int collegeid, int regtype, int deptID, string DateFrom, string DateTo)
+        {
+            List<RegistrationDetailsReport> RegistrationRptdetails = new List<RegistrationDetailsReport>();
+
+            try
+            {
+                using (learnengg_payment_portal_entities contextsdce = new learnengg_payment_portal_entities())
+                {
+                    if (category == 1)
+                    {
+
+                        var RegistrationRptdetailsQuery = (from rpt in contextsdce.user_master
+                                                           join cm in contextsdce.college_master on rpt.collegeid equals cm.college_id
+                                                           join umgrpm in contextsdce.college_group_map on cm.college_id equals umgrpm.college_id
+                                                           join umgrp in contextsdce.college_group_master on umgrpm.college_group_id equals umgrp.college_group_id
+                                                           where rpt.collegeid == collegeid && umgrp.college_group_id == CollegeGrpId
+                                                           select new { username = rpt.user_name, regdate = rpt.created_on }).ToList();
+
+                        foreach (var result in RegistrationRptdetailsQuery)
+                        {
+                            RegistrationDetailsReport repta = new RegistrationDetailsReport();
+                            repta.InstructorName = result.username;
+                            repta.RegisteredOn = result.regdate.ToShortDateString();
+                            RegistrationRptdetails.Add(repta);
+                        }
+                    }
+                    else if (category == 2)
+                    {
+                        // if it is test registration
+                        if (regtype == 2)
+                        {
+                            var RegistrationRptdetailsQuery = (from rpt in contextsdce.college_test_installation_details
+                                                               join cm in contextsdce.college_master on rpt.college_id equals cm.college_id
+                                                               join umgrpm in contextsdce.college_group_map on cm.college_id equals umgrpm.college_id
+                                                               join umgrp in contextsdce.college_group_master on umgrpm.college_group_id equals umgrp.college_group_id
+                                                               join rptd in contextsdce.college_test_installation_expiry on rpt.college_test_install_id equals rptd.college_test_install_id
+                                                               join sub in contextsdce.subject_master on rptd.subject_id equals sub.subject_id
+                                                               where rpt.college_id == collegeid && rptd.installed_on != null && umgrp.college_group_id == CollegeGrpId  // && sub.having_questionpaper == regtype
+                                                               select new { username = rpt.installation_centre_name, installid = rpt.college_test_install_id, tradeid = rptd.department_id, regdate = rpt.enter_on }).ToList();
+
+                            foreach (var result in RegistrationRptdetailsQuery)
+                            {
+                                RegistrationDetailsReport reptz = new RegistrationDetailsReport();
+                                reptz.InstructorName = result.username;
+                                reptz.TradeId = result.tradeid;
+                                reptz.CollegeInstallId = result.installid;
+                                reptz.RegisteredOn = result.regdate.ToShortDateString();
+                                reptz.RegisteredOnDate = (DateTime)result.regdate;
+                                RegistrationRptdetails.Add(reptz);
+                            }
+                        }
+                        else
+                        {
+
+                            var RegistrationRptdetailsQuery = (from rpt in contextsdce.college_installation_details
+                                                               join cm in contextsdce.college_master on rpt.college_id equals cm.college_id
+                                                               join umgrpm in contextsdce.college_group_map on cm.college_id equals umgrpm.college_id
+                                                               join umgrp in contextsdce.college_group_master on umgrpm.college_group_id equals umgrp.college_group_id
+                                                               join rptd in contextsdce.college_installation_expiry on rpt.college_install_id equals rptd.college_install_id
+                                                               join sub in contextsdce.subject_master on rptd.subject_id equals sub.subject_id
+                                                               where rpt.college_id == collegeid && rptd.installed_on != null && sub.having_questionpaper == regtype && umgrp.college_group_id == CollegeGrpId
+                                                               select new { username = rpt.installation_centre_name, installid = rpt.college_install_id, tradeid = rptd.department_id, regdate = rpt.enter_on }).ToList();
+
+                            foreach (var result in RegistrationRptdetailsQuery)
+                            {
+                                RegistrationDetailsReport reptz = new RegistrationDetailsReport();
+                                reptz.InstructorName = result.username;
+                                reptz.TradeId = result.tradeid;
+                                reptz.CollegeInstallId = result.installid;
+                                reptz.RegisteredOn = result.regdate.ToShortDateString();
+                                reptz.RegisteredOnDate = (DateTime)result.regdate;
+                                RegistrationRptdetails.Add(reptz);
+                            }
+                        }
+                    }
+                    else if (category == 3)
+                    {
+
+                        if (regtype == 2)
+                        {
+                            var RegistrationRptdetailsQuery = (from rpt in contextsdce.college_test_installation_details
+                                                               join cm in contextsdce.college_master on rpt.college_id equals cm.college_id
+                                                               join umgrpm in contextsdce.college_group_map on cm.college_id equals umgrpm.college_id
+                                                               join umgrp in contextsdce.college_group_master on umgrpm.college_group_id equals umgrp.college_group_id
+                                                               join rptd in contextsdce.college_test_installation_expiry on rpt.college_test_install_id equals rptd.college_test_install_id
+                                                               join dept in contextsdce.department_master on rptd.department_id equals dept.department_id
+                                                               join sub in contextsdce.subject_master on rptd.subject_id equals sub.subject_id
+                                                               where rpt.college_id == collegeid && rptd.installed_on != null && umgrp.college_group_id == CollegeGrpId // && sub.having_questionpaper == regtype
+                                                               group new { rptd, dept, rpt } by new { rptd.college_test_install_id, dept.department_name } into grp
+                                                               select new { username = grp.Key.department_name, regdate = grp }).ToList();
+
+                            foreach (var result in RegistrationRptdetailsQuery)
+                            {
+                                RegistrationDetailsReport repts = new RegistrationDetailsReport();
+                                // rept.InstructorName = result.username;
+                                //  rept.RegisteredOn = result.regdate.ToShortDateString(); 
+                                // rept.DesktopName = result.regdate.FirstOrDefault().rpt.installation_centre_name;
+                                repts.TradeId = result.regdate.FirstOrDefault().rptd.department_id;
+                                repts.InstructorName = result.regdate.FirstOrDefault().dept.department_name;
+                                repts.RegisteredOn = result.regdate.FirstOrDefault().rptd.installed_on.ToString();
+                                repts.RegisteredOnDate = (DateTime)result.regdate.FirstOrDefault().rptd.installed_on;
+                                RegistrationRptdetails.Add(repts);
+                            }
+                        }
+                        else
+                        {
+                            var RegistrationRptdetailsQuery = (from rpt in contextsdce.college_installation_details
+                                                               join cm in contextsdce.college_master on rpt.college_id equals cm.college_id
+                                                               join umgrpm in contextsdce.college_group_map on cm.college_id equals umgrpm.college_id
+                                                               join umgrp in contextsdce.college_group_master on umgrpm.college_group_id equals umgrp.college_group_id
+                                                               join rptd in contextsdce.college_installation_expiry on rpt.college_install_id equals rptd.college_install_id
+                                                               join dept in contextsdce.department_master on rptd.department_id equals dept.department_id
+                                                               join sub in contextsdce.subject_master on rptd.subject_id equals sub.subject_id
+                                                               where rpt.college_id == collegeid && rptd.installed_on != null && sub.having_questionpaper == regtype && umgrp.college_group_id == CollegeGrpId
+                                                               group new { rptd, dept, rpt } by new { rptd.college_install_id, dept.department_name } into grp
+                                                               select new { username = grp.Key.department_name, regdate = grp }).ToList();
+
+                            foreach (var result in RegistrationRptdetailsQuery)
+                            {
+                                RegistrationDetailsReport repts = new RegistrationDetailsReport();
+                                // rept.InstructorName = result.username;
+                                //  rept.RegisteredOn = result.regdate.ToShortDateString(); 
+                                // rept.DesktopName = result.regdate.FirstOrDefault().rpt.installation_centre_name;
+                                repts.TradeId = result.regdate.FirstOrDefault().rptd.department_id;
+                                repts.InstructorName = result.regdate.FirstOrDefault().dept.department_name;
+                                repts.RegisteredOn = result.regdate.FirstOrDefault().rptd.installed_on.ToString();
+                                repts.RegisteredOnDate = (DateTime)result.regdate.FirstOrDefault().rptd.installed_on;
+                                RegistrationRptdetails.Add(repts);
+                            }
+                        }
+
+
+                    }
+
+                }
+
+                if (deptID != 0)
+                {
+                    var datanew = RegistrationRptdetails.ToList();
+                    RegistrationRptdetails.Clear();
+                    RegistrationRptdetails.AddRange(datanew.Where(x => x.TradeId == deptID));
+                }
+
+                if (!DateFrom.Equals("0"))
+                {
+                    string Reg_sdate = DateFrom + " " + "11:59:00 PM";
+                    DateTime start_date = DateTime.ParseExact(Reg_sdate, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+                    var datanew = RegistrationRptdetails.ToList();
+                    RegistrationRptdetails.Clear();
+                    RegistrationRptdetails.AddRange(datanew.Where(x => x.RegisteredOnDate >= start_date));
+                }
+                if (!DateTo.Equals("0"))
+                {
+                    string usg_End_date = DateTo + " " + "11:59:00 PM";
+                    DateTime usgEnd_date = DateTime.ParseExact(usg_End_date, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+                    var datanew = RegistrationRptdetails.ToList();
+                    RegistrationRptdetails.Clear();
+                    RegistrationRptdetails.AddRange(datanew.Where(x => x.RegisteredOnDate <= usgEnd_date));
+                }
+
+
+                if (category == 2)
+                {
+                    RegistrationRptdetails = (from IntermediateResult in RegistrationRptdetails
+                                              group IntermediateResult by IntermediateResult.CollegeInstallId into result
+                                              select new RegistrationDetailsReport
+                                              {
+                                                  TradeId = result.FirstOrDefault().TradeId,
+                                                  InstructorName = result.FirstOrDefault().InstructorName,
+                                                  RegisteredOn = result.FirstOrDefault().RegisteredOn
+                                              }).ToList();
+
+                }
+                //else if (category == 3)
+                //{
+                //    RegistrationRptdetails = (from IntermediateResult in RegistrationRptdetails
+                //                              group IntermediateResult by new { IntermediateResult.CollegeInstallId, IntermediateResult.TradeId } into result
+                //                              select new RegistrationDetailsReport
+                //                              {
+                //                                  TradeId = result.FirstOrDefault().TradeId,
+                //                                  InstructorName = result.FirstOrDefault().InstructorName,
+                //                                  RegisteredOn = result.FirstOrDefault().RegisteredOn
+                //                              }).ToList();
+                //}
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return RegistrationRptdetails;
+        }
+
+        /// <summary>
+        /// Universities the read history.
+        /// </summary>
+        /// <param name="CollegeGrpId">The college GRP identifier.</param>
+        /// <param name="departmentID">The department identifier.</param>
+        /// <param name="collegeID">The college identifier.</param>
+        /// <param name="SubjectID">The subject identifier.</param>
+        /// <param name="SemsterID">The semster identifier.</param>
+        /// <param name="DateFrom">The date from.</param>
+        /// <param name="DateTo">The date to.</param>
+        /// <param name="SubjectType">Type of the subject.</param>
+        /// <returns></returns>
+        public List<UserReadHistoryModel> UniversityReadHistory(int CollegeGrpId, int departmentID, string collegeID, int SubjectID, int SemsterID, string DateFrom, string DateTo, int SubjectType)
+        {
+            List<UserReadHistoryModel> readHistory = new List<UserReadHistoryModel>();
+
+
+
+            string[] ddlCollege = new string[100];
+            List<int> collge = new List<int>();
+            ddlCollege = collegeID.Split('-').ToArray();
+            if (ddlCollege[0].ToString() != "0")
+            {
+                for (int i = 0; i < ddlCollege.Length; i++)
+                {
+                    collge.Add(Convert.ToInt32(ddlCollege[i].ToString()));
+                }
+            }
+
+
+            using (learnengg_payment_portal_entities contextsdce = new learnengg_payment_portal_entities())
+            {
+                try
+                {
+
+
+                    var regCount = (from sm in contextsdce.subject_master
+                                    join usrh in contextsdce.user_subject_read_history on sm.subject_id equals usrh.subject_id
+                                    join um in contextsdce.user_master on usrh.user_id equals um.user_id
+                                    join dpsm in contextsdce.college_subject_mapping on sm.subject_id equals dpsm.subject_id
+                                    join cm in contextsdce.college_master on um.collegeid equals cm.college_id
+                                    join umgrpm in contextsdce.college_group_map on cm.college_id equals umgrpm.college_id
+                                    join umgrp in contextsdce.college_group_master on umgrpm.college_group_id equals umgrp.college_group_id
+                                    where um.active_status == 1 && cm.active_status == 1 && dpsm.college_id == cm.college_id && usrh.department_id == dpsm.department_id
+                                    && sm.having_questionpaper == SubjectType && umgrp.college_group_id == CollegeGrpId
+                                    orderby usrh.total_hours descending
+                                    select new
+                                    {
+                                        userReadHistryId = usrh.user_read_history_id,
+                                        username = um.user_name,
+                                        mobile = um.mobile,
+                                        userid = um.user_id,
+                                        collegename = um.collegename,
+                                        collegeid = um.collegeid,
+                                        subjectid = sm.subject_id,
+                                        totalhours = usrh.total_hours,
+                                        lastreadon = usrh.last_read_on,
+                                        userrole = um.role_id == 1 ? "INSTRUCTOR " : "INSTRUCTOR ",
+                                        dpsm.map_year,
+                                        dpsm.semester,
+                                        um.currentyear,
+                                        um.created_on,
+                                        usrh.last_read_on,
+                                        univ_Id = um.univ_id,
+                                        dpsm.department_id
+
+
+                                    }).ToList();
+                    if (departmentID != 0)
+                    {
+                        var datanew = regCount.ToList();
+                        regCount.Clear();
+                        regCount.AddRange(datanew.Where(x => x.department_id == departmentID));
+                    }
+
+                    if (collge.Count() > 0)
+                    {
+                        var datanew = regCount.ToList();
+                        regCount.Clear();
+                        regCount.AddRange(datanew.Where(x => collge.Contains(x.collegeid ?? 0)));
+                    }
+
+                    if (SubjectID != 0)
+                    {
+                        var datanew = regCount.ToList();
+                        regCount.Clear();
+                        regCount.AddRange(datanew.Where(x => x.subjectid == SubjectID));
+                    }
+
+                    if (SemsterID != 0)
+                    {
+                        var datanew = regCount.ToList();
+                        regCount.Clear();
+                        regCount.AddRange(datanew.Where(x => x.semester == SemsterID));
+                    }
+
+                    if (!DateFrom.Equals("0"))
+                    {
+                        string Reg_sdate = DateFrom + " " + "11:59:00 PM";
+                        DateTime start_date = DateTime.ParseExact(Reg_sdate, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+                        var datanew = regCount.ToList();
+                        regCount.Clear();
+                        regCount.AddRange(datanew.Where(x => x.lastreadon >= start_date));
+                    }
+                    if (!DateTo.Equals("0"))
+                    {
+                        string usg_End_date = DateTo + " " + "11:59:00 PM";
+                        DateTime usgEnd_date = DateTime.ParseExact(usg_End_date, "dd-MM-yyyy hh:mm:ss tt", CultureInfo.InvariantCulture);
+                        var datanew = regCount.ToList();
+                        regCount.Clear();
+                        regCount.AddRange(datanew.Where(x => x.last_read_on <= usgEnd_date));
+                    }
+
+
+
+                    readHistory = (from g in regCount
+                                   group g by g.userid into t
+                                   select new UserReadHistoryModel
+                                   {
+                                       userName = t.FirstOrDefault().username,
+                                       userId = t.FirstOrDefault().userid,
+                                       collegeName = t.FirstOrDefault().collegename,
+                                       collegeId = t.FirstOrDefault().collegeid,
+                                       Semester = t.FirstOrDefault().semester,
+                                       subjectCount = t.Select(x => x.subjectid).Distinct().Count(),
+                                       subjectCnt = t.Select(x => x.subjectid).Distinct().Count(),
+                                       totalSeconds = t.Sum(x => x.totalhours),
+                                       Mobile = t.FirstOrDefault().mobile,
+                                       totalhrs = string.Format("{0:00}:{1:00}:{2:00}", t.Sum(x => x.totalhours) / 3600, (t.Sum(x => x.totalhours) / 60) % 60, t.Sum(x => x.totalhours) % 60),
+                                       lastReadOn = t.Max(x => x.lastreadon).ToString("dd-MMM-yyyy"),
+                                       lastReadOnDate = t.Max(x => x.lastreadon),
+                                       lastReadOnInt = Convert.ToInt64(t.Max(x => x.lastreadon).ToString("yyyyMMdd")),
+                                       userRole = t.FirstOrDefault().userrole,
+                                       userCount = t.Count(),
+                                       TradeCount = t.Select(x => x.department_id).Distinct().Count(),
+                                       RegisteredOn = t.FirstOrDefault().created_on.ToString("dd-MMM-yyyy"),
+                                       RegisteredOnDate = t.FirstOrDefault().created_on,
+                                       RegisteredOnInt = Convert.ToInt64(t.FirstOrDefault().created_on.ToString("yyyyMMdd"))
+                                   }).OrderByDescending(t => t.totalSeconds).ToList();
+
+                    return readHistory;
+
+                }
+                catch (Exception ex)
+                {
+                    contextsdce.Dispose();
+                    Log.WriteLogMessage(PageName, "AdminReportservice", "UniversityReadHistory", ex.Message, "error");
+                    throw ex;
+                }
+                finally
+                {
+                    contextsdce.Dispose();
+                }
+            }
+
+        }
+
+
+
+        /// <summary>
+        /// Gets the group collesges list.
+        /// </summary>
+        /// <returns></returns>
+        public List<CollegeGroupModel> GetGroupCollesgesList()
+        {
+            List<CollegeGroupModel> GroupCollesgesList = new List<CollegeGroupModel>();
+            using (learnengg_payment_portal_entities contextsdce = new learnengg_payment_portal_entities())
+            {
+                try
+                {
+                    var TempGroupCollesgesList = (from cgm in contextsdce.college_group_master
+                                    join cgmap in contextsdce.college_group_map on cgm.college_group_id equals cgmap.college_group_id
+                                    join cm in contextsdce.college_master on cgmap.college_id equals cm.college_id
+                                    group new { cgm, cm } by new { cgm.college_group_id, cgm.college_group_name } into collegeGroup
+                                    //orderby cgm.college_group_name descending
+                                    select new 
+                                    {
+                                        GroupName = collegeGroup.Key.college_group_name,
+                                        GroupId = collegeGroup.Key.college_group_id,
+                                        CollegesName = collegeGroup.Select(x=>x.cm.college_name),
+                                        CollegesCount = collegeGroup.Select(x=>x.cm.college_id).Count()
+                                    }).ToList();
+
+                    GroupCollesgesList = (from result in TempGroupCollesgesList
+                                          select new CollegeGroupModel
+                                          {
+                                             GroupName  = result.GroupName,
+                                             CollegesName = result.CollegesName.Aggregate((x, y) => x + "," + y),
+                                             CollegesCount = result.CollegesCount,
+                                             GroupId = result.GroupId
+                                              
+                                          }).ToList();
+
+
+                    return GroupCollesgesList;
+                }
+                catch (Exception ex)
+                {
+                    contextsdce.Dispose();
+                    Log.WriteLogMessage(PageName, "CollegeGroupAdminReportservice", "GetGroupCollesgesList", ex.Message, "error");
+                    throw ex;
+                }
+                finally
+                {
+                    contextsdce.Dispose();
+                }
+            }
+
+        }
+
+
+        public RegistrationDashBoardViewModel RegistrationDashBoardDatewiseCount(int CollegeGrpId, int SubjectType)
+        {
+            JavaScriptSerializer Jserializer = new JavaScriptSerializer();
+            RegistrationDashBoardViewModel RegistrationDashBoardVModel = new RegistrationDashBoardViewModel();
+
+            using (learnengg_payment_portal_entities contextsdce = new learnengg_payment_portal_entities())
+            {
+                try
+                {
+
+                    // Datewise Usage
+                    var MonthwiseUsage = (from dm in contextsdce.department_master
+                                          join cie in contextsdce.college_installation_expiry on dm.department_id equals cie.department_id
+                                          join cid in contextsdce.college_installation_details on cie.college_install_id equals cid.college_install_id
+                                          join sub in contextsdce.subject_master on cie.subject_id equals sub.subject_id
+                                          join cm in contextsdce.college_master on cid.college_id equals cm.college_id
+                                          join umgrpm in contextsdce.college_group_map on cm.college_id equals umgrpm.college_id
+                                          join umgrp in contextsdce.college_group_master on umgrpm.college_group_id equals umgrp.college_group_id
+                                          where umgrp.college_group_id == CollegeGrpId && cm.active_status == 1 
+                                           && sub.having_questionpaper == SubjectType && cie.installed_on != null 
+                                          //   let dt = cie.installed_on
+                                          group new { cm, cid, cie } by new { usageYear = cid.enter_on.Year, usageMonth = SqlFunctions.DateName("month", cid.enter_on), Monthorder = cid.enter_on.Month, MonthDate = cid.enter_on.Day } into monthwisegroup
+                                          orderby monthwisegroup.Key.usageYear, monthwisegroup.Key.Monthorder, monthwisegroup.Key.MonthDate
+                                          select new
+                                          {
+                                              MonthName = (monthwisegroup.Key.usageMonth + "-" + monthwisegroup.Key.usageYear),
+                                              TotalRegistration = monthwisegroup.Select(z => z.cie.college_install_id).Distinct().Count(),
+                                              YearCode = monthwisegroup.Key.usageYear,
+                                              MonthCode = monthwisegroup.Key.Monthorder,
+                                              DayCode = monthwisegroup.Key.MonthDate
+                                          });
+
+                    List<DatewiseUsage> _DateUsage = new List<DatewiseUsage>();
+                    foreach (var Monthgroupobject in MonthwiseUsage)
+                    {
+                        DatewiseUsage SubUsage = new DatewiseUsage();
+                        SubUsage.MonthName = Monthgroupobject.MonthName;
+                        SubUsage.TotalRegistration = Monthgroupobject.TotalRegistration;
+                        SubUsage.YearCode = Monthgroupobject.YearCode;
+                        SubUsage.MonthCode = Monthgroupobject.MonthCode;
+                        SubUsage.DayCode = Monthgroupobject.DayCode;
+                        _DateUsage.Add(SubUsage);
+                    }
+                    RegistrationDashBoardVModel.DateUsage = _DateUsage;
+                    return RegistrationDashBoardVModel;
+                }
+                catch (Exception ex)
+                {
+                    Log.WriteLogMessage(PageName, "AdminDashBoard", "DashBoardMain", ex.Message, "error");
+
+                    throw ex;
+                }
+                finally
+                {
+                    contextsdce.Dispose();
+                }
+            }
+
+        }
+
+
+    }
+}

@@ -1,0 +1,503 @@
+﻿
+@{
+    ViewBag.Title = "StudentRegistrationHistorys";
+    Layout = "~/Views/Shared/_LearnEnggGroupAdminLayout.cshtml";
+}
+
+<style type="text/css">
+
+
+    table#tblMaster tr:nth-child(odd), table.table-bordered tr:nth-child(odd) {
+        background-color: #e7f1fd;
+    }
+
+    table#tblMaster th, table.table-bordered th {
+        background-color: #1875f0;
+        color: white;
+    }
+
+
+    table#tblMasterMain tr:nth-child(odd) {
+        background-color: #e7f1fd;
+    }
+
+    table#tblMasterMain th {
+        background-color: #1875f0;
+        color: white;
+    }
+
+    th, td {
+        padding: 7px;
+        text-align: left;
+        text-align: center;
+        color: #000;
+        font-weight: 500;
+    }
+
+    td {
+        padding: 7px;
+        text-align: left;
+        text-align: center;
+        color: #000;
+        font-weight: 500;
+        opacity: 0.87;
+    }
+
+    table {
+        box-shadow: 0 1px 2px 2px #e6ecf1;
+        background-color: #fff;
+    }
+
+    div.dataTables_wrapper div.dataTables_filter label {
+        text-align: right;
+        display: inline-block !important
+    }
+
+    div.dataTables_wrapper div.dataTables_paginate ul.pagination {
+        display: inline-block !important
+    }
+</style>
+
+<style>
+    /*input[type=text] {
+        border: 2px solid grey;
+        border-radius: 4px;
+        width: 100px;
+    }*/
+</style>
+
+<script type="text/javascript" src="~/Scripts/CollegeAdmin/jquery.GroupAdminstudentreport.js"></script>
+<script type="text/javascript" src="~/Scripts/CollegeAdmin/GroupAdminStudentUniversityReport.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+    });
+
+     var sessionuserID = '@Session["loginUserID"]';
+     var sessionCollegeID = '@Session["CollegeID"]';
+     var sessionCollegeGrpId = '@Session["logincollegegrpId"]';
+
+
+    $(document).ready(function () {
+        var DefaultStartDate = "0";
+        var DefaultEndDate = "0";
+        var regTypeID = 1;
+        var deptID = 0;
+
+        $("#GGrpId").val(sessionCollegeGrpId);
+
+        $('.loader').hide();
+        $('.loader1').hide();
+
+        $('.tradefirst').show();
+        $('.itifirst').hide();
+
+        $('#tblMasterMain').hide();
+        $('#tblMaster').hide();
+
+        if ($('#DivSelOption').val() == 2) {
+            $('.SelChoiceVal').show();
+        } else {
+            $('.SelChoiceVal').hide();
+        }
+
+        $('#dwnreport').click(function () {
+            var w = 600, h = 500;
+            wLeft = window.screenLeft ? window.screenLeft : window.screenX;
+            wTop = window.screenTop ? window.screenTop : window.screenY;
+            var left = wLeft + (window.innerWidth / 2) - (w / 2);
+            var top = wTop + (window.innerHeight / 2) - (h / 2);
+
+            var winOptions = 'width=' + w + ',height=' + h + ',resizable=no,menubar=no,status=no,toolbar=no,scrollbars=no,location=0, directories=0,dependant=yes,dialog=yes,modal=yes,unadorned=yes,top=' + top + ',left=' + left;
+            newwin = window.open("../AdminProcess/DownloadReports", 'Report Download', winOptions);
+        });
+
+        $("#StartDate").datepicker({ dateFormat: 'dd-mm-yy' });
+        $("#EndDate").datepicker({ dateFormat: 'dd-mm-yy' });
+
+        $.ajax({
+            type: 'Get',
+            datatype: 'json',
+            url: "/APIService/APICollegeGroupAdminDashBoardReports/GetGroupAdminDepartmentListActivitionextenddays?univId=1&collegeId=0&CollegeGrpId=" + sessionCollegeGrpId ,
+            success: function (data) {
+                var items = "";
+                $.each(data, function (i, val) {
+                    $("#TradeName").append($("<option value=" + val.DepartmentId + "></option>").text(val.DepartmentName).val(val.DepartmentId));
+                });
+            }
+        });
+
+
+        $(document).on('click', '.cnt-snd-ft-two-click', function () {
+
+            if ($(".cnt-snd-ft-two-click").hasClass('cnt-snd-ft-one')) {
+                alert("Please choose other choice");
+            } else {
+
+                $(".cnt-snd-ft-two").switchClass("cnt-snd-ft-two", "cnt-snd-ft-one", 1000);
+                $(".cnt-snd-ft-one").switchClass("cnt-snd-ft-one", "cnt-snd-ft-two", 1000);
+
+                $('.itifirst').show();
+                $('.tradefirst').hide();
+
+                $('#DivSelOption').val(2);
+
+
+                var serURL = "/APIService/APICollegeGroupAdminDashBoardReports/GetGroupAdminColleges?departmentID=0&CollegeGrpId=" + sessionCollegeGrpId;
+                $("#ITIName1").empty().append($("#ITIName1").html('<option value="0">--Select ITI Name --</option>'));
+
+                $.ajax({
+                    type: 'Get',
+                    datatype: 'json',
+                    url: serURL,
+                    success: function (data) {
+                        var items = "";
+                        $.each(data, function (i, val) {
+                            $("#ITIName1").append($("<option>" + val.college_Id + "</option>").text(val.college_Name).val(val.college_Id));
+                        });
+                    }
+                });
+            }
+
+        });
+
+        $(document).on('click', '.cnt-snd-ft-one-click', function () {
+
+            if ($(".cnt-snd-ft-one-click").hasClass('cnt-snd-ft-one')) {
+                alert("Please choose other choice");
+            } else {
+
+                $(".cnt-snd-ft-one").switchClass("cnt-snd-ft-one", "cnt-snd-ft-two", 1000);
+                $(".cnt-snd-ft-two").switchClass("cnt-snd-ft-two", "cnt-snd-ft-one", 1000);
+
+                $('#DivSelOption').val(1);
+                $('.tradefirst').show();
+                $('.itifirst').hide();
+                $("#TradeName").empty().append($("#TradeName").html('<option value="0">--Select Trade Name --</option>'));
+
+                $.ajax({
+                    type: 'Get',
+                    datatype: 'json',
+                    url: "/APIService/APICollegeGroupAdminDashBoardReports/GetGroupAdminDepartmentListActivitionextenddays?univId=1&collegeId=0&CollegeGrpId=" + sessionCollegeGrpId,
+                    success: function (data) {
+                        var items = "";
+                        $.each(data, function (i, val) {
+                            $("#TradeName").append($("<option value=" + val.DepartmentId + "></option>").text(val.DepartmentName).val(val.DepartmentId));
+                        });
+                    }
+                });
+            }
+
+        });
+
+
+        $("#TradeName").change(function () {
+
+            deptID = $("#TradeName").val();
+
+            $("#ITIName").empty().append($("#ITIName").html('<option value="0">--Select ITI Name --</option>'));
+
+            $.ajax({
+                type: 'Get',
+                datatype: 'json',
+                url: "/APIService/APICollegeGroupAdminDashBoardReports/GetGroupAdminColleges?departmentID=" + deptID + "&CollegeGrpId=" + sessionCollegeGrpId,
+                success: function (data) {
+                    var items = "";
+                    $.each(data, function (i, val) {
+                        $("#ITIName").append($("<option>" + val.college_Id + "</option>").text(val.college_Name).val(val.college_Id));
+                    });
+                }
+            });
+
+        });
+
+
+
+        $("#ITIName1").change(function () {
+
+            collegeID = $("#ITIName1").val();
+
+            $("#TradeName2").empty().append($("#TradeName2").html('<option value="0">--Select Trade Name --</option>'));
+
+            $.ajax({
+                type: 'Get',
+                datatype: 'json',
+                url: "/APIService/APICollegeGroupAdminDashBoardReports/GetGroupAdminDepartmentListActivitionextenddays?univId=1&collegeId=" + collegeID + "&CollegeGrpId=" + sessionCollegeGrpId,
+                success: function (data) {
+                    var items = "";
+                    $.each(data, function (i, val) {
+                        $("#TradeName2").append($("<option value=" + val.DepartmentId + "></option>").text(val.DepartmentName).val(val.DepartmentId));
+                    });
+                }
+            });
+
+        });
+
+
+        $(document).on('click', '.rst-btn', function () {
+
+            $("#StartDate").val("").datepicker({ dateFormat: 'dd-mm-yy' });
+            $("#EndDate").val("").datepicker({ dateFormat: 'dd-mm-yy' });
+
+            $("#TradeName").prop("selectedIndex", 0);
+            $("#TradeName2").prop("selectedIndex", 0);
+            $("#ITIName").prop("selectedIndex", 0);
+            $("#ITIName1").prop("selectedIndex", 0);
+
+            $('#tblMasterMain tbody').empty();
+            $('#tblMaster tbody').empty();
+
+        });
+
+        $(document).on('click', '.sbt-btn', function () {
+
+            if ($("#StartDate").val() != "") {
+                DefaultStartDate = $("#StartDate").val();
+            }
+
+            if ($("#EndDate").val() != "") {
+                DefaultEndDate = $("#EndDate").val();
+            }
+
+            deptID = $("#TradeName").val();
+            collegeID = $("#ITIName1").val();
+
+            $('#tblMasterMain').show();
+            $('#tblMaster').show();
+
+            $('#tblMasterMain tbody').empty();
+            $('#tblMaster tbody').empty();
+
+            if ($('#DivSelOption').val() == 2) {
+                $('.SelChoiceVal').show();
+            } else {
+                $('.SelChoiceVal').hide();
+            }
+
+            showUnivData(sessionCollegeGrpId,deptID, collegeID, DefaultStartDate, DefaultEndDate, regTypeID);
+            showDatachk(sessionCollegeGrpId,deptID, collegeID, DefaultStartDate, DefaultEndDate, regTypeID);
+        });
+
+    });
+</script>
+<div class="content clearfix">
+    <div class="fist-cnt clearfix" style="margin-bottom:2%;width:100%;" align="center">
+        <p class="cnt-ft-txt" style="text-align:left">Registration History</p>
+    </div>
+
+    <!-- Bar-chart one start--->
+    <div class="clearfix" style="margin-bottom:2%;">
+        <div class="clearfix scnt-shdw" style="">
+            <div style="margin-top:2%;">
+                <span class="cnt-snd-ft-one cnt-snd-ft-one-click"> Trade Wise ITI</span>
+                <span class="cnt-snd-ft-two cnt-snd-ft-two-click" style=""> ITI Wise Trade  </span>
+            </div>
+            <div class="clearfix" style="margin-top:1%;">
+                <div class="row">
+                    <div class="col-md-9 tradefirst">
+                        <div class="col-md-4">
+                            <div class="cnt-tworw">
+                                <p class="cnt-tworw-txt">Trade Name</p>
+                                <p class="cnt-tworw-txt">ITI Name</p>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <p class="selct-one-pr">
+                                <select class="select-mn" name="TradeName" id="TradeName">
+                                    <option value="0"> Select Trade Name</option>
+
+                                </select>
+                            </p>
+                            <p style="padding-left:8%;">
+                                <select class="select-mn" name="ITIName" id="ITIName">
+                                    <option value="0">Select ITI Name</option>
+
+                                </select>
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-9 itifirst">
+                        <div class="col-md-4">
+                            <div class="cnt-tworw">
+                                <p class="cnt-tworw-txt">ITI Name</p>
+                                <p class="cnt-tworw-txt">Trade Name</p>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <p class="selct-one-pr">
+                                <select class="select-mn" name="ITIName1" id="ITIName1">
+                                    <option value="0"> Select ITI  Name</option>
+
+                                </select>
+                            </p>
+                            <p style="padding-left:8%;">
+                                <select class="select-mn" name="TradeName2" id="TradeName2">
+                                    <option value="0">Select Trade Name</option>
+
+                                </select>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <p class="dt">Date</p>
+                        <p class="dt-txt" style="width:200px;">
+                            <span class="dt-txt-spn"><i class="far fa-calendar-alt" style="opacity:0.87;"></i></span>
+                            <span class="dt-txt-span2" style="width:140px;">
+                                <input type="text" id="StartDate" placeholder="Start Date" readonly="readonly" />
+                            </span>
+                        </p>
+
+                        <p class="dt-txt" style="width:200px;">
+                            <span class="dt-txt-spnn"><i class="far fa-calendar-alt" style="opacity:0.87;"></i></span>
+                            <span class="dt-txt-span2" style="width:140px;">
+                                <input type="text" id="EndDate" placeholder="End Date" readonly="readonly" />
+                            </span>
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+            <div style=" padding-top:1%;">
+                <span class="rst-btn">Reset</span>
+                <span class="sbt-btn">Submit</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="loader1">
+        <center>
+            <img src="../Content/img/pre_loader.gif" />
+        </center>
+    </div>
+    <div class="clearfix">
+        <table style="width:100%" id="tblMasterMain">
+            <thead>
+                <tr>
+                    <th>S.NO</th>
+                    <th>Total Content Register ITI</th>
+                    <th>Total Content Register Desktops</th>
+                    <th class="SelChoiceVal">Total Content Register Instructors</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div class="loader">
+        <center>
+            <img src="../Content/img/pre_loader.gif" />
+        </center>
+    </div>
+    <div class="clearfix" style="margin-top:2%">
+        <div class="clearfix" style="box-shadow: 0 1px 2px 2px #e6ecf1;background-color: #fff;">
+            <table id="tblMaster" width="100%">
+                <thead>
+                    <tr>
+                        <th width="5%">S.NO</th>
+                        <th width="35%">ITI Name</th>
+                        <th width="15%">Registration On</th>
+                        <th>Content Registered Desktops</th>
+                        <th>Content Registered Details</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+    <!-- Bar-chart one start--->
+</div>
+<div>
+    @Html.Hidden("WebServiceUrl", @System.Configuration.ConfigurationManager.AppSettings["localhost"])
+    @Html.Hidden("WebServiceUrlKtu", @System.Configuration.ConfigurationManager.AppSettings["localhostKtu"])
+    @Html.Hidden("WebServiceUrlVtu", @System.Configuration.ConfigurationManager.AppSettings["localhostvtu"])
+    @Html.Hidden("WebServiceUrl_NU", @System.Configuration.ConfigurationManager.AppSettings["localhostnu"])
+</div>
+<div class="modal fade" id="UniversityModel" role="dialog">
+    <div class="modal-dialog custom_pop custom_pop_3">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">
+                    x
+                </button>
+                <h4 id="DynamicUniversityName" class="pop_hed"></h4>
+            </div>
+            <div class="modal-body">
+                <section class="pop_head full_width">
+                    <div class="down_panel" id="UniversityDetails">
+                        <div class="loader">
+                            <center>
+                                <img src="~/Content/img/pre_loader.gif" />
+                            </center>
+                        </div>
+                        <table id="tblChildUniv" class="table table-striped table-bordered" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        S.No
+                                    </th>
+
+                                    <th>
+                                        InstructorName
+                                    </th>
+                                    @*<th >
+                                            E-Mail
+                                        </th>
+                                         <th >
+                                            Mobile
+                                        </th>*@
+                                    <th>
+                                        Registered On
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="subjectModel" role="dialog">
+    <div class="modal-dialog custom_pop custom_pop_3">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">
+                    ×
+                </button>
+                <h4 id="DynamicCollegeName" class="pop_hed"></h4>
+            </div>
+            <div class="modal-body pop_pdng_wrp ">
+                <section class="pop_head full_width ">
+                    <div class="down_panel" id="SubjectUnitDetails">
+                        <table id="tblChild" class="table table-striped table-bordered wd_tb" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        S.No
+                                    </th>
+                                    <th>
+                                        Name
+                                    </th>
+
+                                    <th>
+                                        Registered On
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

@@ -1,0 +1,117 @@
+﻿@model Odishadtet.DAL.college_master
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LearnEnggAdminLayout.cshtml";
+}
+
+<style type="text/css">
+    .inner_mid_wrp-main {
+        float: right;
+        margin: 80px 2% 0;
+        width: 95%;
+    }
+
+    input[type="text"] {
+        /*border: none !important;*/
+        border-radius: 4px;
+        width: 220px !important;        
+        margin-left: 0 !important;
+        margin-left: 0px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        font-size: 15px;
+    }
+
+</style>
+
+
+
+
+
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="container">
+                <div class="row fist-cnt" style="margin-bottom:2%;">
+                    <div class="col-md-9">
+                        <p class="cnt-ft-txt">Edit INSTITUTE</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" style="margin-top:2%;">
+        <div style="box-shadow: 0 1px 2px 2px #e6ecf1;background-color: #fff;"> 
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.college_id)
+
+                            <div class="form-group"><div class="col-md-9">&nbsp;</div></div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Institute Code:</label>
+                                    <div class="col-md-9">
+                                        @Html.EditorFor(model => model.college_code, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                        @Html.ValidationMessageFor(model => model.college_code, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Institute Name:</label>
+                                    <div class="col-md-9">
+                                        @Html.EditorFor(model => model.college_name, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                        @Html.ValidationMessageFor(model => model.college_name, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Total License:</label>
+                                    <div class="col-md-9">
+                                        @Html.EditorFor(model => model.total_license, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+                                        @Html.ValidationMessageFor(model => model.total_license, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Institute Mobile:</label>
+                                    <div class="col-md-9">
+                                        @Html.EditorFor(model => model.college_mobile, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+                                        @Html.ValidationMessageFor(model => model.college_mobile, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Institute Email:</label>
+                                    <div class="col-md-9">
+                                        @Html.EditorFor(model => model.college_email, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.college_email, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <div class="col-md-offset-3 col-md-9">
+                                        <button type="submit" id="btnsave" style="width:120px;height:30px;font-size:large" class="btn btn-primary btn-sm btn_wrp ">Save</button>
+                                        <div style="margin:10px;">
+                                            @Html.ActionLink("Back to Index", "Index")
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    }              
+            </div>
+        </div>
+   
+</div>
+
+
+

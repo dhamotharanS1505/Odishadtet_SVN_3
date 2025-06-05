@@ -1,0 +1,130 @@
+﻿
+@{
+    ViewBag.Title = "ITIUsageReport";
+    Layout = "~/Views/Shared/_LearnEnggAdminLayout.cshtml";
+}
+
+<script src="~/Scripts/moment/moments.js"></script>
+<section class="inner_mid_wrp-main">
+    <article class="col-sm-12">
+        <div class="in_hd_tt row">
+            <strong class="fa fa-file-text"></strong><span><b>Usage Reports</b></span>
+        </div>
+    </article>
+
+
+    <article class="ar_sec_dah_nw marsp">
+        <section class="row">
+            <div class="col-sm-12">                
+            </div>
+         </section>
+
+        <section class="row jqqrid">
+          
+
+                <div id="jqgrid" class="grid_panel" align="center">
+                    <table id="UsageDatagrid"></table>
+                    <div id="pager"></div>
+                </div>
+            @*</div>*@
+        </section>
+     </article>
+
+ </section>
+
+<script>
+    $(document).ready(function () {
+
+       
+        initDateSearch = function (elem) {
+            setTimeout(function () {
+                $(elem).datepicker({
+                    dateFormat: "dd-mm-yy",
+                    autoSize: true,
+                    changeYear: true,
+                    changeMonth: true,
+                    showWeek: true,
+                    showButtonPanel: true,
+                    onSelect: function (dateText, inst) {
+                        setTimeout(function () {
+                            $('#UsageDatagrid')[0].triggerToolbar();
+                        }, 100);
+                    }
+                });
+            }, 100);
+        };
+        ITIReadHistory();
+    });
+    function GridRefresh_Reload() {
+        $("#UsageDatagrid").trigger("reloadGrid");
+    }
+    function ITIReadHistory() {       
+        $('#UsageDatagrid').jqGrid({
+
+            url: '/AdminDashBoard/UniversityReadHistory?DepartmentID=0&collegeID=0',         
+            datatype: 'json',
+            colNames: ['Instructor Name', ' ITI Name', ' Total Hours Used ', ' Viewed Trade', 'Last ReadOn', 'Mobile', 'Registration Date'],
+            colModel: [               
+                {
+                    name: 'userName', index: 'userName', key: true, sortable: true, sorttype: 'text',height:30, width: 4, search: true, resizable: true, editable: true, searchoptions: { sopt: ['cn', 'bw', 'ew', 'eq'] }
+                },
+                {
+                    name: 'collegeName',
+                    index: 'collegeName', key: true, sortable: true, sorttype: 'text', width: 4, search: true, resizable: true, editable: true, searchoptions: { sopt: ['cn', 'bw', 'ew', 'eq'] }
+                },
+                {
+                    name: 'totalhrs', key: true, sortable: false, sorttype: 'decimal', width: 4, search: true, resizable: true, editable: true, align: "right", searchoptions: { sopt: ['cn', 'bw', 'ew', 'eq'] }
+                },
+                {
+                    name: "subjectCount",
+                    index: 'subjectCnt', key: true, sortable: false, sorttype: 'text' , width: 4, search: false, resizable: true, align: "right", editable: true                   
+                },                
+                {
+                    name: "lastReadOnDate",                  
+                    index: 'lastReadOnInt~date', key: true, sortable: true, sorttype: 'text', width: 4, search: true, resizable: true, editable: true, searchoptions: { sopt: ["eq", "ne", "lt", "le", "gt", "ge"], dataInit: initDateSearch },
+                    formatter: '#date', formatoptions: { srcformat: 'd/m/Y', newformat: 'M/d/Y' }
+                 
+                },
+                {
+                    name: "Mobile",
+                    index: 'Mobile', key: true, sortable: false, sorttype: 'text', width: 3, search: false, resizable: true, editable: true, align: "center",
+                    searchoptions: { sopt: ['cn', 'bw', 'ew', 'eq'] }
+                },
+                {
+                    name: "RegisteredOnDate",
+                    index: 'RegisteredOnInt~date',
+                    key: true, sortable: true, sorttype: 'text', width: 4, search: true, resizable: true, editable: true, searchoptions: { sopt: ["eq", "ne", "lt", "le", "gt", "ge"], dataInit: initDateSearch },
+                    formatter: '#date', formatoptions: { srcformat: 'd/m/Y', newformat: 'M/d/Y' }               
+                }         
+            ],
+
+            rownumbers: true,
+            rowNum: 50,
+            rowList: [50,100, 200, 300, 500, 1000, 5000],
+            pager: '#pager',
+          //  sortname: 'totalhrs',
+          //  sortorder: 'desc',
+            multiSort: 'false',
+            sortable: true,
+            altclass: 'myAltRowClass',
+            altRows: true,
+            height: '500px',
+          //  left: '253px',
+            width: '1095px',
+            autowidth: true,
+            shrinkToFit: true,
+            viewsortcols: [true, 'vertical', true],
+            forceFit: true, // have to set for column scroll enable while expand the grid
+            toppager: true,
+            emptyrecords: "Empty records",
+            viewrecords: true,
+            loadComplete: function () {              
+                highlightFilteredData.call(this);
+            },
+            gridComplete: function () {
+            }
+        });
+        InitiateProperty("UsageDatagrid", "pager");
+    }
+
+</script>

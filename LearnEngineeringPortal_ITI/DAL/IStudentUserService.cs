@@ -1,0 +1,130 @@
+﻿
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Odishadtet.Models;
+using static Odishadtet.Models.StudentModels;
+using System.Web.Mvc;
+
+namespace Odishadtet.DAL
+{
+    public interface IStudentUserService
+    {
+        void DoWork();
+
+        bool GetRandomCode(long userId, string code);
+
+        int RemoveUser(long userMobile, long adminMobile);
+
+        ForgetPasswordModel ResetPassword(long mobileNo, string otpCode, string newPassword);
+
+        ForgetPasswordModel ForgetPassword(long mobileNo);
+
+        int GetVerificationCodeByMobile(long MobNo, string emailID);
+
+        string InsertPackageToUserCart(int UserId, string PackageId);
+
+        string InsertToUserWishList(int UserId, int PackageId);
+
+        List<userViewCart> GetViewCartDetails(long UserId);
+
+        int GetViewCartCount(int UserId);
+
+        int RemovePackage(int UserId,int PackageID);
+        int UpdateDeliveryMode(int UserId,int DeliveryModeId);
+
+        string GetPasswordString(string EncPass);
+
+        string GetEncPasswordString(string EncPass);
+
+        List<DeliveryOptionMode> GetDeliveryMode();
+
+        List<purchasedSubjects> GetUserPurchasedSubjects(int UserId);
+
+        List<wishList> GetMyWishList(int UserId);
+
+        string SaveNewUserDetails(string UserName, int Department, int University, int College, int year, int Semester, string Email, long Mobile);
+
+        //checkLogin CheckStudentLoginDetails(string loginID, string Password);
+        StudentcheckLogin CheckStudentLoginDetails(string loginID, string Password);
+        StudentcheckLogin CheckStudentSession(string loginID);
+
+        string StudentSubjectMasterUploadGrid(int Department, int Semester);
+
+        string StudentsemesterMasterUploadGrid(int Department, int Semester);
+
+        int UserSessionDetails(string sessionID, Int64 loginID, string VisitedPageURL);
+
+        string ChangePassword(long mobileNum, string currPasswrd);
+
+        string GetUserProfileImage(int UserID);
+
+        string UpdateContactDetails(int userid, long mobile, string emailId);
+
+        List<userViewCart> GetViewCartDetails_beforeLogin(string PackageId);
+
+        List<Dashboard> UserDashboardDetails(int userid);
+
+        string UserAddress(int pUserId, int pAddressType, string pFullName, long pMobileNumber, string pAddress, int pPincode, string pCity, string pState, int pCountry, string pLandmark, int pIsbilling_delivery);
+
+        string GenerateVerificationCode(long MobNo, string emailID);
+
+        string CreateActivationCode(Int64 user_subscribed_masterid, Int64 created_userid);
+
+        string UpdateActivationCodeForPurchase(int Userid, long Mobilenumber, string activationcode);
+
+        string UpdatePackageActivation(long activate_MobileNo, long buyer_Mobileno, string activationcode);
+
+        string COD_Conformation(long buyer_mobileNo, string ToEmailID);
+
+        string OrderShipped(string buyer_mobileNo, string ToEmailID, string orderID, string TrackingID);
+
+        string COD_Cancellation(long buyer_mobileNo, string ToEmailID, string OrderID);
+
+        string COD_Cancellation_approved(long buyer_mobileNo, string ToEmailID, string OrderID);
+
+        string Registration_Conformation(long mobileNo, string ToEmailID);
+
+        string OTP_CodeVerification(int userId, string otpCode);
+
+        List<UserRegistraion> LoadCollegeList(int univId);
+
+        List<UserRegistraion> LoadDepartmentList(int univId);
+
+        string SaveUserSubjectDetails(int userid);
+
+        string UpdateTrailPackageOnline(int userid, int packageid);
+
+        List<QPAndroidApp> QustionAnsAndroidApp(int universityId, int userId);
+
+        List<yearsemOnDeptID> GetYearSemesterByDepartID(int PDepartID);
+
+        List<UserDetails> GetUserDetails(int studentId);
+
+        string UpdateUserProfileImage(Int64 UserID, string ImageName);
+
+        string UpdatePackagesWithoutPayment(long UserId, long PackageId);
+
+        string GetProfileUpdateOTPCode(string MobNo, int userId);
+
+        string UpdatePackagesWithoutPaymentforSemester(long UserId, long univ_id, int subject_unit_type, int semester, int rule_id);
+
+        string UpdateUserDetails(int userid, string userName, int deptId, string deptName, int year, int sem, string collegeName, int collegeId);
+
+        int GetVerificationCodeByMobileForRefundProcess(long MobNo, string emailID);
+
+        UseageDashBoardViewModel UserUsageDashBoard(int SubjectType, int UserId);
+
+        UserDashBoardViewModel UserDashBoardMain(int UserId);
+
+        UserDashBoardViewModel CollegeDashBoardMain(int CollegeId);
+
+        UseageDashBoardViewModel CollegeUsageDashBoard(int SubjectType, int CollegeId);
+
+        Student_subject_read_history StudentSubjectTimeSave(int userid, int DepartmentID, string fileName);
+
+        Student_subject_read_history StudentSubjectEndTimeSave(int userid, int subject_id, int history_ID, int DepartmentID);
+    }
+}

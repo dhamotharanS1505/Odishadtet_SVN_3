@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<subject label="APPLIED CHEMISTRY - 2024">
+	<Lessons label="UNIT 1 - ATOMIC STRUCTURE, CHEMICAL BONDING AND SOLUTIONS">   		
+		<Chapters label="1.1 Atomic Structure" url="applied_chemistry/html/Lesson_1_Chapter_1.html" />			
+		<Chapters label="1.2 Fundamental Rules for Electronic Configuration" url="applied_chemistry/html/Lesson_1_Chapter_2.html" />
+		<Chapters label="1.3 Quantum Numbers" url="applied_chemistry/html/Lesson_1_Chapter_3.html"/>		
+		<Chapters label="1.4 Chemical bonding" url="applied_chemistry/html/Lesson_1_Chapter_4.html"/>		
+		<Chapters label="1.5 Ionic Bond or Electrovalent Bond" url="applied_chemistry/html/Lesson_1_Chapter_5.html"/>		
+		<Chapters label="1.6 Covalent bonding and Coordinate covalent bonding" url="applied_chemistry/html/Lesson_1_Chapter_6.html"/>		
+		<Chapters label="1.7 Hydrogen Bonding and Metallic Bonding" url="applied_chemistry/html/Lesson_1_Chapter_7.html"/>
+		<Chapters label="1.8 Solutions" url="applied_chemistry/html/Lesson_1_Chapter_8.html"/>
+		<Chapters label="1.9 Mole concept" url="applied_chemistry/html/Lesson_1_Chapter_9.html"/>
+		<Chapters label="1.10 Molecular weight and Equivalent weight" url="applied_chemistry/html/Lesson_1_Chapter_10.html"/>
+		<Chapters label="1.11 Methods to express the concentration of Solution" url="applied_chemistry/html/Lesson_1_Chapter_11.html"/>
+		<Chapters label="1.12 Normality" url="applied_chemistry/html/Lesson_1_Chapter_12.html"/>
+		<Chapters label="1.13 Molality" url="applied_chemistry/html/Lesson_1_Chapter_13.html"/>
+        <Chapters label="1.14 Percentage Quantity on Dry and wet basis" url="applied_chemistry/html/Lesson_1_Chapter_14.html"/>
+		<Chapters label="1.15 Numerical problems on mole, molarity and normality" url="applied_chemistry/html/Lesson_1_Chapter_15.html"/>
+		<Chapters label="1.16 Assessment" url="applied_chemistry/html/Lesson_1_Chapter_16.html"/>
+		<Chapters label="1.17 FAQ" url="applied_chemistry/html/Lesson_1_Chapter_17.html"/>
+	</Lessons>	
+
+	<Lessons label="UNIT 2 - WATER">  
+		<Chapters label="2.1 Soft water and Hard water" url="applied_chemistry/html/Lesson_2_Chapter_1.html" />	
+		<Chapters label="2.2 Expression of Hardness of water" url="applied_chemistry/html/Lesson_2_Chapter_2.html" />	
+		<Chapters label="2.3 Problems based on Hardness of water" url="applied_chemistry/html/Lesson_2_Chapter_3.html" />	
+		<Chapters label="2.4 Estimation of water hardness by EDTA Method" url="applied_chemistry/html/Lesson_2_Chapter_4.html" />	
+		<Chapters label="2.5 Acidity and alkalinity of water" url="applied_chemistry/html/Lesson_2_Chapter_5.html" />	
+		<Chapters label="2.6 Boiler troubles" url="applied_chemistry/html/Lesson_2_Chapter_6.html" />	
+		<Chapters label="2.7 Priming and foaming" url="applied_chemistry/html/Lesson_2_Chapter_7.html" />	
+		<Chapters label="2.8 Treatment of boiler feed water" url="applied_chemistry/html/Lesson_2_Chapter_8.html" />	
+		<Chapters label="2.9 External  treatment" url="applied_chemistry/html/Lesson_2_Chapter_9.html" />	
+		<Chapters label="2.10 Methods of Water softening of hard water" url="applied_chemistry/html/Lesson_2_Chapter_10.html" />	
+		<Chapters label="2.11 Municipal Water treatment" url="applied_chemistry/html/Lesson_2_Chapter_11.html" />	
+		<Chapters label="2.12 Disinfection (or) Sterilization" url="applied_chemistry/html/Lesson_2_Chapter_12.html" />	
+		<Chapters label="2.13 Assessment" url="applied_chemistry/html/Lesson_2_Chapter_13.html" />	
+		<Chapters label="2.14 FAQ" url="applied_chemistry/html/Lesson_2_Chapter_14.html" />	
+	</Lessons>
+	<Lessons label="UNIT 3 - ENGINEERING MATERIALS">  
+		<Chapters label="3.1 Occurrence of metals and terms related to metallurgy" url="applied_chemistry/html/Lesson_3_Chapter_1.html" />	
+		<Chapters label="3.2 Methods of concentration of ore" url="applied_chemistry/html/Lesson_3_Chapter_2.html" />	
+		<Chapters label="3.3 Methods involved in extraction of crude metal" url="applied_chemistry/html/Lesson_3_Chapter_3.html" />	
+		<Chapters label="3.4 Extraction of Iron and Aluminium" url="applied_chemistry/html/Lesson_3_Chapter_4.html" />	
+		<Chapters label="3.5 Alloy" url="applied_chemistry/html/Lesson_3_Chapter_5.html" />	
+		<Chapters label="3.6 Ferrous Alloys" url="applied_chemistry/html/Lesson_3_Chapter_6.html" />	
+		<Chapters label="3.7 Non ferrous alloys" url="applied_chemistry/html/Lesson_3_Chapter_7.html" />	
+		<Chapters label="3.8 Portland cement" url="applied_chemistry/html/Lesson_3_Chapter_8.html" />	
+		<Chapters label="3.9 Refractory and Composite materials" url="applied_chemistry/html/Lesson_3_Chapter_9.html" />	
+		<Chapters label="3.10 Glass" url="applied_chemistry/html/Lesson_3_Chapter_10.html" />	
+		<Chapters label="3.11 Introduction to polymers" url="applied_chemistry/html/Lesson_3_Chapter_11.html" />	
+		<Chapters label="3.12 Types of polymerisation" url="applied_chemistry/html/Lesson_3_Chapter_12.html" />	
+		<Chapters label="3.13 Plastics" url="applied_chemistry/html/Lesson_3_Chapter_13.html" />	
+		<Chapters label="3.14 Preparation and uses of Thermo plastics and thermosetting Plastics" url="applied_chemistry/html/Lesson_3_Chapter_14.html" />	
+		<Chapters label="3.15 Natural rubber" url="applied_chemistry/html/Lesson_3_Chapter_15.html" />
+		<Chapters label="3.16 Processing of natural rubber from latex" url="applied_chemistry/html/Lesson_3_Chapter_16.html" />
+		<Chapters label="3.17 Process of vulcanization" url="applied_chemistry/html/Lesson_3_Chapter_17.html" />
+		<Chapters label="3.18 Characteristics of vulcanized rubber" url="applied_chemistry/html/Lesson_3_Chapter_18.html" />
+		<Chapters label="3.19 Elastomers" url="applied_chemistry/html/Lesson_3_Chapter_19.html" />
+		<Chapters label="3.20 Assessment" url="applied_chemistry/html/Lesson_3_Chapter_20.html" />
+		<Chapters label="3.21 FAQ" url="applied_chemistry/html/Lesson_3_Chapter_21.html" />
+	</Lessons>
+	
+</subject>

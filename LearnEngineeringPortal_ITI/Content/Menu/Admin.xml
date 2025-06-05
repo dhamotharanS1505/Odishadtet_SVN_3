@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<Admin>
+	<Menu>
+    <parentMenuID>1</parentMenuID>
+    <parentMenuName value="">Orders</parentMenuName>
+    <child value="AdminActivity/OpenOrdersDetails">Open Orders</child>
+   		<!-- <child value="../AdminActivity/ActivationExtendDays">Extend Purchased subjects</child> -->
+		</Menu>
+  
+  
+</Admin>

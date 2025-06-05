@@ -1,0 +1,1056 @@
+﻿@{
+
+    ViewBag.Title = "Profile";
+    Layout = @ViewBag.LayoutModel;
+}
+
+<style type="text/css">
+    .sub_wrp {
+        padding: 0 !important;
+    }
+
+    .user_pro_main {
+        display: block;
+        width: auto;
+        margin: 25px auto 0;
+        padding: 0px;
+    }
+
+    #txtOTPcode {
+        background: #fff url("../Content/img/pass_icon.png") no-repeat scroll 0 0;
+        border-radius: 7px;
+        text-indent: 20px;
+    }
+
+    .modal-header h4 {
+        padding: 6px !important;
+    }
+
+    #btnReSendcode {
+        color: #3399ff;
+    }
+
+        #btnReSendcode:hover {
+            text-decoration: underline;
+        }
+
+    .user_photo {
+        background: #e5e5e5 none repeat scroll 0 0;
+        color: #424242;
+        float: right;
+        height: auto;
+        min-height: 188px;
+        padding: 15px 12px;
+        position: relative;
+        text-align: center;
+        margin: 50px 10px 10px 10px;
+    }
+
+        .user_photo > img {
+            border-radius: 100%;
+            width: 120px;
+            height: 120px;
+            display: block;
+            margin: 0 auto;
+            padding: 0px;
+            border: 3px solid #fff;
+        }
+
+        .user_photo > span {
+            display: block;
+            font-size: 20px;
+            padding: 20px 0 2px;
+            text-transform: capitalize;
+        }
+
+        .user_photo ul {
+            display: block;
+            padding: 10px 0px;
+        }
+
+            .user_photo ul li {
+                display: block;
+                padding: 5px 0px;
+                margin: 0 -25px;
+            }
+
+                .user_photo ul li label {
+                    border-bottom: 1px solid #aaaaaa;
+                    display: block;
+                    font-weight: 600;
+                    margin-bottom: 7px;
+                    margin-top: 5px;
+                    padding-bottom: 5px;
+                    text-transform: capitalize;
+                }
+
+                    .user_photo ul li label span {
+                        display: block;
+                    }
+
+        .user_photo > b {
+            display: block;
+            font-size: 13px;
+            font-weight: normal;
+            text-transform: capitalize;
+        }
+
+    .user_info {
+        background: #fff none repeat scroll 0 0;
+        box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+        padding: 10px;
+        position: relative;
+    }
+
+        .user_info > span {
+            background: #f4f4f4 none repeat scroll 0 0;
+            border-left: 5px solid #0096e4;
+            color: #424242;
+            display: block;
+            font-size: 16px;
+            padding: 16px 24px 16px 10px;
+        }
+
+        .user_info ul {
+            display: block;
+            margin-left: 8px;
+        }
+
+        .user_info li {
+            display: inline-block;
+            vertical-align: middle;
+            margin: 10px;
+            width: 30%;
+        }
+
+            .user_info li label {
+                border-bottom: 1px solid #dedede;
+                border-left: 2px solid #0096d4;
+                color: #727272;
+                display: block;
+                margin-bottom: 10px;
+                padding-bottom: 5px;
+                padding-left: 5px;
+            }
+
+            .user_info li input[type="text"], .user_info li textarea {
+                border: 1px solid #0096d4;
+                box-sizing: border-box;
+                height: auto;
+                padding: 8px 5px;
+                transition: all 0.2s linear;
+                -moz-transition: all 0.2s linear;
+                -o-transition: all 0.2s linear;
+                -webkit-transition: all 0.2s linear;
+                width: 100%;
+            }
+
+            .user_info li textarea {
+                height: 34px;
+                resize: vertical;
+                font-size: 13px;
+            }
+
+                .user_info li input[type="text"]:focus, .user_info li textarea:focus {
+                    box-shadow: 0px 0px 4px rgba(0,0,0,0.3);
+                    transition: all 0.2s linear;
+                    -moz-transition: all 0.2s linear;
+                    -o-transition: all 0.2s linear;
+                    -webkit-transition: all 0.2s linear;
+                    border: 1px solid #0096D4;
+                }
+
+            .user_info li:last-child {
+                width: 63%;
+            }
+
+    .user_photo input[type="button"] {
+        background: #0096e4 none repeat scroll 0 0;
+        border: 0 none;
+        border-radius: 0;
+        bottom: 0;
+        color: #fff;
+        font-family: arial;
+        font-size: 12px;
+        font-weight: bold;
+        height: auto;
+        left: 0;
+        margin: 22px auto 0;
+        padding: 13px 0;
+        position: absolute;
+        right: 0;
+        text-align: center;
+        text-transform: uppercase;
+        width: 100%;
+        -moz-transition: all 0.2s linear;
+        -o-transition: all 0.2s linear;
+        -webkit-transition: all 0.2s linear;
+        outline: none;
+    }
+
+        .user_photo input[type="button"]:hover {
+            background: #43C4D8;
+            -moz-transition: all 0.2s linear;
+            -o-transition: all 0.2s linear;
+            -webkit-transition: all 0.2s linear;
+        }
+
+    .date_pic_text {
+        padding-left: 25px !important;
+    }
+
+    .date_picker {
+        display: block;
+        position: relative;
+    }
+
+        .date_picker:after {
+            content: "\f073";
+            color: #0096d4;
+            font-family: "FontAwesome";
+            font-size: 14px;
+            left: 5px;
+            position: absolute;
+            top: 8px;
+        }
+
+    .popup_user {
+        background: rgba(0, 0, 0, 0.2) none repeat scroll 0 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        text-align: center;
+        vertical-align: middle;
+        z-index: 10;
+        overflow: hidden;
+        display: none;
+    }
+
+    .upload_panel {
+        background: #fff none repeat scroll 0 0;
+        border-radius: 10px;
+        bottom: 25px;
+        box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+        display: inline-block;
+        height: auto;
+        left: 25%;
+        padding: 10px;
+        position: absolute;
+        right: 25%;
+        text-align: left;
+        top: 99px;
+        width: auto;
+        height: 400px;
+    }
+
+    .up_h1 {
+        display: block;
+        border-bottom: 1px solid #E5E5E5;
+    }
+
+        .up_h1 > span {
+            display: inline-block;
+            border-bottom: 2px #0096D4 solid;
+            padding: 5px;
+            color: #424242;
+        }
+
+    .pop_iframe {
+        padding: 5px;
+    }
+
+        .pop_iframe > iframe {
+            position: absolute;
+            top: 47px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow-y: auto;
+            border: 0px;
+        }
+
+    .up_close {
+        color: #d9534f;
+        float: right;
+        font-size: 16px;
+        margin-right: 2px;
+        margin-top: 6px;
+    }
+
+    .user_info > div {
+        position: absolute;
+        top: 24px;
+        right: 13px;
+    }
+
+    .pr_hed {
+        color: #337ab7;
+        font-size: 18px;
+        margin: 0 0 10px;
+        padding: 10px;
+    }
+
+    .dash_head {
+        border: 1px solid #e6e6e6;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+        margin: 10px 0;
+        padding: 10px;
+    }
+
+    .table_pr_dt tr td:nth-child(1) {
+        background-color: #75abd9;
+        color: #fff;
+        width: 20%;
+    }
+
+    .table_pr_dt tbody td {
+        border: 1px solid #ececec;
+        font-size: 13px;
+        font-weight: normal;
+        padding: 5px;
+    }
+
+    .sub_wrp {
+        background-color: #fff;
+        border: 1px solid #e6e6e6;
+        margin: 10px 0 0 !important;
+        padding: 20px;
+    }
+
+    .edt_pro h2 span strong:last-child {
+        border-left: 0 none;
+    }
+
+    .edt_pro h2 span strong {
+        color: #337ab7;
+        cursor: pointer;
+        float: right;
+        font-size: 14px;
+        font-weight: normal;
+        margin-left: 10px;
+        padding-left: 10px;
+        text-transform: uppercase;
+    }
+
+    .edt_pro td span {
+        margin: 0 10px 0 0;
+    }
+
+    .modal-dialog {
+        margin: 146px auto !important;
+        width: 327px !important;
+    }
+
+    .txtColor {
+        background-color: Lime;
+        color: Green;
+    }
+
+    .dsp_none_wrp {
+        display: none;
+    }
+
+    @@media screen and (max-width:480px) {
+        .table_pr_dt select {
+            width: 100% !important;
+        }
+    }
+</style>
+
+<div>
+    <article class="col-sm-12">
+        <div class="in_hd_tt row"><strong class="fa fa-file-text"></strong><span>My Profile</span></div>
+    </article>
+
+    <div class="row">
+        <article class="col-sm-12">
+            <section class="sub_wrp row">
+                <article class="col-sm-10 edt_pro table-responsive">
+                    <div id="FixViewProfile">
+                    </div>
+                </article>
+                <article class="col-sm-2">
+                    <div class="user_photo">
+
+                        <img src="../Content/img/ProfileImg/profile_img.png" id="UserProfileCroppedImg" />
+
+                        <input type="button" value="upload Photo" id="pop_upload" />
+                    </div>
+                </article>
+            </section>
+        </article>
+
+    </div>
+</div>
+
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog custom_pop">
+        <!-- Modal content-->
+        <div class="modal-content cus_popup">
+            <div class="modal-header">
+                <button id="btnClose" type="button" class="close" data-dismiss="modal">
+                    &times;
+                </button>
+                <h4 class="pop_hed modal-title">
+                    One Time Password Verification
+                </h4>
+            </div>
+            <div class="modal-body">
+                <p id="lblmsg" class="small_txt" style="color: Green">
+                </p>
+                <input id="txtOTPcode" type="text" class="form-control  full-width" placeholder="Enter your one time password (OTP)">
+                <br>
+                Didn't receive your otp?<a id="btnReSendcode" class="btnHrfTxt" href="#">&nbsp; Resend code</a>
+            </div>
+            <div class="modal-footer">
+                <input id="btnSubmit" type="button" class="btn" value="Submit">
+                @*class="btn_cl is-small" data-dismiss="modal"*@
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="popup_user">
+    <div class="upload_panel">
+        <div class="up_h1">
+            <span>Upload Photo</span>
+
+            <i class="fa fa-times up_close" style="cursor:pointer;"></i>
+        </div>
+        <div class="pop_iframe">
+            <iframe style="width:100%;height:100%;" src="../Home/ImageCrop"></iframe>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    var deptid;
+    var UserID;
+    var Name;
+    var Dept;
+    var college;
+    var year;
+    var sem;
+    var Mobno;
+    var email;
+    var deptmntid;
+    var colID;
+    var Password;
+    var pfileImage = "";
+    var profileimg = 0;
+
+
+    $(document).ready(function () {
+
+        ShowLoader();
+        $('#FixViewProfile').empty();
+        $.getJSON("/APIService/APIUserDashBoard/GetUserDetails",
+        {
+            studentId: $('#sessionUserId').val()
+        },
+        function (data) {
+            $.each(data, function (index, value) {
+                deptid = value.DepartmentID;
+                colID = value.collegeID;
+                year = value.Year;
+                sem = value.semester;
+                profileimg = value.ProfileImg;
+                $("#BindViewProfile").tmpl(value).appendTo("#FixViewProfile");
+            });
+
+            if ($("#sessionUserId").val() != 0) {
+                if (profileimg != null) {
+                    d = new Date();
+                    $("#UserProfileCroppedImg").attr("src", "../Content/img/ProfileImg/" + profileimg + "?" + d.getTime());
+                    $("#loginuserimage").attr("src", "../Content/img/ProfileImg/" + profileimg + "?" + d.getTime());
+                }
+            }
+        });
+        HideLoader();
+
+        $('.up_close').click(function () {
+            $('.popup_user').fadeOut();
+
+        });
+        $('#pop_upload').click(function () {
+            $('.popup_user').fadeIn();
+
+        });
+    });
+
+
+
+    function GetImagePath(Path) {
+
+        d = new Date();
+        $("#UserProfileCroppedImg").attr("src", Path + "?" + d.getTime());
+        //save image to database
+        var spt = Path.split("ProfileImg/");
+        $.getJSON("/APIService/APIUserDashBoard/GetUpdateUserProfileImage",
+            {
+                UserID: $('#sessionUserId').val(),
+                ImageName: spt[1]
+            },
+            function (data) {
+                if (data == "1") {
+                    ShowAlert("Profile Image Update", "Profile Image Updated Sucessfully", "success");
+                    $("#loginuserimage").attr("src", Path + "?" + d.getTime());
+                }
+            });
+        //end
+        $('.popup_user').fadeOut();
+        $("#UserImage").val(Path);
+    }
+
+
+    function GetVerificationCode() {
+        $.ajax({
+            url: '/APIService/APIUserDashBoard/GetProfileUpdateOTPCode?MobNo=' + $('#txtMoblie').val() + '&userId=' + $('#sessionUserId').val(),
+            type: 'GET',
+            dataType: "json",
+            success: function (data) {
+                if (data == 1) {
+
+                    $("#lblmsg").html("OTP Password sent to this Mobile No:" + $('#txtMoblie').val()).show().delay(5000).fadeOut("slow");
+                }
+            }
+        });
+    }
+
+    function userUpdateForPrfl() {
+        UserName = $('#txtName').val();
+        if (UserName == '') {
+            ShowAlert("Profile Update", "Please enter the User Name", "warning");
+            return false;
+        }
+        else if ($('#ddlCollege').val() == 0) {
+            ShowAlert("Profile Update", "Please Select the College", "warning");
+            return false;
+        }
+        else if ($('#ddlDept').val() == 0) {
+            ShowAlert("Profile Update", "Please Select the Department", "warning");
+            return false;
+        }
+        else if ($('#ddlYear').val() == 0) {
+            ShowAlert("Profile Update", "Please Select the Year", "warning");
+            return false;
+        }
+        else if ($('#ddlSem').val() == 0) {
+            ShowAlert("Profile Update", "Please Select the Semester", "warning");
+            return false;
+        }
+        else {
+            Profile_UserdetailsUpdate();
+        }
+    }
+
+    function Profile_UserdetailsUpdate() {
+        $.getJSON("/APIService/APIUserDashBoard/UpdateUserDetails",
+           {
+               userid: $('#sessionUserId').val(),
+               userName: $('#txtName').val(),
+               deptId: $('#ddlDept').val(),
+               deptName: $("#ddlDept option:selected").text(),
+               year: $('#ddlYear').val(),
+               sem: $('#ddlSem').val(),
+               collegeName: $("#ddlCollege option:selected").text(),
+               collegeId: $('#ddlCollege').val()
+           }, function (data) {
+               if (data == 1) {
+                   ShowAlert("Profile Update", "Your profile updated successfully.", "success");
+                   window.location.reload();
+               }
+               else {
+                   ShowAlert("Profile Update", "Update failure please try after some time.", "error");
+               }
+           });
+    }
+
+    function RandomCodeVerification(userId, otpcode) {
+        $.ajax({
+            url: '/APIService/APIUserDashBoard/GetOTP_CodeVerification?userId=' + userId + '&otpCode=' + otpcode,
+            type: 'GET',
+            dataType: "json",
+            success: function (response) {
+                if (response == 1) {
+                    $this.val('Confirm!');
+                    $('#btnClose').click();
+                }
+                else {
+                    ShowAlert("Profile Update", "OTP is not valid, please enter valid OTP code.", "error");
+                    $this.val('Confirm!');
+                    $('#txtOTPcode').val('');
+                }
+            }
+        });
+    }
+
+    function UpdateUserDetails() {
+
+        if ($.trim($('#txtMoblie').val()).length == 0) {
+            ShowAlert("Profile Update", "Please enter Phone Number", "warning");
+            return false;
+        }
+        else if (!validatePhone($('#txtMoblie').val())) {
+            ShowAlert("Profile Update", 'Invalid Phone Number', "warning");
+            return false;
+        }
+        else if ($('#txtEmail').val() == '') {
+            ShowAlert("Profile Update", "Please enter the EmailID Name", "warning");
+            return false;
+        }
+        else if (!isValidEmailAddress($('#txtEmail').val())) {
+
+            ShowAlert("Profile Update", 'Please enter valid Email ID.', "warning");
+            return false;
+        }
+
+        else {
+            $("#lnkContactEdit").attr('data-toggle', 'modal');
+            $("#lnkContactEdit").attr('data-target', '#myModal');
+
+            GetVerificationCode()
+            $("#lnkContactEdit").text('EDIT');
+        }
+
+    }
+
+    function LoadCollegeList() {
+
+        $.getJSON("/APIService/APIUserDashBoard/GetLoadCollegeList",
+            {
+                univId: $('#sessionUniversityId').val()
+            },
+            function (data) {
+                var markup;
+                $.each(data, function (index, value) {
+
+                    if (value.college_Id == colID) {
+                        markup += "<option selected='selected' value=" + value.college_Id + ">" + value.college_Name + "</option>";
+                    }
+                    else {
+                        markup += "<option value=" + value.college_Id + ">" + value.college_Name + "</option>";
+                    }
+
+                });
+                $("#ddlCollege").html(markup).show();
+            });
+    }
+
+    function LoadDepartmentList() {
+
+        $.getJSON("/APIService/APIUserDashBoard/GetLoadDepartmentList",
+            {
+                univId: $('#sessionUniversityId').val()
+            },
+            function (data) {
+                var markup;
+                $.each(data, function (index, value) {
+
+                    if (value.department_Id == deptid) {
+                        markup += "<option selected='selected' value=" + value.department_Id + ">" + value.department_Name + "</option>";
+                    }
+                    else {
+                        markup += "<option value=" + value.department_Id + ">" + value.department_Name + "</option>";
+                    }
+
+                });
+                $("#ddlDept").html(markup).show();
+            });
+    }
+
+    function ChangeEmail() {
+
+        if ($.trim($('#txtNewEmail').val()) == '') {
+            ShowAlert("Profile Update", "Pleae enter your new email", "warning");
+            return false;
+        }
+        else if ($.trim($('#txtEmail').val()) == $.trim($('#txtNewEmail').val())) {
+            ShowAlert("Profile Update", "New email and old email should not be Same", "warning");
+            return false;
+        }
+        else {
+
+        }
+    }
+
+    function inlinefunc() {
+        $(".inline").colorbox({ inline: true, width: "35%", height: "56%" });
+    }
+
+    var displayImage = function (base64Data) {
+        var imag = "<img "
+                     + "src='" + "data:image/jpg;base64,"
+                     + base64Data + "'/>";
+
+        $("#divImageHolder").html(imag)
+    };
+
+    function ConvertToImage() {
+        //var fd = new FormData();
+        var files = $("#uploadEditorImage").get(0).files;
+        ShowAlert("Profile Update", files);
+
+        $.ajax({
+            type: "POST",
+            url: "/ViewProfile/SaveFiles",
+            data: files,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (msg) {
+                ShowAlert("Profile Update", msg);
+            },
+            error: function (msg, status, errorthrown) {
+                ShowAlert("Profile Update", msg.toString() + "-" + status + "-" + errorthrown);
+            }
+
+        });
+
+    }
+
+    function ResetPassword($this) {
+        ShowLoader();
+        var MobileNo = $('#txtMoblie').val();
+        var Newpwd = $('#txtNewPwd').val();
+        var Otp = $('#txtOTPcode').val();
+
+        $.getJSON("/APIService/APIUserDashBoard/GetResetPasswords",
+        {
+            mobileNo: MobileNo,
+            otpCode: Otp,
+            newPassword: Newpwd
+        },
+        function (data) {
+
+            if ($.trim(data.message == "Password changed successfully.")) {
+                ShowAlert("Profile Update", "Password changed successfully.", "success");
+                $this.val('Confirm!');
+                $('#btnClose').click();
+                $('#Np').hide();
+                $('#Rp').hide();
+                $("#lnkEditChangePwd").text('<i class="fa fa-pencil"></i> EDIT').trigger('click');
+                setTimeout(function () {
+                    window.location.reload();
+                }, 500);
+            }
+            else {
+                ShowAlert("Profile Update", data.message, "error");
+                $this.val('Confirm!');
+            }
+        });
+        HideLoader();
+    }
+
+    $(function () {
+
+        $('footer').removeClass('footer_wrap');
+        $('#Prfimg').click(function () {
+            ConvertToImage();
+        });
+
+
+        $("input[type=file]").on("change", function () {
+            $("[for=file]").html(this.files[0].path);
+            $("#Prfimg").attr("src", URL.createObjectURL(this.files[0]));
+        });
+
+
+        $("#click").click(function () {
+            $('#click').css({ "background-color": "#f00", "color": "#fff", "cursor": "inherit" }).text("Open this window again and this message will still be here.");
+            return false;
+        });
+    });
+
+
+    $("#btnReSendcode").click(function (e) {
+        e.preventDefault();
+    });
+
+    $("#lnkContactSave").click(function () {
+        $('#txtMoblie').css('background-color', '');
+        $('#txtEmail').css('background-color', '');
+    });
+
+    $("#lnkContactEdit").click(function () {
+
+        $('#txtOTPcode').val('');
+        var $this = $(this);
+        $('#btnSubmit').removeClass('OtpForPwd');
+        if ($this.hasClass('editContact')) {
+
+            $("#lnkContactEdit").text('UPDATE');
+            $(this).removeClass('cboxElement');
+            $this.removeClass('editContact');
+            $('#txtMoblie').css('background-color', '#F5F5DC');
+            $('#txtEmail').css('background-color', '#F5F5DC');
+            $("#lnkContactEdit").removeAttr('data-toggle', 'modal');
+            $("#lnkContactEdit").removeAttr('data-target', '#myModal');
+        }
+        else {
+            $('#txtMoblie').css('background-color', '');
+            $('#txtEmail').css('background-color', '');
+
+            UpdateUserDetails();
+            $this.addClass('editContact');
+        }
+    });
+
+    $("#btnReSendcode").click(function () {
+
+        GetVerificationCode();
+    });
+
+
+    $(document).on('click', '#btnSubmit', function () {
+        var $this = $(this);
+
+        if ($('#txtOTPcode').val() != '') {
+            $.ajax({
+                url: '/APIService/APIUserDashBoard/GetOTP_CodeVerification?userId=' + $('#sessionUserId').val() + '&otpCode=' + $('#txtOTPcode').val(),
+                type: 'GET',
+                dataType: "json",
+                success: function (response) {
+                    if (response == 1) {
+                        ResetPassword($this);
+                        $this.val('Submit');
+                        $('#btnClose').click();
+                    }
+                    else {
+                        ShowAlert("Profile Update", "OTP is not valid, please enter valid OTP code.", "error");
+                        $this.val('Submit');
+                        $('#txtOTPcode').val('');
+                    }
+                }
+            });
+        }
+        else {
+            ShowAlert("Profile Update", "Please Enter the OTP Number", "warning");
+        }
+
+    });
+
+    $(function () {
+        /*password change */
+        $(document).on('click', '#lnkEditChangePwd', function () {
+
+            $('#lnkEditChangePwd').text('UPDATE');
+
+            $(this).attr("id", "UpdateChangePwd");
+            $(this).attr("class", "updatepwd");
+            $('#Np').show();
+            $('#Rp').show();
+            $('.editPwd').removeClass();
+        });
+
+        /*update password*/
+
+        $(document).on('click', '#UpdateChangePwd', function () {
+            if ($.trim($('#txtNewPwd').val()) == '') {
+                ShowAlert("Profile Update", "Please Enter the New Password", "warning");
+            }
+            else if ($.trim($('#txtReEntPwd').val()) == '') {
+                ShowAlert("Profile Update", "Please Enter the ReEnter New Password", "warning");
+            }
+            else if ($.trim($('#txtNewPwd').val()).length < 3 || $.trim($('#txtNewPwd').val()).length >= 10) {
+                ShowAlert("Profile Update", "The New Password length must be 6 to 10 digits", "warning");
+            }
+            else if ($.trim($('#txtReEntPwd').val()) != $.trim($('#txtNewPwd').val())) {
+                ShowAlert("Profile Update", "New Password does not match with ReEnter Password", "warning");
+            }
+            else if ($.trim($('#txtOldPwd').val()) == $.trim($('#txtNewPwd').val())) {
+                ShowAlert("Profile Update", "New Password and old Password should not be Same", "warning");
+            }
+            else {
+                $("#UpdateChangePwd").attr('data-toggle', 'modal');
+                $("#UpdateChangePwd").attr('data-target', '#myModal');
+                $('#btnSubmit').addClass('OtpForPwd');
+
+                $.ajax({
+                    url: '/APIService/APIUserDashBoard/GetProfileUpdateOTPCode?MobNo=' + $('#txtMoblie').val() + '&userId=' + $('#sessionUserId').val(),
+                    type: 'GET',
+                    dataType: "json",
+                    success: function (data) {
+                        if (data == 1) {
+                            $("#lblmsg").html("OTP Password sent to this Mobile No:" + $('#txtMoblie').val()).show().delay(5000).fadeOut("slow");
+                        }
+                    }, complete: function () {
+                        $('#myModal').modal('show');
+                    }
+                });
+            }
+        });
+
+
+
+        //profile details Update
+
+        $(document).on('click', '#lnkEditPrfl', function () {
+
+            $('#lnkEditPrfl').text('UPDATE');
+            $(this).attr("id", "UpdateProfile");
+
+            $("#txtName").prop("disabled", false);
+            $('#textclg').hide();
+            $('#ddlCollege').show();
+            $('#txtdept').hide();
+            $('#ddlDept').show();
+            $('#txtyear').hide();
+            $('#ddlYear').show();
+            $('#txtsemster').hide();
+            $('#ddlSem').show();
+
+            if (year == $("#sessionyear").val()) {
+
+                $("#ddlYear option[value=" + year + "]").attr("selected", "selected");
+            }
+            if (sem == $("#sessionsemester").val()) {
+
+                $("#ddlSem option[value=" + sem + "]").attr("selected", "selected");
+            }
+
+            LoadCollegeList();
+            LoadDepartmentList();
+        });
+
+        $(document).on('click', '#UpdateProfile', function () {
+
+            userUpdateForPrfl();
+        });
+
+        $(document).on('click', '#lnkEditCancelPwd', function () {
+            window.location.reload();
+        });
+
+        $(document).on('click', '#lnkCancelEditPrfl', function () {
+            window.location.reload();
+        });
+
+    });
+</script>
+
+<script id="BindViewProfile" type="text/html">
+    <div class="">
+        <h2 class="dash_head pr_hed">
+            Account Details
+            <span>
+                <strong id="lnkCancelEditPrfl" class="editPrfle">Cancel</strong>
+                <strong id="lnkEditPrfl" class="editPrfle"> <i class="fa fa-pencil"></i> Edit</strong>
+            </span>
+        </h2>
+        <div class="table-responsive">
+            <table class="table_pr_dt" style="width:100%;">
+                <tbody>
+                    <tr>
+                        <td><span class="fa fa-user"></span>Name</td>
+                        <td>
+                            <input id="txtName" style="width:50%;" name="txtPass" type="text" disabled="disabled" class="form-control" value="${studentName}"><label id="lblName" style="display:none"></label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="fa fa-university"></span>University</td>
+                        <td>
+                            <input id="txtuniv" style="width:50%;" name="txtPass" type="text" class="form-control" disabled="disabled" value="${Univname}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="fa fa-university"></span>College</td>
+                        <td>
+                            <input id="textclg" style="width:50%;" name="txtPass" type="text" class="form-control" disabled="disabled" value="${collegeName}">
+                            <select id="ddlCollege" size="1" style="width:50%;" class="form-control dsp_none_wrp">
+                                <option value="${collegeID}">${collegeName}</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="fa fa-tree"></span>Department </td>
+                        <td>
+                            <select id="ddlDept" size="1" style="width:50%;" name="" class="form-control dsp_none_wrp">
+                                <option value="${DepartmentID}">${DeptName}</option>
+                            </select>
+                            <input id="txtdept" style="width:50%;" name="txtPass" type="text" class="form-control" disabled="disabled" value="${DeptName}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="fa fa-calendar"></span>Year </td>
+                        <td>
+                            <input id="txtyear" style="width:50%;" name="txtPass" type="text" class="form-control" disabled="disabled" value="${Year}">
+                            <select id="ddlYear" style="width:50%;" class="form-control dsp_none_wrp">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="fa fa-calendar"></span>Semester </td>
+                        <td>
+                            <input id="txtsemster" style="width:50%;" name="txtPass" type="text" class="form-control" disabled="disabled" value="${semester}">
+                            <select id="ddlSem" style="width:50%;" name="" class="form-control dsp_none_wrp">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div>
+        <h2 class="dash_head pr_hed">
+            Contact Details
+            @*<span><strong id="lnkcancelEdit" class="editPwdcancel">Cancel</strong></span>
+                <span><strong id="lnkContactEdit" class="editContact"> <i class="fa fa-pencil"></i> Edit</strong></span>*@
+        </h2>
+        <table class="table_pr_dt" style="width:100%;">
+            <tbody>
+                <tr>
+                    <td><span class="fa fa-phone"></span>Mobile No</td>
+                    <td>
+                        <input id="txtMoblie" style="width:40%;" name="txtPass" type="text" class="form-control" value="${mobileNo}" disabled="disabled" />
+                        <label id="lblMobile" style="display:none"></label>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="fa fa-envelope"></span> Email </td>
+                    <td>
+                        <input id="txtEmail" style="width:40%;" value="${emailID}" name="txtPass" disabled="disabled" type="text" class="form-control">
+                        <label id="lblEmail" style="display:none"></label>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="">
+        <h2 class="dash_head pr_hed">
+            Change Password
+            <span><strong id="lnkEditCancelPwd" class="editPwdcancel">Cancel</strong></span>
+            <span> <strong id="lnkEditChangePwd" class="editPwd"> <i class="fa fa-pencil"></i> Edit</strong></span>
+        </h2>
+
+
+        <table class="table_pr_dt" style="width:100%;">
+            <tbody>
+                <tr>
+                    <td><span class="fa fa-lock"></span>Current Password</td>
+                    <td> <input id="txtOldPwd" style="width:30%;" value="${password}" name="password" type="password" onblur="hidePassword()" required="" tabindex="2" disabled="disabled" class="form-control" /> <label id="lblOldPw" style="display:none"></label> </td>
+                </tr>
+                <tr id="Np" style="display:none;">
+                    <td> <span class="fa fa-lock"></span>New Password </td> @*<span class="fa fa-key"><span class="fa fa-unlock-alt">*@
+                    <td><input id="txtNewPwd" style="width:30%;" name="txtPass" type="password" class="form-control" /></td>
+                </tr>
+                <tr id="Rp" style="display:none;">
+                    <td><span class="fa fa-lock"></span>Confirm Password</td>
+                    <td><input id="txtReEntPwd" style="width:30%;" name="txtPass" type="password" class="form-control" /></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <br />
+</script>

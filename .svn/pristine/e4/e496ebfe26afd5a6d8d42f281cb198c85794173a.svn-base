@@ -1,0 +1,2149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="subject_delivery_anna_newModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="batch_year_master">
+    <Key>
+      <PropertyRef Name="batch_year_id" />
+    </Key>
+    <Property Name="batch_year_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="batch_year" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="batch_desc" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="active_status" Type="int" Nullable="false" />
+    <Property Name="created_by" Type="int" Nullable="false" />
+    <Property Name="created_on" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="business_customer">
+    <Key>
+      <PropertyRef Name="bcust_id" />
+    </Key>
+    <Property Name="bcust_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="bcust_first_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="bcust_name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="bcust_password" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="role_id" Type="int" Nullable="false" />
+    <Property Name="bcust_email_id" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="bcust_mobile" Type="bigint" Nullable="false" />
+    <Property Name="loggedin_status" Type="int" />
+    <Property Name="last_loggedin_date" Type="datetime" />
+    <Property Name="is_first_login" Type="int" Nullable="false" />
+    <Property Name="active_status" Type="int" Nullable="false" />
+    <Property Name="created_by" Type="int" />
+    <Property Name="created_on" Type="datetime" Nullable="false" />
+    <Property Name="bcust_profileimage" Type="varchar" MaxLength="200" />
+    <Property Name="bcust_address" Type="varchar" MaxLength="200" />
+    <Property Name="state_id" Type="int" />
+    <Property Name="country" Type="varchar" MaxLength="50" />
+    <Property Name="dob" Type="date" />
+    <Property Name="gender" Type="char" MaxLength="1" />
+    <Property Name="city" Type="varchar" MaxLength="50" />
+    <Property Name="phonenumber" Type="varchar" MaxLength="50" />
+    <Property Name="Bulk_mail" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="business_customer_teams">
+    <Key>
+      <PropertyRef Name="bcust_teamid" />
+    </Key>
+    <Property Name="bcust_teamid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="bcust_id" Type="bigint" />
+    <Property Name="bteamCode" Type="varchar" MaxLength="100" />
+    <Property Name="bteamName" Type="varchar" MaxLength="500" />
+    <Property Name="bteamLeadName" Type="varchar" MaxLength="500" />
+    <Property Name="createdDate" Type="datetime" />
+    <Property Name="active_status" Type="int" />
+  </EntityType>
+  <EntityType Name="cancel_category_master">
+    <Key>
+      <PropertyRef Name="category_id" />
+    </Key>
+    <Property Name="category_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="category_name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="category_desc" Type="varchar(max)" Nullable="false" />
+    <Property Name="active_status" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="clienttool_user_version">
+    <Key>
+      <PropertyRef Name="client_tool_user_versionid" />
+    </Key>
+    <Property Name="client_tool_user_versionid" Type="int" Nullable="false" />
+    <Property Name="user_id" Type="bigint" Nullable="false" />
+    <Property Name="tool_version_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="model_name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="released_on" Type="datetime" Nullable="false" />
+    <Property Name="reason" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="is_current_version" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="clienttool_version">
+    <Key>
+      <PropertyRef Name="tool_version_id" />
+    </Key>
+    <Property Name="tool_version_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tool_version_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="model_name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="released_on" Type="datetime" Nullable="false" />
+    <Property Name="reason" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="is_current_version" Type="int" Nullable="false" />
+    <Property Name="path_to_download" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="college_group_map">
+    <Key>
+      <PropertyRef Name="college_group_map_id" />
+    </Key>
+    <Property Name="college_group_map_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="college_id" Type="int" Nullable="false" />
+    <Property Name="college_group_id" Type="int" Nullable="false" />
+    <Property Name="enter_on" Type="datetime" Nullable="false" />
+    <Property Name="enter_by" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="college_group_master">
+    <Key>
+      <PropertyRef Name="college_group_id" />
+    </Key>
+    <Property Name="college_group_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="college_group_name" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="college_group_desc" Type="varchar" MaxLength="250" />
+    <Property Name="active_status" Type="int" Nullable="false" />
+    <Property Name="enter_on" Type="datetime" Nullable="false" />
+    <Property Name="enter_by" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="college_installation_details">
+    <Key>
+      <PropertyRef Name="college_install_id" />
+    </Key>
+    <Property Name="college_install_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="college_id" Type="int" Nullable="false" />
+    <Property Name="installation_centre_name" Type="varchar" MaxLength="250" />
+    <Property Name="primary_mac" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="enter_on" Type="datetime" Nullable="false" />
+    <Property Name="enter_by" Type="bigint" Nullable="false" />
+    <Property Name="active_status" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="college_installation_expiry">
+    <Key>
+      <PropertyRef Name="college_installation_expiry_id" />
+    </Key>
+    <Property Name="college_installation_expiry_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="college_install_id" Type="bigint" Nullable="false" />
+    <Property Name="department_id" Type="int" Nullable="false" />
+    <Property Name="subject_id" Type="bigint" Nullable="false" />
+    <Property Name="install_by" Type="int" />
+    <Property Name="installed_on" Type="datetime" />
+    <Property Name="expiry_on" Type="datetime" Nullable="false" />
+    <Property Name="semester" Type="int" />
+  </EntityType>
+  <EntityType Name="college_master">
+    <Key>
+      <PropertyRef Name="college_id" />
+    </Key>
+    <Property Name="college_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="college_code" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="college_name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="active_status" Type="int" Nullable="false" />
+    <Property Name="total_license" Type="int" />
+    <Property Name="password" Type="varchar" MaxLength="200" />
+    <Property Name="college_mobile" Type="bigint" />
+    <Property Name="college_email" Type="nvarchar" MaxLength="250" />
+    <Property Name="university_id" Type="int" Nullable="false" />
+    <Property Name="enter_on" Type="datetime" Nullable="false" />
+    <Property Name="enter_by" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="college_subject_mapping">
+    <Key>
+      <PropertyRef Name="college_subject_mapping_id" />
+    </Key>
+    <Property Name="college_subject_mapping_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="university_id" Type="int" />
+    <Property Name="college_id" Type="int" />
+    <Property Name="department_id" Type="int" />
+    <Property Name="subject_id" Type="bigint" />
+    <Property Name="rule_id" Type="int" />
+    <Property Name="map_year" Type="int" />
+    <Property Name="semester" Type="int" />
+    <Property Name="active_status" Type="int" />
+    <Property Name="created_by" Type="int" />
+    <Property Name="created_on" Type="datetime" />
+    <Property Name="active_duration_days" Type="int" />
+    <Property Name="active_duration_date" Type="datetime" />
+    <Property Name="total_license" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Goadsde.dbo.college_subject_test_mapping' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="college_subject_test_mapping">
+    <Key>
+      <PropertyRef Name="college_subject_test_mapping_id" />
+    </Key>
+    <Property Name="college_subject_test_mapping_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="university_id" Type="int" />
+    <Property Name="college_id" Type="int" />
+    <Property Name="department_id" Type="int" />
+    <Property Name="subject_id" Type="bigint" />
+    <Property Name="rule_id" Type="int" />
+    <Property Name="map_year" Type="int" />
+    <Property Name="semester" Type="int" />
+    <Property Name="active_status" Type="int" />
+    <Property Name="created_by" Type="int" />
+    <Property Name="created_on" Type="datetime" />
+    <Property Name="active_duration_days" Type="int" />
+    <Property Name="active_duration_date" Type="datetime" />
+  </EntityType>
+  <EntityType Name="college_test_installation_details">
+    <Key>
+      <PropertyRef Name="college_test_install_id" />
+    </Key>
+    <Property Name="college_test_install_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="college_id" Type="int" Nullable="false" />
+    <Property Name="installation_centre_name" Type="varchar" MaxLength="250" />
+    <Property Name="primary_mac" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="enter_on" Type="datetime" Nullable="false" />
+    <Property Name="enter_by" Type="bigint" Nullable="false" />
+    <Property Name="active_status" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="college_test_installation_expiry">
+    <Key>
+      <PropertyRef Name="college_test_installation_expiry_id" />
+    </Key>
+    <Property Name="college_test_installation_expiry_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="college_test_install_id" Type="bigint" Nullable="false" />
+    <Property Name="department_id" Type="int" Nullable="false" />
+    <Property Name="subject_id" Type="bigint" Nullable="false" />
+    <Property Name="install_by" Type="int" />
+    <Property Name="installed_on" Type="datetime" />
+    <Property Name="expiry_on" Type="datetime" Nullable="false" />
+    <Property Name="semester" Type="int" />
+  </EntityType>
+  <EntityType Name="country_master">
+    <Key>
+      <PropertyRef Name="country_id" />
+    </Key>
+    <Property Name="country_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="country_code" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="country_name" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="country_mobile_prefix" Type="varchar" MaxLength="50" />
+    <Property Name="active_status" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Demo_SubscribedUser">
+    <Key>
+      <PropertyRef Name="SubscriberUserID" />
+    </Key>
+    <Property Name="SubscriberUserID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SubscriberName" Type="varchar" MaxLength="500" />
+    <Property Name="SubscriberCollege" Type="varchar(max)" />
+    <Property Name="EmailID" Type="varchar" MaxLength="250" />
+    <Property Name="MobileNumber" Type="varchar" MaxLength="100" />
+    <Property Name="SubscribedDate" Type="datetime" />
+    <Property Name="Subscriberip" Type="varchar" MaxLength="500" />
+    <Property Name="SubscriberCountry" Type="varchar" MaxLength="500" />
+    <Property Name="SubscriberRegion" Type="varchar" MaxLength="500" />
+    <Property Name="SubscriberCity" Type="varchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="department_master">
+    <Key>
+      <PropertyRef Name="department_id" />
+    </Key>
+    <Property Name="department_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="department_code" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="department_name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="no_of_year" Type="int" Nullable="false" />
+    <Property Name="max_semester_per_year" Type="int" Nullable="false" />
+    <Property Name="active_status" Type="int" Nullable="false" />
+    <Property Name="created_by" Type="int" />
+    <Property Name="created_on" Type="datetime" />
+    <Property Name="modified_by" Type="int" />
+    <Property Name="modified_on" Type="datetime" />
+    <Property Name="UniversityID" Type="int" Nullable="false" />
+    <Property Name="dept_img_path" Type="varchar" MaxLength="250" />
+    <Property Name="coursehours" Type="int" />
+    <Property Name="visuals" Type="int" />
+    <Property Name="pagecontent" Type="int" />
+    <Property Name="solvedproblem" Type="int" />
+    <Property Name="multichoice" Type="int" />
+    <Property Name="dept_video" Type="varchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="department_subject_mapping">
+    <Key>
+      <PropertyRef Name="department_subject_mapping_id" />
+    </Key>
+    <Property Name="department_subject_mapping_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="department_id" Type="int" Nullable="false" />
+    <Property Name="subject_id" Type="bigint" Nullable="false" />
+    <Property Name="rule_id" Type="int" Nullable="false" />
+    <Property Name="university_id" Type="int" Nullable="false" />
+    <Property Name="map_year" Type="int" Nullable="false" />
+    <Property Name="semester" Type="int" Nullable="false" />
+    <Property Name="active_status" Type="int" Nullable="false" />
+    <Property Name="created_by" Type="int" />
+    <Property Name="created_on" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="device_preidentification">
+    <Key>
+      <PropertyRef Name="device_preidentification_id" />
+    </Key>
+    <Property Name="device_preidentification_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="device_id" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="subject_id" Type="bigint" Nullable="false" />
+    <Property Name="expiry_days" Type="int" Nullable="false" />
+    <Property Name="enter_by" Type="int" Nullable="false" />
+    <Property Name="enter_on" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ExceptionLog">
+    <Key>
+      <PropertyRef Name="ExceptionID" />
+    </Key>
+    <Property Name="ExceptionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ExceptionType" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="ExceptionMessage" Type="varchar(max)" Nullable="false" />
+    <Property Name="ExceptionSource" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="ExceptionURL" Type="varchar" MaxLength="100" />
+    <Property Name="TargetSiteModule" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="TargetSiteName" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="StackTrace" Type="varchar(max)" Nullable="false" />
+    <Property Name="HelpLink" Type="varchar" MaxLength="500" />
+    <Property Name="isFromController" Type="bit" />
+    <Property Name="ExceptionDate" Type="datetime" Nullable="false" />
+    <Property Name="ErrorColumnNumber" Type="int" />
+    <Property Name="errorLine" Type="int" />
+  </EntityType>
+  <EntityType Name="feedback">
+    <Key>
+      <PropertyRef Name="fb_id" />
+    </Key>
+    <Property Name="fb_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="100" />
+    <Property Name="college_name" Type="varchar" MaxLength="100" />
+    <Property Name="subject_name" Type="varchar" MaxLength="100" />
+    <Property Name="mobile_number" Type="varchar" MaxLength="12" />
+    <Property Name="email" Type="varchar" MaxLength="100" />
+    <Property Name="message" Type="text" />
+    <Property Name="createdon" Type="datetime" Nullable="false" />
+    <Property Name="isread" Type="bit" Nullable="false" />
+    <Property Name="readon" Type="datetime" />
+    <Property Name="status" Type="bit" Nullable="false" />
+    <Property Name="read_by" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="feedback_poll_userreply">
+    <Key>
+      <PropertyRef Name="feedback_poll_userreply_id" />
+    </Key>
+    <Property Name="feedback_poll_userreply_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="feedback_poll_qanswer1" Type="int" Nullable="false" />
+    <Property Name="feedback_poll_qanswer2" Type="int" Nullable="false" />
+    <Property Name="feedback_poll_qanswer3" Type="int" Nullable="false" />
+    <Property Name="feedback_poll_qanswer4" Type="int" Nullable="false" />
+    <Property Name="feedback_poll_qanswer5" Type="int" Nullable="false" />
+    <Property Name="uname" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="mobile" Type="bigint" />
+    <Property Name="email_id" Type="varchar(max)" Nullable="false" />
+    <Property Name="polled_on" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="mastercopy_usage_details">
+    <Key>
+      <PropertyRef Name="mastercopy_usage_id" />
+    </Key>
+    <Property Name="mastercopy_usage_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_name" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="email_id" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="mobile" Type="bigint" />
+    <Property Name="department_name" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="semester" Type="int" Nullable="false" />
+    <Property Name="requested_on" Type="datetime" Nullable="false" />
+    <Property Name="otp_code" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="is_otp_verified" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Menu">
+    <Key>
+      <PropertyRef Name="MenuID" />
+    </Key>
+    <Property Name="MenuID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ParentMenuID" Type="int" Nullable="false" />
+    <Property Name="MenuText" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="TargetURL" Type="varchar" MaxLength="150" />
+    <Property Name="MenuLevel" Type="int" Nullable="false" />
+    <Property Name="MenuOrder" Type="int" />
+    <Property Name="IsParent" Type="bit" />
+    <Property Name="active_status" Type="bit" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="ModuleID" Type="int" />
+    <Property Name="Univ_ID" Type="int" />
+  </EntityType>
+  <EntityType Name="MenuPrivilege">
+    <Key>
+      <PropertyRef Name="MenuPrivilegeID" />
+    </Key>
+    <Property Name="MenuPrivilegeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleID" Type="int" />
+    <Property Name="MenuID" Type="int" Nullable="false" />
+    <Property Name="active_status" Type="bit" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="order_cancel_history">
+    <Key>
+      <PropertyRef Name="order_cancel_id" />
+    </Key>
+    <Property Name="order_cancel_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="order_ref_no" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="cancelled_by" Type="int" Nullable="false" />
+    <Property Name="cancelled_on" Type="datetime" Nullable="false" />
+    <Property Name="category" Type="varchar(max)" Nullable="false" />
+    <Property Name="reason" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="order_cancel_random_pass">
+    <Key>
+      <PropertyRef Name="user_random_id" />
+    </Key>
+    <Property Name="user_random_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="buyer_user_id" Type="int" Nullable="false" />
+    <Property Name="order_ref_no" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="buyer_mobile" Type="bigint" Nullable="false" />
+    <Property Name="verification_code" Type="varchar(max)" Nullable="false" />
+    <Property Name="action_user_id" Type="int" Nullable="false" />
+    <Property Name="generated_time" Type="datetime" Nullable="false" />
+    <Property Name="action_type" Type="int" Nullable="false" />
+    <Property Name="user_type" Type="int" />
+  </EntityType>
+  <EntityType Name="package_details">
+    <Key>
+      <PropertyRef Name="package_detail_id" />
+    </Key>
+    <Property Name="package_detail_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="package_id" Type="int" Nullable="false" />
+    <Property Name="subject_id" Type="bigint" Nullable="false" />
+    <Property Name="created_on" Type="datetime" Nullable="false" />
+    <Property Name="created_by" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="validity_days" Type="int" Nullable="false" />
+    <Property Name="department_id" Type="int" />
+    <Property Name="year" Type="int" />
+    <Property Name="semester" Type="int" />
+    <Property Name="subject_unit_type" Type="int" />
+  </EntityType>
+  <EntityType Name="package_master">
+    <Key>
+      <PropertyRef Name="package_id" />
+    </Key>
+    <Property Name="package_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="package_code" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="package_display_name" Type="varchar" MaxLength="250" />
+    <Property Name="package_name" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="package_duration_days" Type="int" Nullable="false" />
+    <Property Name="long_desc" Type="varchar(max)" Nullable="false" />
+    <Property Name="short_desc" Type="varchar(max)" Nullable="false" />
+    <Property Name="selling_price" Type="int" Nullable="false" />
+    <Property Name="actual_price" Type="int" Nullable="false" />
+    <Property Name="department_id" Type="int" Nullable="false" />
+    <Property Name="subject_id" Type="bigint" Nullable="false" />
+    <Property Name="rule_id" Type="bigint" Nullable="false" />
+    <Property Name="subject_unit_type" Type="int" />
+    <Property Name="created_on" Type="datetime" Nullable="false" />
+    <Property Name="created_by" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="current_status" Type="int" />
+    <Property Name="activestatus" Type="int" Nullable="false" />
+    <Property Name="is_offer_package" Type="int" Nullable="false" />
+    <Property Name="cover_path" Type="varchar(max)" Nullable="false" />
+    <Property Name="univ_id" Type="int" Nullable="false" />
+    <Property Name="year" Type="int" Nullable="false" />
+    <Property Name="semester" Type="int" Nullable="false" />
+    <Property Name="is_bundle" Type="int" Nullable="false" />
+    <Property Name="keywords" Type="varchar(max)" />
+    <Property Name="package_video_url" Type="varchar(max)" />
+    <Property Name="os_type" Type="int" />
+  </EntityType>
+  <EntityType Name="package_master_track">
+    <Key>
+      <PropertyRef Name="package_master_track_id" />
+    </Key>
+    <Property Name="package_master_track_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_id" Type="bigint" Nullable="false" />
+    <Property Name="previous_words" Type="varchar(max)" />
+    <Property Name="current_words" Type="varchar(max)" />
+    <Property Name="type" Type="int" Nullable="false" />
+    <Property Name="package_id" Type="int" Nullable="false" />
+    <Property Name="created_on" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="payment_master">
+    <Key>
+      <PropertyRef Name="payment_master_id" />
+    </Key>
+    <Property Name="payment_master_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_subscribe_master_id" Type="bigint" Nullable="false" />
+    <Property Name="Txn_msg" Type="varchar" MaxLength="50" />
+    <Property Name="Txn_err_msg" Type="varchar" MaxLength="150" />
+    <Property Name="ClintTxnRefNo" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="TPSLTxnBankCode" Type="varchar" MaxLength="10" />
+    <Property Name="TPSLTxnID" Type="varchar" MaxLength="20" />
+    <Property Name="TxnAmount" Type="decimal" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="TxnDate" Type="datetime" Nullable="false" />
+    <Property Name="TxnDateTime" Type="datetime" Nullable="false" />
+    <Property Name="TxnStatus" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="TxnTime" Type="time" Precision="7" />
+    <Property Name="TransactionType" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Tpsl_charges" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="rpst_token" Type="varchar" MaxLength="50" />
+    <Property Name="service_fee" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="base_fee" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="TPSLRefundID" Type="varchar" MaxLength="50" />
+    <Property Name="bal_amt" Type="decimal" Precision="12" Scale="0" />
+    <Property Name="request_token" Type="varchar" MaxLength="100" />
+    <Property Name="sms_status" Type="int" />
+    <Property Name="payment_gatway_id" Type="int" Nullable="false" />
+    <Property Name="refund_amt" Type="decimal" Precision="12" Scale="0" />
+    <Property Name="refund_date" Type="datetime" />
+  </EntityType>
+  <EntityType Name="payment_refund_master">
+    <Key>
+      <PropertyRef Name="payment_refund_master_id" />
+    </Key>
+    <Property Name="payment_refund_master_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_subscribe_master_id" Type="bigint" Nullable="false" />
+    <Property Name="Txn_msg" Type="varchar" MaxLength="250" />
+    <Property Name="Txn_err_msg" Type="varchar" MaxLength="250" />
+    <Property Name="ClintTxnRefNo" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="TPSLRefundID" Type="varchar" MaxLength="50" />
+    <Property Name="request_token" Type="varchar" MaxLength="100" />
+    <Property Name="refund_amt" Type="decimal" Precision="12" Scale="0" Nullable="false" />
+    <Property Name="refund_date" Type="datetime" Nullable="false" />
+    <Property Name="refund_by" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="product_request_master">
+    <Key>
+      <PropertyRef Name="request_id" />
+    </Key>
+    <Property Name="request_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="bcust_id" Type="bigint" Nullable="false" />
+    <Property Name="college_id" Type="int" Nullable="false" />
+    <Property Name="department_id" Type="int" />
+    <Property Name="product_count" Type="int" />
+    <Property Name="remarks" Type="text" />
+    <Property Name="active_status" Type="int" Nullable="false" />
+    <Property Name="created_on" Type="datetime" Nullable="false" />
+    <Property Name="created_by" Type="int" />
+    <Property Name="modified_on" Type="datetime" />
+    <Property Name="modified_by" Type="int" />
+    <Property Name="bcustTeam_id" Type="int" />
+  </EntityType>
+  <EntityType Name="product_request_master_history">
+    <Key>
+      <PropertyRef Name="request_id" />
+    </Key>
+    <Property Name="request_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="bcust_id" Type="bigint" Nullable="false" />
+    <Property Name="college_id" Type="int" Nullable="false" />
+    <Property Name="department_id" Type="int" />
+    <Property Name="product_count" Type="int" />
+    <Property Name="remarks" Type="text" />
+    <Property Name="active_status" Type="int" Nullable="false" />
+    <Property Name="created_on" Type="datetime" Nullable="false" />
+    <Property Name="created_by" Type="int" />
+    <Property Name="modified_on" Type="datetime" />
+    <Property Name="modified_by" Type="int" />
+    <Property Name="closed_on" Type="datetime" />
+    <Property Name="bcustTeam_id" Type="int" />
+  </EntityType>
+  <EntityType Name="promo_discount_master">
+    <Key>
+      <PropertyRef Name="discount_id" />
+    </Key>
+    <Property Name="discount_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="discount_code" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="discount_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="discount_desc" Type="varchar(max)" Nullable="false" />
+    <Property Name="discount_expiryon" Type="datetime" Nullable="false" />
+    <Property Name="discount_extend_days" Type="int" Nullable="false" />
+    <Property Name="discount_price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="active_status" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="promo_package_mapping">
+    <Key>
+      <PropertyRef Name="promo_package_id" />
+    </Key>
+    <Property Name="promo_package_id" Type="bigint" Nullable="false" />
+    <Property Name="promo_id" Type="bigint" Nullable="false" />
+    <Property Name="package_id" Type="bigint" Nullable="false" />
+    <Property Name="active_status" Type="int" Nullable="false" />
+    <Property Name="created_by" Type="bigint" Nullable="false" />
+    <Property Name="created_on" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="promocode_master">
+    <Key>
+      <PropertyRef Name="promo_id" />
+    </Key>
+    <Property Name="promo_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="promo_code" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="promo_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="promo_desc" Type="varchar(max)" Nullable="false" />
+    <Property Name="promo_expiryon" Type="datetime" Nullable="false" />
+    <Property Name="promo_extend_days" Type="int" Nullable="false" />
+    <Property Name="promo_discount_price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="active_status" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="purchase_activationmaster">
+    <Key>
+      <PropertyRef Name="activationmasterid" />
+    </Key>
+    <Property Name="activationmasterid" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_subscribed_masterid" Type="bigint" />
+    <Property Name="buyer_userid" Type="bigint" />
+    <Property Name="buyer_mobileNo" Type="bigint" />
+    <Property Name="activationcode" Type="varchar" MaxLength="20" />
+    <Property Name="created_date" Type="datetime" />
+    <Property Name="created_userid" Type="bigint" />
+    <Property Name="activated_userid" Type="bigint" />
+    <Property Name="activated_date" Type="datetime" />
+    <Property Name="activationstatus" Type="int" />
+  </EntityType>
+  <EntityType Name="regulation">
+    <Key>
+      <PropertyRef Name="rule_id" />
+    </Key>
+    <Property Name="rule_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="rule_name" Type="varchar" MaxLength="1000" Nullable="false" />
+    <Property Name="rule_desc" Type="text" Nullable="false" />
+    <Property Name="active_status" Type="tinyint" Nullable="false" />
+    <Property Name="created_by" Type="int" />
+    <Property Name="created_on" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="regulation_master">
+    <Key>
+      <PropertyRef Name="rule_id" />
+    </Key>
+    <Property Name="rule_id" Type="int" Nullable="false" />
+    <Property Name="rule_name" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="rule_desc" Type="varchar(max)" />
+    <Property Name="university_id" Type="int" Nullable="false" />
+    <Property Name="active_status" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sms_batch_data">
+    <Key>
+      <PropertyRef Name="sem_data_id" />
+    </Key>
+    <Property Name="sem_data_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="mobile" Type="bigint" Nullable="false" />
+    <Property Name="batch_year_id" Type="int" Nullable="false" />
+    <Property Name="year" Type="int" Nullable="false" />
+    <Property Name="university_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="state_master">
+    <Key>
+      <PropertyRef Name="state_id" />
+    </Key>
+    <Property Name="state_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="state_name" Type="varchar" MaxLength="50" />
+    <Property Name="state_short_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="isDelete" Type="bit" />
+    <Property Name="active_status" Type="int" />
+    <Property Name="created_by" Type="int" />
+    <Property Name="created_on" Type="datetime" />
+  </EntityType>
+  <EntityType Name="status">
+    <Key>
+      <PropertyRef Name="status_id" />
+    </Key>
+    <Property Name="status_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="description" Type="varchar" MaxLength="100" />
+    <Property Name="code" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="subject_enc">
+    <Key>
+      <PropertyRef Name="subject_encid" />
+    </Key>
+    <Property Name="subject_encid" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="subject_id" Type="int" Nullable="false" />
+    <Property Name="enc_data" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="generated_on" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="subject_master">
+    <Key>
+      <PropertyRef Name="subject_id" />
+    </Key>
+    <Property Name="subject_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="subject_code" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="univ_subject_code" Type="nvarchar" MaxLength="30" />
+    <Property Name="subject_name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="subject_cover_path" Type="nvarchar(max)" />
+    <Property Name="subject_description" Type="nvarchar(max)" />
+    <Property Name="active_status" Type="int" Nullable="false" />
+    <Property Name="rule_id" Type="int" />
+    <Property Name="created_on" Type="datetime" Nullable="false" />
+    <Property Name="released_on" Type="datetime" />
+    <Property Name="UniversityID" Type="int" Nullable="false" />
+    <Property Name="having_questionpaper" Type="int" Nullable="false" />
+    <Property Name="subject_version" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="active_duration_days" Type="int" Nullable="false" />
+    <Property Name="active_duration_date" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="subject_master_history">
+    <Key>
+      <PropertyRef Name="subject_historyid" />
+    </Key>
+    <Property Name="subject_historyid" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="subject_id" Type="bigint" Nullable="false" />
+    <Property Name="subject_code" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="subject_name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="subject_cover_path" Type="nvarchar(max)" />
+    <Property Name="subject_description" Type="nvarchar(max)" />
+    <Property Name="active_status" Type="int" Nullable="false" />
+    <Property Name="rule_id" Type="int" Nullable="false" />
+    <Property Name="created_on" Type="datetime" Nullable="false" />
+    <Property Name="released_on" Type="datetime" />
+    <Property Name="UniversityID" Type="int" Nullable="false" />
+    <Property Name="having_questionpaper" Type="int" Nullable="false" />
+    <Property Name="subject_version" Type="nvarchar" MaxLength="15" />
+    <Property Name="active_duration_days" Type="int" Nullable="false" />
+    <Property Name="active_duration_date" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="subject_unit_master">
+    <Key>
+      <PropertyRef Name="unit_id" />
+    </Key>
+    <Property Name="unit_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="unit_code" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="unit_name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="subject_id" Type="bigint" Nullable="false" />
+    <Property Name="active_status" Type="int" Nullable="false" />
+    <Property Name="subject_unit_path" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="is_demo" Type="int" />
+    <Property Name="is_unit_or_index" Type="int" Nullable="false" />
+    <Property Name="subject_unit_type" Type="int" />
+    <Property Name="subject_unit_version" Type="nvarchar" MaxLength="20" />
+    <Property Name="released_on" Type="datetime" />
+    <Property Name="created_on" Type="datetime" Nullable="false" />
+    <Property Name="filesize_in_mb" Type="int" Nullable="false" />
+    <Property Name="created_by" Type="int" Nullable="false" />
+    <Property Name="os_type" Type="int" />
+  </EntityType>
+  <EntityType Name="subject_unit_master_history">
+    <Key>
+      <PropertyRef Name="unit_history_id" />
+    </Key>
+    <Property Name="unit_history_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="unit_id" Type="bigint" Nullable="false" />
+    <Property Name="unit_code" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="unit_name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="subject_id" Type="bigint" Nullable="false" />
+    <Property Name="active_status" Type="int" Nullable="false" />
+    <Property Name="subject_unit_path" Type="varchar" MaxLength="250" />
+    <Property Name="is_demo" Type="int" />
+    <Property Name="is_unit_or_index" Type="int" />
+    <Property Name="subject_unit_version" Type="nvarchar" MaxLength="20" />
+    <Property Name="released_on" Type="datetime" />
+    <Property Name="created_on" Type="datetime" />
+    <Property Name="filesize_in_mb" Type="int" />
+    <Property Name="created_by" Type="int" />
+  </EntityType>
+  <EntityType Name="Transaction_Details">
+    <Key>
+      <PropertyRef Name="user_trans_id" />
+    </Key>
+    <Property Name="user_trans_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="trans_date" Type="datetime" Nullable="false" />
+    <Property Name="trans_number" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="univ_semester_master">
+    <Key>
+      <PropertyRef Name="univ_semester_id" />
+    </Key>
+    <Property Name="univ_semester_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="univ_id" Type="int" Nullable="false" />
+    <Property Name="sem_display" Type="varchar" MaxLength="50" />
+    <Property Name="semester_name" Type="int" Nullable="false" />
+    <Property Name="sem_year" Type="int" Nullable="false" />
+    <Property Name="active_status" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="university_master">
+    <Key>
+      <PropertyRef Name="univ_id" />
+    </Key>
+    <Property Name="univ_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="university_code" Type="varchar" MaxLength="5" />
+    <Property Name="university_name" Type="varchar" MaxLength="100" />
+    <Property Name="university_shortname" Type="varchar" MaxLength="10" />
+    <Property Name="university_address" Type="varchar" MaxLength="100" />
+    <Property Name="university_city" Type="varchar" MaxLength="50" />
+    <Property Name="state_id" Type="int" Nullable="false" />
+    <Property Name="isDelete" Type="bit" />
+    <Property Name="university_type" Type="int" />
+  </EntityType>
+  <EntityType Name="user_address_details">
+    <Key>
+      <PropertyRef Name="delivery_address_id" />
+    </Key>
+    <Property Name="delivery_address_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_id" Type="bigint" Nullable="false" />
+    <Property Name="address_type" Type="int" Nullable="false" />
+    <Property Name="full_name" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="mobile_number" Type="bigint" Nullable="false" />
+    <Property Name="address" Type="varchar(max)" Nullable="false" />
+    <Property Name="pincode" Type="bigint" Nullable="false" />
+    <Property Name="city" Type="varchar" MaxLength="200" />
+    <Property Name="state" Type="varchar" MaxLength="200" />
+    <Property Name="country" Type="int" Nullable="false" />
+    <Property Name="landmark" Type="varchar" MaxLength="200" />
+    <Property Name="isbilling_delivery" Type="int" Nullable="false" />
+    <Property Name="created_on" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="user_app_subject_read_history">
+    <Key>
+      <PropertyRef Name="user_app_read_history_id" />
+    </Key>
+    <Property Name="user_app_read_history_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="subject_id" Type="int" Nullable="false" />
+    <Property Name="total_hours" Type="int" Nullable="false" />
+    <Property Name="usage_date" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="user_cart_details">
+    <Key>
+      <PropertyRef Name="user_cart_details_id" />
+    </Key>
+    <Property Name="user_cart_details_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_id" Type="bigint" Nullable="false" />
+    <Property Name="package_id" Type="int" Nullable="false" />
+    <Property Name="package_display_name" Type="varchar" MaxLength="250" />
+    <Property Name="delivery_modeid" Type="int" />
+    <Property Name="created_on" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="user_feedback">
+    <Key>
+      <PropertyRef Name="user_feedback_id" />
+    </Key>
+    <Property Name="user_feedback_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_id" Type="bigint" Nullable="false" />
+    <Property Name="feedback" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="feedback_on" Type="datetime" Nullable="false" />
+    <Property Name="feedback_category" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="user_feedback_master">
+    <Key>
+      <PropertyRef Name="user_feedback_id" />
+    </Key>
+    <Property Name="user_feedback_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_name" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="rolle_desc" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="rolle_id" Type="int" Nullable="false" />
+    <Property Name="mobile" Type="int" />
+    <Property Name="email" Type="nvarchar" MaxLength="250" />
+    <Property Name="user_id" Type="bigint" />
+    <Property Name="college_id" Type="int" />
+    <Property Name="feedback" Type="varchar(max)" Nullable="false" />
+    <Property Name="enter_on" Type="datetime2" Precision="7" Nullable="false" />
+  </EntityType>
+  <EntityType Name="user_login_track">
+    <Key>
+      <PropertyRef Name="user_log_id" />
+    </Key>
+    <Property Name="user_log_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+    <Property Name="visited_on" Type="date" Nullable="false" />
+    <Property Name="visited_time" Type="datetime" Nullable="false" />
+    <Property Name="is_first_time_login" Type="int" Nullable="false" />
+    <Property Name="repeated_login_cnt" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="user_master">
+    <Key>
+      <PropertyRef Name="user_id" />
+    </Key>
+    <Property Name="user_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_first_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="user_name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="role_id" Type="int" Nullable="false" />
+    <Property Name="email_id" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="mobile" Type="bigint" Nullable="false" />
+    <Property Name="loggedin_status" Type="int" />
+    <Property Name="last_loggedin_date" Type="datetime" />
+    <Property Name="is_first_login" Type="int" Nullable="false" />
+    <Property Name="active_status" Type="int" Nullable="false" />
+    <Property Name="created_by" Type="int" />
+    <Property Name="created_on" Type="datetime" Nullable="false" />
+    <Property Name="profileimage" Type="varchar" MaxLength="200" />
+    <Property Name="univ_id" Type="int" />
+    <Property Name="collegeid" Type="int" />
+    <Property Name="collegename" Type="varchar" MaxLength="100" />
+    <Property Name="DepartmentID" Type="int" />
+    <Property Name="department_name" Type="varchar" MaxLength="50" />
+    <Property Name="currentyear" Type="int" />
+    <Property Name="currentsemester" Type="int" />
+    <Property Name="address" Type="varchar" MaxLength="200" />
+    <Property Name="state_id" Type="int" />
+    <Property Name="country" Type="varchar" MaxLength="50" />
+    <Property Name="dob" Type="date" />
+    <Property Name="gender" Type="char" MaxLength="1" />
+    <Property Name="city" Type="varchar" MaxLength="50" />
+    <Property Name="phonenumber" Type="varchar" MaxLength="50" />
+    <Property Name="Bulk_mail" Type="bit" />
+    <Property Name="primary_imei" Type="nvarchar" MaxLength="50" />
+    <Property Name="primary_mac" Type="nvarchar" MaxLength="50" />
+    <Property Name="tool_version_name" Type="varchar" MaxLength="50" />
+    <Property Name="registered_from" Type="int" />
+    <Property Name="roll_number" Type="varchar" MaxLength="50" />
+    <Property Name="ref_mobileno" Type="bigint" />
+    <Property Name="primary_andriod_mac" Type="nvarchar" MaxLength="60" />
+    <Property Name="college_group_id" Type="int" />
+  </EntityType>
+  <EntityType Name="user_master_history">
+    <Key>
+      <PropertyRef Name="user_historyid" />
+    </Key>
+    <Property Name="user_historyid" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_id" Type="bigint" Nullable="false" />
+    <Property Name="user_first_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="user_name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="role_id" Type="int" Nullable="false" />
+    <Property Name="email_id" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="mobile" Type="bigint" Nullable="false" />
+    <Property Name="loggedin_status" Type="int" />
+    <Property Name="last_loggedin_date" Type="datetime" />
+    <Property Name="is_first_login" Type="int" Nullable="false" />
+    <Property Name="active_status" Type="int" Nullable="false" />
+    <Property Name="created_by" Type="int" />
+    <Property Name="created_on" Type="datetime" Nullable="false" />
+    <Property Name="modified_by" Type="int" />
+    <Property Name="modified_on" Type="datetime" />
+    <Property Name="ProfileImage" Type="varchar" MaxLength="200" />
+    <Property Name="univ_id" Type="int" />
+    <Property Name="CollegeName" Type="varchar" MaxLength="100" />
+    <Property Name="DepartmentID" Type="int" />
+    <Property Name="address" Type="varchar" MaxLength="200" />
+    <Property Name="state_id" Type="int" />
+    <Property Name="country" Type="varchar" MaxLength="50" />
+    <Property Name="dob" Type="date" />
+    <Property Name="gender" Type="char" MaxLength="1" />
+    <Property Name="city" Type="varchar" MaxLength="50" />
+    <Property Name="phonenumber" Type="varchar" MaxLength="50" />
+    <Property Name="Bulk_mail" Type="bit" Nullable="false" />
+    <Property Name="primary_imei" Type="nvarchar" MaxLength="50" />
+    <Property Name="primary_mac" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="user_notification_details">
+    <Key>
+      <PropertyRef Name="user_notify_id" />
+    </Key>
+    <Property Name="user_notify_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+    <Property Name="notification_id" Type="int" Nullable="false" />
+    <Property Name="notification_on" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="user_notification_master">
+    <Key>
+      <PropertyRef Name="notification_id" />
+    </Key>
+    <Property Name="notification_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="notification_message" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="notification_for" Type="int" Nullable="false" />
+    <Property Name="created_by" Type="int" Nullable="false" />
+    <Property Name="created_on" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="user_random_pass">
+    <Key>
+      <PropertyRef Name="user_random_id" />
+    </Key>
+    <Property Name="user_random_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+    <Property Name="verification_code" Type="varchar(max)" Nullable="false" />
+    <Property Name="generated_time" Type="datetime" Nullable="false" />
+    <Property Name="action_type" Type="int" Nullable="false" />
+    <Property Name="user_type" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="user_random_pass_college">
+    <Key>
+      <PropertyRef Name="user_college_random_id" />
+    </Key>
+    <Property Name="user_college_random_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="verification_code" Type="varchar(max)" Nullable="false" />
+    <Property Name="generated_time" Type="datetime" Nullable="false" />
+    <Property Name="college_id" Type="int" Nullable="false" />
+    <Property Name="action_type" Type="int" Nullable="false" />
+    <Property Name="user_type" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="user_role">
+    <Key>
+      <PropertyRef Name="role_id" />
+    </Key>
+    <Property Name="role_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="role_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="role_desc" Type="varchar" MaxLength="100" />
+    <Property Name="role_type" Type="int" Nullable="false" />
+    <Property Name="active_subject_days" Type="int" Nullable="false" />
+    <Property Name="active_status" Type="int" Nullable="false" />
+    <Property Name="created_by" Type="int" />
+    <Property Name="created_on" Type="datetime" Nullable="false" />
+    <Property Name="LandingPage" Type="varchar(max)" />
+    <Property Name="role_level" Type="int" />
+  </EntityType>
+  <EntityType Name="user_session_track">
+    <Key>
+      <PropertyRef Name="user_session_track_id" />
+    </Key>
+    <Property Name="user_session_track_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="session_id" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="user_id" Type="bigint" Nullable="false" />
+    <Property Name="visit_page_url" Type="varchar(max)" Nullable="false" />
+    <Property Name="repeated_visit_count" Type="int" Nullable="false" />
+    <Property Name="visited_on" Type="date" Nullable="false" />
+    <Property Name="visited_time" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="user_subject_activation_history">
+    <Key>
+      <PropertyRef Name="user_subject_activation_id" />
+    </Key>
+    <Property Name="user_subject_activation_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="subject_id" Type="int" Nullable="false" />
+    <Property Name="subject_code" Type="nvarchar" MaxLength="30" />
+    <Property Name="subject_name" Type="varchar" MaxLength="200" />
+    <Property Name="subject_version" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+    <Property Name="department_id" Type="int" Nullable="false" />
+    <Property Name="subject_expiry_date" Type="datetime" Nullable="false" />
+    <Property Name="subject_expiry_extension_date" Type="datetime" Nullable="false" />
+    <Property Name="subject_extension_days" Type="int" Nullable="false" />
+    <Property Name="activated_on" Type="datetime" Nullable="false" />
+    <Property Name="activated_by" Type="int" Nullable="false" />
+    <Property Name="activation_type" Type="int" Nullable="false" />
+    <Property Name="activation_product_type" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="user_subject_mapping">
+    <Key>
+      <PropertyRef Name="user_subject_id" />
+    </Key>
+    <Property Name="user_subject_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="subject_id" Type="int" Nullable="false" />
+    <Property Name="subject_code" Type="nvarchar" MaxLength="30" />
+    <Property Name="subject_name" Type="varchar" MaxLength="200" />
+    <Property Name="subject_version" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="subject_cover_path" Type="nvarchar(max)" />
+    <Property Name="subject_purchasedon" Type="datetime" Nullable="false" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+    <Property Name="department_id" Type="int" Nullable="false" />
+    <Property Name="department_code" Type="varchar" MaxLength="50" />
+    <Property Name="department_name" Type="varchar" MaxLength="50" />
+    <Property Name="download_status" Type="int" />
+    <Property Name="downloaded_on" Type="datetime" Nullable="false" />
+    <Property Name="subject_unit_id" Type="int" Nullable="false" />
+    <Property Name="subject_unit_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="subject_unit_name" Type="varchar" MaxLength="200" />
+    <Property Name="subject_unit_version" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="subject_unit_user_version" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="subject_unit_expiryon" Type="datetime" Nullable="false" />
+    <Property Name="subject_trial_expiryon" Type="datetime" />
+    <Property Name="is_trial" Type="int" />
+    <Property Name="is_demo" Type="int" />
+    <Property Name="is_unit_or_index" Type="int" Nullable="false" />
+    <Property Name="subject_unit_path" Type="varchar" MaxLength="250" />
+    <Property Name="is_updated_to_client" Type="int" Nullable="false" />
+    <Property Name="last_modified_on" Type="datetime" />
+    <Property Name="last_client_updated_on" Type="datetime" />
+    <Property Name="is_updated_subunit_to_client" Type="int" />
+    <Property Name="last_subunit_modified_on" Type="datetime" />
+    <Property Name="last_subunit_client_updated_on" Type="datetime" />
+    <Property Name="package_expirydate" Type="datetime" Nullable="false" />
+    <Property Name="is_purchased" Type="int" />
+    <Property Name="yearsem" Type="int" />
+  </EntityType>
+  <EntityType Name="user_subject_mapping_history">
+    <Key>
+      <PropertyRef Name="user_subject_history_id" />
+    </Key>
+    <Property Name="user_subject_history_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_subject_id" Type="bigint" Nullable="false" />
+    <Property Name="subject_id" Type="int" Nullable="false" />
+    <Property Name="subject_code" Type="nvarchar" MaxLength="20" />
+    <Property Name="subject_name" Type="varchar" MaxLength="200" />
+    <Property Name="subject_version" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="subject_cover_path" Type="nvarchar(max)" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+    <Property Name="department_id" Type="int" Nullable="false" />
+    <Property Name="department_code" Type="varchar" MaxLength="50" />
+    <Property Name="department_name" Type="varchar" MaxLength="50" />
+    <Property Name="download_status" Type="int" />
+    <Property Name="downloaded_on" Type="datetime" Nullable="false" />
+    <Property Name="subject_unit_id" Type="int" Nullable="false" />
+    <Property Name="subject_unit_code" Type="nvarchar" MaxLength="25" />
+    <Property Name="subject_unit_name" Type="varchar" MaxLength="200" />
+    <Property Name="subject_unit_version" Type="varchar" MaxLength="15" />
+    <Property Name="subject_unit_expiryon" Type="datetime" Nullable="false" />
+    <Property Name="is_demo" Type="int" />
+    <Property Name="is_unit_or_index" Type="int" />
+    <Property Name="subject_unit_path" Type="varchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="user_subject_read_history">
+    <Key>
+      <PropertyRef Name="user_read_history_id" />
+    </Key>
+    <Property Name="user_read_history_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+    <Property Name="department_id" Type="int" />
+    <Property Name="subject_id" Type="int" Nullable="false" />
+    <Property Name="total_hours" Type="int" Nullable="false" />
+    <Property Name="last_read_on" Type="datetime" Nullable="false" />
+    <Property Name="is_updated_to_server" Type="int" />
+    <Property Name="hours_topic_video" Type="text" />
+    <Property Name="entered_on" Type="datetime" />
+  </EntityType>
+  <EntityType Name="user_subject_read_history_androidapp">
+    <Key>
+      <PropertyRef Name="user_read_history_id" />
+    </Key>
+    <Property Name="user_read_history_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+    <Property Name="subject_id" Type="int" Nullable="false" />
+    <Property Name="total_hours" Type="int" Nullable="false" />
+    <Property Name="last_read_on" Type="datetime" Nullable="false" />
+    <Property Name="is_updated_to_server" Type="int" />
+    <Property Name="hours_topic_video" Type="text" />
+    <Property Name="entered_on" Type="datetime" />
+  </EntityType>
+  <EntityType Name="user_subject_unit_read_history">
+    <Key>
+      <PropertyRef Name="user_read_unit_history_id" />
+    </Key>
+    <Property Name="user_read_unit_history_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+    <Property Name="subject_id" Type="int" Nullable="false" />
+    <Property Name="subject_unitid" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="total_seconds" Type="int" Nullable="false" />
+    <Property Name="last_read_on" Type="datetime" Nullable="false" />
+    <Property Name="is_updated_to_server" Type="int" />
+    <Property Name="read_percentage" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="user_subject_unit_read_history_androidapp">
+    <Key>
+      <PropertyRef Name="user_read_unit_history_id" />
+    </Key>
+    <Property Name="user_read_unit_history_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+    <Property Name="subject_id" Type="int" Nullable="false" />
+    <Property Name="subject_unitid" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="total_seconds" Type="int" Nullable="false" />
+    <Property Name="last_read_on" Type="datetime" Nullable="false" />
+    <Property Name="is_updated_to_server" Type="int" />
+    <Property Name="read_percentage" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Goadsde.dbo.user_subject_unit_read_history_restore' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="user_subject_unit_read_history_restore">
+    <Key>
+      <PropertyRef Name="user_read_unit_history_id" />
+      <PropertyRef Name="user_id" />
+      <PropertyRef Name="subject_id" />
+      <PropertyRef Name="subject_unitid" />
+      <PropertyRef Name="total_seconds" />
+      <PropertyRef Name="last_read_on" />
+      <PropertyRef Name="read_percentage" />
+    </Key>
+    <Property Name="user_read_unit_history_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+    <Property Name="subject_id" Type="int" Nullable="false" />
+    <Property Name="subject_unitid" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="total_seconds" Type="int" Nullable="false" />
+    <Property Name="last_read_on" Type="datetime" Nullable="false" />
+    <Property Name="is_updated_to_server" Type="int" />
+    <Property Name="read_percentage" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="user_subject_video_history">
+    <Key>
+      <PropertyRef Name="user_read_video_id" />
+    </Key>
+    <Property Name="user_read_video_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+    <Property Name="subject_id" Type="int" Nullable="false" />
+    <Property Name="subject_unitid" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="subject_videoname" Type="varchar(max)" Nullable="false" />
+    <Property Name="total_viewed" Type="int" Nullable="false" />
+    <Property Name="last_read_on" Type="datetime" Nullable="false" />
+    <Property Name="is_updated_to_server" Type="int" />
+    <Property Name="user_rating" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="user_subject_video_history_androidapp">
+    <Key>
+      <PropertyRef Name="user_read_video_id" />
+    </Key>
+    <Property Name="user_read_video_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+    <Property Name="subject_id" Type="int" Nullable="false" />
+    <Property Name="subject_unitid" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="subject_videoname" Type="varchar(max)" Nullable="false" />
+    <Property Name="total_viewed" Type="int" Nullable="false" />
+    <Property Name="last_read_on" Type="datetime" Nullable="false" />
+    <Property Name="is_updated_to_server" Type="int" />
+    <Property Name="user_rating" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="user_subscribe_delivery_mode">
+    <Key>
+      <PropertyRef Name="user_subscribe_delivery_mode_id" />
+    </Key>
+    <Property Name="user_subscribe_delivery_mode_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="subscribe_delivery_mode" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="description" Type="varchar" MaxLength="100" />
+    <Property Name="delivery_desc" Type="varchar(max)" />
+    <Property Name="price" Type="int" Nullable="false" />
+    <Property Name="product_price" Type="int" />
+    <Property Name="delivery_price" Type="int" />
+    <Property Name="delivery_type" Type="int" />
+    <Property Name="active_status" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="user_subscribe_details">
+    <Key>
+      <PropertyRef Name="user_subscribe_details_id" />
+    </Key>
+    <Property Name="user_subscribe_details_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_subscribe_master_id" Type="bigint" Nullable="false" />
+    <Property Name="package_id" Type="int" Nullable="false" />
+    <Property Name="actual_price" Type="int" Nullable="false" />
+    <Property Name="selling_price" Type="int" Nullable="false" />
+    <Property Name="package_validity_days" Type="int" Nullable="false" />
+    <Property Name="package_expiryon" Type="datetime" Nullable="false" />
+    <Property Name="promocode_id" Type="bigint" />
+    <Property Name="promo_discount_amt" Type="int" />
+    <Property Name="deliver_status" Type="int" />
+  </EntityType>
+  <EntityType Name="user_subscribe_master">
+    <Key>
+      <PropertyRef Name="user_subscribe_master_id" />
+    </Key>
+    <Property Name="user_subscribe_master_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_id" Type="bigint" Nullable="false" />
+    <Property Name="payment_ref_no" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="count" Type="int" Nullable="false" />
+    <Property Name="discount_id" Type="bigint" />
+    <Property Name="discount_amt" Type="int" />
+    <Property Name="TransactionType" Type="int" Nullable="false" />
+    <Property Name="payment_status" Type="int" Nullable="false" />
+    <Property Name="order_status" Type="int" />
+    <Property Name="user_subscribe_delivery_mode_id" Type="int" />
+    <Property Name="payment_on" Type="datetime" Nullable="false" />
+    <Property Name="created_on" Type="datetime" Nullable="false" />
+    <Property Name="billing_address_id" Type="bigint" />
+    <Property Name="deliver_address_id" Type="bigint" />
+    <Property Name="refund_on" Type="datetime" />
+    <Property Name="refund_amount" Type="int" />
+    <Property Name="refund_by" Type="bigint" />
+  </EntityType>
+  <EntityType Name="user_subscribe_order_track">
+    <Key>
+      <PropertyRef Name="user_subscribe_order_track_id" />
+    </Key>
+    <Property Name="user_subscribe_order_track_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_subscribe_master_id" Type="bigint" Nullable="false" />
+    <Property Name="package_id" Type="int" />
+    <Property Name="orderby" Type="bigint" Nullable="false" />
+    <Property Name="orderstatus" Type="int" Nullable="false" />
+    <Property Name="orderon" Type="datetime" Nullable="false" />
+    <Property Name="orderrefno" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="ordermobile" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="preparedstatus" Type="int" Nullable="false" />
+    <Property Name="preparedon" Type="datetime" />
+    <Property Name="preparedby" Type="bigint" />
+    <Property Name="preparedcomments" Type="varchar" MaxLength="250" />
+    <Property Name="qualitycheckstatus" Type="int" Nullable="false" />
+    <Property Name="qualitycheckon" Type="datetime" />
+    <Property Name="qualitycheckby" Type="bigint" />
+    <Property Name="qualitycheckcomments" Type="varchar" MaxLength="250" />
+    <Property Name="deliverstatus" Type="int" Nullable="false" />
+    <Property Name="deliveron" Type="datetime" />
+    <Property Name="deliverby" Type="varchar" MaxLength="250" />
+    <Property Name="delivercomments" Type="varchar" MaxLength="250" />
+    <Property Name="couriername" Type="varchar" MaxLength="250" />
+    <Property Name="courierrefno" Type="varchar" MaxLength="250" />
+    <Property Name="couriercontactno" Type="varchar" MaxLength="250" />
+    <Property Name="expecteddeliverywdays" Type="int" />
+    <Property Name="denterby" Type="bigint" />
+    <Property Name="denteron" Type="datetime" />
+    <Property Name="paystatus" Type="int" Nullable="false" />
+    <Property Name="payreceiveon" Type="datetime" />
+    <Property Name="payreceivedby" Type="bigint" />
+    <Property Name="payreceivedamt" Type="bigint" />
+    <Property Name="payenteron" Type="datetime" />
+    <Property Name="activationstatus" Type="int" Nullable="false" />
+    <Property Name="activationon" Type="datetime" />
+    <Property Name="activationby" Type="bigint" />
+    <Property Name="activationmobile" Type="varchar" MaxLength="50" />
+    <Property Name="refundstatus" Type="int" />
+    <Property Name="refundon" Type="datetime" />
+    <Property Name="refundamt" Type="int" />
+    <Property Name="refundby" Type="bigint" />
+  </EntityType>
+  <EntityType Name="user_subunit_download_history">
+    <Key>
+      <PropertyRef Name="user_unit_download_history" />
+    </Key>
+    <Property Name="user_unit_download_history" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_id" Type="bigint" Nullable="false" />
+    <Property Name="subject_unit_id" Type="bigint" Nullable="false" />
+    <Property Name="downloaded_on" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="user_trial_subject">
+    <Key>
+      <PropertyRef Name="user_trial_subject_id" />
+    </Key>
+    <Property Name="user_trial_subject_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_id" Type="bigint" Nullable="false" />
+    <Property Name="subject_id" Type="bigint" Nullable="false" />
+    <Property Name="trail_expiry_on" Type="datetime" Nullable="false" />
+    <Property Name="created_on" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="user_university_privilege">
+    <Key>
+      <PropertyRef Name="univ_user_privilege_id" />
+    </Key>
+    <Property Name="univ_user_privilege_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="university_id" Type="int" Nullable="false" />
+    <Property Name="user_id" Type="bigint" Nullable="false" />
+    <Property Name="active_status" Type="int" Nullable="false" />
+    <Property Name="mapped_on" Type="datetime" Nullable="false" />
+    <Property Name="mapped_by" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="user_wishlist">
+    <Key>
+      <PropertyRef Name="user_wishlist_id" />
+    </Key>
+    <Property Name="user_wishlist_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="package_id" Type="bigint" Nullable="false" />
+    <Property Name="user_id" Type="bigint" Nullable="false" />
+    <Property Name="created_on" Type="datetime" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__product_r__bcust__0A688BB1">
+    <End Role="business_customer" Type="Self.business_customer" Multiplicity="1" />
+    <End Role="product_request_master" Type="Self.product_request_master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="business_customer">
+        <PropertyRef Name="bcust_id" />
+      </Principal>
+      <Dependent Role="product_request_master">
+        <PropertyRef Name="bcust_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__product_r__bcust__0E391C95">
+    <End Role="business_customer" Type="Self.business_customer" Multiplicity="1" />
+    <End Role="product_request_master_history" Type="Self.product_request_master_history" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="business_customer">
+        <PropertyRef Name="bcust_id" />
+      </Principal>
+      <Dependent Role="product_request_master_history">
+        <PropertyRef Name="bcust_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__product_r__bcust__793DFFAF">
+    <End Role="business_customer" Type="Self.business_customer" Multiplicity="1" />
+    <End Role="product_request_master" Type="Self.product_request_master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="business_customer">
+        <PropertyRef Name="bcust_id" />
+      </Principal>
+      <Dependent Role="product_request_master">
+        <PropertyRef Name="bcust_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__product_r__bcust__id">
+    <End Role="business_customer" Type="Self.business_customer" Multiplicity="1" />
+    <End Role="product_request_master_history" Type="Self.product_request_master_history" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="business_customer">
+        <PropertyRef Name="bcust_id" />
+      </Principal>
+      <Dependent Role="product_request_master_history">
+        <PropertyRef Name="bcust_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__product_r__depar__047AA831">
+    <End Role="department_master" Type="Self.department_master" Multiplicity="0..1" />
+    <End Role="product_request_master_history" Type="Self.product_request_master_history" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="department_master">
+        <PropertyRef Name="department_id" />
+      </Principal>
+      <Dependent Role="product_request_master_history">
+        <PropertyRef Name="department_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__product_r__depar__09746778">
+    <End Role="department_master" Type="Self.department_master" Multiplicity="0..1" />
+    <End Role="product_request_master" Type="Self.product_request_master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="department_master">
+        <PropertyRef Name="department_id" />
+      </Principal>
+      <Dependent Role="product_request_master">
+        <PropertyRef Name="department_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__product_r__depar__7B264821">
+    <End Role="department_master" Type="Self.department_master" Multiplicity="0..1" />
+    <End Role="product_request_master" Type="Self.product_request_master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="department_master">
+        <PropertyRef Name="department_id" />
+      </Principal>
+      <Dependent Role="product_request_master">
+        <PropertyRef Name="department_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__product_r__depar__id">
+    <End Role="department_master" Type="Self.department_master" Multiplicity="0..1" />
+    <End Role="product_request_master_history" Type="Self.product_request_master_history" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="department_master">
+        <PropertyRef Name="department_id" />
+      </Principal>
+      <Dependent Role="product_request_master_history">
+        <PropertyRef Name="department_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_college_group_map_college_group_master">
+    <End Role="college_group_master" Type="Self.college_group_master" Multiplicity="1" />
+    <End Role="college_group_map" Type="Self.college_group_map" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="college_group_master">
+        <PropertyRef Name="college_group_id" />
+      </Principal>
+      <Dependent Role="college_group_map">
+        <PropertyRef Name="college_group_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_college_group_map_college_master">
+    <End Role="college_master" Type="Self.college_master" Multiplicity="1" />
+    <End Role="college_group_map" Type="Self.college_group_map" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="college_master">
+        <PropertyRef Name="college_id" />
+      </Principal>
+      <Dependent Role="college_group_map">
+        <PropertyRef Name="college_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_college_installation_details_college_installation_details">
+    <End Role="college_master" Type="Self.college_master" Multiplicity="1" />
+    <End Role="college_installation_details" Type="Self.college_installation_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="college_master">
+        <PropertyRef Name="college_id" />
+      </Principal>
+      <Dependent Role="college_installation_details">
+        <PropertyRef Name="college_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_college_installation_expiry_college_installation_details">
+    <End Role="college_installation_details" Type="Self.college_installation_details" Multiplicity="1" />
+    <End Role="college_installation_expiry" Type="Self.college_installation_expiry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="college_installation_details">
+        <PropertyRef Name="college_install_id" />
+      </Principal>
+      <Dependent Role="college_installation_expiry">
+        <PropertyRef Name="college_install_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_college_installation_expiry_department_master">
+    <End Role="department_master" Type="Self.department_master" Multiplicity="1" />
+    <End Role="college_installation_expiry" Type="Self.college_installation_expiry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="department_master">
+        <PropertyRef Name="department_id" />
+      </Principal>
+      <Dependent Role="college_installation_expiry">
+        <PropertyRef Name="department_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_college_installation_expiry_subject_master">
+    <End Role="subject_master" Type="Self.subject_master" Multiplicity="1" />
+    <End Role="college_installation_expiry" Type="Self.college_installation_expiry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="subject_master">
+        <PropertyRef Name="subject_id" />
+      </Principal>
+      <Dependent Role="college_installation_expiry">
+        <PropertyRef Name="subject_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_college_subject_mapping_college_subject_mapping">
+    <End Role="subject_master" Type="Self.subject_master" Multiplicity="0..1" />
+    <End Role="college_subject_mapping" Type="Self.college_subject_mapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="subject_master">
+        <PropertyRef Name="subject_id" />
+      </Principal>
+      <Dependent Role="college_subject_mapping">
+        <PropertyRef Name="subject_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_college_subject_mapping_college_subject_mapping1">
+    <End Role="college_master" Type="Self.college_master" Multiplicity="0..1" />
+    <End Role="college_subject_mapping" Type="Self.college_subject_mapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="college_master">
+        <PropertyRef Name="college_id" />
+      </Principal>
+      <Dependent Role="college_subject_mapping">
+        <PropertyRef Name="college_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_college_subject_mapping_department_master">
+    <End Role="department_master" Type="Self.department_master" Multiplicity="0..1" />
+    <End Role="college_subject_mapping" Type="Self.college_subject_mapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="department_master">
+        <PropertyRef Name="department_id" />
+      </Principal>
+      <Dependent Role="college_subject_mapping">
+        <PropertyRef Name="department_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_department_subject_mapping_department_master">
+    <End Role="department_master" Type="Self.department_master" Multiplicity="1" />
+    <End Role="department_subject_mapping" Type="Self.department_subject_mapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="department_master">
+        <PropertyRef Name="department_id" />
+      </Principal>
+      <Dependent Role="department_subject_mapping">
+        <PropertyRef Name="department_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_department_subject_mapping_subject_master">
+    <End Role="subject_master" Type="Self.subject_master" Multiplicity="1" />
+    <End Role="department_subject_mapping" Type="Self.department_subject_mapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="subject_master">
+        <PropertyRef Name="subject_id" />
+      </Principal>
+      <Dependent Role="department_subject_mapping">
+        <PropertyRef Name="subject_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_device_preidentification_subject_master">
+    <End Role="subject_master" Type="Self.subject_master" Multiplicity="1" />
+    <End Role="device_preidentification" Type="Self.device_preidentification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="subject_master">
+        <PropertyRef Name="subject_id" />
+      </Principal>
+      <Dependent Role="device_preidentification">
+        <PropertyRef Name="subject_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_feedback_poll_userreply_feedback_poll_userreply">
+    <End Role="feedback_poll_userreply" Type="Self.feedback_poll_userreply" Multiplicity="1" />
+    <End Role="feedback_poll_userreply1" Type="Self.feedback_poll_userreply" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="feedback_poll_userreply">
+        <PropertyRef Name="feedback_poll_userreply_id" />
+      </Principal>
+      <Dependent Role="feedback_poll_userreply1">
+        <PropertyRef Name="feedback_poll_userreply_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MenuPrivilege_Menu">
+    <End Role="Menu" Type="Self.Menu" Multiplicity="1" />
+    <End Role="MenuPrivilege" Type="Self.MenuPrivilege" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Menu">
+        <PropertyRef Name="MenuID" />
+      </Principal>
+      <Dependent Role="MenuPrivilege">
+        <PropertyRef Name="MenuID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MenuPrivilege_Role">
+    <End Role="user_role" Type="Self.user_role" Multiplicity="0..1" />
+    <End Role="MenuPrivilege" Type="Self.MenuPrivilege" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user_role">
+        <PropertyRef Name="role_id" />
+      </Principal>
+      <Dependent Role="MenuPrivilege">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_package_details_package_master">
+    <End Role="package_master" Type="Self.package_master" Multiplicity="1" />
+    <End Role="package_details" Type="Self.package_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="package_master">
+        <PropertyRef Name="package_id" />
+      </Principal>
+      <Dependent Role="package_details">
+        <PropertyRef Name="package_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_package_details_subject_master">
+    <End Role="subject_master" Type="Self.subject_master" Multiplicity="1" />
+    <End Role="package_details" Type="Self.package_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="subject_master">
+        <PropertyRef Name="subject_id" />
+      </Principal>
+      <Dependent Role="package_details">
+        <PropertyRef Name="subject_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_payment_refund_master_user_subscribe_master">
+    <End Role="user_subscribe_master" Type="Self.user_subscribe_master" Multiplicity="1" />
+    <End Role="payment_refund_master" Type="Self.payment_refund_master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user_subscribe_master">
+        <PropertyRef Name="user_subscribe_master_id" />
+      </Principal>
+      <Dependent Role="payment_refund_master">
+        <PropertyRef Name="user_subscribe_master_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_subject_master_history_subject_master">
+    <End Role="subject_master" Type="Self.subject_master" Multiplicity="1" />
+    <End Role="subject_master_history" Type="Self.subject_master_history" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="subject_master">
+        <PropertyRef Name="subject_id" />
+      </Principal>
+      <Dependent Role="subject_master_history">
+        <PropertyRef Name="subject_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_subject_master_history_UniversityID">
+    <End Role="university_master" Type="Self.university_master" Multiplicity="1" />
+    <End Role="subject_master_history" Type="Self.subject_master_history" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="university_master">
+        <PropertyRef Name="univ_id" />
+      </Principal>
+      <Dependent Role="subject_master_history">
+        <PropertyRef Name="UniversityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_subject_master_UniversityID">
+    <End Role="university_master" Type="Self.university_master" Multiplicity="1" />
+    <End Role="subject_master" Type="Self.subject_master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="university_master">
+        <PropertyRef Name="univ_id" />
+      </Principal>
+      <Dependent Role="subject_master">
+        <PropertyRef Name="UniversityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_subject_unit_master_subject_master">
+    <End Role="subject_master" Type="Self.subject_master" Multiplicity="1" />
+    <End Role="subject_unit_master" Type="Self.subject_unit_master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="subject_master">
+        <PropertyRef Name="subject_id" />
+      </Principal>
+      <Dependent Role="subject_unit_master">
+        <PropertyRef Name="subject_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_university_master_state_master">
+    <End Role="state_master" Type="Self.state_master" Multiplicity="1" />
+    <End Role="university_master" Type="Self.university_master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="state_master">
+        <PropertyRef Name="state_id" />
+      </Principal>
+      <Dependent Role="university_master">
+        <PropertyRef Name="state_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_address_details_country_master">
+    <End Role="country_master" Type="Self.country_master" Multiplicity="1" />
+    <End Role="user_address_details" Type="Self.user_address_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="country_master">
+        <PropertyRef Name="country_id" />
+      </Principal>
+      <Dependent Role="user_address_details">
+        <PropertyRef Name="country" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_cart_details_package_master">
+    <End Role="package_master" Type="Self.package_master" Multiplicity="1" />
+    <End Role="user_cart_details" Type="Self.user_cart_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="package_master">
+        <PropertyRef Name="package_id" />
+      </Principal>
+      <Dependent Role="user_cart_details">
+        <PropertyRef Name="package_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_cart_details_user_master">
+    <End Role="user_master" Type="Self.user_master" Multiplicity="1" />
+    <End Role="user_cart_details" Type="Self.user_cart_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user_master">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="user_cart_details">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_feedback_user_master">
+    <End Role="user_master" Type="Self.user_master" Multiplicity="1" />
+    <End Role="user_feedback" Type="Self.user_feedback" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user_master">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="user_feedback">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_master_college_master">
+    <End Role="college_master" Type="Self.college_master" Multiplicity="0..1" />
+    <End Role="user_master" Type="Self.user_master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="college_master">
+        <PropertyRef Name="college_id" />
+      </Principal>
+      <Dependent Role="user_master">
+        <PropertyRef Name="collegeid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_master_department_master">
+    <End Role="department_master" Type="Self.department_master" Multiplicity="0..1" />
+    <End Role="user_master" Type="Self.user_master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="department_master">
+        <PropertyRef Name="department_id" />
+      </Principal>
+      <Dependent Role="user_master">
+        <PropertyRef Name="DepartmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_master_history_user_master">
+    <End Role="user_master" Type="Self.user_master" Multiplicity="1" />
+    <End Role="user_master_history" Type="Self.user_master_history" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user_master">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="user_master_history">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_master_university_master">
+    <End Role="university_master" Type="Self.university_master" Multiplicity="0..1" />
+    <End Role="user_master" Type="Self.user_master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="university_master">
+        <PropertyRef Name="univ_id" />
+      </Principal>
+      <Dependent Role="user_master">
+        <PropertyRef Name="univ_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_master_user_role">
+    <End Role="user_role" Type="Self.user_role" Multiplicity="1" />
+    <End Role="user_master" Type="Self.user_master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user_role">
+        <PropertyRef Name="role_id" />
+      </Principal>
+      <Dependent Role="user_master">
+        <PropertyRef Name="role_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_subscribe_details_user_subscribe_master">
+    <End Role="user_subscribe_master" Type="Self.user_subscribe_master" Multiplicity="1" />
+    <End Role="user_subscribe_details" Type="Self.user_subscribe_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user_subscribe_master">
+        <PropertyRef Name="user_subscribe_master_id" />
+      </Principal>
+      <Dependent Role="user_subscribe_details">
+        <PropertyRef Name="user_subscribe_master_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_subscribe_master_user_id">
+    <End Role="user_master" Type="Self.user_master" Multiplicity="1" />
+    <End Role="user_subscribe_master" Type="Self.user_subscribe_master" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user_master">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="user_subscribe_master">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_subscribe_order_track_user_subscribe_master">
+    <End Role="user_subscribe_master" Type="Self.user_subscribe_master" Multiplicity="1" />
+    <End Role="user_subscribe_order_track" Type="Self.user_subscribe_order_track" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user_subscribe_master">
+        <PropertyRef Name="user_subscribe_master_id" />
+      </Principal>
+      <Dependent Role="user_subscribe_order_track">
+        <PropertyRef Name="user_subscribe_master_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_subunit_download_history_subject_unit_master">
+    <End Role="subject_unit_master" Type="Self.subject_unit_master" Multiplicity="1" />
+    <End Role="user_subunit_download_history" Type="Self.user_subunit_download_history" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="subject_unit_master">
+        <PropertyRef Name="unit_id" />
+      </Principal>
+      <Dependent Role="user_subunit_download_history">
+        <PropertyRef Name="subject_unit_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_university_privilege_university_master">
+    <End Role="university_master" Type="Self.university_master" Multiplicity="1" />
+    <End Role="user_university_privilege" Type="Self.user_university_privilege" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="university_master">
+        <PropertyRef Name="univ_id" />
+      </Principal>
+      <Dependent Role="user_university_privilege">
+        <PropertyRef Name="university_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_university_privilege_user_master">
+    <End Role="user_master" Type="Self.user_master" Multiplicity="1" />
+    <End Role="user_university_privilege" Type="Self.user_university_privilege" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user_master">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="user_university_privilege">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="subject_delivery_anna_newModelStoreContainer">
+    <EntitySet Name="batch_year_master" EntityType="Self.batch_year_master" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="business_customer" EntityType="Self.business_customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="business_customer_teams" EntityType="Self.business_customer_teams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="cancel_category_master" EntityType="Self.cancel_category_master" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="clienttool_user_version" EntityType="Self.clienttool_user_version" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="clienttool_version" EntityType="Self.clienttool_version" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="college_group_map" EntityType="Self.college_group_map" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="college_group_master" EntityType="Self.college_group_master" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="college_installation_details" EntityType="Self.college_installation_details" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="college_installation_expiry" EntityType="Self.college_installation_expiry" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="college_master" EntityType="Self.college_master" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="college_subject_mapping" EntityType="Self.college_subject_mapping" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="college_test_installation_details" EntityType="Self.college_test_installation_details" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="college_test_installation_expiry" EntityType="Self.college_test_installation_expiry" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="country_master" EntityType="Self.country_master" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Demo_SubscribedUser" EntityType="Self.Demo_SubscribedUser" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="department_master" EntityType="Self.department_master" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="department_subject_mapping" EntityType="Self.department_subject_mapping" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="device_preidentification" EntityType="Self.device_preidentification" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ExceptionLog" EntityType="Self.ExceptionLog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="feedback" EntityType="Self.feedback" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="feedback_poll_userreply" EntityType="Self.feedback_poll_userreply" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="mastercopy_usage_details" EntityType="Self.mastercopy_usage_details" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MenuPrivilege" EntityType="Self.MenuPrivilege" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="order_cancel_history" EntityType="Self.order_cancel_history" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="order_cancel_random_pass" EntityType="Self.order_cancel_random_pass" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="package_details" EntityType="Self.package_details" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="package_master" EntityType="Self.package_master" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="package_master_track" EntityType="Self.package_master_track" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="payment_master" EntityType="Self.payment_master" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="payment_refund_master" EntityType="Self.payment_refund_master" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="product_request_master" EntityType="Self.product_request_master" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="product_request_master_history" EntityType="Self.product_request_master_history" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="promo_discount_master" EntityType="Self.promo_discount_master" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="promo_package_mapping" EntityType="Self.promo_package_mapping" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="promocode_master" EntityType="Self.promocode_master" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="purchase_activationmaster" EntityType="Self.purchase_activationmaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="regulation" EntityType="Self.regulation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="regulation_master" EntityType="Self.regulation_master" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sms_batch_data" EntityType="Self.sms_batch_data" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="state_master" EntityType="Self.state_master" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="status" EntityType="Self.status" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="subject_enc" EntityType="Self.subject_enc" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="subject_master" EntityType="Self.subject_master" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="subject_master_history" EntityType="Self.subject_master_history" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="subject_unit_master" EntityType="Self.subject_unit_master" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="subject_unit_master_history" EntityType="Self.subject_unit_master_history" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Transaction_Details" EntityType="Self.Transaction_Details" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="univ_semester_master" EntityType="Self.univ_semester_master" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="university_master" EntityType="Self.university_master" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_address_details" EntityType="Self.user_address_details" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_app_subject_read_history" EntityType="Self.user_app_subject_read_history" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_cart_details" EntityType="Self.user_cart_details" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_feedback" EntityType="Self.user_feedback" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_feedback_master" EntityType="Self.user_feedback_master" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_login_track" EntityType="Self.user_login_track" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_master" EntityType="Self.user_master" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_master_history" EntityType="Self.user_master_history" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_notification_details" EntityType="Self.user_notification_details" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_notification_master" EntityType="Self.user_notification_master" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_random_pass" EntityType="Self.user_random_pass" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_random_pass_college" EntityType="Self.user_random_pass_college" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_role" EntityType="Self.user_role" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_session_track" EntityType="Self.user_session_track" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_subject_activation_history" EntityType="Self.user_subject_activation_history" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_subject_mapping" EntityType="Self.user_subject_mapping" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_subject_mapping_history" EntityType="Self.user_subject_mapping_history" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_subject_read_history" EntityType="Self.user_subject_read_history" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_subject_read_history_androidapp" EntityType="Self.user_subject_read_history_androidapp" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_subject_unit_read_history" EntityType="Self.user_subject_unit_read_history" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_subject_unit_read_history_androidapp" EntityType="Self.user_subject_unit_read_history_androidapp" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_subject_video_history" EntityType="Self.user_subject_video_history" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_subject_video_history_androidapp" EntityType="Self.user_subject_video_history_androidapp" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_subscribe_delivery_mode" EntityType="Self.user_subscribe_delivery_mode" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_subscribe_details" EntityType="Self.user_subscribe_details" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_subscribe_master" EntityType="Self.user_subscribe_master" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_subscribe_order_track" EntityType="Self.user_subscribe_order_track" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_subunit_download_history" EntityType="Self.user_subunit_download_history" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_trial_subject" EntityType="Self.user_trial_subject" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_university_privilege" EntityType="Self.user_university_privilege" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_wishlist" EntityType="Self.user_wishlist" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="college_subject_test_mapping" EntityType="Self.college_subject_test_mapping" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [college_subject_test_mapping].[college_subject_test_mapping_id] AS [college_subject_test_mapping_id], 
+    [college_subject_test_mapping].[university_id] AS [university_id], 
+    [college_subject_test_mapping].[college_id] AS [college_id], 
+    [college_subject_test_mapping].[department_id] AS [department_id], 
+    [college_subject_test_mapping].[subject_id] AS [subject_id], 
+    [college_subject_test_mapping].[rule_id] AS [rule_id], 
+    [college_subject_test_mapping].[map_year] AS [map_year], 
+    [college_subject_test_mapping].[semester] AS [semester], 
+    [college_subject_test_mapping].[active_status] AS [active_status], 
+    [college_subject_test_mapping].[created_by] AS [created_by], 
+    [college_subject_test_mapping].[created_on] AS [created_on], 
+    [college_subject_test_mapping].[active_duration_days] AS [active_duration_days], 
+    [college_subject_test_mapping].[active_duration_date] AS [active_duration_date]
+    FROM [dbo].[college_subject_test_mapping] AS [college_subject_test_mapping]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="user_subject_unit_read_history_restore" EntityType="Self.user_subject_unit_read_history_restore" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [user_subject_unit_read_history_restore].[user_read_unit_history_id] AS [user_read_unit_history_id], 
+    [user_subject_unit_read_history_restore].[user_id] AS [user_id], 
+    [user_subject_unit_read_history_restore].[subject_id] AS [subject_id], 
+    [user_subject_unit_read_history_restore].[subject_unitid] AS [subject_unitid], 
+    [user_subject_unit_read_history_restore].[total_seconds] AS [total_seconds], 
+    [user_subject_unit_read_history_restore].[last_read_on] AS [last_read_on], 
+    [user_subject_unit_read_history_restore].[is_updated_to_server] AS [is_updated_to_server], 
+    [user_subject_unit_read_history_restore].[read_percentage] AS [read_percentage]
+    FROM [dbo].[user_subject_unit_read_history_restore] AS [user_subject_unit_read_history_restore]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__product_r__bcust__0A688BB1" Association="Self.FK__product_r__bcust__0A688BB1">
+      <End Role="business_customer" EntitySet="business_customer" />
+      <End Role="product_request_master" EntitySet="product_request_master" />
+    </AssociationSet>
+    <AssociationSet Name="FK__product_r__bcust__0E391C95" Association="Self.FK__product_r__bcust__0E391C95">
+      <End Role="business_customer" EntitySet="business_customer" />
+      <End Role="product_request_master_history" EntitySet="product_request_master_history" />
+    </AssociationSet>
+    <AssociationSet Name="FK__product_r__bcust__793DFFAF" Association="Self.FK__product_r__bcust__793DFFAF">
+      <End Role="business_customer" EntitySet="business_customer" />
+      <End Role="product_request_master" EntitySet="product_request_master" />
+    </AssociationSet>
+    <AssociationSet Name="FK__product_r__bcust__id" Association="Self.FK__product_r__bcust__id">
+      <End Role="business_customer" EntitySet="business_customer" />
+      <End Role="product_request_master_history" EntitySet="product_request_master_history" />
+    </AssociationSet>
+    <AssociationSet Name="FK__product_r__depar__047AA831" Association="Self.FK__product_r__depar__047AA831">
+      <End Role="department_master" EntitySet="department_master" />
+      <End Role="product_request_master_history" EntitySet="product_request_master_history" />
+    </AssociationSet>
+    <AssociationSet Name="FK__product_r__depar__09746778" Association="Self.FK__product_r__depar__09746778">
+      <End Role="department_master" EntitySet="department_master" />
+      <End Role="product_request_master" EntitySet="product_request_master" />
+    </AssociationSet>
+    <AssociationSet Name="FK__product_r__depar__7B264821" Association="Self.FK__product_r__depar__7B264821">
+      <End Role="department_master" EntitySet="department_master" />
+      <End Role="product_request_master" EntitySet="product_request_master" />
+    </AssociationSet>
+    <AssociationSet Name="FK__product_r__depar__id" Association="Self.FK__product_r__depar__id">
+      <End Role="department_master" EntitySet="department_master" />
+      <End Role="product_request_master_history" EntitySet="product_request_master_history" />
+    </AssociationSet>
+    <AssociationSet Name="FK_college_group_map_college_group_master" Association="Self.FK_college_group_map_college_group_master">
+      <End Role="college_group_master" EntitySet="college_group_master" />
+      <End Role="college_group_map" EntitySet="college_group_map" />
+    </AssociationSet>
+    <AssociationSet Name="FK_college_group_map_college_master" Association="Self.FK_college_group_map_college_master">
+      <End Role="college_master" EntitySet="college_master" />
+      <End Role="college_group_map" EntitySet="college_group_map" />
+    </AssociationSet>
+    <AssociationSet Name="FK_college_installation_details_college_installation_details" Association="Self.FK_college_installation_details_college_installation_details">
+      <End Role="college_master" EntitySet="college_master" />
+      <End Role="college_installation_details" EntitySet="college_installation_details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_college_installation_expiry_college_installation_details" Association="Self.FK_college_installation_expiry_college_installation_details">
+      <End Role="college_installation_details" EntitySet="college_installation_details" />
+      <End Role="college_installation_expiry" EntitySet="college_installation_expiry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_college_installation_expiry_department_master" Association="Self.FK_college_installation_expiry_department_master">
+      <End Role="department_master" EntitySet="department_master" />
+      <End Role="college_installation_expiry" EntitySet="college_installation_expiry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_college_installation_expiry_subject_master" Association="Self.FK_college_installation_expiry_subject_master">
+      <End Role="subject_master" EntitySet="subject_master" />
+      <End Role="college_installation_expiry" EntitySet="college_installation_expiry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_college_subject_mapping_college_subject_mapping" Association="Self.FK_college_subject_mapping_college_subject_mapping">
+      <End Role="subject_master" EntitySet="subject_master" />
+      <End Role="college_subject_mapping" EntitySet="college_subject_mapping" />
+    </AssociationSet>
+    <AssociationSet Name="FK_college_subject_mapping_college_subject_mapping1" Association="Self.FK_college_subject_mapping_college_subject_mapping1">
+      <End Role="college_master" EntitySet="college_master" />
+      <End Role="college_subject_mapping" EntitySet="college_subject_mapping" />
+    </AssociationSet>
+    <AssociationSet Name="FK_college_subject_mapping_department_master" Association="Self.FK_college_subject_mapping_department_master">
+      <End Role="department_master" EntitySet="department_master" />
+      <End Role="college_subject_mapping" EntitySet="college_subject_mapping" />
+    </AssociationSet>
+    <AssociationSet Name="FK_department_subject_mapping_department_master" Association="Self.FK_department_subject_mapping_department_master">
+      <End Role="department_master" EntitySet="department_master" />
+      <End Role="department_subject_mapping" EntitySet="department_subject_mapping" />
+    </AssociationSet>
+    <AssociationSet Name="FK_department_subject_mapping_subject_master" Association="Self.FK_department_subject_mapping_subject_master">
+      <End Role="subject_master" EntitySet="subject_master" />
+      <End Role="department_subject_mapping" EntitySet="department_subject_mapping" />
+    </AssociationSet>
+    <AssociationSet Name="FK_device_preidentification_subject_master" Association="Self.FK_device_preidentification_subject_master">
+      <End Role="subject_master" EntitySet="subject_master" />
+      <End Role="device_preidentification" EntitySet="device_preidentification" />
+    </AssociationSet>
+    <AssociationSet Name="FK_feedback_poll_userreply_feedback_poll_userreply" Association="Self.FK_feedback_poll_userreply_feedback_poll_userreply">
+      <End Role="feedback_poll_userreply" EntitySet="feedback_poll_userreply" />
+      <End Role="feedback_poll_userreply1" EntitySet="feedback_poll_userreply" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MenuPrivilege_Menu" Association="Self.FK_MenuPrivilege_Menu">
+      <End Role="Menu" EntitySet="Menu" />
+      <End Role="MenuPrivilege" EntitySet="MenuPrivilege" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MenuPrivilege_Role" Association="Self.FK_MenuPrivilege_Role">
+      <End Role="user_role" EntitySet="user_role" />
+      <End Role="MenuPrivilege" EntitySet="MenuPrivilege" />
+    </AssociationSet>
+    <AssociationSet Name="FK_package_details_package_master" Association="Self.FK_package_details_package_master">
+      <End Role="package_master" EntitySet="package_master" />
+      <End Role="package_details" EntitySet="package_details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_package_details_subject_master" Association="Self.FK_package_details_subject_master">
+      <End Role="subject_master" EntitySet="subject_master" />
+      <End Role="package_details" EntitySet="package_details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_payment_refund_master_user_subscribe_master" Association="Self.FK_payment_refund_master_user_subscribe_master">
+      <End Role="user_subscribe_master" EntitySet="user_subscribe_master" />
+      <End Role="payment_refund_master" EntitySet="payment_refund_master" />
+    </AssociationSet>
+    <AssociationSet Name="FK_subject_master_history_subject_master" Association="Self.FK_subject_master_history_subject_master">
+      <End Role="subject_master" EntitySet="subject_master" />
+      <End Role="subject_master_history" EntitySet="subject_master_history" />
+    </AssociationSet>
+    <AssociationSet Name="FK_subject_master_history_UniversityID" Association="Self.FK_subject_master_history_UniversityID">
+      <End Role="university_master" EntitySet="university_master" />
+      <End Role="subject_master_history" EntitySet="subject_master_history" />
+    </AssociationSet>
+    <AssociationSet Name="FK_subject_master_UniversityID" Association="Self.FK_subject_master_UniversityID">
+      <End Role="university_master" EntitySet="university_master" />
+      <End Role="subject_master" EntitySet="subject_master" />
+    </AssociationSet>
+    <AssociationSet Name="FK_subject_unit_master_subject_master" Association="Self.FK_subject_unit_master_subject_master">
+      <End Role="subject_master" EntitySet="subject_master" />
+      <End Role="subject_unit_master" EntitySet="subject_unit_master" />
+    </AssociationSet>
+    <AssociationSet Name="FK_university_master_state_master" Association="Self.FK_university_master_state_master">
+      <End Role="state_master" EntitySet="state_master" />
+      <End Role="university_master" EntitySet="university_master" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_address_details_country_master" Association="Self.FK_user_address_details_country_master">
+      <End Role="country_master" EntitySet="country_master" />
+      <End Role="user_address_details" EntitySet="user_address_details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_cart_details_package_master" Association="Self.FK_user_cart_details_package_master">
+      <End Role="package_master" EntitySet="package_master" />
+      <End Role="user_cart_details" EntitySet="user_cart_details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_cart_details_user_master" Association="Self.FK_user_cart_details_user_master">
+      <End Role="user_master" EntitySet="user_master" />
+      <End Role="user_cart_details" EntitySet="user_cart_details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_feedback_user_master" Association="Self.FK_user_feedback_user_master">
+      <End Role="user_master" EntitySet="user_master" />
+      <End Role="user_feedback" EntitySet="user_feedback" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_master_college_master" Association="Self.FK_user_master_college_master">
+      <End Role="college_master" EntitySet="college_master" />
+      <End Role="user_master" EntitySet="user_master" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_master_department_master" Association="Self.FK_user_master_department_master">
+      <End Role="department_master" EntitySet="department_master" />
+      <End Role="user_master" EntitySet="user_master" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_master_history_user_master" Association="Self.FK_user_master_history_user_master">
+      <End Role="user_master" EntitySet="user_master" />
+      <End Role="user_master_history" EntitySet="user_master_history" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_master_university_master" Association="Self.FK_user_master_university_master">
+      <End Role="university_master" EntitySet="university_master" />
+      <End Role="user_master" EntitySet="user_master" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_master_user_role" Association="Self.FK_user_master_user_role">
+      <End Role="user_role" EntitySet="user_role" />
+      <End Role="user_master" EntitySet="user_master" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_subscribe_details_user_subscribe_master" Association="Self.FK_user_subscribe_details_user_subscribe_master">
+      <End Role="user_subscribe_master" EntitySet="user_subscribe_master" />
+      <End Role="user_subscribe_details" EntitySet="user_subscribe_details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_subscribe_master_user_id" Association="Self.FK_user_subscribe_master_user_id">
+      <End Role="user_master" EntitySet="user_master" />
+      <End Role="user_subscribe_master" EntitySet="user_subscribe_master" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_subscribe_order_track_user_subscribe_master" Association="Self.FK_user_subscribe_order_track_user_subscribe_master">
+      <End Role="user_subscribe_master" EntitySet="user_subscribe_master" />
+      <End Role="user_subscribe_order_track" EntitySet="user_subscribe_order_track" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_subunit_download_history_subject_unit_master" Association="Self.FK_user_subunit_download_history_subject_unit_master">
+      <End Role="subject_unit_master" EntitySet="subject_unit_master" />
+      <End Role="user_subunit_download_history" EntitySet="user_subunit_download_history" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_university_privilege_university_master" Association="Self.FK_user_university_privilege_university_master">
+      <End Role="university_master" EntitySet="university_master" />
+      <End Role="user_university_privilege" EntitySet="user_university_privilege" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_university_privilege_user_master" Association="Self.FK_user_university_privilege_user_master">
+      <End Role="user_master" EntitySet="user_master" />
+      <End Role="user_university_privilege" EntitySet="user_university_privilege" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

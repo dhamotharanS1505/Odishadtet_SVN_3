@@ -1,0 +1,190 @@
+﻿
+@{
+    ViewBag.Title = "OverAllOrderSummary";
+    Layout = "~/Views/Shared/_LearnEnggLayout.cshtml";
+}
+
+
+
+    <style>
+        /******** Main   ****/
+        .height {
+            min-height: auto;
+        }
+
+
+        .table > tbody > tr > .emptyrow {
+            border-top: none;
+        }
+
+        .table > thead > tr > .emptyrow {
+            border-bottom: none;
+        }
+
+        .table > tbody > tr > .highrow {
+            border-top: 3px solid;
+        }
+
+        tr:nth-child(even) {
+            background: RGBA(204, 204, 204, 0.54);
+        }
+
+        tr:nth-child(odd) {
+            background: #FFF;
+        }
+
+        .panel-heading:after {
+            content: "";
+        }
+
+        .date-range {
+            text-align: center;
+        }
+
+        .panel-heading.title {
+            padding: 0px 12px;
+        }
+
+        .panel-body.des {
+            padding: 7px 12px;
+        }
+    </style>
+
+
+
+<body id="one-page-home" class="page  page-template-default custom-background waves-pagebuilder menu-fixed header-logo_left theme-full">
+
+    <!------ Main------->
+    <section class="mid_warp">
+        <div class="container">
+            <div class="">
+
+                <div class="col-md-12" style="margin-bottom: 10px;">
+                    <div class="date-range">
+                        <label>Start Date:&nbsp;</label>
+                        <input type="date" class="input-small" name="start" placeholder="Start Date" />
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+
+                        <label style="padding-left:5px;">End Date:&nbsp</label>
+                        <input type="date" class="input-small" name="end" placeholder="End Date" />
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+
+                        <span style="padding-left:5px;"> <button type="button" class="btn btn-info sm"> GO </button></span>
+                    </div>
+
+                </div>
+                <hr></hr>
+
+                @*<div class="col-md-8 col-md-offset-2" style="padding:0;">
+                    <div class="col-md-4">
+                        <div class="panel panel-default height">
+                            <div class="panel-heading title">Open Orders</div>
+                            <div class="panel-body des">
+                                <div class="open-orders">
+                                    <span class="col-md-8 text-center">15</span>
+                                    <span class="col-md-4"><input type="checkbox" name="" /></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="panel panel-default height">
+                            <div class="panel-heading title">Completed Orders</div>
+                            <div class="panel-body des">
+                                <div class="comp-orders">
+                                    <span class="col-md-8 text-center">15</span>
+                                    <span class="col-md-4"><input type="checkbox" name="" /></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="panel panel-default height">
+                            <div class="panel-heading title">Canceled Orders</div>
+                            <div class="panel-body des">
+                                <div class="cancel-orders">
+                                    <span class="col-md-8 text-center">15</span>
+                                    <span class="col-md-4"><input type="checkbox" name="" /></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>*@
+
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="text-left" style="margin:0;"><strong>Datewise Summary</strong></h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-condensed">
+                                    <thead>
+                                        <tr>
+                                            <td><strong>Date</strong></td>
+                                            <td><strong>Orders</strong></td>
+                                            <td><strong>Total Amount <i class="fa fa-inr" aria-hidden="true"></i> </strong></td>
+                                            <td><strong>Details</strong></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="DailyOrderDetails">
+                                       
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+    <!------------->
+
+</body>
+</html>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        var FromDate = "2016-08-10";
+        var ToDate = "2016-08-26";
+
+        $.getJSON("/APIService/APIAdminActivity/GetDateWiseOrderSummary",
+            {
+                FromDate : FromDate,
+                ToDate : ToDate
+            },
+            function (rdata) {
+            $.each(rdata, function (index, value) {
+                $("fixOrderDetails").appendTo("DailyOrderDetails").html();
+            })
+        })
+    })
+
+</script>
+
+<script type="text/html" id="fixOrderDetails">
+    <tr>
+        <td>${value.}</td>
+        <td>10</td>
+        <td>200</td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td class="highrow" style="text-align: right;"><strong>Total:&nbsp;</strong></td>
+        <td class="highrow">10</td>
+        <td class="highrow"><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;200.00</td>
+        <td class="highrow"></td>
+    </tr>
+</script>
+

@@ -1,0 +1,128 @@
+﻿@{
+    ViewBag.Title = "About";
+}
+<style>
+    p {
+        font-weight: 400;
+        color: #6f6f6f;
+        line-height: 20px;
+    }
+
+    .title {
+        margin-bottom: 20px;
+    }
+
+    .text-priamry {
+        color: #e83a25;
+    }
+</style>
+<div class="container" style="padding:0">
+    <div class="">
+        <div style="margin-top:70px;" class="col-md-12">
+
+            <ol style="margin-top: 16px;" class="breadcrumb">
+                <li><a href="index.html">Home</a></li>
+                <li class="active">About</li>
+            </ol>
+        </div>
+
+        <div class="col-md-12">
+            <div class="col-md-6 pad-0">
+                <div class="title">
+                    <h3>WHO <span class="text-priamry">WE ARE</span></h3>
+                </div>
+                <div class="subcontnet">
+                    <h4>
+                        <em>We  bring you the world's best courses from all universities</em>
+                    </h4>
+                    <p>
+                        <b>TechTeach</b> is subset of Infoplus Technologies Pvt Ltd.
+                    </p>
+                    <p>
+                        <strong>Infoplus Technologies</strong> started in the year 1999 with its head office in London, has registered office at USA, Germany Spain, Belgium, Switzerland, Sweden, Dubai, Netherland, Australia and India.
+                    </p>
+                    <p>
+                        In India, it has been established as a Private Limited company under Indian Companies Act of 1956 in the year 2003.
+                    </p>
+                    <p>
+                        Infoplus Technologies Private Limited (Infoplus), incorporated under the Companies Act of 1956, is promoted and led by highly qualified and experienced technocrats supported with qualified &amp; experienced Engineers across all disciplines of Engineering and Multi-media professionals with expertise in 3D &amp; 2D animations.
+                    </p>
+                    <p>
+                        It is pioneer in India, in development of 3DM e-Learning for e-Training and e-manuals for Industrial Sector.
+                    </p>
+                    <p>
+                        The business is aimed at delivering a cost-effective and result oriented solutions.
+                    </p>
+                </div>
+            </div>
+
+            <div style="margin-top:25px;" class="col-md-6">
+                <div class="col-md-6">
+                    <div class="highlights">
+                        <i style="color:#337ab7" aria-hidden="true" class="fa fa-eye fa-2x"></i>
+                    </div>
+                    <div class="">
+                        <h4>Our Vision</h4>
+                        <p>
+                            TechTeach delivers "Visual Based Knowledge System"which addresses the Industry readiness of the students and their understanding of engineering concepts right in their classroom.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="highlights">
+                        <i style="color:#337ab7" aria-hidden="true" class="fa fa-globe fa-2x"></i>
+                    </div>
+                    <div class="">
+                        <h4>Our Mission</h4>
+                        <p>
+                            TechTeach delivers "Visual Based Knowledge System"which addresses the Industry readiness of the students and their understanding of engineering concepts right in their classroom.
+                        </p>
+                    </div>
+                </div>
+
+                <div style="margin-top:25px;" class="col-md-6">
+                    <div class="highlights">
+                        <i style="color:#337ab7" aria-hidden="true" class="fa fa-diamond fa-2x"></i>
+                    </div>
+                    <div class="">
+                        <h4>Product Features</h4>
+                        <p>
+                            TechTeach’s objective is to create conducive and effective e-learning / training environments with accentuated visual expressions.
+                        </p>
+                    </div>
+                </div>
+                <div style="margin-top:25px;" class="col-md-6">
+                    <div class="highlights">
+                        <i style="color:#337ab7" aria-hidden="true" class="fa fa-rocket fa-2x"></i>
+                    </div>
+                    <div class="">
+                        <h4>Achievements</h4>
+                        <p>
+                            TechTeach achieves in filling the gap between the growing demand for, and the scarce supply of, skilled personnel across sectors, by featuring the latest ICT based technology into the curriculum of specific skill development.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div style="margin-bottom:25px;" class="col-md-12 pad-0">
+                <div class="title">
+                    <h3>WHAT <span class="text-priamry">WE PROVIDE</span></h3>
+                </div>
+                <div class="subcontnet">
+                    <h4>
+                        <em>Best e-content</em>
+                    </h4>
+                    <p>
+                        TechTeach is an interactive visual-rich accelerated learning &amp; teaching aid for Engineering courses. It has value add thru real-world industry related 3D visual applications &amp; simulations for the better grasp of Engineering Fundamentals, Principles and concepts, covering all disciplines of Engineering Education.
+                    </p>
+                    <p>
+                        It is a cost-effective delivery tools with digital learning contents, an integrated 3D medium platform for industry related illustrations for technical education and vocational training, powered by technology - to infuse ICT into Appropriate Areas of Quality Teaching and Learning, bringing products, machineries, equipment and the industry virtually into the class-room.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,8 @@
+﻿
+@{
+    ViewBag.Title = "SiteVisitorsReport";
+    Layout = "~/Views/Shared/_LearnEnggAdminLayout.cshtml";
+}
+
+<h2>SiteVisitorsReport</h2>
+

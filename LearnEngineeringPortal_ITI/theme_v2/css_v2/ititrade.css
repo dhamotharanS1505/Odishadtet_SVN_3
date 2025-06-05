@@ -1,0 +1,501 @@
+#ititrade_page .colorbox
+	{
+		background-color: #eeeeee;
+		min-height:100px;
+		position: relative;
+		border-left:15px solid ;
+		border-top:20px solid ;	
+		margin-bottom: 30px;
+		margin-top:10px;						
+	}
+	#ititrade_page .colorbox:before{
+		width: 15px;
+		height: 15px;
+		position: absolute;
+		top:-28px;
+		left: -15px;				
+	}
+	#ititrade_page .colorbox:after
+	{				
+		width: 30px;
+		height: 15px;
+		position: absolute;
+		top:-30px;
+		right: 0;
+	} 
+	#ititrade_page .colorbox span{ 
+		color: #fff;
+	    font-size: 27px;
+	    font-weight: bold;
+	    left: 10px;
+	    padding: 37px 0;
+	    position: absolute;
+	    text-align: center;
+	    top: -28px;
+	    vertical-align: middle;
+	    width: 100px;
+		/*box-shadow: 0px 0px 6px 0px #858585;*/
+
+	} 
+	#ititrade_page .colorbox p{			
+		display: table-cell;
+	    height: 86px;
+	    padding-left: 120px;			   
+	    vertical-align: middle;
+		
+	}
+	#ititrade_page .colorbox .inner-p
+	{
+		padding-top: 0px;
+	}
+	#ititrade_page .colorbox .colorbox_title{
+		 color: #fff;
+	    font-weight: bold;
+	    position: absolute;
+	    text-align: center;
+	    top: -23px;
+	    width: 93%;
+
+	}
+	
+	#ititrade_page .colorbox.blue:before,
+	#ititrade_page .colorbox.blue:after{
+		background-color: #2c91af; 
+	}		
+	#ititrade_page .colorbox.blue span{
+		background-color: #2ba0c1;
+	}
+	#ititrade_page .colorbox.blue{
+		border-color: #2c91af;
+	}
+	 
+	/******** red *************/	
+	#ititrade_page .colorbox.red:before,
+	#ititrade_page .colorbox.red:after{
+		background-color: #d14847; 
+	}
+	#ititrade_page .colorbox.red span{
+		background-color: #ef5450;
+	}		
+	#ititrade_page .colorbox.red{
+		border-color: #d14847;
+	}
+	/******** green *************/	
+	#ititrade_page .colorbox.green:before,
+	#ititrade_page .colorbox.green:after{
+		background-color: #2d8a58; 
+	}
+	#ititrade_page .colorbox.green span{
+		background-color: #3ab071;
+	}		
+	#ititrade_page .colorbox.green{
+		border-color: #2d8a58;
+	}
+
+	#ititrade_page h2 , #ititrade_page h3
+	{
+
+		font-family: open sans !important;
+		font-size: 22px;			
+	}
+	#ititrade_page h3 {
+	    margin-bottom: 25px;
+	    margin-top: 0;
+	}
+	#ititrade_page .vp-a img
+	{
+		width: 80%;
+		border-radius: 10px;
+	}
+	#ititrade_page .courses-tab {
+		margin-bottom: 30px;
+	}
+	#ititrade_page .tab-content {
+		margin-top:20px;
+		margin-bottom: 20px;
+	}
+	#ititrade_page .tab-text{
+		color: #999;
+		line-height: 25px;
+		font-style: italic;
+		text-align: center;
+		font-size:22px;
+		margin-top:20px;
+		display: block;
+	}
+	#ititrade_page .full-width{
+		width: 100%
+	}
+	#ititrade_page ul.courselist  {
+
+		display: block;
+		padding:3px;
+		list-style: outside;
+		margin-left: 40px;
+	}
+	#ititrade_page .courselist li {
+		line-height: 27px; 
+		padding: 0px 15px; 
+	}
+	#ititrade_page .coursediv p
+	{
+		color: #111;
+		line-height: 22px;
+		margin-left: 22px;
+
+	}
+	#ititrade_page .btn-orange {
+	    background-color: 	#FF5500; 
+	    color: #fff;
+	    padding: 5px 20px;
+	    font-weight: bold;
+	}
+	#ititrade_page .btn-orange:hover {
+	    background-color: #C94503; 
+	    color: #fff;
+	}
+	#ititrade_page ul.courses-tab {
+
+	}
+	#ititrade_page 	.courses-tab li {
+		padding: 0px 15px;
+	}
+	#ititrade_page .page-title-parallax {
+		background-repeat: no-repeat;
+		background-size: cover;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		z-index: -2;
+		top: 0;
+		left: 0;
+	}
+	#ititrade_page .page-title-inner {
+	    padding-bottom: 0;
+	    padding-top: 270px;
+	}
+	 #ititrade_page  .page-title .m-title .p-font {
+	    color: #fff;
+	    font-family: "Open Sans",sans-serif !important;
+	    font-stretch: normal;
+	    font-style: normal;
+	    font-weight: 300;
+	    text-transform: capitalize;
+	}
+	#ititrade_page  #page-title h1 {
+	    font-size: 32px;
+	    font-weight: 500;
+	    letter-spacing: 0.05em;
+	    margin: 0;
+	    max-height: 96px;
+	    overflow: hidden;
+	    overflow-wrap: break-word;
+	}	
+	  #wrapper-content {
+	    background-color: #fff;
+	    overflow: hidden;
+	    position: relative;
+	    width: 100%;
+	    z-index: 1;
+	}
+	#ititrade_page .p-font
+	{
+		color:#FFF;
+	}	
+	#ititrade_page  #page-title {
+		background: rgba(0, 0, 0, 0) linear-gradient(to bottom, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.44)) repeat scroll 0 0;
+		height: 460px;
+	} 	
+	#ititrade_page .btn-lightgreen
+	{
+		background-color: #e5f0e0;
+		color: #264821;
+		font-weight: bold;
+		font-size: 13px;
+		text-transform: capitalize;
+		border:1px solid #7ac70a;
+		box-shadow: 0px 1px 4px #ededed;
+		border-radius: 2px;
+		margin-right: 20px;
+		padding: 2px 10px;
+	}
+	#ititrade_page  .approachtab i
+	{
+		color: #264821;
+		margin-right: 20px;
+
+	}
+	#ititrade_page .infograph_box
+	{
+		background-image: url("../images/infograph_bg.png");
+		background-repeat: no-repeat;
+		background-position: left;
+		height: 104px;
+		width: 298px;
+	}
+	#ititrade_page .infograph_box .infograph_inner{
+		/*padding-top:16px;
+		padding-left: 10px;*/
+		display: table;
+	}
+	#ititrade_page .infograph_box span.infograph-number{
+		 color: #47763a;
+	    display: table-cell;
+	    font-size: 16px;
+	    font-weight: 500;
+	    height: 96px;
+	    padding-right: 10px;
+	    text-align: right;
+	    vertical-align: middle;
+	    width: 62px;				 
+	}
+	#ititrade_page .infograph_box .infograph-img {
+		display: table-cell;
+	    text-align: center;
+	    vertical-align: middle;
+	    width: 120px;
+	}
+	#ititrade_page .infograph_box span.infograph-text{							  
+		color: #47763a;
+		display: table-cell;
+		font-weight: 500;
+		padding-left: 12px;
+		padding-right: 20px;
+		text-align: left;
+		vertical-align: middle;
+		width: 198px;		
+	}
+	/*********infograph right bg *************/
+	#ititrade_page .infograph_box_right
+	{
+		background-image: url("../images/infograph_box_right.png");
+		background-repeat: no-repeat;
+		background-position: left;
+		height: 104px;
+		width: 298px;
+	}
+	#ititrade_page .infograph_box_right .infograph_inner{
+		display: table;
+	}
+	#ititrade_page .infograph_box_right span.infograph-number{
+	    color: #47763a;
+	    display: table-cell;
+	    font-size: 16px;
+	    font-weight: 500;
+	    height: 96px;
+	    padding-right: 10px;
+	    text-align: right;
+	    vertical-align: middle;
+	    width: 35px;	
+	}
+	#ititrade_page .infograph_box_right .infograph-img {
+		 
+		display: table-cell;
+	    text-align: center;
+	    vertical-align: middle;
+	    width: 98px;		
+	}
+	#ititrade_page .infograph_box_right span.infograph-text{							  
+	     color: #47763a;
+	    display: table-cell;
+	    font-weight: 500;
+	    padding-left: 45px; 
+	    text-align: center;
+	    vertical-align: middle;
+	    width: 150px;			
+	}
+	#ititrade_page .threedmclass	{
+		background-image: url("../images/3d_class_room_logo_bg.png");
+		background-repeat: no-repeat;
+		background-position: top;  
+	}
+	#ititrade_page .dark-green-box{
+		background-color: #e5f0e0;
+	    border: 1px solid #9bd151;
+	    border-radius: 3px;
+	    box-shadow: 0 2px 4px #666;
+	    display: table;
+	    margin-bottom: 15px;
+	    padding: 0;*/
+	}
+    #ititrade_page .dark-green-box3{
+    	margin-right:20px;
+    }
+	#ititrade_page .light-green-box{
+		background-color: #edf3f2;
+	    border: 1px solid #cbd0cf;
+	    border-radius: 3px;
+	    box-shadow: 0 2px 4px #666;
+	    display: table;
+	    margin-bottom: 15px;
+	    padding: 0;
+	}
+	#ititrade_page .dark-green-box .dark_green_img {
+		border-right: 2px solid #9bd151;
+	    display: table-cell;
+	    height: 70px;
+	    text-align: center;
+	    vertical-align: middle;
+	    width: 25%;
+	}
+	 #ititrade_page .light-green-box .light_green_img{
+	 	display: table-cell;
+	 	height: 70px;
+	    text-align: center;
+	    vertical-align: middle;
+	    width: 25%;
+	 }
+	#ititrade_page .dark-green-box .dark_green_txt {
+		color: #264821;
+	    display: table-cell;
+	    font-weight: bold;
+	    height: 70px;
+	    padding: 6px;
+	    text-align: left;
+	    vertical-align: middle;
+	    width: 75%;
+	}
+	 #ititrade_page .light-green-box .light_green_txt{
+	 	border-left: 2px solid #c0c2c2;
+	    color: #264821;
+	    display: table-cell;
+	    font-weight: bold;
+	    height: 70px;
+	    padding: 6px;
+	    text-align: left;
+	    vertical-align: middle;
+	    width: 75%;
+	}
+	.threedmclass .light-green-box.dark-green-box3.col-md-offset-3
+	{
+		margin-left:23%;
+
+	}
+	.tradesec{
+		border-top:1px solid #9ca3a7;
+		border-bottom:1px solid #9ca3a7;
+		margin-bottom: 20px;
+		margin-top: 30px;
+		display: flex;	
+	}
+	.tradesec .tradesec_left{
+		border-right:1px solid #9ca3a7;
+		padding-bottom: 20px;
+		padding-top:30px;
+	}
+	.tradesec .tradesec_right{
+		padding-top:30px;
+		padding-bottom: 20px;
+	}
+	.threedmclass_img{
+		width: 55%;
+	}
+@media (min-width: 320px) {
+	#ititrade_page .colorbox .colorbox_title	{
+		width: 98%;
+	}
+	.threedmclass_img{
+		width: 100%;
+	}
+	#ititrade_page .btn-lightgreen{
+		margin-right:2px;
+		width: 40% ;
+		margin-top:10px;
+	}
+	#ititrade_page .approachtab i{
+		margin-right:2px;
+		margin-top:10px;
+
+	}
+	.tradesec	{
+		display: inline;
+	}
+	.threedmclass .light-green-box.dark-green-box3.col-md-offset-3{
+		margin:0px;
+	}
+	#ititrade_page .dark-green-box3 {
+		margin-right: 0px;
+	}
+
+}
+@media (min-width: 360px) {
+	#ititrade_page .colorbox .colorbox_title	{
+		width: 98%;
+	}
+	.threedmclass_img{
+		width: 100%;
+	}
+	#ititrade_page .btn-lightgreen{
+		margin-right:2px;
+		width: 40%;
+		margin-top:10px;
+	}
+	#ititrade_page .approachtab i{
+		margin-right:2px;
+		margin-top:10px;
+	}
+	.tradesec	{
+		display: inline;
+	}
+	.threedmclass .light-green-box.dark-green-box3.col-md-offset-3{
+		margin:0px;
+	}
+	#ititrade_page .dark-green-box3 {
+		margin-right: 20px;
+	}
+ 
+
+}
+@media (min-width: 768px) {
+	#ititrade_page .colorbox .colorbox_title	{
+		width: 96%;
+	}
+	.threedmclass_img{
+		width: 80%;
+	}
+	.col-sm-15 {
+        width: 20%;
+        float: left;
+    }
+    .threedmclass .col-sm-6{
+    	width: 46%;
+    	margin-right:20px;
+    }
+    #ititrade_page .btn-lightgreen {
+	    background-color: #e5f0e0;
+	    border: 1px solid #7ac70a;
+	    border-radius: 2px;
+	    box-shadow: 0 1px 4px #ededed;
+	    color: #264821;
+	    font-size: 13px;
+	    font-weight: bold;
+	    margin-right: 20px;
+	    padding: 2px 10px;
+	    text-transform: capitalize;
+	    width:110px;
+	}
+	.tradesec {
+	    border-bottom: 1px solid #9ca3a7;
+	    border-top: 1px solid #9ca3a7;
+	    display: flex;
+	    margin-bottom: 20px;
+	    margin-top: 30px;
+	}
+	.threedmclass .light-green-box.dark-green-box3.col-md-offset-3
+	{
+		margin-left:23%;
+
+	}
+}
+@media (min-width: 992px) {
+    .col-md-15 {
+        width: 20%;
+        float: left;
+    }
+}
+@media (min-width: 1200px) {
+    .col-lg-15 {
+        width: 20%;
+        float: left;
+    }
+}
